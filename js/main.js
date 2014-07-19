@@ -22,15 +22,20 @@ function initialize() {
     });
     // create the map
     var myOptions = {
-        zoom: 14,
-        center: new google.maps.LatLng(41.8819, -87.6278),
+        zoom: 10,
+        center: new google.maps.LatLng(41.80, -87.6278),
         mapTypeControl: true,
         mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
         },
         navigationControl: true,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [{
+            featureType: "poi.medical",
+            elementType: "geometry.fill",
+            stylers: [{ lightness: -100 }]
+        }]
+    };
     map = new google.maps.Map(document.getElementById("map_canvas"),
         myOptions);
     geoXml = new geoXML3.parser({
@@ -45,7 +50,7 @@ function initialize() {
 function showAddress(address) {
     var contentString = address + "<br>Outside Area";
     geocoder.geocode({
-        'address': address
+        'address': address+' Chicago'
     }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             var point = results[0].geometry.location;
