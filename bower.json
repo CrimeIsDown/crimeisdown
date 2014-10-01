@@ -1,0 +1,24 @@
+{
+  "name": "crimeIsDown",
+  "version": "0.0.0",
+  "dependencies": {
+    "modernizr": "2.8.x",
+    "angular": "1.2.x",
+    "modernizr" : "2.8.x",
+    "jquery" : "1.x.x",
+    "angular-animate" : "1.2.x",
+    "angular-cookies" : "1.2.x",
+    "angular-touch" : "1.2.x",
+    "angular-sanitize" : "1.2.x",
+    "angular-resource" : "1.2.x",
+    "angular-route" : "1.2.x"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.x"
+  },
+  "resolutions": {
+    "angular": "1.2.x",
+    "modernizr" : "2.8.x",
+    "jquery" : "1.x.x"
+  }
+}
