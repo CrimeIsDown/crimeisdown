@@ -89,8 +89,14 @@ gulp.task('fonts', function () {
     .pipe($.size());
 });
 
+gulp.task('public', function () {
+  return gulp.src('app/public/**/*')
+    .pipe(gulp.dest('dist'))
+    .pipe($.size());
+});
+
 gulp.task('clean', function () {
   return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.rimraf());
 });
 
-gulp.task('build', ['html', 'partials', 'images', 'fonts']);
+gulp.task('build', ['html', 'partials', 'images', 'fonts', 'public']);

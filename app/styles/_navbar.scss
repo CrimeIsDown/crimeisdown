@@ -1,0 +1,54 @@
+/* HEADER START */
+.header {
+  width: 100%;
+}
+
+.header#page-header {
+  line-height: 50px;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: $heading-color;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+
+  .header-logo {
+    text-align: center;
+
+    a {
+      color: $body-bg;
+      text-decoration: none;
+      font-size: $font-size-h3;
+
+      span {
+        font-style: italic;
+      }
+
+      span::before {
+        content: '#';
+      }
+    }
+  }
+}
+
+/* HEADER END */
+
+/* NAVBAR START */
+.header-nav {
+  display: block;
+  margin-top: 50px;
+  line-height: 3;
+  background-color: $highlight-bg;
+  a {
+    display: inline-block;
+    padding: 0 1.5vw;
+    text-align: center;
+    text-decoration: none;
+  }
+  a:hover {
+    background-color: $active-bg;
+    color: $body-bg;
+  }
+}
+/* NAVBAR END */
+

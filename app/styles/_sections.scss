@@ -1,0 +1,93 @@
+.site-content {
+  .section {
+    width: 100%;
+    clear: both;
+    position: relative;
+    padding: 3em 2em 0 2em;
+
+    header {
+      text-align: center;
+      h1 {
+        font-style: italic;
+      }
+    }
+
+    .section-copy {
+      font-family: $font-family-serif;
+    }
+    .section-multimedia {
+
+    }
+    @media screen and (min-width: $screen-sm) {
+      .section-copy, .section-multimedia {
+        float: left;
+        width: 50%;
+      }
+    }
+  }
+}
+
+/* Section-specific rules */
+
+.section#introduction {
+  height: 90vh;
+  background: url(../images/intro-bg.jpg) no-repeat center #000;
+  color: #fff;
+  padding: 0;
+
+  .section-copy {
+    background: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    width: 100%;
+    padding: 2em 0;
+    left: 0;
+    bottom: 15vh;
+    text-align: center;
+
+    h1 {
+      font-style: italic;
+      color: #fff;
+    }
+
+    h3 {
+      color: #fff;
+      margin-top: 1em;
+    }
+  }
+}
+
+.section#crime-in-chicago {
+
+}
+
+.section#keeping-informed {
+
+}
+
+.section#keeping-informed img {
+  max-height: 60vh;
+}
+
+.section#information-overload {
+
+}
+
+.section#information-overload h1 span {
+  text-decoration: underline;
+}
+
+.section#more-signal-less-noise {
+
+}
+
+.section#site-mechanics {
+
+}
+
+.section#storytelling-is-important {
+
+}
+
+.section#whats-next {
+
+}

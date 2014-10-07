@@ -1,0 +1,48 @@
+/* Style variables
+Used https://github.com/twbs/bootstrap/blob/master/less/variables.less as an example.
+*/
+
+/*
+Colors
+
+https://color.adobe.com/Neutral-Blue-color-theme-22361/
+#FCFFF5 - tan - page background
+#D1DBBD - tan-blue
+#91AA9D - grey-blue -> buttons, interactive
+#3E606F - blue -> regular body text
+#193441 - dark blue -> bold text, headings, other emphasis
+*/
+
+$body-bg:       #FCFFF5;
+$highlight-bg:  #D1DBBD;
+$active-bg:     #91AA9D;
+$text-color:    #3E606F;
+$heading-color: #193441;
+
+/* Typography */
+$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif:       Georgia, "Times New Roman", Times, serif;
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-base:        $font-family-sans-serif;
+
+$font-size-base:          1em;
+$font-size-large:         ($font-size-base * 1.25);
+$font-size-small:         ($font-size-base * 0.85);
+
+$font-size-h1:            ($font-size-base * 2);
+$font-size-h2:            ($font-size-base * 1.75);
+$font-size-h3:            ($font-size-base * 1.5);
+$font-size-h4:            ($font-size-base * 1.25);
+$font-size-h5:            $font-size-base;
+$font-size-h6:            ($font-size-base * 0.85);
+
+$font-weight-heading:     700;
+
+$line-height: 1.2;
+
+
+/* Media queries sizes */
+$screen-xs:                  480px !default; // Extra small screen / phone
+$screen-sm:                  768px !default; // Small screen / tablet
+$screen-md:                  992px !default; // Medium screen / desktop
+$screen-lg:                  1200px !default; // Large screen / wide desktop
