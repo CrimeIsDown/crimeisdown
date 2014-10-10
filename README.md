@@ -11,9 +11,11 @@ CrimeIsDown.com takes the confusion out of monitoring Chicago crime with data-dr
 2. Ensure you have [Node.js](http://nodejs.org/), NPM (Node Package Manager), [Bower](http://bower.io/), [Karma](http://karma-runner.github.io/), and [Gulp.js](http://gulpjs.com/) installed globally.
 3. In the root of the repostiory, run the following commands:
 
-    $ npm install
-    $ bower install
-    $ gulp
+```shell
+npm install
+bower install
+gulp
+```
 
 4. This should install all the necessary packages and generate a folder called `/dist` which contains the compiled HTML, CSS, and JS needed to make the website work. The contents of this `/dist` folder can be uploaded to a web server and viewed. To edit the website and view the changes instantly, use the command `gulp serve` instead of the standard `gulp` command. See the client-side documentation below for a full list of Gulp tasks.
 
