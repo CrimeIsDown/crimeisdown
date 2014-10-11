@@ -14,11 +14,11 @@
 
 <!-- page navigation -->
 <nav class="header-nav" role="navigation">
-  <a href="#crime-in-chicago" data-scroll>Crime in Chicago</a>
-  <a href="#keeping-informed" data-scroll>Keeping Informed</a>
-  <a href="#more-signal-less-noise" data-scroll>Signal vs. Noise</a>
-  <a href="#contextual-incident-monitoring" data-scroll>Adding Context</a>
-  <a href="#whats-next" data-scroll>What's Next</a>
+  <a ng-click="scrollTo('crime-in-chicago')">Crime in Chicago</a>
+  <a ng-click="scrollTo('keeping-informed')">Keeping Informed</a>
+  <a ng-click="scrollTo('more-signal-less-noise')">Signal vs. Noise</a>
+  <a ng-click="scrollTo('contextual-incident-monitoring')">Adding Context</a>
+  <a ng-click="scrollTo('whats-next')">What's Next</a>
 </nav>
 <!-- end page navigation -->
 
@@ -28,10 +28,7 @@
   <!-- "Introduction" section -->
   <section class="section" id="introduction">
     <div class="section-copy">
-      <p>
-        Last year in Chicago, a person was shot on average every four hours. Garry McCarthy, the Superintendent of the Chicago Police Department (CPD), had reported to Mayor Rahm Emanuel that 2013 saw 415 murders which was 88 fewer than the previous year (2012 was a particularly violent year), and 1,864 total shootings. Chicago crime is a very complex problem.
-      </p>
-      <h1>Get smarter about crime.</h1>
+      <h1>Get smarter about crime. Coming soon.</h1>
       <h3>Welcome to <span>CrimeIsDown</span>.com, the host of a diverse set of data-driven tools which bring clarity to Chicago crime. Scroll down to learn more.</h3>
       <!-- <button>Skip to tools</button> -->
     </div>
@@ -169,6 +166,9 @@
 
     <div class="section-multimedia">
       <!-- subscribe to email list -->
+      <p>
+        Subscribe to our email list!
+      </p>
     </div>
   </section>
   <!-- end "What's Next" section -->

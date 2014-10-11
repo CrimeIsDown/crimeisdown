@@ -11,6 +11,7 @@ body {
   font-size: $font-size-base;
   color: $text-color;
   background-color: $body-bg;
+  line-height: $line-height;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -38,6 +39,10 @@ h6 {
   font-size: $font-size-h6;
 }
 
+p {
+  font-size: $font-size-para;
+}
+
 a, a:visited {
   color: $heading-color;
   font-weight: bold;
@@ -59,6 +64,13 @@ p {
 footer {
   clear: both;
   padding: 2em 5em;
+}
+
+footer.footer {
+  background-color: $heading-color;
+  h1, h2, h3, h4, h5, h6 {
+    color: $highlight-bg;
+  }
 }
 
 .browsehappy {
