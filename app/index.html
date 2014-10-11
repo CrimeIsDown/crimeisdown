@@ -36,13 +36,6 @@
     <!-- build:js scripts/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
-  </head>
-  <body>
-    <!--[if lt IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <div ng-view></div>
 
     <!-- Google Analytics -->
     <script>
@@ -53,6 +46,13 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create', 'UA-30674963-11', 'auto');ga('require', 'displayfeatures');ga('send', 'pageview');
     </script>
+  </head>
+  <body>
+    <!--[if lt IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div ng-view></div>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
