@@ -72,11 +72,21 @@
 }
 
 .section#crime-in-chicago {
-
+  .section-multimedia {
+    figure img {
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
 }
 
 .section#keeping-informed {
-
+  .section-multimedia {
+    figure iframe {
+      width: 100%;
+      height: 25em;
+    }
+  }
 }
 
 .section#keeping-informed img {
@@ -84,11 +94,20 @@
 }
 
 .section#more-signal-less-noise {
-
+  .section-copy {
+    figure iframe {
+      width: 100%;
+      height: 25em;
+    }
+  }
 }
 
 .section#contextual-incident-monitoring {
-
+  .section-multimedia {
+    .twitter-timeline {
+      height: 45em;
+    }
+  }
 }
 
 .section#whats-next {
