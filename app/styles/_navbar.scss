@@ -37,6 +37,7 @@
 .header-nav {
   display: block;
   margin-top: 50px;
+  width: 100%;
   line-height: 3;
   background-color: $highlight-bg;
   a {
@@ -44,6 +45,7 @@
     padding: 0 1.5vw;
     text-align: center;
     text-decoration: none;
+    cursor: pointer;
   }
   a:hover {
     background-color: $active-bg;
