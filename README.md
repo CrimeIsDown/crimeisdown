@@ -75,6 +75,10 @@ Various releases of this website and the tools under it will make use of the [Se
 
 Releases should be numbered with the format of `<major>.<minor>.<patch>`. What is defined as a "major", "minor", or "patch" release has yet to be decided.
 
+### 0.1.0
+
+* Finished single-page website with multimedia
+
 ### 0.0.1
 
 * Initial release, with a draft of single-page website (idea pitch site)
