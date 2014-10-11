@@ -33,7 +33,7 @@ $font-weight-heading:     700;
 $line-height: 1.5;
 
 /* Media queries sizes */
-$screen-xs:                  480px !default; // Extra small screen, e.g. phone
-$screen-sm:                  768px !default; // Small screen, e.g. tablet
-$screen-md:                  960px !default; // Medium screen, e.g. desktop
-$screen-lg:                  1200px !default; // Large screen, e.g. wide desktop
+$screen-xs:                  30em !default; // 480px - Extra small screen, e.g. phone
+$screen-sm:                  48em !default; // 768px - Small screen, e.g. tablet
+$screen-md:                  60em !default; // 960px - Medium screen, e.g. desktop
+$screen-lg:                  75em !default; // 1200px - Large screen, e.g. wide desktop
