@@ -15,7 +15,7 @@ deploy:
   provider: s3
   access_key_id: "$AWS_ACCESS_KEY"
   secret_access_key: "$AWS_SECRET_KEY"
-  bucket: "$AWS_BUCKET"
+  bucket: "crimeisdown.com"
   skip_cleanup: true
   local-dir: "dist"
-  upload-dir: "$AWS_UPLOAD_DIR"
+  #upload-dir: "$AWS_UPLOAD_DIR"
