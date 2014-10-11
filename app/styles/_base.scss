@@ -41,6 +41,15 @@ h6 {
 
 p {
   font-size: $font-size-para;
+  margin-bottom: 1em;
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
 }
 
 a, a:visited {
@@ -57,10 +66,6 @@ img {
   max-width: 100%;
 }
 
-p {
-  margin-bottom: 1em;
-}
-
 footer {
   clear: both;
   padding: 2em 5em;
@@ -69,7 +74,13 @@ footer {
 footer.footer {
   background-color: $heading-color;
   h1, h2, h3, h4, h5, h6 {
+    color: $text-color;
+  }
+  p {
     color: $highlight-bg;
+  }
+  a, a:visited {
+    color: $body-bg;
   }
 }
 
