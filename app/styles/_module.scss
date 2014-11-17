@@ -1,3 +1,60 @@
+/* HEADER START */
+.header {
+  width: 100%;
+}
+
+.header#page-header {
+  line-height: 3.125em;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: $heading-color;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3.125em;
+
+  .header-logo {
+    text-align: center;
+
+    a {
+      color: $body-bg;
+      text-decoration: none;
+      font-size: $font-size-h3;
+
+      span {
+        font-style: italic;
+      }
+
+      span::before {
+        content: '#';
+      }
+    }
+  }
+}
+
+/* HEADER END */
+
+/* NAVBAR START */
+.header-nav {
+  display: block;
+  margin-top: 3.125em;
+  width: 100%;
+  line-height: 3;
+  background-color: $highlight-bg;
+  a {
+    display: inline-block;
+    padding: 0 4vw;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  a:hover {
+    background-color: $active-bg;
+    color: $body-bg;
+  }
+}
+/* NAVBAR END */
+
+/* SITE CONTENT */
 .site-content {
   .section {
     width: 100%;
@@ -112,4 +169,24 @@
 
 .section#whats-next {
 
+}
+
+footer.footer {
+  background-color: $heading-color;
+  h1, h2, h3, h4, h5, h6 {
+    color: $text-color;
+  }
+  p {
+    color: $highlight-bg;
+  }
+  a, a:visited {
+    color: $body-bg;
+  }
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }

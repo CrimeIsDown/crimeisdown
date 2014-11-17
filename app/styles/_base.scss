@@ -70,23 +70,3 @@ footer {
   clear: both;
   padding: 2em 5em;
 }
-
-footer.footer {
-  background-color: $heading-color;
-  h1, h2, h3, h4, h5, h6 {
-    color: $text-color;
-  }
-  p {
-    color: $highlight-bg;
-  }
-  a, a:visited {
-    color: $body-bg;
-  }
-}
-
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
