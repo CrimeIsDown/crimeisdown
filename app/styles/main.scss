@@ -1,8 +1,8 @@
 /* CrimeIsDown.com CSS */
-/* Version 0.01 */
+/* Version 0.10 */
 
-@import 'fonts';
-@import 'variables';
-@import 'base';
-@import 'navbar';
-@import 'sections';
+@import 'variables'; // vars for use in following stylesheets
+@import 'base'; // element styles
+@import 'module'; // class styles
+@import 'layout'; // grid styles
+// @import 'state'; // stateful styles
