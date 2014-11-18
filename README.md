@@ -8,7 +8,7 @@ CrimeIsDown.com takes the confusion out of monitoring Chicago crime with data-dr
 ## Getting started
 
 1. Clone the repository
-2. Ensure you have [Node.js](http://nodejs.org/), NPM (Node Package Manager), [Bower](http://bower.io/), [Karma](http://karma-runner.github.io/), and [Gulp.js](http://gulpjs.com/) installed globally.
+2. Ensure you have [Node.js](http://nodejs.org/), NPM (Node Package Manager), [Bower](http://bower.io/), [PhantomJS](http://phantomjs.org/), and [Gulp.js](http://gulpjs.com/) installed globally.
 3. In the root of the repostiory, run the following commands:
 
 ```shell

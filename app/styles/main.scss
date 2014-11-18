@@ -1,8 +1,44 @@
 /* CrimeIsDown.com CSS */
 /* Version 0.10 */
 
-@import 'variables'; // vars for use in following stylesheets
-@import 'base'; // element styles
-@import 'module'; // class styles
-@import 'layout'; // grid styles
+// @import 'variables'; // vars for use in following stylesheets
+// @import 'base'; // element styles
+// @import 'module'; // class styles
+// @import 'layout'; // grid styles
 // @import 'state'; // stateful styles
+
+#site-header, #main-menu {
+    background: #000;
+    a {
+        color: #fff;
+    }
+    ul.pure-menu-children a:hover, li.pure-menu-open a {
+        color: #000;
+    }
+}
+#site-header {
+
+}
+
+.col-center {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+main#main {
+    display: block;
+    margin: 1em 7% 2em 7%;
+}
+
+#site-footer {
+    padding-left: 8%;
+    padding-right: 8%;
+    border-top: 1px solid #ccc;
+    background: #222;
+    p, a {
+        color: #fff;
+    }
+    & > div:last-child {
+        text-align: right;
+    }
+}
