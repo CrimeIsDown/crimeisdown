@@ -16,13 +16,11 @@
         color: #000;
     }
 }
-#site-header {
-
-}
 
 .col-center {
     margin-left: auto !important;
     margin-right: auto !important;
+    text-align: center;
 }
 
 main#main {
@@ -35,10 +33,17 @@ main#main {
     padding-right: 8%;
     border-top: 1px solid #ccc;
     background: #222;
+    font-size: 0.8em;
     p, a {
         color: #fff;
     }
     & > div:last-child {
         text-align: right;
     }
+}
+
+// index page only
+
+.section .header {
+    text-align: center;
 }
