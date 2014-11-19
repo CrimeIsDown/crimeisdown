@@ -32,8 +32,12 @@ main#main {
     margin: 1em 7% 2em 7%;
 }
 
-.section .header { // on home page
+.section .header, .section#introduction { // on home page
     text-align: center;
+}
+.section figure iframe.video {
+    width: 100%;
+    height: 350px;
 }
 // SITE CONTENT END //
 
