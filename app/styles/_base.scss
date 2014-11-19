@@ -1,4 +1,11 @@
 // General element CSS rules //
+
+iframe {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
 /*
 *, :after, :before {
   -moz-box-sizing: border-box;
