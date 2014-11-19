@@ -1,192 +1,47 @@
-/* HEADER START */
-.header {
-  width: 100%;
-}
-
-.header#page-header {
-  line-height: 3.125em;
-  border-bottom: 1px solid rgba(0,0,0,.1);
-  background: $heading-color;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 3.125em;
-
-  .header-logo {
-    text-align: center;
-
+// HEADER START //
+#site-header, #main-menu {
+    background: #000;
     a {
-      color: $body-bg;
-      text-decoration: none;
-      font-size: $font-size-h3;
-
-      span {
-        font-style: italic;
-      }
-
-      span::before {
-        content: '#';
-      }
+        color: #fff;
     }
-  }
+    ul.pure-menu-children a:hover, li.pure-menu-open a {
+        color: #000;
+    }
+}
+// HEADER END //
+
+// FOOTER START //
+#site-footer {
+    padding-left: 8%;
+    padding-right: 8%;
+    border-top: 1px solid #ccc;
+    background: #222;
+    font-size: 0.8em;
+    p, a {
+        color: #fff;
+    }
+    & > div:last-child {
+        text-align: right;
+    }
+}
+// FOOTER END //
+
+// SITE CONTENT START //
+main#main {
+    display: block;
+    margin: 1em 7% 2em 7%;
 }
 
-/* HEADER END */
-
-/* NAVBAR START */
-.header-nav {
-  display: block;
-  margin-top: 3.125em;
-  width: 100%;
-  line-height: 3;
-  background-color: $highlight-bg;
-  a {
-    display: inline-block;
-    padding: 0 4vw;
+.section .header { // on home page
     text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  a:hover {
-    background-color: $active-bg;
-    color: $body-bg;
-  }
 }
-/* NAVBAR END */
+// SITE CONTENT END //
 
-/* SITE CONTENT */
-.site-content {
-  .section {
-    width: 100%;
-    clear: both;
-    position: relative;
-    padding-top: 1em;
-
-    header {
-      text-align: center;
-      line-height: 2.5;
-      h1 {
-        font-style: italic;
-        background-color: darken($active-bg, 40);
-        color: $body-bg;
-      }
-      h3 {
-        background-color: darken($active-bg, 20);
-        color: $body-bg;
-      }
-    }
-
-    .section-copy {
-      font-family: $font-family-serif;
-    }
-    .section-multimedia {
-      img {
-        width: 100%;
-      }
-    }
-    .section-copy, .section-multimedia {
-      padding: 2em;
-    }
-    @media screen and (min-width: $screen-sm) {
-      .section-copy, .section-multimedia {
-        float: left;
-        width: 50%;
-      }
-    }
-  }
-  .section:nth-child(2) {
-    padding-top: 0;
-  }
-}
-
-/* Section-specific rules */
-
-.section#introduction {
-  height: 90vh;
-  background: url(../images/intro-bg.jpg) no-repeat center #000;
-  color: #fff;
-  padding: 0;
-
-  .section-copy {
-    background: rgba(0, 0, 0, 0.75);
-    position: absolute;
-    width: 100%;
-    padding: 0.5em 0 1em 0;;
-    left: 0;
-    bottom: 15vh;
-    text-align: center;
-
-    h1 {
-      font-style: italic;
-      color: #fff;
-    }
-
-    h3 {
-      color: #fff;
-      margin-top: 1em;
-    }
-  }
-}
-
-.section#crime-in-chicago {
-  .section-multimedia {
-    figure img {
-      width: 70%;
-      margin: 0 auto;
-    }
-  }
-}
-
-.section#keeping-informed {
-  .section-multimedia {
-    figure iframe {
-      width: 100%;
-      height: 25em;
-    }
-  }
-}
-
-.section#keeping-informed img {
-  max-height: 60vh;
-}
-
-.section#more-signal-less-noise {
-  .section-copy {
-    figure iframe {
-      width: 100%;
-      height: 25em;
-    }
-  }
-}
-
-.section#contextual-incident-monitoring {
-  .section-multimedia {
-    .twitter-timeline {
-      height: 45em;
-    }
-  }
-}
-
-.section#whats-next {
-
-}
-
-footer.footer {
-  background-color: $heading-color;
-  h1, h2, h3, h4, h5, h6 {
-    color: $text-color;
-  }
-  p {
-    color: $highlight-bg;
-  }
-  a, a:visited {
-    color: $body-bg;
-  }
-}
-
+// MISC ELEMENTS START //
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
 }
+// MISC ELEMENTS END //
