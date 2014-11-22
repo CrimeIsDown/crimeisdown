@@ -1,13 +1,115 @@
 // General element CSS rules //
 
-aside {
-    font-style: italic;
+//====BASE====//
+html {
+    font-size: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+html, button, input, select, textarea {
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+    line-height: 1.2;
 }
 
 iframe {
     margin: 0;
     padding: 0;
     border: none;
+}
+
+//====LINKS====//
+a:focus {
+    outline: thin dotted;
+}
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+//====TYPOGRAPHY====//
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 0.83em 0;
+}
+
+h3 {
+    font-size: 1.17em;
+    margin: 1em 0;
+}
+
+h4 {
+    font-size: 1em;
+    margin: 1.33em 0;
+}
+
+h5 {
+    font-size: 0.83em;
+    margin: 1.67em 0;
+}
+
+h6 {
+    font-size: 0.67em;
+    margin: 2.33em 0;
+}
+
+aside, blockquote {
+    font-style: italic;
+}
+
+b, strong {
+    font-weight: bold;
+}
+
+blockquote {
+    margin: 1em 0 1em 1em;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+p, pre {
+    margin: 1em 0;
+}
+
+small {
+    font-size: 80%;
+}
+
+//====LISTS====/
+
+menu, ol, ul {
+    padding: 0 0 0 2em;
+    li {
+        padding-bottom: 0.5em;
+        p {
+            padding: 0 0 0.5em 0;
+        }
+    }
+}
+
+nav ul, nav ol {
+    list-style: none;
+    list-style-image: none;
+}
+
+//====IMAGES, FIGURES====//
+img {
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+    max-width: 100%;
+}
+figure {
+    margin: 0;
 }
 
 /*
