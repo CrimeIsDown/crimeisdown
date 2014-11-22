@@ -1,68 +1,84 @@
 // HEADER START //
-#site-header, #main-menu {
+#site-header {
     background: #000;
-    .menu {
+    #main-menu {
         a, .menu-heading {
             display: block;
             color: #fff;
             line-height: 1.5em;
-            padding: 5px 20px;
+            padding: 0.32em 1.25em;
             text-decoration: none;
             white-space: nowrap;
         }
 
         .menu-heading {
-            display: inline-block;
-            zoom: 1;
             margin: 0;
             vertical-align: middle;
+            font-weight: bold;
+            font-style: italic;
         }
 
         ul {
-            display: inline-block;
-            zoom: 1;
+            display: block;
             vertical-align: middle;
             list-style: none;
             margin: 0;
             padding: 0;
-            z-index: 1;
-            /* position: absolute; */
-            /* visibility: hidden; */
             li {
-                display: inline-block;
-                zoom: 1;
+                display: block;
                 vertical-align: middle;
                 position: relative;
                 padding: 0;
-                a:hover {
+                &:hover > a {
                     background: #eee;
                     color: #000;
                 }
             }
             li.dropdown-menu {
                 ul {
-                    display: none;
-                    position: absolute;
+                    display: block;
                     li {
                         display: block;
+                        a {
+                            padding-left: 3em;
+                        }
                     }
-                }
-
-                a:hover + ul,  {
-                    display: block;
-                    position: absolute;
-                    background: #000;
                 }
             }
         }
     }
 }
+
+@media (min-width: 55em) {
+    #main-menu {
+        .menu-heading, ul#main-menu-items, ul#main-menu-items > li, ul#main-menu-items > li > a {
+            display: inline-block !important;
+        }
+        li.dropdown-menu {
+            ul, li {
+                display: none !important;
+            }
+
+            &:hover > ul {
+                display: block !important;
+                position: absolute;
+                background: #000;
+                li {
+                    display: block !important;
+                    a {
+                        padding: 0.32em 1.25em !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
 // HEADER END //
 
 // FOOTER START //
 #site-footer {
     clear: both;
-    height: 3.3em;
     padding-left: 8%;
     padding-right: 8%;
     border-top: 1px solid #ccc;
@@ -83,12 +99,16 @@ main#main {
     margin: 1em 7% 2em 7%;
 }
 
-.section .header, .section#introduction { // on home page
-    text-align: center;
-}
-.section figure iframe.video {
-    width: 100%;
-    height: 350px;
+
+.section {
+    line-height: 1.4;
+    .header, &#introduction { // on home page
+        text-align: center;
+    }
+    figure iframe.video {
+        width: 100%;
+        height: 350px;
+    }
 }
 // SITE CONTENT END //
 
