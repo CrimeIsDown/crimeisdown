@@ -1,6 +1,12 @@
 // General element CSS rules //
 
 //====BASE====//
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 html {
     font-size: 100%;
     -ms-text-size-adjust: 100%;
@@ -86,7 +92,6 @@ small {
 }
 
 //====LISTS====/
-
 menu, ol, ul {
     padding: 0 0 0 2em;
     li {
@@ -110,77 +115,9 @@ img {
 }
 figure {
     margin: 0;
+    padding-bottom: 1.5em;
+    figcaption {
+        padding-top: 0.5em;
+        font-size: 0.8em;
+    }
 }
-
-/*
-*, :after, :before {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: $font-family-base;
-  font-size: $font-size-base;
-  color: $text-color;
-  background-color: $body-bg;
-  line-height: $line-height;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: $heading-color;
-  margin: 0;
-  font-weight: $font-weight-heading;
-}
-
-h1 {
-  font-size: $font-size-h1;
-}
-h2 {
-  font-size: $font-size-h2;
-}
-h3 {
-  font-size: $font-size-h3;
-}
-h4 {
-  font-size: $font-size-h4;
-}
-h5 {
-  font-size: $font-size-h5;
-}
-h6 {
-  font-size: $font-size-h6;
-}
-
-p {
-  font-size: $font-size-para;
-  margin-bottom: 1em;
-}
-
-strong {
-  font-weight: 700;
-}
-
-em {
-  font-style: italic;
-}
-
-a, a:visited {
-  color: $heading-color;
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-figure {
-  margin: 1em 0;
-}
-
-img {
-  max-width: 100%;
-}
-
-footer {
-  clear: both;
-  padding: 2em 5em;
-}
-*/
