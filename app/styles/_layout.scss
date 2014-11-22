@@ -4,9 +4,58 @@
 }
 
 // GRID START //
-.pure-g > div {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0 1.25em;
+// 8 column layout
+/*
+1/8
+1/4
+3/8
+1/2
+5/8
+3/4
+7/8
+1/1
+*/
+.columns {
+    & > div {
+        float: left;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 0 1.25em;
+    }
+    .col-1-1, .col-1 {
+        width: 100%;
+        clear: both;
+    }
+
+    .col-1-2 {
+        width: 50%;
+    }
+
+    .col-1-4 {
+        width: 25%;
+    }
+
+    .col-3-4 {
+        width: 75%;
+    }
+
+    .col-1-8 {
+        width: 12.5%;
+    }
+
+    .col-3-8 {
+        width: 37.5%;
+    }
+
+    .col-5-8 {
+        width: 62.5%;
+    }
+
+    .col-7-8 {
+        width: 87.5%;
+    }
 }
+
+// GRID END //
+
