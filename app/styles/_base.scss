@@ -11,15 +11,17 @@ html {
     font-size: 100%;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
 }
 
 html, button, input, select, textarea {
-    font-family: sans-serif;
+    font-family: $font-family-sans-serif;
 }
 
 body {
     margin: 0;
-    line-height: 1.2;
+    line-height: $line-height;
+    background: $body-bg;
 }
 
 iframe {
@@ -39,33 +41,36 @@ a:hover {
 }
 
 //====TYPOGRAPHY====//
+h1, h2, h3, h4, h5, h6 {
+    font-weight: $font-weight-heading;
+}
 h1 {
-    font-size: 2em;
+    font-size: $font-size-h1;
     margin: 0.67em 0;
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: $font-size-h2;
     margin: 0.83em 0;
 }
 
 h3 {
-    font-size: 1.17em;
+    font-size: $font-size-h3;
     margin: 1em 0;
 }
 
 h4 {
-    font-size: 1em;
+    font-size: $font-size-h4;
     margin: 1.33em 0;
 }
 
 h5 {
-    font-size: 0.83em;
+    font-size: $font-size-h5;
     margin: 1.67em 0;
 }
 
 h6 {
-    font-size: 0.67em;
+    font-size: $font-size-h6;
     margin: 2.33em 0;
 }
 
@@ -87,8 +92,17 @@ p, pre {
     margin: 1em 0;
 }
 
+pre, code {
+    font-family: $font-family-monospace;
+}
+
+p, section li {
+    font-size: $font-size-para;
+    font-family: $font-family-serif;
+}
+
 small {
-    font-size: 80%;
+    font-size: 0.8rem;
 }
 
 //====LISTS====/
@@ -109,9 +123,12 @@ nav ul, nav ol {
 
 //====IMAGES, FIGURES====//
 img {
+    width: auto\9;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
     border: 0;
     -ms-interpolation-mode: bicubic;
-    max-width: 100%;
 }
 figure {
     margin: 0;

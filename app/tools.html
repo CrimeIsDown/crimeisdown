@@ -1,0 +1,124 @@
+<!-- @@master = templates/index.tpl.html -->
+<!-- @@block = pagetitle -->
+<title>Tools - CrimeIsDown.com</title>
+<!-- @@close -->
+<!-- @@block = content -->
+<div id="tools" class="columns">
+    <section id="introduction" class="col-7-8 col-center">
+        <p><strong>Welcome to the Tools page</strong> of CrimeIsDown.com! Here you will find a variety of tools to assist in scanner listening. You can use <a href="#maps">maps (with radio zone lookup)</a>, <a href="#radioids">search for a radio ID you hear</a>, <a href="#onlinestreams">listen to online streams</a>, or <a href="#socialmedia">read reports of Chicago crime from social media.</a></p>
+        <p><em>Please note this page is a current work-in-progress and so some tools may be incomplete or have bugs.</em></p>
+    </section>
+    <section id="maps" class="col-7-8 col-center">
+        <h1>Address to CPD Radio Zone Lookup</h1>
+
+        <iframe src="http://tendian.io/zonemap/" width="100%" height="700"><a href="http://tendian.io/zonemap/">Please access the zone map at http://tendian.io/zonemap/</a>. You must have JavaScript enabled.</iframe>
+
+        <!--
+        http://crime.chicagotribune.com/
+        http://boundaries.tribapps.com/
+
+        1. user inputs address
+        2. queries for boundaries
+        3. boundaries returned, split up
+        4. for each of the boundaries, draw and label
+        5. add boundaries in text form to info panel
+        6. plot point from geocoding
+        7. determine zone
+
+
+        <div class="col-md-6">
+          <form action="#" onsubmit="showAddress(this.address.value); return false">
+            <p>
+              <input type="text" size="50" name="address" placeholder="63rd and Halsted, Chicago" style="width: 87%" />
+              <input type="submit" value="Search" />
+            </p>
+            <div id="map_canvas" style="height: 400px;"></div>
+          </form>
+        </div>
+        -->
+    </section>
+    <section id="radioids" class="col-7-8 col-center">
+        <h1>Radio ID Lookup</h1>
+
+        <iframe src="https://docs.google.com/spreadsheets/d/1kiv-ELXw9Z-LcfZ87dFlBDN4GMdjZv_Iz5DSxTH_Cd4/pubhtml?widget=true&amp;headers=false" width="100%" height="600"></iframe>
+
+        <!--
+        1. user inputs id, specifies either cpd or cfd (not always needed)
+        2. searches
+            a. for each id entry, check for a match against string (if 2chars or less, match entire line) - if a match, add the row info
+            b. ends up with as much info as possible (overwrite old data)
+            c. return first result
+        -->
+    </section>
+    <section id="onlinestreams" class="col-7-8 col-center">
+        <h1 id="online-streams">Online Streams</h1>
+
+        <h3 id="chicago-police-department">Chicago Police Department</h3>
+        <ul>
+          <li><a href="http://www.broadcastify.com/listen/feed/763">Chicago Police Department</a></li>
+          <li><a href="http://www.broadcastify.com/listen/feed/17136">Citywide 1</a> Major Auto Accidents, Traffic, Gangs, CTA patrols</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/17695">Citywide 6</a> CPD Alternate Channel, also used for special events and sports games</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/16702">Zone 1 - Districts 16 and 17</a></li>
+          <li><a href="http://www.broadcastify.com/listen/feed/17684">Zone 2 - District 19</a> 19th District - Town Hall: Serving Uptown, south Lincoln Square, North Center, and Lakeview (including Boystown).</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/14545">Zone 3 - Districts 12 and 14</a> Near West Side, Wicker Park, Ukranian Village, West Town, Logan Square, Bucktown, UIC areas.</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/15380">Zone 4 - Districts 1 and 18</a> 1st District-Central..18th District-Near North.. Zone cover Downtown Chicago, Lake Shore Drive, Mag Mile, Navy Pier, Central Detention</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/17691">Zone 5 - District 2</a> 2nd District - Wentworth: Serving Douglas, Oakland, Grand Boulevard, Kenwood, Washington Park, and Hyde Park.</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/13262">Zone 6 - Districts 7 and 8</a></li>
+          <li><a href="http://www.broadcastify.com/listen/feed/14677">Zone 7 - District 3</a> Grand Crossing</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/15045">Zone 8 - Districts 4 and 6</a> District 4 - South Chicago &amp; District 6 - Gresham.</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/15084">Zone 9 - Districts 5 and 22</a> 5th District.. Calumet / Area South.. 22nd District  Morgan Park</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/17693">Zone 10 - Districts 10 and 11</a> 10th District - Ogden: Serving North Lawndale, South Lawndale, and the Lower West Side; 11th District - Harrison: Serving West Garfield Park, East Garfield Park, and the southern half of Humboldt Park.</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/12444">Zone 11 - Districts 20 and 24</a></li>
+          <li><a href="http://www.broadcastify.com/listen/feed/653">Zone 12 - Districts 15 and 25</a></li>
+          <li><a href="http://www.broadcastify.com/listen/feed/17692">Zone 13 - District 9</a> 9th District - Deering: Serving Bridgeport, McKinley Park, Brighton Park, New City, and Gage Park.</li>
+        </ul>
+
+        <h3 id="chicago-fire-department">Chicago Fire Department</h3>
+        <ul>
+          <li><a href="http://www.broadcastify.com/listen/feed/909">Chicago Fire - Digital</a> Chicago Fire Department (P25 Digital UHF ) - MAIN/north &amp; ENGLEWOOD/south, Fire Alarm Offices, including CITYWIDE Fire, radio system. CITYWIDE FIRE is also on the Chicago Fire &amp; EMS Feed! (WPSG 985)  www.ChicagoFD.org</li>
+          <li><a href="http://www.broadcastify.com/listen/feed/13605">Chicago Fire and EMS</a> Chicago Fire Department (UHF) CTA-Fire, CITYWIDE Fire, Fire Tac., Joint Ops. Also in (P25 Digital-UHF)  EMS-MAIN/north, EMS-ENGLEWOOD/south &amp; UHF-EMS Command. www.ChicagoFD.org</li>
+        </ul>
+
+        <!--
+        Chicago Police Department
+        http://relay.broadcastify.com:80/il_chicago_police2.mp3
+        Chicago Police - Citywide 1
+        http://relay.broadcastify.com:80/128024765.mp3
+        Chicago Police - Citywide 6
+        http://relay.broadcastify.com:80/299858349.mp3
+        Chicago Police Zone 1 - Districts 16 and 17
+        http://relay.broadcastify.com:80/51174769.mp3
+        Chicago Police Zone 2 - District 19
+        http://relay.broadcastify.com:80/779125459.mp3
+        Chicago Police Zone 3 Dispatch - Districts 12 and 14
+        http://relay.broadcastify.com:80/29449913.mp3
+        Chicago Police Zone 4 - Districts 1 and 18
+        http://relay.broadcastify.com:80/527466356.mp3
+        Chicago Police Zone 5 - District 2
+        http://relay.broadcastify.com:80/464465203.mp3
+        Chicago Police Zone 6 - Districts 7 and 8
+        http://relay.broadcastify.com:80/877430000.mp3
+        Chicago Police Zone 7 - District 3
+        http://relay.broadcastify.com:80/937409687.mp3
+        Chicago Police Zone 8 - Districts 4 and 6
+        http://relay.broadcastify.com:80/267563787.mp3
+        Chicago Police Zone 9 - Districts 5 and 22
+        http://relay.broadcastify.com:80/258823627.mp3
+        Chicago Police Zone 10 - Districts 10 and 11
+        http://relay.broadcastify.com:80/716183595.mp3
+        Chicago Police Zone 11 - Districts 20 and 24
+        http://relay.broadcastify.com:80/243172971.mp3
+        Chicago Police Zone 12 - Districts 15 and 25
+        http://relay.broadcastify.com:80/il_chicago_police.mp3
+        Chicago Police Zone 13 - District 9
+        http://relay.broadcastify.com:80/539709865.mp3
+        -->
+    </section>
+    <section id="socialmedia" class="col-7-8 col-center">
+        <h1 id="social-media-dashboard">Social Media Dashboard</h1>
+
+        <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/EricTendian/lists/crimeisdown" data-widget-id="521039582192611328">Tweets from https://twitter.com/EricTendian/lists/crimeisdown</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </section>
+</div>
+<!-- @@close -->

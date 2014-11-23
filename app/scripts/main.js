@@ -1,6 +1,8 @@
 'use strict';
 
 $(function onload() {
+    $('.imgLiquidFill').imgLiquid({ fill: true }); // for backdrop on index page
+
     $('a[href*=#]:not([href=#])').click(function() {
         if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') && location.hostname === this.hostname) {
             var target = $(this.hash);
