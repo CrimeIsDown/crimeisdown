@@ -1,0 +1,97 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <!-- @@placeholder = pagetitle -->
+        {block:Description}
+            <meta name="description" content="{MetaDescription}" />
+        {/block:Description}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicon, touch icon -->
+        <link rel="shortcut icon" href="{Favicon}" type="image/x-icon">
+
+        <!-- RSS feed -->
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+        <!-- Social media meta tags -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@EricTendian">
+        <meta name="twitter:title" content="CrimeIsDown.com">
+        <meta name="twitter:description" content="{MetaDescription}">
+        <meta name="twitter:creator" content="@EricTendian">
+        <meta name="twitter:image:src" content="">
+        <meta property="og:title" content="CrimeIsDown.com">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="http://crimeisdown.com/">
+        <meta property="og:image" content="">
+        <meta property="og:description" content="{MetaDescription}">
+
+        <!-- build:css styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="styles/vendor.css">
+        <!-- endbower -->
+        <!-- endbuild -->
+
+        <!-- build:css styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <header id="site-header">
+            <nav id="main-menu" class="menu menu-open menu-horizontal">
+                <a href="/" class="menu-heading">#CrimeIsDown.com Blog</a>
+
+                <ul id="main-menu-items">
+                    <li><a href="http://crimeisdown.com/index.html">Back to Home</a></li>
+                    <li><a href="/archive">Archive</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main id="content">
+            <!-- @@placeholder = content -->
+
+            <footer id="site-footer" class="columns">
+                <div class="col-3-8">
+                    <p>
+                        Copyright &copy; 2014 CrimeIsDown.com. All Rights Reserved.
+                    </p>
+                </div>
+                <div class="col-5-8">
+                    <p>
+                        <a href="http://crimeisdown.com/about.html">About CrimeIsDown.com</a> | Created by <a href="mailto:eric@crimeisdown.com">Eric Tendian</a> | <a href="https://twitter.com/EricTendian">Follow on Twitter</a> | <a href="https://www.facebook.com/Tendian.io">Like on Facebook</a>
+                    </p>
+                </div>
+            </footer>
+        </main>
+
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create', 'UA-30674963-11', 'auto');ga('require', 'displayfeatures');ga('send', 'pageview');
+        </script>
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="scripts/_imgLiquid-min.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
+        <!-- build:js scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>
