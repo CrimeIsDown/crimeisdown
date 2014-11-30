@@ -57,6 +57,15 @@
     }
     & > div:last-child {
         text-align: right;
+        form {
+            img {
+                display: none;
+            }
+            input#donatebutton {
+                vertical-align: top;
+                margin-top: -2px;
+            }
+        }
     }
 }
 // FOOTER END //
