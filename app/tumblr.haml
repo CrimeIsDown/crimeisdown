@@ -60,148 +60,147 @@
     %article.post.link
       %header
         %h3 Link
-      = succeed "{Target}>{Name}" do
-        %a.link{:href => "{URL}"}
-    {block:Description}
-    .description {Description}
-    {/block:Description}
-  {/block:Link}
-  {block:Chat}
-  %article.post.chat
-    {block:Title}
-    %header
-      %h3
-        %a{:href => "{Permalink}"} {Title}
-    {/block:Title}
-    %ul.chat
-      {block:Lines}
-      %li{:class => "{Alt} user_{UserNumber}"}
-        {block:Label}
-        %span.label {Label}
-        {/block:Label}{Line}
-      {/block:Lines}
-  {/block:Chat}
-  {block:Video}
-  %article.post.video
-    %header
-      %h3 Video
-    {Video-500}
-    {block:Caption}
-    .caption {Caption}
-    {/block:Caption}
-  {/block:Video}
-  {block:Audio}
-  %article.post.audio
-    %header
-      %h3 Audio
-    {AudioEmbed}
-    {block:Caption}
-    .caption {Caption}
-    {/block:Caption}
-  {/block:Audio}
-  {/block:Posts}
-  %p#footer
-    {block:PreviousPage}
-    %a{:href => "{PreviousPage}"} &#xAB; Previous
-    {/block:PreviousPage}{block:NextPage}
-    %a{:href => "{NextPage}"} Next &#xBB;
-    {/block:NextPage}
-    %a{:href => "/archive"} Archive
-%section#links.col-3-8
-  %h2#additional-links-and-resources Additional links and resources
-  %h3#chicago-area-frequency-databases-lists Chicago-area frequency databases/lists
-  %ul
-    %li
-      %a{:href => "http://jts203.com/2-IllinoisFrequencyLists.htm"} Illinois Frequency Lists
-    %li
-      %a{:href => "http://www.carmachicago.com/profiles/index.html"} CARMA Profiles
-    %li
-      %a{:href => "http://www.carmachicago.com/profiles/chgofreq2.pdf"} City of Chicago Communications Guide
-    %li
-      %a{:href => "http://www.carmachicago.com/profiles/CPD%20Radio%20Nrs.pdf"} CPD Radio and Unit ID Numbers
-    %li
-      %a{:href => "http://www.radioreference.com/apps/db/?ctid=606"} Cook County, Illinois (IL) Scanner Frequencies and Radio Frequency Reference
-    %li
-      %a{:href => "http://www.radioreference.com/apps/db/?sid=581"} Chicago Public Safety and Services Trunking System, Chicago, Illinois - Scanner Frequencies
-    %li
-      %a{:href => "http://www.carmachicago.com/profiles/CPDID03A.pdf"} CPD Radio ID list 03A
-  %h3#mapping-tools Mapping tools
-  %ul
-    %li
-      %a{:href => "http://tendian.io/zonemap/"} Address to CPD Radio Zone Lookup
-    %li
-      %a{:href => "http://boundaries.tribapps.com/"} You are here. Chicagoland political boundaries
-    %li
-      %a{:href => "http://crime.chicagotribune.com/"} Crime in Chicagoland by the Chicago Tribune
-    %li
-      %a{:href => "http://interactive.wbez.org/curiouscity/redx/index.html"} Red X Buildings
-    %li
-      %a{:href => "http://www.chicagocityscape.com/"} Chicago Cityscape
-    %li
-      %a{:href => "http://edifice.opencityapps.org/"} Edifice - building maps
-    %li
-      %a{:href => "http://chicagobuildings.org/"} Vacant and Abandoned Building Finder
-  %h3#scanner-manuals Scanner Manuals/Guides
-  %ul
-    %li
-      %a{:href => "http://marksscanners.com/396XT/396xt.shtml"} Easier to Read BCD396XT Digital Scanner Manual
-    %li
-      %a{:href => "http://kalcountyraces.org/docs/Training/Radio/SmartZone101.html"} How a SmartZone system works
-    %li
-      %a{:href => "http://wiki.radioreference.com/index.php/Manuals_and_Publications"} RadioReference Manual List
-  %h3#scanner-recordings Scanner Recordings
-  %p You may need to right click and download the MP3 file if it does not play in your browser.
-  %ul
-    %li
-      %a{:href => "http://www.broadcastify.com/listen/ctid/606", :target => "_blank"} Cook County Illinois Live Audio Feeds
-    %li
-      %a{:href => "https://www.youtube.com/watch?v=r7YVYmnBaCM", :target => "_blank"} Chicago Mass Shooting Cornell Square Park EMS Radio Traffic 9/19/13
-    %li
-      %a{:href => "http://clyp.it/kj2xdske", :target => "_blank"} Chicago Police Zone 8 - 8:55pm Aug 24 - Clyp
-    %li
-      %a{:href => "http://clyp.it/kyega4w2", :target => "_blank"} 10-1 at 80th and Avalon - Aug, 26 2014 - Clyp
-    %li
-      %a{:href => "http://clyp.it/mvf3zfbd", :target => "_blank"} 7204 S Lowe - 10-1, officer shot  standoff
-    %li
-      %a{:href => "http://clyp.it/ute5duq0", :target => "_blank"} Fatal pursuit, 4001 W Ogden
-    %li
-      %a{:href => "http://shortwaveamerica.blogspot.com/2013/04/chicago-police-department.html", :target => "_blank"} Chicago Police Officer written up for lack of radio discipline
-    %li
-      %a{:href => "http://clyp.it/lqzcoo0z", :target => "_blank"} "Santa Claus just set a car on fire"
-    %li
-      %a{:href => "http://tendian.io/ctaradio/", :target => "_blank"} CTA Radio
-    %li
-      %strong
-        %a{:href => "/recordings/chicago_brownfriday_protest_cw6_20141128_1147-1247_recording.mp3", :target => "_blank"} #BrownFriday protest - CW6 audio, 11:47am - 12:47pm
-    %li
-      %strong
-        %a{:href => "/recordings/chicago_brownfriday_protest_cw6_20141128_1207_stingray_recording.mp3", :target => "_blank"} #BrownFriday protest - CW6 audio, 12:07pm, CPD hints at possible Stingray use
-        (
-        %a{:href => "http://clyp.it/sv23cozu", :target => "_blank"}> alternate mirror
-        )
-  %h3#journalism Journalism
-  %ul
-    %li
-      %a{:href => "http://graphics.chicagotribune.com/under-the-gun/2014/"} Chicago Under The Gun - Chicago Tribune
-    %li
-      %a{:href => "http://live.chicagotribune.com/Event/News_Chicago_Overnight"} The Overnight Beat - Chicago Tribune
-    %li
-      %a{:href => "http://chicagosuntimes.com/section/news/"} Chicago Sun-Times Breaking News Feed
-    %li
-      %a{:href => "http://www.thedailybeast.com/articles/2014/04/22/how-chicago-became-chiraq.html"} How Chicago Became 'Chiraq'
-    %li
-      %a{:href => "http://www.economist.com/blogs/democracyinamerica/2014/05/crime-statistics-chicago"} "Deceptive numbers" - Crime statistics in Chicago
-    %li
-      %a{:href => "http://www.chicagomag.com/Chicago-Magazine/May-2014/Chicago-crime-rates/"} The Truth About Chicago&#x2019;s Crime Rates
-    %li
-      %a{:href => "http://crime.chicagotribune.com/"} Crime in Chicagoland - Data Journalism
-    %li
-      %a{:href => "http://www.chicagotribune.com/news/opinion/plan/ct-edit-xproject4a-crime-1027-20131027-story.html"} "Curb crime. Save Chicago."
-    %li
-      %a{:href => "http://www.chicagotribune.com/news/opinion/editorials/ct-plan-of-chicago-edit-0921-bd-20140921-story.html"} "A new Plan of Chicago: 12 ways to heal a city"
-    %li
-      %a{:href => "http://guncrisis.org/principles/"} GunCrisis.org Reporting Principles and Practices
-    %li
-      %a{:href => "http://howardowens.com/2013/09/23/the-batavians-basic-rules-for-scanner-reporting/"} Batavian's basic rules for scanner reporting
-    %li
-      %a{:href => "http://www.cmsimpact.org/journalism"} Set of Principles in Fair Use for Journalism
+           %a.link{:href => "{URL}" :target => "{Target}"} {Name}
+      {block:Description}
+      .description {Description}
+      {/block:Description}
+    {/block:Link}
+    {block:Chat}
+    %article.post.chat
+      {block:Title}
+      %header
+        %h3
+          %a{:href => "{Permalink}"} {Title}
+      {/block:Title}
+      %ul.chat
+        {block:Lines}
+        %li{:class => "{Alt} user_{UserNumber}"}
+          {block:Label}
+          %span.label {Label}
+          {/block:Label}{Line}
+        {/block:Lines}
+    {/block:Chat}
+    {block:Video}
+    %article.post.video
+      %header
+        %h3 Video
+      {Video-500}
+      {block:Caption}
+      .caption {Caption}
+      {/block:Caption}
+    {/block:Video}
+    {block:Audio}
+    %article.post.audio
+      %header
+        %h3 Audio
+      {AudioEmbed}
+      {block:Caption}
+      .caption {Caption}
+      {/block:Caption}
+    {/block:Audio}
+    {/block:Posts}
+    %p#footer
+      {block:PreviousPage}
+      %a{:href => "{PreviousPage}"} &#xAB; Previous
+      {/block:PreviousPage}{block:NextPage}
+      %a{:href => "{NextPage}"} Next &#xBB;
+      {/block:NextPage}
+      %a{:href => "/archive"} Archive
+  %section#links.col-3-8
+    %h2#additional-links-and-resources Additional links and resources
+    %h3#chicago-area-frequency-databases-lists Chicago-area frequency databases/lists
+    %ul
+      %li
+        %a{:href => "http://jts203.com/2-IllinoisFrequencyLists.htm"} Illinois Frequency Lists
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/index.html"} CARMA Profiles
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/chgofreq2.pdf"} City of Chicago Communications Guide
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/CPD%20Radio%20Nrs.pdf"} CPD Radio and Unit ID Numbers
+      %li
+        %a{:href => "http://www.radioreference.com/apps/db/?ctid=606"} Cook County, Illinois (IL) Scanner Frequencies and Radio Frequency Reference
+      %li
+        %a{:href => "http://www.radioreference.com/apps/db/?sid=581"} Chicago Public Safety and Services Trunking System, Chicago, Illinois - Scanner Frequencies
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/CPDID03A.pdf"} CPD Radio ID list 03A
+    %h3#mapping-tools Mapping tools
+    %ul
+      %li
+        %a{:href => "http://tendian.io/zonemap/"} Address to CPD Radio Zone Lookup
+      %li
+        %a{:href => "http://boundaries.tribapps.com/"} You are here. Chicagoland political boundaries
+      %li
+        %a{:href => "http://crime.chicagotribune.com/"} Crime in Chicagoland by the Chicago Tribune
+      %li
+        %a{:href => "http://interactive.wbez.org/curiouscity/redx/index.html"} Red X Buildings
+      %li
+        %a{:href => "http://www.chicagocityscape.com/"} Chicago Cityscape
+      %li
+        %a{:href => "http://edifice.opencityapps.org/"} Edifice - building maps
+      %li
+        %a{:href => "http://chicagobuildings.org/"} Vacant and Abandoned Building Finder
+    %h3#scanner-manuals Scanner Manuals/Guides
+    %ul
+      %li
+        %a{:href => "http://marksscanners.com/396XT/396xt.shtml"} Easier to Read BCD396XT Digital Scanner Manual
+      %li
+        %a{:href => "http://kalcountyraces.org/docs/Training/Radio/SmartZone101.html"} How a SmartZone system works
+      %li
+        %a{:href => "http://wiki.radioreference.com/index.php/Manuals_and_Publications"} RadioReference Manual List
+    %h3#scanner-recordings Scanner Recordings
+    %p You may need to right click and download the MP3 file if it does not play in your browser.
+    %ul
+      %li
+        %a{:href => "http://www.broadcastify.com/listen/ctid/606", :target => "_blank"} Cook County Illinois Live Audio Feeds
+      %li
+        %a{:href => "https://www.youtube.com/watch?v=r7YVYmnBaCM", :target => "_blank"} Chicago Mass Shooting Cornell Square Park EMS Radio Traffic 9/19/13
+      %li
+        %a{:href => "http://clyp.it/kj2xdske", :target => "_blank"} Chicago Police Zone 8 - 8:55pm Aug 24 - Clyp
+      %li
+        %a{:href => "http://clyp.it/kyega4w2", :target => "_blank"} 10-1 at 80th and Avalon - Aug, 26 2014 - Clyp
+      %li
+        %a{:href => "http://clyp.it/mvf3zfbd", :target => "_blank"} 7204 S Lowe - 10-1, officer shot  standoff
+      %li
+        %a{:href => "http://clyp.it/ute5duq0", :target => "_blank"} Fatal pursuit, 4001 W Ogden
+      %li
+        %a{:href => "http://shortwaveamerica.blogspot.com/2013/04/chicago-police-department.html", :target => "_blank"} Chicago Police Officer written up for lack of radio discipline
+      %li
+        %a{:href => "http://clyp.it/lqzcoo0z", :target => "_blank"} "Santa Claus just set a car on fire"
+      %li
+        %a{:href => "http://tendian.io/ctaradio/", :target => "_blank"} CTA Radio
+      %li
+        %strong
+          %a{:href => "/recordings/chicago_brownfriday_protest_cw6_20141128_1147-1247_recording.mp3", :target => "_blank"} #BrownFriday protest - CW6 audio, 11:47am - 12:47pm
+      %li
+        %strong
+          %a{:href => "/recordings/chicago_brownfriday_protest_cw6_20141128_1207_stingray_recording.mp3", :target => "_blank"} #BrownFriday protest - CW6 audio, 12:07pm, CPD hints at possible Stingray use
+          (
+          %a{:href => "http://clyp.it/sv23cozu", :target => "_blank"}> alternate mirror
+          )
+    %h3#journalism Journalism
+    %ul
+      %li
+        %a{:href => "http://graphics.chicagotribune.com/under-the-gun/2014/"} Chicago Under The Gun - Chicago Tribune
+      %li
+        %a{:href => "http://live.chicagotribune.com/Event/News_Chicago_Overnight"} The Overnight Beat - Chicago Tribune
+      %li
+        %a{:href => "http://chicagosuntimes.com/section/news/"} Chicago Sun-Times Breaking News Feed
+      %li
+        %a{:href => "http://www.thedailybeast.com/articles/2014/04/22/how-chicago-became-chiraq.html"} How Chicago Became 'Chiraq'
+      %li
+        %a{:href => "http://www.economist.com/blogs/democracyinamerica/2014/05/crime-statistics-chicago"} "Deceptive numbers" - Crime statistics in Chicago
+      %li
+        %a{:href => "http://www.chicagomag.com/Chicago-Magazine/May-2014/Chicago-crime-rates/"} The Truth About Chicago&#x2019;s Crime Rates
+      %li
+        %a{:href => "http://crime.chicagotribune.com/"} Crime in Chicagoland - Data Journalism
+      %li
+        %a{:href => "http://www.chicagotribune.com/news/opinion/plan/ct-edit-xproject4a-crime-1027-20131027-story.html"} "Curb crime. Save Chicago."
+      %li
+        %a{:href => "http://www.chicagotribune.com/news/opinion/editorials/ct-plan-of-chicago-edit-0921-bd-20140921-story.html"} "A new Plan of Chicago: 12 ways to heal a city"
+      %li
+        %a{:href => "http://guncrisis.org/principles/"} GunCrisis.org Reporting Principles and Practices
+      %li
+        %a{:href => "http://howardowens.com/2013/09/23/the-batavians-basic-rules-for-scanner-reporting/"} Batavian's basic rules for scanner reporting
+      %li
+        %a{:href => "http://www.cmsimpact.org/journalism"} Set of Principles in Fair Use for Journalism
