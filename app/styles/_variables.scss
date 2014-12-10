@@ -6,11 +6,13 @@ $body-bg:       #FFF;
 $menu-bg:       #222;
 $menu-link:     #FFF;
 $text-color:    #000;
+$link-color:    #F00;
+$link-visited:  darken($link-color, 5);
 $heading-color: #000;
 
 /* Typography */
-$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
+$font-family-sans-serif:  'Montserrat', Helvetica, Arial, sans-serif !default;
+$font-family-serif:       'Neuton', Georgia, Times, serif !default;
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
 $font-family-base:        $font-family-sans-serif !default;
 
@@ -21,7 +23,7 @@ $font-size-base:          16px;
 }
 
 $font-size-small:         em($font-size-base * 0.8);
-$font-size-para:          em($font-size-base);
+$font-size-para:          em($font-size-base * 1.3);
 
 $font-size-h1:            em($font-size-base * 2);
 $font-size-h2:            em($font-size-base * 1.5);
@@ -32,4 +34,4 @@ $font-size-h6:            em($font-size-base * 0.67);
 
 $font-weight-heading:     700;
 
-$line-height: 1.2;
+$line-height: 1;

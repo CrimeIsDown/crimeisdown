@@ -1,0 +1,34 @@
+/ @@master = templates/index.tpl.html
+/ @@block = pagetitle
+%title Maps - CrimeIsDown.com
+/ @@close
+/ @@block = content
+#site-body.columns
+  .col-7-8.col-center
+    %h1 Address to CPD Radio Zone Lookup
+    %iframe{:height => "700", :src => "http://tendian.io/zonemap/", :width => "100%"}
+      %a{:href => "http://tendian.io/zonemap/"}> Please access the zone map at http://tendian.io/zonemap/
+      \. You must have JavaScript enabled.
+    /
+      http://crime.chicagotribune.com/
+      http://boundaries.tribapps.com/
+
+      1. user inputs address
+      2. queries for boundaries
+      3. boundaries returned, split up
+      4. for each of the boundaries, draw and label
+      5. add boundaries in text form to info panel
+      6. plot point from geocoding
+      7. determine zone
+
+
+      <div class="col-md-6">
+      <form action="#" onsubmit="showAddress(this.address.value); return false">
+      <p>
+      <input type="text" size="50" name="address" placeholder="63rd and Halsted, Chicago" style="width: 87%" />
+      <input type="submit" value="Search" />
+      </p>
+      <div id="map_canvas" style="height: 400px;"></div>
+      </form>
+      </div>
+/ @@close

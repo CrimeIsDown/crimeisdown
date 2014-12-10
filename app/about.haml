@@ -1,0 +1,80 @@
+/ @@master = templates/index.tpl.html
+/ @@block = pagetitle
+%title About - CrimeIsDown.com
+/ @@close
+/ @@block = content
+#about.columns
+  %header.col-1
+    %h1#about-crimeisdown About CrimeIsDown.com
+  .col-5-8
+    %h2#data-we-use Data we use
+    %section
+      %h3#maps Maps
+      %p
+        Mapping data comes from the
+        = succeed "," do
+          %a{:href => "https://data.cityofchicago.org/"} City of Chicago Data Portal
+        = succeed "." do
+          %a{:href => "http://boundaries.tribapps.com/api/"} Chicago Tribune's Boundaries API
+    %section
+      %h3#radio-database Radio Database
+      %p
+        We make use of a variety of sources for the information used on the radio ID, online streams, and map pages. The sources are as follows:
+      %ul
+        %li
+          %a{:href => "http://www.carmachicago.com/"} CARMA Chicago
+        %li
+          %a{:href => "http://www.radioreference.com/"} RadioReference Databases
+        %li
+          %a{:href => "http://www.broadcastify.com/"} Broadcastify.com
+    %section
+      %h3#social-media Social Media
+      %p
+        Social media updates come from a variety of hardworking folks, some crime/breaking news reporters and photographers, some news editors, but most importantly hobbyists who listen to the scanners in their free time. Check out some of their Twitter profiles and follow them.
+      %p
+        %a{:href => "https://twitter.com/EricTendian/lists/crimeisdown"} View the #CrimeIsDown list on Twitter
+    %section
+      %h2#updates-development Updates/Development
+      %p
+        Site updates/changes will be posted on the homepage as needed. You can always
+        = succeed "." do
+          %a{:href => "https://github.com/EricTendian/crimeisdown"} view the complete site changelog on GitHub
+    %section
+      %h2#contact-us Contact Us
+      %p
+        %a{:href => "https://twitter.com/EricTendian"} Follow @CrimeIsDown on Twitter
+        to get crime news and updates from CrimeIsDown.com.
+      %p
+        Contact Eric Tendian (eric [at] tendian.io) for support with the website and other inquiries. Please consider
+        %a{:href => "#"} clicking here and donating
+        a small sum of money to keep the site up and running.
+  .col-3-8
+    %h2 Links
+    %h4
+      Last updated
+      %time 11/18/14
+    %ul
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/index.html"} CARMA Profiles
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/chgofreq2.pdf"} City of Chicago Communications Guide
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/CPD%20Radio%20Nrs.pdf"} CPD Radio and Unit ID Numbers
+      %li
+        %a{:href => "http://www.radioreference.com/apps/db/?ctid=606"} Cook Co. Frequency Reference
+      %li
+        %a{:href => "http://www.radioreference.com/apps/db/?sid=581"} CPD Trunked System Information
+      %li
+        %a{:href => "http://tendian.io/zonemap/"} Address to CPD Radio Zone Lookup
+      %li
+        %a{:href => "http://boundaries.tribapps.com/"} Chicagoland political boundaries (map, API)
+      %li
+        %a{:href => "http://marksscanners.com/396XT/396xt.shtml"} Easier to Read BCD396XT Digital Scanner Manual
+      %li
+        %a{:href => "http://www.broadcastify.com/listen/ctid/606"} Cook County Illinois Live Audio Feeds
+      %li
+        %a{:href => "http://crime.chicagotribune.com/"} Crime in Chicagoland by the Chicago Tribune
+    %p
+      For more links, check out the
+      %a{:href => "getting-started.html"} "Getting started with #ChicagoScanner" page.
+/ @@close
