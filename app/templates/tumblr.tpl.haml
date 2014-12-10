@@ -3,39 +3,38 @@
   %head
     %meta{:charset => "utf-8"}/
     %title {Title}
+    {block:Description}
+    %meta{:content => "{MetaDescription}", :name => "description"}/
+    {/block:Description}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    / Favicon, touch icon
+    %link{:href => "{Favicon}", :rel => "shortcut icon", :type => "image/x-icon"}/
+    / RSS feed
+    %link{:href => "{RSS}", :rel => "alternate", :type => "application/rss+xml"}/
+    / Social media meta tags
+    %meta{:content => "summary", :name => "twitter:card"}/
+    %meta{:content => "@EricTendian", :name => "twitter:site"}/
+    %meta{:content => "CrimeIsDown.com", :name => "twitter:title"}/
+    %meta{:content => "{MetaDescription}", :name => "twitter:description"}/
+    %meta{:content => "@EricTendian", :name => "twitter:creator"}/
+    %meta{:content => "", :name => "twitter:image:src"}/
+    %meta{:content => "CrimeIsDown.com", :property => "og:title"}/
+    %meta{:content => "website", :property => "og:type"}/
+    %meta{:content => "http://crimeisdown.com/", :property => "og:url"}/
+    %meta{:content => "", :property => "og:image"}/
+    %meta{:content => "{MetaDescription}", :property => "og:description"}/
+    / build:css styles/vendor.css
+    / bower:css
+    %link{:href => "styles/vendor.css", :rel => "stylesheet"}/
+    / endbower
+    / endbuild
+    / build:css styles/main.css
+    %link{:href => "styles/main.css", :rel => "stylesheet"}/
+    / endbuild
+    / build:js scripts/vendor/modernizr.js
+    %script{:src => "bower_components/modernizr/modernizr.js"}
+    / endbuild
   %body
-    %p
-      {block:Description}
-      %meta{:content => "{MetaDescription}", :name => "description"}/
-      {/block:Description}
-      %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
-      / Favicon, touch icon
-      %link{:href => "{Favicon}", :rel => "shortcut icon", :type => "image/x-icon"}/
-      / RSS feed
-      %link{:href => "{RSS}", :rel => "alternate", :type => "application/rss+xml"}/
-      / Social media meta tags
-      %meta{:content => "summary", :name => "twitter:card"}/
-      %meta{:content => "@EricTendian", :name => "twitter:site"}/
-      %meta{:content => "CrimeIsDown.com", :name => "twitter:title"}/
-      %meta{:content => "{MetaDescription}", :name => "twitter:description"}/
-      %meta{:content => "@EricTendian", :name => "twitter:creator"}/
-      %meta{:content => "", :name => "twitter:image:src"}/
-      %meta{:content => "CrimeIsDown.com", :property => "og:title"}/
-      %meta{:content => "website", :property => "og:type"}/
-      %meta{:content => "http://crimeisdown.com/", :property => "og:url"}/
-      %meta{:content => "", :property => "og:image"}/
-      %meta{:content => "{MetaDescription}", :property => "og:description"}/
-      / build:css styles/vendor.css
-      / bower:css
-      %link{:href => "styles/vendor.css", :rel => "stylesheet"}/
-      / endbower
-      / endbuild
-      / build:css styles/main.css
-      %link{:href => "styles/main.css", :rel => "stylesheet"}/
-      / endbuild
-      / build:js scripts/vendor/modernizr.js
-      %script{:src => "bower_components/modernizr/modernizr.js"}
-      / endbuild
     /[if lt IE 10]
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     %header#site-header
