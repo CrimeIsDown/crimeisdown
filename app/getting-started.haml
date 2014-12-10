@@ -1,0 +1,166 @@
+/ @@master = templates/index.tpl.html
+/ @@block = pagetitle
+%title Getting Started - CrimeIsDown.com
+/ @@close
+/ @@block = content
+#getting-started.columns
+  %header.col-1
+    %h1#getting-started-with-chicagoscanner Getting Started with #ChicagoScanner
+    %p Welcome to the Chicago scanner community! We've prepared these set of steps for you to get started.
+  %section.col-1-2
+    %h2#steps-to-becoming-a-successful-scanner-enthusiast Steps to becoming a successful scanner enthusiast
+    %h3#scanner-ethics Step 0: Scanner Ethics
+    %p
+      As anyone with a scanner knows, what is heard on the air may be confidential or sensitive, either to victims, police/fire, or the general public. Thus, ethics is very important when listening to scanner traffic. Here at CrimeIsDown.com, we have developed our own code of ethics around listening to and reporting information heard on the scanner.
+      %a{:href => "ethics.html"} You can view our set of rules here.
+    %h3#buy-a-scanner Step 1: Buy a Scanner
+    %p So you want to listen to CPD or CFD dispatches? You'll need a scanner to do this. But not just any scanner - we recommend getting a scanner with P25 digital decoding, as well as trunking capability, if you want to ensure you can hear all the different conversations. CPD uses convential analog channels around 460MHz, while CFD uses conventional digital channels around 477MHz. CPD also has a trunked system (Motorola) for special units.
+    %p
+      If you need help choosing a scanner,
+      %a{:href => "http://wiki.radioreference.com/index.php/Scanner_decision", :target => "_blank", :title => "Scanner decision"} check out RadioReference's guide.
+    %h3#program-the-scanner Step 2: Program the Scanner
+    %p
+      Once you have a scanner, you'll need to program it. We recommend using
+      %a{:href => "http://www.radioreference.com/apps/db/?ctid=606#cid-1327", :target => "_blank"} the RadioReference database for Cook County
+      and adding in frequencies for the following (see below). If you own one of the Uniden DMA scanners (e.g. BCD396XT) we will be publishing a set of systems you can download and import.
+    %ul
+      %li
+        %strong Chicago Police Department
+        \- Zones 1-13, Citywide 1-8
+      %li
+        %strong Chicago Fire Department
+        \- Fire Main+Englewood, EMS Main+Englewood, Citywide Fire, EMS Command, Fireground
+      %li
+        %strong Chicago Transit Authority
+        \- All CTA lines, bus supervisors North+South
+      %li
+        %strong Aviation
+        \- Helicopter UNICOM, Fixed-Wing UNICOM
+      %li
+        %strong Chicago Media
+        \- As you see fit
+        %a{:href => "http://www.radioreference.com/apps/db/?aid=2820", :target => "_blank"} from this list.
+      %li
+        %strong CPD Trunked
+        \- If you're up for the challenge, add in the
+        %a{:href => "http://www.radioreference.com/apps/db/?sid=581", :target => "_blank"} Chicago Public Safety and Services trunked system
+        as well.
+    %h3#start-scanning Step 3: Start Scanning!
+    %p Got your scanner programmed? Time to start scanning! There's a lot you could potentially listen to, but for the most action we recommend you listen to the following:
+    %ul
+      %li CPD Zones 3, 5, 6, 7, 8, 9, 10, 12, 13
+      %li CPD Citywide 1, 2, 6 (10-1 simulcasts go out on all citywides)
+      %li CFD Fire Main, Fire Englewood, EMS Main, EMS Englewood
+      %li Helicopter UNICOM
+      %li CPD Trunked TG352 (Mayor's detail), TG45072 (Marine Unit)
+    %p
+      Of course, there may be incidents which take place on a frequency other than these, so check our
+      %a{:href => "tools.html#socialmedia"} Social Media Dashboard
+      to see what other folks are listening to.
+    %h3#make-tweaks Step 4: Make Tweaks and Adjustments As Needed
+    %p
+      Often you may need to make adjustments to the programming, antenna, or other equipment in order to hear more transmissions or hear them more clearly. We don't have any specific advice on what tweaks to make, but do
+      %a{:href => "about-police-scanners.html#improvements"} check out our Scanning 101 page
+      and see if you can find something helpful.
+    /
+      <h3 id="record-what-you-hear">Step 5: Record What You Hear</h3>
+      <p>Bacon ipsum dolor amet venison tongue strip steak kevin tail ham. Pork loin strip steak pork belly cupim corned beef, ground round capicola kevin meatloaf kielbasa. Sausage short loin beef pork belly doner kevin filet mignon. Bacon short ribs corned beef kevin. Ribeye bacon short loin, corned beef sausage turducken boudin ham rump biltong porchetta shoulder pancetta. Tri-tip ham doner biltong meatloaf jerky pork belly short loin drumstick filet mignon shankle. Sirloin doner pork belly andouille pig chicken.</p>
+  %section.col-1-2
+    %h2#additional-links-and-resources Additional links and resources
+    %h3#chicago-area-frequency-databases-lists Chicago-area frequency databases/lists
+    %ul
+      %li
+        %a{:href => "http://jts203.com/2-IllinoisFrequencyLists.htm"} Illinois Frequency Lists
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/index.html"} CARMA Profiles
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/chgofreq2.pdf"} City of Chicago Communications Guide
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/CPD%20Radio%20Nrs.pdf"} CPD Radio and Unit ID Numbers
+      %li
+        %a{:href => "http://www.radioreference.com/apps/db/?ctid=606"} Cook County, Illinois (IL) Scanner Frequencies and Radio Frequency Reference
+      %li
+        %a{:href => "http://www.radioreference.com/apps/db/?sid=581"} Chicago Public Safety and Services Trunking System, Chicago, Illinois - Scanner Frequencies
+      %li
+        %a{:href => "http://www.carmachicago.com/profiles/CPDID03A.pdf"} CPD Radio ID list 03A
+    %h3#mapping-tools Mapping tools
+    %ul
+      %li
+        %a{:href => "http://tendian.io/zonemap/"} Address to CPD Radio Zone Lookup
+      %li
+        %a{:href => "http://boundaries.tribapps.com/"} You are here. Chicagoland political boundaries
+      %li
+        %a{:href => "http://crime.chicagotribune.com/"} Crime in Chicagoland by the Chicago Tribune
+      %li
+        %a{:href => "http://interactive.wbez.org/curiouscity/redx/index.html"} Red X Buildings
+      %li
+        %a{:href => "http://www.chicagocityscape.com/"} Chicago Cityscape
+      %li
+        %a{:href => "http://edifice.opencityapps.org/"} Edifice - building maps
+      %li
+        %a{:href => "http://chicagobuildings.org/"} Vacant and Abandoned Building Finder
+    %h3#scanner-manuals Scanner Manuals/Guides
+    %ul
+      %li
+        %a{:href => "http://marksscanners.com/396XT/396xt.shtml"} Easier to Read BCD396XT Digital Scanner Manual
+      %li
+        %a{:href => "http://kalcountyraces.org/docs/Training/Radio/SmartZone101.html"} How a SmartZone system works
+      %li
+        %a{:href => "http://wiki.radioreference.com/index.php/Manuals_and_Publications"} RadioReference Manual List
+    %h3#scanner-recordings Scanner Recordings
+    %p You may need to right click and download the MP3 file if it does not play in your browser.
+    %ul
+      %li
+        %a{:href => "http://www.broadcastify.com/listen/ctid/606", :target => "_blank"} Cook County Illinois Live Audio Feeds
+      %li
+        %a{:href => "https://www.youtube.com/watch?v=r7YVYmnBaCM", :target => "_blank"} Chicago Mass Shooting Cornell Square Park EMS Radio Traffic 9/19/13
+      %li
+        %a{:href => "http://clyp.it/kj2xdske", :target => "_blank"} Chicago Police Zone 8 - 8:55pm Aug 24 - Clyp
+      %li
+        %a{:href => "http://clyp.it/kyega4w2", :target => "_blank"} 10-1 at 80th and Avalon - Aug, 26 2014 - Clyp
+      %li
+        %a{:href => "http://clyp.it/mvf3zfbd", :target => "_blank"} 7204 S Lowe - 10-1, officer shot &amp; standoff
+      %li
+        %a{:href => "http://clyp.it/ute5duq0", :target => "_blank"} Fatal pursuit, 4001 W Ogden
+      %li
+        %a{:href => "http://shortwaveamerica.blogspot.com/2013/04/chicago-police-department.html", :target => "_blank"} Chicago Police Officer written up for lack of radio discipline
+      %li
+        %a{:href => "http://clyp.it/lqzcoo0z", :target => "_blank"} "Santa Claus just set a car on fire"
+      %li
+        %a{:href => "http://tendian.io/ctaradio/", :target => "_blank"} CTA Radio
+      %li
+        %strong
+          %a{:href => "/recordings/chicago_brownfriday_protest_cw6_20141128_1147-1247_recording.mp3", :target => "_blank"} #BrownFriday protest - CW6 audio, 11:47am - 12:47pm
+      %li
+        %strong
+          %a{:href => "/recordings/chicago_brownfriday_protest_cw6_20141128_1207_stingray_recording.mp3", :target => "_blank"} #BrownFriday protest - CW6 audio, 12:07pm, CPD hints at possible Stingray use
+          (
+          %a{:href => "http://clyp.it/sv23cozu", :target => "_blank"}> alternate mirror
+          )
+    %h3#journalism Journalism
+    %ul
+      %li
+        %a{:href => "http://graphics.chicagotribune.com/under-the-gun/2014/"} Chicago Under The Gun - Chicago Tribune
+      %li
+        %a{:href => "http://live.chicagotribune.com/Event/News_Chicago_Overnight"} The Overnight Beat - Chicago Tribune
+      %li
+        %a{:href => "http://chicagosuntimes.com/section/news/"} Chicago Sun-Times Breaking News Feed
+      %li
+        %a{:href => "http://www.thedailybeast.com/articles/2014/04/22/how-chicago-became-chiraq.html"} How Chicago Became 'Chiraq'
+      %li
+        %a{:href => "http://www.economist.com/blogs/democracyinamerica/2014/05/crime-statistics-chicago"} "Deceptive numbers" - Crime statistics in Chicago
+      %li
+        %a{:href => "http://www.chicagomag.com/Chicago-Magazine/May-2014/Chicago-crime-rates/"} The Truth About Chicago’s Crime Rates
+      %li
+        %a{:href => "http://crime.chicagotribune.com/"} Crime in Chicagoland - Data Journalism
+      %li
+        %a{:href => "http://www.chicagotribune.com/news/opinion/plan/ct-edit-xproject4a-crime-1027-20131027-story.html"} "Curb crime. Save Chicago."
+      %li
+        %a{:href => "http://www.chicagotribune.com/news/opinion/editorials/ct-plan-of-chicago-edit-0921-bd-20140921-story.html"} "A new Plan of Chicago: 12 ways to heal a city"
+      %li
+        %a{:href => "http://guncrisis.org/principles/"} GunCrisis.org Reporting Principles and Practices
+      %li
+        %a{:href => "http://howardowens.com/2013/09/23/the-batavians-basic-rules-for-scanner-reporting/"} Batavian's basic rules for scanner reporting
+      %li
+        %a{:href => "http://www.cmsimpact.org/journalism"} Set of Principles in Fair Use for Journalism
+/ @@close

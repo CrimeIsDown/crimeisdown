@@ -1,0 +1,245 @@
+/ @@master = templates/index.tpl.html
+/ @@block = pagetitle
+%title Scanning 101 - CrimeIsDown.com
+/ @@close
+/ @@block = content
+#about-police-scanners.columns
+  .col-1
+    %aside#citation
+      %p
+        The following guide comes from the RadioReference wiki, a great selection of content about scanners and other radio monitoring. Please access the
+        %a{:href => "http://wiki.radioreference.com/index.php/Scanning_101"} full version of the article on the wiki.
+        Additionally, if you are curious as to how police scanners work from a more scientific/engineering perspective, check out the
+        %a{:href => "http://electronics.howstuffworks.com/radio-scanner.htm"} HowStuffWorks article entitled "How Radio Scanners Work".
+    %h1#a-newbie-s-guide-to-scanners A Newbie's Guide to Scanners
+  .col-1-4
+    %h2 Outline
+    %ol
+      %li
+        %a{:href => "#introduction-and-explanation"} Introduction and Explanation
+      %li
+        %a{:href => "#general-questions"} General Questions
+      %li
+        %a{:href => "#pcs-and-software"} PCs and Software
+      %li
+        %a{:href => "#improvements"} Improvements
+      %li
+        %a{:href => "#so-where-do-i-go-from-here"} So where do I go from here?
+  .col-3-4
+    %section
+      %h2#introduction-and-explanation Introduction and Explanation
+      %p
+        %strong I want to hear my local police/fire, and don't know what I need?
+        %br/
+        %strong I just got this scanner, and I don't know what to do next?
+      %p
+        Don't worry, we've all been there. First off, welcome. You came to the right place. As a basic definition, scanning involves listening (and, at times, looking) on frequencies just below, above and around the standard FM and TV broadcast bands. There are numerous services that use this spectrum - from police and fire, to the guy that picks up your garbage and lots in between. The challenge comes when you decide what you want to hear and the equipment necessary.
+      %h2#general-questions General Questions
+      %p
+        %strong What is a scanner? How can I decide which one is right for me?
+      %p
+        To start getting some answers, read our
+        %a{:href => "http://wiki.radioreference.com/index.php/Scanner_decision", :title => "Scanner decision"} Scanner decision
+        article
+      %p
+        %strong Where can I look up some of this odd looking terminology? It's very confusing
+      %p
+        From stamp collecting to scanning and everything in between, there's often a bewildering amount of terminology and abbreviations, most specialized to the application that defines it. Our
+        %a{:href => "http://wiki.radioreference.com/index.php/Category:RR_Glossary", :title => "Category:RR Glossary"} glossary
+        is a category that has links that define numerous terms you will see on RR, along with several online glossaries that can be referred to for more information.
+      %p
+        %strong I'm told that my area is on a trunking system. What is this, and how can I understand how it works?
+      %p
+        Trunking can be loosely defined as a set of frequencies that are shared by numerous agencies. A better definition can be found in this
+        %a{:href => "/images/c/c7/Trunking_description.pdf", :title => "Trunking description.pdf"} article
+        (PDF format) written by Paul Opitz of Uniden.
+      %p
+        %strong How can I program my scanner manually?
+      %p
+        Many feel that manually programming the scanner is the best way to learn about it. However, sometimes with the newer scanners, the instructions are obtuse, or very hard to follow. We have a category article with numerous
+        %a{:href => "http://wiki.radioreference.com/index.php/Category:Programming_FAQs_and_Tips", :title => "Category:Programming FAQs and Tips"} FAQs and Tips
+        that you may find helpful.
+      %p
+        %strong What is this rebanding I keep hearing about? Will my scanner still work after this happens?
+      %p
+        The answer to this is pretty involved, so
+        %a{:href => "http://wiki.radioreference.com/index.php/Rebanding", :title => "Rebanding"} Rebanding
+        gets an entire article.
+      %p
+        %strong I lost the manual that came with my scanner. Where can I find a replacement?
+      %p
+        %strong I got this scanner off of eBay and it doesn't have a manual
+      %p
+        See our
+        %a{:href => "http://wiki.radioreference.com/index.php/Manuals_and_Publications", :title => "Manuals and Publications"} Manuals and Publications
+        article for a listing of sites from where you might be able to download a copy. Some are free, others charge for the service.
+      %p
+        %strong Where can I get up to date data for my area?
+      %p
+        %strong My scanner comes with preprogrammed data but I suspect its outdated. Where can I find more up to date information?
+      %p
+        Look at the blue toolbar under the logo. Click on
+        %strong DATABASE
+        and follow the prompts and pulldowns from that point. It's pretty simple to navigate. Another way to access your state's data is to click on the state in the map.
+      %p
+        %strong How do I interpret what I see in the database?
+      %p
+        These 2 articles will give you a start in understanding what is presented in the database:
+      %ul
+        %li
+          %a{:href => "http://wiki.radioreference.com/index.php/Common_Conventional_Programming_Questions", :title => "Common Conventional Programming Questions"} Common Conventional Programming Questions
+        %li
+          %a{:href => "http://wiki.radioreference.com/index.php/Common_Trunking_Programming_Questions", :title => "Common Trunking Programming Questions"} Common Trunking Programming Questions
+      %p
+        %strong I have some additional questions....
+      %p
+        You made it this far. Good. See if the
+        %a{:href => "http://wiki.radioreference.com/index.php/Scanning_Q%26A", :title => "Scanning Q&A"} Scanning Q&amp;A
+        article addresses them.
+    %section
+      %h2#pcs-and-software PCs and Software
+      %p
+        %strong How can I hook up my PC to my scanner? Why should I want to do this?
+      %p
+        There are more than a few reasons for this - you travel a lot, and want to be able to load a new configuration quickly. There are too many channels to program manually. You wish to research your system. Whatever the reason, making the connection is problematic these days, because most newer PCs don't come with serial ports. They do however have USB ports, and we need a way to make the connection between the serial the scanner needs and the USB the PC needs. USB to serial converters abound, but there are some tricks you need to know to make it work correctly. Our
+        %a{:href => "http://wiki.radioreference.com/index.php/Connecting_scanners_via_USB", :title => "Connecting scanners via USB"} Connecting scanners via USB
+        should give you a head start.
+      %p
+        %strong Where can I get software for my scanner? What is the best software for it?
+      %p
+        The 'best' software is often in the mind of the user, but there are some packages that are much more popular than others. See our
+        %a{:href => "http://wiki.radioreference.com/index.php/Radio_Control_Software", :title => "Radio Control Software"} Radio Control Software
+        article to answer this question.
+      %p
+        %strong I now have the software and scanner, but I need to find data for my area
+      %p
+        In some cases, this is indirectly related to the software being used - the popular software seems to be those that can download data from our online databases. Once downloaded, the user can edit or change this data to fit their needs. To enable this function, one must first purchase a
+        = succeed "." do
+          %a{:href => "http://www.radioreference.com/apps/subscription/"} premium subscription
+        %a{:href => "http://wiki.radioreference.com/index.php/RadioReference.com_Web_Service", :title => "RadioReference.com Web Service"} RadioReference.com Web Service
+        article.
+      %p
+        While using the database is a popular approach, another one is to obtain a file from someone - or another website - in a format that the software you are using can support. Two widely supported formats are comma seperated value (or
+        = succeed ")" do
+          %strong .csv
+        %strong .usd
+        files. These files are written by applications that support the newer Uniden scanners called the Uniden Advanced System Director (or UASD). These, and other formats, can be used as import sources. PDF files are
+        %strong never
+        used as such a source - no program supports this. Such websites would be listed by state or region in our
+        = succeed "." do
+          %a{:href => "http://wiki.radioreference.com/index.php/Collaboration_Gateway", :title => "Collaboration Gateway"} Collaboration Gateway
+      %p
+        %strong I'd like to be able to record audio some I can listen later. How do I got about doing this?
+      %p
+        There are a few tricks you need to know before making the connection. See our
+        %a{:href => "http://wiki.radioreference.com/index.php/Connecting_Radios_to_Soundcards", :title => "Connecting Radios to Soundcards"} Connecting Radios to Soundcards
+        article. Not all software can record; see the links found in our
+        %a{:href => "http://wiki.radioreference.com/index.php/Radio_Control_Software", :title => "Radio Control Software"} Radio Control Software
+        for compatible applications. Generally speaking, older RS scanners cannot scan and record audio - it's not provided for in the firmware.
+    %section
+      %h2#equipment-questions Equipment Questions
+      %p
+        %strong I have bought a (insert scanner model here) but don't know how to use it. Help!
+      %p
+        If you've made it to this point, and read the articles in the various links presented so far, you've read most everything you need to know to understand the basics of scanning. However, we now need to get a little more detailed and specific. How to use the scanner depends greatly on which model you have.
+      %h3#for-the-uniden-dma-scanners For the Uniden DMA scanners (BC246, BR330, BCD396, BCD996T, BCT15, BCD396XT, BCT996XT, BC346XT, BCT15X)
+      %p
+        These resources from our
+        %a{:href => "http://wiki.radioreference.com/index.php/Programming_Your_Uniden_Scanner", :title => "Programming Your Uniden Scanner"} Programming Your Uniden Scanner
+        article will give you a start in learning how to work with these radios:
+      %ul
+        %li
+          The manuals Uniden wrote for these radios has been universally panned as being poorly written. The
+          %strong Easier to Read
+          manuals are the place to start.
+        %li
+          The
+          %strong Uniden DMA FAQ
+          has a great deal of information (particularly the first 2 sections) about what
+          %a{:href => "http://wiki.radioreference.com/index.php/DMA", :title => "DMA"} DMA
+          is and relationships with the data
+        %li
+          We have software links in our
+          %strong Uniden DMA Software Support
+          article. One of the most popular freeware packages is FreeScan - and we host the
+          %a{:href => "http://wiki.radioreference.com/index.php/FreeScan_User_Guide", :title => "FreeScan User Guide"} user guide
+          in our wiki
+      %h3#for-the-rs-gre-object-oriented-scanners For the RS/GRE object oriented scanners (GRE PSR-310, PSR-410, PSR-500, PSR-600, RS PRO-106, PRO-197)
+      %p
+        These resources from our
+        %a{:href => "http://wiki.radioreference.com/index.php/Programming_Your_Radio_Shack_Scanner", :title => "Programming Your Radio Shack Scanner"} Programming Your Radio Shack Scanner
+        (covers the Pro-106 and 197) and
+        %a{:href => "http://wiki.radioreference.com/index.php/Programming_Your_GRE_Scanner", :title => "Programming Your GRE Scanner"} Programming Your GRE Scanner
+        (covers the PSR-310, 410, 500 and 600) articles will give you a starting point
+      %ul
+        %li
+          See the
+          %strong Easier to Read
+          links for downloadable manuals for these radios
+        %li
+          We also have an
+          %strong Object Oriented Scanner FAQ
+          for the most common questions
+        %li
+          Unlike the Uniden DMA Scanners, there is no freeware for the object oriented scanners; the 3 most popular packages are ARC500, PSREdit500 and Win500 - and we host user guides for both ARC500 and Win500 in our wiki. See the
+          %strong Popular Software for Radio Shack Scanners
+          article (for the PRO-106 and 197 in the RS article) and
+          %strong Object Oriented Scanner Software
+          (for the PSR-500 and 600 in the GRE article) for links. All 3 packages will handle both RS and GRE models.
+      %h3#for-the-rs-pro-scanners For the RS PRO-97, PRO-2055, GRE PSR-300 and PSR-400, PRO-163 and 164
+      %p
+        These resources from our
+        %a{:href => "http://wiki.radioreference.com/index.php/Programming_Your_Radio_Shack_Scanner", :title => "Programming Your Radio Shack Scanner"} Programming Your Radio Shack Scanner
+        (covers the PRO-97, 2055, 163 and 164) and
+        %a{:href => "http://wiki.radioreference.com/index.php/Programming_Your_GRE_Scanner", :title => "Programming Your GRE Scanner"} Programming Your GRE Scanner
+        (covers the PSR-300 and 400) articles will give you a starting point
+      %ul
+        %li
+          See the
+          %strong Easier to Read
+          links for downloadable manuals for these radios
+        %li
+          We also have an article for
+          %a{:href => "http://wiki.radioreference.com/index.php/PSR-300/400_Operating_Tips", :title => "PSR-300/400 Operating Tips"} operating hints
+          for the PSR-300 and 400
+        %li
+          The
+          %strong PSR-300/400 Software and USB Support
+          article has links for software support
+    %section
+      %h2#improvements Improvements
+      %p
+        %strong I'd like to be able to hear more (or stations further away). How do I do this?
+        %br/
+        %strong Do I need an amplifier for my system?
+      %p
+        Hooking up an antenna outdoors, nice and high and away from obstructions, along with buying the right coax cable, are the best ways to increase the range of what you hear. The ScanTenna and various discones (such as those made by Diamond or Icom) are very popular, but there are others as well. Check the
+        %a{:href => "http://wiki.radioreference.com/index.php/Scanner_Antennas", :title => "Scanner Antennas"} Scanner Antennas
+        article for more. Be sure to buy the best coax you can - using cheap RG-58U or 59U at high frequencies can be very costly in terms of signal loss. Avoid amplifiers if you can, particularly if you live in an urban environment. These can cause issues with overloading and other complications.
+      %p
+        %strong I'm hearing (pagers, FM, TV audio) when scanning in some bands. Can this be alleviated?
+      %p
+        Unfortunately with the growth of urban areas, comes pagers and other unwanted services that show up in places you don't want to hear them. Consumer grade scanners can be susceptible to such interference. A temporary solution is to use the scanner's attenuator (if it has one), but this has the added consequence of reducing the scanner's sensitivity. A better solution is to add filters in between the scanner and antenna; see the filters section of the
+        %a{:href => "http://wiki.radioreference.com/index.php/Milcom_Receiving_Equipment", :title => "Milcom Receiving Equipment"} Milcom Receiving Equipment
+        article for more on this topic.
+      %p
+        %strong I've heard that scanners can sometimes hear transmissions on frequencies that don't match the displayed frequency. Can this be alleviated? Can I use this to my advantage to extend the range of my scanner?
+      %p
+        Some scanners are susceptible to reception of
+        = succeed "." do
+          %a{:href => "http://wiki.radioreference.com/index.php/Image_Frequencies", :title => "Image Frequencies"} Image Frequencies
+    %section
+      %h2#so-where-do-i-go-from-here So where do I go from here?
+      %p At this point, you should realize that information is king. So I would do the following;
+      %ul
+        %li
+          Make yourself familiar with
+          %strong all
+          the forums on the site. Don't stick to viewing new stuff only, at least for now. Be aware that there are numerous forums for many different topics.
+        %li Make yourself familiar with the database entries for your area. In most cases if you float your mouse over a term, you will get a balloon with more information
+        %li Make yourself familiar with the forum for your state
+        %li
+          Find out (thought I was going to say 'make yourself' again, didn't you?) whether there's a Yahoo scanning group for your area. Join it. If there's a good scanning related website for your area, bookmark it. Become familiar with the data and websites in your state, as listed in our
+          %a{:href => "http://wiki.radioreference.com/index.php/Collaboration_Gateway", :title => "Collaboration Gateway"} Collaboration Gateway
+        %li Wander through the wiki. It's open to anyone to view, but you would need to register to edit it. With just under 6000 articles currently, there's likely something to jog your interest.
+/ @@close

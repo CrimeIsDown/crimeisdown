@@ -31,13 +31,19 @@ iframe {
 }
 
 //====LINKS====//
-a:focus {
-    outline: thin dotted;
-}
-
-a:active,
-a:hover {
-    outline: 0;
+a {
+    color: $link-color;
+    &:visited {
+        color: $link-visited;
+    }
+    &:focus {
+        outline: thin dotted;
+    }
+    &:active,
+    &:hover {
+        outline: 0;
+        text-decoration: none;
+    }
 }
 
 //====TYPOGRAPHY====//
