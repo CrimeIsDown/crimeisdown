@@ -91,3 +91,8 @@
     / build:js //crimeisdown.com/scripts/main.js
     %script{:src => "scripts/main.js"}
     / endbuild
+    {block:PermalinkPage}
+    {block:Twitter}
+    %script{:src => "/tweets.js", :type => "text/javascript"}
+    {/block:Twitter}
+    {/block:PermalinkPage}
