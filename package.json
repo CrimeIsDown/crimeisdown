@@ -1,6 +1,10 @@
 {
   "name": "crimeisdown",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "repository": {
+    "type" : "git",
+    "url" : "http://github.com/EricTendian/crimeisdown.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "connect": "^2.14.4",

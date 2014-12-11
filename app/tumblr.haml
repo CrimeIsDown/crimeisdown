@@ -239,16 +239,16 @@
     #twitter{:style => "display:none;"}
       %h3
         %a{:href => "http://twitter.com/{TwitterUsername}"} Latest Tweets
-      #tweets
+      %ul#tweets
     :javascript
       function recent_tweets(data) {
           for (i=0; i<data.length; i++) {
               document.getElementById("tweets").innerHTML =
                   document.getElementById("tweets").innerHTML +
-                  '<a href="http://twitter.com/{TwitterUsername}/status/' +
+                  '<li><a href="http://twitter.com/{TwitterUsername}/status/' +
                   (data[i].id_str ? data[i].id_str : data[i].id) +
-                  '"><div class="content">' + data[i].text +
-                  '</div></a>';
+                  '">' + data[i].text +
+                  '</a></li>';
           }
           document.getElementById("twitter").style.display = 'block';
       }
