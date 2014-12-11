@@ -113,12 +113,22 @@
           {/block:HasTags}
     {/block:Posts}
     %p#footer
+      {block:Pagination}
       {block:PreviousPage}
       %a{:href => "{PreviousPage}"} &#xAB; Previous
-      {/block:PreviousPage}{block:NextPage}
+      {/block:PreviousPage}
+      {block:JumpPagination length="5"}
+      {block:CurrentPage}
+      %span.current_page {PageNumber}
+      {/block:CurrentPage}
+      {block:JumpPage}
+      %a.jump_page{:href => "{URL}"} {PageNumber}
+      {/block:JumpPage}
+      {/block:JumpPagination}
+      {block:NextPage}
       %a{:href => "{NextPage}"} Next &#xBB;
       {/block:NextPage}
-      %a{:href => "/archive"} Archive
+      {/block:Pagination}
 
   %section#links.col-3-8
     {block:IndexPage}
