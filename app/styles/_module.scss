@@ -53,9 +53,6 @@
         color: #fff;
         font-family: $font-family-sans-serif;
     }
-    p {
-        margin-top: 0.7em;
-    }
     & > div:last-child {
         text-align: right;
         form {
@@ -179,7 +176,9 @@ section#backdrop {
 article.post {
     border-bottom: em(2px) solid #eee;
     footer {
-        font-size: 0.8em;
+        p {
+            font-size: 1em;
+        }
     }
 }
 // SITE CONTENT END //
