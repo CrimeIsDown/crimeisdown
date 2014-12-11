@@ -1,10 +1,10 @@
 / @@master = templates/tumblr.tpl.html
 / @@block = content
 .columns
-  / <h1>{Title}</h1>
-  /
+  %section#intro.col-1
+    %h1 Welcome to the {Title} blog!
     {block:Description}
-    <p id="description">{Description}</p>
+    %p#description {Description}
     {/block:Description}
   %section#posts.col-5-8
     {block:Posts}
@@ -21,21 +21,23 @@
       {block:Photo}
       %header
         %h3 Photo
-      %img{:alt => "{PhotoAlt}", :src => "{PhotoURL-500}"}/
-      {block:Caption}
-      .caption {Caption}
-      {/block:Caption}
+      %figure
+        %img{:alt => "{PhotoAlt}", :src => "{PhotoURL-500}"}/
+        {block:Caption}
+        %figcaption {Caption}
+        {/block:Caption}
       {/block:Photo}
 
       {block:Panorama}
       %header
         %h3 Panorama
-      {LinkOpenTag}
-      %img{:alt => "{PhotoAlt}", :src => "{PhotoURL-Panorama}"}/
-      {LinkCloseTag}
-      {block:Caption}
-      .caption {Caption}
-      {/block:Caption}
+      %figure
+        {LinkOpenTag}
+        %img{:alt => "{PhotoAlt}", :src => "{PhotoURL-Panorama}"}/
+        {LinkCloseTag}
+        {block:Caption}
+        %figcaption {Caption}
+        {/block:Caption}
       {/block:Panorama}
 
       {block:Photoset}
@@ -43,7 +45,7 @@
         %h3 Photoset
       {Photoset-500}
       {block:Caption}
-      .caption {Caption}
+      %div.caption {Caption}
       {/block:Caption}
       {/block:Photoset}
 
@@ -52,7 +54,7 @@
         %h3 Quote
       "{Quote}"
       {block:Source}
-      .source {Source}
+      %div.source {Source}
       {/block:Source}
       {/block:Quote}
 
@@ -61,7 +63,7 @@
         %h3
           %a.link{:href => "{URL}", :target => "{Target}"} {Name}
       {block:Description}
-      .description {Description}
+      %div.description {Description}
       {/block:Description}
       {/block:Link}
 
@@ -83,10 +85,11 @@
       {block:Video}
       %header
         %h3 Video
-      {Video-500}
-      {block:Caption}
-      .caption {Caption}
-      {/block:Caption}
+      %figure
+        {Video-500}
+        {block:Caption}
+        %figcaption {Caption}
+        {/block:Caption}
       {/block:Video}
 
       {block:Audio}
@@ -94,7 +97,7 @@
         %h3 Audio
       {AudioEmbed}
       {block:Caption}
-      .caption {Caption}
+      %div.caption {Caption}
       {/block:Caption}
       {/block:Audio}
 
@@ -230,3 +233,24 @@
       %li
         %a{:href => "http://www.cmsimpact.org/journalism"} Set of Principles in Fair Use for Journalism
     {/block:IndexPage}
+
+    {block:PermalinkPage}
+    {block:Twitter}
+    #twitter{:style => "display:none;"}
+      %h3
+        %a{:href => "http://twitter.com/{TwitterUsername}"} Latest Tweets
+      #tweets
+    :javascript
+      function recent_tweets(data) {
+          for (i=0; i<data.length; i++) {
+              document.getElementById("tweets").innerHTML =
+                  document.getElementById("tweets").innerHTML +
+                  '<a href="http://twitter.com/{TwitterUsername}/status/' +
+                  (data[i].id_str ? data[i].id_str : data[i].id) +
+                  '"><div class="content">' + data[i].text +
+                  '</div></a>';
+          }
+          document.getElementById("twitter").style.display = 'block';
+      }
+    {/block:Twitter}
+    {/block:PermalinkPage}

@@ -1,7 +1,8 @@
 'use strict';
-// generated on 2014-11-17 using generator-gulp-webapp 0.1.0
 
 var gulp = require('gulp');
+var del = require('del');
+var mainBowerFiles = require('main-bower-files');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -62,7 +63,7 @@ gulp.task('images', function () {
 });
 
 gulp.task('fonts', function () {
-    return $.bowerFiles()
+    return gulp.src(require('main-bower-files')().concat('app/fonts/**/*'))
         .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
         .pipe($.flatten())
         .pipe(gulp.dest('dist/fonts'))
@@ -74,13 +75,12 @@ gulp.task('extras', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', function () {
-    return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
+gulp.task('clean', function (cb) {
+    del(['.tmp', 'dist'], cb);
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'extras'], function () {
-    return gulp.src(['app/templates/*.html', 'dist/crimeisdown.com'], { read: false })
-        .pipe($.clean());
+gulp.task('build', ['html', 'images', 'fonts', 'extras'], function (cb) {
+    del(['app/templates/*.html', 'dist/crimeisdown.com'], cb);
 });
 
 gulp.task('default', ['clean'], function () {
