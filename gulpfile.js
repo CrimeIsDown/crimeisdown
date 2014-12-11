@@ -72,16 +72,6 @@ gulp.task('fonts', function () {
 gulp.task('extras', function () {
     return gulp.src(['app/*.*', '!app/*.haml'], { dot: true })
         .pipe(gulp.dest('dist'));
-
-    // gulp.src('dist/tumblr.html')
-    //     .pipe(assetpaths({
-    //         newDomain: 'crimeisdown.com',
-    //         oldDomain : '',
-    //         docRoot : '',
-    //         filetypes : ['js','css'],
-    //         templates: true;
-    //     }))
-    //     .on('end', cb);
 });
 
 gulp.task('clean', function () {
