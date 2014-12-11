@@ -24,12 +24,18 @@ gulp.task('scripts', function () {
         .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts'], function () {
+gulp.task('templates', function () {
+    return gulp.src('app/templates/*.haml')
+        .pipe($.rubyHaml({doubleQuote: true}))
+        .pipe(gulp.dest('app/templates'));
+});
+
+gulp.task('html', ['styles', 'scripts', 'templates'], function () {
     var jsFilter = $.filter('**/*.js');
     var cssFilter = $.filter('**/*.css');
 
     return gulp.src('app/*.haml')
-        .pipe($.rubyHaml())
+        .pipe($.rubyHaml({doubleQuote: true}))
         .pipe($.htmlExtend({annotations: false, verbose: false}))
         .pipe($.useref.assets({searchPath: '{.tmp,app}'}))
         .pipe(jsFilter)
@@ -66,13 +72,26 @@ gulp.task('fonts', function () {
 gulp.task('extras', function () {
     return gulp.src(['app/*.*', '!app/*.haml'], { dot: true })
         .pipe(gulp.dest('dist'));
+
+    // gulp.src('dist/tumblr.html')
+    //     .pipe(assetpaths({
+    //         newDomain: 'crimeisdown.com',
+    //         oldDomain : '',
+    //         docRoot : '',
+    //         filetypes : ['js','css'],
+    //         templates: true;
+    //     }))
+    //     .on('end', cb);
 });
 
 gulp.task('clean', function () {
     return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'extras']);
+gulp.task('build', ['html', 'images', 'fonts', 'extras'], function () {
+    return gulp.src(['app/templates/*.html', 'dist/crimeisdown.com'], { read: false })
+        .pipe($.clean());
+});
 
 gulp.task('default', ['clean'], function () {
     gulp.start('build');

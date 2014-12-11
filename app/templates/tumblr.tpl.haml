@@ -23,15 +23,15 @@
     %meta{:content => "http://crimeisdown.com/", :property => "og:url"}/
     %meta{:content => "", :property => "og:image"}/
     %meta{:content => "{MetaDescription}", :property => "og:description"}/
-    / build:css styles/vendor.css
+    / build:css //crimeisdown.com/styles/vendor.css
     / bower:css
     %link{:href => "styles/vendor.css", :rel => "stylesheet"}/
     / endbower
     / endbuild
-    / build:css styles/main.css
+    / build:css //crimeisdown.com/styles/main.css
     %link{:href => "styles/main.css", :rel => "stylesheet"}/
     / endbuild
-    / build:js scripts/vendor/modernizr.js
+    / build:js //crimeisdown.com/scripts/vendor/modernizr.js
     %script{:src => "bower_components/modernizr/modernizr.js"}
     / endbuild
   %body
@@ -79,12 +79,12 @@
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create', 'UA-30674963-11', 'auto');ga('require', 'displayfeatures');ga('send', 'pageview');
-    / build:js scripts/vendor.js
+    / build:js //crimeisdown.com/scripts/vendor.js
     / bower:js
     %script{:src => "bower_components/jquery/dist/jquery.js"}
-    %script{:src => "scripts/_imgLiquid-min.js"}
+    %script{:src => "bower_components/imgLiquid/js/imgLiquid-min.js"}
     / endbower
     / endbuild
-    / build:js scripts/main.js
+    / build:js //crimeisdown.com/scripts/main.js
     %script{:src => "scripts/main.js"}
     / endbuild

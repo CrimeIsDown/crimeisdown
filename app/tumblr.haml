@@ -51,7 +51,6 @@
       %header
         %h3 Quote
       "{Quote}"
-
       {block:Source}
       .source {Source}
       {/block:Source}
@@ -59,8 +58,8 @@
     {block:Link}
     %article.post.link
       %header
-        %h3 Link
-          %a.link{:href => "{URL}" :target => "{Target}"} {Name}
+        %h3
+          %a.link{:href => "{URL}", :target => "{Target}"} {Name}
       {block:Description}
       .description {Description}
       {/block:Description}
