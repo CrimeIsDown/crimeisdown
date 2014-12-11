@@ -8,10 +8,11 @@ CrimeIsDown.com takes the confusion out of monitoring Chicago crime with data-dr
 ## Getting started
 
 1. Clone the repository
-2. Ensure you have [Node.js](http://nodejs.org/), NPM (Node Package Manager), [Bower](http://bower.io/), [PhantomJS](http://phantomjs.org/), and [Gulp.js](http://gulpjs.com/) installed globally.
+2. Ensure you have [Ruby](https://www.ruby-lang.org/en/) with [Bundler](http://bundler.io/), [Node.js](http://nodejs.org/), NPM (Node Package Manager), [Bower](http://bower.io/), and [Gulp.js](http://gulpjs.com/) installed globally.
 3. In the root of the repostiory, run the following commands:
 
 ```shell
+bundle install
 npm install
 bower install
 gulp
@@ -25,26 +26,22 @@ No server-side technologies are being used currently. An API that interacts with
 
 ## Client-side
 
-The original project structure and development tool configuration was made possible by the [Yeoman generator for AngularJS with Gulp.js](https://github.com/Swiip/generator-gulp-angular) and has been modified for the purposes of this website.
+The original project structure and development tool configuration was made possible by the [Yeoman generator for web apps with Gulp.js](https://github.com/yeoman/generator-gulp-webapp) and has been modified for the purposes of this website.
 
 ### Directory structure
 
     /
-    |-app        # Application goes here (index.html, 404.html)
-    |---images   # Static images used inside the app
-    |---partials # AngularJS partial templates
-    |---public   # Files to be copied over to the root of /dist
-    |---scripts  # Various JavaScript files to be loaded (mainly AngularJS)
-    |-----home   # JavaScript being used on the Home partial view
-    |---styles   # SCSS being used in the application, in main.scss for app stylesheets and vendor.scss for vendor stylesheets
-    |-dist       # Where the files go after being compiled
-    |---images   # Compressed versions of images in /app/images
-    |---scripts  # Compiled, minified scripts used in application (both original and vendor JS)
-    |---styles   # Compiled SCSS from /app/styles
-    |-gulp       # Gulp.js tasks called by the "gulp" command
-    |-test       # JavaScript tests should go here (currently just defaults from Yeoman generator)
-    |---e2e      # Protractor end-to-end tests
-    |---unit     # Karma unit tests
+    |-app         # Application goes here (index.haml, 404.haml, etc.)
+    |---images    # Static images used inside the app
+    |---scripts   # Various JavaScript files to be loaded
+    |---styles    # SCSS being used in the application, in main.scss for app stylesheets and vendor.scss for vendor stylesheets
+    |---templates # Master templates used by application pages
+    |-dist        # Where the files go after being compiled
+    |---images    # Compressed versions of images in /app/images
+    |---scripts   # Compiled, minified scripts used in application (both original and vendor JS)
+    |---styles    # Compiled SCSS from /app/styles
+    |-test        # JavaScript tests should go here
+    |---spec      # Mocha tests
 
 ### Use Gulp tasks to "compile" the website
 
@@ -54,15 +51,10 @@ These Gulp.js tasks were included in the Yeoman generator listed above. More may
   * `gulp serve` to launch a browser sync server on your source files
   * `gulp serve:dist` to launch a server on your optimized application
   * `gulp wiredep` to fill bower dependencies in your `.html` file(s)
-  * `gulp test` to launch your unit tests with Karma
-  * `gulp protractor` to launch your e2e tests with Protractor
-  * `gulp protractor:dist` to launch your e2e tests with Protractor on the dist files
 
 Other client-side technologies currently being used include:
 
   * SCSS split up into separate files in the `app/styles` folder, compiled in a Gulp.js task
-  * AngularJS
-  * Yahoo! YUI 3.0 CSS Reset, included in `app/styles/vendor.scss`
   * More technologies not listed in this README yet
 
 ## Contributing
@@ -74,6 +66,14 @@ To be decided in a new CONTRIBUTING.md file. Stay tuned for further information.
 Various releases of this website and the tools under it will make use of the [Semantic Versioning guidelines.](http://semver.org/) There may be some errors in protocol, but generally we try to adhere to this.
 
 Releases should be numbered with the format of `<major>.<minor>.<patch>`. What is defined as a "major", "minor", or "patch" release has yet to be decided.
+
+### 1.1.0
+
+* Finished Tumblr theme, some design changes to main website
+
+### 1.0.0
+
+* Finished multi-page website, more multimedia and tools
 
 ### 0.1.0
 
