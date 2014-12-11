@@ -3,7 +3,8 @@
   "private": true,
   "dependencies": {
     "modernizr": "~2.6.2",
-    "jquery": "~1.11.0"
+    "jquery": "~1.11.0",
+    "imgLiquid": "~0.9.944"
   },
   "devDependencies": {}
 }
