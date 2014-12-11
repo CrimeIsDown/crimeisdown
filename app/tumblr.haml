@@ -8,26 +8,26 @@
     {/block:Description}
   %section#posts.col-5-8
     {block:Posts}
-    {block:Text}
-    %article.post.text
+    %article{:class => "post {PostType} {TagsAsClasses}", :id => "p{PostID}"}
+      {block:Text}
       {block:Title}
       %header
         %h3
           %a{:href => "{Permalink}"} {Title}
       {/block:Title}
       {Body}
-    {/block:Text}
-    {block:Photo}
-    %article.post.photo
+      {/block:Text}
+
+      {block:Photo}
       %header
         %h3 Photo
       %img{:alt => "{PhotoAlt}", :src => "{PhotoURL-500}"}/
       {block:Caption}
       .caption {Caption}
       {/block:Caption}
-    {/block:Photo}
-    {block:Panorama}
-    %article.post.panorama
+      {/block:Photo}
+
+      {block:Panorama}
       %header
         %h3 Panorama
       {LinkOpenTag}
@@ -36,36 +36,36 @@
       {block:Caption}
       .caption {Caption}
       {/block:Caption}
-    {/block:Panorama}
-    {block:Photoset}
-    %article.post.photoset
+      {/block:Panorama}
+
+      {block:Photoset}
       %header
         %h3 Photoset
       {Photoset-500}
       {block:Caption}
       .caption {Caption}
       {/block:Caption}
-    {/block:Photoset}
-    {block:Quote}
-    %article.post.quote
+      {/block:Photoset}
+
+      {block:Quote}
       %header
         %h3 Quote
       "{Quote}"
       {block:Source}
       .source {Source}
       {/block:Source}
-    {/block:Quote}
-    {block:Link}
-    %article.post.link
+      {/block:Quote}
+
+      {block:Link}
       %header
         %h3
           %a.link{:href => "{URL}", :target => "{Target}"} {Name}
       {block:Description}
       .description {Description}
       {/block:Description}
-    {/block:Link}
-    {block:Chat}
-    %article.post.chat
+      {/block:Link}
+
+      {block:Chat}
       {block:Title}
       %header
         %h3
@@ -78,25 +78,39 @@
           %span.label {Label}
           {/block:Label}{Line}
         {/block:Lines}
-    {/block:Chat}
-    {block:Video}
-    %article.post.video
+      {/block:Chat}
+
+      {block:Video}
       %header
         %h3 Video
       {Video-500}
       {block:Caption}
       .caption {Caption}
       {/block:Caption}
-    {/block:Video}
-    {block:Audio}
-    %article.post.audio
+      {/block:Video}
+
+      {block:Audio}
       %header
         %h3 Audio
       {AudioEmbed}
       {block:Caption}
       .caption {Caption}
       {/block:Caption}
-    {/block:Audio}
+      {/block:Audio}
+
+      %footer
+        %p
+          %a{:href => "{Permalink}"} Permalink
+          {block:Date}
+          | Posted on
+          %time{:datetime => "{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}"} {Month} {DayOfMonth}, {Year}
+          {/block:Date}
+          {block:HasTags}
+          | Tagged as:
+          {block:Tags}
+          %a{:href => "{TagURLChrono}"} {Tag}
+          {/block:Tags}
+          {/block:HasTags}
     {/block:Posts}
     %p#footer
       {block:PreviousPage}
@@ -105,7 +119,9 @@
       %a{:href => "{NextPage}"} Next &#xBB;
       {/block:NextPage}
       %a{:href => "/archive"} Archive
+
   %section#links.col-3-8
+    {block:IndexPage}
     %h2#additional-links-and-resources Additional links and resources
     %h3#chicago-area-frequency-databases-lists Chicago-area frequency databases/lists
     %ul
@@ -203,3 +219,4 @@
         %a{:href => "http://howardowens.com/2013/09/23/the-batavians-basic-rules-for-scanner-reporting/"} Batavian's basic rules for scanner reporting
       %li
         %a{:href => "http://www.cmsimpact.org/journalism"} Set of Principles in Fair Use for Journalism
+    {/block:IndexPage}
