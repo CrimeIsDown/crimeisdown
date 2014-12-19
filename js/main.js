@@ -53,6 +53,13 @@ function showAddress(address) {
         'address': address+' Chicago'
     }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
+            var url = "http://boundaries.tribapps.com/1.0/boundary/?contains="+results[0].geometry.location.k+","+results[0].geometry.location.D+"&sets=community-areas,neighborhoods,police-districts,police-beats&format=jsonp&callback=showInfo";
+            $.ajax({
+                url: url,
+                jsonp: "showInfo",
+                dataType: "jsonp",
+                crossDomain: true
+            });
             var point = results[0].geometry.location;
             contentString += "<br>" + point;
             map.setCenter(point);
@@ -77,4 +84,68 @@ function showAddress(address) {
             alert("Geocode was not successful for the following reason: " + status);
         }
     });
+}
+
+function showInfo(data) {
+    $('p#addressinfo').remove();
+    if (data.objects.length) {
+        var zone = 'N/A';
+        var info = '';
+        for (var i=0; i<data.objects.length; i++) {
+            info += '<strong>'+data.objects[i].kind + ':</strong> ' + data.objects[i].name + '<br>';
+            if (data.objects[i].kind=="Police District") {
+                switch (data.objects[i].name) {
+                    case '16th':
+                    case '17th':
+                        zone = '1';
+                        break;
+                    case '19th':
+                        zone = '2';
+                        break;
+                    case '12th':
+                    case '14th':
+                        zone = '3';
+                        break;
+                    case '1st':
+                    case '18th':
+                        zone = '4';
+                        break;
+                    case '2nd':
+                        zone = '5';
+                        break;
+                    case '7th':
+                    case '8th':
+                        zone = '6';
+                        break;
+                    case '3rd':
+                        zone = '7';
+                        break;
+                    case '4th':
+                    case '6th':
+                        zone = '8';
+                        break;
+                    case '5th':
+                    case '22nd':
+                        zone = '9';
+                        break;
+                    case '10th':
+                    case '11th':
+                        zone = '10';
+                        break;
+                    case '20th':
+                    case '24th':
+                        zone = '11';
+                        break;
+                    case '15th':
+                    case '25th':
+                        zone = '12';
+                        break;
+                    case '9th':
+                        zone = '13';
+                        break;
+                }
+            }
+        }
+        $('#infobox').append('<p id="addressinfo"><strong>Zone:</strong> ' + zone + '<br>' + info + '</p>');
+    }
 }
