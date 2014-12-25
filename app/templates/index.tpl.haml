@@ -39,7 +39,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     %header#site-header
       %nav#main-menu.navbar.navbar-inverse
-        .container
+        .container-fluid
           .navbar-header
             %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
               %span.sr-only Toggle navigation
@@ -62,8 +62,9 @@
                 %a{:href => "take-action.html"} Take Action
               %li
                 %a{:href => "about.html"} About
-              %li
-                %a{:href => "http://blog.crimeisdown.com/"} #CrimeIsDown.com Blog
+              /
+                %li
+                  %a{:href => "http://blog.crimeisdown.com/"} #CrimeIsDown.com Blog
 
     / @@placeholder = content-nocontainer
 
