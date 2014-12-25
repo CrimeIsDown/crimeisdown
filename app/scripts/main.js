@@ -201,32 +201,10 @@ function showMatches(query) {
     $('#radioid-results').empty();
 
     if (matches.length > 0) {
-        var table = '
-            <table class="table table-striped table-condensed">
-                <thead>
-                    <tr>
-                        <th>Agency</th>
-                        <th>ID</th>
-                        <th>Level 1 (Bureau)</th>
-                        <th>Level 2 (Division)</th>
-                        <th>Level 3 (Section)</th>
-                        <th>Level 4 (Unit/Assignment)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>';
+        var table = '<table class="table table-striped table-condensed"><thead><tr><th>Agency</th><th>ID</th><th>Level 1 (Bureau)</th><th>Level 2 (Division)</th><th>Level 3 (Section)</th><th>Level 4 (Unit/Assignment)</th></tr></thead><tbody></tbody></table>';
         $('#radioid-results').append(table);
         matches.forEach(function (match, index) {
-            $('#radioid-results tbody').append('
-                <tr>
-                    <th scope="row">' + match.Agency + '</th>
-                    <td>' + match.ID_Number + '</td>
-                    <td>' + match.Level_1 + '</td>
-                    <td>' + match.Level_2 + '</td>
-                    <td>' + match.Level_3 + '</td>
-                    <td>' + match.Level_4 + '</td>
-                </tr>');
+            $('#radioid-results tbody').append('<tr><th scope="row">' + match.Agency + '</th><td>' + match.ID_Number + '</td><td>' + match.Level_1 + '</td><td>' + match.Level_2 + '</td><td>' + match.Level_3 + '</td><td>' + match.Level_4 + '</td></tr>');
         });
     } else {
         $('#radioid-results').append('<p>No matches found.</p>');

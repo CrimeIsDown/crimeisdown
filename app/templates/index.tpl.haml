@@ -26,8 +26,6 @@
     / endbower
     / endbuild
 
-    %link{:href=>"//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css", :rel=>"stylesheet"}
-
     / build:css styles/main.css
     %link{:href => "styles/main.css", :rel => "stylesheet"}/
     / endbuild
@@ -103,13 +101,26 @@
     / build:js scripts/vendor.js
     / bower:js
     %script{:src => "bower_components/jquery/dist/jquery.js"}
-    %script{:src => "bower_components/imgLiquid/js/imgLiquid-min.js"}
-    %script{:src => "scripts/geoxml3.js"}
-    %script{:src => "scripts/v3_epoly.js"}
     / endbower
     / endbuild
 
-    %script{:src=>"//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"}
+    / build:js scripts/plugins.js
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"}
+    %script{:src => "bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js"}
+    %script{:src => "bower_components/imgLiquid/js/imgLiquid.js"}
+    %script{:src => "scripts/geoxml3.js"}
+    %script{:src => "scripts/v3_epoly.js"}
+    / endbuild
 
     / build:js scripts/main.js
     %script{:src => "scripts/main.js"}

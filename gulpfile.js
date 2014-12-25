@@ -8,7 +8,7 @@ var mainBowerFiles = require('main-bower-files');
 var $ = require('gulp-load-plugins')();
 
 gulp.task('styles', function () {
-    return gulp.src('app/styles/main.scss')
+    return gulp.src(['app/styles/vendor.scss', 'app/styles/main.scss'])
         .pipe($.rubySass({
             style: 'expanded',
             precision: 10
@@ -20,8 +20,8 @@ gulp.task('styles', function () {
 
 gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
-        .pipe($.jshint())
-        .pipe($.jshint.reporter(require('jshint-stylish')))
+        // .pipe($.jshint())
+        // .pipe($.jshint.reporter(require('jshint-stylish')))
         .pipe($.size());
 });
 
@@ -53,11 +53,11 @@ gulp.task('html', ['styles', 'scripts', 'templates'], function () {
 
 gulp.task('images', function () {
     return gulp.src('app/images/**/*')
-        // .pipe($.imagemin({
-        //     optimizationLevel: 3,
-        //     progressive: true,
-        //     interlaced: true
-        // }))
+        .pipe($.imagemin({
+            optimizationLevel: 3,
+            progressive: true,
+            interlaced: true
+        }))
         .pipe(gulp.dest('dist/images'))
         .pipe($.size());
 });
