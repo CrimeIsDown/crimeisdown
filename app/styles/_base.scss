@@ -1,33 +1,21 @@
 // General element CSS rules //
 
 //====BASE====//
-*:before, *:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+body, html {
+    height: 100%;
 }
 
-html {
-    font-size: 100%;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
+* {
+    font-family: $font-family-serif;
 }
 
-html, button, input, select, textarea {
+html, button, label, input, select, textarea, h1, h2, h3, h4, h5, h6, figcaption {
     font-family: $font-family-sans-serif;
 }
 
 body {
-    margin: 0;
     line-height: $line-height;
     background: $body-bg;
-}
-
-iframe {
-    margin: 0;
-    padding: 0;
-    border: none;
 }
 
 //====LINKS====//
@@ -105,6 +93,7 @@ pre, code {
 p, section li {
     font-size: $font-size-para;
     font-family: $font-family-serif;
+    line-height: 1.2;
 }
 
 small {
@@ -122,25 +111,23 @@ menu, ol, ul {
     }
 }
 
-nav ul, nav ol {
-    list-style: none;
-    list-style-image: none;
-}
-
 //====IMAGES, FIGURES====//
-img {
-    width: auto\9;
-    height: auto;
-    max-width: 100%;
-    vertical-align: middle;
-    border: 0;
-    -ms-interpolation-mode: bicubic;
-}
+// img {
+//     width: auto\9;
+//     height: auto;
+//     max-width: 100%;
+//     vertical-align: middle;
+//     border: 0;
+//     -ms-interpolation-mode: bicubic;
+// }
 figure {
     margin: 0;
     padding-bottom: 1.5em;
     figcaption {
         padding: 0.75em 0 2em 0;
-        font-size: 0.8em;
+        line-height: 1.5;
     }
+}
+iframe {
+    border: 0;
 }

@@ -1,44 +1,26 @@
 // HEADER START //
 #site-header {
-    background-color: $menu-bg;
-    z-index: 1000;
     #main-menu {
-        a, .menu-heading {
-            display: inline-block;
-            color: $menu-link;
-            line-height: 1.5em;
-            padding: 0.32em 1.25em;
-            text-decoration: none;
-            white-space: nowrap;
+        background-color: $menu-bg;
+        margin-bottom: 0;
+        border: 0;
+        border-radius: 0;
+        min-height: initial;
+        z-index: 9999;
+        .navbar-brand {
+            padding: 0.4em 1em;
+            height: auto;
+            line-height: 1em;
         }
-
-        .menu-heading {
-            margin: 0;
-            vertical-align: middle;
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        ul {
-            display: inline-block;
-            vertical-align: middle;
-            list-style: none;
-            margin: 0;
+        ul li {
             padding: 0;
-            li {
-                display: inline-block;
-                vertical-align: middle;
-                position: relative;
-                padding: 0;
-                &:hover > a, &:active > a {
-                    background-color: #eee;
-                    color: $menu-bg;
-                    -moz-transition: background-color 0.2s ease;
-                    -o-transition: background-color 0.2s ease;
-                    -webkit-transition: background-color 0.2s ease;
-                    transition: background-color 0.2s ease;
-                }
+            a {
+                padding-top: 0.5em;
+                padding-bottom: 0.5em;
             }
+        }
+        a, strong {
+            font-family: $font-family-sans-serif !important;
         }
     }
 }
@@ -69,30 +51,29 @@
 // FOOTER END //
 
 // SITE CONTENT START //
-body, html, #content {
-    height: 100%;
-}
 section#backdrop {
     height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
-    text-align: center;
-    z-index: 0;
     background: #000;
     .header-wrapper {
         position: absolute;
         margin: auto;
         left: 0;
-        bottom: 1em;
+        bottom: 2em;
         right: 0;
-        background: rgba(0,0,0,0.7);
         .header {
-            max-width: 68em;
+            text-align: left;
+            text-shadow: em(3px) em(3px) em(2px) #000;
+            max-width: 90%;
             margin: 0 auto;
+            font-size: 1.5em;
+            -webkit-text-stroke: 0.04em black;
             h1 {
-               font-style: italic;
-               color: #fff;
+                font-weight: bold;
+                font-style: italic;
+                color: #fff;
             }
             h3 {
                 color: #fff;
@@ -128,6 +109,37 @@ section#backdrop {
     max-width: 100%;
     position: relative;
     z-index: 0;
+    .section {
+        padding: 2em 0;
+    }
+}
+#tools {
+    margin: 2em 0;
+    .col-md-12 {
+        margin: 0.5em 0;
+
+    }
+    .col-md-12:first-child, .col-md-12:last-child, p {
+        margin: 0;
+    }
+    * {
+        font-family: $font-family-sans-serif !important;
+    }
+    #map-canvas {
+        height: em(480px);
+    }
+    .modal {
+        h3 {
+            margin: 0 0 1em 0;
+        }
+    }
+    #radioid-results {
+        table {
+            td:empty {
+                content: 'N/A';
+            }
+        }
+    }
 }
 
 .section {
@@ -152,6 +164,7 @@ section#backdrop {
     &#crime-in-chicago {
         background: #A40802;
         line-height: 1.3;
+        padding-top: 1em;
     }
     &#keeping-informed {
         background: url(../images/bo_play_pattern.png) repeat #171717;
