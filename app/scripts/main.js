@@ -1,6 +1,10 @@
 'use strict';
 
 $(function onload() {
+    $('ul.nav a').filter(function() {
+        return this.href == window.location;
+    }).parent().addClass('active');
+
     $('.imgLiquidFill').imgLiquid({ fill: true }); // for backdrop on index page
 
     $('a[href*=#]:not([href=#])').click(function() {

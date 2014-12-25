@@ -8,18 +8,27 @@
         min-height: initial;
         z-index: 9999;
         .navbar-brand {
-            padding: 0.4em 1em;
-            height: auto;
-            line-height: 1em;
+            font-style: italic;
+            color: #fff !important;
+        }
+        @media (min-width: 768px) {
+            .navbar-brand {
+                padding: 0.4em 1em;
+                height: auto;
+                line-height: 1em;
+            }
         }
         ul li {
             padding: 0;
             a {
                 padding-top: 0.5em;
                 padding-bottom: 0.5em;
+                strong {
+                    text-decoration: underline;
+                }
             }
         }
-        a, strong {
+        a, strong, em {
             font-family: $font-family-sans-serif !important;
         }
     }
@@ -131,6 +140,9 @@ section#backdrop {
     .modal {
         h3 {
             margin: 0 0 1em 0;
+        }
+        li {
+            font-size: 1em;
         }
     }
     #radioid-results {
