@@ -1,12 +1,12 @@
 / @@master = templates/tumblr.tpl.html
 / @@block = content
-.columns
-  %section#intro.col-1
+.row
+  %section#intro.col-md-12
     %h1 Welcome to the {Title} blog!
     {block:Description}
     %p#description {Description}
     {/block:Description}
-  %section#posts.col-5-8
+  %section#posts.col-md-8
     {block:Posts}
     %article{:class => "post {PostType} {TagsAsClasses}", :id => "p{PostID}"}
       {block:Text}
@@ -133,7 +133,7 @@
       {/block:NextPage}
       {/block:Pagination}
 
-  %section#links.col-3-8
+  %section#links.col-md-4
     {block:IndexPage}
     %h2#additional-links-and-resources Additional links and resources
     %h3#chicago-area-frequency-databases-lists Chicago-area frequency databases/lists

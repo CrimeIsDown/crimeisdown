@@ -23,58 +23,74 @@
     %meta{:content => "http://crimeisdown.com/", :property => "og:url"}/
     %meta{:content => "", :property => "og:image"}/
     %meta{:content => "{MetaDescription}", :property => "og:description"}/
+
     / build:css //crimeisdown.com/styles/vendor.css
     / bower:css
     %link{:href => "styles/vendor.css", :rel => "stylesheet"}/
     / endbower
     / endbuild
+
+    %link{:href=>"//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css", :rel=>"stylesheet"}
+
     / build:css //crimeisdown.com/styles/main.css
     %link{:href => "styles/main.css", :rel => "stylesheet"}/
     / endbuild
+
     / build:js //crimeisdown.com/scripts/vendor/modernizr.js
     %script{:src => "bower_components/modernizr/modernizr.js"}
     / endbuild
+
   %body
     /[if lt IE 10]
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     %header#site-header
-      %nav#main-menu.menu.menu-open.menu-horizontal
-        %a.menu-heading{:href => "/"} #CrimeIsDown.com Blog
-        %ul#main-menu-items
-          %li
-            %a{:href => "http://crimeisdown.com/"}
-              %em Back to CrimeIsDown.com
-          %li
-            %a{:href => "/"} Blog Index
-          {block:HasPages}
-          {block:Pages}
-          %li
-            %a{:href => "{URL}"} {Label}
-          {/block:Pages}
-          {/block:HasPages}
-          %li
-            %a{:href => "/archive"} Archive
-    %main#content
+      %nav#main-menu.navbar.navbar-inverse
+        .container
+          .navbar-header
+            %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %a.navbar-brand{:href => "/"} #CrimeIsDown.com Blog
+          #navbar.collapse.navbar-collapse
+            %ul#main-menu-items.nav.navbar-nav
+              %li
+                %a{:href => "http://crimeisdown.com/"}
+                  %em Back to CrimeIsDown.com
+              %li
+                %a{:href => "/"} Blog Index
+              {block:HasPages}
+              {block:Pages}
+              %li
+                %a{:href => "{URL}"} {Label}
+              {/block:Pages}
+              {/block:HasPages}
+              %li
+                %a{:href => "/archive"} Archive
+
+    %main#content.container
       / @@placeholder = content
-      %footer#site-footer.columns
-        .col-3-8
+
+    %footer#site-footer.container
+      .row
+        .col-md-5
           %p
             Copyright &#169; 2014 CrimeIsDown.com. All Rights Reserved.
-        .col-5-8
+        .col-md-7
           %form#donateform{:action => "https://www.paypal.com/cgi-bin/webscr", :method => "post", :target => "_top"}
             %input{:name => "cmd", :type => "hidden", :value => "_s-xclick"}/
             %input{:name => "encrypted", :type => "hidden", :value => "-----BEGIN PKCS7-----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-----END PKCS7-----\n                        "}/
             %img{:alt => "", :border => "0", :height => "1", :src => "https://www.paypalobjects.com/en_US/i/scr/pixel.gif", :width => "1"}/
             %p
               %a{:href => "about.html"} About CrimeIsDown.com
-              | Created by
-              %a{:href => "mailto:eric@crimeisdown.com"} Eric Tendian
               |
               %a{:href => "https://twitter.com/EricTendian"} Follow on Twitter
               |
               %a{:href => "https://www.facebook.com/Tendian.io"} Like on Facebook
               |
               %input#donatebutton{:alt => "PayPal - The safer, easier way to pay online!", :border => "0", :name => "submit", :src => "https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif", :type => "image"}/
+
     :javascript
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -82,15 +98,19 @@
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create', 'UA-30674963-11', 'auto');ga('require', 'displayfeatures');ga('send', 'pageview');
-    / build:js //crimeisdown.com/scripts/vendor.js
+
+    / build:js scripts/vendor.js
     / bower:js
     %script{:src => "bower_components/jquery/dist/jquery.js"}
-    %script{:src => "bower_components/imgLiquid/js/imgLiquid-min.js"}
     / endbower
     / endbuild
-    / build:js //crimeisdown.com/scripts/main.js
+
+    %script{:src=>"//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"}
+
+    / build:js scripts/main.js
     %script{:src => "scripts/main.js"}
     / endbuild
+
     {block:PermalinkPage}
     {block:Twitter}
     %script{:src => "/tweets.js", :type => "text/javascript"}
