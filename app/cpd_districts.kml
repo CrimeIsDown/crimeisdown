@@ -11,7 +11,7 @@
          <altitudeMode>clampToGround</altitudeMode>
       </LookAt>
       <Placemark id="district_17">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/16702/web" target="_blank"><h2>Zone 1</h2></a><strong>17th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/16702/web" target="_blank" class="live-audio"><h2>Zone 1</h2></a><strong>17th District</strong>]]></description>
          <LookAt>
             <longitude>-87.72046820981797</longitude>
             <latitude>41.96809897581083</latitude>
@@ -56,7 +56,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_20">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/12444/web" target="_blank"><h2>Zone 11</h2></a><strong>20th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/12444/web" target="_blank" class="live-audio"><h2>Zone 11</h2></a><strong>20th District</strong>]]></description>
          <LookAt>
             <longitude>-87.67670520901655</longitude>
             <latitude>41.979720103648326</latitude>
@@ -101,7 +101,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_19">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/17684/web" target="_blank"><h2>Zone 2</h2></a><strong>19th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/17684/web" target="_blank" class="live-audio"><h2>Zone 2</h2></a><strong>19th District</strong>]]></description>
          <LookAt>
             <longitude>-87.66534938069685</longitude>
             <latitude>41.947493003340846</latitude>
@@ -146,7 +146,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_25">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/653/web" target="_blank"><h2>Zone 12</h2></a><strong>25th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/653/web" target="_blank" class="live-audio"><h2>Zone 12</h2></a><strong>25th District</strong>]]></description>
          <LookAt>
             <longitude>-87.76655514391982</longitude>
             <latitude>41.92061783915562</latitude>
@@ -191,7 +191,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_14">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/14545/web" target="_blank"><h2>Zone 3</h2></a><strong>14th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/14545/web" target="_blank" class="live-audio"><h2>Zone 3</h2></a><strong>14th District</strong>]]></description>
          <LookAt>
             <longitude>-87.68713393830203</longitude>
             <latitude>41.9210944088437</latitude>
@@ -236,7 +236,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_22">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15084/web" target="_blank"><h2>Zone 9</h2></a><strong>22nd District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15084/web" target="_blank" class="live-audio"><h2>Zone 9</h2></a><strong>22nd District</strong>]]></description>
          <LookAt>
             <longitude>-87.68613475611059</longitude>
             <latitude>41.70670552026433</latitude>
@@ -286,7 +286,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_5">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15084/web" target="_blank"><h2>Zone 9</h2></a><strong>5th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15084/web" target="_blank" class="live-audio"><h2>Zone 9</h2></a><strong>5th District</strong>]]></description>
          <LookAt>
             <longitude>-87.62001274941423</longitude>
             <latitude>41.68346904261777</latitude>
@@ -331,7 +331,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_24">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/12444/web" target="_blank"><h2>Zone 11</h2></a><strong>24th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/12444/web" target="_blank" class="live-audio"><h2>Zone 11</h2></a><strong>24th District</strong>]]></description>
          <LookAt>
             <longitude>-87.68238934183503</longitude>
             <latitude>42.006519945587264</latitude>
@@ -376,7 +376,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_16">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/16702/web" target="_blank"><h2>Zone 1</h2></a><strong>16th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/16702/web" target="_blank" class="live-audio"><h2>Zone 1</h2></a><strong>16th District</strong>]]></description>
          <LookAt>
             <longitude>-87.8435555973675</longitude>
             <latitude>41.978165468551616</latitude>
@@ -431,7 +431,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_8">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/13262/web" target="_blank"><h2>Zone 6</h2></a><strong>8th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/13262/web" target="_blank" class="live-audio"><h2>Zone 6</h2></a><strong>8th District</strong>]]></description>
          <LookAt>
             <longitude>-87.73999095389485</longitude>
             <latitude>41.78158525614994</latitude>
@@ -476,7 +476,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_18">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15380/web" target="_blank"><h2>Zone 4</h2></a><strong>18th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15380/web" target="_blank" class="live-audio"><h2>Zone 4</h2></a><strong>18th District</strong>]]></description>
          <LookAt>
             <longitude>-87.6365122812864</longitude>
             <latitude>41.9063837966386</latitude>
@@ -521,7 +521,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_12">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/14545/web" target="_blank"><h2>Zone 3</h2></a><strong>12th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/14545/web" target="_blank" class="live-audio"><h2>Zone 3</h2></a><strong>12th District</strong>]]></description>
          <LookAt>
             <longitude>-87.67066582163142</longitude>
             <latitude>41.87376029821439</latitude>
@@ -566,7 +566,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_11">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/17693/web" target="_blank"><h2>Zone 10</h2></a><strong>11th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/17693/web" target="_blank" class="live-audio"><h2>Zone 10</h2></a><strong>11th District</strong>]]></description>
          <LookAt>
             <longitude>-87.71601704851506</longitude>
             <latitude>41.88436831666811</latitude>
@@ -611,7 +611,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_7">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/13262/web" target="_blank"><h2>Zone 6</h2></a><strong>7th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/13262/web" target="_blank" class="live-audio"><h2>Zone 6</h2></a><strong>7th District</strong>]]></description>
          <LookAt>
             <longitude>-87.65233364608997</longitude>
             <latitude>41.77586290958429</latitude>
@@ -656,7 +656,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_3">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/14677/web" target="_blank"><h2>Zone 7</h2></a><strong>3rd District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/14677/web" target="_blank" class="live-audio"><h2>Zone 7</h2></a><strong>3rd District</strong>]]></description>
          <LookAt>
             <longitude>-87.59270563177054</longitude>
             <latitude>41.77584023744186</latitude>
@@ -701,7 +701,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_4">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15045/web" target="_blank"><h2>Zone 8</h2></a><strong>4th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15045/web" target="_blank" class="live-audio"><h2>Zone 8</h2></a><strong>4th District</strong>]]></description>
          <LookAt>
             <longitude>-87.56401612409252</longitude>
             <latitude>41.70312914564884</latitude>
@@ -746,7 +746,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_6">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15045/web" target="_blank"><h2>Zone 8</h2></a><strong>6th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15045/web" target="_blank" class="live-audio"><h2>Zone 8</h2></a><strong>6th District</strong>]]></description>
          <LookAt>
             <longitude>-87.63907381958052</longitude>
             <latitude>41.74015214152419</latitude>
@@ -791,7 +791,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_10">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/17693/web" target="_blank"><h2>Zone 10</h2></a><strong>10th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/17693/web" target="_blank" class="live-audio"><h2>Zone 10</h2></a><strong>10th District</strong>]]></description>
          <LookAt>
             <longitude>-87.70540343365403</longitude>
             <latitude>41.842860761894016</latitude>
@@ -836,7 +836,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_1">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15380/web" target="_blank"><h2>Zone 4</h2></a><strong>1st District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/15380/web" target="_blank" class="live-audio"><h2>Zone 4</h2></a><strong>1st District</strong>]]></description>
          <LookAt>
             <longitude>-87.6239816517824</longitude>
             <latitude>41.86358783096035</latitude>
@@ -881,7 +881,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_9">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/17692/web" target="_blank"><h2>Zone 13</h2></a><strong>9th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/17692/web" target="_blank" class="live-audio"><h2>Zone 13</h2></a><strong>9th District</strong>]]></description>
          <LookAt>
             <longitude>-87.67204852401017</longitude>
             <latitude>41.82679712866993</latitude>
@@ -926,7 +926,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_2">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/17691/web" target="_blank"><h2>Zone 5</h2></a><strong>2nd District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/17691/web" target="_blank" class="live-audio"><h2>Zone 5</h2></a><strong>2nd District</strong>]]></description>
          <LookAt>
             <longitude>-87.60329853321542</longitude>
             <latitude>41.8113231559077</latitude>
@@ -971,7 +971,7 @@
          </MultiGeometry>
       </Placemark>
       <Placemark id="district_15">
-         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/653/web" target="_blank"><h2>Zone 12</h2></a><strong>15th District</strong>]]></description>
+         <description><![CDATA[<a href="http://www.broadcastify.com/listen/feed/653/web" target="_blank" class="live-audio"><h2>Zone 12</h2></a><strong>15th District</strong>]]></description>
          <LookAt>
             <longitude>-87.76006232827191</longitude>
             <latitude>41.8839067538186</latitude>

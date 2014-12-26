@@ -81,6 +81,7 @@ function showAddress(address) {
         'address': address+' Chicago'
     }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
+            $('#address-results td').text('Loading...');
             var url = "http://boundaries.tribapps.com/1.0/boundary/?contains="+results[0].geometry.location.k+","+results[0].geometry.location.D+"&sets=community-areas,neighborhoods,police-districts,police-beats&format=jsonp&callback=showInfo";
             $.ajax({
                 url: url,
@@ -100,7 +101,9 @@ function showAddress(address) {
                 if (geoXml.docs[0].gpolygons[i].Contains(point)) {
                     contentString = results[0].formatted_address + "<br>" + geoXml.docs[0].placemarks[i].description;
                     contentString += "<br>" + point;
-                    i = 999; // Jump out of loop
+                    $('#address-results #formattedaddress').html(results[0].formatted_address);
+                    $('#address-results #policedistrict').html(geoXml.docs[0].placemarks[i].description);
+                    break;
                 }
             }
             google.maps.event.addListener(marker, 'click', function () {
@@ -115,66 +118,24 @@ function showAddress(address) {
 }
 
 function showInfo(data) {
-    $('p#addressinfo').remove();
     if (data.objects.length) {
-        var zone = 'N/A';
-        var info = '';
         for (var i=0; i<data.objects.length; i++) {
-            info += '<strong>'+data.objects[i].kind + ':</strong> ' + data.objects[i].name + '<br>';
-            if (data.objects[i].kind=="Police District") {
-                switch (data.objects[i].name) {
-                    case '16th':
-                    case '17th':
-                        zone = '1';
-                        break;
-                    case '19th':
-                        zone = '2';
-                        break;
-                    case '12th':
-                    case '14th':
-                        zone = '3';
-                        break;
-                    case '1st':
-                    case '18th':
-                        zone = '4';
-                        break;
-                    case '2nd':
-                        zone = '5';
-                        break;
-                    case '7th':
-                    case '8th':
-                        zone = '6';
-                        break;
-                    case '3rd':
-                        zone = '7';
-                        break;
-                    case '4th':
-                    case '6th':
-                        zone = '8';
-                        break;
-                    case '5th':
-                    case '22nd':
-                        zone = '9';
-                        break;
-                    case '10th':
-                    case '11th':
-                        zone = '10';
-                        break;
-                    case '20th':
-                    case '24th':
-                        zone = '11';
-                        break;
-                    case '15th':
-                    case '25th':
-                        zone = '12';
-                        break;
-                    case '9th':
-                        zone = '13';
-                        break;
-                }
+            switch (data.objects[i].kind) {
+                case 'Police Beat':
+                    $('#address-results #policebeat').text(data.objects[i].name);
+                    break;
+                case 'Community Area':
+                    $('#address-results #communityarea').text(data.objects[i].name);
+                    break;
+                case 'Neighborhood':
+                    $('#address-results #neighborhood').text(data.objects[i].name);
+                    break;
             }
         }
-        $('#address-results').append('<p id="addressinfo"><strong>Zone:</strong> ' + zone + '<br>' + info + '</p>');
+    } else {
+        $('#address-results #policebeat').empty();
+        $('#address-results #communityarea').empty();
+        $('#address-results #neighborhood').empty();
     }
 }
 
@@ -195,22 +156,28 @@ function parseSheet(data) {
 }
 
 function showMatches(query) {
+    $('#radioid-results td').text('Loading...');
     var matches = [];
     radioIds.forEach(function (row, index) {
-        if (query.match('^' + row.ID_Number + '$')) {
+        if (query.match('^' + row.ID_Number + '[A-Za-z]?$')) {
             matches.push(row);
         }
     });
-
-    $('#radioid-results').empty();
-
+    $('#radioid-results td').empty();
     if (matches.length > 0) {
-        var table = '<table class="table table-striped table-condensed"><thead><tr><th>Agency</th><th>ID</th><th>Level 1 (Bureau)</th><th>Level 2 (Division)</th><th>Level 3 (Section)</th><th>Level 4 (Unit/Assignment)</th></tr></thead><tbody></tbody></table>';
-        $('#radioid-results').append(table);
         matches.forEach(function (match, index) {
-            $('#radioid-results tbody').append('<tr><th scope="row">' + match.Agency + '</th><td>' + match.ID_Number + '</td><td>' + match.Level_1 + '</td><td>' + match.Level_2 + '</td><td>' + match.Level_3 + '</td><td>' + match.Level_4 + '</td></tr>');
+            if (match.Agency.length) $('#radioid-results #agency').text(match.Agency);
+            if (match.Level_1.length) $('#radioid-results #level1').text(match.Level_1);
+            if (match.Level_2.length) $('#radioid-results #level2').text(match.Level_2);
+            if (match.Level_3.length) $('#radioid-results #level3').text(match.Level_3);
+            if (match.Level_4.length) {
+                if (match.Level_4 == 'Beat Car') {
+                    $('#radioid-results #level4').text('Beat #' + query.match(/\d+/)[0]);
+                } else {
+                    $('#radioid-results #level4').text(match.Level_4);
+                }
+            }
+            // match.ID_Number
         });
-    } else {
-        $('#radioid-results').append('<p>No matches found.</p>');
     }
 }
