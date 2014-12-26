@@ -5,6 +5,21 @@
 / @@block = content-nocontainer
 #tools.container-fluid
   .row
+    /
+      %section#introduction.col-md-10.col-md-offset-1
+        %p
+          %strong Welcome to the Tools page
+          of CrimeIsDown.com! Here you will find a variety of tools to assist in scanner listening. You can use
+          = succeed "," do
+            %a{:href => "#maps"} maps (with radio zone lookup)
+          = succeed "," do
+            %a{:href => "#radioids"} search for a radio ID you hear
+          = succeed "," do
+            %a{:href => "#onlinestreams"} listen to online streams
+          %a{:href => "#socialmedia"} read reports of Chicago crime from social media.
+        %p
+          %em Please note this page is a current work-in-progress and so some tools may be incomplete or have bugs.
+
     .col-md-6
       .col-md-12
         %form{:action => "#", :onsubmit => "showAddress(this.address.value); return false"}
@@ -18,6 +33,24 @@
         #map-canvas
       .col-md-12
         #address-results
+          %table.table.table-bordered.table-condensed
+            %tbody
+              %tr
+                %th{:scope => "row"} Formatted Address
+                %td#formattedaddress
+              %tr
+                %th{:scope => "row"} Community Area
+                %td#communityarea
+              %tr
+                %th{:scope => "row"} Neighborhood
+                %td#neighborhood
+              %tr
+                %th{:scope => "row"} Zone / Police District
+                %td#policedistrict
+              %tr
+                %th{:scope => "row"} Police Beat
+                %td#policebeat
+
       .col-md-12
         %button.btn.btn-primary.btn-lg{"data-target" => "#onlineStreams", "data-toggle" => "modal", :type => "button"}
           Listen Online
@@ -87,41 +120,6 @@
                 .modal-footer
                   %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
 
-
-        /
-          Chicago Police Department
-          http://relay.broadcastify.com:80/il_chicago_police2.mp3
-          Chicago Police - Citywide 1
-          http://relay.broadcastify.com:80/128024765.mp3
-          Chicago Police - Citywide 6
-          http://relay.broadcastify.com:80/299858349.mp3
-          Chicago Police Zone 1 - Districts 16 and 17
-          http://relay.broadcastify.com:80/51174769.mp3
-          Chicago Police Zone 2 - District 19
-          http://relay.broadcastify.com:80/779125459.mp3
-          Chicago Police Zone 3 Dispatch - Districts 12 and 14
-          http://relay.broadcastify.com:80/29449913.mp3
-          Chicago Police Zone 4 - Districts 1 and 18
-          http://relay.broadcastify.com:80/527466356.mp3
-          Chicago Police Zone 5 - District 2
-          http://relay.broadcastify.com:80/464465203.mp3
-          Chicago Police Zone 6 - Districts 7 and 8
-          http://relay.broadcastify.com:80/877430000.mp3
-          Chicago Police Zone 7 - District 3
-          http://relay.broadcastify.com:80/937409687.mp3
-          Chicago Police Zone 8 - Districts 4 and 6
-          http://relay.broadcastify.com:80/267563787.mp3
-          Chicago Police Zone 9 - Districts 5 and 22
-          http://relay.broadcastify.com:80/258823627.mp3
-          Chicago Police Zone 10 - Districts 10 and 11
-          http://relay.broadcastify.com:80/716183595.mp3
-          Chicago Police Zone 11 - Districts 20 and 24
-          http://relay.broadcastify.com:80/243172971.mp3
-          Chicago Police Zone 12 - Districts 15 and 25
-          http://relay.broadcastify.com:80/il_chicago_police.mp3
-          Chicago Police Zone 13 - District 9
-          http://relay.broadcastify.com:80/539709865.mp3
-
     .col-md-6
       .col-md-12
         %form{:action => "#", :onsubmit => "showMatches(this.radioid.value); return false"}
@@ -132,32 +130,29 @@
               %input.btn.btn-default{:type => "submit", :value => "Search"}/
       .col-md-12
         #radioid-results
+          %table.table.table-bordered.table-condensed
+            %tbody
+              %tr
+                %th{:scope => "row"} Agency
+                %td#agency
+              %tr
+                %th{:scope => "row"} Level 1 (Bureau)
+                %td#level1
+              %tr
+                %th{:scope => "row"} Level 2 (Division)
+                %td#level2
+              %tr
+                %th{:scope => "row"} Level 3 (Section)
+                %td#level3
+              %tr
+                %th{:scope => "row"} Level 4 (Unit/Assignment)
+                %td#level4
 
-        /
-          1. user inputs id, specifies either cpd or cfd (not always needed)
-          2. searches
-          a. for each id entry, check for a match against string (if 2chars or less, match entire line) - if a match, add the row info
-          b. ends up with as much info as possible (overwrite old data)
-          c. return first result
       .col-md-12
         %h3#social-media-dashboard Social Media Dashboard
         %a.twitter-timeline{"data-dnt" => "true", "data-widget-id" => "521039582192611328", :href => "https://twitter.com/EricTendian/lists/crimeisdown"} Tweets from https://twitter.com/EricTendian/lists/crimeisdown
         :javascript
           !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-    /
-      %section#introduction.col-md-10.col-md-offset-1
-        %p
-          %strong Welcome to the Tools page
-          of CrimeIsDown.com! Here you will find a variety of tools to assist in scanner listening. You can use
-          = succeed "," do
-            %a{:href => "#maps"} maps (with radio zone lookup)
-          = succeed "," do
-            %a{:href => "#radioids"} search for a radio ID you hear
-          = succeed "," do
-            %a{:href => "#onlinestreams"} listen to online streams
-          %a{:href => "#socialmedia"} read reports of Chicago crime from social media.
-        %p
-          %em Please note this page is a current work-in-progress and so some tools may be incomplete or have bugs.
 
 %script{:src => "http://maps.google.com/maps/api/js?sensor=false"}
 

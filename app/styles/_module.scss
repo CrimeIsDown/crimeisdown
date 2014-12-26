@@ -137,6 +137,10 @@ section#backdrop {
     #map-canvas {
         height: em(480px);
     }
+    #address-results h2 {
+        font-size: 1.2em;
+        margin: 0;
+    }
     .modal {
         h3 {
             margin: 0 0 1em 0;
@@ -145,11 +149,12 @@ section#backdrop {
             font-size: 1em;
         }
     }
-    #radioid-results {
-        table {
-            td:empty {
-                content: 'N/A';
-            }
+    table {
+        th {
+            width: 35%;
+        }
+        td:empty:after {
+            content: 'Not Available';
         }
     }
 }
