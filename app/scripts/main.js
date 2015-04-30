@@ -82,7 +82,7 @@ function showAddress(address) {
     }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             $('#address-results td').text('Loading...');
-            var url = "http://boundaries.tribapps.com/1.0/boundary/?contains="+results[0].geometry.location.k+","+results[0].geometry.location.D+"&sets=community-areas,neighborhoods,police-districts,police-beats&format=jsonp&callback=showInfo";
+            var url = "http://boundaries.tribapps.com/1.0/boundary/?contains="+results[0].geometry.location.A+","+results[0].geometry.location.F+"&sets=community-areas,neighborhoods,police-districts,police-beats&format=jsonp&callback=showInfo";
             $.ajax({
                 url: url,
                 jsonp: "showInfo",
