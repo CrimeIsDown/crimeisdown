@@ -1,103 +1,105 @@
-<div class="row">
-  <div class="col-sm-12 col-md-8">
-    <div id="map-canvas"></div>
-  </div>
-  <div class="col-sm-12 col-md-4">
-    <div id="address-search">
-      <form ng-submit="lookupAddress()">
-        <div class="form-group">
-          <label for="address">Address, intersection, place to search</label>
-          <div class="input-group input-group-sm">
-            <input autofocus="autofocus" class="form-control" name="address" placeholder="63rd and Halsted, Chicago" type="text" ng-model="address">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit">Search</button>
-            </span>
+<div>
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+      <div id="map-canvas"></div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <div id="address-search">
+        <form ng-submit="lookupAddress()">
+          <div class="form-group">
+            <label for="address">Address, intersection, place to search</label>
+            <div class="input-group input-group-sm">
+              <input autofocus="autofocus" class="form-control" name="address" placeholder="3510 S Michigan, Chicago" type="text" ng-model="address">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Search</button>
+              </span>
+            </div>
           </div>
-        </div>
-      </form>
-      <div class="results">
-        <table class="table table-bordered table-condensed">
-          <tbody>
-            <tr class="info">
-              <th colspan="2">Location</th>
-            </tr>
-            <tr>
-              <td>Formatted Address</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Longitude: </td>
-              <td>Latitude: </td>
-            </tr>
-            <tr>
-              <td>Neighborhood</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Community Area</td>
-              <td></td>
-            </tr>
-            <tr class="info">
-              <th colspan="2">Police</th>
-            </tr>
-            <tr>
-              <td>Beat</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Radio Zone</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>District</td>
-              <td>Area</td>
-            </tr>
-            <tr class="info">
-              <th colspan="2">Fire</th>
-            </tr>
-            <tr>
-              <td>Nearest Station</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Battalion District</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Radio Channel</td>
-              <td></td>
-            </tr>
-            <tr class="info">
-              <th colspan="2">Stats</th>
-            </tr>
-            <tr>
-              <td>Population</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Homicides</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Shootings</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Census Tract Median Income</td>
-              <td></td>
-            </tr>
-<!--
-Formatted address / Longitude and latitude
-Neighborhood / Community Area
-Police Beat / Radio Zone / District / Area
-Nearest CFD station
-Fire Battalion Chief District / Main or Englewood
+        </form>
+        <div class="results">
+          <table class="table table-bordered table-condensed">
+            <tbody>
+              <tr class="info">
+                <th colspan="2">Location</th>
+              </tr>
+              <tr>
+                <td>Formatted Address</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Longitude: </td>
+                <td>Latitude: </td>
+              </tr>
+              <tr>
+                <td>Neighborhood</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Community Area</td>
+                <td></td>
+              </tr>
+              <tr class="info">
+                <th colspan="2">Police</th>
+              </tr>
+              <tr>
+                <td>Beat</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Radio Zone</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>District</td>
+                <td>Area</td>
+              </tr>
+              <tr class="info">
+                <th colspan="2">Fire</th>
+              </tr>
+              <tr>
+                <td>Nearest Station</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Battalion District</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Radio Channel</td>
+                <td></td>
+              </tr>
+              <tr class="info">
+                <th colspan="2">Stats</th>
+              </tr>
+              <tr>
+                <td>Population</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Homicides</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Shootings</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Census Tract Median Income</td>
+                <td></td>
+              </tr>
+  <!--
+  Formatted address / Longitude and latitude
+  Neighborhood / Community Area
+  Police Beat / Radio Zone / District / Area
+  Nearest CFD station
+  Fire Battalion Chief District / Main or Englewood
 
-Crime stats?
-Nearby incidents?
--->
-          </tbody>
-        </table>
+  Crime stats?
+  Nearby incidents?
+  -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
