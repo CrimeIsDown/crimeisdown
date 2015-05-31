@@ -10,9 +10,14 @@ angular.module('crimeisdown')
     var geocoder = new google.maps.Geocoder();
     var chicago = new google.maps.Circle({center: mapOptions.center, radius: 50000}).getBounds()
 
+    $scope.location = {meta: {}, police: {}, fire: {}, stats: {}};
+
     $scope.lookupAddress = function () {
       geocoder.geocode({'address': $scope.address, bounds: chicago}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
+          $scope.location.meta.formatted_address = results[0].formatted_address;
+          $scope.location.meta.latitude = results[0].geometry.location.lat().toFixed(6);
+          $scope.location.meta.longitude = results[0].geometry.location.lng().toFixed(6);
           $scope.map.setCenter(results[0].geometry.location);
           var marker = new google.maps.Marker({
               map: $scope.map,

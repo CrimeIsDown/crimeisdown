@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-controller="GlossaryCtrl">
   <div class="col-sm-12 col-md-6" id="radio-search">
     <form ng-submit="lookupRadioId()">
       <label for="radioid">Radio ID to search</label>
@@ -14,23 +14,23 @@
         <tbody>
           <tr>
             <th scope="row">Agency</th>
-            <td id="agency"></td>
+            <td id="agency">{{ radio.agency }}</td>
           </tr>
           <tr>
             <th scope="row">Level 1 (Bureau)</th>
-            <td id="level1"></td>
+            <td id="level1">{{ radio.level1 }}</td>
           </tr>
           <tr>
             <th scope="row">Level 2 (Division)</th>
-            <td id="level2"></td>
+            <td id="level2">{{ radio.level2 }}</td>
           </tr>
           <tr>
             <th scope="row">Level 3 (Section)</th>
-            <td id="level3"></td>
+            <td id="level3">{{ radio.level3 }}</td>
           </tr>
           <tr>
             <th scope="row">Level 4 (Unit/Assignment)</th>
-            <td id="level4"></td>
+            <td id="level4">{{ radio.level4 }}</td>
           </tr>
         </tbody>
       </table>

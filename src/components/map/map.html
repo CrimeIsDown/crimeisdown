@@ -23,76 +23,70 @@
             </tr>
             <tr>
               <td>Formatted Address</td>
-              <td></td>
+              <td>{{ location.meta.formatted_address }}</td>
             </tr>
             <tr>
-              <td>Longitude: </td>
-              <td>Latitude: </td>
+              <td>Latitude: {{ location.meta.latitude }}</td>
+              <td>Longitude: {{ location.meta.longitude }}</td>
             </tr>
             <tr>
               <td>Neighborhood</td>
-              <td></td>
+              <td>{{ location.meta.neighborhood }}</td>
             </tr>
             <tr>
               <td>Community Area</td>
-              <td></td>
+              <td>{{ location.meta.community_area }}</td>
             </tr>
             <tr class="info">
               <th colspan="2">Police</th>
             </tr>
             <tr>
               <td>Beat</td>
-              <td></td>
+              <td>{{ location.police.beat }}</td>
             </tr>
             <tr>
               <td>Radio Zone</td>
-              <td></td>
+              <td>{{ location.police.zone }}</td>
             </tr>
             <tr>
-              <td>District</td>
-              <td>Area</td>
+              <td>District {{ location.police.district }}</td>
+              <td>Area {{ location.police.area }}</td>
             </tr>
             <tr class="info">
               <th colspan="2">Fire</th>
             </tr>
             <tr>
               <td>Nearest Station</td>
-              <td></td>
+              <td>{{ location.fire.nearest_station }}</td>
             </tr>
             <tr>
               <td>Battalion District</td>
-              <td></td>
+              <td>{{ location.fire.district }}</td>
             </tr>
             <tr>
               <td>Radio Channel</td>
-              <td></td>
+              <td>{{ location.fire.channel }}</td>
             </tr>
             <tr class="info">
               <th colspan="2">Stats</th>
             </tr>
             <tr>
               <td>Population</td>
-              <td></td>
+              <td>{{ location.stats.population }}</td>
             </tr>
             <tr>
               <td>Homicides</td>
-              <td></td>
+              <td>{{ location.stats.homicides }}</td>
             </tr>
             <tr>
               <td>Shootings</td>
-              <td></td>
+              <td>{{ location.stats.shootings }}</td>
             </tr>
             <tr>
               <td>Census Tract Median Income</td>
-              <td></td>
+              <td>{{ location.stats.income }}</td>
             </tr>
 <!--
-Formatted address / Longitude and latitude
-Neighborhood / Community Area
-Police Beat / Radio Zone / District / Area
-Nearest CFD station
-Fire Battalion Chief District / Main or Englewood
-
 Crime stats?
 Nearby incidents?
 -->
