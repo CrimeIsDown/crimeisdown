@@ -3,6 +3,7 @@
 angular.module('crimeisdown')
   .controller('GlossaryCtrl', function ($scope, $http) {
     var radioIds = [];
+    var ucrCodes;
 
     $http.jsonp("https://script.google.com/macros/s/AKfycbwdMu3lgUaMPqA-ESlmhD12Yo6Jz78LlCM8cMQXW7Cm4O94sAA/exec?id=1kiv-ELXw9Z-LcfZ87dFlBDN4GMdjZv_Iz5DSxTH_Cd4&sheet=Radio%20IDs&callback=JSON_CALLBACK")
       .success(function (data) {
@@ -10,6 +11,15 @@ angular.module('crimeisdown')
       })
       .error(function (data) {
         console.error('Could not fetch radio ID list');
+      });
+
+    $http.get("assets/data/ucr_codes.json")
+      .success(function (data) {
+        ucrCodes = data;
+      })
+      .error(function (data) {
+        ucrCodes = {};
+        console.error('Could not fetch UCR code list');
       });
 
     $scope.radio = {};
@@ -35,5 +45,14 @@ angular.module('crimeisdown')
           // match.ID_Number
         });
       } else $scope.radio = {agency: 'N/A', level1: 'N/A', level2: 'N/A', level3: 'N/A', level4: 'N/A'};
+    };
+
+    $scope.ucr = {};
+
+    $scope.lookupUCR = function () {
+      // ucrCode = $scope.ucrCode;
+      // strip it and take out hyphens, leading zeroes
+      if (ucrCodes[$scope.ucrCode.toUpperCase()]) $scope.ucr = ucrCodes[$scope.ucrCode.toUpperCase()];
+      else $scope.ucr = {primary_desc: 'Not Found', secondary_desc: 'Not Found', index_code: 'N/A'};
     };
   });

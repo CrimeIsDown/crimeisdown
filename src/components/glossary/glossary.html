@@ -36,7 +36,33 @@
       </table>
     </div>
   </div>
-  <div class="col-sm-12 col-md-6" id="term-search">
-
+  <div class="col-sm-12 col-md-6" id="ucr-search">
+    <form ng-submit="lookupUCR()">
+      <label for="ucr">UCR (Uniform Crime Reporting) Code to lookup</label>
+      <div class="input-group input-group-sm">
+        <input class="form-control" name="ucr" placeholder="041A" type="text" ng-model="ucrCode">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">Define</button>
+        </span>
+      </div>
+    </form>
+    <div class="results">
+      <table class="table table-bordered table-condensed">
+        <tbody>
+          <tr>
+            <th scope="row">Primary Description</th>
+            <td id="primary_desc">{{ ucr.primary_desc }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Secondary Description</th>
+            <td id="secondary_desc">{{ ucr.secondary_desc }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Index Code?</th>
+            <td id="index_code">{{ ucr.index_code }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

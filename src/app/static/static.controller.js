@@ -1,5 +1,5 @@
 'use strict';
 
 angular.module('crimeisdown')
-  .controller('StaticCtrl', function ($scope) {
+  .controller('StaticCtrl', function () {
   });
