@@ -50,9 +50,10 @@ angular.module('crimeisdown')
     $scope.ucr = {};
 
     $scope.lookupUCR = function () {
-      // ucrCode = $scope.ucrCode;
-      // strip it and take out hyphens, leading zeroes
-      if (ucrCodes[$scope.ucrCode.toUpperCase()]) $scope.ucr = ucrCodes[$scope.ucrCode.toUpperCase()];
-      else $scope.ucr = {primary_desc: 'Not Found', secondary_desc: 'Not Found', index_code: 'N/A'};
+      var code = $scope.ucrCode.toUpperCase().replace(/-/g, '');
+      if (ucrCodes[code]) {
+        $scope.ucr = ucrCodes[code];
+        $scope.ucrCode = code;
+      } else $scope.ucr = {primary_desc: 'Not Found', secondary_desc: 'Not Found', index_code: 'N/A'};
     };
   });
