@@ -2,15 +2,7 @@
 
 angular.module('crimeisdown')
   .controller('MapCtrl', function ($scope) {
-    var mapOptions = {
-      center: {lat: 41.8369, lng: -87.6847},
-      zoom: 10
-    };
-    $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    var geocoder = new google.maps.Geocoder();
-    var chicago = new google.maps.Circle({center: mapOptions.center, radius: 50000}).getBounds()
-
-    $scope.location = {meta: {}, police: {}, fire: {}, stats: {}};
+    initializeMap();
 
     $scope.lookupAddress = function () {
       geocoder.geocode({'address': $scope.address, bounds: chicago}, function (results, status) {
@@ -30,4 +22,48 @@ angular.module('crimeisdown')
         }
       });
     };
+
+
+    function initializeMap () {
+      var mapOptions = {
+        center: {lat: 41.8369, lng: -87.6847},
+        zoom: 10
+      };
+      $scope.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+      var geocoder = new google.maps.Geocoder();
+      var chicago = new google.maps.Circle({center: mapOptions.center, radius: 50000}).getBounds()
+
+      $scope.location = {meta: {}, police: {}, fire: {}, stats: {}};
+
+      var communityAreasLayer = new google.maps.Data();
+      var neighborhoodsLayer = new google.maps.Data();
+      var policeDistrictsLayer = new google.maps.Data();
+
+      communityAreasLayer.loadGeoJson('assets/data/community_areas.json');
+      communityAreasLayer.setStyle({
+        fillOpacity: 0.0,
+        strokeColor: '#333',
+        strokeWeight: 2
+      });
+
+      neighborhoodsLayer.loadGeoJson('assets/data/neighborhoods.json');
+      neighborhoodsLayer.setStyle({
+        fillOpacity: 0.0,
+        strokeColor: '#CCC',
+        strokeWeight: 1
+      });
+
+      policeDistrictsLayer.loadGeoJson('assets/data/police_districts.json');
+      policeDistrictsLayer.setStyle({
+        fillOpacity: 0.0,
+        strokeColor: 'blue',
+        strokeWeight: 3
+      });
+
+      communityAreasLayer.setMap($scope.map);
+      neighborhoodsLayer.setMap($scope.map);
+      policeDistrictsLayer.setMap($scope.map);
+    }
+
   });
