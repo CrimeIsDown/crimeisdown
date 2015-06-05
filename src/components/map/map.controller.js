@@ -2,6 +2,21 @@
 
 angular.module('crimeisdown')
   .controller('MapCtrl', function ($scope) {
+    // this should not be done
+    String.prototype.toProperCase = function () {
+      return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    };
+
+    $scope.map = null;
+    $scope.location = {
+      meta: {formatted_address: '', latitude: '', longitude: '', neighborhood: '', community_area: ''},
+      police: {beat: '', zone: '', district: '', area: ''},
+      fire: {nearest_station: '', district: '', channel: ''},
+      stats: {population: '', homicides: '', shootings: '', income: ''}
+    };
+
+    $scope.polyDesc = '';
+
     initializeMap();
 
     $scope.lookupAddress = function () {
@@ -34,8 +49,6 @@ angular.module('crimeisdown')
       var geocoder = new google.maps.Geocoder();
       var chicago = new google.maps.Circle({center: mapOptions.center, radius: 50000}).getBounds()
 
-      $scope.location = {meta: {}, police: {}, fire: {}, stats: {}};
-
       var communityAreasLayer = new google.maps.Data();
       var neighborhoodsLayer = new google.maps.Data();
       var policeDistrictsLayer = new google.maps.Data();
@@ -46,12 +59,24 @@ angular.module('crimeisdown')
         strokeColor: '#333',
         strokeWeight: 2
       });
+      communityAreasLayer.addListener('click', function (event) {
+        var result = event.feature.getProperty('COMMUNITY').toProperCase();
+        $scope.$apply(function () {
+          $scope.location.meta.community_area = result;
+        });
+      });
 
       neighborhoodsLayer.loadGeoJson('assets/data/neighborhoods.json');
       neighborhoodsLayer.setStyle({
         fillOpacity: 0.0,
         strokeColor: '#CCC',
         strokeWeight: 1
+      });
+      neighborhoodsLayer.addListener('click', function (event) {
+        var result = event.feature.getProperty('PRI_NEIGH').toProperCase() + ' / ' + event.feature.getProperty('SEC_NEIGH').toProperCase();
+        $scope.$apply(function () {
+          $scope.location.meta.neighborhood = result;
+        });
       });
 
       policeDistrictsLayer.loadGeoJson('assets/data/police_districts.json');
@@ -60,10 +85,18 @@ angular.module('crimeisdown')
         strokeColor: 'blue',
         strokeWeight: 3
       });
+      policeDistrictsLayer.addListener('click', function (event) {
+        var result = event.feature.getProperty('DIST_LABEL').toLowerCase();
+        $scope.$apply(function () {
+          $scope.location.police.district = result;
+        });
+      });
 
       communityAreasLayer.setMap($scope.map);
       neighborhoodsLayer.setMap($scope.map);
       policeDistrictsLayer.setMap($scope.map);
+
+
     }
 
   });

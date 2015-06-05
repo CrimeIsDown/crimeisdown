@@ -1,5 +1,6 @@
 <div class="row" ng-controller="MapCtrl">
   <div class="col-sm-12 col-md-8">
+    <div>{{ polyDesc }}</div>
     <div id="map-canvas"></div>
   </div>
   <div class="col-sm-12 col-md-4">
@@ -49,7 +50,7 @@
               <td>{{ location.police.zone }}</td>
             </tr>
             <tr>
-              <td>District {{ location.police.district }}</td>
+              <td>{{ location.police.district }} District</td>
               <td>Area {{ location.police.area }}</td>
             </tr>
             <tr class="info">
