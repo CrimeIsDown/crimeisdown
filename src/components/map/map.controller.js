@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('crimeisdown')
-  .controller('MapCtrl', function ($scope) {
+  .controller('MapCtrl', function ($scope, $http) {
     // this should not be done
     String.prototype.toProperCase = function () {
       return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -53,7 +53,6 @@ angular.module('crimeisdown')
       var neighborhoodsLayer = new google.maps.Data();
       var policeDistrictsLayer = new google.maps.Data();
 
-      communityAreasLayer.loadGeoJson('assets/data/community_areas.json');
       communityAreasLayer.setStyle({
         fillOpacity: 0.0,
         strokeColor: '#333',
@@ -65,6 +64,28 @@ angular.module('crimeisdown')
           $scope.location.meta.community_area = result;
         });
       });
+      $http.get('assets/data/community_areas.json')
+        .then(function (res) {
+          var json = new GeoJSON(res.data);
+          json.forEach(function (value) {
+            console.log(value[0]);
+            var feature = new google.maps.Data.Feature();
+            feature.setGeometry(value[0]);
+            communityAreasLayer.add(feature);
+          });
+        });
+      setTimeout(function () {
+        communityAreasLayer.forEach(function (feature) {
+          console.log(feature);
+          var point = new google.maps.LatLng(41.888872, -87.627583);
+          if (google.maps.geometry.poly.containsLocation(point, feature.getGeometry())) {
+            console.log('found it!');
+            console.log(feature);
+          }
+        });
+      }, 5000);
+
+
 
       neighborhoodsLayer.loadGeoJson('assets/data/neighborhoods.json');
       neighborhoodsLayer.setStyle({
