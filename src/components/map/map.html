@@ -57,18 +57,18 @@
               <th colspan="2">Fire</th>
             </tr>
             <tr>
-              <td>Nearest Station</td>
-              <td>{{ location.fire.nearest_station }}</td>
+              <td>Nearest Engine {{ location.fire.nearest_engine }}</td>
+              <td>Nearest Ambo. {{ location.fire.nearest_ambo }}</td>
             </tr>
             <tr>
-              <td>Battalion District</td>
-              <td>{{ location.fire.district }}</td>
+              <td>Fire District {{ location.fire.district }}</td>
+              <td>Battalion {{ location.fire.battalion }}</td>
             </tr>
             <tr>
               <td>Radio Channel</td>
               <td>{{ location.fire.channel }}</td>
             </tr>
-            <tr class="info">
+            <!-- <tr class="info">
               <th colspan="2">Stats</th>
             </tr>
             <tr>
@@ -86,7 +86,7 @@
             <tr>
               <td>Census Tract Median Income</td>
               <td>{{ location.stats.income }}</td>
-            </tr>
+            </tr> -->
 <!--
 Crime stats?
 Nearby incidents?

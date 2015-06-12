@@ -18,7 +18,9 @@ angular.module('crimeisdown')
 
     $scope.lookupAddress = function () {
       $scope.location = mapUtils.lookupAddress($scope.address);
-      console.log($scope.location);
+      setTimeout(function () {
+        $scope.$digest();
+      }, 500);
     };
 
   });

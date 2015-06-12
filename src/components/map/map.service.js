@@ -33,11 +33,6 @@ angular.module('crimeisdown')
           location.meta.latitude = point.lat().toFixed(6);
           location.meta.longitude = point.lng().toFixed(6);
           map.setCenter(point);
-          var marker = new google.maps.Marker({
-              map: map,
-              position: point
-          });
-          map.setCenter(marker.position);
           map.setZoom(15);
 
           polygons.communityAreas.forEach(function (poly) {
@@ -65,7 +60,7 @@ angular.module('crimeisdown')
                 }
               }
               for (var key in areas) {
-                if ($.inArray(poly.geojsonProperties.DIST_NUM, areas[key])) {
+                if ($.inArray(poly.geojsonProperties.DIST_NUM, areas[key])>-1) {
                   location.police.area = key;
                 }
               }
@@ -76,6 +71,11 @@ angular.module('crimeisdown')
             if (google.maps.geometry.poly.containsLocation(point, poly)) {
               location.police.beat = poly.geojsonProperties.BEAT_NUM;
             }
+          });
+
+          var marker = new google.maps.Marker({
+              map: map,
+              position: point
           });
         } else {
           alert("Geocode was not successful for the following reason: " + status);
