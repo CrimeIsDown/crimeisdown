@@ -1,3 +1,7 @@
+.alert p {
+    margin: 0;
+}
+
 #address-search table tr > td {
     width: 50%;
 }
@@ -13,6 +17,13 @@ blockquote {
 }
 .results {
     margin-top: 1em;
+}
+
+#site-footer {
+    margin-top: 2em;
+    .col-md-7 {
+        text-align: right;
+    }
 }
 
 // injector

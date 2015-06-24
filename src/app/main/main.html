@@ -1,6 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)"><p ng-bind-html="alert.msg"></p></alert>
   <div ng-include="'components/map/map.html'"></div>
   <div ng-include="'components/glossary/glossary.html'"></div>
 </div>

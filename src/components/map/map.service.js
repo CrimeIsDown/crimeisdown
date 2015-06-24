@@ -18,10 +18,20 @@ angular.module('crimeisdown')
     var chicago = new google.maps.Circle({center: mapOptions.center, radius: 50000}).getBounds();
     var geocoder = new google.maps.Geocoder();
     var map;
+    var currMarker;
+    var onlineStreams;
 
     mapService.createMap = function (element) {
       map = new google.maps.Map(element, mapOptions);
       return map;
+    };
+
+    mapService.loadOnlineStreams = function () {
+      $http.get('assets/data/online_streams.json')
+        .then(function (res) {
+          onlineStreams = angular.fromJson(res.data);
+        });
+      return onlineStreams;
     };
 
     mapService.lookupAddress = function (address) {
@@ -56,7 +66,7 @@ angular.module('crimeisdown')
 
               for (var key in zones) {
                 if ($.inArray(poly.geojsonProperties.DIST_NUM, zones[key])>-1) {
-                  location.police.zone = key;
+                  location.police.zone = {num: key, url: onlineStreams['Z'+key].feedUrl, mp3: onlineStreams['Z'+key].directStreamUrl};
                 }
               }
               for (var key in areas) {
@@ -73,7 +83,8 @@ angular.module('crimeisdown')
             }
           });
 
-          var marker = new google.maps.Marker({
+          if (currMarker) currMarker.setMap(null);
+          currMarker = new google.maps.Marker({
               map: map,
               position: point
           });
@@ -86,10 +97,10 @@ angular.module('crimeisdown')
 
     mapService.loadLayers = function (map) {
       var communityAreasLayer = loadCommunityAreas();
-      communityAreasLayer.setMap(map);
+      //communityAreasLayer.setMap(map);
 
       var neighborhoodsLayer = loadNeighborhoods();
-      neighborhoodsLayer.setMap(map);
+      //neighborhoodsLayer.setMap(map);
 
       var policeDistrictsLayer = loadPoliceDistricts();
       policeDistrictsLayer.setMap(map);
@@ -114,7 +125,7 @@ angular.module('crimeisdown')
     function loadPoliceDistricts() {
       var policeDistrictsLayer = new google.maps.Data();
       loadGeoJSON('assets/data/police_districts.json', policeDistrictsLayer, polygons.policeDistricts);
-      policeDistrictsLayer.setStyle({fillOpacity: 0.0, strokeColor: 'blue', strokeWeight: 3});
+      policeDistrictsLayer.setStyle({fillOpacity: 0.0, strokeColor: 'blue', strokeWeight: 2});
       return policeDistrictsLayer;
     }
 
@@ -135,25 +146,6 @@ angular.module('crimeisdown')
           });
         });
     }
-
-    // communityAreasLayer.addListener('click', function (event) {
-    //   var result = event.feature.getProperty('COMMUNITY').toProperCase();
-    //   $scope.$apply(function () {
-    //     $scope.location.meta.community_area = result;
-    //   });
-    // });
-    // neighborhoodsLayer.addListener('click', function (event) {
-    //   var result = event.feature.getProperty('PRI_NEIGH').toProperCase() + ' / ' + event.feature.getProperty('SEC_NEIGH').toProperCase();
-    //   $scope.$apply(function () {
-    //     $scope.location.meta.neighborhood = result;
-    //   });
-    // });
-    // policeDistrictsLayer.addListener('click', function (event) {
-    //   var result = event.feature.getProperty('DIST_LABEL').toLowerCase();
-    //   $scope.$apply(function () {
-    //     $scope.location.police.district = result;
-    //   });
-    // });
 
     return mapService;
   }]);

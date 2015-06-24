@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 var GeoJSON = function(geojson, options){
   var _geometryToGoogleMaps = function( geojsonGeometry, options, geojsonProperties ){
 
@@ -236,3 +237,4 @@ var GeoJSON = function(geojson, options){
   return obj;
 
 };
+/* jshint ignore:end */

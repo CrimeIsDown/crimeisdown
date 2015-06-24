@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('crimeisdown', ['ngResource', 'ui.router', 'ui.bootstrap'])
-  .config(function ($stateProvider, $urlRouterProvider) {
+angular.module('crimeisdown', ['ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap'])
+  .config(function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
     $stateProvider
       .state('home', {
         url: '/',
@@ -31,5 +31,12 @@ angular.module('crimeisdown', ['ngResource', 'ui.router', 'ui.bootstrap'])
       ;
 
     $urlRouterProvider.otherwise('/');
+
+    $sceDelegateProvider.resourceUrlWhitelist([
+      // Allow same origin resource loads.
+      'self',
+      // Allow loading from Broadcastify
+      'http://relay.broadcastify.com/**'
+    ]);
   })
 ;

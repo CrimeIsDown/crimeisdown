@@ -1,0 +1,121 @@
+{
+     "CPD-General": {
+          "name": "Chicago Police Department",
+          "shortname": "CPD-General",
+          "description": "General CPD stream, scans the 13 zones.",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/763",
+          "directStreamUrl": "http://relay.broadcastify.com/il_chicago_police2.mp3"
+     },
+     "CW6": {
+          "name": "CPD Citywide 6",
+          "shortname": "Citywide 6",
+          "description": "",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/17695",
+          "directStreamUrl": "http://relay.broadcastify.com/299858349.mp3"
+     },
+     "Z1": {
+          "name": "CPD Zone 1 - Districts 16 and 17",
+          "shortname": "Zone 1",
+          "description": "",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/16702",
+          "directStreamUrl": "http://relay.broadcastify.com/51174769.mp3"
+     },
+     "Z2": {
+          "name": "CPD Zone 2 - District 19",
+          "shortname": "Zone 2",
+          "description": "19th District - Town Hall: Serving Uptown, south Lincoln Square, North Center, and Lakeview (including Boystown).",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/17684",
+          "directStreamUrl": "http://relay.broadcastify.com/779125459.mp3"
+     },
+     "Z3": {
+          "name": "CPD Zone 3 - Districts 12 and 14",
+          "shortname": "Zone 3",
+          "description": "Near West Side, Wicker Park, Ukranian Village, West Town, Logan Square, Bucktown, UIC areas.",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/14545",
+          "directStreamUrl": "http://relay.broadcastify.com/29449913.mp3"
+     },
+     "Z4": {
+          "name": "CPD Zone 4 - Districts 1 and 18",
+          "shortname": "Zone 4",
+          "description": "1st District-Central..18th District-Near North.. Zone cover Downtown Chicago, Lake Shore Drive, Mag Mile, Navy Pier, Central Detention",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/15380",
+          "directStreamUrl": "http://relay.broadcastify.com/527466356.mp3"
+     },
+     "Z5": {
+          "name": "CPD Zone 5 - District 2",
+          "shortname": "Zone 5",
+          "description": "2nd District - Wentworth: Serving Douglas, Oakland, Grand Boulevard, Kenwood, Washington Park, and Hyde Park.",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/17691",
+          "directStreamUrl": "http://relay.broadcastify.com/464465203.mp3"
+     },
+     "Z6": {
+          "name": "CPD Zone 6 - Districts 7 and 8",
+          "shortname": "Zone 6",
+          "description": "7th District – Englewood & 8th District – Chicago Lawn",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/19608",
+          "directStreamUrl": "http://relay.broadcastify.com/640282916.mp3"
+     },
+     "Z7": {
+          "name": "CPD Zone 7 - District 3",
+          "shortname": "Zone 7",
+          "description": "Grand Crossing",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/14677",
+          "directStreamUrl": "http://relay.broadcastify.com/937409687.mp3"
+     },
+     "Z8": {
+          "name": "CPD Zone 8 - Districts 4 and 6",
+          "shortname": "Zone 8",
+          "description": "District 4 - South Chicago &amp; District 6 - Gresham.",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/15045",
+          "directStreamUrl": "http://relay.broadcastify.com/267563787.mp3"
+     },
+     "Z9": {
+          "name": "CPD Zone 9 - Districts 5 and 22",
+          "shortname": "Zone 9",
+          "description": "5th District.. Calumet / Area South.. 22nd District  Morgan Park",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/15084",
+          "directStreamUrl": "http://relay.broadcastify.com/258823627.mp3"
+     },
+     "Z10": {
+          "name": "CPD Zone 10 - Districts 10 and 11",
+          "shortname": "Zone 10",
+          "description": "10th District - Ogden: Serving North Lawndale, South Lawndale, and the Lower West Side; 11th District - Harrison: Serving West Garfield Park, East Garfield Park, and the southern half of Humboldt Park.",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/17693",
+          "directStreamUrl": "http://relay.broadcastify.com/716183595.mp3"
+     },
+     "Z11": {
+          "name": "CPD Zone 11 - Districts 20 and 24",
+          "shortname": "Zone 11",
+          "description": "",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/12444",
+          "directStreamUrl": "http://relay.broadcastify.com/243172971.mp3"
+     },
+     "Z12": {
+          "name": "CPD Zone 12 - Districts 15 and 25",
+          "shortname": "Zone 12",
+          "description": "",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/653",
+          "directStreamUrl": "http://relay.broadcastify.com/il_chicago_police.mp3"
+     },
+     "Z13": {
+          "name": "CPD Zone 13 - District 9",
+          "shortname": "Zone 13",
+          "description": "9th District - Deering: Serving Bridgeport, McKinley Park, Brighton Park, New City, and Gage Park.",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/17692",
+          "directStreamUrl": "http://relay.broadcastify.com/539709865.mp3"
+     },
+     "CFD-Fire": {
+          "name": "CFD Fire - Main and Englewood, Citywide",
+          "shortname": "CFD Fire",
+          "description": "Chicago Fire Department (P25 Digital UHF) - MAIN/north &amp; ENGLEWOOD/south, Fire Alarm Offices, including CITYWIDE Fire, radio system. CITYWIDE FIRE is also on the Chicago Fire &amp; EMS Feed! (WPSG 985)  www.ChicagoFD.org",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/909",
+          "directStreamUrl": "http://relay.broadcastify.com/il_chicago_fire2.mp3"
+     },
+     "CFD-EMS": {
+          "name": "CFD EMS - Main and Englewood, EMS Command, CTA Fire. Citywide Fire, Joint Ops",
+          "shortname": "CFD EMS",
+          "description": "Chicago Fire Department (UHF) CTA-Fire, CITYWIDE Fire, Fire Tac., Joint Ops. Also in (P25 Digital-UHF)  EMS-MAIN/north, EMS-ENGLEWOOD/south &amp; UHF-EMS Command. www.ChicagoFD.org",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/13605",
+          "directStreamUrl": "http://relay.broadcastify.com/836454979.mp3"
+     }
+}

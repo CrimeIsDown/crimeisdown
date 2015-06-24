@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('crimeisdown')
-  .controller('MapCtrl', function ($scope, mapUtils) {
+  .controller('MapCtrl', function ($scope, $modal, mapUtils) {
     // this should not be done
     String.prototype.toProperCase = function () {
       return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -9,6 +9,7 @@ angular.module('crimeisdown')
 
     $scope.map = mapUtils.createMap(document.getElementById('map-canvas'));
     mapUtils.loadLayers($scope.map);
+    $scope.feeds = mapUtils.loadOnlineStreams();
     $scope.location = {
       meta: {formatted_address: '', latitude: '', longitude: '', neighborhood: '', community_area: ''},
       police: {beat: '', zone: '', district: '', area: ''},
@@ -22,5 +23,24 @@ angular.module('crimeisdown')
         $scope.$digest();
       }, 500);
     };
+
+    var modalInstance;
+
+    $scope.openModal = function () {
+      modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'onlinestreams.html',
+        controller: 'MapCtrl',
+        resolve: {
+          feeds: function () {
+            return $scope.feeds;
+          }
+        }
+      });
+    };
+
+    $scope.closeModal = function () {
+      modalInstance.close();
+    }
 
   });

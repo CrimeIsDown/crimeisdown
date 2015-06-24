@@ -2,6 +2,7 @@
   <div class="col-sm-12 col-md-8">
     <div>{{ polyDesc }}</div>
     <div id="map-canvas"></div>
+    <p><em><strong>KEY</strong>: Police districts are outlined in blue.</em></p>
   </div>
   <div class="col-sm-12 col-md-4">
     <div id="address-search">
@@ -46,25 +47,25 @@
               <td>{{ location.police.beat }}</td>
             </tr>
             <tr>
-              <td>Radio Zone</td>
-              <td>{{ location.police.zone }}</td>
+              <td colspan="2"><strong>Radio Zone {{ location.police.zone.num }}</strong> <span ng-if="location.police.zone.url">(<a href="{{ location.police.zone.url }}" target="_blank" ng-if="location.police.zone.url">Audio from Broadcastify</a>)</span><br>
+              <div ng-if="location.police.zone.mp3"><audio controls src="{{ location.police.zone.mp3 }}">Your user agent does not support the HTML5 Audio element.</audio></div></td>
             </tr>
             <tr>
               <td>{{ location.police.district }} District</td>
               <td>Area {{ location.police.area }}</td>
             </tr>
             <tr class="info">
-              <th colspan="2">Fire</th>
+              <th colspan="2">Fire (coming soon)</th>
             </tr>
-            <tr>
+            <tr class="active">
               <td>Nearest Engine {{ location.fire.nearest_engine }}</td>
               <td>Nearest Ambo. {{ location.fire.nearest_ambo }}</td>
             </tr>
-            <tr>
+            <tr class="active">
               <td>Fire District {{ location.fire.district }}</td>
               <td>Battalion {{ location.fire.battalion }}</td>
             </tr>
-            <tr>
+            <tr class="active">
               <td>Radio Channel</td>
               <td>{{ location.fire.channel }}</td>
             </tr>
@@ -87,13 +88,31 @@
               <td>Census Tract Median Income</td>
               <td>{{ location.stats.income }}</td>
             </tr> -->
-<!--
-Crime stats?
-Nearby incidents?
--->
           </tbody>
         </table>
+        <button class="btn btn-primary btn-lg" ng-click="openModal()" type="button">
+          Listen Online
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="onlinestreams.html">
+  <div class="modal-header">
+    <button aria-label="Close" class="close" ng-click="closeModal()" type="button">
+      <span aria-hidden="true">&#215;</span>
+    </button>
+    <h4 class="modal-title" id="onlineStreamsLabel">Online Streams</h4>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <li ng-repeat="feed in feeds">
+        <a href="{{ feed.feedUrl }}" target="_blank">{{ feed.name }}</a> {{ feed.description }}
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" ng-click="closeModal()" type="button">Close</button>
+  </div>
+</script>
