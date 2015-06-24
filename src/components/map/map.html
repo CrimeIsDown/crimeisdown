@@ -47,7 +47,7 @@
               <td>{{ location.police.beat }}</td>
             </tr>
             <tr>
-              <td colspan="2"><strong>Radio Zone {{ location.police.zone.num }}</strong> <span ng-if="location.police.zone.url">(<a href="{{ location.police.zone.url }}" target="_blank" ng-if="location.police.zone.url">Audio from Broadcastify</a>)</span><br>
+              <td colspan="2"><strong>Radio Zone {{ location.police.zone.num }}</strong> <span ng-if="location.police.zone.url">({{ location.police.zone.freq }} / <a href="{{ location.police.zone.url }}" target="_blank" ng-if="location.police.zone.url">Audio from Broadcastify</a>)</span><br>
               <div ng-if="location.police.zone.mp3"><audio controls src="{{ location.police.zone.mp3 }}">Your user agent does not support the HTML5 Audio element.</audio></div></td>
             </tr>
             <tr>
@@ -108,7 +108,7 @@
   <div class="modal-body">
     <ul>
       <li ng-repeat="feed in feeds">
-        <a href="{{ feed.feedUrl }}" target="_blank">{{ feed.name }}</a> {{ feed.description }}
+        <a href="{{ feed.feedUrl }}" target="_blank">{{ feed.name }}</a> {{ feed.frequency + ' - ' }}{{ feed.description }}
       </li>
     </ul>
   </div>

@@ -66,7 +66,8 @@ angular.module('crimeisdown')
 
               for (var key in zones) {
                 if ($.inArray(poly.geojsonProperties.DIST_NUM, zones[key])>-1) {
-                  location.police.zone = {num: key, url: onlineStreams['Z'+key].feedUrl, mp3: onlineStreams['Z'+key].directStreamUrl};
+                  var stream = onlineStreams['Z'+key];
+                  location.police.zone = {num: key, freq: stream.frequency, url: stream.feedUrl, mp3: stream.directStreamUrl};
                 }
               }
               for (var key in areas) {
