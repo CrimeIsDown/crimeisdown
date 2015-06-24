@@ -1,12 +1,18 @@
 <nav class="navbar navbar-static-top navbar-inverse" ng-controller="NavbarCtrl">
   <div class="container">
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <a class="navbar-brand" ui-sref="home">
         <i class="fa fa-bar-chart"></i> CrimeIsDown.com
       </a>
     </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+    <div class="collapse navbar-collapse" id="navbar" collapse="navCollapsed">
       <ul class="nav navbar-nav">
         <li ui-sref-active="active"><a ui-sref="home">Tools</a></li>
         <li ui-sref-active="active"><a ui-sref="aboutUs">About Us</a></li>

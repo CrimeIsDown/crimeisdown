@@ -1,5 +1,5 @@
-<div class="row" ng-controller="GlossaryCtrl">
-  <div class="col-sm-12 col-md-6" id="radio-search">
+<div ng-controller="GlossaryCtrl">
+  <div id="radio-search">
     <form ng-submit="lookupRadioId()">
       <label for="radioid">Radio ID to search</label>
       <div class="input-group input-group-sm">
@@ -36,7 +36,7 @@
       </table>
     </div>
   </div>
-  <div class="col-sm-12 col-md-6" id="ucr-search">
+  <div id="ucr-search">
     <form ng-submit="lookupUCR()">
       <label for="ucr">UCR (Uniform Crime Reporting) Code to lookup</label>
       <div class="input-group input-group-sm">

@@ -3,7 +3,14 @@
 <div class="container">
   <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)"><p ng-bind-html="alert.msg"></p></alert>
   <div ng-include="'components/map/map.html'"></div>
-  <div ng-include="'components/glossary/glossary.html'"></div>
+  <div class="row">
+  <div class="col-sm-12 col-md-6">
+    <div ng-include="'components/glossary/glossary.html'"></div>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/EricTendian/lists/crimeisdown" data-widget-id="613537792040243200">Tweets from https://twitter.com/EricTendian/lists/crimeisdown</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </div>
 </div>
 
 <hr>
