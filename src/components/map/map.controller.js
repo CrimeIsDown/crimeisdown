@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('crimeisdown')
-  .controller('MapCtrl', function ($scope, $modal, mapUtils) {
+  .controller('MapCtrl', function ($analytics, $scope, $modal, mapUtils) {
     // this should not be done
     String.prototype.toProperCase = function () {
       return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -18,6 +18,7 @@ angular.module('crimeisdown')
     };
 
     $scope.lookupAddress = function () {
+      $analytics.eventTrack('Looks up address', {category: 'Tools', label: $scope.address});
       $scope.location = mapUtils.lookupAddress($scope.address);
       setTimeout(function () {
         $scope.$digest();

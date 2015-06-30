@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('crimeisdown', ['ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap'])
-  .config(function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
+angular.module('crimeisdown', ['ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'angulartics', 'angulartics.google.analytics'])
+  .config(function ($stateProvider, $urlRouterProvider, $sceDelegateProvider, $locationProvider, $analyticsProvider) {
     $stateProvider
       .state('home', {
         url: '/',
@@ -31,6 +31,9 @@ angular.module('crimeisdown', ['ngResource', 'ngSanitize', 'ui.router', 'ui.boot
       ;
 
     $urlRouterProvider.otherwise('/');
+
+    $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
 
     $sceDelegateProvider.resourceUrlWhitelist([
       // Allow same origin resource loads.

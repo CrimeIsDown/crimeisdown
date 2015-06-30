@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('crimeisdown')
-  .controller('GlossaryCtrl', function ($scope, $http) {
+  .controller('GlossaryCtrl', function ($analytics, $scope, $http) {
     var radioIds = [];
     var ucrCodes;
 
@@ -25,6 +25,7 @@ angular.module('crimeisdown')
     $scope.radio = {};
 
     $scope.lookupRadioId = function () {
+      $analytics.eventTrack('Searches radio ID list', {category: 'Tools', label: $scope.radioId});
       var matches = [];
       radioIds.forEach(function (row, index) {
         if ($scope.radioId.match('^' + row.ID_Number + '[A-Za-z]?$')) {
@@ -50,6 +51,7 @@ angular.module('crimeisdown')
     $scope.ucr = {};
 
     $scope.lookupUCR = function () {
+      $analytics.eventTrack('Searches UCR list', {category: 'Tools', label: $scope.ucrCode});
       var code = $scope.ucrCode.toUpperCase().replace(/-/g, '');
       if (ucrCodes[code]) {
         $scope.ucr = ucrCodes[code];
