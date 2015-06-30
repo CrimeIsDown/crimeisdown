@@ -1,5 +1,10 @@
-.alert p {
-    margin: 0;
+.alert {
+    p {
+        margin: 0;
+    }
+    a {
+        text-decoration: underline;
+    }
 }
 
 blockquote {
