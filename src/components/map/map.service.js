@@ -19,6 +19,8 @@ angular.module('crimeisdown')
     var geocoder = new google.maps.Geocoder();
     var map;
     var currMarker;
+    var currListener;
+    var streetView;
     var onlineStreams;
 
     mapService.createMap = function (element) {
@@ -84,10 +86,18 @@ angular.module('crimeisdown')
             }
           });
 
-          if (currMarker) currMarker.setMap(null);
+          if (currMarker) {
+            currMarker.setMap(null);
+            google.maps.event.removeListener(currListener);
+          }
           currMarker = new google.maps.Marker({
               map: map,
               position: point
+          });
+          currListener = google.maps.event.addListener(currMarker, 'click', function() {
+            streetView = map.getStreetView();
+            streetView.setPosition(point);
+            streetView.setVisible(true);
           });
         } else {
           alert("Geocode was not successful for the following reason: " + status);
@@ -107,6 +117,18 @@ angular.module('crimeisdown')
       policeDistrictsLayer.setMap(map);
 
       var policeBeatsLayer = loadPoliceBeats();
+
+      var trafficLayer = new google.maps.TrafficLayer();
+      var transitLayer = new google.maps.TransitLayer();
+
+      return {
+        community_areas: communityAreasLayer,
+        neighborhoods: neighborhoodsLayer,
+        police_districts: policeDistrictsLayer,
+        police_beats: policeBeatsLayer,
+        traffic: trafficLayer,
+        transit: transitLayer
+      };
     }
 
     function loadCommunityAreas() {

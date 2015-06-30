@@ -8,7 +8,7 @@ angular.module('crimeisdown')
     };
 
     $scope.map = mapUtils.createMap(document.getElementById('map-canvas'));
-    mapUtils.loadLayers($scope.map);
+    var layers = mapUtils.loadLayers($scope.map);
     $scope.feeds = mapUtils.loadOnlineStreams();
     $scope.location = {
       meta: {formatted_address: '', latitude: '', longitude: '', neighborhood: '', community_area: ''},
@@ -16,6 +16,7 @@ angular.module('crimeisdown')
       fire: {nearest_station: '', district: '', channel: ''},
       stats: {population: '', homicides: '', shootings: '', income: ''}
     };
+    $scope.layers = {traffic: false, transit: false};
 
     $scope.lookupAddress = function () {
       $analytics.eventTrack('Looks up address', {category: 'Tools', label: $scope.address});
@@ -23,6 +24,11 @@ angular.module('crimeisdown')
       setTimeout(function () {
         $scope.$digest();
       }, 500);
+    };
+
+    $scope.toggleLayer = function () {
+      layers.traffic.setMap($scope.layers.traffic ? $scope.map : null);
+      layers.transit.setMap($scope.layers.transit ? $scope.map : null);
     };
 
     var modalInstance;

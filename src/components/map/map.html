@@ -1,7 +1,7 @@
 <div id="map" class="row" ng-controller="MapCtrl">
   <div class="col-sm-12 col-md-8">
     <h3>Map of Chicago</h3>
-    <p>Interact with this map or use the search box to find information about a specific address. Click/tap on the marker to get street view. Police districts are outlined in blue.</p>
+    <p>Interact with this map or use the search box to find information about a specific address. Police districts are outlined in blue. Click/tap on the marker to get street view of the location (experimental).</p>
     <div id="map-canvas"></div>
   </div>
   <div class="col-sm-12 col-md-4">
@@ -14,6 +14,20 @@
             <span class="input-group-btn">
               <button class="btn btn-default" type="submit">Search</button>
             </span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label for="traffic">
+              Show traffic layer
+              <input type="checkbox" ng-model="layers.traffic" name="traffic" ng-change="toggleLayer()">
+            </label>
+          </div>
+          <div class="col-sm-6">
+          <label for="transit">
+              Show transit layer
+              <input type="checkbox" ng-model="layers.transit" name="transit" ng-change="toggleLayer()">
+            </label>
           </div>
         </div>
       </form>
