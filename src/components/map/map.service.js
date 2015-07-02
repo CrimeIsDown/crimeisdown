@@ -17,11 +17,7 @@ angular.module('crimeisdown')
     };
     var chicago = new google.maps.Circle({center: mapOptions.center, radius: 50000}).getBounds();
     var geocoder = new google.maps.Geocoder();
-    var map;
-    var currMarker;
-    var currListener;
-    var streetView;
-    var onlineStreams;
+    var map, currMarker, currListener, streetView, onlineStreams, fireStations;
 
     mapService.createMap = function (element) {
       map = new google.maps.Map(element, mapOptions);
@@ -34,6 +30,14 @@ angular.module('crimeisdown')
           onlineStreams = angular.fromJson(res.data);
         });
       return onlineStreams;
+    };
+
+    mapService.loadFireStations = function () {
+      $http.get('assets/data/fire_stations.json')
+        .then(function (res) {
+          fireStations = angular.fromJson(res.data);
+        });
+      return fireStations;
     };
 
     mapService.lookupAddress = function (address) {
@@ -85,6 +89,34 @@ angular.module('crimeisdown')
               location.police.beat = poly.geojsonProperties.BEAT_NUM;
             }
           });
+
+          var nearest_engine = {distance: 99999999};
+          var nearest_ambo = {distance: 99999999};
+
+          fireStations.forEach(function (station) {
+            if (station.engine.length) {
+              var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(station.latitude, station.longitude), point);
+              if (nearest_engine.distance > distance) {
+                nearest_engine = station;
+                nearest_engine.distance = distance;
+              }
+            }
+            if (station.ambo.length) {
+              var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(station.latitude, station.longitude), point);
+              if (nearest_ambo.distance > distance) {
+                nearest_ambo = station;
+                nearest_ambo.distance = distance;
+              }
+            }
+
+          });
+
+          location.fire.nearest_engine = nearest_engine.engine;
+          location.fire.fire_district = nearest_engine.fire_dist.replace(' (HQ)', '');
+          location.fire.ems_district = nearest_engine.ems_dist.replace(' (HQ)', '');
+          location.fire.battalion = nearest_engine.batt.replace(' (HQ)', '');
+          location.fire.nearest_ambo = nearest_ambo.ambo;
+          location.fire.channel = nearest_engine.radio;
 
           if (currMarker) {
             currMarker.setMap(null);

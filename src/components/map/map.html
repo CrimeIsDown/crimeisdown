@@ -35,7 +35,7 @@
         <table class="table table-bordered table-condensed">
           <tbody>
             <tr class="info">
-              <th colspan="2">Location</th>
+              <th colspan="2">Location Info</th>
             </tr>
             <tr>
               <td>Formatted Address</td>
@@ -54,7 +54,7 @@
               <td>{{ location.meta.community_area }}</td>
             </tr>
             <tr class="info">
-              <th colspan="2">Police</th>
+              <th colspan="2">Chicago Police Department</th>
             </tr>
             <tr>
               <td>Beat</td>
@@ -69,19 +69,18 @@
               <td>Area {{ location.police.area }}</td>
             </tr>
             <tr class="info">
-              <th colspan="2">Fire (coming soon)</th>
+              <th colspan="2">Chicago Fire Department</th>
             </tr>
-            <tr class="active">
+            <tr>
               <td>Nearest Engine {{ location.fire.nearest_engine }}</td>
               <td>Nearest Ambo. {{ location.fire.nearest_ambo }}</td>
             </tr>
-            <tr class="active">
-              <td>Fire District {{ location.fire.district }}</td>
-              <td>Battalion {{ location.fire.battalion }}</td>
+            <tr>
+              <td>Battalion {{ location.fire.battalion }} / Fire Dist. {{ location.fire.fire_district }}</td>
+              <td>EMS District {{ location.fire.ems_district }}</td>
             </tr>
-            <tr class="active">
-              <td>Radio Channel</td>
-              <td>{{ location.fire.channel }}</td>
+            <tr>
+              <td colspan="2">Radio Channel: {{ location.fire.channel }}</td>
             </tr>
             <!-- <tr class="info">
               <th colspan="2">Stats</th>

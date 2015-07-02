@@ -10,10 +10,11 @@ angular.module('crimeisdown')
     $scope.map = mapUtils.createMap(document.getElementById('map-canvas'));
     var layers = mapUtils.loadLayers($scope.map);
     $scope.feeds = mapUtils.loadOnlineStreams();
+    mapUtils.loadFireStations();
     $scope.location = {
       meta: {formatted_address: '', latitude: '', longitude: '', neighborhood: '', community_area: ''},
       police: {beat: '', zone: '', district: '', area: ''},
-      fire: {nearest_station: '', district: '', channel: ''},
+      fire: {nearest_engine: '', nearest_ambo: '', fire_district: '', ems_district: '', battalion: '', channel: ''},
       stats: {population: '', homicides: '', shootings: '', income: ''}
     };
     $scope.layers = {traffic: false, transit: false};
