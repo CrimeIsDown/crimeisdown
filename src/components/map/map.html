@@ -17,16 +17,35 @@
           </div>
         </div>
         <div class="form-group row">
+          <div class="col-sm-12">
+            <h4>Layers</h4>
+          </div>
           <div class="col-sm-6">
-            <label for="traffic">
-              Show traffic layer
-              <input type="checkbox" ng-model="layers.traffic" name="traffic" ng-change="toggleLayer()">
+            <label>
+              <input type="checkbox" ng-model="layers.community_areas" ng-change="toggleLayer('community_areas')">
+              Community Areas
+            </label>
+            <label>
+              <input type="checkbox" ng-model="layers.neighborhoods" ng-change="toggleLayer('neighborhoods')">
+              Neighborhoods
+            </label>
+            <label>
+              <input type="checkbox" ng-model="layers.transit" ng-change="toggleLayer('transit')">
+              Public Transit
             </label>
           </div>
           <div class="col-sm-6">
-          <label for="transit">
-              Show transit layer
-              <input type="checkbox" ng-model="layers.transit" name="transit" ng-change="toggleLayer()">
+            <label>
+              <input type="checkbox" ng-model="layers.police_districts" ng-change="toggleLayer('police_districts')">
+              Police Districts
+            </label>
+            <label>
+              <input type="checkbox" ng-model="layers.police_beats" ng-change="toggleLayer('police_beats')">
+              Police Beats
+            </label>
+            <label>
+              <input type="checkbox" ng-model="layers.traffic" ng-change="toggleLayer('traffic')">
+              Real-time Traffic
             </label>
           </div>
         </div>
@@ -80,7 +99,7 @@
               <td>EMS District {{ location.fire.ems_district }}</td>
             </tr>
             <tr>
-              <td colspan="2">Radio Channel: {{ location.fire.channel }}</td>
+              <td colspan="2">Radio Channel: {{ location.fire.channel }}<span ng-if="location.fire.channel"> (Listen to <a href="http://www.broadcastify.com/listen/feed/909/web" target="_blank">Fire</a> or <a href="http://www.broadcastify.com/listen/feed/13605/web" target="_blank">EMS</a>)</span></td>
             </tr>
             <!-- <tr class="info">
               <th colspan="2">Stats</th>

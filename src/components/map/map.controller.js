@@ -17,7 +17,14 @@ angular.module('crimeisdown')
       fire: {nearest_engine: '', nearest_ambo: '', fire_district: '', ems_district: '', battalion: '', channel: ''},
       stats: {population: '', homicides: '', shootings: '', income: ''}
     };
-    $scope.layers = {traffic: false, transit: false};
+    $scope.layers = {
+      community_areas: false,
+      neighborhoods: false,
+      police_districts: true,
+      police_beats: false,
+      traffic: false,
+      transit: false
+    };
 
     $scope.lookupAddress = function () {
       $analytics.eventTrack('Looks up address', {category: 'Tools', label: $scope.address});
@@ -27,9 +34,8 @@ angular.module('crimeisdown')
       }, 500);
     };
 
-    $scope.toggleLayer = function () {
-      layers.traffic.setMap($scope.layers.traffic ? $scope.map : null);
-      layers.transit.setMap($scope.layers.transit ? $scope.map : null);
+    $scope.toggleLayer = function (layer) {
+      layers[layer].setMap($scope.layers[layer] ? $scope.map : null);
     };
 
     var modalInstance;

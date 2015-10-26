@@ -173,7 +173,7 @@ angular.module('crimeisdown')
     function loadNeighborhoods() {
       var neighborhoodsLayer = new google.maps.Data();
       loadGeoJSON('assets/data/neighborhoods.json', neighborhoodsLayer, polygons.neighborhoods);
-      neighborhoodsLayer.setStyle({fillOpacity: 0.0, strokeColor: '#CCC', strokeWeight: 1});
+      neighborhoodsLayer.setStyle({fillOpacity: 0.0, strokeColor: '#A00', strokeWeight: 1});
       return neighborhoodsLayer;
     }
 

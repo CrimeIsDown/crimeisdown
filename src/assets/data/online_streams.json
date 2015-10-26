@@ -49,9 +49,7 @@
           "name": "CPD Zone 5 - District 2",
           "shortname": "Zone 5",
           "description": "2nd District - Wentworth: Serving Douglas, Oakland, Grand Boulevard, Kenwood, Washington Park, and Hyde Park.",
-          "frequency": "460.500MHz",
-          "feedUrl": "http://www.broadcastify.com/listen/feed/17691",
-          "directStreamUrl": "http://relay.broadcastify.com/464465203.mp3"
+          "frequency": "460.500MHz"
      },
      "Z6": {
           "name": "CPD Zone 6 - Districts 7 and 8",
