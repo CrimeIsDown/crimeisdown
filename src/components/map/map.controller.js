@@ -11,17 +11,19 @@ angular.module('crimeisdown')
     var layers = mapUtils.loadLayers($scope.map);
     $scope.feeds = mapUtils.loadOnlineStreams();
     mapUtils.loadFireStations();
+    mapUtils.loadTraumaCenters();
     $scope.location = {
-      meta: {formatted_address: '', latitude: '', longitude: '', neighborhood: '', community_area: ''},
+      meta: {formattedAddress: '', latitude: '', longitude: '', neighborhood: '', communityArea: ''},
       police: {beat: '', zone: '', district: '', area: ''},
-      fire: {nearest_engine: '', nearest_ambo: '', fire_district: '', ems_district: '', battalion: '', channel: ''},
+      fire: {nearestEngine: '', nearestAmbo: '', fireDistrict: '', emsDistrict: '', battalion: '', channel: ''},
+      ems: {nearestTraumaAdult: '', nearestTraumaPed: ''},
       stats: {population: '', homicides: '', shootings: '', income: ''}
     };
     $scope.layers = {
-      community_areas: false,
+      communityAreas: false,
       neighborhoods: false,
-      police_districts: true,
-      police_beats: false,
+      policeDistricts: true,
+      policeBeats: false,
       traffic: false,
       transit: false
     };
@@ -55,6 +57,6 @@ angular.module('crimeisdown')
 
     $scope.closeModal = function () {
       modalInstance.close();
-    }
+    };
 
   });

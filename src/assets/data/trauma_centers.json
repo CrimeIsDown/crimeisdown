@@ -1,0 +1,145 @@
+[
+  {
+    "name":"Advocate Christ Medical Center",
+    "level1Adult":true,
+    "level1Ped":false,
+    "addr":"4440 W 95th St",
+    "city":"Oak Lawn",
+    "state":"IL",
+    "zip":60453,
+    "latitude":41.721989,
+    "longitude":-87.732829
+  },
+  {
+    "name":"Advocate Condell Medical Center",
+    "level1Adult":true,
+    "level1Ped":false,
+    "addr":"801 S Milwaukee Ave",
+    "city":"Libertyville",
+    "state":"IL",
+    "zip":60048,
+    "latitude":42.274477,
+    "longitude":-87.957566
+  },
+  {
+    "name":"Advocate Good Samaritan Hospital",
+    "level1Adult":true,
+    "level1Ped":false,
+    "addr":"3815 Highland Ave",
+    "city":"Downers Grove",
+    "state":"IL",
+    "zip":60515,
+    "latitude":41.817932,
+    "longitude":-88.009037
+  },
+  {
+    "name":"Advocate Illinois Masonic Medical Center",
+    "level1Adult":true,
+    "level1Ped":false,
+    "addr":"836 W Wellington Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60657,
+    "latitude":41.936793,
+    "longitude":-87.651935
+  },
+  {
+    "name":"Advocate Lutheran General Hospital",
+    "level1Adult":true,
+    "level1Ped":false,
+    "addr":"1775 Dempster St",
+    "city":"Park Ridge",
+    "state":"IL",
+    "zip":60068,
+    "latitude":42.038478,
+    "longitude":-87.847611
+  },
+  {
+    "name":"Loyola University Medical Center",
+    "level1Adult":true,
+    "level1Ped":false,
+    "addr":"2160 S 1st Ave",
+    "city":"Maywood",
+    "state":"IL",
+    "zip":60153,
+    "latitude":41.859859,
+    "longitude":-87.835105
+  },
+  {
+    "name":"Evanston Hospital",
+    "level1Adult":true,
+    "level1Ped":false,
+    "addr":"2650 Ridge Ave",
+    "city":"Evanston",
+    "state":"IL",
+    "zip":60201,
+    "latitude":42.065599,
+    "longitude":-87.684208
+  },
+  {
+    "name":"Northwestern Memorial Hospital",
+    "level1Adult":true,
+    "level1Ped":false,
+    "addr":"251 E Huron St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60611,
+    "latitude":41.89464,
+    "longitude":-87.621128
+  },
+  {
+    "name":"Presence Saint Francis Hospital",
+    "level1Adult":true,
+    "level1Ped":false,
+    "addr":"355 Ridge Ave",
+    "city":"Evanston",
+    "state":"IL",
+    "zip":60202,
+    "latitude":42.024609,
+    "longitude":-87.684406
+  },
+  {
+    "name":"John H. Stroger, Jr. Hospital of Cook Co.",
+    "level1Adult":true,
+    "level1Ped":true,
+    "addr":"1901 W Harrison St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60612,
+    "latitude":41.873588,
+    "longitude":-87.674275
+  },
+  {
+    "name":"Mount Sinai Hospital",
+    "level1Adult":true,
+    "level1Ped":true,
+    "addr":"1500 S Fairfield Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60608,
+    "latitude":41.861111,
+    "longitude":-87.694758
+  },
+  {
+    "name":"Ann & Robert H. Lurie Children's Hosp of Chicago",
+    "level1Adult":false,
+    "level1Ped":true,
+    "addr":"225 E Chicago Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60611,
+    "latitude":41.896389,
+    "longitude":-87.621686
+  },
+  {
+    "name":"University of Chicago Medical Center",
+    "level1Adult":false,
+    "level1Ped":true,
+    "addr":"5841 S Maryland Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60637,
+    "latitude":41.788313,
+    "longitude":-87.604566
+  }
+]

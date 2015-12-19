@@ -17,7 +17,7 @@ angular.module('crimeisdown')
     };
     var chicago = new google.maps.Circle({center: mapOptions.center, radius: 50000}).getBounds();
     var geocoder = new google.maps.Geocoder();
-    var map, currMarker, currListener, streetView, onlineStreams, fireStations;
+    var map, currMarker, currListener, streetView, onlineStreams, fireStations, traumaCenters;
 
     mapService.createMap = function (element) {
       map = new google.maps.Map(element, mapOptions);
@@ -40,12 +40,20 @@ angular.module('crimeisdown')
       return fireStations;
     };
 
+    mapService.loadTraumaCenters = function () {
+      $http.get('assets/data/trauma_centers.json')
+        .then(function (res) {
+          traumaCenters = angular.fromJson(res.data);
+        });
+        return traumaCenters;
+    };
+
     mapService.lookupAddress = function (address) {
-      var location = {meta: {}, police: {}, fire: {}, stats: {}};
+      var location = {meta: {}, police: {}, fire: {}, ems: {}, stats: {}};
       geocoder.geocode({'address': address, bounds: chicago}, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
+        if (status === google.maps.GeocoderStatus.OK) {
           var point = results[0].geometry.location;
-          location.meta.formatted_address = results[0].formatted_address;
+          location.meta.formattedAddress = results[0].formatted_address;
           location.meta.latitude = point.lat().toFixed(6);
           location.meta.longitude = point.lng().toFixed(6);
           map.setCenter(point);
@@ -53,7 +61,7 @@ angular.module('crimeisdown')
 
           polygons.communityAreas.forEach(function (poly) {
             if (google.maps.geometry.poly.containsLocation(point, poly)) {
-              location.meta.community_area = poly.geojsonProperties.COMMUNITY;
+              location.meta.communityArea = poly.geojsonProperties.COMMUNITY;
             }
           });
 
@@ -68,7 +76,7 @@ angular.module('crimeisdown')
               location.police.district = poly.geojsonProperties.DIST_LABEL.toLowerCase();
 
               var zones = {'1': ['16', '17'], '2': ['19'], '3': ['12', '14'], '4': ['1', '18'], '5': ['2'], '6': ['7', '8'], '7': ['3'], '8': ['4', '6'], '9': ['5', '22'], '10': ['10', '11'], '11': ['20', '24'], '12': ['15', '25'], '13': ['9']};
-              var areas = {'North': ['11', '14', '15', '16', '17', '19', '20', '24'], 'Central': ['1', '2', '3', '8', '9', '10', '12', '18'], 'South': ['4', '5', '6', '7', '22']}
+              var areas = {'North': ['11', '14', '15', '16', '17', '19', '20', '24'], 'Central': ['1', '2', '3', '8', '9', '10', '12', '18'], 'South': ['4', '5', '6', '7', '22']};
 
               for (var key in zones) {
                 if ($.inArray(poly.geojsonProperties.DIST_NUM, zones[key])>-1) {
@@ -90,33 +98,51 @@ angular.module('crimeisdown')
             }
           });
 
-          var nearest_engine = {distance: 99999999};
-          var nearest_ambo = {distance: 99999999};
+          var nearestEngine = {distance: 99999999};
+          var nearestAmbo = {distance: 99999999};
 
           fireStations.forEach(function (station) {
+            var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(station.latitude, station.longitude), point);
             if (station.engine.length) {
-              var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(station.latitude, station.longitude), point);
-              if (nearest_engine.distance > distance) {
-                nearest_engine = station;
-                nearest_engine.distance = distance;
+              if (nearestEngine.distance > distance) {
+                nearestEngine = station;
+                nearestEngine.distance = distance;
               }
             }
             if (station.ambo.length) {
-              var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(station.latitude, station.longitude), point);
-              if (nearest_ambo.distance > distance) {
-                nearest_ambo = station;
-                nearest_ambo.distance = distance;
+              if (nearestAmbo.distance > distance) {
+                nearestAmbo = station;
+                nearestAmbo.distance = distance;
               }
             }
-
           });
 
-          location.fire.nearest_engine = nearest_engine.engine;
-          location.fire.fire_district = nearest_engine.fire_dist.replace(' (HQ)', '');
-          location.fire.ems_district = nearest_engine.ems_dist.replace(' (HQ)', '');
-          location.fire.battalion = nearest_engine.batt.replace(' (HQ)', '');
-          location.fire.nearest_ambo = nearest_ambo.ambo;
-          location.fire.channel = nearest_engine.radio;
+          location.fire.nearestEngine = nearestEngine.engine;
+          location.fire.fireDistrict = nearestEngine.fireDist.replace(' (HQ)', '');
+          location.fire.emsDistrict = nearestEngine.emsDist.replace(' (HQ)', '');
+          location.fire.battalion = nearestEngine.batt.replace(' (HQ)', '');
+          location.fire.nearestAmbo = nearestAmbo.ambo;
+          location.fire.channel = nearestEngine.radio;
+
+          var nearestTraumaAdult = {distance: 99999999};
+          var nearestTraumaPed = {distance: 99999999};
+
+          traumaCenters.forEach(function (hospital) {
+            var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(hospital.latitude, hospital.longitude), point);
+            if (hospital.level1Adult && nearestTraumaAdult.distance > distance) {
+              nearestTraumaAdult = hospital;
+              nearestTraumaAdult.distance = distance;
+              nearestTraumaAdult.distanceMi = Math.round(distance*0.000621371192*100)/100;
+            }
+            if (hospital.level1Ped && nearestTraumaPed.distance > distance) {
+              nearestTraumaPed = hospital;
+              nearestTraumaPed.distance = distance;
+              nearestTraumaPed.distanceMi = Math.round(distance*0.000621371192*100)/100;
+            }
+          });
+
+          location.ems.nearestTraumaAdult = nearestTraumaAdult;
+          location.ems.nearestTraumaPed = nearestTraumaPed;
 
           if (currMarker) {
             currMarker.setMap(null);
@@ -132,7 +158,7 @@ angular.module('crimeisdown')
             streetView.setVisible(true);
           });
         } else {
-          alert("Geocode was not successful for the following reason: " + status);
+          alert('Geocode was not successful for the following reason: ' + status);
         }
       });
       return location;
@@ -154,14 +180,14 @@ angular.module('crimeisdown')
       var transitLayer = new google.maps.TransitLayer();
 
       return {
-        community_areas: communityAreasLayer,
+        communityAreas: communityAreasLayer,
         neighborhoods: neighborhoodsLayer,
-        police_districts: policeDistrictsLayer,
-        police_beats: policeBeatsLayer,
+        policeDistricts: policeDistrictsLayer,
+        policeBeats: policeBeatsLayer,
         traffic: trafficLayer,
         transit: transitLayer
       };
-    }
+    };
 
     function loadCommunityAreas() {
       var communityAreasLayer = new google.maps.Data();
