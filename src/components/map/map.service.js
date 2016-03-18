@@ -225,7 +225,7 @@ angular.module('crimeisdown')
     function loadWards() {
       var wardsLayer = new google.maps.Data();
       loadGeoJSON('assets/data/wards.json', wardsLayer, polygons.wards);
-      wardsLayer.setStyle({fillOpacity: 0.0, strokeColor: '#FF0', strokeWeight: 1});
+      wardsLayer.setStyle({fillOpacity: 0.0, strokeColor: '#030', strokeWeight: 1});
       return wardsLayer;
     }
 
