@@ -28,12 +28,13 @@ angular.module('crimeisdown')
       $analytics.eventTrack('Searches radio ID list', {category: 'Tools', label: $scope.radioId});
       var matches = [];
       radioIds.forEach(function (row, index) {
-        if ($scope.radioId.match('^' + row.ID_Number + '[A-Za-z]?$')) {
+        if ($scope.radioId.match('^' + row.ID_Number + '$')) {
           matches.push(row);
         }
       });
       $('#radioid-results td').empty();
       if (matches.length > 0) {
+        $scope.radio = {agency: '', level1: '', level2: '', level3: '', level4: ''};
         matches.forEach(function (match, index) {
           if (match.Agency.length) {
             $scope.radio.agency = match.Agency;
