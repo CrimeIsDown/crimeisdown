@@ -12,6 +12,7 @@ angular.module('crimeisdown')
     $scope.feeds = mapUtils.loadOnlineStreams();
     mapUtils.loadFireStations();
     mapUtils.loadTraumaCenters();
+    mapUtils.loadAldermen();
     $scope.location = {
       meta: {formattedAddress: '', latitude: '', longitude: '', neighborhood: '', communityArea: ''},
       police: {beat: '', zone: '', district: '', area: ''},

@@ -7,6 +7,7 @@ angular.module('crimeisdown')
     var polygons = {
       communityAreas: [],
       neighborhoods: [],
+      wards: [],
       policeDistricts: [],
       policeBeats: []
     };
@@ -17,7 +18,7 @@ angular.module('crimeisdown')
     };
     var chicago = new google.maps.Circle({center: mapOptions.center, radius: 50000}).getBounds();
     var geocoder = new google.maps.Geocoder();
-    var map, currMarker, currListener, streetView, onlineStreams, fireStations, traumaCenters;
+    var map, currMarker, currListener, streetView, onlineStreams, fireStations, traumaCenters, aldermen;
 
     mapService.createMap = function (element) {
       map = new google.maps.Map(element, mapOptions);
@@ -48,6 +49,14 @@ angular.module('crimeisdown')
         return traumaCenters;
     };
 
+    mapService.loadAldermen = function () {
+      $http.get('assets/data/aldermen.json')
+        .then(function (res) {
+          aldermen = angular.fromJson(res.data);
+        });
+      return aldermen;
+    };
+
     mapService.lookupAddress = function (address) {
       var location = {meta: {}, police: {}, fire: {}, ems: {}, stats: {}};
       geocoder.geocode({'address': address, bounds: chicago}, function (results, status) {
@@ -68,6 +77,13 @@ angular.module('crimeisdown')
           polygons.neighborhoods.forEach(function (poly) {
             if (google.maps.geometry.poly.containsLocation(point, poly)) {
               location.meta.neighborhood = poly.geojsonProperties.PRI_NEIGH;
+            }
+          });
+
+          polygons.wards.forEach(function (poly) {
+            if (google.maps.geometry.poly.containsLocation(point, poly)) {
+              location.meta.ward = poly.geojsonProperties.ward;
+              location.meta.alderman = aldermen[parseInt(poly.geojsonProperties.ward)-1];
             }
           });
 
@@ -171,6 +187,8 @@ angular.module('crimeisdown')
       var neighborhoodsLayer = loadNeighborhoods();
       //neighborhoodsLayer.setMap(map);
 
+      var wardsLayer = loadWards();
+
       var policeDistrictsLayer = loadPoliceDistricts();
       policeDistrictsLayer.setMap(map);
 
@@ -182,6 +200,7 @@ angular.module('crimeisdown')
       return {
         communityAreas: communityAreasLayer,
         neighborhoods: neighborhoodsLayer,
+        wards: wardsLayer,
         policeDistricts: policeDistrictsLayer,
         policeBeats: policeBeatsLayer,
         traffic: trafficLayer,
@@ -201,6 +220,13 @@ angular.module('crimeisdown')
       loadGeoJSON('assets/data/neighborhoods.json', neighborhoodsLayer, polygons.neighborhoods);
       neighborhoodsLayer.setStyle({fillOpacity: 0.0, strokeColor: '#A00', strokeWeight: 1});
       return neighborhoodsLayer;
+    }
+
+    function loadWards() {
+      var wardsLayer = new google.maps.Data();
+      loadGeoJSON('assets/data/wards.json', wardsLayer, polygons.wards);
+      wardsLayer.setStyle({fillOpacity: 0.0, strokeColor: '#FF0', strokeWeight: 1});
+      return wardsLayer;
     }
 
     function loadPoliceDistricts() {

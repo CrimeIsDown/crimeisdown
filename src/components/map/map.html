@@ -74,6 +74,10 @@
               <td>Community Area</td>
               <td>{{ location.meta.communityArea }}</td>
             </tr>
+            <tr>
+              <td>Ward / Alderman</td>
+              <td><span ng-if="location.meta.ward">{{ location.meta.ward }} - <a href="{{ location.meta.alderman.website }}" target="_blank">Alderman {{ location.meta.alderman.name }}</a></span></td>
+            </tr>
             <tr class="info">
               <th colspan="2">Chicago Police Department</th>
             </tr>
@@ -135,6 +139,7 @@
                   {{ location.ems.nearestTraumaAdult.city }},
                   {{ location.ems.nearestTraumaAdult.state }},
                   {{ location.ems.nearestTraumaAdult.zip }})
+                  - Patient Reports on {{ location.ems.nearestTraumaAdult.medChannel }}
                 </span>
               </td>
             </tr>
@@ -151,6 +156,7 @@
                   {{ location.ems.nearestTraumaPed.city }},
                   {{ location.ems.nearestTraumaPed.state }},
                   {{ location.ems.nearestTraumaPed.zip }})
+                  - Patient Reports on {{ location.ems.nearestTraumaPed.medChannel }}
                 </span>
               </td>
             </tr>
