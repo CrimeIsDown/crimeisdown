@@ -1,6 +1,7 @@
 [
   {
     "name":"Advocate Christ Medical Center",
+    "medChannel":"463.000MHz",
     "level1Adult":true,
     "level1Ped":false,
     "addr":"4440 W 95th St",
@@ -12,6 +13,7 @@
   },
   {
     "name":"Advocate Condell Medical Center",
+    "medChannel":"155.340MHz, 155.400MHz",
     "level1Adult":true,
     "level1Ped":false,
     "addr":"801 S Milwaukee Ave",
@@ -23,6 +25,7 @@
   },
   {
     "name":"Advocate Good Samaritan Hospital",
+    "medChannel":"155.340MHz",
     "level1Adult":true,
     "level1Ped":false,
     "addr":"3815 Highland Ave",
@@ -34,6 +37,7 @@
   },
   {
     "name":"Advocate Illinois Masonic Medical Center",
+    "medChannel":"463.000MHz, 463.150MHz, 463.175MHz",
     "level1Adult":true,
     "level1Ped":false,
     "addr":"836 W Wellington Ave",
@@ -45,6 +49,7 @@
   },
   {
     "name":"Advocate Lutheran General Hospital",
+    "medChannel":"155.400MHz, 463.000MHz",
     "level1Adult":true,
     "level1Ped":false,
     "addr":"1775 Dempster St",
@@ -56,6 +61,7 @@
   },
   {
     "name":"Loyola University Medical Center",
+    "medChannel":"155.340MHz, 463.000MHz",
     "level1Adult":true,
     "level1Ped":false,
     "addr":"2160 S 1st Ave",
@@ -67,6 +73,7 @@
   },
   {
     "name":"Evanston Hospital",
+    "medChannel":"155.340MHz",
     "level1Adult":true,
     "level1Ped":false,
     "addr":"2650 Ridge Ave",
@@ -78,6 +85,7 @@
   },
   {
     "name":"Northwestern Memorial Hospital",
+    "medChannel":"463.075MHz, 463.100MHz, 463.125MHz",
     "level1Adult":true,
     "level1Ped":false,
     "addr":"251 E Huron St",
@@ -89,6 +97,7 @@
   },
   {
     "name":"Presence Saint Francis Hospital",
+    "medChannel":"155.340MHz, 463.000MHz",
     "level1Adult":true,
     "level1Ped":false,
     "addr":"355 Ridge Ave",
@@ -100,6 +109,7 @@
   },
   {
     "name":"John H. Stroger, Jr. Hospital of Cook Co.",
+    "medChannel":"155.340MHz, 463.025MHz, 463.150MHz",
     "level1Adult":true,
     "level1Ped":true,
     "addr":"1901 W Harrison St",
@@ -111,6 +121,7 @@
   },
   {
     "name":"Mount Sinai Hospital",
+    "medChannel":"155.340MHz, 463.000MHz, 463.025MHz",
     "level1Adult":true,
     "level1Ped":true,
     "addr":"1500 S Fairfield Ave",
@@ -122,6 +133,7 @@
   },
   {
     "name":"Ann & Robert H. Lurie Children's Hosp of Chicago",
+    "medChannel":"155.340MHz",
     "level1Adult":false,
     "level1Ped":true,
     "addr":"225 E Chicago Ave",
@@ -133,6 +145,7 @@
   },
   {
     "name":"University of Chicago Medical Center",
+    "medChannel":"463.125MHz, 463.150MHz",
     "level1Adult":false,
     "level1Ped":true,
     "addr":"5841 S Maryland Ave",
