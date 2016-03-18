@@ -13,9 +13,9 @@ angular.module('crimeisdown')
         console.error('Could not fetch radio ID list');
       });
 
-    $http.get('assets/data/ucr_codes.json')
+    $http.jsonp('https://script.google.com/macros/s/AKfycbwdMu3lgUaMPqA-ESlmhD12Yo6Jz78LlCM8cMQXW7Cm4O94sAA/exec?id=1Zzx6UXOYL5BXXYTO_PanTESGS5nHLHDMxBi7u0k1ppg&sheet=UCR%20Codes&callback=JSON_CALLBACK')
       .success(function (data) {
-        ucrCodes = data;
+        ucrCodes = data['UCR Codes'];
       })
       .error(function (data) {
         ucrCodes = {};
@@ -65,12 +65,17 @@ angular.module('crimeisdown')
 
     $scope.lookupUCR = function () {
       $analytics.eventTrack('Searches UCR list', {category: 'Tools', label: $scope.ucrCode});
-      var code = $scope.ucrCode.toUpperCase().replace(/-/g, '');
-      if (ucrCodes[code]) {
-        $scope.ucr = ucrCodes[code];
-        $scope.ucrCode = code;
-      } else {
-        $scope.ucr = {primaryDesc: 'Not Found', secondaryDesc: 'Not Found', indexCode: 'N/A'};
+      $scope.ucr = {primaryDesc: 'Not Found', secondaryDesc: 'Not Found', indexCode: 'N/A'};
+      var code = transformUCR($scope.ucrCode);
+      ucrCodes.forEach(function (row, index) {
+        if (code == transformUCR(row.ucrCode)) {
+          $scope.ucr = row;
+          $scope.ucrCode = code;
+          return;
+        }
+      });
+      function transformUCR(code) {
+        return code.toUpperCase().replace(/-/g, '');
       }
     };
   });
