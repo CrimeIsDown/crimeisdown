@@ -7,9 +7,9 @@
           "directStreamUrl": "http://relay.broadcastify.com/il_chicago_police2.mp3"
      },
      "CW6": {
-          "name": "CPD Citywide 6",
-          "shortname": "Citywide 6",
-          "description": "",
+          "name": "CPD Citywide 1, 5, 6",
+          "shortname": "Citywide 1, 5, 6",
+          "description": "Listen to this stream during special events, protests, or for high-priority calls being dispatched. Citywide 1 is for traffic, Marine Unit, mass transit, etc. Citywide 5 and 6 are alternate channels.",
           "feedUrl": "http://www.broadcastify.com/listen/feed/17695",
           "directStreamUrl": "http://relay.broadcastify.com/299858349.mp3"
      },
@@ -49,7 +49,9 @@
           "name": "CPD Zone 5 - District 2",
           "shortname": "Zone 5",
           "description": "2nd District - Wentworth: Serving Douglas, Oakland, Grand Boulevard, Kenwood, Washington Park, and Hyde Park.",
-          "frequency": "460.500MHz"
+          "frequency": "460.500MHz",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/23006",
+          "directStreamUrl": "http://relay.broadcastify.com/khtxwn0r1v53.mp3"
      },
      "Z6": {
           "name": "CPD Zone 6 - Districts 7 and 8",
