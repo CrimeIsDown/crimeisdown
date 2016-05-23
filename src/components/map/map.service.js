@@ -62,7 +62,6 @@ angular.module('crimeisdown')
       var location = {meta: {}, police: {}, fire: {}, ems: {}, stats: {}};
       geocoder.geocode({'address': address, bounds: chicago}, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
-          console.log(results);
           var result;
           var shortestDistance = 9999999999;
           // get the geocode result closest to Chicago
