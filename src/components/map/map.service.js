@@ -13,10 +13,11 @@ angular.module('crimeisdown')
     };
 
     var mapOptions = {
-      center: {lat: 41.8369, lng: -87.6847},
+      center: {lat: 41.826767, lng: -87.671500},
       zoom: 10
     };
-    var chicago = new google.maps.Circle({center: mapOptions.center, radius: 50000}).getBounds();
+    var centerPoint = new google.maps.LatLng(mapOptions.center.lat, mapOptions.center.lng);
+    var chicago = new google.maps.Circle({center: mapOptions.center, radius: 25000}).getBounds();
     var geocoder = new google.maps.Geocoder();
     var map, currMarker, currListener, streetView, onlineStreams, fireStations, traumaCenters, aldermen;
 
@@ -61,8 +62,19 @@ angular.module('crimeisdown')
       var location = {meta: {}, police: {}, fire: {}, ems: {}, stats: {}};
       geocoder.geocode({'address': address, bounds: chicago}, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
-          var point = results[0].geometry.location;
-          location.meta.formattedAddress = results[0].formatted_address;
+          console.log(results);
+          var result;
+          var shortestDistance = 9999999999;
+          // get the geocode result closest to Chicago
+          results.forEach(function (searchResult) {
+            var distance = google.maps.geometry.spherical.computeDistanceBetween(centerPoint, searchResult.geometry.location);
+            if (distance < shortestDistance) {
+              result = searchResult;
+              shortestDistance = distance;
+            }
+          });
+          var point = result.geometry.location;
+          location.meta.formattedAddress = result.formatted_address;
           location.meta.latitude = point.lat().toFixed(6);
           location.meta.longitude = point.lng().toFixed(6);
           map.setCenter(point);
