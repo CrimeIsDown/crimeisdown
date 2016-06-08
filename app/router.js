@@ -6,6 +6,10 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('map');
+  this.route('directives');
+  this.route('guide');
+  this.route('audio');
 });
 
 export default Router;
