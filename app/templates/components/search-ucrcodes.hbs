@@ -1,1 +1,32 @@
+<div id="ucr-search">
+  <form>
+    <label for="ucr">UCR (Uniform Crime Reporting) Code to lookup</label>
+    <div class="input-group input-group-sm">
+      <input class="form-control" name="ucr" placeholder="041A" type="text" />
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">Define</button>
+        </span>
+    </div>
+  </form>
+  <div class="results">
+    <table class="table table-bordered table-condensed">
+      <tbody>
+      <tr>
+        <th scope="row">Primary Description</th>
+        <td id="primary_desc">{{ ucr.primaryDesc }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Secondary Description</th>
+        <td id="secondary_desc">{{ ucr.secondaryDesc }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Index Code?</th>
+        <td id="index_code">{{ ucr.indexCode }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <p>The full list of UCR codes and information about them can be found in the <a href="http://directives.chicagopolice.org/forms/CPD-63.451_Table.pdf">CPD's Incident Reporting Guide</a>.</p>
+  </div>
+</div>
+
 {{yield}}

@@ -1,11 +1,54 @@
 <header>
-  <h2 id="title">Welcome to CrimeIsDown.com</h2>
-  <ul>
-    <li>{{#link-to "map"}}Incident Map{{/link-to}}</li>
-    <li>{{#link-to "audio"}}Scanner Audio{{/link-to}}</li>
-    <li>{{#link-to "guide"}}Scanner Guide{{/link-to}}</li>
-    <li>{{#link-to "directives"}}CPD Directive Diffs{{/link-to}}</li>
-  </ul>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        {{#link-to "index" class="navbar-brand"}}CrimeIsDown.com{{/link-to}}
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav">
+          {{#active-link}}
+            {{#link-to "map"}}Incident Map{{/link-to}}
+          {{/active-link}}
+          {{#active-link}}
+            {{#link-to "audio"}}Scanner Audio{{/link-to}}
+          {{/active-link}}
+          {{#active-link}}
+            {{#link-to "guide"}}Scanner Guide{{/link-to}}
+          {{/active-link}}
+          {{#active-link}}
+            {{#link-to "directives"}}Police Directive Changes{{/link-to}}
+          {{/active-link}}
+        </ul>
+      </div>
+    </div>
+  </nav>
 </header>
 
-{{outlet}}
+<div class="container">
+  {{outlet}}
+</div>
+
+<footer id="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <p>
+          Copyright &copy; 2014-2016 CrimeIsDown.com. All Rights Reserved.
+        </p>
+      </div>
+      <div class="col-md-7">
+        <a href="#">About CrimeIsDown.com</a> |
+        <a href="https://twitter.com/CrimeIsDown">Follow on Twitter</a> |
+        <a href="https://www.facebook.com/crimeisdown">Like on Facebook</a> |
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SHEMCHJPV8KY&lc=US&item_name=CrimeIsDown%2ecom&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" target="_blank">Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>

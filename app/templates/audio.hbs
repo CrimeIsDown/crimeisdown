@@ -1,1 +1,18 @@
 {{outlet}}
+
+<div class="modal-header">
+  <button aria-label="Close" class="close" ng-click="closeModal()" type="button">
+    <span aria-hidden="true">&#215;</span>
+  </button>
+  <h4 class="modal-title" id="onlineStreamsLabel">Online Streams</h4>
+</div>
+<div class="modal-body">
+  <ul>
+    <li ng-repeat="feed in feeds">
+      <a href="{{ feed.feedUrl }}" target="_blank">{{ feed.name }}</a> {{ feed.frequency }} - {{ feed.description }}
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="closeModal()" type="button">Close</button>
+</div>
