@@ -15,130 +15,130 @@
   <div class="results">
     <table class="table table-bordered table-condensed">
       <tbody>
-      <tr class="info">
-        <th colspan="2">Location Info</th>
-      </tr>
-      <tr>
-        <td>Formatted Address</td>
-        <td>{{ location.meta.formattedAddress }}</td>
-      </tr>
-      <tr>
-        <td>Latitude: {{ location.meta.latitude }}</td>
-        <td>Longitude: {{ location.meta.longitude }}</td>
-      </tr>
-      <tr>
-        <td>Neighborhood</td>
-        <td>{{ location.meta.neighborhood }}</td>
-      </tr>
-      <tr>
-        <td>Community Area</td>
-        <td>{{ location.meta.communityArea }}</td>
-      </tr>
-      <tr>
-        <td>Ward / Alderman</td>
-        <td><span ng-if="location.meta.ward">{{ location.meta.ward }} - <a href="{{ location.meta.alderman.website }}" target="_blank">Alderman {{ location.meta.alderman.name }}</a></span></td>
-      </tr>
-      <tr class="info">
-        <th colspan="2">Chicago Police Department</th>
-      </tr>
-      <tr>
-        <td>Beat</td>
-        <td>{{ location.police.beat }}</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <strong>Radio Zone {{ location.police.zone.num }}</strong>
-          <span ng-if="location.police.zone.url">
-            ({{ location.police.zone.freq }}
-            /
-            <a href="{{ location.police.zone.url }}" target="_blank" ng-if="location.police.zone.url">Audio from Broadcastify</a>)
-          </span><br>
-          <div ng-if="location.police.zone.mp3">
-            <audio controls src="{{ location.police.zone.mp3 }}">Your user agent does not support the HTML5 Audio element.</audio>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>{{ location.police.district }} District</td>
-        <td>Area {{ location.police.area }}</td>
-      </tr>
-      <tr class="info">
-        <th colspan="2">Chicago Fire Department</th>
-      </tr>
-      <tr>
-        <td>Nearest Engine {{ location.fire.nearestEngine }}</td>
-        <td>Nearest Ambo. {{ location.fire.nearestAmbo }}</td>
-      </tr>
-      <tr>
-        <td>Battalion {{ location.fire.battalion }} / Fire Dist. {{ location.fire.fireDistrict }}</td>
-        <td>EMS District {{ location.fire.emsDistrict }}</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          Radio Channel: {{ location.fire.channel }}
-          <span ng-if="location.fire.channel">
-            (Listen to <a href="http://www.broadcastify.com/listen/feed/909/web" target="_blank">Fire</a>
-            or
-            <a href="http://www.broadcastify.com/listen/feed/13605/web" target="_blank">EMS</a>)
-          </span>
-        </td>
-      </tr>
-      <tr class="info">
-        <th colspan="2">Closest Medical Services</th>
-      </tr>
-      <tr>
-        <td colspan="2">
-          Adult Trauma Center:
-          <span ng-if="location.ems.nearestTraumaAdult.name">
-            <em>
-              {{ location.ems.nearestTraumaAdult.name }}
-              -
-              {{ location.ems.nearestTraumaAdult.distanceMi }}mi
-            </em>
-            ({{ location.ems.nearestTraumaAdult.addr }},
-            {{ location.ems.nearestTraumaAdult.city }},
-            {{ location.ems.nearestTraumaAdult.state }},
-            {{ location.ems.nearestTraumaAdult.zip }})
-            - Patient Reports on {{ location.ems.nearestTraumaAdult.medChannel }}
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          Pediatric Trauma Center:
-          <span ng-if="location.ems.nearestTraumaPed.name">
-            <em>
-              {{ location.ems.nearestTraumaPed.name }}
-              -
-              {{ location.ems.nearestTraumaPed.distanceMi }}mi
-            </em>
-            ({{ location.ems.nearestTraumaPed.addr }},
-            {{ location.ems.nearestTraumaPed.city }},
-            {{ location.ems.nearestTraumaPed.state }},
-            {{ location.ems.nearestTraumaPed.zip }})
-            - Patient Reports on {{ location.ems.nearestTraumaPed.medChannel }}
-          </span>
-        </td>
-      </tr>
-      <!-- <tr class="info">
-              <th colspan="2">Stats</th>
-            </tr>
-            <tr>
-              <td>Population</td>
-              <td>{{ location.stats.population }}</td>
-            </tr>
-            <tr>
-              <td>Homicides</td>
-              <td>{{ location.stats.homicides }}</td>
-            </tr>
-            <tr>
-              <td>Shootings</td>
-              <td>{{ location.stats.shootings }}</td>
-            </tr>
-            <tr>
-              <td>Census Tract Median Income</td>
-              <td>{{ location.stats.income }}</td>
-            </tr> -->
+        <tr class="info">
+          <th colspan="2">Location Info</th>
+        </tr>
+        <tr>
+          <td>Formatted Address</td>
+          <td>{{ location.meta.formattedAddress }}</td>
+        </tr>
+        <tr>
+          <td>Latitude: {{ location.meta.latitude }}</td>
+          <td>Longitude: {{ location.meta.longitude }}</td>
+        </tr>
+        <tr>
+          <td>Neighborhood</td>
+          <td>{{ location.meta.neighborhood }}</td>
+        </tr>
+        <tr>
+          <td>Community Area</td>
+          <td>{{ location.meta.communityArea }}</td>
+        </tr>
+        <tr>
+          <td>Ward / Alderman</td>
+          <td><span ng-if="location.meta.ward">{{ location.meta.ward }} - <a href="{{ location.meta.alderman.website }}" target="_blank">Alderman {{ location.meta.alderman.name }}</a></span></td>
+        </tr>
+        <tr class="info">
+          <th colspan="2">Chicago Police Department</th>
+        </tr>
+        <tr>
+          <td>Beat</td>
+          <td>{{ location.police.beat }}</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <strong>Radio Zone {{ location.police.zone.num }}</strong>
+            <span ng-if="location.police.zone.url">
+              ({{ location.police.zone.freq }}
+              /
+              <a href="{{ location.police.zone.url }}" target="_blank" ng-if="location.police.zone.url">Audio from Broadcastify</a>)
+            </span><br>
+            <div ng-if="location.police.zone.mp3">
+              <audio controls src="{{ location.police.zone.mp3 }}">Your user agent does not support the HTML5 Audio element.</audio>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>{{ location.police.district }} District</td>
+          <td>Area {{ location.police.area }}</td>
+        </tr>
+        <tr class="info">
+          <th colspan="2">Chicago Fire Department</th>
+        </tr>
+        <tr>
+          <td>Nearest Engine {{ location.fire.nearestEngine }}</td>
+          <td>Nearest Ambo. {{ location.fire.nearestAmbo }}</td>
+        </tr>
+        <tr>
+          <td>Battalion {{ location.fire.battalion }} / Fire Dist. {{ location.fire.fireDistrict }}</td>
+          <td>EMS District {{ location.fire.emsDistrict }}</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            Radio Channel: {{ location.fire.channel }}
+            <span ng-if="location.fire.channel">
+              (Listen to <a href="http://www.broadcastify.com/listen/feed/909/web" target="_blank">Fire</a>
+              or
+              <a href="http://www.broadcastify.com/listen/feed/13605/web" target="_blank">EMS</a>)
+            </span>
+          </td>
+        </tr>
+        <tr class="info">
+          <th colspan="2">Closest Medical Services</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            Adult Trauma Center:
+            <span ng-if="location.ems.nearestTraumaAdult.name">
+              <em>
+                {{ location.ems.nearestTraumaAdult.name }}
+                -
+                {{ location.ems.nearestTraumaAdult.distanceMi }}mi
+              </em>
+              ({{ location.ems.nearestTraumaAdult.addr }},
+              {{ location.ems.nearestTraumaAdult.city }},
+              {{ location.ems.nearestTraumaAdult.state }},
+              {{ location.ems.nearestTraumaAdult.zip }})
+              - Patient Reports on {{ location.ems.nearestTraumaAdult.medChannel }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            Pediatric Trauma Center:
+            <span ng-if="location.ems.nearestTraumaPed.name">
+              <em>
+                {{ location.ems.nearestTraumaPed.name }}
+                -
+                {{ location.ems.nearestTraumaPed.distanceMi }}mi
+              </em>
+              ({{ location.ems.nearestTraumaPed.addr }},
+              {{ location.ems.nearestTraumaPed.city }},
+              {{ location.ems.nearestTraumaPed.state }},
+              {{ location.ems.nearestTraumaPed.zip }})
+              - Patient Reports on {{ location.ems.nearestTraumaPed.medChannel }}
+            </span>
+          </td>
+        </tr>
+        <!--<tr class="info">-->
+          <!--<th colspan="2">Stats</th>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>Population</td>-->
+          <!--<td>{{ location.stats.population }}</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>Homicides</td>-->
+          <!--<td>{{ location.stats.homicides }}</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>Shootings</td>-->
+          <!--<td>{{ location.stats.shootings }}</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>Census Tract Median Income</td>-->
+          <!--<td>{{ location.stats.income }}</td>-->
+        <!--</tr>-->
       </tbody>
     </table>
   </div>
