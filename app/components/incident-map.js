@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   policeDistricts: defaultGeoJSON,
   didInsertElement() {
     Ember.$.getJSON("/map_data/police_districts.json").done((data) => {
-      this.set('policeDistricts', data)
+      this.set('policeDistricts', data);
     });
   }
 });
