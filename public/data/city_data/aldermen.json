@@ -1,0 +1,252 @@
+[
+  {
+    "ward": 1,
+    "name": "Joe Moreno",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/01.html"
+  },
+  {
+    "ward": 2,
+    "name": "Brian Hopkins",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/02.html"
+  },
+  {
+    "ward": 3,
+    "name": "Pat Dowell",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/03.html"
+  },
+  {
+    "ward": 4,
+    "name": "William Burns",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/04.html"
+  },
+  {
+    "ward": 5,
+    "name": "Leslie Hairston",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/05.html"
+  },
+  {
+    "ward": 6,
+    "name": "Roderick Sawyer",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/06.html"
+  },
+  {
+    "ward": 7,
+    "name": "Gregory Mitchell",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/07.html"
+  },
+  {
+    "ward": 8,
+    "name": "Michelle Harris",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/08.html"
+  },
+  {
+    "ward": 9,
+    "name": "Anthony Beale",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/09.html"
+  },
+  {
+    "ward": 10,
+    "name": "Susan Sadlowski Garza",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/10.html"
+  },
+  {
+    "ward": 11,
+    "name": "Patrick Thompson",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/11.html"
+  },
+  {
+    "ward": 12,
+    "name": "George A. Cardenas",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/12.html"
+  },
+  {
+    "ward": 13,
+    "name": "Marty Quinn",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/13.html"
+  },
+  {
+    "ward": 14,
+    "name": "Ed Burke",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/14.html"
+  },
+  {
+    "ward": 15,
+    "name": "Raymond Lopez",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/15.html"
+  },
+  {
+    "ward": 16,
+    "name": "Toni Foulkes",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/16.html"
+  },
+  {
+    "ward": 17,
+    "name": "David Moore",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/17.html"
+  },
+  {
+    "ward": 18,
+    "name": "Derrick Curtis",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/18.html"
+  },
+  {
+    "ward": 19,
+    "name": "Matthew O&rsquo;Shea",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/19.html"
+  },
+  {
+    "ward": 20,
+    "name": "Willie B. Cochran",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/20.html"
+  },
+  {
+    "ward": 21,
+    "name": "Howard Brookins Jr.",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/21.html"
+  },
+  {
+    "ward": 22,
+    "name": "Ricardo Munoz",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/22.html"
+  },
+  {
+    "ward": 23,
+    "name": "Michael Zalewski",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/23.html"
+  },
+  {
+    "ward": 24,
+    "name": "Michael Scott Jr.",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/24.html"
+  },
+  {
+    "ward": 25,
+    "name": "Daniel Solis",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/25.html"
+  },
+  {
+    "ward": 26,
+    "name": "Roberto Maldonado",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/26.html"
+  },
+  {
+    "ward": 27,
+    "name": "Walter Burnett, Jr.",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/27.html"
+  },
+  {
+    "ward": 28,
+    "name": "Jason Ervin",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/28.html"
+  },
+  {
+    "ward": 29,
+    "name": "Chris Taliaferro",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/29.html"
+  },
+  {
+    "ward": 30,
+    "name": "Ariel E. Reboyras",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/30.html"
+  },
+  {
+    "ward": 31,
+    "name": "Milly Santiago",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/31.html"
+  },
+  {
+    "ward": 32,
+    "name": "Scott Waguespack",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/32.html"
+  },
+  {
+    "ward": 33,
+    "name": "Deborah Mell",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/33.html"
+  },
+  {
+    "ward": 34,
+    "name": "Carrie Austin",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/34.html"
+  },
+  {
+    "ward": 35,
+    "name": "Carlos Ramirez-Rosa",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/35.html"
+  },
+  {
+    "ward": 36,
+    "name": "Gilbert Villegas",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/36.html"
+  },
+  {
+    "ward": 37,
+    "name": "Emma Mitts",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/37.html"
+  },
+  {
+    "ward": 38,
+    "name": "Nicholas Sposato",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/38.html"
+  },
+  {
+    "ward": 39,
+    "name": "Margaret Laurino",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/39.html"
+  },
+  {
+    "ward": 40,
+    "name": "Patrick J. O'Connor",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/40.html"
+  },
+  {
+    "ward": 41,
+    "name": "Anthony Napolitano",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/41.html"
+  },
+  {
+    "ward": 42,
+    "name": "Brendan Reilly",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/42.html"
+  },
+  {
+    "ward": 43,
+    "name": "Michele Smith",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/43.html"
+  },
+  {
+    "ward": 44,
+    "name": "Thomas M. Tunney",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/44.html"
+  },
+  {
+    "ward": 45,
+    "name": "John Arena",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/45.html"
+  },
+  {
+    "ward": 46,
+    "name": "James Cappleman",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/46.html"
+  },
+  {
+    "ward": 47,
+    "name": "Ameya Pawar",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/47.html"
+  },
+  {
+    "ward": 48,
+    "name": "Harry Osterman",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/48.html"
+  },
+  {
+    "ward": 49,
+    "name": "Joseph A. Moore",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/49.html"
+  },
+  {
+    "ward": 50,
+    "name": "Debra Silverstein",
+    "website": "http://www.cityofchicago.org/city/en/about/wards/50.html"
+  }
+]
