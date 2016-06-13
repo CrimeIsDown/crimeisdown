@@ -1,6 +1,3 @@
-{{#leaflet-map lat=lat lng=lng zoom=zoom}}
-  {{tile-layer url="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}}
-  {{geojson-layer geoJSON=policeDistricts fill=false}}
-{{/leaflet-map}}
+<div id="leaflet-map"></div>
 
 {{yield}}
