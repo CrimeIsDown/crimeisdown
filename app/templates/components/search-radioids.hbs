@@ -2,9 +2,9 @@
   <form>
     <label for="radioid">Radio ID to search</label>
     <div class="input-group input-group-sm">
-      <input class="form-control" name="radioid" placeholder="1234, 599, 2-1-8, 100X" type="text" />
+      {{input class="form-control" name="radioid" placeholder="1234, 599, 2-1-8, 100X" type="text" value=radioId }}
       <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">Search</button>
+        <button class="btn btn-default" {{action "lookupRadioId"}}>Search</button>
       </span>
     </div>
   </form>
@@ -13,23 +13,23 @@
       <tbody>
       <tr>
         <th scope="row">Agency</th>
-        <td id="agency">{{ radio.agency }}</td>
+        <td id="agency">{{radio.agency}}</td>
       </tr>
       <tr>
         <th scope="row">Level 1 (Bureau)</th>
-        <td id="level1">{{ radio.level1 }}</td>
+        <td id="level1">{{radio.level1}}</td>
       </tr>
       <tr>
         <th scope="row">Level 2 (Division)</th>
-        <td id="level2">{{ radio.level2 }}</td>
+        <td id="level2">{{radio.level2}}</td>
       </tr>
       <tr>
         <th scope="row">Level 3 (Section)</th>
-        <td id="level3">{{ radio.level3 }}</td>
+        <td id="level3">{{radio.level3}}</td>
       </tr>
       <tr>
         <th scope="row">Level 4 (Unit/Assignment)</th>
-        <td id="level4">{{ radio.level4 }}</td>
+        <td id="level4">{{radio.level4}}</td>
       </tr>
       </tbody>
     </table>

@@ -2,9 +2,9 @@
   <form>
     <label for="ucr">UCR (Uniform Crime Reporting) Code to lookup</label>
     <div class="input-group input-group-sm">
-      <input class="form-control" name="ucr" placeholder="041A" type="text" />
+      {{input class="form-control" name="ucr" placeholder="041A" type="text" value=ucrCode}}
         <span class="input-group-btn">
-          <button class="btn btn-default" type="submit">Define</button>
+          <button class="btn btn-default" {{action "lookupUCR" ucrCode}}>Define</button>
         </span>
     </div>
   </form>
@@ -13,15 +13,15 @@
       <tbody>
       <tr>
         <th scope="row">Primary Description</th>
-        <td id="primary_desc">{{ ucr.primaryDesc }}</td>
+        <td id="primary_desc">{{ucr.primaryDesc}}</td>
       </tr>
       <tr>
         <th scope="row">Secondary Description</th>
-        <td id="secondary_desc">{{ ucr.secondaryDesc }}</td>
+        <td id="secondary_desc">{{ucr.secondaryDesc}}</td>
       </tr>
       <tr>
         <th scope="row">Index Code?</th>
-        <td id="index_code">{{ ucr.indexCode }}</td>
+        <td id="index_code">{{ucr.indexCode}}</td>
       </tr>
       </tbody>
     </table>
