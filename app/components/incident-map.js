@@ -15,26 +15,13 @@ export default Ember.Component.extend({
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
     }).addTo(map);
 
-    var info = L.control();
-
-    info.onAdd = function (map) {
-      this._div = L.DomUtil.create('div', 'info');
-      this.update();
-      return this._div;
-    };
-
-    info.update = function (props) {
-      let html = '<h4>Layer Info</h4><ul>';
-      for (let key in props) {
-        if (props.hasOwnProperty(key) && key === key.toUpperCase()) {
-          html += '<li>' + key + ': ' + props[key] + '</li>';
+    let geocoder = L.Control.geocoder({
+      geocoder: L.Control.Geocoder.google('REDACTED_PUBLIC_CREDENTIAL', {
+        geocodingQueryParams: {
+          bounds: '41.60218817897012,-87.37011785993366|42.05134582102988,-87.9728821400663'
         }
-      }
-      html += '</ul>';
-      this._div.innerHTML = html;
-    };
-
-    info.addTo(map);
+      })
+    }).addTo(map);
 
     let layers = {
       policeDistricts: {
@@ -110,16 +97,19 @@ export default Ember.Component.extend({
               mouseover: (e) => {
                 let layer = e.target;
 
-                layer.setStyle({
-                  color: '#ff0',
-                  fillOpacity: 0.4
-                });
+                info.update(layer.feature.properties);
+                if (map.getZoom() < 14) {
+                  layer.setStyle({
+                    color: '#ff0',
+                    fillOpacity: 0.15
+                  });
+                } else {
+                  e.target.setStyle(layerObj.style);
+                }
 
                 if (!L.Browser.ie && !L.Browser.opera) {
                   layer.bringToFront();
                 }
-
-                info.update(layer.feature.properties);
               },
               mouseout: (e) => {
                 e.target.setStyle(layerObj.style);
@@ -147,5 +137,25 @@ export default Ember.Component.extend({
     }, overlay, {
       collapse: false
     }).addTo(map);
+
+    let info = L.control();
+
+    info.onAdd = function (map) {
+      this._div = L.DomUtil.create('div', 'info');
+      this.update();
+      return this._div;
+    };
+
+    info.update = function (props) {
+      let html = '<h4>Layer Info</h4>';
+      for (let key in props) {
+        if (props.hasOwnProperty(key) && key === key.toUpperCase()) {
+          html += '<p>' + key + ': ' + props[key] + '</p>';
+        }
+      }
+      this._div.innerHTML = html;
+    };
+
+    info.addTo(map);
   }
 });

@@ -6,6 +6,7 @@
     "ember-cli-test-loader": "0.2.2",
     "ember-qunit-notifications": "0.1.0",
     "leaflet": "~0.7.7",
+    "leaflet-control-geocoder": "~1.5.1",
     "bootswatch": "~3.3.6",
     "bootstrap-sass": "~3.3.6"
   }

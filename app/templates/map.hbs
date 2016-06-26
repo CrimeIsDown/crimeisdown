@@ -3,51 +3,20 @@
 <div id="map" class="row">
   <div class="col-md-12">
     <h3>Map of Chicago</h3>
-    <p>Interact with this map or use the search box to find information about a specific address. Police districts are outlined in blue. Click/tap on the marker to get street view of the location (experimental).</p>
+    <!--<p>Interact with this map or use the search box to find information about a specific address. Police districts are outlined in blue.</p>-->
   </div>
-  <div class="col-sm-12 col-md-8">
-    <!--<div class="col-md-12">-->
-      <!--<h4>Layers</h4>-->
-    <!--</div>-->
-    <!--<div class="col-md-4">-->
-      <!--<label>-->
-        <!--<input type="checkbox" ng-model="layers.communityAreas" ng-change="toggleLayer('communityAreas')">-->
-        <!--Community Areas-->
-      <!--</label>-->
-      <!--<label>-->
-        <!--<input type="checkbox" ng-model="layers.neighborhoods" ng-change="toggleLayer('neighborhoods')">-->
-        <!--Neighborhoods-->
-      <!--</label>-->
-      <!--<label>-->
-        <!--<input type="checkbox" ng-model="layers.wards" ng-change="toggleLayer('wards')">-->
-        <!--Wards-->
-      <!--</label>-->
-    <!--</div>-->
-    <!--<div class="col-md-4">-->
-      <!--<label>-->
-        <!--<input type="checkbox" ng-model="layers.policeDistricts" ng-change="toggleLayer('policeDistricts')">-->
-        <!--Police Districts-->
-      <!--</label>-->
-      <!--<label>-->
-        <!--<input type="checkbox" ng-model="layers.policeBeats" ng-change="toggleLayer('policeBeats')">-->
-        <!--Police Beats-->
-      <!--</label>-->
-    <!--</div>-->
-    <!--<div class="col-md-4">-->
-      <!--<label>-->
-        <!--<input type="checkbox" ng-model="layers.transit" ng-change="toggleLayer('transit')">-->
-        <!--Public Transit-->
-      <!--</label>-->
-      <!--<label>-->
-        <!--<input type="checkbox" ng-model="layers.traffic" ng-change="toggleLayer('traffic')">-->
-        <!--Real-time Traffic-->
-      <!--</label>-->
-    <!--</div>-->
+  <div class="col-sm-12 col-md-12">
     <div id="map-canvas">
       {{incident-map}}
     </div>
   </div>
-  <div class="col-sm-12 col-md-4">
-    {{address-lookup}}
+  <!--<div class="col-sm-12 col-md-4">-->
+    <!--{{!address-lookup}}-->
+  <!--</div>-->
+  <div class="col-sm-12 col-md-6">
+    {{search-radioids}}
+  </div>
+  <div class="col-sm-12 col-md-6">
+    {{search-ucrcodes}}
   </div>
 </div>

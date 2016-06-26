@@ -20,18 +20,20 @@ module.exports = function(defaults) {
   // modules that you would like to import into your application
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
+
+  app.import('bower_components/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
+  app.import('bower_components/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
+  app.import('bower_components/leaflet/dist/images/marker-icon.png', {destDir: 'assets/images'});
+  app.import('bower_components/leaflet/dist/images/marker-icon-2x.png', {destDir: 'assets/images'});
+  app.import('bower_components/leaflet/dist/images/marker-shadow.png', {destDir: 'assets/images'});
   app.import({
     development: 'bower_components/leaflet/dist/leaflet-src.js',
     production: 'bower_components/leaflet/dist/leaflet.js'
   });
-  app.import('bower_components/leaflet/dist/leaflet.css');
 
-  // Copy only the relevant files. For example the WOFF-files and stylesheets for a webfont
-  var extraAssets = new Funnel('bower_components/leaflet', {
-    srcDir: '/dist/images',
-    include: ['*.png'],
-    destDir: '/assets/images'
-  });
+  app.import('bower_components/leaflet-control-geocoder/dist/images/geocoder.png', {destDir: 'assets/images'});
+  app.import('bower_components/leaflet-control-geocoder/dist/images/throbber.gif', {destDir: 'assets/images'});
+  app.import('bower_components/leaflet-control-geocoder/dist/Control.Geocoder.js');
 
-  return app.toTree(extraAssets);
+  return app.toTree();
 };
