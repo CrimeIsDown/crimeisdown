@@ -24,8 +24,8 @@
 
     {{content-for "head"}}
 
-    <link rel="stylesheet" href="assets/vendor.css">
-    <link rel="stylesheet" href="assets/crimeisdown.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/crimeisdown.css">
 
     {{content-for "head-footer"}}
   </head>
@@ -48,9 +48,9 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL"></script>
 
-    <script src="assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-plugins/1.7.0/layer/tile/Google.min.js"></script>
-    <script src="assets/crimeisdown.js"></script>
+    <script src="{{rootURL}}assets/crimeisdown.js"></script>
 
     {{content-for "body-footer"}}
   </body>
