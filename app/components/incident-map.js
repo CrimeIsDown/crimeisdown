@@ -33,7 +33,7 @@ export default Ember.Component.extend({
       policeDistricts: {
         label: "Police Districts",
         layer: null,
-        url: '/data/map_data/police_districts.json',
+        url: '/data/map_data/police_districts.geojson',
         showByDefault: true,
         style: {
           fill: true,
@@ -45,7 +45,7 @@ export default Ember.Component.extend({
       policeBeats: {
         label: "Police Beats",
         layer: null,
-        url: '/data/map_data/police_beats.json',
+        url: '/data/map_data/police_beats.geojson',
         showByDefault: false,
         style: {
           fill: true,
@@ -57,7 +57,7 @@ export default Ember.Component.extend({
       neighborhoods: {
         label: "Neighborhoods",
         layer: null,
-        url: '/data/map_data/neighborhoods.json',
+        url: '/data/map_data/neighborhoods.geojson',
         showByDefault: false,
         style: {
           fill: true,
@@ -69,7 +69,7 @@ export default Ember.Component.extend({
       communityAreas: {
         label: "Community Areas",
         layer: null,
-        url: '/data/map_data/community_areas.json',
+        url: '/data/map_data/community_areas.geojson',
         showByDefault: false,
         style: {
           fill: true,
@@ -81,7 +81,7 @@ export default Ember.Component.extend({
       wards: {
         label: "Wards",
         layer: null,
-        url: '/data/map_data/wards.json',
+        url: '/data/map_data/wards.geojson',
         showByDefault: false,
         style: {
           fill: true,
@@ -134,6 +134,8 @@ export default Ember.Component.extend({
         overlay[layerObj.label] = layerObj.layer;
         Ember.$.getJSON(layerObj.url).done((data) => {
           layerObj.layer.addData(data).setStyle(layerObj.style);
+          console.log(layerName);
+          console.log(leafletPip.pointInLayer([-87.629798, 41.878114], layerObj.layer, true)[0].feature.properties);
         });
       }
     }
