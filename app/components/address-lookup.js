@@ -65,5 +65,32 @@ export default Ember.Component.extend({
       }
     },
     stats: {}
+  },
+  didInsertElement() {
+
+    /*
+     location.meta.formattedAddress = result.formatted_address;
+     location.meta.latitude = point.lat().toFixed(6);
+     location.meta.longitude = point.lng().toFixed(6);
+     location.meta.communityArea = poly.geojsonProperties.COMMUNITY; // contains location
+     location.meta.neighborhood = poly.geojsonProperties.PRI_NEIGH; // contains location
+     location.meta.ward = poly.geojsonProperties.ward; // contains location
+     location.meta.alderman = aldermen[parseInt(poly.geojsonProperties.ward)-1]; // load from data/city_data/aldermen.json
+
+     location.police.district = poly.geojsonProperties.DIST_LABEL.toLowerCase(); // contains location
+     // get zone - create object w/ stream data
+     // get area
+     location.police.beat = poly.geojsonProperties.BEAT_NUM; // contains location
+
+     // find the nearest engine
+     // find the nearest ambulance
+     // find the proper districts
+     // find the radio channel (main/englewood)
+
+     // find the nearest adult trauma center
+     // find the nearest ped trauma center
+
+     // send all the data
+     */
   }
 });
