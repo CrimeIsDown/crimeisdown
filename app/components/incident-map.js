@@ -21,13 +21,33 @@ export default Ember.Component.extend({
 
     let googleHybrid = new L.Google('HYBRID');
 
-    let geocoder = L.Control.geocoder({
-      geocoder: L.Control.Geocoder.google('REDACTED_PUBLIC_CREDENTIAL', {
-        geocodingQueryParams: {
-          bounds: '41.60218817897012,-87.37011785993366|42.05134582102988,-87.9728821400663'
+    let handleGeocodeResult = function (e) {
+      console.log(e.geocode);
+      map.fitBounds(e.geocode.bbox);
+      let properties = {};
+      if (e.geocode.properties[3].long_name == 'Chicago') {
+        for (let layerName in layers) {
+          if (layers.hasOwnProperty(layerName)) {
+            let result = leafletPip.pointInLayer(e.geocode.center, layers[layerName].layer, true)[0];
+            if (result) {
+              properties[layerName] = JSON.stringify(result.feature.properties)
+            }
+          }
         }
+        info.update(properties);
+      }
+    };
+
+    let geocoder = L.Control.geocoder({
+        geocoder: L.Control.Geocoder.google('REDACTED_PUBLIC_CREDENTIAL', {
+          geocodingQueryParams: {
+            bounds: '41.60218817897012,-87.37011785993366|42.05134582102988,-87.9728821400663'
+          }
+        }),
+        collapsed: false
       })
-    }).addTo(map);
+      .on('markgeocode', handleGeocodeResult)
+      .addTo(map);
 
     let layers = {
       policeDistricts: {
@@ -134,8 +154,6 @@ export default Ember.Component.extend({
         overlay[layerObj.label] = layerObj.layer;
         Ember.$.getJSON(layerObj.url).done((data) => {
           layerObj.layer.addData(data).setStyle(layerObj.style);
-          console.log(layerName);
-          console.log(leafletPip.pointInLayer([-87.629798, 41.878114], layerObj.layer, true)[0].feature.properties);
         });
       }
     }
@@ -159,7 +177,7 @@ export default Ember.Component.extend({
     info.update = function (props) {
       let html = '<h4>Layer Info</h4>';
       for (let key in props) {
-        if (props.hasOwnProperty(key) && key === key.toUpperCase()) {
+        if (props.hasOwnProperty(key)) {
           html += '<p>' + key + ': ' + props[key] + '</p>';
         }
       }
