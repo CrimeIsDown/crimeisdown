@@ -1,44 +1,60 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  lat: 41.8781,
-  lng: -87.6298,
-  zoom: 10,
+  map: null,
+  geocoder: null,
+  addressLookup: Ember.inject.service(),
+  baseLayers: {},
+  layers: {},
+  overlay: {},
+  location: {},
+
   didInsertElement() {
     L.Icon.Default.imagePath = '/assets/images';
-    let map = L.map('leaflet-map', {
-      center: [this.lat, this.lng],
-      zoom: this.zoom
-    });
+    this.initMap();
+  },
 
-    let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  initMap() {
+    this.set('map', L.map('leaflet-map', {
+      center: [41.8781, -87.6298],
+      zoom: 10
+    }));
+
+    this.initBaseLayers();
+    this.initGeocoder();
+    this.initInfoBox();
+    this.initLayers();
+
+    L.control.layers(this.get('baseLayers'), this.get('overlay'), {
+      collapse: false
+    }).addTo(this.get('map'));
+  },
+
+  initBaseLayers() {
+    this.get('baseLayers')["OpenStreetMap"] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-    }).addTo(map);
+    }).addTo(this.get('map'));
 
-    let mapboxStreets = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
+    this.get('baseLayers')["MapBox Streets"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
       attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
-    let googleHybrid = new L.Google('HYBRID');
+    this.get('baseLayers')["Google Hybrid"] = new L.Google('HYBRID');
+  },
 
-    let handleGeocodeResult = function (e) {
+  initGeocoder() {
+    let handleGeocodeResult = (e) => {
       console.log(e.geocode);
-      map.fitBounds(e.geocode.bbox);
-      let properties = {};
+      this.get('map').fitBounds(e.geocode.bbox);
       if (e.geocode.properties[3].long_name == 'Chicago') {
-        for (let layerName in layers) {
-          if (layers.hasOwnProperty(layerName)) {
-            let result = leafletPip.pointInLayer(e.geocode.center, layers[layerName].layer, true)[0];
-            if (result) {
-              properties[layerName] = JSON.stringify(result.feature.properties)
-            }
-          }
-        }
-        info.update(properties);
+        this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), e));
+        console.log(location);
       }
     };
 
-    let geocoder = L.Control.geocoder({
+    handleGeocodeResult = handleGeocodeResult.bind(this);
+
+    this.set('geocoder', L.Control.geocoder({
         geocoder: L.Control.Geocoder.google('REDACTED_PUBLIC_CREDENTIAL', {
           geocodingQueryParams: {
             bounds: '41.60218817897012,-87.37011785993366|42.05134582102988,-87.9728821400663'
@@ -47,9 +63,12 @@ export default Ember.Component.extend({
         collapsed: false
       })
       .on('markgeocode', handleGeocodeResult)
-      .addTo(map);
+      .addTo(this.get('map'))
+    );
+  },
 
-    let layers = {
+  initLayers() {
+    this.set('layers', {
       policeDistricts: {
         label: "Police Districts",
         layer: null,
@@ -110,33 +129,41 @@ export default Ember.Component.extend({
           weight: 2
         }
       }
-    };
+    });
 
-    let overlay = {};
+    this.loadLayerData(this.get('layers'));
+  },
+
+  loadLayerData(layers) {
+    let map = this.get('map');
+    let info = this.get('infobox');
 
     for (let layerName in layers) {
       if (layers.hasOwnProperty(layerName)) {
         let layerObj = layers[layerName];
+
+        let layerMouseover = (e) => {
+          let layer = e.target;
+
+          info.update(layer.feature.properties);
+          if (map.getZoom() < 14) {
+            layer.setStyle({
+              color: '#ff0',
+              fillOpacity: 0.15
+            });
+          } else {
+            e.target.setStyle(layerObj.style);
+          }
+
+          if (!L.Browser.ie && !L.Browser.opera) {
+            layer.bringToFront();
+          }
+        };
+
         let geoJsonLayer = L.geoJson(null, {
           onEachFeature: (feature, layer) => {
             layer.on({
-              mouseover: (e) => {
-                let layer = e.target;
-
-                info.update(layer.feature.properties);
-                if (map.getZoom() < 14) {
-                  layer.setStyle({
-                    color: '#ff0',
-                    fillOpacity: 0.15
-                  });
-                } else {
-                  e.target.setStyle(layerObj.style);
-                }
-
-                if (!L.Browser.ie && !L.Browser.opera) {
-                  layer.bringToFront();
-                }
-              },
+              mouseover: layerMouseover,
               mouseout: (e) => {
                 e.target.setStyle(layerObj.style);
                 info.update();
@@ -151,21 +178,15 @@ export default Ember.Component.extend({
           geoJsonLayer.addTo(map);
         }
         layerObj.layer = geoJsonLayer;
-        overlay[layerObj.label] = layerObj.layer;
+        this.get('overlay')[layerObj.label] = layerObj.layer;
         Ember.$.getJSON(layerObj.url).done((data) => {
           layerObj.layer.addData(data).setStyle(layerObj.style);
         });
       }
     }
+  },
 
-    L.control.layers({
-      "OpenStreetMap": osm,
-      "MapBox Streets": mapboxStreets,
-      "Google Hybrid": googleHybrid
-    }, overlay, {
-      collapse: false
-    }).addTo(map);
-
+  initInfoBox() {
     let info = L.control();
 
     info.onAdd = function (map) {
@@ -184,6 +205,8 @@ export default Ember.Component.extend({
       this._div.innerHTML = html;
     };
 
-    info.addTo(map);
+    info.addTo(this.get('map'));
+
+    this.set('infobox', info);
   }
 });
