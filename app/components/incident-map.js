@@ -24,6 +24,7 @@ export default Ember.Component.extend({
     this.initGeocoder();
     this.initInfoBox();
     this.initLayers();
+    this.get('addressLookup').loadData();
 
     L.control.layers(this.get('baseLayers'), this.get('overlay'), {
       collapse: false
@@ -44,11 +45,11 @@ export default Ember.Component.extend({
 
   initGeocoder() {
     let handleGeocodeResult = (e) => {
-      console.log(e.geocode);
       this.get('map').fitBounds(e.geocode.bbox);
       if (e.geocode.properties[3].long_name == 'Chicago') {
         this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), e));
-        console.log(location);
+      } else {
+        this.set('location', {meta: {formattedAddress: 'INVALID ADDRESS'}});
       }
     };
 
