@@ -105,11 +105,11 @@ export default Ember.Service.extend({
       let distance = geocode.center.distanceTo(L.latLng(station.latitude, station.longitude));
       if (station.engine.length && nearestEngine.distance > distance) {
         nearestEngine = station;
-        nearestEngine.distance = distance;
+        Ember.set(nearestEngine, 'distance', distance);
       }
       if (station.ambo.length && nearestAmbo.distance > distance) {
         nearestAmbo = station;
-        nearestAmbo.distance = distance;
+        Ember.set(nearestAmbo, 'distance', distance);
       }
     });
 
@@ -131,13 +131,13 @@ export default Ember.Service.extend({
       let distance = geocode.center.distanceTo(L.latLng(hospital.latitude, hospital.longitude));
       if (hospital.level1Adult && nearestTraumaAdult.distance > distance) {
         nearestTraumaAdult = hospital;
-        nearestTraumaAdult.distance = distance;
-        nearestTraumaAdult.distanceMi = Math.round(distance*0.000621371192*100)/100;
+        Ember.set(nearestTraumaAdult, 'distance', distance);
+        Ember.set(nearestTraumaAdult, 'distanceMi', Math.round(distance*0.000621371192*100)/100);
       }
       if (hospital.level1Ped && nearestTraumaPed.distance > distance) {
         nearestTraumaPed = hospital;
-        nearestTraumaPed.distance = distance;
-        nearestTraumaPed.distanceMi = Math.round(distance*0.000621371192*100)/100;
+        Ember.set(nearestTraumaPed, 'distance', distance);
+        Ember.set(nearestTraumaPed, 'distanceMi', Math.round(distance*0.000621371192*100)/100);
       }
     });
 
