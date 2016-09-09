@@ -21,6 +21,11 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  app.import({
+    development: 'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
+    production: 'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
+  });
+
   app.import('bower_components/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
   app.import('bower_components/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
   app.import('bower_components/leaflet/dist/images/marker-icon.png', {destDir: 'assets/images'});
