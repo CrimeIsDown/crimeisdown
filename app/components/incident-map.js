@@ -53,7 +53,6 @@ export default Ember.Component.extend({
 
   initGeocoder() {
     let handleGeocodeResult = (e) => {
-      console.log(e);
       this.get('map').fitBounds(e.geocode.bbox);
       if (e.geocode.name.indexOf('Chicago, IL')!==-1) {
         this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), e));
@@ -75,6 +74,7 @@ export default Ember.Component.extend({
       .on('markgeocode', handleGeocodeResult)
       .addTo(this.get('map'))
     );
+    Ember.$('.leaflet-control-geocoder-form input').attr('autofocus', true);
   },
 
   initLayers() {

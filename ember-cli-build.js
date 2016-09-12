@@ -26,6 +26,15 @@ module.exports = function(defaults) {
     production: 'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
   });
 
+  app.import({
+    development: 'bower_components/bootstrap-table/dist/bootstrap-table.css',
+    production: 'bower_components/bootstrap-table/dist/bootstrap-table.min.css'
+  });
+  app.import({
+    development: 'bower_components/bootstrap-table/dist/bootstrap-table.js',
+    production: 'bower_components/bootstrap-table/dist/bootstrap-table.min.js'
+  });
+
   app.import('bower_components/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
   app.import('bower_components/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
   app.import('bower_components/leaflet/dist/images/marker-icon.png', {destDir: 'assets/images'});
