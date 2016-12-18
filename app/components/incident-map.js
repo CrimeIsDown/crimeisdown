@@ -52,29 +52,42 @@ export default Ember.Component.extend({
   },
 
   initGeocoder() {
-    let handleGeocodeResult = (e) => {
-      this.get('map').fitBounds(e.geocode.bbox);
-      if (e.geocode.name.indexOf('Chicago, IL')!==-1) {
-        this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), e));
-      } else {
-        this.set('location', {meta: {formattedAddress: 'ADDRESS OUT OF BOUNDS'}});
+    let handleGeocodeResult = (place) => {
+      console.log(place);
+      if (!place.geometry) {
+        alert("Location not found");
+        return;
       }
+      if (place.geometry.viewport) {
+        let southWest = L.latLng(place.geometry.viewport.getNorthEast().lat(), place.geometry.viewport.getNorthEast().lng()),
+            northEast = L.latLng(place.geometry.viewport.getSouthWest().lat(), place.geometry.viewport.getSouthWest().lng()),
+            viewport = L.latLngBounds(southWest, northEast);
+        this.get('map').fitBounds(viewport, {
+          maxZoom: 18
+        });
+      }
+      if (this.get('locationMarker')) {
+        this.get('map').removeLayer(this.get('locationMarker'));
+      }
+      this.set('locationMarker', L.marker(L.latLng(place.geometry.location.lat(), place.geometry.location.lng())).addTo(this.get('map')));
+      this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), place));
     };
 
     handleGeocodeResult = handleGeocodeResult.bind(this);
 
-    this.set('geocoder', L.Control.geocoder({
-        geocoder: L.Control.Geocoder.google('REDACTED_PUBLIC_CREDENTIAL', {
-          geocodingQueryParams: {
-            bounds: '41.60218817897012,-87.37011785993366|42.05134582102988,-87.9728821400663'
+    this.set('geocoder', new L.Control.GPlaceAutocomplete({
+        callback: handleGeocodeResult,
+        autocomplete_options: {
+          bounds: {
+            east: '-87.37011785993366',
+            north: '42.05134582102988',
+            south: '41.60218817897012',
+            west: '-87.9728821400663'
           }
-        }),
-        collapsed: false
+        }
       })
-      .on('markgeocode', handleGeocodeResult)
       .addTo(this.get('map'))
     );
-    Ember.$('.leaflet-control-geocoder-form input').attr('autofocus', true);
   },
 
   initLayers() {

@@ -5,7 +5,6 @@ export default Ember.Component.extend({
     this.modal.find(' h4.modal-title').text(title);
     this.modal.find('#directiveFrame a').attr('href', path);
     Ember.$.get('https://directives.crimeisdown.com/' + path, (data) => {
-      data = data.replace('http://directives.chicagopolice.org/', 'https://crossorigin.me/http://directives.chicagopolice.org/');
       let doc = document.getElementById('directiveFrame').contentWindow.document;
       doc.open()
       doc.write(data);

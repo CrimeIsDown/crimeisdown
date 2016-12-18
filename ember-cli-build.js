@@ -45,9 +45,8 @@ module.exports = function(defaults) {
     production: 'bower_components/leaflet/dist/leaflet.js'
   });
 
-  app.import('bower_components/leaflet-control-geocoder/dist/images/geocoder.png', {destDir: 'assets/images'});
-  app.import('bower_components/leaflet-control-geocoder/dist/images/throbber.gif', {destDir: 'assets/images'});
-  app.import('bower_components/leaflet-control-geocoder/dist/Control.Geocoder.js');
+  app.import('bower_components/leaflet-google-places-autocomplete/src/css/leaflet-gplaces-autocomplete.css');
+  app.import('bower_components/leaflet-google-places-autocomplete/src/js/leaflet-gplaces-autocomplete.js');
 
   return app.toTree();
 };

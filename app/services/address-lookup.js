@@ -19,40 +19,47 @@ export default Ember.Service.extend({
     this.policeAreas = {'North': ['11', '14', '15', '16', '17', '19', '20', '24'], 'Central': ['1', '2', '3', '8', '9', '10', '12', '18'], 'South': ['4', '5', '6', '7', '22']};
   },
 
-  generateLocationDataForAddress(layers, e) {
+  generateLocationDataForAddress(layers, place) {
     let location = {};
 
-    location.meta = this.buildMeta(layers, e.geocode);
-    location.police = this.buildPolice(layers, e.geocode);
-    location.fire = this.buildFire(e.geocode);
-    location.ems = this.buildEMS(e.geocode);
+    let latlng = L.latLng(place.geometry.location.lat(), place.geometry.location.lng());
+
+    location.meta = this.buildMeta(layers, place.formatted_address, latlng);
+
+    if (!location.meta.communityArea) {
+      location.meta.formattedAddress = 'ADDRESS OUT OF BOUNDS: '+location.meta.formattedAddress;
+    } else {
+      location.police = this.buildPolice(layers, latlng);
+      location.fire = this.buildFire(latlng);
+      location.ems = this.buildEMS(latlng);
+    }
 
     return location;
   },
 
-  buildMeta(layers, geocode) {
+  buildMeta(layers, address, location) {
     let meta = {
-      formattedAddress: geocode.name,
-      latitude: geocode.center.lat.toFixed(6),
-      longitude: geocode.center.lng.toFixed(6)
+      formattedAddress: address,
+      latitude: location.lat.toFixed(6),
+      longitude: location.lng.toFixed(6)
     };
 
     if (layers.hasOwnProperty('communityAreas')) {
-      let result = leafletPip.pointInLayer(geocode.center, layers.communityAreas.layer, true)[0];
+      let result = leafletPip.pointInLayer(location, layers.communityAreas.layer, true)[0];
       if (result) {
         meta.communityArea = result.feature.properties.community;
       }
     }
 
     if (layers.hasOwnProperty('neighborhoods')) {
-      let result = leafletPip.pointInLayer(geocode.center, layers.neighborhoods.layer, true)[0];
+      let result = leafletPip.pointInLayer(location, layers.neighborhoods.layer, true)[0];
       if (result) {
         meta.neighborhood = result.feature.properties.pri_neigh;
       }
     }
 
     if (layers.hasOwnProperty('wards')) {
-      let result = leafletPip.pointInLayer(geocode.center, layers.wards.layer, true)[0];
+      let result = leafletPip.pointInLayer(location, layers.wards.layer, true)[0];
       if (result) {
         meta.ward = result.feature.properties.ward;
         meta.alderman = this.aldermen[parseInt(result.feature.properties.ward)-1];
@@ -62,11 +69,11 @@ export default Ember.Service.extend({
     return meta;
   },
 
-  buildPolice(layers, geocode) {
+  buildPolice(layers, location) {
     let police = {};
 
     if (layers.hasOwnProperty('policeDistricts')) {
-      let result = leafletPip.pointInLayer(geocode.center, layers.policeDistricts.layer, true)[0];
+      let result = leafletPip.pointInLayer(location, layers.policeDistricts.layer, true)[0];
       if (result) {
         police.district = result.feature.properties.dist_label.toLowerCase();
 
@@ -88,7 +95,7 @@ export default Ember.Service.extend({
     }
 
     if (layers.hasOwnProperty('policeBeats')) {
-      let result = leafletPip.pointInLayer(geocode.center, layers.policeBeats.layer, true)[0];
+      let result = leafletPip.pointInLayer(location, layers.policeBeats.layer, true)[0];
       if (result) {
         police.beat = result.feature.properties.beat_num;
       }
@@ -97,12 +104,12 @@ export default Ember.Service.extend({
     return police;
   },
 
-  buildFire(geocode) {
+  buildFire(location) {
     let nearestEngine = {distance: 99999999};
     let nearestAmbo = {distance: 99999999};
 
     this.fireStations.forEach((station) => {
-      let distance = geocode.center.distanceTo(L.latLng(station.latitude, station.longitude));
+      let distance = location.distanceTo(L.latLng(station.latitude, station.longitude));
       if (station.engine.length && nearestEngine.distance > distance) {
         nearestEngine = station;
         Ember.set(nearestEngine, 'distance', distance);
@@ -123,12 +130,12 @@ export default Ember.Service.extend({
     };
   },
 
-  buildEMS(geocode) {
+  buildEMS(location) {
     let nearestTraumaAdult = {distance: 99999999};
     let nearestTraumaPed = {distance: 99999999};
 
     this.traumaCenters.forEach((hospital) => {
-      let distance = geocode.center.distanceTo(L.latLng(hospital.latitude, hospital.longitude));
+      let distance = location.distanceTo(L.latLng(hospital.latitude, hospital.longitude));
       if (hospital.level1Adult && nearestTraumaAdult.distance > distance) {
         nearestTraumaAdult = hospital;
         Ember.set(nearestTraumaAdult, 'distance', distance);
