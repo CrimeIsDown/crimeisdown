@@ -2,6 +2,7 @@
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var Funnel = require('broccoli-funnel');
+var AssetRev = require('broccoli-asset-rev');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
