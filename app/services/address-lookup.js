@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import L from 'npm:leaflet';
+import leafletPip from 'npm:@mapbox/leaflet-pip';
 
 export default Ember.Service.extend({
   loadData() {
@@ -19,22 +21,23 @@ export default Ember.Service.extend({
     this.policeAreas = {'North': ['11', '14', '15', '16', '17', '19', '20', '24'], 'Central': ['1', '2', '3', '8', '9', '10', '12', '18'], 'South': ['4', '5', '6', '7', '22']};
   },
 
-  generateLocationDataForAddress(layers, place) {
-    let location = {};
+  generateLocationDataForAddress(layers, location) {
+    let result = {};
+    console.log(location);
 
-    let latlng = L.latLng(place.geometry.location.lat(), place.geometry.location.lng());
+    let latlng = L.latLng(location.geometry.location.lat, location.geometry.location.lng);
 
-    location.meta = this.buildMeta(layers, place.formatted_address, latlng);
+    result.meta = this.buildMeta(layers, location.formatted_address, latlng);
 
-    if (!location.meta.communityArea) {
-      location.meta.formattedAddress = 'ADDRESS OUT OF BOUNDS: '+location.meta.formattedAddress;
+    if (!result.meta.communityArea) {
+      result.meta.formattedAddress = 'ADDRESS OUT OF BOUNDS: '+location.meta.formattedAddress;
     } else {
-      location.police = this.buildPolice(layers, latlng);
-      location.fire = this.buildFire(latlng);
-      location.ems = this.buildEMS(latlng);
+      result.police = this.buildPolice(layers, latlng);
+      result.fire = this.buildFire(latlng);
+      result.ems = this.buildEMS(latlng);
     }
 
-    return location;
+    return result;
   },
 
   buildMeta(layers, address, location) {

@@ -1,7 +1,7 @@
 /*jshint node:true*/
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
-var Funnel = require('broccoli-funnel');
+// var Funnel = require('broccoli-funnel');
 var AssetRev = require('broccoli-asset-rev');
 
 module.exports = function(defaults) {
@@ -23,31 +23,24 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import({
-    development: 'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
-    production: 'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
+    development: 'vendor/bootstrap-sass/assets/javascripts/bootstrap.js',
+    production: 'vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js'
   });
 
   app.import({
-    development: 'bower_components/bootstrap-table/dist/bootstrap-table.css',
-    production: 'bower_components/bootstrap-table/dist/bootstrap-table.min.css'
+    development: 'vendor/bootstrap-table/dist/bootstrap-table.css',
+    production: 'vendor/bootstrap-table/dist/bootstrap-table.min.css'
   });
   app.import({
-    development: 'bower_components/bootstrap-table/dist/bootstrap-table.js',
-    production: 'bower_components/bootstrap-table/dist/bootstrap-table.min.js'
+    development: 'vendor/bootstrap-table/dist/bootstrap-table.js',
+    production: 'vendor/bootstrap-table/dist/bootstrap-table.min.js'
   });
 
-  app.import('bower_components/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
-  app.import('bower_components/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
-  app.import('bower_components/leaflet/dist/images/marker-icon.png', {destDir: 'assets/images'});
-  app.import('bower_components/leaflet/dist/images/marker-icon-2x.png', {destDir: 'assets/images'});
-  app.import('bower_components/leaflet/dist/images/marker-shadow.png', {destDir: 'assets/images'});
-  app.import({
-    development: 'bower_components/leaflet/dist/leaflet-src.js',
-    production: 'bower_components/leaflet/dist/leaflet.js'
-  });
-
-  app.import('bower_components/leaflet-google-places-autocomplete/src/css/leaflet-gplaces-autocomplete.css');
-  app.import('bower_components/leaflet-google-places-autocomplete/src/js/leaflet-gplaces-autocomplete.js');
+  app.import('vendor/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
+  app.import('vendor/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
+  app.import('vendor/leaflet/dist/images/marker-icon.png', {destDir: 'assets/images'});
+  app.import('vendor/leaflet/dist/images/marker-icon-2x.png', {destDir: 'assets/images'});
+  app.import('vendor/leaflet/dist/images/marker-shadow.png', {destDir: 'assets/images'});
 
   return app.toTree();
 };

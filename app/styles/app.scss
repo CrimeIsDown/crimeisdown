@@ -1,9 +1,9 @@
-@import "../../bower_components/leaflet/dist/leaflet";
-@import "../../bower_components/leaflet-google-places-autocomplete/src/css/leaflet-gplaces-autocomplete";
+@import "../../node_modules/leaflet/dist/leaflet";
+@import "../../node_modules/leaflet-geosearch/assets/css/leaflet";
 
-// @import "../../bower_components/bootswatch/darkly/variables";
-@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-// @import "../../bower_components/bootswatch/darkly/bootswatch";
+// @import "../../node_modules/bootswatch/darkly/variables";
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+// @import "../../node_modules/bootswatch/darkly/bootswatch";
 
 body {
   margin-top: 5em;
@@ -53,9 +53,13 @@ blockquote {
       margin: 0.25em 0;
     }
   }
+  .leaflet-control-geosearch.bar {
+    z-index: 999;
+  }
 }
 
-.results {
+#radio-search .results,
+#ucr-search .results {
   margin-top: 1em;
 }
 

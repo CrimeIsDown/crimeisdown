@@ -1,4 +1,7 @@
 import Ember from 'ember';
+import L from 'npm:leaflet';
+import GoogleMutant from 'npm:leaflet.gridlayer.googlemutant';
+import GeoSearch from 'npm:leaflet-geosearch';
 
 export default Ember.Component.extend({
   map: null,
@@ -10,7 +13,7 @@ export default Ember.Component.extend({
   location: {},
 
   didInsertElement() {
-    L.Icon.Default.imagePath = '/assets/images';
+    L.Icon.Default.imagePath = '/assets/images/';
     this.initMap();
   },
 
@@ -45,49 +48,36 @@ export default Ember.Component.extend({
       maxZoom: 20
     });
 
-    this.get('baseLayers')["Google Hybrid"] = new L.Google('HYBRID', {
+    this.get('baseLayers')["Google Hybrid"] = new L.gridLayer.googleMutant({
+      type: 'hybrid',
       minZoom: 0,
       maxZoom: 20
     });
   },
 
   initGeocoder() {
-    let handleGeocodeResult = (place) => {
-      console.log(place);
-      if (!place.geometry) {
-        alert("Location not found");
-        return;
-      }
-      if (place.geometry.viewport) {
-        let southWest = L.latLng(place.geometry.viewport.getNorthEast().lat(), place.geometry.viewport.getNorthEast().lng()),
-            northEast = L.latLng(place.geometry.viewport.getSouthWest().lat(), place.geometry.viewport.getSouthWest().lng()),
-            viewport = L.latLngBounds(southWest, northEast);
-        this.get('map').fitBounds(viewport, {
-          maxZoom: 18
-        });
-      }
-      if (this.get('locationMarker')) {
-        this.get('map').removeLayer(this.get('locationMarker'));
-      }
-      this.set('locationMarker', L.marker(L.latLng(place.geometry.location.lat(), place.geometry.location.lng())).addTo(this.get('map')));
-      this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), place));
-    };
+    const provider = new GeoSearch.GoogleProvider({
+      params: {
+        key: 'REDACTED_PUBLIC_CREDENTIAL',
+        bounds: '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366'
+      },
+    });
 
-    handleGeocodeResult = handleGeocodeResult.bind(this);
+    const searchControl = new GeoSearch.GeoSearchControl({
+      provider: provider,
+      style: 'bar',
+      autoComplete: false,
+      showPopup: true,
+      maxMarkers: 3
+    });
 
-    this.set('geocoder', new L.Control.GPlaceAutocomplete({
-        callback: handleGeocodeResult,
-        autocomplete_options: {
-          bounds: {
-            east: '-87.37011785993366',
-            north: '42.05134582102988',
-            south: '41.60218817897012',
-            west: '-87.9728821400663'
-          }
-        }
-      })
-      .addTo(this.get('map'))
-    );
+    this.get('map').addControl(searchControl);
+    Ember.$('.leaflet-control-geosearch.bar form input').attr('autofocus', true);
+
+    this.get('map').on('geosearch/showlocation', (event) => {
+      let location = event.location.raw;
+      this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), location));
+    });
   },
 
   initLayers() {
