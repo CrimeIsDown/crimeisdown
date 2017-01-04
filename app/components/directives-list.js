@@ -6,20 +6,26 @@ export default Ember.Component.extend({
     this.modal.find('#directiveFrame a').attr('href', path);
     Ember.$.get('https://directives.crimeisdown.com/' + path, (data) => {
       let doc = document.getElementById('directiveFrame').contentWindow.document;
-      doc.open()
+      doc.open();
       doc.write(data);
       doc.close();
       this.modal.find('#directiveFrame').contents().find('head').append('<link type="text/css" rel="stylesheet" href="https://directives.crimeisdown.com/iframe.css">');
     });
     this.modal.modal();
     this.modal.find('input[type="text"]').val(window.location + '#' + path.substring(7));
-    ga('send', 'event', 'Directive', 'open', title);
+    if (window.ga && typeof window.ga === "function") {
+      ga('send', 'event', 'Directive', 'open', title);
+    }
   },
   dateSorter(a, b) {
     a = new Date(a);
     b = new Date(b);
-    if (a > b) return 1;
-    if (a < b) return -1;
+    if (a > b) {
+      return 1;
+    }
+    if (a < b) {
+      return -1;
+    }
     return 0;
   },
   didInsertElement() {

@@ -15,7 +15,9 @@ export default Ember.Component.extend({
   actions: {
     lookupRadioId() {
       let input = this.get('radioId');
-      // $analytics.eventTrack('Searches radio ID list', {category: 'Tools', label: input});
+      if (window.ga && typeof window.ga === "function") {
+        ga('send', 'event', 'Searches radio ID list', 'Tools', input);
+      }
       let matches = [];
       this.radioIds.forEach((row, index) => {
         if (input.match('^' + row.ID_Number + '$')) {

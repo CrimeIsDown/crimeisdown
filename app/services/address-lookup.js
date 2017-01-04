@@ -83,7 +83,7 @@ export default Ember.Service.extend({
         for (let key in this.policeZones) {
           if (this.policeZones[key].includes(result.feature.properties.dist_num)) {
             this.onlineStreams.forEach((stream) => {
-              if ('Z' + key == stream.key) {
+              if ('Z' + key === stream.key) {
                 police.zone = {num: key, freq: stream.frequency, url: stream.feedUrl, mp3: stream.directStreamUrl};
               }
             });

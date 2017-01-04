@@ -75,6 +75,9 @@ export default Ember.Component.extend({
     Ember.$('.leaflet-control-geosearch.bar form input').attr('autofocus', true);
 
     this.get('map').on('geosearch/showlocation', (event) => {
+      if (window.ga && typeof window.ga === "function") {
+        ga('send', 'event', 'Looks up address', 'Tools', Ember.$('.leaflet-control-geosearch.bar form input').val());
+      }
       let location = event.location.raw;
       this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), location));
     });

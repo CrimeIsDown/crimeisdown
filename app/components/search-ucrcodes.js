@@ -16,11 +16,13 @@ export default Ember.Component.extend({
   actions: {
     lookupUCR() {
       let input = this.get('ucrCode');
-      // $analytics.eventTrack('Searches UCR list', {category: 'Tools', label: input});
+      if (window.ga && typeof window.ga === "function") {
+        ga('send', 'event', 'Searches UCR list', 'Tools', input);
+      }
       Ember.set(this, 'ucr', {primaryDesc: 'Not Found', secondaryDesc: 'Not Found', indexCode: 'N/A'});
       let code = transformUCR(input);
-      this.ucrCodes.forEach((row, index) => {
-        if (code == transformUCR(row.ucrCode)) {
+      this.ucrCodes.forEach((row) => {
+        if (code === transformUCR(row.ucrCode)) {
           Ember.set(this, 'ucr', row);
           Ember.set(this, 'ucrCode', code);
           return;
