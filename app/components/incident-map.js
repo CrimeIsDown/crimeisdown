@@ -15,6 +15,13 @@ export default Ember.Component.extend({
   didInsertElement() {
     L.Icon.Default.imagePath = '/assets/images/';
     this.initMap();
+
+    let searchControl = this.get('searchControl');
+    Ember.$('#address-search > form').submit(function (event) {
+      event.preventDefault();
+      Ember.$('.leaflet-control-geosearch.bar form input').val(Ember.$('#address-search > form input[name="address"]').val());
+      searchControl.searchElement.handleSubmit({ query: Ember.$('.leaflet-control-geosearch.bar form input').val() });
+    });
   },
 
   initMap() {
@@ -70,6 +77,7 @@ export default Ember.Component.extend({
       showPopup: true,
       maxMarkers: 3
     });
+    this.set('searchControl', searchControl);
 
     this.get('map').addControl(searchControl);
     Ember.$('.leaflet-control-geosearch.bar form input').attr('autofocus', true);

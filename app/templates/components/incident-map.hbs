@@ -5,6 +5,17 @@
 </div>
 <div class="col-sm-12 col-md-4">
   <div id="address-search">
+    <form>
+      <div class="form-group">
+        <label for="address">Address, intersection, place to search</label>
+        <div class="input-group input-group-sm">
+          <input autofocus="autofocus" class="form-control" name="address" placeholder="e.g. 3510 S Michigan, Chicago" type="text">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Search</button>
+          </span>
+        </div>
+      </div>
+    </form>
     <table class="table table-bordered table-condensed">
       <tbody>
       <tr class="info">
@@ -134,7 +145,7 @@
       </tbody>
     </table>
   </div>
-</div>
-<div class="col-sm-12 col-md-4">
-  {{#link-to "audio" class="btn btn-primary btn-lg"}}Listen Online{{/link-to}}
+  <div style="margin-bottom: 1em">
+    {{#link-to "audio" class="btn btn-primary btn-lg"}}Listen Online{{/link-to}}
+  </div>
 </div>
