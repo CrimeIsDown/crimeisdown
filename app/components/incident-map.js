@@ -22,6 +22,16 @@ export default Ember.Component.extend({
       Ember.$('.leaflet-control-geosearch.bar form input').val(Ember.$('#address-search > form input[name="address"]').val());
       searchControl.searchElement.handleSubmit({ query: Ember.$('.leaflet-control-geosearch.bar form input').val() });
     });
+
+    if (window.location.hash) {
+      let hash = window.location.hash.substr(1),
+          query = hash.substr(hash.indexOf('location_query='))
+                      .split('&')[0]
+                      .split('=')[1];
+      query = decodeURIComponent(query.replace(/\+/g, " "));
+      Ember.$('.leaflet-control-geosearch.bar form input').val(query);
+      searchControl.searchElement.handleSubmit({ query: Ember.$('.leaflet-control-geosearch.bar form input').val() });
+    }
   },
 
   initMap() {
@@ -86,6 +96,7 @@ export default Ember.Component.extend({
       if (window.ga && typeof window.ga === "function") {
         ga('send', 'event', 'Looks up address', 'Tools', Ember.$('.leaflet-control-geosearch.bar form input').val());
       }
+      window.location.hash = '#location_query=' + encodeURIComponent(Ember.$('.leaflet-control-geosearch.bar form input').val());
       let location = event.location.raw;
       this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), location));
     });
