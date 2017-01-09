@@ -6,7 +6,9 @@ var AssetRev = require('broccoli-asset-rev');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    // Add options here
+    babel: {
+      includePolyfill: true
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
