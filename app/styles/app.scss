@@ -54,7 +54,9 @@ blockquote {
     }
   }
   .leaflet-control-geosearch.bar {
-    z-index: 999;
+    z-index: 99999;
+    max-width: 400px;
+    width: 100%;
   }
 }
 
