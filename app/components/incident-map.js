@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import fetch from 'npm:whatwg-fetch'; // polyfill for fetch() used by leaflet-geosearch
 import L from 'npm:leaflet';
 import GoogleMutant from 'npm:leaflet.gridlayer.googlemutant';
 import GeoSearch from 'npm:leaflet-geosearch';
