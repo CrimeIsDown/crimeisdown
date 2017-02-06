@@ -52,13 +52,14 @@
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
+    "font-awesome": "^4.7.0",
     "leaflet": "^1.0.2",
     "leaflet-geosearch": "^2.0.0",
     "leaflet-plugins": "^3.0.0",
+    "leaflet-sidebar-v2": "^1.0.0",
     "leaflet.gridlayer.googlemutant": "^0.4.3",
     "loader.js": "^4.0.10",
     "nodent-runtime": "^3.0.3",
-    "sidebar-v2": "^0.3.1",
     "whatwg-fetch": "^2.0.1"
   },
   "private": true

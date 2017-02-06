@@ -30,7 +30,7 @@ export default Ember.Service.extend({
     result.meta = this.buildMeta(layers, location.formatted_address, latlng);
 
     if (!result.meta.communityArea) {
-      result.meta.formattedAddress = 'ADDRESS OUT OF BOUNDS: '+location.meta.formattedAddress;
+      result.meta.formattedAddress = 'ADDRESS OUT OF BOUNDS: '+result.meta.formattedAddress;
     } else {
       result.police = this.buildPolice(layers, latlng);
       result.fire = this.buildFire(latlng);
