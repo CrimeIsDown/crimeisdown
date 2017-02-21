@@ -6,7 +6,7 @@ var AssetRev = require('broccoli-asset-rev');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    babel: {
+    'ember-cli-babel': {
       includePolyfill: true
     }
   });
