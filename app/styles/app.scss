@@ -36,30 +36,46 @@ blockquote {
   z-index: 9999;
 }
 
-.sidebar.collapsed {
-  width: 44px;
-}
-
-$map-row-height: 80vh;
-
-#map-row {
-  width: 100%;
-  height: $map-row-height;
-  position: absolute;
-  left: 0;
-  margin: 0 0 1em 0;
-}
-
-#map-row-placeholder {
-  width: 100%;
-  height: $map-row-height;
-}
-
 #searchpane {
   padding-right: 30px;
 }
 
-#map {
+$map-container-height: 85vh;
+
+.container-fluid.map {
+  padding-left: 0;
+  margin-top: -20px;
+  max-height: $map-container-height;
+  .row > * {
+    max-height: $map-container-height;
+    overflow: auto;
+  }
+  .map-container {
+    position: relative;
+    padding-right: 0;
+    .leaflet-container {
+      width: 100%;
+      height: $map-container-height;
+      color: #000;
+      .info.leaflet-control {
+        background: rgba(255,255,255,0.7);
+        padding: 0.5em 1em;
+        text-align: right;
+        h4, p {
+          margin: 0.25em 0;
+        }
+      }
+      .leaflet-control-geosearch.bar {
+        z-index: 1900;
+        max-width: 400px;
+        width: 100%;
+      }
+    }
+  }
+  .search-container {
+    padding-top: 20px;
+  }
+
   h3 {
     margin-top: 0;
   }
@@ -69,26 +85,9 @@ $map-row-height: 80vh;
       width: 50%;
     }
   }
-  .leaflet-container {
-    width: 100%;
-    height: $map-row-height;
-    color: #000;
-  }
+
   label {
     display: block;
-  }
-  .info.leaflet-control {
-    background: rgba(255,255,255,0.7);
-    padding: 0.5em 1em;
-    text-align: right;
-    h4, p {
-      margin: 0.25em 0;
-    }
-  }
-  .leaflet-control-geosearch.bar {
-    z-index: 1900;
-    max-width: 400px;
-    width: 100%;
   }
 }
 

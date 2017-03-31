@@ -8,8 +8,8 @@ export default Ember.Component.extend({
       .done((data) => {
         this.radioIds = data['Radio IDs'];
       })
-      .fail((jqxhr, textStatus, error) => {
-        console.error('Could not fetch radio ID list');
+      .fail(() => {
+        alert('Could not fetch radio ID list');
       });
   },
   actions: {
@@ -19,7 +19,7 @@ export default Ember.Component.extend({
         ga('send', 'event', 'Searches radio ID list', 'Tools', input);
       }
       let matches = [];
-      this.radioIds.forEach((row, index) => {
+      this.radioIds.forEach((row) => {
         if (input.match('^' + row.ID_Number + '$')) {
           matches.push(row);
         }
@@ -27,7 +27,7 @@ export default Ember.Component.extend({
       Ember.$('#radioid-results td').empty();
       if (matches.length > 0) {
         Ember.set(this, 'radio', {agency: '', level1: '', level2: '', level3: '', level4: ''});
-        matches.forEach((match, index) => {
+        matches.forEach((match) => {
           if (match.Agency.length) {
             this.radio.agency = match.Agency;
           }

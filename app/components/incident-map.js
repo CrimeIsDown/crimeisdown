@@ -1,9 +1,10 @@
+/*eslint-disable no-unused-vars*/
+
 import Ember from 'ember';
 import fetch from 'npm:whatwg-fetch'; // polyfill for fetch() used by leaflet-geosearch
 import L from 'npm:leaflet';
 import GoogleMutant from 'npm:leaflet.gridlayer.googlemutant';
 import GeoSearch from 'npm:leaflet-geosearch';
-import Sidebar from 'npm:leaflet-sidebar-v2';
 
 export default Ember.Component.extend({
   map: null,
@@ -27,7 +28,6 @@ export default Ember.Component.extend({
 
     setTimeout(() => {
       if (window.location.hash) {
-        console.log(window.location.hash);
         let hash = window.location.hash.substr(1),
           query = hash.substr(hash.indexOf('location_query='))
             .split('&')[0]
@@ -35,7 +35,6 @@ export default Ember.Component.extend({
         query = decodeURIComponent(query.replace(/\+/g, " "));
         Ember.$('.leaflet-control-geosearch.bar form input').val(query);
         searchControl.searchElement.handleSubmit({ query: Ember.$('.leaflet-control-geosearch.bar form input').val() });
-        this.get('sidebar').open('searchpane');
       }
     }, 500); // wait until we have everything loaded
   },
@@ -45,8 +44,6 @@ export default Ember.Component.extend({
       center: [41.8781, -87.6298],
       zoom: 10
     }));
-    this.set('sidebar', L.control.sidebar('sidebar'));
-    this.get('sidebar').addTo(this.get('map'));
 
     this.initBaseLayers();
     this.initGeocoder();

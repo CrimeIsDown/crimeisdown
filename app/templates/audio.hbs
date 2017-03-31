@@ -1,25 +1,26 @@
-{{outlet}}
-
-<div class="row">
-  <header class="col-md-12">
-    <h2>Online Streams</h2>
-    <div class="alert alert-warning">
-      Note: the "Get last minute" links are temporary and may not work if the replay server is not online.
-      Click on the links sparingly to avoid overloading the server.
+<div class="container">
+  <div class="row">
+    <header class="col-md-12">
+      <h2>Online Streams</h2>
+      <div class="alert alert-warning">
+        Note: the "Get last minute" links are temporary and may not work if the replay server is not online.
+        Click on the links sparingly to avoid overloading the server.
+      </div>
+    </header>
+    <div class="col-md-12">
+      {{ audio-search }}
+      <ul>
+        {{#each model as |feed|}}
+          <li>
+            <h4><a href="{{ feed.feedUrl }}" target="_blank">{{ feed.name }}</a></h4>
+            <p><a href="http://audio.crimeisdown.com:8080/replay/{{ feed.key}}?duration=60" target="_blank">Get last minute</a> (<a href="http://audio.crimeisdown.com:8080/replay/{{ feed.key}}?duration=60&trimsilence=true" target="_blank">with silence removed</a>)</p>
+            <p>
+              {{#if feed.frequency }}<i>{{ feed.frequency }}</i> - {{/if}}
+              {{ feed.description }}
+            </p>
+          </li>
+        {{/each}}
+      </ul>
     </div>
-  </header>
-  <div class="col-md-12">
-    <ul>
-      {{#each model as |feed|}}
-        <li>
-          <h4><a href="{{ feed.feedUrl }}" target="_blank">{{ feed.name }}</a></h4>
-          <p><a href="http://dev.tendian.io:8080/replay/{{ feed.key}}?duration=60" target="_blank">Get last minute</a> (<a href="http://dev.tendian.io:8080/replay/{{ feed.key}}?duration=60&trimsilence=true" target="_blank">with silence removed</a>)</p>
-          <p>
-            {{#if feed.frequency }}<i>{{ feed.frequency }}</i> - {{/if}}
-            {{ feed.description }}
-          </p>
-        </li>
-      {{/each}}
-    </ul>
   </div>
 </div>

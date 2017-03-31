@@ -8,9 +8,9 @@ export default Ember.Component.extend({
       .done((data) => {
         this.ucrCodes = data['UCR Codes'];
       })
-      .fail((jqxhr, textStatus, error) => {
+      .fail(() => {
         this.ucrCodes = {};
-        console.error('Could not fetch UCR code list');
+        alert('Could not fetch UCR code list');
       });
   },
   actions: {

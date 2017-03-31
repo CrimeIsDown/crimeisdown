@@ -23,7 +23,6 @@ export default Ember.Service.extend({
 
   generateLocationDataForAddress(layers, location) {
     let result = {};
-    console.log(location);
 
     let latlng = L.latLng(location.geometry.location.lat, location.geometry.location.lng);
 
