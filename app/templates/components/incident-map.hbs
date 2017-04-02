@@ -1,9 +1,7 @@
-<div class="row">
-  <div class="map-container col-sm-7 col-md-8 col-lg-9">
-    <div id="leaflet-map"></div>
-  </div>
-  <div class="search-container col-sm-5 col-md-4 col-lg-3">
+<section class="overall-container">
+  <div class="search-container">
     <p><em>Interact with this map or use the search box to find information about a specific address. Police districts are outlined in blue.</em></p>
+    <p class="mobile text-primary"><em>Scroll down for incident map</em></p>
     <div id="address-search">
       <form>
         <div class="form-group">
@@ -152,4 +150,7 @@
       {{search-ucrcodes}}
     </div>
   </div>
-</div>
+  <div class="map-container">
+    <div id="leaflet-map"></div>
+  </div>
+</section>

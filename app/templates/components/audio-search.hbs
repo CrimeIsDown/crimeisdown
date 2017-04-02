@@ -1,7 +1,7 @@
-<form action="https://audio.crimeisdown.com/download-audio.php" method="get">
-  <label>
-    CPD radio channel
-    <select name="feed" required>
+<form id="recordingsearch" action="https://audio.crimeisdown.com/download-audio.php" method="get">
+  <div class="form-group">
+    <label for="cpdfeed">CPD radio channel</label>
+    <select name="feed" id="cpdfeed" class="form-control" required>
       <option value="" disabled selected>Select channel</option>
       <option value="citywide1">Citywide 1</option>
       <option value="citywide2">Citywide 2</option>
@@ -20,10 +20,12 @@
       <option value="zone12">Zone 12</option>
       <option value="zone13">Zone 13</option>
     </select>
-  </label>
-  <label>
-    Get recording for particular time
-    <input type="text" name="datetime" value="" id="datetimepicker" required>
-  </label>
-  <input type="submit">
+  </div>
+  <div class="form-group">
+    <label for="datetimepicker">Time of recording</label>
+    <input type="text" name="datetime" placeholder="1/1/2017 12:05am" class="form-control" id="datetimepicker" required>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Get recording</button>
+  </div>
 </form>

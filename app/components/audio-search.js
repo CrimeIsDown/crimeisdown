@@ -10,6 +10,10 @@ export default Ember.Component.extend({
     };
     options.endDate.setHours(options.endDate.getHours()-1);
     options.endDate.setMinutes(59);
-    $("#datetimepicker").datetimepicker(options);
+    $('#datetimepicker').datetimepicker(options);
+    $('#recordingsearch').submit(function (e) {
+      e.preventDefault();
+      alert('April Fools! This feature is coming soon.');
+    })
   }
 });
