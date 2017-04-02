@@ -62,6 +62,7 @@
     "leaflet.gridlayer.googlemutant": "^0.4.3",
     "loader.js": "^4.2.3",
     "nodent-runtime": "^3.0.3",
+    "raven-js": "^3.14.0",
     "whatwg-fetch": "^2.0.1"
   },
   "private": true

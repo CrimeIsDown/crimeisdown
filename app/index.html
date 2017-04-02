@@ -37,6 +37,12 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL"></script>
 
     <script src="{{rootURL}}assets/vendor.js"></script>
+    <script>
+      Raven
+        .config('https://fc1365bf53c34718b4674383752e1080@sentry.io/154438')
+        .addPlugin(Raven.Plugins.Ember)
+        .install();
+    </script>
     <script src="{{rootURL}}assets/crimeisdown.js"></script>
 
     {{content-for "body-footer"}}

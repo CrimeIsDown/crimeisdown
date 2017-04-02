@@ -23,6 +23,9 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  app.import('vendor/raven-js/dist/raven.js');
+  app.import('vendor/raven-js/dist/plugins/ember.js');
+
   app.import({
     development: 'vendor/bootstrap-sass/assets/javascripts/bootstrap.js',
     production: 'vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js'
