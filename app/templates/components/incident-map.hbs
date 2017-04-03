@@ -37,7 +37,7 @@
         </tr>
         <tr>
           <td>Ward / Alderman</td>
-          <td><span ng-if="location.meta.ward">{{ location.meta.ward }} - <a href="{{ location.meta.alderman.website }}" target="_blank">Alderman {{ location.meta.alderman.name }}</a></span></td>
+          <td>{{#if location.meta.ward}}{{ location.meta.ward }} - <a href="{{ location.meta.alderman.website }}" target="_blank">Alderman {{ location.meta.alderman.name }}</a>{{/if}}</td>
         </tr>
         <tr class="info">
           <th colspan="2">Chicago Police Department</th>
@@ -49,14 +49,16 @@
         <tr>
           <td colspan="2">
             <strong>Radio Zone {{ location.police.zone.num }}</strong>
-            <span ng-if="location.police.zone.url">
+            {{#if location.police.zone.freq}}
             ({{ location.police.zone.freq }}
+            {{#if location.police.zone.url}}
               /
-            <a href="{{ location.police.zone.url }}" target="_blank" ng-if="location.police.zone.url">Audio from Broadcastify</a>)
-          </span><br>
-            <div ng-if="location.police.zone.mp3">
-              <audio controls src="{{ location.police.zone.mp3 }}">Your user agent does not support the HTML5 Audio element.</audio>
-            </div>
+            <a href="{{ location.police.zone.url }}" target="_blank">Audio from Broadcastify</a>
+            {{/if}})
+            {{#if location.police.zone.mp3}}
+              <br><audio controls src="{{ location.police.zone.mp3 }}">Your user agent does not support the HTML5 Audio element.</audio>
+            {{/if}}
+            {{/if}}
           </td>
         </tr>
         <tr>
@@ -77,11 +79,11 @@
         <tr>
           <td colspan="2">
             Radio Channel: {{ location.fire.channel }}
-            <span ng-if="location.fire.channel">
+            {{#if location.fire.channel}}
             (Listen to <a href="http://www.broadcastify.com/listen/feed/909/web" target="_blank">Fire</a>
             or
             <a href="http://www.broadcastify.com/listen/feed/13605/web" target="_blank">EMS</a>)
-          </span>
+            {{/if}}
           </td>
         </tr>
         <tr class="info">
@@ -90,7 +92,7 @@
         <tr>
           <td colspan="2">
             Adult Trauma Center:
-            <span ng-if="location.ems.nearestTraumaAdult.name">
+            {{#if location.ems.nearestTraumaAdult.name}}
             <em>
               {{ location.ems.nearestTraumaAdult.name }}
               -
@@ -101,13 +103,13 @@
               {{ location.ems.nearestTraumaAdult.state }},
               {{ location.ems.nearestTraumaAdult.zip }})
             - Patient Reports on {{ location.ems.nearestTraumaAdult.medChannel }}
-          </span>
+            {{/if}}
           </td>
         </tr>
         <tr>
           <td colspan="2">
             Pediatric Trauma Center:
-            <span ng-if="location.ems.nearestTraumaPed.name">
+            {{#if location.ems.nearestTraumaPed.name}}
             <em>
               {{ location.ems.nearestTraumaPed.name }}
               -
@@ -118,28 +120,9 @@
               {{ location.ems.nearestTraumaPed.state }},
               {{ location.ems.nearestTraumaPed.zip }})
             - Patient Reports on {{ location.ems.nearestTraumaPed.medChannel }}
-          </span>
+            {{/if}}
           </td>
         </tr>
-        <!--<tr class="info">-->
-        <!--<th colspan="2">Stats</th>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td>Population</td>-->
-        <!--<td>{{ location.stats.population }}</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td>Homicides</td>-->
-        <!--<td>{{ location.stats.homicides }}</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td>Shootings</td>-->
-        <!--<td>{{ location.stats.shootings }}</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td>Census Tract Median Income</td>-->
-        <!--<td>{{ location.stats.income }}</td>-->
-        <!--</tr>-->
         </tbody>
       </table>
     </div>

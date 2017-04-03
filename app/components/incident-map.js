@@ -229,7 +229,7 @@ export default Ember.Component.extend({
   initInfoBox() {
     let info = L.control();
 
-    info.onAdd = function (map) {
+    info.onAdd = function () {
       this._div = L.DomUtil.create('div', 'info');
       this.update();
       return this._div;
