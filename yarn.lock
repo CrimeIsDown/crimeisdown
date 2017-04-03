@@ -3640,9 +3640,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-leaflet-geosearch@^2.0.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/leaflet-geosearch/-/leaflet-geosearch-2.0.3.tgz#2520015f6ef19ee078dfe59a67c364d5cfbf9977"
+leaflet-geosearch@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/leaflet-geosearch/-/leaflet-geosearch-2.0.2.tgz#34046a199629b444dba9183e6e749ac4275c4bc9"
   dependencies:
     lodash.debounce "^4.0.8"
 
