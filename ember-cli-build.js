@@ -32,6 +32,16 @@ module.exports = function(defaults) {
   });
 
   app.import({
+    development: 'vendor/bootstrap-material-design/dist/js/material.js',
+    production: 'vendor/bootstrap-material-design/dist/js/material.min.js'
+  });
+
+  app.import({
+    development: 'vendor/bootstrap-material-design/dist/js/ripples.js',
+    production: 'vendor/bootstrap-material-design/dist/js/ripples.min.js'
+  });
+
+  app.import({
     development: 'vendor/bootstrap-table/dist/bootstrap-table.css',
     production: 'vendor/bootstrap-table/dist/bootstrap-table.min.css'
   });

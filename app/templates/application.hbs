@@ -13,15 +13,29 @@
 
       <div class="navbar-collapse collapse" id="navbar">
         <ul class="nav navbar-nav">
-          {{#nav-link-to "map"}}Incident Map{{/nav-link-to}}
-          {{#nav-link-to "audio"}}Scanner Audio{{/nav-link-to}}
-          {{#nav-link-to "guide"}}Scanner Guide{{/nav-link-to}}
-          {{#nav-link-to "directives"}}Police Directive Changes{{/nav-link-to}}
+          {{#nav-link-to "map" id="map-link"}}Incident Map{{/nav-link-to}}
+          {{#nav-link-to "audio" id="audio-link"}}Scanner Audio{{/nav-link-to}}
+          {{#nav-link-to "guide" id="guide-link"}}Scanner Guide{{/nav-link-to}}
+          {{#nav-link-to "directives" id="directives-link"}}Police Directive Changes{{/nav-link-to}}
         </ul>
       </div>
     </div>
   </nav>
 </header>
+
+<script>
+  $(document).on('click','.navbar-collapse.in',function (e) {
+    if ($(e.target).is('a') && ( $(e.target).attr('class') != 'dropdown-toggle' ) ) {
+      $(this).collapse('hide');
+    }
+  });
+  $(function () {
+    if (typeof Android !== 'undefined') {
+      $('html').addClass('android');
+      $('body').scrollTop(0);
+    }
+  });
+</script>
 
 {{outlet}}
 

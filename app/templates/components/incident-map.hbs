@@ -56,7 +56,7 @@
             <a href="{{ location.police.zone.url }}" target="_blank">Audio from Broadcastify</a>
             {{/if}})
             {{#if location.police.zone.mp3}}
-              <br><audio controls src="{{ location.police.zone.mp3 }}">Your user agent does not support the HTML5 Audio element.</audio>
+              <br><audio controls src="{{ location.police.zone.mp3 }}" preload="none">Your user agent does not support the HTML5 Audio element.</audio>
             {{/if}}
             {{/if}}
           </td>

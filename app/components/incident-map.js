@@ -95,7 +95,7 @@ export default Ember.Component.extend({
     this.set('searchControl', searchControl);
 
     this.get('map').addControl(searchControl);
-    Ember.$('.leaflet-control-geosearch.bar form input').attr('autofocus', true);
+    // Ember.$('.leaflet-control-geosearch.bar form input').attr('autofocus', true);
 
     this.get('map').on('geosearch/showlocation', (event) => {
       if (window.ga && typeof window.ga === "function") {
