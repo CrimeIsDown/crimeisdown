@@ -12,7 +12,6 @@ You will need the following things properly installed on your computer.
 
 * [Git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/) (with NPM)
-* [Bower](https://bower.io/)
 * [Ember CLI](https://ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
@@ -21,7 +20,6 @@ You will need the following things properly installed on your computer.
 * `git clone <repository-url>` this repository
 * `cd crimeisdown`
 * `npm install`
-* `bower install`
 
 ## Running / Development
 

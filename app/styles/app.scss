@@ -2,22 +2,24 @@
 @import "../../node_modules/leaflet-geosearch/assets/css/leaflet";
 
 // From Bootstrap 4:
-//$font-family-sans-serif:
-//  // Safari for OS X and iOS (San Francisco)
-//  -apple-system,
-//    // Chrome >= 56 for OS X (San Francisco), Windows, Linux and Android
-//  system-ui,
-//    // Chrome < 56 for OS X (San Francisco)
-//  BlinkMacSystemFont,
-//    // Windows
-//  "Segoe UI",
-//    // Android
-//  "Roboto",
-//    // Basic web fallback
-//  "Helvetica Neue", Arial, sans-serif !default;
+$font-family-sans-serif:
+  // Safari for OS X and iOS (San Francisco)
+  -apple-system,
+    // Chrome >= 56 for OS X (San Francisco), Windows, Linux and Android
+  system-ui,
+    // Chrome < 56 for OS X (San Francisco)
+  BlinkMacSystemFont,
+    // Windows
+  "Segoe UI",
+    // Android
+  "Roboto",
+    // Basic web fallback
+  "Helvetica Neue", Arial, sans-serif !default;
 
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "../../node_modules/bootstrap-material-design/dist/sassc/bootstrap-material-design";
+
+//@import "../../node_modules/bootswatch/darkly/bootswatch";
+//@import "../../node_modules/bootstrap-material-design/dist/sassc/bootstrap-material-design";
 
 $fa-font-path: "../assets/fonts";
 @import "../../node_modules/font-awesome/scss/font-awesome";
