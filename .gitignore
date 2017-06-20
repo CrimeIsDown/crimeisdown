@@ -17,5 +17,7 @@ npm-debug.log*
 testem.log
 /.firebaserc
 
+/public/data/ChicagoScannerGuide.pdf
+
 # IDEs
 /.idea
