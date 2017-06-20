@@ -4,16 +4,11 @@ export default Ember.Component.extend({
   openDirective(path, title) {
     this.modal.find(' h4.modal-title').text(title);
     this.modal.find('#directiveFrame a').attr('href', path);
-    Ember.$.get('https://directives.crimeisdown.com/' + path, (data) => {
-      data = data.replace('http://directives.chicagopolice.org/directives/data/ContentPackages/Core/Stylesheets/Core.css?bv=288', 'https://directives.crimeisdown.com/cpd-assets/Core.css')
-                 .replace('http://directives.chicagopolice.org/directives/data/ContentPackages/components/General.css?bv=288', 'https://directives.crimeisdown.com/cpd-assets/General.css')
-                 .replace('http://directives.chicagopolice.org/directives/data/ContentPackages/Core/Transforms/lang/en/strings.js?bv=288', 'https://directives.crimeisdown.com/cpd-assets/strings.js')
-                 .replace('http://directives.chicagopolice.org/directives/data/ContentPackages/Core/Transforms/code/CommonUtilities.js?bv=288', 'https://directives.crimeisdown.com/cpd-assets/CommonUtilities.js');
+    Ember.$.get(path, (data) => {
       let doc = document.getElementById('directiveFrame').contentWindow.document;
       doc.open();
       doc.write(data);
       doc.close();
-      this.modal.find('#directiveFrame').contents().find('head').append('<link type="text/css" rel="stylesheet" href="https://directives.crimeisdown.com/iframe.css">');
     });
     this.modal.modal();
     this.modal.find('input[type="text"]').val(window.location + '#' + path.substring(7));
