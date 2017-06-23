@@ -1,6 +1,39 @@
 <div class="container">
-  <h1 id="title">Welcome to CrimeIsDown.com</h1>
-
+  <h1 id="title">Welcome to CrimeIsDown.com!</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Our Tools</h2>
+      <p>We offer various tools to help monitor crime in Chicago. Check out some of them below, or read on to learn more about the site.</p>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      {{#link-to "map"}}<h3>Incident Map</h3>{{/link-to}}
+      <figure class="figure">
+        {{#link-to "map"}}<img src="/img/incident_map.png" alt="Incident map page screenshot" class="img-responsive figure-img">{{/link-to}}
+        <figcaption class="figure-caption">Find information about incidents in your area including a scanner feed for the searched area</figcaption>
+      </figure>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      {{#link-to "audio"}}<h3>Scanner Audio</h3>{{/link-to}}
+      <figure class="figure">
+        {{#link-to "audio"}}<img src="/img/scanner_audio.png" alt="Scanner audio page screenshot" class="img-responsive figure-img">{{/link-to}}
+        <figcaption class="figure-caption">Listen to live police/fire radio traffic and access recordings from all CPD radio channels</figcaption>
+      </figure>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      {{#link-to "guide"}}<h3>Scanner Guide</h3>{{/link-to}}
+      <figure class="figure">
+        {{#link-to "guide"}}<img src="/img/scanner_guide.png" alt="Scanner guide page screenshot" class="img-responsive figure-img">{{/link-to}}
+        <figcaption class="figure-caption">Learn the lingo of #ChicagoScanner on our comprehensive scanner guide</figcaption>
+      </figure>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      {{#link-to "directives"}}<h3>Directive Changes</h3>{{/link-to}}
+      <figure class="figure">
+        {{#link-to "directives"}}<img src="/img/directive_changes.png" alt="Police directive changes page screenshot" class="img-responsive figure-img">{{/link-to}}
+        <figcaption class="figure-caption">See exactly what Chicago Police Department directives have changed recently</figcaption>
+      </figure>
+    </div>
+  </div>
   <div class="row" id="about">
     <div class="col-md-12">
       <h2 id="about-crimeisdown">About CrimeIsDown.com</h2>
@@ -38,6 +71,7 @@
               <li><a href="http://ragenglewood.org/" target="_blank">R.A.G.E.</a></li>
               <li><a href="http://www.scy-chicago.org/" target="_blank">Strengthening Chicago's Youth</a></li>
               <li><a href="http://youngchicagoauthors.org/blog/" target="_blank">Young Chicago Authors</a></li>
+              <li>And many more!</li>
             </ul>
           </div>
         </div>
