@@ -72,5 +72,11 @@ module.exports = function(defaults) {
   app.import('vendor/font-awesome/fonts/fontawesome-webfont.woff', {destDir: 'assets/fonts'});
   app.import('vendor/font-awesome/fonts/fontawesome-webfont.woff2', {destDir: 'assets/fonts'});
 
+  app.import('vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot', {destDir: 'assets/fonts'});
+  app.import('vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.svg', {destDir: 'assets/fonts'});
+  app.import('vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf', {destDir: 'assets/fonts'});
+  app.import('vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff', {destDir: 'assets/fonts'});
+  app.import('vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2', {destDir: 'assets/fonts'});
+
   return app.toTree();
 };

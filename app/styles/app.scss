@@ -16,6 +16,8 @@ $font-family-sans-serif:
     // Basic web fallback
   "Helvetica Neue", Arial, sans-serif !default;
 
+$icon-font-path: "../assets/fonts/";
+
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 //@import "../../node_modules/bootswatch/darkly/bootswatch";
