@@ -19,7 +19,7 @@
     "url": "https://github.com/CrimeIsDown/crimeisdown-v3/issues"
   },
   "engines": {
-    "node": ">= 4"
+    "node": ">= 6"
   },
   "author": "Eric Tendian <eric@crimeisdown.com>",
   "license": "MIT",
@@ -46,7 +46,7 @@
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-qunit": "^4.0.0",
     "ember-cli-release": "^0.2.9",
-    "ember-cli-sass": "5.3.1",
+    "ember-cli-sass": "^7.0.0",
     "ember-cli-shims": "^1.1.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
