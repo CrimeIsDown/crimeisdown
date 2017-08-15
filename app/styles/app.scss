@@ -1,21 +1,6 @@
 @import "../../node_modules/leaflet/dist/leaflet";
 @import "../../node_modules/leaflet-geosearch/assets/css/leaflet";
 
-// From Bootstrap 4:
-$font-family-sans-serif:
-  // Safari for OS X and iOS (San Francisco)
-  -apple-system,
-    // Chrome >= 56 for OS X (San Francisco), Windows, Linux and Android
-  system-ui,
-    // Chrome < 56 for OS X (San Francisco)
-  BlinkMacSystemFont,
-    // Windows
-  "Segoe UI",
-    // Android
-  "Roboto",
-    // Basic web fallback
-  "Helvetica Neue", Arial, sans-serif !default;
-
 $icon-font-path: "../assets/fonts/";
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
@@ -147,7 +132,7 @@ $map-container-height: 85vh;
 
 #site-footer {
   margin-top: 1rem;
-  .col-md-7 {
+  .col-sm-7 {
     text-align: right;
   }
 }
