@@ -1,0 +1,37 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="{{ site.mainsiteurl }}/">{{ site.name }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="{{ site.mainsiteurl }}/map" id="map-link" class="nav-link">Incident Map</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ site.mainsiteurl }}/audio" id="audio-link" class="nav-link">Scanner Audio</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ site.mainsiteurl }}/guide" id="guide-link" class="nav-link">Scanner Guide</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ site.mainsiteurl }}/directives" id="directives-link" class="nav-link">Police Directive Changes</a>
+        </li>
+        <li class="nav-item active">
+          <a href="{{ site.baseurl }}/" class="nav-link">Blog</a>
+        </li>
+        {% for page in site.pages %}
+          {% if page.title %}
+            {% if page.excludedFromNav != true %}
+              <li class="nav-item">
+                <a href="{{ page.url | prepend: site.baseurl }}" class="nav-link">{{ page.title }}</a>
+              </li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+</header>

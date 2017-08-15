@@ -1,0 +1,30 @@
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="keywords" content="{{ page.tags | join: ',' }}">
+
+    <!-- Favicon, touch icon -->
+    <link href="{{ site.baseurl }}/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <!-- Social media meta tags -->
+    <meta content="summary" name="twitter:card">
+    <meta content="@CrimeIsDown" name="twitter:site">
+    <meta content="CrimeIsDown.com" name="twitter:title">
+    <meta content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 140 }}{% else %}{{ site.description }}{% endif %}" name="twitter:description">
+    <meta content="@EricTendian" name="twitter:creator">
+    <meta content="" name="twitter:image:src">
+    <meta content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}" property="og:title">
+    <meta content="article" property="og:type">
+    <meta content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" property="og:url">
+    <meta content="" property="og:image">
+    <meta content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 140 }}{% else %}{{ site.description }}{% endif %}" property="og:description">
+
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}" />
+
+    <link rel="stylesheet" href="https://dev.crimeisdown.com/assets/vendor.css">
+    <link rel="stylesheet" href="https://dev.crimeisdown.com/assets/crimeisdown.css">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>

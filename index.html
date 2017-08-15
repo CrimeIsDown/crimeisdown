@@ -1,0 +1,39 @@
+---
+layout: default
+index: true
+pagination:
+  enabled: true
+---
+
+<h1>{{ site.name }} Blog</h1>
+
+{% for post in paginator.posts %}
+<article class="post">
+  <header class="post-header">
+    <h2 class="post-title"><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+    <p class="post-meta">Posted on {{ post.date | date: "%B %d, %Y" }}{% if post.author %} by {{ post.author }}{% endif %}</p>
+  </header>
+  <div class="post-main">
+    {{ post.content }}
+    <a href="{{ post.url | prepend: site.baseurl }}">Permalink</a>
+  </div>
+</article>
+<hr/>
+{% endfor %}
+
+<nav aria-label="Page navigation">
+  {% if paginator.total_pages > 1 %}
+  <ul class="pagination">
+    {% if paginator.previous_page %}
+    <li class="page-item">
+      <a class="page-link" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer</a>
+    </li>
+    {% endif %}
+    {% if paginator.next_page %}
+    <li class="page-item">
+      <a class="page-link" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older</a>
+    </li>
+    {% endif %}
+  </ul>
+  {% endif %}
+</nav>
