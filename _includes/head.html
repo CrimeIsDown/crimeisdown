@@ -11,7 +11,7 @@
     <!-- Social media meta tags -->
     <meta content="summary" name="twitter:card">
     <meta content="@CrimeIsDown" name="twitter:site">
-    <meta content="CrimeIsDown.com" name="twitter:title">
+    <meta content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}" name="twitter:title">
     <meta content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 140 }}{% else %}{{ site.description }}{% endif %}" name="twitter:description">
     <meta content="@EricTendian" name="twitter:creator">
     <meta content="" name="twitter:image:src">
