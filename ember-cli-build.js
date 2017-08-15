@@ -15,30 +15,15 @@ module.exports = function(defaults) {
 
   app.import('vendor/popper.js/dist/umd/popper.js');
 
-  app.import({
-    development: 'vendor/bootstrap/dist/js/bootstrap.js',
-    production: 'vendor/bootstrap/dist/js/bootstrap.min.js'
-  });
+  app.import('vendor/bootstrap/dist/js/bootstrap.js');
 
-  app.import({
-    development: 'vendor/bootstrap-table/dist/bootstrap-table.js',
-    production: 'vendor/bootstrap-table/dist/bootstrap-table.min.js'
-  });
+  app.import('vendor/bootstrap-table/dist/bootstrap-table.js');
 
-  app.import({
-    development: 'vendor/bootstrap-table/dist/bootstrap-table.css',
-    production: 'vendor/bootstrap-table/dist/bootstrap-table.min.css'
-  });
+  app.import('vendor/bootstrap-table/dist/bootstrap-table.css');
 
-  app.import({
-    development: 'vendor/rome/dist/rome.js',
-    production: 'vendor/rome/dist/rome.min.js'
-  });
+  app.import('vendor/rome/dist/rome.js');
 
-  app.import({
-    development: 'vendor/rome/dist/rome.css',
-    production: 'vendor/rome/dist/rome.min.css'
-  });
+  app.import('vendor/rome/dist/rome.css');
 
   app.import('vendor/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
   app.import('vendor/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});

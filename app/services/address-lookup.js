@@ -5,22 +5,22 @@ import leafletPip from 'npm:@mapbox/leaflet-pip';
 
 export default Ember.Service.extend({
   loadData() {
-    fetch('https://dev.crimeisdown.com/data/city_data/aldermen.json').then((response) => {
+    fetch('https://crimeisdown.com/data/city_data/aldermen.json').then((response) => {
       response.json().then((data) => {
         this.aldermen = data;
       });
     });
-    fetch('https://dev.crimeisdown.com/data/audio_data/online_streams.json').then((response) => {
+    fetch('https://crimeisdown.com/data/audio_data/online_streams.json').then((response) => {
       response.json().then((data) => {
         this.onlineStreams = data;
       });
     });
-    fetch('https://dev.crimeisdown.com/data/city_data/fire_stations.json').then((response) => {
+    fetch('https://crimeisdown.com/data/city_data/fire_stations.json').then((response) => {
       response.json().then((data) => {
         this.fireStations = data;
       });
     });
-    fetch('https://dev.crimeisdown.com/data/city_data/trauma_centers.json').then((response) => {
+    fetch('https://crimeisdown.com/data/city_data/trauma_centers.json').then((response) => {
       response.json().then((data) => {
         this.traumaCenters = data;
       });

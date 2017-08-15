@@ -60,7 +60,7 @@
     "leaflet-geosearch": "2.0.2",
     "leaflet-plugins": "^3.0.0",
     "leaflet-sidebar-v2": "^1.0.0",
-    "leaflet.gridlayer.googlemutant": "^0.4.3",
+    "leaflet.gridlayer.googlemutant": "^0.6.2",
     "loader.js": "^4.2.3",
     "nodent-runtime": "^3.0.3",
     "popper.js": "^1.11.1",
