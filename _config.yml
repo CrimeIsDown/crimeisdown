@@ -8,10 +8,10 @@ permalink: /:title/
 # Setup
 title: CrimeIsDown.com Blog
 name: 'CrimeIsDown.com'
-description: 'add a description'
+description: 'Taking the confusion out of monitoring Chicago crime with data-driven tools.'
 url: https://blog.crimeisdown.com
 baseurl:
-mainsiteurl: https://dev.crimeisdown.com
+mainsiteurl: https://crimeisdown.com
 
 paginate: 5
 paginate_path: page/:num
