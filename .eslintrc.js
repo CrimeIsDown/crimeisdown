@@ -10,7 +10,8 @@ module.exports = {
     jquery: true
   },
   globals: {
-    "ga": true
+    "ga": true,
+    "rome": true
   },
   rules: {
   }

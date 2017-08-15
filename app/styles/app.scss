@@ -18,20 +18,14 @@ $font-family-sans-serif:
 
 $icon-font-path: "../assets/fonts/";
 
-@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
-//@import "../../node_modules/bootswatch/darkly/bootswatch";
-//@import "../../node_modules/bootstrap-material-design/dist/sassc/bootstrap-material-design";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 $fa-font-path: "../assets/fonts";
 @import "../../node_modules/font-awesome/scss/font-awesome";
 
 body {
   background-color: #FFF !important;
-}
-
-header {
-  margin-top: 5em;
+  padding-top: 5rem;
 }
 
 iframe {
@@ -50,9 +44,6 @@ html.android {
     font-weight: 400 !important;
     text-rendering: geometricPrecision;
   }
-  header {
-    display: none;
-  }
   footer#site-footer {
     display: none;
   }
@@ -70,10 +61,6 @@ html.android {
 blockquote {
   font-size: 1em;
   font-style: italic;
-}
-
-.navbar-fixed-top, .navbar-fixed-bottom {
-  z-index: 9999;
 }
 
 #searchpane {
@@ -102,8 +89,14 @@ $map-container-height: 85vh;
   }
 }
 
+.table {
+  th, td {
+    padding: 0.25rem !important;
+  }
+}
+
 .map {
-  margin-top: -20px;
+  margin-top: -1.5rem;
   .map-container {
     position: relative;
     .leaflet-container {
@@ -127,7 +120,7 @@ $map-container-height: 85vh;
     }
   }
   .search-container {
-    padding: 15px;
+    padding: 1rem;
     #address-search {
       table tr > td {
         width: 50%;
@@ -147,6 +140,9 @@ $map-container-height: 85vh;
 #radio-search .results,
 #ucr-search .results {
   margin-top: 1em;
+  tr > th {
+    width: 33.33333%;
+  }
 }
 
 #site-footer {
@@ -156,8 +152,12 @@ $map-container-height: 85vh;
   }
 }
 
-tr > th {
-  width: 33.33333%;
+.articles-list article {
+  max-width: 48rem;
+}
+
+th.rd-day-head {
+  width: 2rem;
 }
 
 #directiveViewer {

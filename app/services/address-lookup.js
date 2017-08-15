@@ -1,20 +1,29 @@
 import Ember from 'ember';
+import fetch from 'fetch';
 import L from 'npm:leaflet';
 import leafletPip from 'npm:@mapbox/leaflet-pip';
 
 export default Ember.Service.extend({
   loadData() {
-    Ember.$.getJSON('/data/city_data/aldermen.json').done((data) => {
-      this.aldermen = data;
+    fetch('https://dev.crimeisdown.com/data/city_data/aldermen.json').then((response) => {
+      response.json().then((data) => {
+        this.aldermen = data;
+      });
     });
-    Ember.$.getJSON('/data/audio_data/online_streams.json').done((data) => {
-      this.onlineStreams = data;
+    fetch('https://dev.crimeisdown.com/data/audio_data/online_streams.json').then((response) => {
+      response.json().then((data) => {
+        this.onlineStreams = data;
+      });
     });
-    Ember.$.getJSON('/data/city_data/fire_stations.json').done((data) => {
-      this.fireStations = data;
+    fetch('https://dev.crimeisdown.com/data/city_data/fire_stations.json').then((response) => {
+      response.json().then((data) => {
+        this.fireStations = data;
+      });
     });
-    Ember.$.getJSON('/data/city_data/trauma_centers.json').done((data) => {
-      this.traumaCenters = data;
+    fetch('https://dev.crimeisdown.com/data/city_data/trauma_centers.json').then((response) => {
+      response.json().then((data) => {
+        this.traumaCenters = data;
+      });
     });
 
     this.policeZones = {'1': ['16', '17'], '2': ['19'], '3': ['12', '14'], '4': ['1', '18'], '5': ['2'], '6': ['7', '8'], '7': ['3'], '8': ['4', '6'], '9': ['5', '22'], '10': ['10', '11'], '11': ['20', '24'], '12': ['15', '25'], '13': ['9']};

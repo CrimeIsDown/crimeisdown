@@ -1,41 +1,31 @@
 <header>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        {{#link-to "index" class="navbar-brand"}}CrimeIsDown.com{{/link-to}}
-      </div>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    {{#link-to "index" class="navbar-brand"}}CrimeIsDown.com{{/link-to}}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="navbar-collapse collapse" id="navbar">
-        <ul class="nav navbar-nav">
-          {{#nav-link-to "map" id="map-link"}}Incident Map{{/nav-link-to}}
-          {{#nav-link-to "audio" id="audio-link"}}Scanner Audio{{/nav-link-to}}
-          {{#nav-link-to "guide" id="guide-link"}}Scanner Guide{{/nav-link-to}}
-          {{#nav-link-to "directives" id="directives-link"}}Police Directive Changes{{/nav-link-to}}
-        </ul>
-      </div>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          {{#link-to "map" id="map-link" class="nav-link"}}Incident Map{{/link-to}}
+        </li>
+        <li class="nav-item">
+          {{#link-to "audio" id="audio-link" class="nav-link"}}Scanner Audio{{/link-to}}
+        </li>
+        <li class="nav-item">
+          {{#link-to "guide" id="guide-link" class="nav-link"}}Scanner Guide{{/link-to}}
+        </li>
+        <li class="nav-item">
+          {{#link-to "directives" id="directives-link" class="nav-link"}}Police Directive Changes{{/link-to}}
+        </li>
+        <li class="nav-item">
+          {{#link-to "news" id="news-link" class="nav-link"}}News{{/link-to}}
+        </li>
+      </ul>
     </div>
   </nav>
 </header>
-
-<script>
-  $(document).on('click','.navbar-collapse.in',function (e) {
-    if ($(e.target).is('a') && ( $(e.target).attr('class') != 'dropdown-toggle' ) ) {
-      $(this).collapse('hide');
-    }
-  });
-  $(function () {
-    if (typeof Android !== 'undefined') {
-      $('html').addClass('android');
-      $('body').scrollTop(0);
-    }
-  });
-</script>
 
 {{outlet}}
 
