@@ -14,15 +14,12 @@ module.exports = function(defaults) {
   app.import('vendor/raven-js/dist/plugins/ember.js');
 
   app.import('vendor/popper.js/dist/umd/popper.js');
-
   app.import('vendor/bootstrap/dist/js/bootstrap.js');
 
   app.import('vendor/bootstrap-table/dist/bootstrap-table.js');
-
   app.import('vendor/bootstrap-table/dist/bootstrap-table.css');
 
   app.import('vendor/rome/dist/rome.js');
-
   app.import('vendor/rome/dist/rome.css');
 
   app.import('vendor/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
