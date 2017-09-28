@@ -54,6 +54,7 @@
     "ember-router-scroll": "^0.3.0",
     "ember-simple-auth": "^1.2.1",
     "ember-source": "~2.13.0",
+    "ember-trix-editor": "lynnetye/ember-trix-editor",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "leaflet": "^1.2.0",

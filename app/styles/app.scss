@@ -122,11 +122,49 @@ $map-container-height: 85vh;
   }
 }
 
+.accordion {
+  .card-header {
+    padding: 0.5rem 1.25rem;
+    margin-bottom: 0.5rem;
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+      &::before {
+        // From Font Awesome
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        content: "\f0d7";
+        width: 0.75rem;
+      }
+      &.collapsed::before {
+        content: "\f0da";
+        padding-left: 0.125rem; // to ensure proper centering
+      }
+    }
+  }
+}
+
 #radio-search .results,
 #ucr-search .results {
   margin-top: 1em;
   tr > th {
     width: 33.33333%;
+  }
+}
+
+
+#notepad {
+  trix-editor {
+    margin-bottom: 1em;
+  }
+  trix-toolbar {
+    display: none;
   }
 }
 

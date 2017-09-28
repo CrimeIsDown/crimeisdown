@@ -2,135 +2,170 @@
   <div class="search-container">
     <p><em>Interact with this map or use the search box to find information about a specific address. Police districts are outlined in blue.</em></p>
     <p class="mobile text-primary"><em>Scroll down for incident map</em></p>
-    <div id="address-search">
-      <form>
-        <div class="form-group">
-          <label for="address">Address, intersection, place to search</label>
-          <div class="input-group input-group-sm">
-            <input autofocus="autofocus" class="form-control" name="address" placeholder="e.g. 3510 S Michigan, Chicago" type="text">
-            <span class="input-group-btn">
-          <button class="btn btn-default" type="submit">Search</button>
-        </span>
-          </div>
+    <div class="accordion" role="tablist">
+      <div class="card card-header" role="tab">
+        <a id="headingNotepad" class="collapsed" data-toggle="collapse" href="#collapseNotepad" aria-expanded="true" aria-controls="collapseNotepad">
+          Notepad
+        </a>
+      </div>
+      <div id="collapseNotepad" class="collapse" role="tabpanel" aria-labelledby="headingNotepad" data-parent="#accordion">
+        <div id="notepad">
+          <p>Use the text area for any notes you may need to take when listening to the scanner.</p>
+          {{trix-editor}}
+          <p><em>Refreshing the page or navigating away will clear anything you have written.</em></p>
         </div>
-      </form>
-      <table class="table table-bordered table-condensed">
-        <tbody>
-        <tr class="info">
-          <th colspan="2">Location Info</th>
-        </tr>
-        <tr>
-          <td>Formatted Address</td>
-          <td>{{ location.meta.formattedAddress }}</td>
-        </tr>
-        <tr>
-          <td>Latitude: {{ location.meta.latitude }}</td>
-          <td>Longitude: {{ location.meta.longitude }}</td>
-        </tr>
-        <tr>
-          <td>Neighborhood</td>
-          <td>{{ location.meta.neighborhood }}</td>
-        </tr>
-        <tr>
-          <td>Community Area</td>
-          <td>{{ location.meta.communityArea }}</td>
-        </tr>
-        <tr>
-          <td>Ward / Alderman</td>
-          <td>{{#if location.meta.ward}}{{ location.meta.ward }} - <a href="{{ location.meta.alderman.website }}" target="_blank">Alderman {{ location.meta.alderman.name }}</a>{{/if}}</td>
-        </tr>
-        <tr class="info">
-          <th colspan="2">Chicago Police Department</th>
-        </tr>
-        <tr>
-          <td>Beat</td>
-          <td>{{ location.police.beat }}</td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <strong>Radio Zone {{ location.police.zone.num }}</strong>
-            {{#if location.police.zone.freq}}
-            ({{ location.police.zone.freq }}
-            {{#if location.police.zone.url}}
-              /
-            <a href="{{ location.police.zone.url }}" target="_blank">Audio from Broadcastify</a>
-            {{/if}})
-            {{#if location.police.zone.mp3}}
-              <br><audio controls src="{{ location.police.zone.mp3 }}" preload="none">Your user agent does not support the HTML5 Audio element.</audio>
-            {{/if}}
-            {{/if}}
-          </td>
-        </tr>
-        <tr>
-          <td>{{ location.police.district }} District</td>
-          <td>Area {{ location.police.area }}</td>
-        </tr>
-        <tr class="info">
-          <th colspan="2">Chicago Fire Department</th>
-        </tr>
-        <tr>
-          <td>Nearest Engine {{ location.fire.nearestEngine }}</td>
-          <td>Nearest Ambo. {{ location.fire.nearestAmbo }}</td>
-        </tr>
-        <tr>
-          <td>Battalion {{ location.fire.battalion }} / Fire Dist. {{ location.fire.fireDistrict }}</td>
-          <td>EMS District {{ location.fire.emsDistrict }}</td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            Radio Channel: {{ location.fire.channel }}
-            {{#if location.fire.channel}}
-            (Listen to <a href="http://www.broadcastify.com/listen/feed/909/web" target="_blank">Fire</a>
-            or
-            <a href="http://www.broadcastify.com/listen/feed/13605/web" target="_blank">EMS</a>)
-            {{/if}}
-          </td>
-        </tr>
-        <tr class="info">
-          <th colspan="2">Closest Medical Services</th>
-        </tr>
-        <tr>
-          <td colspan="2">
-            Adult Trauma Center:
-            {{#if location.ems.nearestTraumaAdult.name}}
-            <em>
-              {{ location.ems.nearestTraumaAdult.name }}
-              -
-              {{ location.ems.nearestTraumaAdult.distanceMi }}mi
-            </em>
-            ({{ location.ems.nearestTraumaAdult.addr }},
-              {{ location.ems.nearestTraumaAdult.city }},
-              {{ location.ems.nearestTraumaAdult.state }},
-              {{ location.ems.nearestTraumaAdult.zip }})
-            - Patient Reports on {{ location.ems.nearestTraumaAdult.medChannel }}
-            {{/if}}
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            Pediatric Trauma Center:
-            {{#if location.ems.nearestTraumaPed.name}}
-            <em>
-              {{ location.ems.nearestTraumaPed.name }}
-              -
-              {{ location.ems.nearestTraumaPed.distanceMi }}mi
-            </em>
-            ({{ location.ems.nearestTraumaPed.addr }},
-              {{ location.ems.nearestTraumaPed.city }},
-              {{ location.ems.nearestTraumaPed.state }},
-              {{ location.ems.nearestTraumaPed.zip }})
-            - Patient Reports on {{ location.ems.nearestTraumaPed.medChannel }}
-            {{/if}}
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div id="search-radioids">
-      {{search-radioids}}
-    </div>
-    <div id="search-ucrcodes">
-      {{search-ucrcodes}}
+      </div>
+      <div class="card card-header" role="tab">
+        <a class="headingAddrSearch" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
+          Address Search
+        </a>
+      </div>
+      <div id="collapseAddrSearch" class="collapse show" role="tabpanel" aria-labelledby="headingAddrSearch" data-parent="#accordion">
+        <div id="address-search">
+          <form>
+            <div class="form-group">
+              <label for="address">Address, intersection, place to search</label>
+              <div class="input-group input-group-sm">
+                <input autofocus="autofocus" class="form-control" name="address" placeholder="e.g. 3510 S Michigan, Chicago" type="text">
+                <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Search</button>
+            </span>
+              </div>
+            </div>
+          </form>
+          <table class="table table-bordered table-condensed">
+            <tbody>
+            <tr class="info">
+              <th colspan="2">Location Info</th>
+            </tr>
+            <tr>
+              <td>Formatted Address</td>
+              <td>{{ location.meta.formattedAddress }}</td>
+            </tr>
+            <tr>
+              <td>Latitude: {{ location.meta.latitude }}</td>
+              <td>Longitude: {{ location.meta.longitude }}</td>
+            </tr>
+            <tr>
+              <td>Neighborhood</td>
+              <td>{{ location.meta.neighborhood }}</td>
+            </tr>
+            <tr>
+              <td>Community Area</td>
+              <td>{{ location.meta.communityArea }}</td>
+            </tr>
+            <tr>
+              <td>Ward / Alderman</td>
+              <td>{{#if location.meta.ward}}{{ location.meta.ward }} - <a href="{{ location.meta.alderman.website }}" target="_blank">Alderman {{ location.meta.alderman.name }}</a>{{/if}}</td>
+            </tr>
+            <tr class="info">
+              <th colspan="2">Chicago Police Department</th>
+            </tr>
+            <tr>
+              <td>Beat</td>
+              <td>{{ location.police.beat }}</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Radio Zone {{ location.police.zone.num }}</strong>
+                {{#if location.police.zone.freq}}
+                ({{ location.police.zone.freq }}
+                {{#if location.police.zone.url}}
+                  /
+                <a href="{{ location.police.zone.url }}" target="_blank">Audio from Broadcastify</a>
+                {{/if}})
+                {{#if location.police.zone.mp3}}
+                  <br><audio controls src="{{ location.police.zone.mp3 }}" preload="none">Your user agent does not support the HTML5 Audio element.</audio>
+                {{/if}}
+                {{/if}}
+              </td>
+            </tr>
+            <tr>
+              <td>{{ location.police.district }} District</td>
+              <td>Area {{ location.police.area }}</td>
+            </tr>
+            <tr class="info">
+              <th colspan="2">Chicago Fire Department</th>
+            </tr>
+            <tr>
+              <td>Nearest Engine {{ location.fire.nearestEngine }}</td>
+              <td>Nearest Ambo. {{ location.fire.nearestAmbo }}</td>
+            </tr>
+            <tr>
+              <td>Battalion {{ location.fire.battalion }} / Fire Dist. {{ location.fire.fireDistrict }}</td>
+              <td>EMS District {{ location.fire.emsDistrict }}</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Radio Channel: {{ location.fire.channel }}
+                {{#if location.fire.channel}}
+                (Listen to <a href="http://www.broadcastify.com/listen/feed/909/web" target="_blank">Fire</a>
+                or
+                <a href="http://www.broadcastify.com/listen/feed/13605/web" target="_blank">EMS</a>)
+                {{/if}}
+              </td>
+            </tr>
+            <tr class="info">
+              <th colspan="2">Closest Medical Services</th>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Adult Trauma Center:
+                {{#if location.ems.nearestTraumaAdult.name}}
+                <em>
+                  {{ location.ems.nearestTraumaAdult.name }}
+                  -
+                  {{ location.ems.nearestTraumaAdult.distanceMi }}mi
+                </em>
+                ({{ location.ems.nearestTraumaAdult.addr }},
+                  {{ location.ems.nearestTraumaAdult.city }},
+                  {{ location.ems.nearestTraumaAdult.state }},
+                  {{ location.ems.nearestTraumaAdult.zip }})
+                - Patient Reports on {{ location.ems.nearestTraumaAdult.medChannel }}
+                {{/if}}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Pediatric Trauma Center:
+                {{#if location.ems.nearestTraumaPed.name}}
+                <em>
+                  {{ location.ems.nearestTraumaPed.name }}
+                  -
+                  {{ location.ems.nearestTraumaPed.distanceMi }}mi
+                </em>
+                ({{ location.ems.nearestTraumaPed.addr }},
+                  {{ location.ems.nearestTraumaPed.city }},
+                  {{ location.ems.nearestTraumaPed.state }},
+                  {{ location.ems.nearestTraumaPed.zip }})
+                - Patient Reports on {{ location.ems.nearestTraumaPed.medChannel }}
+                {{/if}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card card-header" role="tab">
+        <a data-toggle="collapse" href="#collapseRIDSearch" aria-expanded="true" aria-controls="collapseRIDSearch">
+          Radio ID Search
+        </a>
+      </div>
+      <div id="collapseRIDSearch" class="collapse show" role="tabpanel" aria-labelledby="headingRIDSearch" data-parent="#accordion">
+        <div id="search-radioids">
+          {{search-radioids}}
+        </div>
+      </div>
+      <div class="card card-header" role="tab">
+        <a data-toggle="collapse" href="#collapseUCRSearch" aria-expanded="true" aria-controls="collapseUCRSearch">
+          UCR Code Search
+        </a>
+      </div>
+      <div id="collapseUCRSearch" class="collapse show" role="tabpanel" aria-labelledby="headingUCRSearch" data-parent="#accordion">
+        <div id="search-ucrcodes">
+          {{search-ucrcodes}}
+        </div>
+      </div>
     </div>
   </div>
   <div class="map-container">
