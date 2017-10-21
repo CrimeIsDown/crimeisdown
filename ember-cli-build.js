@@ -9,6 +9,15 @@ module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     'ember-cli-babel': {
       includePolyfill: true
+    },
+    fingerprint: {
+      exclude: [
+        'assets/images/layers-2x.png',
+        'assets/images/layers.png',
+        'assets/images/marker-icon-2x.png',
+        'assets/images/marker-icon.png',
+        'assets/images/marker-shadow.png'
+      ]
     }
   });
 

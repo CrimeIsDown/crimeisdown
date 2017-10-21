@@ -57,6 +57,9 @@
             a.appendChild(r);
         })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
+
+    <!-- We are loading leaflet-geosearch via unpkg because it is incompatible with ember-browserify -->
+    <script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script>
       Raven
