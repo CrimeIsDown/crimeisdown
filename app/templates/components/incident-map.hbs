@@ -8,6 +8,7 @@
           <a id="headingNotepad" class="collapsed" data-toggle="collapse" href="#collapseNotepad" aria-expanded="true" aria-controls="collapseNotepad">
             Notepad
           </a>
+          <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
         </div>
         <div id="collapseNotepad" class="collapse" role="tabpanel" aria-labelledby="headingNotepad" data-parent="#accordion">
           <div id="notepad">
@@ -22,6 +23,7 @@
           <a class="headingAddrSearch" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
             Address Search
           </a>
+          <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
         </div>
         <div id="collapseAddrSearch" class="collapse show" role="tabpanel" aria-labelledby="headingAddrSearch" data-parent="#accordion">
           <div id="address-search">
@@ -155,6 +157,7 @@
           <a data-toggle="collapse" href="#collapseRIDSearch" aria-expanded="true" aria-controls="collapseRIDSearch">
             Radio ID Search
           </a>
+          <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
         </div>
         <div id="collapseRIDSearch" class="collapse show" role="tabpanel" aria-labelledby="headingRIDSearch" data-parent="#accordion">
           <div id="search-radioids">
@@ -167,6 +170,7 @@
           <a data-toggle="collapse" href="#collapseUCRSearch" aria-expanded="true" aria-controls="collapseUCRSearch">
             UCR Code Search
           </a>
+          <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
         </div>
         <div id="collapseUCRSearch" class="collapse show" role="tabpanel" aria-labelledby="headingUCRSearch" data-parent="#accordion">
           <div id="search-ucrcodes">
@@ -179,9 +183,8 @@
       // @TODO: Move outside the template
       var el = document.querySelector('.search-container > .accordion');
       var sortable = Sortable.create(el, {
-        delay: 100,
         draggable: '.draggable',
-        handle: '.card-header'
+        handle: '.draggable-handle'
       });
     </script>
   </div>

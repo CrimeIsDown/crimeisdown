@@ -54,26 +54,6 @@ blockquote {
 
 $map-container-height: 85vh;
 
-@media (min-width: 768px) {
-  .overall-container {
-    display: flex;
-    .map-container {
-      flex: 1;
-      .leaflet-container {
-        height: $map-container-height !important;
-      }
-    }
-    .search-container {
-      width: 350px;
-      max-height: $map-container-height;
-      overflow-y: auto;
-      .mobile {
-        display: none;
-      }
-    }
-  }
-}
-
 .table {
   th, td {
     padding: 0.25rem !important;
@@ -85,7 +65,7 @@ $map-container-height: 85vh;
   .map-container {
     position: relative;
     .leaflet-container {
-      width: 100%;
+      margin: 0 1rem;
       height: 75vh;
       color: #000;
       .info.leaflet-control {
@@ -126,7 +106,7 @@ $map-container-height: 85vh;
   .card-header {
     padding: 0.5rem 1.25rem;
     margin-bottom: 0.5rem;
-    a {
+    a[data-toggle="collapse"] {
       &:hover {
         text-decoration: none;
       }
@@ -136,18 +116,18 @@ $map-container-height: 85vh;
         content: $fa-var-caret-down;
         width: 0.75rem;
       }
-      &::after {
-        @include fa-icon();
-
-        content: $fa-var-arrows-v;
-        float: right;
-        width: 0.75rem;
-        padding-top: 0.2rem;
-      }
       &.collapsed::before {
         content: $fa-var-caret-right;
         padding-left: 0.125rem; // to ensure proper centering
       }
+    }
+    .draggable-handle {
+      cursor: pointer;
+      color: #777;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.5rem 1rem;
     }
   }
 }
@@ -197,5 +177,27 @@ th.rd-day-head {
     margin: 0 0.25em;
     padding: 0.4em;
     width: 50%;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .overall-container {
+    display: flex;
+    .map-container {
+      flex: 1;
+      .leaflet-container {
+        margin: 0;
+        width: 100%;
+        height: $map-container-height;
+      }
+    }
+    .search-container {
+      width: 350px;
+      max-height: $map-container-height;
+      overflow-y: auto;
+      .mobile {
+        display: none;
+      }
+    }
   }
 }
