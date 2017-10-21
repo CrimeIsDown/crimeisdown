@@ -1,9 +1,10 @@
 /* eslint-env node */
+'use strict';
 
 module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'crimeisdown',
-    environment: environment,
+    environment,
     rootURL: '/',
     locationType: 'router-scroll',
     historySupportMiddleware: true,

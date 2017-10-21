@@ -1,10 +1,12 @@
 /* eslint-env node */
+'use strict';
+
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 // const Funnel = require('broccoli-funnel');
 const AssetRev = require('broccoli-asset-rev');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
+  let app = new EmberApp(defaults, {
     'ember-cli-babel': {
       includePolyfill: true
     }
