@@ -139,7 +139,7 @@ $map-container-height: 85vh;
       &::after {
         @include fa-icon();
 
-        content: $fa-var-arrows;
+        content: $fa-var-arrows-v;
         float: right;
         width: 0.75rem;
         padding-top: 0.2rem;

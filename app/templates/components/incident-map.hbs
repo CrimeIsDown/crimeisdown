@@ -179,7 +179,8 @@
       // @TODO: Move outside the template
       var el = document.querySelector('.search-container > .accordion');
       var sortable = Sortable.create(el, {
-        draggable: '.draggable'
+        draggable: '.draggable',
+        handle: '.card-header'
       });
     </script>
   </div>
