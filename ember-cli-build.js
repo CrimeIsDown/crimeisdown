@@ -12,30 +12,32 @@ module.exports = function(defaults) {
     }
   });
 
-  app.import('vendor/raven-js/dist/raven.js');
-  app.import('vendor/raven-js/dist/plugins/ember.js');
+  app.import('node_modules/raven-js/dist/raven.js');
+  app.import('node_modules/raven-js/dist/plugins/ember.js');
 
-  app.import('vendor/popper.js/dist/umd/popper.js');
-  app.import('vendor/bootstrap/dist/js/bootstrap.js');
+  app.import('node_modules/popper.js/dist/umd/popper.js');
+  app.import('node_modules/bootstrap/dist/js/bootstrap.js');
 
-  app.import('vendor/bootstrap-table/dist/bootstrap-table.js');
-  app.import('vendor/bootstrap-table/dist/bootstrap-table.css');
+  app.import('node_modules/bootstrap-table/dist/bootstrap-table.js');
+  app.import('node_modules/bootstrap-table/dist/bootstrap-table.css');
 
-  app.import('vendor/rome/dist/rome.js');
-  app.import('vendor/rome/dist/rome.css');
+  app.import('node_modules/sortablejs/Sortable.js');
 
-  app.import('vendor/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
-  app.import('vendor/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
-  app.import('vendor/leaflet/dist/images/marker-icon.png', {destDir: 'assets/images'});
-  app.import('vendor/leaflet/dist/images/marker-icon-2x.png', {destDir: 'assets/images'});
-  app.import('vendor/leaflet/dist/images/marker-shadow.png', {destDir: 'assets/images'});
+  app.import('node_modules/rome/dist/rome.js');
+  app.import('node_modules/rome/dist/rome.css');
 
-  app.import('vendor/font-awesome/fonts/FontAwesome.otf', {destDir: 'assets/fonts'});
-  app.import('vendor/font-awesome/fonts/fontawesome-webfont.eot', {destDir: 'assets/fonts'});
-  app.import('vendor/font-awesome/fonts/fontawesome-webfont.svg', {destDir: 'assets/fonts'});
-  app.import('vendor/font-awesome/fonts/fontawesome-webfont.ttf', {destDir: 'assets/fonts'});
-  app.import('vendor/font-awesome/fonts/fontawesome-webfont.woff', {destDir: 'assets/fonts'});
-  app.import('vendor/font-awesome/fonts/fontawesome-webfont.woff2', {destDir: 'assets/fonts'});
+  app.import('node_modules/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet/dist/images/marker-icon.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet/dist/images/marker-icon-2x.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet/dist/images/marker-shadow.png', {destDir: 'assets/images'});
+
+  app.import('node_modules/font-awesome/fonts/FontAwesome.otf', {destDir: 'assets/fonts'});
+  app.import('node_modules/font-awesome/fonts/fontawesome-webfont.eot', {destDir: 'assets/fonts'});
+  app.import('node_modules/font-awesome/fonts/fontawesome-webfont.svg', {destDir: 'assets/fonts'});
+  app.import('node_modules/font-awesome/fonts/fontawesome-webfont.ttf', {destDir: 'assets/fonts'});
+  app.import('node_modules/font-awesome/fonts/fontawesome-webfont.woff', {destDir: 'assets/fonts'});
+  app.import('node_modules/font-awesome/fonts/fontawesome-webfont.woff2', {destDir: 'assets/fonts'});
 
   return app.toTree();
 };
