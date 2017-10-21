@@ -131,19 +131,21 @@ $map-container-height: 85vh;
         text-decoration: none;
       }
       &::before {
-        // From Font Awesome
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        @include fa-icon();
 
-        content: "\f0d7";
+        content: $fa-var-caret-down;
         width: 0.75rem;
       }
+      &::after {
+        @include fa-icon();
+
+        content: $fa-var-arrows;
+        float: right;
+        width: 0.75rem;
+        padding-top: 0.2rem;
+      }
       &.collapsed::before {
-        content: "\f0da";
+        content: $fa-var-caret-right;
         padding-left: 0.125rem; // to ensure proper centering
       }
     }
