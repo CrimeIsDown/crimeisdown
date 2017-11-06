@@ -23,6 +23,12 @@ html.android {
   }
 }
 
+nav.navbar .form-inline .form-check-label {
+  color: rgba(255, 255, 255, 0.5);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .alert {
   p {
     margin: 0;

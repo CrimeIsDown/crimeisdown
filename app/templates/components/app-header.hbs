@@ -23,31 +23,35 @@
           <a href="https://blog.crimeisdown.com" id="blog-link" class="nav-link">Blog</a>
         </li>
       </ul>
+      <form class="form-inline">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" id="nightmodetoggle">
+          Night Mode
+        </label>
+      </form>
     </div>
-    <label class="form-check-label text-light">
-      <input type="checkbox" class="form-check-input" id="nightmodetoggle">
-      Night Mode
-    </label>
     <script>
       // @TODO: Move to actual .js file
 
       $(function () {
         function toggleStylesheets(dark = false) {
-          if (dark) {
-            $('link[title="Dark Theme"]').attr('disabled', false);
-            $('link[title="Default Theme"]').attr('disabled', true);
-            localStorage.setItem('dark', true);
-          } else {
-            $('link[title="Default Theme"]').attr('disabled', false);
-            $('link[title="Dark Theme"]').attr('disabled', true);
-            localStorage.removeItem('dark');
+          $('html').toggleClass('dark', dark !== false);
+          for (var i = document.styleSheets.length-1; i >= 0; i--){
+            var styleSheet = document.styleSheets[i];
+            if (styleSheet.ownerNode.id === "defaulttheme") {
+              styleSheet.disabled = (dark !== false);
+            } else if (styleSheet.ownerNode.id === "darktheme") {
+              styleSheet.disabled = (dark === false);
+            }
           }
+          if (dark) localStorage.setItem('dark', true);
+          else localStorage.removeItem('dark');
         }
 
         if (localStorage.getItem('dark')) {
-          $("#nightmodetoggle").click();
-          toggleStylesheets(true);
+          $("#nightmodetoggle").attr('checked', true);
         }
+        toggleStylesheets(localStorage.getItem('dark') !== null);
         $("#nightmodetoggle").click(function () {
           toggleStylesheets(this.checked);
         });

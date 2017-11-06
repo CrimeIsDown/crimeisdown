@@ -3,241 +3,245 @@
 
 @import "variables_cyborg";
 
-// Navbar ======================================================================
+html.dark {
 
-.navbar {
+  // Navbar ======================================================================
 
-  &.bg-primary {
-    border: 1px solid $gray-700;
+  .navbar {
+
+    &.bg-primary {
+      border: 1px solid $gray-700;
+    }
+
+    &.bg-dark {
+      background-color: $body-bg !important;
+      border: 1px solid $gray-700;
+    }
+
+    &.bg-light {
+      background-color: $gray-500 !important;
+    }
+
+    &.fixed-top {
+      border-width: 0 0 1px 0;
+    }
+
+    &.fixed-bottom {
+      border-width: 1px 0 0 0;
+    }
+
   }
 
-  &.bg-dark {
-    background-color: $body-bg !important;
-    border: 1px solid $gray-700;
+  // Buttons =====================================================================
+
+  .btn {
+
+    &-warning,
+    &-warning:hover {
+      color: $white;
+    }
   }
 
-  &.bg-light {
-    background-color: $gray-500 !important;
+  // Typography ==================================================================
+
+  // Tables ======================================================================
+
+  table {
+    color: #fff;
   }
 
-  &.fixed-top {
-    border-width: 0 0 1px 0;
+  .table {
+
+    .thead-dark th {
+      color: $white;
+    }
+
+    &-success {
+      &, > th, > td {
+        background-color: $success;
+      }
+    }
+
+    &-info {
+      &, > th, > td {
+        background-color: $info;
+      }
+    }
+
+    &-danger {
+      &, > th, > td {
+        background-color: $danger;
+      }
+    }
+
+    &-warning {
+      &, > th, > td {
+        background-color: $warning;
+      }
+    }
+
+    &-hover {
+
+      .table-success:hover {
+        &, > th, > td {
+          background-color: darken($success, 5%);
+        }
+      }
+
+      .table-info:hover {
+        &, > th, > td {
+          background-color: darken($info, 5%);
+        }
+      }
+
+      .table-danger:hover {
+        &, > th, > td {
+          background-color: darken($danger, 5%);
+        }
+      }
+
+      .table-warning:hover {
+        &, > th, > td {
+          background-color: darken($warning, 5%);
+        }
+      }
+
+    }
   }
 
-  &.fixed-bottom {
-    border-width: 1px 0 0 0;
+  // Forms =======================================================================
+
+  legend,
+  .input-group-addon {
+    color: #fff;
   }
 
-}
+  // Navs ========================================================================
 
-// Buttons =====================================================================
+  .nav-tabs,
+  .nav-pills {
+    .nav-link {
+      color: #fff;
 
-.btn {
+      &:hover {
+        background-color: $gray-700;
+      }
 
-  &-warning,
-  &-warning:hover {
+      &.disabled,
+      &.disabled:hover {
+        background-color: transparent;
+        color: $nav-link-disabled-color;
+      }
+
+      &.active {
+        background-color: $primary;
+      }
+    }
+  }
+
+  .breadcrumb {
+    a {
+      color: #fff;
+    }
+  }
+
+  .pagination {
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  // Indicators ==================================================================
+
+  .alert {
+    border: none;
     color: $white;
-  }
-}
 
-// Typography ==================================================================
+    a,
+    .alert-link {
+      color: #fff;
+      text-decoration: underline;
+    }
 
-// Tables ======================================================================
+    &-primary {
+      background-color: $primary;
+    }
 
-table {
-  color: #fff;
-}
-
-.table {
-
-  .thead-dark th {
-    color: $white;
-  }
-
-  &-success {
-    &, > th, > td {
+    &-success {
       background-color: $success;
     }
-  }
 
-  &-info {
-    &, > th, > td {
-      background-color: $info;
-    }
-  }
-
-  &-danger {
-    &, > th, > td {
+    &-danger {
       background-color: $danger;
     }
-  }
 
-  &-warning {
-    &, > th, > td {
+    &-warning {
       background-color: $warning;
     }
+
+    &-info {
+      background-color: $info;
+    }
+
+    &-dark {
+      background-color: $dark;
+    }
   }
 
-  &-hover {
+  .badge {
 
-    .table-success:hover {
-      &, > th, > td {
-        background-color: darken($success, 5%);
-      }
+    &-warning {
+      color: $white;
     }
-
-    .table-info:hover {
-      &, > th, > td {
-        background-color: darken($info, 5%);
-      }
-    }
-
-    .table-danger:hover {
-      &, > th, > td {
-        background-color: darken($danger, 5%);
-      }
-    }
-
-    .table-warning:hover {
-      &, > th, > td {
-        background-color: darken($warning, 5%);
-      }
-    }
-
   }
-}
 
-// Forms =======================================================================
+  .close {
+    opacity: 0.6;
 
-legend,
-.input-group-addon {
-  color: #fff;
-}
+    &:hover {
+      opacity: 1;
+    }
+  }
 
-// Navs ========================================================================
+  // Progress bars ===============================================================
 
-.nav-tabs,
-.nav-pills {
-  .nav-link {
-    color: #fff;
+  // Containers ==================================================================
+
+  .list-group-item {
 
     &:hover {
       background-color: $gray-700;
+      color: #fff;
     }
 
-    &.disabled,
-    &.disabled:hover {
-      background-color: transparent;
-      color: $nav-link-disabled-color;
-    }
-
-    &.active {
-      background-color: $primary;
-    }
-  }
-}
-
-.breadcrumb {
-  a {
-    color: #fff;
-  }
-}
-
-.pagination {
-  a:hover {
-    text-decoration: none;
-  }
-}
-
-// Indicators ==================================================================
-
-.alert {
-  border: none;
-  color: $white;
-
-  a,
-  .alert-link {
-    color: #fff;
-    text-decoration: underline;
-  }
-
-  &-primary {
-    background-color: $primary;
-  }
-
-  &-success {
-    background-color: $success;
-  }
-
-  &-danger {
-    background-color: $danger;
-  }
-
-  &-warning {
-    background-color: $warning;
-  }
-
-  &-info {
-    background-color: $info;
-  }
-
-  &-dark {
-    background-color: $dark;
-  }
-}
-
-.badge {
-
-  &-warning {
-    color: $white;
-  }
-}
-
-.close {
-  opacity: 0.6;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-// Progress bars ===============================================================
-
-// Containers ==================================================================
-
-.list-group-item {
-
-  &:hover {
-    background-color: $gray-700;
-    color: #fff;
-  }
-
-  &-action {
-    color: $gray-500;
-
-    .list-group-item-heading {
+    &-action {
       color: $gray-500;
+
+      .list-group-item-heading {
+        color: $gray-500;
+      }
+    }
+
+    &:hover .list-group-item-heading {
+      color: #fff;
     }
   }
 
-  &:hover .list-group-item-heading {
-    color: #fff;
-  }
-}
+  .card {
+    &-header {
+      background-color: $gray-800;
+    }
 
-.card {
-  &-header {
-    background-color: $gray-800;
+    &-header,
+    &-title {
+      color: #fff;
+    }
   }
 
-  &-header,
-  &-title {
-    color: #fff;
+  .popover {
+    &-title {
+      border-bottom: none;
+    }
   }
-}
 
-.popover {
-  &-title {
-    border-bottom: none;
-  }
 }
