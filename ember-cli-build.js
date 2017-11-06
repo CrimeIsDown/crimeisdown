@@ -7,6 +7,14 @@ const AssetRev = require('broccoli-asset-rev');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
+    outputPaths: {
+      app: {
+        css: {
+          'app': '/assets/crimeisdown.css',
+          'app-dark': '/assets/crimeisdown-dark.css'
+        }
+      }
+    },
     'ember-cli-babel': {
       includePolyfill: true
     },

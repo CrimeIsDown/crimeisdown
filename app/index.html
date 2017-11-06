@@ -22,12 +22,22 @@
     <meta content="" property="og:image">
     <meta content="Taking the confusion out of monitoring Chicago crime with data-driven tools." property="og:description">
 
-    <link rel="search" type="application/opensearchdescription+xml" href="https://crimeisdown.com/osd.xml" title="Address search" />
+    <link rel="search" type="application/opensearchdescription+xml" href="https://crimeisdown.com/osd.xml" title="Address search">
 
     {{content-for "head"}}
 
+    <link rel="preconnect" href="//maps.googleapis.com">
+    <link rel="preload" href="{{rootURL}}assets/vendor.css" as="style">
+    <link rel="preload" href="{{rootURL}}assets/crimeisdown.css" as="style">
+    <link rel="preload" href="{{rootURL}}assets/crimeisdown-dark.css" as="style">
+    <link rel="preload" href="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL" as="style">
+    <link rel="preload" href="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js" as="script">
+    <link rel="preload" href="{{rootURL}}assets/vendor.js" as="script">
+    <link rel="preload" href="{{rootURL}}assets/crimeisdown.js" as="script">
+
     <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
-    <link rel="stylesheet" href="{{rootURL}}assets/crimeisdown.css">
+    <link rel="stylesheet" href="{{rootURL}}assets/crimeisdown.css" title="Default Theme">
+    <link rel="alternate stylesheet" href="{{rootURL}}assets/crimeisdown-dark.css" title="Dark Theme" disabled="disabled">
 
     {{content-for "head-footer"}}
   </head>

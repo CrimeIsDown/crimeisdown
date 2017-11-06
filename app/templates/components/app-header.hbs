@@ -24,5 +24,34 @@
         </li>
       </ul>
     </div>
+    <label class="form-check-label text-light">
+      <input type="checkbox" class="form-check-input" id="nightmodetoggle">
+      Night Mode
+    </label>
+    <script>
+      // @TODO: Move to actual .js file
+
+      $(function () {
+        function toggleStylesheets(dark = false) {
+          if (dark) {
+            $('link[title="Dark Theme"]').attr('disabled', false);
+            $('link[title="Default Theme"]').attr('disabled', true);
+            localStorage.setItem('dark', true);
+          } else {
+            $('link[title="Default Theme"]').attr('disabled', false);
+            $('link[title="Dark Theme"]').attr('disabled', true);
+            localStorage.removeItem('dark');
+          }
+        }
+
+        if (localStorage.getItem('dark')) {
+          $("#nightmodetoggle").click();
+          toggleStylesheets(true);
+        }
+        $("#nightmodetoggle").click(function () {
+          toggleStylesheets(this.checked);
+        });
+      });
+    </script>
   </nav>
 </header>

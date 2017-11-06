@@ -1,0 +1,193 @@
+body {
+  padding-top: 5rem;
+}
+
+iframe {
+  width: 100%;
+  height: 1000px;
+  border: none;
+}
+
+audio {
+  max-width: 100%;
+}
+
+html.android {
+  body {
+    margin-top: 1em;
+    font-weight: 400 !important;
+    text-rendering: geometricPrecision;
+  }
+  footer#site-footer {
+    display: none;
+  }
+}
+
+.alert {
+  p {
+    margin: 0;
+  }
+  a {
+    text-decoration: underline;
+  }
+}
+
+blockquote {
+  font-size: 1em;
+  font-style: italic;
+}
+
+#searchpane {
+  padding-right: 30px;
+}
+
+$map-container-height: 85vh;
+
+.table {
+  th, td {
+    padding: 0.25rem !important;
+  }
+}
+
+.map {
+  margin-top: -1.5rem;
+  .map-container {
+    position: relative;
+    .leaflet-container {
+      margin: 0 1rem;
+      height: 75vh;
+      color: #000;
+      .info.leaflet-control {
+        background: rgba(26,26,26,0.7);
+        padding: 0.5em 1em;
+        text-align: right;
+        h4, p {
+          color: $light;
+          margin: 0.25em 0;
+        }
+      }
+      .leaflet-control-geosearch.bar {
+        z-index: 1900;
+        max-width: 400px;
+        width: 100%;
+        position: relative !important;
+      }
+    }
+  }
+  .search-container {
+    padding: 1rem;
+    #address-search {
+      table tr > td {
+        width: 50%;
+      }
+    }
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  label {
+    display: block;
+  }
+}
+
+.accordion {
+  .card-header {
+    padding: 0.5rem 1.25rem;
+    margin-bottom: 0.5rem;
+    a[data-toggle="collapse"] {
+      &:hover {
+        text-decoration: none;
+      }
+      &::before {
+        @include fa-icon();
+
+        content: $fa-var-caret-down;
+        width: 0.75rem;
+      }
+      &.collapsed::before {
+        content: $fa-var-caret-right;
+        padding-left: 0.125rem; // to ensure proper centering
+      }
+    }
+    .draggable-handle {
+      cursor: pointer;
+      color: #777;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.5rem 1rem;
+    }
+  }
+}
+
+#radio-search .results,
+#ucr-search .results {
+  margin-top: 1em;
+  tr > th {
+    width: 33.33333%;
+  }
+}
+
+
+#notepad {
+  trix-editor {
+    margin-bottom: 1em;
+  }
+  trix-toolbar {
+    display: none;
+  }
+}
+
+#site-footer {
+  margin-top: 1rem;
+  .col-sm-7 {
+    text-align: right;
+  }
+}
+
+.articles-list article {
+  max-width: 48rem;
+}
+
+th.rd-day-head {
+  width: 2rem;
+}
+
+#directiveViewer {
+  margin-top: 3em;
+  iframe {
+    width: 100%;
+    height: 70vh;
+    border: none;
+    background: #fff;
+  }
+  form input {
+    margin: 0 0.25em;
+    padding: 0.4em;
+    width: 50%;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .overall-container {
+    display: flex;
+    .map-container {
+      flex: 1;
+      .leaflet-container {
+        margin: 0;
+        width: 100%;
+        height: $map-container-height;
+      }
+    }
+    .search-container {
+      width: 350px;
+      max-height: $map-container-height;
+      overflow-y: auto;
+      .mobile {
+        display: none;
+      }
+    }
+  }
+}

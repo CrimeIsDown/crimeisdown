@@ -62,9 +62,15 @@ export default Ember.Component.extend({
       maxNativeZoom: 19,
       minZoom: 0,
       maxZoom: 20
-    }).addTo(this.get('map'));
+    });
 
     this.get('baseLayers')["MapBox Streets"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
+      attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      minZoom: 0,
+      maxZoom: 20
+    });
+
+    this.get('baseLayers')["MapBox Streets Dark"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/cj9ne99zz3e112rp4pxcpua1z/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
       attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       minZoom: 0,
       maxZoom: 20
@@ -75,6 +81,12 @@ export default Ember.Component.extend({
       minZoom: 0,
       maxZoom: 20
     });
+
+    if (localStorage.getItem('dark')) {
+      this.get('baseLayers')["MapBox Streets Dark"].addTo(this.get('map'));
+    } else {
+      this.get('baseLayers')["OpenStreetMap"].addTo(this.get('map'));
+    }
   },
 
   initGeocoder() {
