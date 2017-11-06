@@ -109,6 +109,13 @@ html.dark {
     }
   }
 
+  // For bootstrap-table package
+  .fixed-table-container,
+  .fixed-table-container .table > thead > tr > th,
+  .fixed-table-container tbody td {
+    border-color: #333;
+  }
+
   // Forms =======================================================================
 
   legend,
