@@ -161,6 +161,10 @@ th.rd-day-head {
   width: 2rem;
 }
 
+input#datetimepicker[readonly] {
+  background-color: $white;
+}
+
 #directiveViewer {
   margin-top: 3em;
   iframe {

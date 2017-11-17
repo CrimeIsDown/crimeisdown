@@ -40,8 +40,8 @@ module.exports = function(defaults) {
 
   app.import('node_modules/sortablejs/Sortable.js');
 
-  app.import('node_modules/rome/dist/rome.js');
-  app.import('node_modules/rome/dist/rome.css');
+  app.import('node_modules/flatpickr/dist/flatpickr.js');
+  app.import('node_modules/flatpickr/dist/flatpickr.css');
 
   app.import('node_modules/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
