@@ -46,16 +46,15 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
+      {{virtual-scanner}}
+    </div>
+    <div class="col-md-8">
       <h2>Online Streams</h2>
       {{!-- <div class="alert alert-warning">
         Note: the "Get last minute" links are temporary and may not work if the replay server is not online.
         Click on the links sparingly to avoid overloading the server.
       </div> --}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
       <ul>
         {{#each model as |feed|}}
           <li>
@@ -73,4 +72,5 @@
       </ul>
     </div>
   </div>
+
 </div>
