@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import fetch from 'fetch';
 import dashjs from 'npm:dashjs';
 
 export default Ember.Component.extend({
