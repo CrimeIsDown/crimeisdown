@@ -22,6 +22,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      MEDIA_PLAYER_DEBUG: true
     },
     fastboot: {
       hostWhitelist: ['crimeisdown.com', 'dev.crimeisdown.com', /^localhost:\d+$/]
@@ -51,6 +52,7 @@ module.exports = function(environment) {
     ENV.googleAnalytics = {
       webPropertyId: 'UA-EXAMPLE-1'
     };
+    ENV.APP.MEDIA_PLAYER_DEBUG = false;
   }
 
   return ENV;
