@@ -26,6 +26,12 @@ module.exports = function(defaults) {
         'assets/images/marker-icon.png',
         'assets/images/marker-shadow.png'
       ]
+    },
+    'ember-cli-uglify': {
+      enabled: true
+    },
+    minifyCSS: {
+      enabled: true
     }
   });
 
