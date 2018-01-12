@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   stream: null,
   streams: [],
   player: null,
+  mediaSourceSupported: true,
   init() {
     this._super(...arguments);
     fetch('https://audio.crimeisdown.com/streaming/stat')
@@ -16,22 +17,46 @@ export default Ember.Component.extend({
         let nodes = data.querySelectorAll('live stream name');
         // we would use forEach but it does not work on Safari <10
         for (let i = 0; i < nodes.length; i++) {
-          this.get('streams').pushObject(nodes[i].innerHTML);
+          console.log(nodes[i].textContent);
+          this.get('streams').pushObject(nodes[i].textContent);
         }
       });
     this.set('player', dashjs.MediaPlayer().create());
     this.get('player').getDebug().setLogToBrowserConsole(ENV.APP.MEDIA_PLAYER_DEBUG);
+    this.get('player').on(dashjs.MediaPlayer.events.ERROR, payload => {
+      console.error(payload);
+      if (payload.error === 'capability' && payload.event === 'mediasource') {
+        this.set('mediaSourceSupported', false);
+      }
+    }, this);
   },
   didInsertElement() {
-    this.get('player').initialize(document.querySelector('#streamplayer'));
+    let hasWebKit = ('WebKitMediaSource' in window);
+    let hasMediaSource = ('MediaSource' in window);
+    this.set('mediaSourceSupported', (hasWebKit || hasMediaSource));
+
+    this.set('playerElement', document.getElementById('streamplayer'));
+    if (this.get('mediaSourceSupported')) {
+      this.get('player').initialize(this.get('playerElement'));
+    } else {
+      alert('Sorry, your browser does not support our live streaming functionality.');
+    }
   },
   actions: {
     stream(value) {
       this.set('stream', value);
-      this.get('player').attachSource('https://audio.crimeisdown.com/streaming/dash/'+value+'/');
+      if (this.get('mediaSourceSupported')) {
+        this.get('player').attachSource('https://audio.crimeisdown.com/streaming/dash/' + value + '/');
+      } else {
+        this.get('playerElement').src = 'https://audio.crimeisdown.com/streaming/hls/' + value + '/index.m3u8';
+      }
     },
     seek(time) {
-      this.get('player').seek(time);
+      if (this.get('mediaSourceSupported')) {
+        this.get('player').seek(time);
+      } else {
+        this.get('playerElement').fastSeek(time);
+      }
     }
   }
 });
