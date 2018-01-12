@@ -33,13 +33,14 @@ export default Ember.Component.extend({
   didInsertElement() {
     let hasWebKit = ('WebKitMediaSource' in window);
     let hasMediaSource = ('MediaSource' in window);
-    this.set('mediaSourceSupported', (hasWebKit || hasMediaSource));
+    let isSafari = navigator.userAgent.search("Safari") > 0 && navigator.userAgent.search("Chrome") < 0;
+    this.set('mediaSourceSupported', (hasWebKit || hasMediaSource) && !isSafari);
 
     this.set('playerElement', document.getElementById('streamplayer'));
     if (this.get('mediaSourceSupported')) {
       this.get('player').initialize(this.get('playerElement'));
     } else {
-      alert('Sorry, your browser does not support our live streaming functionality.');
+      console.error('Sorry, your browser does not support our live streaming functionality.');
     }
   },
   actions: {
