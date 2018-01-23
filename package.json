@@ -29,6 +29,7 @@
     "bootstrap-table": "^1.11.0",
     "broccoli-asset-rev": "^2.4.5",
     "broccoli-funnel": "^1.0.1",
+    "dashjs": "^2.6.4",
     "ember-ajax": "^3.0.0",
     "ember-browserify": "^1.1.13",
     "ember-cli": "~2.16.2",
