@@ -1,17 +1,23 @@
 <h3>Live streaming from CrimeIsDown (Beta)</h3>
-<div class="form-group">
-  <label for="streamlist">Select a stream to play</label>
-  <select onchange={{action "stream" value="target.value"}} id="streamlist" class="form-control" style="width:auto" required>
-    <option value="" disabled selected>Select a stream</option>
-    {{#each streams as |streamOption|}}
-      <option value={{streamOption}}>{{streamOption}}</option>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="streamlist">Select a stream to play</label>
+
+      <fieldset onchange={{action "changeStreams" value="target"}} id="streamlist" style="width:auto">
+        <legend>Select a stream</legend>
+        {{#each streams as |streamOption|}}
+          <div class="checkbox">
+            <label><input type="checkbox" name="stream" value={{streamOption}}> {{streamOption}}</label>
+          </div>
+        {{/each}}
+      </fieldset>
+    </div>
+  </div>
+  <div class="col-md-6">
+    {{#each enabledStreams as |stream|}}
+      {{#audio-stream stream=stream}}
+      {{/audio-stream}}
     {{/each}}
-  </select>
-</div>
-<div>
-  <video id="streamplayer" controls></video>
-  <div class="form-group">
-    <button onclick={{action "seek" -10}} class="btn btn-info">Rewind 10s</button>
-    <button onclick={{action "seek" 999}} class="btn btn-danger">Live</button>
   </div>
 </div>

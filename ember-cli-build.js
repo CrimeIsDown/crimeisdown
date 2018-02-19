@@ -49,6 +49,8 @@ module.exports = function(defaults) {
   app.import('node_modules/flatpickr/dist/flatpickr.js');
   app.import('node_modules/flatpickr/dist/flatpickr.css');
 
+  app.import('node_modules/resonance-audio/build/resonance-audio.js');
+
   app.import('node_modules/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet/dist/images/marker-icon.png', {destDir: 'assets/images'});
