@@ -22,7 +22,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      MEDIA_PLAYER_DEBUG: true
+      MEDIA_PLAYER_DEBUG: false
     },
     fastboot: {
       hostWhitelist: ['crimeisdown.com', 'dev.crimeisdown.com', /^localhost:\d+$/]
