@@ -25,7 +25,7 @@
   "license": "MIT",
   "devDependencies": {
     "@mapbox/leaflet-pip": "^1.1.0",
-    "bootstrap": "^4.0.0-beta",
+    "bootstrap": "^4.0.0",
     "bootstrap-table": "^1.11.0",
     "broccoli-asset-rev": "^2.4.5",
     "broccoli-funnel": "^1.0.1",
@@ -68,6 +68,7 @@
     "nodent-runtime": "^3.0.3",
     "popper.js": "^1.11.1",
     "raven-js": "^3.17.0",
+    "resonance-audio": "^1.0.0",
     "sortablejs": "^1.6.1",
     "whatwg-fetch": "^2.0.1"
   },
