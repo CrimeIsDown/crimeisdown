@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import ENV from '../config/environment';
-import fetch from 'fetch';
 import dashjs from 'npm:dashjs';
 
 export default Ember.Component.extend({
@@ -34,31 +33,6 @@ export default Ember.Component.extend({
       this.get('playerElement').src = 'https://audio.crimeisdown.com/streaming/hls/' + this.get('stream') + '/index.m3u8';
       console.error('Sorry, your browser does not support our live streaming functionality.');
     }
-
-    let audioContext = new (window.AudioContext || window.webkitAudioContext);
-
-    let scene = new window.ResonanceAudio(audioContext, {
-      ambisonicOrder: 1,
-    });
-    let dimensions = {
-      width: 3, height: 3, depth: 3,
-    };
-    let materials = {
-      left: 'brick-bare', right: 'brick-bare',
-      up: 'brick-bare', down: 'wood-panel',
-      front: 'brick-bare', back: 'brick-bare',
-    };
-    scene.setRoomProperties(dimensions, materials);
-
-    let audioElementSource = audioContext.createMediaElementSource(this.get('playerElement'));
-
-    let soundSource = scene.createSource();
-    function getRandomInt(max) {
-      return Math.floor(Math.random() * Math.floor(max));
-    }
-    soundSource.setPosition(getRandomInt(dimensions.width), 0, getRandomInt(dimensions.depth));
-    audioElementSource.connect(soundSource.input);
-    scene.output.connect(audioContext.destination);
   },
   actions: {
     seek(time) {
