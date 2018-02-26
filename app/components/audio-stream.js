@@ -1,7 +1,8 @@
+/*global dashjs*/
+
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import ENV from '../config/environment';
-import dashjs from 'dashjs';
 
 export default Component.extend({
   stream: computed('params.[]', function(){
