@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import LinkComponent from '@ember/routing/link-component';
+import Component from '@ember/component';
 
-Ember.LinkComponent.reopen({
+LinkComponent.reopen({
   attributeBindings: ['data-toggle', 'data-target']
 });
 
-export default Ember.Component.extend({
+export default Component.extend({
 });

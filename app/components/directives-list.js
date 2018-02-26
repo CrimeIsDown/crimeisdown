@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import $ from 'jquery';
 import fetch from 'fetch';
 
-export default Ember.Component.extend({
+export default Component.extend({
   openDirective(path, title) {
     this.modal.find(' h4.modal-title').text(title);
     this.modal.find('#directiveFrame a').attr('href', path); // Needed in case the browser doesn't support iframes

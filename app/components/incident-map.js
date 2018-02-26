@@ -1,29 +1,31 @@
 /*eslint-disable no-unused-vars*/
 /*global GeoSearch*/
 
-import Ember from 'ember';
-import fetch from 'npm:whatwg-fetch'; // polyfill for fetch() used by leaflet-geosearch
-import L from 'npm:leaflet';
-import GoogleMutant from 'npm:leaflet.gridlayer.googlemutant';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import $ from 'jquery';
 
-export default Ember.Component.extend({
-  map: null,
-  geocoder: null,
-  addressLookup: Ember.inject.service(),
-  baseLayers: {},
-  layers: {},
-  overlay: {},
-  location: {},
+export default Component.extend({
+  addressLookup: service(),
+  init() {
+    this._super(...arguments);
+    this.map = null;
+    this.geocoder = null;
+    this.baseLayers = {};
+    this.layers = {};
+    this.overlay = {};
+    this.location = {};
+  },
 
   didInsertElement() {
     L.Icon.Default.imagePath = '/assets/images/';
     this.initMap();
 
     let searchControl = this.get('searchControl');
-    Ember.$('#address-search > form').submit(function (event) {
+    $('#address-search > form').submit(function (event) {
       event.preventDefault();
-      Ember.$('.leaflet-control-geosearch.bar form input').val(Ember.$('#address-search > form input[name="address"]').val());
-      searchControl.searchElement.handleSubmit({ query: Ember.$('.leaflet-control-geosearch.bar form input').val() });
+      $('.leaflet-control-geosearch.bar form input').val($('#address-search > form input[name="address"]').val());
+      searchControl.searchElement.handleSubmit({ query: $('.leaflet-control-geosearch.bar form input').val() });
     });
 
     setTimeout(() => {
@@ -33,8 +35,8 @@ export default Ember.Component.extend({
             .split('&')[0]
             .split('=')[1];
         query = decodeURIComponent(query.replace(/\+/g, " "));
-        Ember.$('.leaflet-control-geosearch.bar form input').val(query);
-        searchControl.searchElement.handleSubmit({ query: Ember.$('.leaflet-control-geosearch.bar form input').val() });
+        $('.leaflet-control-geosearch.bar form input').val(query);
+        searchControl.searchElement.handleSubmit({ query: $('.leaflet-control-geosearch.bar form input').val() });
       }
     }, 500); // wait until we have everything loaded
   },
@@ -107,13 +109,13 @@ export default Ember.Component.extend({
     this.set('searchControl', searchControl);
 
     this.get('map').addControl(searchControl);
-    // Ember.$('.leaflet-control-geosearch.bar form input').attr('autofocus', true);
+    // $('.leaflet-control-geosearch.bar form input').attr('autofocus', true);
 
     this.get('map').on('geosearch/showlocation', (event) => {
       if (window.ga && typeof window.ga === "function") {
-        ga('send', 'event', 'Looks up address', 'Tools', Ember.$('.leaflet-control-geosearch.bar form input').val());
+        ga('send', 'event', 'Looks up address', 'Tools', $('.leaflet-control-geosearch.bar form input').val());
       }
-      window.location.hash = '#location_query=' + encodeURIComponent(Ember.$('.leaflet-control-geosearch.bar form input').val());
+      window.location.hash = '#location_query=' + encodeURIComponent($('.leaflet-control-geosearch.bar form input').val());
       let location = event.location.raw;
       this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), location));
     });
@@ -231,8 +233,10 @@ export default Ember.Component.extend({
         }
         layerObj.layer = geoJsonLayer;
         this.get('overlay')[layerObj.label] = layerObj.layer;
-        Ember.$.getJSON(layerObj.url).done((data) => {
-          layerObj.layer.addData(data).setStyle(layerObj.style);
+        fetch(layerObj.url).then((response) => {
+          response.json().then((data) => {
+            layerObj.layer.addData(data).setStyle(layerObj.style);
+          });
         });
       }
     }

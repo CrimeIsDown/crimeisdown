@@ -2,8 +2,6 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-// const Funnel = require('broccoli-funnel');
-const AssetRev = require('broccoli-asset-rev');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
@@ -26,14 +24,20 @@ module.exports = function(defaults) {
         'assets/images/marker-icon.png',
         'assets/images/marker-shadow.png'
       ]
-    },
-    'ember-cli-uglify': {
-      enabled: true
-    },
-    minifyCSS: {
-      enabled: true
     }
   });
+
+  if (app.env === 'production') {
+    app.options.inlineContent = {
+      'doorbell': 'app/helpers/doorbell.js',
+        'hotjar': 'app/helpers/hotjar.js',
+        'raven': 'app/helpers/raven.js'
+    };
+  }
+
+  app.import('node_modules/whatwg-fetch/fetch.js'); // polyfill for fetch() used by leaflet-geosearch
+
+  app.import('node_modules/@mapbox/leaflet-pip/leaflet-pip.js');
 
   app.import('node_modules/raven-js/dist/raven.js');
   app.import('node_modules/raven-js/dist/plugins/ember.js');
@@ -51,11 +55,14 @@ module.exports = function(defaults) {
 
   app.import('node_modules/resonance-audio/build/resonance-audio.js');
 
+  app.import('node_modules/leaflet/dist/leaflet.js');
   app.import('node_modules/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet/dist/images/marker-icon.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet/dist/images/marker-icon-2x.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet/dist/images/marker-shadow.png', {destDir: 'assets/images'});
+
+  app.import('node_modules/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js');
 
   app.import('node_modules/font-awesome/fonts/FontAwesome.otf', {destDir: 'assets/fonts'});
   app.import('node_modules/font-awesome/fonts/fontawesome-webfont.eot', {destDir: 'assets/fonts'});

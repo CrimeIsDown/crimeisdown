@@ -1,9 +1,10 @@
-import Ember from 'ember';
-import fetch from 'fetch';
-import L from 'npm:leaflet';
-import leafletPip from 'npm:@mapbox/leaflet-pip';
+/*global leafletPip*/
 
-export default Ember.Service.extend({
+import Service from '@ember/service';
+import { set } from '@ember/object';
+import fetch from 'fetch';
+
+export default Service.extend({
   loadData() {
     fetch('https://crimeisdown.com/data/city_data/aldermen.json').then((response) => {
       response.json().then((data) => {
@@ -123,11 +124,11 @@ export default Ember.Service.extend({
       let distance = location.distanceTo(L.latLng(station.latitude, station.longitude));
       if (station.engine.length && nearestEngine.distance > distance) {
         nearestEngine = station;
-        Ember.set(nearestEngine, 'distance', distance);
+        set(nearestEngine, 'distance', distance);
       }
       if (station.ambo.length && nearestAmbo.distance > distance) {
         nearestAmbo = station;
-        Ember.set(nearestAmbo, 'distance', distance);
+        set(nearestAmbo, 'distance', distance);
       }
     });
 
@@ -149,13 +150,13 @@ export default Ember.Service.extend({
       let distance = location.distanceTo(L.latLng(hospital.latitude, hospital.longitude));
       if (hospital.level1Adult && nearestTraumaAdult.distance > distance) {
         nearestTraumaAdult = hospital;
-        Ember.set(nearestTraumaAdult, 'distance', distance);
-        Ember.set(nearestTraumaAdult, 'distanceMi', Math.round(distance*0.000621371192*100)/100);
+        set(nearestTraumaAdult, 'distance', distance);
+        set(nearestTraumaAdult, 'distanceMi', Math.round(distance*0.000621371192*100)/100);
       }
       if (hospital.level1Ped && nearestTraumaPed.distance > distance) {
         nearestTraumaPed = hospital;
-        Ember.set(nearestTraumaPed, 'distance', distance);
-        Ember.set(nearestTraumaPed, 'distanceMi', Math.round(distance*0.000621371192*100)/100);
+        set(nearestTraumaPed, 'distance', distance);
+        set(nearestTraumaPed, 'distanceMi', Math.round(distance*0.000621371192*100)/100);
       }
     });
 

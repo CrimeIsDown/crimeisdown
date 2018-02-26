@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import fetch from 'fetch';
 
-export default Ember.Component.extend({
-  streams: [],
-  enabledStreams: [],
+export default Component.extend({
   init() {
     this._super(...arguments);
+    this.streams = [];
+    this.enabledStreams = [];
     fetch('https://audio.crimeisdown.com/streaming/stat')
       .then(response => response.text())
       .then(xml => (new window.DOMParser()).parseFromString(xml, 'text/xml'))
@@ -78,8 +78,8 @@ export default Ember.Component.extend({
           let soundSource = this.get('resonanceScene').createSource();
           let position = this.get('possiblePositions')[Math.floor(Math.random() * this.get('possiblePositions').length)];
           soundSource.setPosition(position.x, position.y, position.z);
-          console.log(target.value);
-          console.log(position);
+          // console.log(target.value);
+          // console.log(position);
           audioElementSource.connect(soundSource.input);
         }, 500);
       } else {

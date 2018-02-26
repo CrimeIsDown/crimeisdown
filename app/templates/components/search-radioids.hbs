@@ -1,11 +1,11 @@
 <div id="radio-search">
   <form>
     <label for="radioid">Radio ID to search</label>
-    <div class="input-group input-group-sm">
+    <div class="input-group">
       {{input class="form-control" name="radioid" placeholder="1234, 599, 2-1-8, 100X" type="text" value=radioId }}
-      <span class="input-group-btn">
+      <div class="input-group-append">
         <button class="btn btn-default" {{action "lookupRadioId"}}>Search</button>
-      </span>
+      </div>
     </div>
   </form>
   <div class="results">
