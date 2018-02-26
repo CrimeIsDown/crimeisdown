@@ -73,5 +73,7 @@ module.exports = function(defaults) {
 
   app.import('node_modules/dashjs/dist/dash.mediaplayer.min.js');
 
+  app.import('node_modules/interactjs/dist/interact.js');
+
   return app.toTree();
 };

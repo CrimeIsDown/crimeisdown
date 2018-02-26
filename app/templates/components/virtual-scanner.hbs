@@ -15,9 +15,27 @@
     </div>
   </div>
   <div class="col-md-6">
-    <canvas></canvas>
+    <style>
+      .draggable-parent {
+        width: 200px;
+        height: 200px;
+        background: #fff
+      }
+      .draggable {
+        width: 16px;
+        height: 16px;
+        text-align: center;
+      }
+      .draggable::after {
+        font-family: Arial, sans-serif;
+        font-size: 1em;
+      }
+    </style>
+    <div class="draggable-parent">
+      <i class="fa fa-user" style="transform: translate(92px, 92px)"></i>
+    </div>
     {{#each enabledStreams as |stream|}}
-      {{#audio-stream stream=stream}}
+      {{#audio-stream stream=stream.name}}
       {{/audio-stream}}
     {{/each}}
   </div>
