@@ -2,10 +2,8 @@
 <div class="row">
   <div class="col-md-5">
     <div class="form-group">
-      <label for="streamlist">Select a stream to play</label>
-
-      <fieldset onchange={{action "changeStreams" value="target"}} id="streamlist" style="width:auto;">
-        <legend>Select a stream</legend>
+      <fieldset onchange={{action "changeStreams" value="target"}} id="streamlist">
+        <legend>Check the streams to play</legend>
         <div class="stream-options">
           {{#each streams as |streamOption|}}
             <div class="checkbox">
@@ -30,8 +28,8 @@
       <div class="row">
         <h5 class="col-sm-7 title">{{stream.name}}</h5>
         <div class="col-sm-5 btn-group" role="group">
-          <button onclick='{{action "seekStream" -10}}' class="btn btn-sm btn-secondary" title="Rewind 10 seconds"><i class="fa fa-step-backward"></i> 10s</button>
-          <button onclick='{{action "seekStream" 999}}' class="btn btn-sm btn-info"><i class="fa fa-circle text-danger"></i> Live</button>
+          <button onclick={{action "seekStream" -10}} class="btn btn-sm btn-secondary" title="Rewind 10 seconds"><i class="fa fa-step-backward"></i> 10s</button>
+          <button onclick={{action "seekStream" 999}} class="btn btn-sm btn-info"><i class="fa fa-circle text-danger"></i> Live</button>
         </div>
       </div>
       <audio id="audio-player-{{stream.name}}" controls></audio>
