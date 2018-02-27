@@ -1,7 +1,6 @@
 /*global dashjs*/
 
 import Component from '@ember/component';
-import { set } from '@ember/object';
 import EmberObject from '@ember/object';
 import ENV from '../config/environment';
 import fetch from 'fetch';
@@ -39,7 +38,6 @@ export default Component.extend({
       let streamData = this.get('enabledStreams').findBy('name', streamName);
       if (streamData) {
         let roomPos = this.dragPositionToRoomPosition(x, y);
-        console.log(roomPos);
         streamData.soundSource.setPosition(roomPos.x, roomPos.y, roomPos.z);
       }
     };
