@@ -1,20 +1,22 @@
 <h3>Live streaming from CrimeIsDown (Beta)</h3>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-5">
     <div class="form-group">
       <label for="streamlist">Select a stream to play</label>
 
-      <fieldset onchange={{action "changeStreams" value="target"}} id="streamlist" style="width:auto">
+      <fieldset onchange={{action "changeStreams" value="target"}} id="streamlist" style="width:auto;">
         <legend>Select a stream</legend>
-        {{#each streams as |streamOption|}}
-          <div class="checkbox">
-            <label><input type="checkbox" name="stream" value={{streamOption}}> {{streamOption}}</label>
-          </div>
-        {{/each}}
+        <div class="stream-options">
+          {{#each streams as |streamOption|}}
+            <div class="checkbox">
+              <label><input type="checkbox" name="stream" value={{streamOption}}> {{streamOption}}</label>
+            </div>
+          {{/each}}
+        </div>
       </fieldset>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-7">
     <h4>Spatial Scanner Audio</h4>
     <p>drag <i class="fa fa-volume-up"></i> to move stereo channels</p>
     <div class="draggable-parent">
@@ -25,12 +27,14 @@
     </div>
     {{#each enabledStreams as |stream|}}
     <div class="stream" id="stream-{{stream.name}}">
-      <h5>{{stream.name}}</h5>
-      <audio id="audio-player-{{stream.name}}" controls></audio>
-      <div class="form-group">
-        <button onclick={{action "seekStream" -10}} class="btn btn-info">Rewind 10s</button>
-        <button onclick={{action "seekStream" 999}} class="btn btn-danger">Live</button>
+      <div class="row">
+        <h5 class="col-sm-7 title">{{stream.name}}</h5>
+        <div class="col-sm-5 btn-group" role="group">
+          <button onclick='{{action "seekStream" -10}}' class="btn btn-sm btn-secondary" title="Rewind 10 seconds"><i class="fa fa-step-backward"></i> 10s</button>
+          <button onclick='{{action "seekStream" 999}}' class="btn btn-sm btn-info"><i class="fa fa-circle text-danger"></i> Live</button>
+        </div>
       </div>
+      <audio id="audio-player-{{stream.name}}" controls></audio>
     </div>
     {{/each}}
   </div>

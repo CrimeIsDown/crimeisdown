@@ -10,6 +10,7 @@ iframe {
 
 audio {
   max-width: 100%;
+  max-height: 3em;
 }
 
 html.android {
@@ -165,9 +166,23 @@ input#datetimepicker[readonly] {
   background-color: $white;
 }
 
-#streamplayer {
-  height: 40px;
-  width: 100%;
+.stream-options {
+  //max-height: 400px;
+  overflow-y: auto;
+  label {
+    cursor: pointer;
+    margin-bottom: 0.2rem;
+  }
+}
+
+.stream {
+  .title {
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+  .row + audio {
+    margin-top: 0.5rem;
+  }
 }
 
 .draggable-parent {
@@ -176,19 +191,29 @@ input#datetimepicker[readonly] {
   background: #fff;
   margin-bottom: 1em;
   border: 1px solid $gray-300;
+  position: relative;
   .fa-user {
+    position: absolute;
     transform: translate(92px, 88px);
   }
   .draggable {
-    width: 16px;
+    position: absolute;
+    width: 32px;
     height: 16px;
     text-align: center;
+    -ms-touch-action: none;
+    touch-action: none;
     span {
       font-family: Arial, sans-serif;
       font-size: 0.75em;
       font-weight: bold;
     }
   }
+}
+
+.broadcastify-streams {
+  list-style-type: none;
+  padding-left: 0;
 }
 
 #directiveViewer {

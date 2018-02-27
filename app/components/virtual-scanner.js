@@ -60,6 +60,7 @@ export default Component.extend({
           endOnly: true,
           elementRect: { top: 0.05, left: 0.05, bottom: 0.95, right: 0.95 }
         },
+        autoScroll: true,
         onmove: this.onMove,
         onend: this.onEnd
       });
@@ -199,8 +200,8 @@ export default Component.extend({
   },
   roomPositionToDragPosition(position) {
     return {
-      dragX: (position.x + this.sceneDimensions.width/2) * this.dragScale - 24,
-      dragY: (position.z + this.sceneDimensions.depth/2) * this.dragScale - 8,
+      dragX: Math.min((position.x + this.sceneDimensions.width/2) * this.dragScale, 180),
+      dragY: Math.min((position.z + this.sceneDimensions.depth/2) * this.dragScale, 180),
     };
   },
   dragPositionToRoomPosition(x, y) {
