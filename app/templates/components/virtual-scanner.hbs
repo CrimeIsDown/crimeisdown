@@ -15,28 +15,23 @@
     </div>
   </div>
   <div class="col-md-6">
-    <style>
-      .draggable-parent {
-        width: 200px;
-        height: 200px;
-        background: #fff
-      }
-      .draggable {
-        width: 16px;
-        height: 16px;
-        text-align: center;
-      }
-      .draggable::after {
-        font-family: Arial, sans-serif;
-        font-size: 1em;
-      }
-    </style>
+    <h4>Spatial Scanner Audio</h4>
+    <p>drag <i class="fa fa-volume-up"></i> to move stereo channels</p>
     <div class="draggable-parent">
-      <i class="fa fa-user" style="transform: translate(92px, 92px)"></i>
+      <i class="fa fa-user"></i>
+      {{#each enabledStreams as |stream|}}
+        <i class="draggable fa fa-volume-up" id="drag-{{stream.name}}" title="{{stream.name}}"><span>&nbsp;{{stream.name}}</span></i>
+      {{/each}}
     </div>
     {{#each enabledStreams as |stream|}}
-      {{#audio-stream stream=stream.name}}
-      {{/audio-stream}}
+    <div class="stream" id="stream-{{stream.name}}">
+      <h5>{{stream.name}}</h5>
+      <audio id="audio-player-{{stream.name}}" controls></audio>
+      <div class="form-group">
+        <button onclick={{action "seekStream" -10}} class="btn btn-info">Rewind 10s</button>
+        <button onclick={{action "seekStream" 999}} class="btn btn-danger">Live</button>
+      </div>
+    </div>
     {{/each}}
   </div>
 </div>

@@ -1,6 +1,9 @@
+/*global dashjs*/
+
 import Component from '@ember/component';
 import { set } from '@ember/object';
 import EmberObject from '@ember/object';
+import ENV from '../config/environment';
 import fetch from 'fetch';
 import $ from 'jquery';
 
@@ -10,6 +13,13 @@ export default Component.extend({
     this._super(...arguments);
     this.streams = [];
     this.enabledStreams = [];
+
+    this.audioContext = new (window.AudioContext || window.webkitAudioContext);
+    this.setupResonanceScene();
+
+    let isSafari = navigator.userAgent.search("Safari") > 0 && navigator.userAgent.search("Chrome") < 0;
+    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isSafari);
+
     this.onMove = (event) => {
       let target = event.target,
         // keep the dragged position in the data-x/data-y attributes
@@ -55,23 +65,6 @@ export default Component.extend({
         onmove: this.onMove,
         onend: this.onEnd
       });
-
-    this.set('audioContext', new (window.AudioContext || window.webkitAudioContext));
-
-    this.set('resonanceScene', new window.ResonanceAudio(this.get('audioContext'), {
-      ambisonicOrder: 1,
-    }));
-    let dimensions = {
-      width: 4, height: 4, depth: 4,
-    };
-    this.set('sceneDimensions', dimensions);
-    this.set('sceneMaterials', {
-      left: 'uniform', right: 'uniform',
-      up: 'transparent', down: 'transparent',
-      front: 'uniform', back: 'uniform',
-    });
-    this.get('resonanceScene').setRoomProperties(this.get('sceneDimensions'), this.get('sceneMaterials'));
-    this.get('resonanceScene').output.connect(this.get('audioContext').destination);
   },
   actions: {
     changeStreams(target) {
@@ -80,39 +73,119 @@ export default Component.extend({
       } else {
         this.removeStream(target.value);
       }
+    },
+    seekStream(time) {
+      if (this.get('mediaSourceSupported')) {
+        this.get('player').seek(time);
+      } else {
+        this.get('playerElement').fastSeek(time);
+      }
     }
+  },
+  setupResonanceScene() {
+    this.resonanceScene = new window.ResonanceAudio(this.audioContext, {
+      ambisonicOrder: 1,
+    });
+    this.sceneDimensions = {
+      width: 4, height: 4, depth: 4,
+    };
+    this.sceneMaterials = {
+      left: 'uniform', right: 'uniform',
+      up: 'transparent', down: 'transparent',
+      front: 'uniform', back: 'uniform',
+    };
+    this.resonanceScene.setRoomProperties(this.sceneDimensions, this.sceneMaterials);
+    this.resonanceScene.output.connect(this.audioContext.destination);
   },
   addStream(streamName) {
     let streamData = EmberObject.create({name: streamName});
     this.get('enabledStreams').pushObject(streamData);
 
-    setTimeout(() => {
-      let audioElementSource = this.get('audioContext').createMediaElementSource(document.getElementById('audio-player-'+streamName));
-      let soundSource = this.get('resonanceScene').createSource();
-      let position = this.randomPosition(this.get('sceneDimensions').width, this.get('sceneDimensions').height, this.get('sceneDimensions').depth);
-      soundSource.setPosition(position.x, 0, position.z);
-      audioElementSource.connect(soundSource.input);
-      let draggableElement = document.createElement('i');
-      draggableElement.id = 'drag-' + streamName;
-      draggableElement.className = 'draggable fa fa-volume-up';
-      let dragPos = this.roomPositionToDragPosition(position);
-      draggableElement.style = 'transform: translate('+dragPos.dragX+'px, '+dragPos.dragY+'px);';
-      draggableElement.title = streamName;
-      draggableElement.setAttribute('data-x', dragPos.dragX);
-      draggableElement.setAttribute('data-y', dragPos.dragY);
-      $('.draggable-parent').append(draggableElement);
-      streamData.setProperties({
-        name: streamName,
-        audioElementSource: audioElementSource,
-        soundSource: soundSource,
-        position: position,
-        draggableElement: draggableElement
-      });
-    }, 500);
+    // wait for new elements to render so we can select them
+    $('#stream-'+streamName).ready(() => {
+      let playerElement = document.getElementById('audio-player-' + streamName);
+
+      this.startPlayer(streamName, playerElement);
+
+      if (this.audioContext) {
+        let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
+
+        let analyser = this.audioContext.createAnalyser();
+        analyser.smoothingTimeConstant = 0.5;
+        analyser.fftSize = 512; // the total samples are half the fft size.
+        audioElementSource.connect(analyser);
+
+        let soundSource = this.resonanceScene.createSource();
+        let position = this.randomPosition(this.sceneDimensions.width, this.sceneDimensions.height, this.sceneDimensions.depth);
+        soundSource.setPosition(position.x, 0, position.z);
+        analyser.connect(soundSource.input);
+
+        let draggableElement = this.addDraggable(streamName, position);
+        $('.draggable-parent').append(draggableElement);
+
+        streamData.setProperties({
+          name: streamName,
+          audioElementSource: audioElementSource,
+          analyser: analyser,
+          soundSource: soundSource,
+          position: position,
+          draggableElement: draggableElement
+        });
+
+        this.drawVU(analyser, draggableElement, 0);
+      }
+    });
+  },
+  startPlayer(stream, playerElement) {
+    let player = dashjs.MediaPlayer().create();
+    player.getDebug().setLogToBrowserConsole(ENV.APP.MEDIA_PLAYER_DEBUG);
+    player.on(dashjs.MediaPlayer.events.ERROR, payload => {
+      // console.error(payload);
+      if (payload.error === 'capability' && payload.event === 'mediasource') {
+        this.mediaSourceSupported = false;
+      }
+    }, this);
+
+    if (this.mediaSourceSupported) {
+      player.initialize(playerElement);
+      player.attachSource('https://audio.crimeisdown.com/streaming/dash/' + stream + '/');
+    } else {
+      playerElement.src = 'https://audio.crimeisdown.com/streaming/hls/' + stream + '/index.m3u8';
+      // console.error('Sorry, your browser does not support our live streaming functionality.');
+    }
   },
   removeStream(streamName) {
-    this.get('enabledStreams').removeObject(this.get('enabledStreams').findBy('name', streamName));
-    document.getElementById('drag-' + streamName).remove();
+    let streamData = this.get('enabledStreams').findBy('name', streamName);
+    streamData.draggableElement.remove();
+    this.get('enabledStreams').removeObject(streamData);
+  },
+  addDraggable(streamName, roomPosition) {
+    let draggableElement = document.getElementById('drag-' + streamName);
+    let dragPos = this.roomPositionToDragPosition(roomPosition);
+    draggableElement.style.transform = 'translate('+dragPos.dragX+'px, '+dragPos.dragY+'px)';
+    draggableElement.setAttribute('data-x', dragPos.dragX);
+    draggableElement.setAttribute('data-y', dragPos.dragY);
+    return draggableElement;
+  },
+  drawVU(analyser, canvasContext, lastVal) {
+    let array = new Uint8Array(analyser.fftSize);
+    analyser.getByteTimeDomainData(array);
+
+    let max = 0;
+    for (let i = 0; i < array.length; i++) {
+      max = Math.max(max, Math.abs(array[i] - 128));
+    }
+
+    let val = Math.round(max * 4);
+
+    // optimization to avoid unnecessary repaints
+    if (val !== lastVal) {
+      canvasContext.style.color = 'rgb(0,' + val + ',0)';
+    }
+
+    requestAnimationFrame(() => {
+      this.drawVU(analyser, canvasContext, val);
+    });
   },
   randomPosition(width, height, depth) {
     function randomAxisPosition(len) {

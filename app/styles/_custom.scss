@@ -170,6 +170,27 @@ input#datetimepicker[readonly] {
   width: 100%;
 }
 
+.draggable-parent {
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  margin-bottom: 1em;
+  border: 1px solid $gray-300;
+  .fa-user {
+    transform: translate(92px, 88px);
+  }
+  .draggable {
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    span {
+      font-family: Arial, sans-serif;
+      font-size: 0.75em;
+      font-weight: bold;
+    }
+  }
+}
+
 #directiveViewer {
   margin-top: 3em;
   iframe {
