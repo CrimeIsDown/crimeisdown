@@ -64,6 +64,13 @@ module.exports = function(defaults) {
 
   app.import('node_modules/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js');
 
+  app.import('node_modules/leaflet-draw/dist/leaflet.draw.js');
+  app.import('node_modules/leaflet-draw/dist/images/spritesheet.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet-draw/dist/images/spritesheet-2x.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet-draw/dist/images/spritesheet.svg', {destDir: 'assets/images'});
+
+  app.import('node_modules/leaflet.markercluster/dist/leaflet.markercluster.js');
+
   app.import('node_modules/font-awesome/fonts/FontAwesome.otf', {destDir: 'assets/fonts'});
   app.import('node_modules/font-awesome/fonts/fontawesome-webfont.eot', {destDir: 'assets/fonts'});
   app.import('node_modules/font-awesome/fonts/fontawesome-webfont.svg', {destDir: 'assets/fonts'});

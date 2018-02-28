@@ -6,29 +6,64 @@ import fetch from 'fetch';
 
 export default Service.extend({
   loadData() {
-    fetch('https://crimeisdown.com/data/city_data/aldermen.json').then((response) => {
-      response.json().then((data) => {
-        this.aldermen = data;
-      });
-    });
-    fetch('https://crimeisdown.com/data/audio_data/online_streams.json').then((response) => {
-      response.json().then((data) => {
-        this.onlineStreams = data;
-      });
-    });
-    fetch('https://crimeisdown.com/data/city_data/fire_stations.json').then((response) => {
-      response.json().then((data) => {
-        this.fireStations = data;
-      });
-    });
-    fetch('https://crimeisdown.com/data/city_data/trauma_centers.json').then((response) => {
-      response.json().then((data) => {
-        this.traumaCenters = data;
-      });
-    });
-
-    this.policeZones = {'1': ['16', '17'], '2': ['19'], '3': ['12', '14'], '4': ['1', '18'], '5': ['2'], '6': ['7', '8'], '7': ['3'], '8': ['4', '6'], '9': ['5', '22'], '10': ['10', '11'], '11': ['20', '24'], '12': ['15', '25'], '13': ['9']};
-    this.policeAreas = {'North': ['11', '14', '15', '16', '17', '19', '20', '24'], 'Central': ['1', '2', '3', '8', '9', '10', '12', '18'], 'South': ['4', '5', '6', '7', '22']};
+    return Promise.all([
+      new Promise((resolve, reject) => {
+        this.policeZones = {'1': ['16', '17'], '2': ['19'], '3': ['12', '14'], '4': ['1', '18'], '5': ['2'], '6': ['7', '8'], '7': ['3'], '8': ['4', '6'], '9': ['5', '22'], '10': ['10', '11'], '11': ['20', '24'], '12': ['15', '25'], '13': ['9']};
+        resolve();
+      }),
+      new Promise((resolve, reject) => {
+        this.policeAreas = {'North': ['11', '14', '15', '16', '17', '19', '20', '24'], 'Central': ['1', '2', '3', '8', '9', '10', '12', '18'], 'South': ['4', '5', '6', '7', '22']};
+        resolve();
+      }),
+      new Promise((resolve, reject) => {
+        fetch('https://crimeisdown.com/data/city_data/aldermen.json').then((response) => {
+          response.json().then((data) => {
+            this.aldermen = data;
+            resolve(data);
+          }).catch((err) => {
+            reject(err);
+          });
+        }).catch((err) => {
+          reject(err);
+        });
+      }),
+      new Promise((resolve, reject) => {
+        fetch('https://crimeisdown.com/data/audio_data/online_streams.json').then((response) => {
+          response.json().then((data) => {
+            this.onlineStreams = data;
+            resolve(data);
+          }).catch((err) => {
+            reject(err);
+          });
+        }).catch((err) => {
+          reject(err);
+        });
+      }),
+      new Promise((resolve, reject) => {
+        fetch('https://crimeisdown.com/data/city_data/fire_stations.json').then((response) => {
+          response.json().then((data) => {
+            this.fireStations = data;
+            resolve(data);
+          }).catch((err) => {
+            reject(err);
+          });
+        }).catch((err) => {
+          reject(err);
+        });
+      }),
+      new Promise((resolve, reject) => {
+        fetch('https://crimeisdown.com/data/city_data/trauma_centers.json').then((response) => {
+          response.json().then((data) => {
+            this.traumaCenters = data;
+            resolve(data);
+          }).catch((err) => {
+            reject(err);
+          });
+        }).catch((err) => {
+          reject(err);
+        });
+      })
+    ]);
   },
 
   generateLocationDataForAddress(layers, location) {

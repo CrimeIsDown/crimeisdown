@@ -1,5 +1,8 @@
 @import "../../node_modules/leaflet/dist/leaflet";
 @import "../../node_modules/leaflet-geosearch/assets/css/leaflet";
+@import "../../node_modules/leaflet-draw/dist/leaflet.draw-src";
+@import "../../node_modules/leaflet.markercluster/dist/MarkerCluster";
+@import "../../node_modules/leaflet.markercluster/dist/MarkerCluster.Default";
 
 $icon-font-path: "../assets/fonts/";
 @import "../../node_modules/bootstrap/scss/bootstrap";
