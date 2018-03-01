@@ -20,13 +20,14 @@ export default Component.extend({
   didInsertElement() {
     L.Icon.Default.imagePath = '/assets/images/';
     this.initMap();
+  },
 
-    let searchControl = this.get('searchControl');
-    $('#address-search > form').submit(function (event) {
-      event.preventDefault();
-      $('.leaflet-control-geosearch.bar form input').val($('#address-search > form input[name="address"]').val());
-      searchControl.searchElement.handleSubmit({ query: $('.leaflet-control-geosearch.bar form input').val() });
-    });
+  actions: {
+    searchAddress(address) {
+      $('.leaflet-control-geosearch.bar form input').val(address);
+      $('#address-search').find('input[name="address"]').val(address);
+      this.get('searchControl').searchElement.handleSubmit({ query: address });
+    }
   },
 
   initMap() {
@@ -49,12 +50,7 @@ export default Component.extend({
             .split('&')[0]
             .split('=')[1];
         query = decodeURIComponent(query.replace(/\+/g, " "));
-        $('.leaflet-control-geosearch.bar form input').val(query);
-        this.get('searchControl').searchElement.handleSubmit({
-          query: query
-        }).then(() => {
-          $('#address-search').find('input[name="address"]').val(query);
-        })
+        this.actions.searchAddress.bind(this)(query);
       }
     });
 
@@ -123,12 +119,13 @@ export default Component.extend({
       this.get('map').addControl(searchControl);
 
       this.get('map').on('geosearch/showlocation', (event) => {
+        let query = $('.leaflet-control-geosearch.bar form input').val();
+        $('#address-search').find('input[name="address"]').val(query);
         if (window.ga && typeof window.ga === "function") {
-          ga('send', 'event', 'Looks up address', 'Tools', $('.leaflet-control-geosearch.bar form input').val());
+          ga('send', 'event', 'Looks up address', 'Tools', query);
         }
-        window.location.hash = '#location_query=' + encodeURIComponent($('.leaflet-control-geosearch.bar form input').val());
-        let location = event.location.raw;
-        this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), location));
+        window.location.hash = '#location_query=' + encodeURIComponent(query);
+        this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), event.location.raw));
       });
 
       resolve();

@@ -6,8 +6,9 @@
         <legend>Check the streams to play</legend>
         <div class="stream-options">
           {{#each streams as |streamOption|}}
-            <div class="checkbox">
-              <label><input type="checkbox" name="stream" value={{streamOption}}> {{streamOption}}</label>
+            <div class="form-check">
+              <input class="form-check-input" id="checkbox-{{streamOption}}" type="checkbox" name="stream" value={{streamOption}}>
+              <label class="form-check-label" for="checkbox-{{streamOption}}">{{streamOption}}</label>
             </div>
           {{/each}}
         </div>
