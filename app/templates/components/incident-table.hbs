@@ -1,68 +1,47 @@
-<div class="modal fade" id="add-incident-modal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <form {{action "addIncident" on="submit"}}>
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalTitle">{{if model.id "Edit" "Add a new"}} incident</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="submitterName">Submitter Name</label>
-            <input type="text" class="form-control" id="submitterName" placeholder="Your name" required>
-          </div>
-          <div class="form-group">
-            <label for="callType">Call Type</label>
-            <select class="form-control" id="callType" required>
-              {{#each callTypes as |callType|}}
-                <option value="{{callType.slug}}">{{callType.name}}</option>
-              {{/each}}
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" class="form-control" id="address" value="{{ location.meta.formattedAddress }}" required>
-          </div>
-          <div class="form-group">
-            <fieldset>
-              <legend>Agencies responding</legend>
-              {{#each agencies as |agency|}}
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="{{agency.slug}}" id="agency{{agency.slug}}">
-                  <label class="form-check-label" for="agency{{agency.slug}}">{{agency.name}}</label>
-                </div>
-              {{/each}}
-            </fieldset>
-          </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" id="description" rows="3"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="tweetUrl">Tweets</label>
-            <input type="url" class="form-control" id="tweetUrl" placeholder="https://twitter.com/...">
-          </div>
-          <div class="form-group">
-            <label for="photoUrl">Photos</label>
-            <input type="url" class="form-control" id="photoUrl" placeholder="https://twitter.com/...">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Create</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 <div>
   {{#each incidents as |incident|}}
     <div class="card">
       <div class="card-body">
-        <pre>{{json incident}}</pre>
+        <ul>
+          <li>Submitter name: {{incident.submitterName}}</li>
+          <li>Title: {{incident.title}}</li>
+          <li>Call type: {{incident.callType.name}}</li>
+          <li>Address: {{incident.address}}</li>
+          <li>Location: {{incident.location}}</li>
+          <li>Description: {{incident.description}}</li>
+          <ul>
+            {{#each incident.units as |unit|}}
+              <li>{{unit.agency.name}} - {{unit.radioId}}</li>
+            {{/each}}
+          </ul>
+          <ul>
+            {{#each incident.tweets as |tweet|}}
+              <li>{{tweet.url}}</li>
+            {{/each}}
+          </ul>
+          <ul>
+            {{#each incident.photos as |photo|}}
+              <li>{{photo.url}}</li>
+            {{/each}}
+          </ul>
+        </ul>
+        <div class="btn-group" role="group" aria-label="Incident actions">
+          <button class="btn btn-danger" {{action "deleteIncident" incident}}>Delete Incident</button>
+        </div>
+        <p>Comments</p>
+        <ul>
+          {{#each incident.comments as |comment|}}
+            <li>{{comment.body}} - {{comment.author}}</li>
+          {{/each}}
+        </ul>
+        {{new-comment incident=incident}}
+
+        {{update-incident incident=incident units=units callTypes=callTypes}}
       </div>
     </div>
   {{/each}}
 </div>
+
+{{new-incident units=units callTypes=callTypes}}
+
+<button class="btn btn-default" {{action "seedData" on="click"}}>Seed data</button>

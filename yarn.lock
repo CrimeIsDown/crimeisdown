@@ -407,7 +407,7 @@ babel-core@^5.0.0:
     trim-right "^1.0.0"
     try-resolve "^1.0.0"
 
-babel-core@^6.14.0, babel-core@^6.26.0:
+babel-core@^6.14.0, babel-core@^6.24.1, babel-core@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.0.tgz#af32f78b31a6fcef119c87b0fd8d9753f03a0bb8"
   dependencies:
@@ -1035,6 +1035,10 @@ blank-object@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/blank-object/-/blank-object-1.0.2.tgz#f990793fbe9a8c8dd013fb3219420bec81d5f4b9"
 
+blob-polyfill@^2.0.20171115:
+  version "2.0.20171115"
+  resolved "https://registry.yarnpkg.com/blob-polyfill/-/blob-polyfill-2.0.20171115.tgz#8e5c2659dda443365fafd6dd421517653f1d5ffd"
+
 blob@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/blob/-/blob-0.0.4.tgz#bcf13052ca54463f30f9fc7e95b9a47630a94921"
@@ -1507,7 +1511,7 @@ broccoli-sri-hash@^2.1.0:
     sri-toolbox "^0.2.0"
     symlink-or-copy "^1.0.1"
 
-broccoli-stew@^1.2.0, broccoli-stew@^1.3.3, broccoli-stew@^1.4.2:
+broccoli-stew@^1.2.0, broccoli-stew@^1.3.3, broccoli-stew@^1.4.2, broccoli-stew@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/broccoli-stew/-/broccoli-stew-1.5.0.tgz#d7af8c18511dce510e49d308a62e5977f461883c"
   dependencies:
@@ -1695,7 +1699,7 @@ chalk@^1.0.0, chalk@^1.1.1, chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.1:
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.1.tgz#523fe2678aec7b04e8041909292fe8b17059b796"
   dependencies:
@@ -2276,6 +2280,15 @@ ember-app-scheduler@0.0.5:
   dependencies:
     ember-cli-babel "^5.1.7"
 
+ember-basic-dropdown@^1.0.0-beta.3:
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-1.0.0-beta.3.tgz#c6fb53d4cc8e4ddc1ec9f09e23207f15be7b1f04"
+  dependencies:
+    ember-cli-babel "^6.11.0"
+    ember-cli-htmlbars "^2.0.3"
+    ember-maybe-in-element "^0.1.0"
+    ember-native-dom-helpers "^0.5.10"
+
 ember-cli-app-version@^3.0.0:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/ember-cli-app-version/-/ember-cli-app-version-3.1.3.tgz#26d25f5e653ff0106f0b39da6d75518ba8ed282d"
@@ -2369,7 +2382,7 @@ ember-cli-htmlbars@1.1.1:
     json-stable-stringify "^1.0.0"
     strip-bom "^2.0.0"
 
-ember-cli-htmlbars@^2.0.1:
+ember-cli-htmlbars@^2.0.1, ember-cli-htmlbars@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-2.0.3.tgz#e116e1500dba12f29c94b05b9ec90f52cb8bb042"
   dependencies:
@@ -2596,6 +2609,14 @@ ember-cli@~3.0.0:
     watch-detector "^0.1.0"
     yam "0.0.22"
 
+ember-concurrency@^0.8.12:
+  version "0.8.16"
+  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-0.8.16.tgz#979fab6fb7e3105e695defb39e7a4b641237944d"
+  dependencies:
+    babel-core "^6.24.1"
+    ember-cli-babel "^6.8.2"
+    ember-maybe-import-regenerator "^0.1.5"
+
 ember-data@~3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-3.0.1.tgz#555bddde064c72ff9dde4ae4c8c635afe8158b8b"
@@ -2672,7 +2693,20 @@ ember-load-initializers@^1.0.0:
   dependencies:
     ember-cli-babel "^6.0.0-beta.7"
 
-ember-maybe-import-regenerator@^0.1.6:
+ember-local-storage@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/ember-local-storage/-/ember-local-storage-1.4.1.tgz#adb2058d4382d8c2742a824b4e505c84078c811c"
+  dependencies:
+    blob-polyfill "^2.0.20171115"
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^2.0.0"
+    broccoli-stew "^1.5.0"
+    chalk "^2.3.0"
+    ember-cli-babel "^6.6.0"
+    ember-cli-string-utils "^1.1.0"
+    ember-cli-version-checker "^2.1.0"
+
+ember-maybe-import-regenerator@^0.1.5, ember-maybe-import-regenerator@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/ember-maybe-import-regenerator/-/ember-maybe-import-regenerator-0.1.6.tgz#35d41828afa6d6a59bc0da3ce47f34c573d776ca"
   dependencies:
@@ -2680,6 +2714,30 @@ ember-maybe-import-regenerator@^0.1.6:
     broccoli-merge-trees "^1.0.0"
     ember-cli-babel "^6.0.0-beta.4"
     regenerator-runtime "^0.9.5"
+
+ember-maybe-in-element@^0.1.0:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/ember-maybe-in-element/-/ember-maybe-in-element-0.1.3.tgz#1c89be49246e580c1090336ad8be31e373f71b60"
+  dependencies:
+    ember-cli-babel "^6.11.0"
+
+ember-native-dom-helpers@^0.5.10:
+  version "0.5.10"
+  resolved "https://registry.yarnpkg.com/ember-native-dom-helpers/-/ember-native-dom-helpers-0.5.10.tgz#9c7172e4ddfa5dd86830c46a936e2f8eca3e5896"
+  dependencies:
+    broccoli-funnel "^1.1.0"
+    ember-cli-babel "^6.6.0"
+
+ember-power-select@^2.0.0-beta.3:
+  version "2.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/ember-power-select/-/ember-power-select-2.0.0-beta.3.tgz#af24c064b72c6550a73d534ede9545fb35d86961"
+  dependencies:
+    ember-basic-dropdown "^1.0.0-beta.3"
+    ember-cli-babel "^6.11.0"
+    ember-cli-htmlbars "^2.0.1"
+    ember-concurrency "^0.8.12"
+    ember-text-measurer "^0.4.0"
+    ember-truth-helpers "^2.0.0"
 
 ember-qunit@^3.3.2:
   version "3.3.2"
@@ -2752,12 +2810,24 @@ ember-source@~3.0.0:
     jquery "^3.2.1"
     resolve "^1.3.3"
 
+ember-text-measurer@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/ember-text-measurer/-/ember-text-measurer-0.4.0.tgz#a676195378d4eb4c1617678c2d198a2344b4d12b"
+  dependencies:
+    ember-cli-babel "^6.8.2"
+
 ember-trix-editor@lynnetye/ember-trix-editor:
   version "1.0.5"
   resolved "https://codeload.github.com/lynnetye/ember-trix-editor/tar.gz/01998f5f315e3fbcf2c601eb0207c4a84f94961b"
   dependencies:
     ember-cli-babel "^5.1.7"
     ember-cli-htmlbars "1.1.1"
+
+ember-truth-helpers@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ember-truth-helpers/-/ember-truth-helpers-2.0.0.tgz#f3e2eef667859197f1328bb4f83b0b35b661c1ac"
+  dependencies:
+    ember-cli-babel "^6.8.2"
 
 encodeurl@~1.0.1:
   version "1.0.2"

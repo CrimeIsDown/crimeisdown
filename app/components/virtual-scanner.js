@@ -2,6 +2,7 @@
 
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
+import { bind } from '@ember/runloop';
 import ENV from '../config/environment';
 import fetch from 'fetch';
 import $ from 'jquery';
@@ -101,7 +102,7 @@ export default Component.extend({
     this.get('enabledStreams').pushObject(streamData);
 
     // wait for new elements to render so we can select them
-    $('#stream-'+streamName).ready(() => {
+    $('#stream-'+streamName).ready(bind(this, () => {
       let playerElement = document.getElementById('audio-player-' + streamName);
 
       this.startPlayer(streamName, playerElement);
@@ -133,7 +134,7 @@ export default Component.extend({
 
         this.drawVU(analyser, draggableElement, 0);
       }
-    });
+    }));
   },
   startPlayer(stream, playerElement) {
     let player = dashjs.MediaPlayer().create();

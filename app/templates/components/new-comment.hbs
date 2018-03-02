@@ -1,0 +1,16 @@
+{{#if showForm}}
+  <h4>New Comment</h4>
+  <form {{action "create" on="submit"}}>
+    <div class="form-group">
+      <label for="author">Author</label>
+      {{input type="text" class="form-control" id="author" value=comment.author}}
+    </div>
+    <div class="form-group">
+      <label for="content">Content</label>
+      {{input type="text" class="form-control" id="content" value=comment.body}}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{{else}}
+  <button class="btn btn-info" {{action (mut showForm) true}}>New Comment</button>
+{{/if}}

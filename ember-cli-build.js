@@ -29,9 +29,9 @@ module.exports = function(defaults) {
 
   if (app.env === 'production') {
     app.options.inlineContent = {
-      'doorbell': 'app/helpers/doorbell.js',
-        'hotjar': 'app/helpers/hotjar.js',
-        'raven': 'app/helpers/raven.js'
+      'doorbell': 'app/doorbell.js',
+      'hotjar': 'app/hotjar.js',
+      'raven': 'app/raven.js'
     };
   }
 

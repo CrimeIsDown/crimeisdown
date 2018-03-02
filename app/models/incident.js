@@ -1,13 +1,14 @@
 import DS from 'ember-data';
-const { attr, hasMany } = DS;
+const { attr, hasMany, belongsTo } = DS;
 
 export default DS.Model.extend({
   submitterName: attr('string'),
-  callType: attr('string'),
+  title: attr('string'),
+  callType: belongsTo('call-type'),
   address: attr('string'),
   location: attr('location'),
-  agencies: hasMany('agency'),
   description: attr('string'),
+  units: hasMany('unit'),
   tweets: hasMany('tweet'),
   photos: hasMany('photo'),
   comments: hasMany('comment')
