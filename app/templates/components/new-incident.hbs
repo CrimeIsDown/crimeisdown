@@ -1,9 +1,9 @@
-<!--<div class="modal fade" id="add-incident-modal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">-->
-  <!--<div class="modal-dialog" role="document">-->
-    <!--<div class="modal-content">-->
+<div class="modal fade" id="add-incident-modal" tabindex="-1" role="dialog" aria-labelledby="addModalTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
       <form {{action "create" on="submit"}}>
         <div class="modal-header">
-          <h5 class="modal-title" id="modalTitle">Add a new incident</h5>
+          <h5 class="modal-title" id="addModalTitle">Add a new incident</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -25,6 +25,7 @@
               selected=incident.callType
               placeholder="Select call type"
               onchange=(action (mut incident.callType))
+              renderInPlace=true
             as |callType|
             }}
               {{callType.name}}
@@ -42,6 +43,7 @@
               selected=incident.units
               placeholder="Attach units to call"
               onchange=(action (mut incident.units))
+              renderInPlace=true
             as |unit|
             }}
               {{unit.radioId}}
@@ -65,7 +67,7 @@
           <button type="submit" class="btn btn-primary">Create</button>
         </div>
       </form>
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+    </div>
+  </div>
+</div>
 <button class="btn btn-default" data-toggle="modal" data-target="#add-incident-modal">New Incident</button>
