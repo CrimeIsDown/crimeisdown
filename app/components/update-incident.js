@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import $ from 'jquery';
 
 export default Component.extend({
   store: service(),
@@ -8,7 +9,9 @@ export default Component.extend({
   },
   actions: {
     update() {
-      this.get('incident').save();
+      this.get('incident').save().then(() => {
+        $('#update-incident-modal').modal('hide');
+      });
     }
   }
 });

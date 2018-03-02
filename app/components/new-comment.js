@@ -10,8 +10,11 @@ export default Component.extend({
   },
   actions: {
     create() {
-      this.set('comment.incident', this.get('incident'));
-      this.get('store').createRecord('comment', this.get('comment')).save();
+      let comment = this.get('store').createRecord('comment', this.get('comment'));
+      this.get('incident.comments').pushObject(comment);
+      comment.save().then(() => {
+        this.get('incident').save();
+      });
       this.set('showForm', false);
     }
   }

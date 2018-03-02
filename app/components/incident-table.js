@@ -24,6 +24,10 @@ export default Component.extend({
     deleteIncident(incident) {
       incident.destroyRecord();
     },
+    deleteComment(incident, comment) {
+      incident.get('comments').removeObject(comment);
+      incident.save();
+    },
     seedData() {
       // populate agencies and units
       [{
