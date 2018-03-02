@@ -29,6 +29,7 @@
           <button class="btn btn-danger" {{action "deleteIncident" incident}}>Delete Incident</button>
         </div>
         <p>Comments</p>
+        <!-- @TODO: Get comments to show up on refresh -->
         <ul>
           {{#each incident.comments as |comment|}}
             <li>{{comment.body}} - {{comment.author}}</li>
