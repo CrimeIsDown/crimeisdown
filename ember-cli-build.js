@@ -13,9 +13,11 @@ module.exports = function(defaults) {
         }
       }
     },
+
     'ember-cli-babel': {
       includePolyfill: true
     },
+
     fingerprint: {
       exclude: [
         'assets/images/layers-2x.png',

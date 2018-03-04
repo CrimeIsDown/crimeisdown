@@ -5,17 +5,13 @@
     <div class="accordion" role="tablist">
       <div class="draggable">
         <div class="card card-header" role="tab">
-          <a id="headingNotepad" class="collapsed" data-toggle="collapse" href="#collapseNotepad" aria-expanded="true" aria-controls="collapseNotepad">
-            Notepad
+          <a id="headingIncidents" class="collapsed" data-toggle="collapse" href="#collapseIncidents" aria-expanded="true" aria-controls="collapseIncidents">
+            Incidents
           </a>
           <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
         </div>
-        <div id="collapseNotepad" class="collapse" role="tabpanel" aria-labelledby="headingNotepad" data-parent="#accordion">
-          <div id="notepad">
-            <p>Use the text area for any notes you may need to take when listening to the scanner.</p>
-            {{trix-editor}}
-            <p><em>Refreshing the page or navigating away will clear anything you have written.</em></p>
-          </div>
+        <div id="collapseIncidents" class="collapse show" role="tabpanel" aria-labelledby="headingIncidents" data-parent="#accordion">
+          {{incident-table incidents=incidents openIncidents=openIncidents callTypes=callTypes agencies=agencies}}
         </div>
       </div>
       <div class="draggable">
@@ -175,6 +171,21 @@
         <div id="collapseUCRSearch" class="collapse show" role="tabpanel" aria-labelledby="headingUCRSearch" data-parent="#accordion">
           <div id="search-ucrcodes">
             {{search-ucrcodes}}
+          </div>
+        </div>
+      </div>
+      <div class="draggable">
+        <div class="card card-header" role="tab">
+          <a id="headingNotepad" class="collapsed" data-toggle="collapse" href="#collapseNotepad" aria-expanded="true" aria-controls="collapseNotepad">
+            Notepad
+          </a>
+          <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
+        </div>
+        <div id="collapseNotepad" class="collapse" role="tabpanel" aria-labelledby="headingNotepad" data-parent="#accordion">
+          <div id="notepad">
+            <p>Use the text area for any notes you may need to take when listening to the scanner.</p>
+            {{trix-editor}}
+            <p><em>Refreshing the page or navigating away will clear anything you have written.</em></p>
           </div>
         </div>
       </div>

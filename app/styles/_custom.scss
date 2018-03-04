@@ -56,8 +56,34 @@ $map-container-height: 85vh;
   }
 }
 
-.map {
+ul.nav.nav-tabs {
   margin-top: -1.5rem;
+  padding-top: 0.5rem;
+  li:first-child {
+    margin-left: 1rem;
+  }
+  &.bg-dark .nav-item .nav-link {
+    color: $white;
+    &.active, &:hover, &:focus {
+      color: $gray-800;
+      background-color: $white;
+    }
+  }
+}
+
+.nav-close {
+  display: inline-block;
+  padding-right: 1.75rem;
+  & + span {
+    position: relative;
+    display: inline-block;
+    margin-left: -2rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+  }
+}
+
+.overall-container {
   .map-container {
     position: relative;
     .leaflet-container {
@@ -83,6 +109,9 @@ $map-container-height: 85vh;
   }
   .search-container {
     padding: 1rem;
+    * {
+      font-size: 0.8rem;
+    }
     #address-search {
       table tr > td {
         width: 50%;
@@ -243,7 +272,7 @@ input#datetimepicker[readonly] {
       }
     }
     .search-container {
-      width: 350px;
+      max-width: 40vw;
       max-height: $map-container-height;
       overflow-y: auto;
       .mobile {

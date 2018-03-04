@@ -1,0 +1,17 @@
+{{incident-form update=true incident=incident agencies=agencies callTypes=callTypes}}
+<p>Comments</p>
+{{#if incident.comments.length}}
+  <ul>
+    {{#each incident.comments as |comment|}}
+      <li>
+        <button type="button" class="btn btn-danger btn-sm" aria-label="Delete comment" {{action "deleteComment" incident comment}}>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{comment-form update=true comment=comment incident=incident}}
+        [{{comment.createdAt}}] {{comment.body}} - {{comment.author}}</li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>Nobody has commented on this incident yet.</p>
+{{/if}}
+{{comment-form update=false incident=incident}}

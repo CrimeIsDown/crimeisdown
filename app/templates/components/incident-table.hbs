@@ -1,63 +1,47 @@
-<div>
-  {{#each incidents as |incident|}}
-    <div class="card">
-      <div class="card-body">
-        {{update-incident incident=incident units=units callTypes=callTypes}}
-        <div class="btn-group" role="group" aria-label="Incident actions">
-          <button class="btn btn-default" data-toggle="modal" data-target="#update-incident-modal">Update Incident</button>
-          <button class="btn btn-danger" {{action "deleteIncident" incident}}>Delete Incident</button>
-        </div>
-        <h4>{{incident.title}} - {{incident.callType.name}}</h4>
-        <ul>
-          <li>Submitter: {{incident.submitterName}}</li>
-          <li>Address: {{incident.address}}</li>
-          <li>Location: {{incident.location}}</li>
-          <li>Description: {{incident.description}}</li>
-          {{#if incident.units.length}}
-          <li>Units assigned</li>
-          <ul>
-            {{#each incident.units as |unit|}}
-              <li>{{unit.agency.name}} - {{unit.radioId}}</li>
-            {{/each}}
-          </ul>
-          {{/if}}
-          {{#if incident.tweets.length}}
-          <li>Relevant tweets</li>
-          <ul>
-            {{#each incident.tweets as |tweet|}}
-              <li>{{tweet.url}}</li>
-            {{/each}}
-          </ul>
-          {{/if}}
-          {{#if incident.photos.length}}
-          <li>Relevant photos</li>
-          <ul>
-            {{#each incident.photos as |photo|}}
-              <li>{{photo.url}}</li>
-            {{/each}}
-          </ul>
-          {{/if}}
-        </ul>
-        <p>Comments</p>
-        {{#if incident.comments.length}}
-          <ul>
-            {{#each incident.comments as |comment|}}
-              <li>
-                <button type="button" class="btn btn-danger btn-sm" aria-label="Delete comment" {{action "deleteComment" incident comment}}>
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                [{{comment.createdAt}}] {{comment.body}} - {{comment.author}}</li>
-            {{/each}}
-          </ul>
-        {{else}}
-          <p>Nobody has commented on this incident yet.</p>
-        {{/if}}
-        {{new-comment incident=incident}}
+<div class="modal fade" id="add-incident-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create Incident</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{incident-form update=false agencies=agencies callTypes=callTypes}}
       </div>
     </div>
-  {{/each}}
+  </div>
 </div>
-
-{{new-incident units=units callTypes=callTypes}}
-<br>
-<button class="btn btn-default" {{action "seedData" on="click"}}>Seed data into localStorage</button>
+<p>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal">
+    Add Incident
+  </button>
+</p>
+<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th>Posted</th>
+      <th>Pri.</th>
+      <th>Type</th>
+      <th>Nature</th>
+      <th>Location</th>
+      <th>Disposition</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each incidents as |incident|}}
+    <tr>
+      <td>{{moment-format incident.createdAt 'HH:mm:ss'}}</td>
+      <td>{{incident.priority}}</td>
+      <td>{{incident.callType.name}}</td>
+      <td>{{incident.callNature}}</td>
+      <td><a href="#" {{action "gotoMarker" incident.location.marker}}>{{incident.address}}</a></td>
+      <td>{{if incident.disposition incident.disposition "Ongoing"}}</td>
+      <td><button class="btn btn-sm btn-primary" {{action "openIncident" incident}}>Open</button></td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+<p><button class="btn btn-default" {{action "seedData" on="click"}}>Seed data into localStorage</button></p>

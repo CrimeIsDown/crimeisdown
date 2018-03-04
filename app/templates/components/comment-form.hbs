@@ -1,6 +1,6 @@
 {{#if showForm}}
-  <h4>New Comment</h4>
-  <form {{action "create" on="submit"}}>
+  <h4>{{if update "Edit" "New"}} Comment</h4>
+  <form {{action "upsert" on="submit"}}>
     <div class="form-group">
       <label for="author">Author</label>
       {{input type="text" class="form-control" id="author" value=comment.author}}
@@ -13,5 +13,5 @@
     <button class="btn btn-secondary" {{action (mut showForm) false}}>Cancel</button>
   </form>
 {{else}}
-  <button class="btn btn-info" {{action (mut showForm) true}}>New Comment</button>
+  <button class="btn btn-info" {{action (mut showForm) true}}>{{if update "Edit" "New"}} Comment</button>
 {{/if}}

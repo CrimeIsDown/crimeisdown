@@ -1,32 +1,15 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { get } from '@ember/object';
 
 export default Component.extend({
   store: service(),
   init() {
     this._super(...arguments);
     this.incident = {};
-    this.units = [];
-    this.agencies.forEach((agency) => {
-      let units = [];
-      // we must use get and pushObject in order to properly execute the computed functions and update state in the components
-      get(agency, 'units').forEach((unit) => {
-        units.pushObject(unit);
-      });
-      this.units.pushObject({
-        groupName: get(agency, 'name'),
-        options: units
-      });
-    });
   },
   actions: {
-    deleteIncident(incident) {
-      incident.destroyRecord();
-    },
-    deleteComment(incident, comment) {
-      incident.get('comments').removeObject(comment);
-      incident.save();
+    openIncident(incident) {
+      this.get('openIncidents').pushObject(incident);
     },
     seedData() {
       // populate agencies and units

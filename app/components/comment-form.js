@@ -6,16 +6,30 @@ export default Component.extend({
   showForm: false,
   init() {
     this._super(...arguments);
-    this.comment = {};
+    if (!this.comment) {
+      this.comment = {};
+    }
   },
   actions: {
+    upsert() {
+      if (this.update) {
+        return this.actions.update();
+      }
+      return this.actions.create();
+    },
     create() {
       let comment = this.get('store').createRecord('comment', this.get('comment'));
       this.get('incident.comments').pushObject(comment);
       comment.save().then(() => {
-        this.get('incident').save();
+        this.get('incident').save().then(() => {
+          this.set('showForm', false);
+        });
       });
-      this.set('showForm', false);
+    },
+    update() {
+      this.get('comment').save().then(() => {
+        this.set('showForm', false);
+      });
     }
   }
 });

@@ -1,0 +1,73 @@
+<form {{action "upsert" on="submit"}}>
+  <div class="form-group">
+    <label id="callTypeLabel">Call Type</label>
+    {{#power-select
+      ariaLabelledBy="callTypeLabel"
+      options=callTypes
+      selected=incident.callType
+      placeholder="Select call type"
+      onchange=(action (mut incident.callType))
+      renderInPlace=true
+    as |callType|
+    }}
+      {{callType.name}}
+    {{/power-select}}
+  </div>
+  <div class="form-group">
+    <label for="callNature">Nature of call</label>
+    {{input type="text" class="form-control" id="callNature" placeholder="e.g. Car vs semi w/ injuries" required=true value=incident.callNature}}
+  </div>
+  <div class="form-group">
+    <label for="narrative">Narrative</label>
+    {{textarea class="form-control" id="narrative" rows="3" value=incident.narrative}}
+  </div>
+  <div class="form-group">
+    <label for="address">Address</label>
+    {{input type="text" class="form-control" id="address" value=incident.address required=true}}
+  </div>
+  <div class="form-group">
+    <label id="priorityLabel">Priority</label>
+    {{#power-select
+      ariaLabelledBy="priorityLabel"
+      options=priorities
+      selected=incident.priority
+      placeholder="Choose priority level"
+      onchange=(action (mut incident.priority))
+      renderInPlace=true
+    as |priority|
+    }}
+      {{priority.level}}: {{priority.description}}
+    {{/power-select}}
+  </div>
+  <div class="form-group">
+    <label id="unitsLabel">Units attached</label>
+    {{#power-select-multiple
+      ariaLabelledBy="unitsLabel"
+      options=units
+      selected=incident.units
+      placeholder="Attach units to call"
+      onchange=(action (mut incident.units))
+      renderInPlace=true
+    as |unit|
+    }}
+      {{unit.radioId}}
+    {{/power-select-multiple}}
+  </div>
+  <div class="form-group">
+    <label for="disposition">Disposition</label>
+    {{input type="text" class="form-control" id="disposition" placeholder="19-Paul, Code 4, etc." value=incident.disposition}}
+  </div>
+  <!--<div class="form-group">-->
+    <!--<label for="tweetUrl">Tweets</label>-->
+    <!--<input type="url" class="form-control" id="tweetUrl" placeholder="https://twitter.com/...">-->
+  <!--</div>-->
+  <!--<div class="form-group">-->
+    <!--<label for="photoUrl">Photos</label>-->
+    <!--<input type="url" class="form-control" id="photoUrl" placeholder="https://twitter.com/...">-->
+  <!--</div>-->
+  <div class="form-group">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+    <button type="submit" class="btn btn-primary">{{if update "Update" "Create"}}</button>
+    {{#if update}}<button class="btn btn-danger" {{action "delete"}}>Delete</button>{{/if}}
+  </div>
+</form>

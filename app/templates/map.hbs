@@ -1,8 +1,26 @@
-<div class="map">
-  {{incident-map}}
-</div>
-<hr>
-<div class="container">
-  <h2>Incidents - Experimental</h2>
-  {{incident-table incidents=model.incidents callTypes=model.callTypes agencies=model.agencies}}
+<ul class="nav nav-tabs bg-dark" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="home" aria-selected="true">Map/CAD</a>
+  </li>
+  {{#each openIncidents as |incident|}}
+    <li class="nav-item">
+      <a class="nav-link nav-close" id="incident-label-{{incident.id}}" data-toggle="tab" href="#incident{{incident.id}}" role="tab" aria-controls="incident{{incident.id}}" aria-selected="false">
+        {{incident.callNature}} - {{incident.callType.name}}
+      </a>
+      <span class="text-danger" onclick={{action "closeTab" incident}}>&times;</span>
+    </li>
+  {{/each}}
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
+    {{incident-map incidents=model.incidents openIncidents=openIncidents callTypes=model.callTypes agencies=model.agencies}}
+  </div>
+  {{#each openIncidents as |incident|}}
+    <div class="tab-pane fade" id="incident{{incident.id}}" role="tabpanel" aria-labelledby="incident-label-{{incident.id}}">
+      <div class="container">
+        {{incident-show incident=incident callTypes=model.callTypes agencies=model.agencies}}
+      </div>
+    </div>
+  {{/each}}
 </div>
