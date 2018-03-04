@@ -8,13 +8,15 @@
         </button>
       </div>
       <div class="modal-body">
-        {{incident-form update=false agencies=agencies callTypes=callTypes}}
+        {{#if showNewForm}}
+          {{incident-form update=false agencies=agencies callTypes=callTypes}}
+        {{/if}}
       </div>
     </div>
   </div>
 </div>
 <p>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal">
+  <button type="button" class="btn btn-primary" {{action "openAddIncidentModal"}}>
     Add Incident
   </button>
 </p>

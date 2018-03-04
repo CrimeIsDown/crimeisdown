@@ -11,12 +11,6 @@ export default Component.extend({
     }
   },
   actions: {
-    upsert() {
-      if (this.update) {
-        return this.actions.update();
-      }
-      return this.actions.create();
-    },
     create() {
       let comment = this.get('store').createRecord('comment', this.get('comment'));
       this.get('incident.comments').pushObject(comment);

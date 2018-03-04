@@ -1,6 +1,6 @@
 {{#if showForm}}
   <h4>{{if update "Edit" "New"}} Comment</h4>
-  <form {{action "upsert" on="submit"}}>
+  <form {{action (if update "update" "create") on="submit"}}>
     <div class="form-group">
       <label for="author">Author</label>
       {{input type="text" class="form-control" id="author" value=comment.author}}

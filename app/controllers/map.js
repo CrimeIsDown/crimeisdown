@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import $ from 'jquery';
 
 export default Controller.extend({
   init() {
@@ -8,6 +9,7 @@ export default Controller.extend({
   actions: {
     closeTab(incident) {
       this.get('openIncidents').removeObject(incident);
+      $('#cadTabs #map-tab').tab('show');
     }
   }
 });

@@ -1,15 +1,33 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import $ from 'jquery';
+import { bind } from '@ember/runloop';
 
 export default Component.extend({
   store: service(),
+  showNewForm: false,
   init() {
     this._super(...arguments);
-    this.incident = {};
   },
   actions: {
+    openAddIncidentModal() {
+      // only one incident form can be open at a time, so we must close all open incidents
+      // and reopen them once the form has been un-rendered (after submission or cancel)
+      let openIncidents = this.get('openIncidents');
+      this.set('openIncidents', []);
+      this.set('showNewForm', true);
+      $('#add-incident-modal').modal('show');
+      $('#add-incident-modal').on('hidden.bs.modal', bind(this, () => {
+        this.set('showNewForm', false);
+        this.set('openIncidents', openIncidents);
+      }));
+    },
     openIncident(incident) {
       this.get('openIncidents').pushObject(incident);
+      let selector = '#cadTabs #incident-tab-'+incident.id;
+      $(selector).ready(bind(this, () => {
+        $(selector).tab('show');
+      }));
     },
     seedData() {
       // populate agencies and units

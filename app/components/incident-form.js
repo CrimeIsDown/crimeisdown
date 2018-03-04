@@ -7,6 +7,7 @@ export default Component.extend({
   store: service(),
   init() {
     this._super(...arguments);
+    // components share the same properties across instances
     if (!this.incident) {
       this.incident = {};
     }
@@ -41,28 +42,35 @@ export default Component.extend({
       level: 5,
       description: "Alternate Response"
     }];
+    if (get(this.incident, 'priority')) {
+      this.priority = this.priorities[get(this.incident, 'priority')];
+    }
   },
   actions: {
-    upsert() {
-      if (this.update) {
-        return this.actions.update();
-      }
-      return this.actions.create();
+    setPriority(priority) {
+      this.set('incident.priority', priority.level);
+      this.set('priority', priority);
     },
     create() {
-      this.set('incident.priority', this.get('incident.priority.level'));
       this.get('store').createRecord('incident', this.get('incident')).save().then(() => {
         $('#add-incident-modal').modal('hide');
       });
     },
     update() {
-      this.set('incident.priority', this.get('incident.priority.level'));
       this.get('incident').save().then(() => {
         $('#update-incident-modal').modal('hide');
+        alert('Updated successfully!');
       });
     },
+    close() {
+      this.get('openIncidents').removeObject(this.get('incident'));
+      $('#cadTabs #map-tab').tab('show');
+    },
     delete() {
-      this.get('incident').destroyRecord();
+      this.get('incident').destroyRecord().then(() => {
+        this.get('openIncidents').removeObject(this.get('incident'));
+        $('#cadTabs #map-tab').tab('show');
+      });
     },
   }
 });
