@@ -24,6 +24,10 @@ export default Component.extend({
       this.get('comment').save().then(() => {
         this.set('showForm', false);
       });
+    },
+    delete() {
+      this.get('incident.comments').removeObject(this.get('comment'));
+      this.get('incident').save();
     }
   }
 });

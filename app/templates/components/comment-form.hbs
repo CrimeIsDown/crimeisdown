@@ -1,5 +1,5 @@
 {{#if showForm}}
-  <h4>{{if update "Edit" "New"}} Comment</h4>
+  <h5>{{if update "Edit" "New"}} Comment</h5>
   <form {{action (if update "update" "create") on="submit"}}>
     <div class="form-group">
       <label for="author">Author</label>
@@ -13,5 +13,14 @@
     <button class="btn btn-secondary" {{action (mut showForm) false}}>Cancel</button>
   </form>
 {{else}}
-  <button class="btn btn-info" {{action (mut showForm) true}}>{{if update "Edit" "New"}} Comment</button>
+  <div class="btn-group">
+    {{#if update}}
+      <button type="button" class="btn btn-danger btn-sm" aria-label="Delete comment" {{action "delete"}}>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <button class="btn btn-sm btn-info" {{action (mut showForm) true}}>Edit</button>
+    {{else}}
+      <button class="btn btn-info" {{action (mut showForm) true}}>New Comment</button>
+    {{/if}}
+  </div>
 {{/if}}

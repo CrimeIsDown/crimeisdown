@@ -2,16 +2,14 @@
   <div class="col-md-12">
     <h3 style="margin-top: 1rem;">Event #{{incident.id}}</h3>
     {{incident-form update=true incident=incident openIncidents=openIncidents agencies=agencies callTypes=callTypes}}
-    <p>Comments</p>
+    <h4>Comments</h4>
     {{#if incident.comments.length}}
       <ul>
         {{#each incident.comments as |comment|}}
           <li>
-            <button type="button" class="btn btn-danger btn-sm" aria-label="Delete comment" {{action "deleteComment" incident comment}}>
-              <span aria-hidden="true">&times;</span>
-            </button>
             {{comment-form update=true comment=comment incident=incident}}
-            [{{comment.createdAt}}] {{comment.body}} - {{comment.author}}</li>
+            [{{moment-format comment.createdAt 'HH:mm:ss'}}] {{comment.author}} said {{comment.body}}
+          </li>
         {{/each}}
       </ul>
     {{else}}
