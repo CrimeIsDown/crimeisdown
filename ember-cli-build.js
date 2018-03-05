@@ -73,6 +73,16 @@ module.exports = function(defaults) {
 
   app.import('node_modules/leaflet.markercluster/dist/leaflet.markercluster.js');
 
+  app.import('node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js');
+  app.import('node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.css');
+  app.import('node_modules/leaflet.awesome-markers/dist/images/markers-matte.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet.awesome-markers/dist/images/markers-matte@2x.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet.awesome-markers/dist/images/markers-plain.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet.awesome-markers/dist/images/markers-shadow.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet.awesome-markers/dist/images/markers-shadow@2x.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet.awesome-markers/dist/images/markers-soft.png', {destDir: 'assets/images'});
+  app.import('node_modules/leaflet.awesome-markers/dist/images/markers-soft@2x.png', {destDir: 'assets/images'});
+
   app.import('node_modules/font-awesome/fonts/FontAwesome.otf', {destDir: 'assets/fonts'});
   app.import('node_modules/font-awesome/fonts/fontawesome-webfont.eot', {destDir: 'assets/fonts'});
   app.import('node_modules/font-awesome/fonts/fontawesome-webfont.svg', {destDir: 'assets/fonts'});

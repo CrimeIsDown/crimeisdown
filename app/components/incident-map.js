@@ -2,6 +2,7 @@
 /*global GeoSearch*/
 
 import Component from '@ember/component';
+import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
 
@@ -43,6 +44,32 @@ export default Component.extend({
       this.initLayers(),
       this.get('addressLookup').loadData()
     ]).then(() => {
+      this.get('incidents').forEach((incident) => {
+        this.get('geosearchProvider').search({query: get(incident, 'address')}).then((results) => {
+          if (results && results.length > 0) {
+            let location = results[0].raw;
+            let latlng = L.latLng(location.geometry.location.lat, location.geometry.location.lng);
+
+            let incidentMarker = L.marker(latlng, {
+              icon: L.AwesomeMarkers.icon({
+                icon: 'exclamation-circle',
+                prefix: 'fa',
+                markerColor: 'red'
+              })
+            });
+
+            // this is a really hacky way to make a popup, we should stop doing it
+            // @TODO: Use Handlebars template to make Leaflet popup
+            let popupContents = '<h6>'+get(incident, 'callType.name')+'</h6>' +
+              '<strong>Nature of call:</strong> '+get(incident, 'callNature') +
+              '<br><strong>Location:</strong> '+location.formatted_address +
+              '<br><button class="btn btn-sm btn-primary" onclick="$(\'#incident-row-'+get(incident, 'id')+' button\').click()">Open Details</button>';
+            incidentMarker.bindPopup(popupContents).openPopup();
+            incidentMarker.addTo(this.get('overlay')['User Features']);
+          }
+        });
+      });
+
       // wait for everything to load before trying to geocode an address
       if (window.location.hash) {
         let hash = window.location.hash.substr(1),
@@ -100,15 +127,15 @@ export default Component.extend({
 
   initGeocoder() {
     return new Promise((resolve, reject) => {
-      const provider = new GeoSearch.GoogleProvider({
+      this.set('geosearchProvider', new GeoSearch.GoogleProvider({
         params: {
           key: 'REDACTED_PUBLIC_CREDENTIAL',
           bounds: '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366'
         },
-      });
+      }));
 
       const searchControl = new GeoSearch.GeoSearchControl({
-        provider: provider,
+        provider: this.get('geosearchProvider'),
         style: 'bar',
         autoComplete: false,
         showPopup: true,

@@ -34,7 +34,7 @@
   </thead>
   <tbody>
   {{#each incidents as |incident|}}
-    <tr>
+    <tr id="incident-row-{{incident.id}}">
       <td>{{moment-format incident.createdAt 'HH:mm:ss'}}</td>
       <td>{{incident.priority}}</td>
       <td>{{incident.callType.name}}</td>
