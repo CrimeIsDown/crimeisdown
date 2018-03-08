@@ -1,70 +1,98 @@
 <form {{action (if update "update" "create") on="submit"}}>
   <div class="form-group">
-    <label id="callTypeLabel">Call Type</label>
+    <label id="incidentTypeLabel">Incident Type</label>
     {{#power-select
-      ariaLabelledBy="callTypeLabel"
-      options=callTypes
-      selected=incident.callType
-      placeholder="Select call type"
-      onchange=(action (mut incident.callType))
+      ariaLabelledBy="incidentTypeLabel"
+      options=model.incidentTypes
+      selected=incident.type
+      placeholder="Select incident type"
+      onchange=(action (mut incident.type))
       renderInPlace=true
-    as |callType|
+    as |incidentType|
     }}
-      {{callType.name}}
+      {{incidentType.description}}
     {{/power-select}}
   </div>
   <div class="form-group">
-    <label for="callNature">Nature of call</label>
-    {{input type="text" class="form-control" id="callNature" placeholder="e.g. Car vs semi w/ injuries" required=true value=incident.callNature}}
+    <label for="nature">Nature of call</label>
+    {{input type="text" class="form-control" id="nature" placeholder="e.g. Car vs semi w/ injuries" required=true value=incident.nature}}
   </div>
   <div class="form-group">
-    <label for="narrative">Narrative</label>
-    {{textarea class="form-control" id="narrative" rows="3" value=incident.narrative}}
+    <label for="locationAddress">Address</label>
+    {{input type="text" class="form-control" id="locationAddress" value=location.address required=true}}
   </div>
   <div class="form-group">
-    <label for="address">Address</label>
-    {{input type="text" class="form-control" id="address" value=incident.address required=true}}
+    <label for="locationDescription">Location Description (additional details about address e.g. in alley)</label>
+    {{input type="text" class="form-control" id="locationDescription" value=location.description}}
   </div>
+  {{#unless update}}
+  <div class="form-group">
+    <label for="notes">Notes/Narrative</label>
+    {{trix-editor placeholder="Further description about the incident" value=note.body}}
+  </div>
+  {{/unless}}
   <div class="form-group">
     <label id="priorityLabel">Priority</label>
     {{#power-select
       ariaLabelledBy="priorityLabel"
-      options=priorities
-      selected=priority
+      options=model.incidentPriorities
+      selected=incident.priority
       placeholder="Choose priority level"
-      onchange=(action "setPriority")
+      onchange=(action (mut incident.priority))
       renderInPlace=true
     as |priority|
     }}
-      {{priority.level}}: {{priority.description}}
+      {{priority.value}}: {{priority.description}}
     {{/power-select}}
   </div>
   <div class="form-group">
     <label id="unitsLabel">Units attached</label>
     {{#power-select-multiple
       ariaLabelledBy="unitsLabel"
-      options=units
+      search=(action "searchUnit")
       selected=incident.units
       placeholder="Attach units to call"
-      onchange=(action (mut incident.units))
+      onchange=(action "setUnits")
       renderInPlace=true
     as |unit|
     }}
-      {{unit.radioId}}
+      {{#if unit.searchResult}}
+        {{unit.agency}} - {{unit.level1}} {{unit.level2}} {{unit.level3}} {{unit.level4}}
+      {{else}}
+        {{unit.agency.name}} {{unit.radioId}}
+      {{/if}}
     {{/power-select-multiple}}
   </div>
   <div class="form-group">
-    <label for="disposition">Disposition</label>
-    {{input type="text" class="form-control" id="disposition" placeholder="19-Paul, Code 4, etc." value=incident.disposition}}
+    <label id="statusLabel">Status</label>
+    {{#power-select
+      ariaLabelledBy="statusLabel"
+      options=model.incidentStatuses
+      selected=incident.status
+      placeholder="Choose incident status"
+      onchange=(action (mut incident.status))
+      renderInPlace=true
+    as |status|
+    }}
+      {{status.value}}: {{status.description}}
+    {{/power-select}}
   </div>
-  <!--<div class="form-group">-->
-    <!--<label for="tweetUrl">Tweets</label>-->
-    <!--<input type="url" class="form-control" id="tweetUrl" placeholder="https://twitter.com/...">-->
-  <!--</div>-->
-  <!--<div class="form-group">-->
-    <!--<label for="photoUrl">Photos</label>-->
-    <!--<input type="url" class="form-control" id="photoUrl" placeholder="https://twitter.com/...">-->
-  <!--</div>-->
+  {{#if update}}
+  <div class="form-group">
+    <label id="dispositionLabel">Disposition</label>
+    {{#power-select
+      ariaLabelledBy="dispositionLabel"
+      options=model.incidentDispositions
+      selected=incident.disposition
+      placeholder="Choose incident disposition"
+      onchange=(action (mut incident.disposition))
+      renderInPlace=true
+    as |disposition|
+    }}
+      {{disposition.description}}
+    {{/power-select}}
+  </div>
+  {{/if}}
   <div class="form-group">
     <button type="submit" class="btn btn-primary">{{if update "Update" "Create"}}</button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal" {{action "close"}}>{{if update "Close Tab" "Cancel"}}</button>

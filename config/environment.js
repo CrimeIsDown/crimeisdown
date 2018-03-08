@@ -35,6 +35,12 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.firebase = {
+      apiKey: "REDACTED_PUBLIC_CREDENTIAL",
+      authDomain: "crimeisdown-dev.firebaseapp.com",
+      databaseURL: "https://crimeisdown-dev.firebaseio.com",
+      storageBucket: "crimeisdown-dev.appspot.com"
+    };
   }
 
   if (environment === 'test') {
@@ -51,6 +57,12 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.googleAnalytics = {
       webPropertyId: 'UA-EXAMPLE-1'
+    };
+    ENV.firebase = {
+      apiKey: "REDACTED_PUBLIC_CREDENTIAL",
+      authDomain: "crimeisdown.firebaseapp.com",
+      databaseURL: "https://crimeisdown.firebaseio.com",
+      storageBucket: "crimeisdown.appspot.com"
     };
     ENV.APP.MEDIA_PLAYER_DEBUG = false;
   }

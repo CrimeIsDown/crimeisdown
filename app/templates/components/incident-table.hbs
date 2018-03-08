@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         {{#if showNewForm}}
-          {{incident-form update=false agencies=agencies callTypes=callTypes}}
+          {{incident-form update=false model=model}}
         {{/if}}
       </div>
     </div>
@@ -28,22 +28,22 @@
       <th>Type</th>
       <th>Nature</th>
       <th>Location</th>
-      <th>Disposition</th>
+      <th>Status</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-  {{#each incidents as |incident|}}
+  {{#each model.incidents as |incident|}}
     <tr id="incident-row-{{incident.id}}">
       <td>{{moment-format incident.createdAt 'HH:mm:ss'}}</td>
-      <td>{{incident.priority}}</td>
-      <td>{{incident.callType.name}}</td>
-      <td>{{incident.callNature}}</td>
-      <td><a href="#" {{action "gotoMarker" incident.location.marker}}>{{incident.address}}</a></td>
-      <td>{{if incident.disposition incident.disposition "Ongoing"}}</td>
+      <td>{{incident.priority.value}}</td>
+      <td>{{incident.type.value}}</td>
+      <td>{{incident.nature}}</td>
+      <td><a href="#" {{action "gotoMarker" incident.location.marker}}>{{incident.location.address}}</a></td>
+      <td>{{incident.status.value}}</td>
       <td><button class="btn btn-sm btn-primary" {{action "openIncident" incident}}>Open</button></td>
     </tr>
   {{/each}}
   </tbody>
 </table>
-<p><button class="btn btn-default" {{action "seedData" on="click"}}>Seed data into localStorage</button></p>
+<p><button class="btn btn-default" {{action "seedData" on="click"}}>Clear and seed form data into localStorage</button></p>

@@ -44,31 +44,35 @@ export default Component.extend({
       this.initLayers(),
       this.get('addressLookup').loadData()
     ]).then(() => {
-      this.get('incidents').forEach((incident) => {
-        this.get('geosearchProvider').search({query: get(incident, 'address')}).then((results) => {
-          if (results && results.length > 0) {
-            let location = results[0].raw;
-            let latlng = L.latLng(location.geometry.location.lat, location.geometry.location.lng);
+      let incidents = this.get('incidents');
+      if (incidents) {
+        incidents.forEach((incident) => {
+          this.get('geosearchProvider').search({query: get(incident, 'address')}).then((results) => {
+            if (results && results.length > 0) {
+              let location = results[0].raw;
+              let latlng = L.latLng(location.geometry.location.lat, location.geometry.location.lng);
 
-            let incidentMarker = L.marker(latlng, {
-              icon: L.AwesomeMarkers.icon({
-                icon: 'exclamation-circle',
-                prefix: 'fa',
-                markerColor: 'red'
-              })
-            });
+              let incidentMarker = L.marker(latlng, {
+                icon: L.AwesomeMarkers.icon({
+                  icon: 'exclamation-circle',
+                  prefix: 'fa',
+                  markerColor: 'red'
+                })
+              });
 
-            // this is a really hacky way to make a popup, we should stop doing it
-            // @TODO: Use Handlebars template to make Leaflet popup
-            let popupContents = '<h6>'+get(incident, 'callType.name')+'</h6>' +
-              '<strong>Nature of call:</strong> '+get(incident, 'callNature') +
-              '<br><strong>Location:</strong> '+location.formatted_address +
-              '<br><button class="btn btn-sm btn-primary" onclick="$(\'#incident-row-'+get(incident, 'id')+' button\').click()">Open Details</button>';
-            incidentMarker.bindPopup(popupContents).openPopup();
-            incidentMarker.addTo(this.get('overlay')['User Features']);
-          }
+              // this is a really hacky way to make a popup, we should stop doing it
+              // @TODO: Use Handlebars template to make Leaflet popup
+              let popupContents = '<h6>' + get(incident, 'type.value') + '</h6>' +
+                '<strong>Status:</strong> ' + get(incident, 'status.value') +
+                '<br><strong>Nature of call:</strong> ' + get(incident, 'nature') +
+                '<br><strong>Location:</strong> ' + location.formatted_address +
+                '<br><button class="btn btn-sm btn-primary" onclick="$(\'#incident-row-' + get(incident, 'id') + ' button\').click()">Open Details</button>';
+              incidentMarker.bindPopup(popupContents).openPopup();
+              incidentMarker.addTo(this.get('overlay')['User Features']);
+            }
+          });
         });
-      });
+      }
 
       // wait for everything to load before trying to geocode an address
       if (window.location.hash) {

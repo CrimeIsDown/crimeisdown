@@ -8,27 +8,20 @@ export default DS.Model.extend({
   updatedAt: attr('date', {
     defaultValue() { return new Date(); }
   }),
-  // nature of the call (e.g. car vs semi crash and rollover)
-  callNature: attr('string'),
   // type of call (e.g. MVA w/ entrapment)
-  callType: belongsTo('call-type'),
-  // longer description of the call
-  narrative: attr('string'),
-  // address of incident (intersection, full address, etc.)
-  address: attr('string'),
-  // location object from address lookup tool)
-  location: attr('location'),
-  // priority level (e.g. 1)
-  // see http://directives.chicagopolice.org/directives/data/a7a57be2-128ff3f0-ae912-8ff7-442a6e5fde43e2df.html
-  priority: attr('number'),
-  // disposition of call, aka how it ended (e.g. 19-Paul)
-  disposition: attr('string'),
+  type: belongsTo('incident-type', {async: true, inverse: null}),
+  // summary of the nature of the call (e.g. car vs semi crash and rollover)
+  nature: attr('string'),
+  // location object from address lookup tool), incl. address of incident (intersection, full address, etc.)
+  location: belongsTo('location', {async: true, inverse: null}),
+  // priority level
+  priority: belongsTo('incident-priority', {async: true, inverse: null}),
+  // whether or not the incident is active
+  status: belongsTo('incident-status', {async: true, inverse: null}),
+  // disposition of call, aka how it ended
+  disposition: belongsTo('incident-disposition', {async: true, inverse: null}),
   // units attached to the call
-  units: hasMany('unit'),
-  // relevant tweets
-  tweets: hasMany('tweet'),
-  // relevant photos
-  photos: hasMany('photo'),
-  // further updates
-  comments: hasMany('comment')
+  units: hasMany('unit', {async: true, inverse: null}),
+  // longer description of the call and further updates, formatting supported
+  notes: hasMany('note', {async: true, inverse: null}),
 });

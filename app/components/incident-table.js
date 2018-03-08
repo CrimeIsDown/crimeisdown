@@ -30,103 +30,95 @@ export default Component.extend({
       }));
     },
     seedData() {
-      // populate agencies and units
-      [{
-        slug: 'cpd',
-        name: 'Chicago Police Department',
-        units: [{
-          radioId: 'CPD 1000X'
+      // clear entire store
+      (new Promise((resolve) => {
+        this.get('store').unloadAll();
+        resolve();
+      })).then(() => {
+        // populate agencies and units
+        [{
+          slug: 'cpd',
+          name: 'Chicago Police Department',
+          units: [{
+            radioId: 'CPD 1000X'
+          }, {
+            radioId: 'CPD 1234'
+          }]
         }, {
-          radioId: 'CPD 1234'
-        }]
-      }, {
-        slug: 'cfd',
-        name: 'Chicago Fire Department',
-        units: [{
-          radioId: 'CFD E13'
-        }]
-      }, {
-        slug: 'other',
-        name: 'Other',
-        units: [{
-          radioId: 'Forest Park PD 1'
-        }]
-      }].forEach((v) => {
-        let agency = this.get('store').createRecord('agency', {
-          slug: v.slug,
-          name: v.name
+          slug: 'cfd',
+          name: 'Chicago Fire Department',
+          units: [{
+            radioId: 'CFD E13'
+          }]
+        }, {
+          slug: 'other',
+          name: 'Other',
+          units: [{
+            radioId: 'Forest Park PD 1'
+          }]
+        }].forEach((v) => {
+          let agency = this.get('store').createRecord('agency', {
+            slug: v.slug,
+            name: v.name
+          });
+          agency.save();
+          v.units.forEach((unit) => {
+            unit = this.get('store').createRecord('unit', unit);
+            unit.save();
+            unit.set('agency', agency);
+          });
         });
-        agency.save();
-        v.units.forEach((unit) => {
-          unit = this.get('store').createRecord('unit', unit);
-          unit.save();
-          unit.set('agency', agency);
-        });
-      });
 
-      // populate call types
-      [{
-        slug: 'police-activity',
-        name: 'Police Activity'
-      }, {
-        slug: 'fire-activity',
-        name: 'Fire Activity'
-      }, {
-        slug: 'residential-fire',
-        name: 'Residential Fire'
-      }, {
-        slug: 'garage-fire',
-        name: 'Garage Fire'
-      }, {
-        slug: 'commercial-fire',
-        name: 'Commercial Fire'
-      }, {
-        slug: 'multiple-alarm-fire',
-        name: 'Multiple Alarm Fire'
-      }, {
-        slug: 'vehicular-hijacking',
-        name: 'Vehicular Hijacking'
-      }, {
-        slug: 'armed-robbery',
-        name: 'Armed Robbery'
-      }, {
-        slug: 'vehicle-crash',
-        name: 'Vehicle Crash'
-      }, {
-        slug: 'vehicle-crash-pin-in',
-        name: 'Vehicle Crash (pin-in)'
-      }, {
-        slug: 'person-battered-fight-in-progress',
-        name: 'Person Battered / Fight in Progress'
-      }, {
-        slug: 'persons-shot',
-        name: 'Person(s) Shot'
-      }, {
-        slug: 'persons-stabbed',
-        name: 'Person(s) Stabbed'
-      }, {
-        slug: 'bomb-threat',
-        name: 'Bomb Threat'
-      }, {
-        slug: 'gas-leak',
-        name: 'Gas Leak'
-      }, {
-        slug: 'person-in-the-water',
-        name: 'Person in the Water'
-      }, {
-        slug: 'animal-attack',
-        name: 'Animal Attack'
-      }, {
-        slug: 'police-officer-needs-assistance',
-        name: 'Police Officer Needs Assistance'
-      }, {
-        slug: 'missing-person',
-        name: 'Missing Person'
-      }, {
-        slug: 'death-investigation',
-        name: 'Death Investigation'
-      }].forEach((v) => {
-        this.get('store').createRecord('call-type', v).save();
+        // populate incident dispositions
+        // read from XML http://technet.nena.org/nrs/registry/EIDD-CommonDispositionCode.xml?download
+        [{
+          value: '01',
+          description: 'Report Taken'
+        }].forEach((v) => {
+          this.get('store').createRecord('incident-disposition', v).save();
+        });
+
+        // populate incident priorities
+        // from http://directives.chicagopolice.org/directives/data/a7a57be2-128ff3f0-ae912-8ff7-442a6e5fde43e2df.html
+        [{
+          value: 0,
+          description: "Emergency Assistance (10-1)"
+        }, {
+          value: 1,
+          description: "Immediate Dispatch - life threatening"
+        }, {
+          value: 2,
+          description: "Rapid Dispatch"
+        }, {
+          value: 3,
+          description: "Routine Dispatch"
+        }, {
+          value: 4,
+          description: "Administrative Dispatch"
+        }, {
+          value: 5,
+          description: "Alternate Response"
+        }].forEach((v) => {
+          this.get('store').createRecord('incident-priority', v).save();
+        });
+
+        // populate incident statuses
+        // read from XML http://technet.nena.org/nrs/registry/EIDD-IncidentStatus-Common.xml?download
+        [{
+          value: 'Active',
+          description: 'The incident is active.'
+        }].forEach((v) => {
+          this.get('store').createRecord('incident-status', v).save();
+        });
+
+        // populate incident types
+        // read from https://release.niem.gov/niem/codes/apco_event/4.0/apco_event.xsd - IncidentCategoryCodeSimpleType
+        [{
+          value: 'ABDOM',
+          description: 'ABDOMINAL - Abdominal pain or problems'
+        }].forEach((v) => {
+          this.get('store').createRecord('incident-type', v).save();
+        });
       });
     }
   }

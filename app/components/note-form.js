@@ -6,27 +6,27 @@ export default Component.extend({
   showForm: false,
   init() {
     this._super(...arguments);
-    if (!this.comment) {
-      this.comment = {};
+    if (!this.note) {
+      this.note = {};
     }
   },
   actions: {
     create() {
-      let comment = this.get('store').createRecord('comment', this.get('comment'));
-      this.get('incident.comments').pushObject(comment);
-      comment.save().then(() => {
+      let note = this.get('store').createRecord('note', this.get('note'));
+      this.get('incident.notes').pushObject(note);
+      note.save().then(() => {
         this.get('incident').save().then(() => {
           this.set('showForm', false);
         });
       });
     },
     update() {
-      this.get('comment').save().then(() => {
+      this.get('note').save().then(() => {
         this.set('showForm', false);
       });
     },
     delete() {
-      this.get('incident.comments').removeObject(this.get('comment'));
+      this.get('incident.notes').removeObject(this.get('note'));
       this.get('incident').save();
     }
   }

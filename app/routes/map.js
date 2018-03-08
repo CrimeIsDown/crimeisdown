@@ -4,9 +4,12 @@ import RSVP from 'rsvp';
 export default Route.extend({
   model() {
     return RSVP.hash({
-      incidents: this.get('store').findAll('incident', {include: 'comments'}),
-      callTypes: this.get('store').findAll('call-type'),
-      agencies: this.get('store').findAll('agency', {include: 'units'})
+      agencies: this.get('store').findAll('agency'),
+      incidents: this.get('store').findAll('incident'),
+      incidentDispositions: this.get('store').findAll('incident-disposition'),
+      incidentPriorities: this.get('store').findAll('incident-priority'),
+      incidentStatuses: this.get('store').findAll('incident-status'),
+      incidentTypes: this.get('store').findAll('incident-type')
     });
   }
 });

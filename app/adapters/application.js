@@ -1,1 +1,4 @@
-export { default } from 'ember-local-storage/adapters/local';
+import FirebaseAdapter from 'emberfire/adapters/firebase';
+
+export default FirebaseAdapter.extend({
+});

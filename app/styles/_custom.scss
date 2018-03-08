@@ -115,6 +115,9 @@ ul.nav.nav-tabs {
     * {
       font-size: 0.8rem;
     }
+    trix-toolbar .button_group * {
+      font-size: 0 !important;
+    }
     #address-search {
       table tr > td {
         width: 50%;

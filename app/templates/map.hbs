@@ -5,7 +5,7 @@
   {{#each openIncidents as |incident|}}
     <li class="nav-item">
       <a class="nav-link nav-close" id="incident-tab-{{incident.id}}" data-toggle="tab" href="#incident-{{incident.id}}" role="tab" aria-controls="incident-{{incident.id}}" aria-selected="false">
-        {{incident.callNature}} - {{incident.callType.name}}
+        {{incident.type.value}} - {{incident.location.address}}
       </a>
       <span class="text-danger" onclick={{action "closeTab" incident}}>&times;</span>
     </li>
@@ -14,12 +14,12 @@
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
-    {{incident-map incidents=model.incidents openIncidents=openIncidents callTypes=model.callTypes agencies=model.agencies}}
+    {{incident-map model=model openIncidents=openIncidents}}
   </div>
   {{#each openIncidents as |incident|}}
     <div class="tab-pane fade" id="incident-{{incident.id}}" role="tabpanel" aria-labelledby="incident-tab-{{incident.id}}">
       <div class="container">
-        {{incident-show incident=incident openIncidents=openIncidents callTypes=model.callTypes agencies=model.agencies}}
+        {{incident-show model=model incident=incident openIncidents=openIncidents}}
       </div>
     </div>
   {{/each}}
