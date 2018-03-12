@@ -1,6 +1,8 @@
+/*global GeoSearch*/
+
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { get } from '@ember/object';
+import { get, set } from '@ember/object';
 import FindQuery from 'ember-emberfire-find-query/mixins/find-query';
 import $ from 'jquery';
 
@@ -13,7 +15,7 @@ export default Component.extend(FindQuery, {
       this.location = this.incident.get('location');
       this.units = this.incident.get('units');
     } else {
-      this.incident = this.get('store').createRecord('incident');
+      this.incident = {};
       // @TODO: Make Active the default status
       this.location = {address: '', description: ''};
       this.note = {author: 'Original dispatcher', content: ''};
@@ -29,17 +31,15 @@ export default Component.extend(FindQuery, {
         this.radioIds = {};
         alert('Could not fetch radio ID list');
       });
-    this.model.units = [];
+    this.set('geosearchProvider', new GeoSearch.GoogleProvider({
+      params: {
+        key: 'REDACTED_PUBLIC_CREDENTIAL',
+        bounds: '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366'
+      },
+    }));
+    this.agencies = [];
     this.model.agencies.forEach((agency) => {
-      let units = [];
-      // we must use get and pushObject in order to properly execute the computed functions and update state in the components
-      get(agency, 'units').forEach((unit) => {
-        units.pushObject(unit);
-      });
-      this.model.units.pushObject({
-        groupName: get(agency, 'name'),
-        options: units
-      });
+      set(this.agencies, get(agency, 'slug'), agency); // set the array key of an agency to be its slug
     });
   },
   actions: {
@@ -84,38 +84,83 @@ export default Component.extend(FindQuery, {
       return [];
     },
     setUnits(units) {
-      // @TODO: possible bug - if items are removed we do not do removeObject
-      units.forEach((v) => {
+      Promise.all(units.map(unit => {
         // only do this for new results from search
-        if (v.searchResult) {
-          this.filterEqual(this.get('store'), 'agency', {slug: v.agency.toLowerCase()}, (agencies) => {
-            let agency = agencies.get('firstObject');
-            if (agency) {
-              this.filterEqual(this.get('store'), 'unit', {radioId: v.radioId}, (units) => {
-                let first = units.get('firstObject');
-                if (first) {
-                  this.get('incident.units').pushObject(first);
-                } else {
-                  let record = this.get('store').createRecord('unit', {
-                    agency: agency,
-                    radioId: v.radioId
-                  });
-                  record.save().then(() => {
-                    this.get('incident.units').pushObject(record);
-                  });
-                }
-              });
-            }
+        if (undefined !== unit.searchResult) {
+          set(unit, 'searchResult', false); // set to false so it appears the same in template
+          return new Promise((resolve, reject) => {
+            this.filterEqual(this.get('store'), 'unit', {radioId: unit.radioId}, (units) => {
+              let first = units.get('firstObject');
+              if (first) {
+                resolve(first);
+              } else {
+                let record = this.get('store').createRecord('unit', {
+                  agency: this.get('agencies')[unit.agency.toLowerCase()],
+                  radioId: unit.radioId
+                });
+                record.save().then(() => {
+                  resolve(record);
+                }).catch((err) => {
+                  alert('Could not save unit');
+                  reject(err.errors);
+                });
+              }
+            });
           });
+        } else {
+          return Promise.resolve(unit);
         }
+      })).then((unitModels) => {
+        this.set('units', unitModels);
+      });
+    },
+    setLocation(locationModel) {
+      let address = get(locationModel, 'address');
+      return new Promise((resolve, reject) => {
+        this.get('geosearchProvider').search({query: address}).then((results) => {
+          if (results && results.length > 0) {
+            let location = results[0].raw;
+            let latlng = L.latLng(location.geometry.location.lat, location.geometry.location.lng);
+
+            let incidentMarker = L.marker(latlng, {
+              icon: L.AwesomeMarkers.icon({
+                icon: 'exclamation-circle',
+                prefix: 'fa',
+                markerColor: 'red'
+              })
+            });
+
+            // this is a really hacky way to make a popup, we should stop doing it
+            // @TODO: Use Handlebars template to make Leaflet popup
+            let popupContents = '<h6>' + this.get('incident.type.value') + '</h6>' +
+              '<strong>Status:</strong> ' + this.get('incident.status.value') +
+              '<br><strong>Nature of call:</strong> ' + this.get('incident.nature') +
+              '<br><strong>Location:</strong> ' + location.formatted_address +
+              '<br><button class="btn btn-sm btn-primary" onclick="$(\'#incident-row-' + this.get('incident.id') + ' button\').click()">Open Details</button>';
+            incidentMarker.bindPopup(popupContents).openPopup();
+
+            set(locationModel, 'layer', incidentMarker);
+          }
+          resolve(locationModel);
+        }).catch((err) => {
+          console.error(err);
+          resolve(locationModel);
+        });
       });
     },
     create() {
-      let incident = this.get('incident');
+      let incident = this.get('store').createRecord('incident', this.get('incident'));
+
       let note = this.get('store').createRecord('note', this.get('note'));
       incident.get('notes').pushObject(note);
+
       let location = this.get('store').createRecord('location', this.get('location'));
       incident.set('location', location);
+      (this.actions.setLocation.bind(this))(location).then((updatedLocation) => {
+        location = updatedLocation;
+      });
+
+      incident.set('units', this.get('units'));
       location.save()
         .then(() => {
           note.save()
@@ -137,6 +182,11 @@ export default Component.extend(FindQuery, {
         });
     },
     update() {
+      // we use .content as the model is on the content property
+      (this.actions.setLocation.bind(this))(this.get('location').content).then((updatedLocation) => {
+        updatedLocation.save();
+      });
+      this.set('incident.units', this.get('units'));
       this.get('incident').save().then(() => {
         $('#update-incident-modal').modal('hide');
         alert('Updated successfully!');

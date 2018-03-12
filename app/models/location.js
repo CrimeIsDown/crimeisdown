@@ -16,5 +16,5 @@ export default DS.Model.extend({
   // ems: attr('object')
 
   // leaflet markers
-  // markers: []
+  layer: attr('geojson')
 });
