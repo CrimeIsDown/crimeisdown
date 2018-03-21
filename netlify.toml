@@ -22,3 +22,7 @@
 #[context.branch-deploy]
 #  command = "ember build"
 
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
