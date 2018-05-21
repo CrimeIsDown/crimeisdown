@@ -4,16 +4,16 @@
     "name": "Chicago Police Department",
     "shortname": "CPD-General",
     "description": "General CPD stream, scans the 13 zones.",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/763",
-    "directStreamUrl": "http://relay.broadcastify.com/il_chicago_police2.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/763",
+    "directStreamUrl": "http://relay.broadcastify.com/7pv30d8gyqcxwtf.mp3"
   },
   {
     "key": "CW6",
     "name": "CPD Citywide 1, 5, 6",
     "shortname": "Citywide 1, 5, 6",
     "description": "Listen to this stream during special events, protests, or for high-priority calls being dispatched. Citywide 1 is for traffic, Marine Unit, mass transit, etc. Citywide 5 and 6 are alternate channels.",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/17695",
-    "directStreamUrl": "http://relay.broadcastify.com/299858349.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/17695",
+    "directStreamUrl": "http://relay.broadcastify.com/ctzpv08nrydkgh7.mp3"
   },
   {
     "key": "Z1",
@@ -21,17 +21,17 @@
     "shortname": "Zone 1",
     "description": "16th and 17th districts cover the far Northwest Side of Chicago.",
     "frequency": "460.475MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/16702",
-    "directStreamUrl": "http://relay.broadcastify.com/51174769.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/27730",
+    "directStreamUrl": "http://relay.broadcastify.com/ck1gxt40826fqsw.mp3"
   },
   {
     "key": "Z2",
     "name": "CPD Zone 2 - District 19",
     "shortname": "Zone 2",
-    "description": "19th District - Town Hall: Serving Uptown, south Lincoln Square, North Center, and Lakeview (including Boystown).",
+    "description": "19th District - Town Hall. Wrigley Field. Serving the area from Fullerton to Lawrence and Lake Michigan to the Chicago River. Lake View, north Lincoln Park, North Center, most of Uptown.",
     "frequency": "460.050MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/17684",
-    "directStreamUrl": "http://relay.broadcastify.com/779125459.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/17684",
+    "directStreamUrl": "http://relay.broadcastify.com/s2vzrmcbf5td4kw.mp3"
   },
   {
     "key": "Z3",
@@ -39,17 +39,17 @@
     "shortname": "Zone 3",
     "description": "Near West Side, Wicker Park, Ukranian Village, West Town, Logan Square, Bucktown, UIC areas.",
     "frequency": "460.225MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/14545",
-    "directStreamUrl": "http://relay.broadcastify.com/29449913.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/14545",
+    "directStreamUrl": "http://relay.broadcastify.com/p14hgjwt5y9kz2x.mp3"
   },
   {
     "key": "Z4",
     "name": "CPD Zone 4 - Districts 1 and 18",
     "shortname": "Zone 4",
-    "description": "1st District-Central..18th District-Near North.. Zone cover Downtown Chicago, Lake Shore Drive, Mag Mile, Navy Pier, Central Detention",
+    "description": "Zone 4 is the downtown Chicago and Mag Mile scanner feed. District 1 - Central: Serving the Loop, Near South Side, and the northern part of Douglas. District 18 - Near North: Serving the Near North Side and most of Lincoln Park.",
     "frequency": "460.150MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/15380",
-    "directStreamUrl": "http://relay.broadcastify.com/527466356.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/26296",
+    "directStreamUrl": "http://relay.broadcastify.com/4v15hrxn320mcws.mp3"
   },
   {
     "key": "Z5",
@@ -57,8 +57,8 @@
     "shortname": "Zone 5",
     "description": "2nd District - Wentworth: Serving Douglas, Oakland, Grand Boulevard, Kenwood, Washington Park, and Hyde Park.",
     "frequency": "460.500MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/23006",
-    "directStreamUrl": "http://relay.broadcastify.com/khtxwn0r1v53.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/23006",
+    "directStreamUrl": "http://relay.broadcastify.com/dw0rc463x21tmhs.mp3"
   },
   {
     "key": "Z6",
@@ -66,17 +66,8 @@
     "shortname": "Zone 6",
     "description": "7th District – Englewood & 8th District – Chicago Lawn",
     "frequency": "460.400MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/19608",
-    "directStreamUrl": "http://relay.broadcastify.com/640282916.mp3"
-  },
-  {
-    "key": "Z7",
-    "name": "CPD Zone 7 - District 3",
-    "shortname": "Zone 7",
-    "description": "Grand Crossing",
-    "frequency": "460.075MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/14677",
-    "directStreamUrl": "http://relay.broadcastify.com/937409687.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/27910",
+    "directStreamUrl": "http://relay.broadcastify.com/whf3myp2tx674b0.mp3"
   },
   {
     "key": "Z8",
@@ -84,8 +75,8 @@
     "shortname": "Zone 8",
     "description": "District 4 - South Chicago & District 6 - Gresham.",
     "frequency": "460.200MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/15045",
-    "directStreamUrl": "http://relay.broadcastify.com/267563787.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/27158",
+    "directStreamUrl": "http://relay.broadcastify.com/3dz5mfp2hwt1768.mp3"
   },
   {
     "key": "Z9",
@@ -93,8 +84,8 @@
     "shortname": "Zone 9",
     "description": "5th District.. Calumet / Area South.. 22nd District  Morgan Park",
     "frequency": "460.025MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/15084",
-    "directStreamUrl": "http://relay.broadcastify.com/258823627.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/15084",
+    "directStreamUrl": "http://relay.broadcastify.com/y70spfmqrj96zkg.mp3"
   },
   {
     "key": "Z10",
@@ -102,8 +93,8 @@
     "shortname": "Zone 10",
     "description": "10th District - Ogden: Serving North Lawndale, South Lawndale, and the Lower West Side; 11th District - Harrison: Serving West Garfield Park, East Garfield Park, and the southern half of Humboldt Park.",
     "frequency": "460.100MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/17693",
-    "directStreamUrl": "http://relay.broadcastify.com/716183595.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/17693",
+    "directStreamUrl": "http://relay.broadcastify.com/m4qs9ntxf1cgbdw.mp3"
   },
   {
     "key": "Z11",
@@ -111,8 +102,8 @@
     "shortname": "Zone 11",
     "description": "Dist. 20 and 24, serving the far North side of Chicago, including community areas of Rodgers Park, West Ridge, and Edgewater",
     "frequency": "460.375MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/12444",
-    "directStreamUrl": "http://relay.broadcastify.com/243172971.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/12444",
+    "directStreamUrl": "http://relay.broadcastify.com/v4zhq3s6791pd8c.mp3"
   },
   {
     "key": "Z12",
@@ -120,8 +111,8 @@
     "shortname": "Zone 12",
     "description": "Dist. 15 and 25, serving the far West side of Chicago, including community areas of Austin, Hermosa, and Belmont Cragin.",
     "frequency": "460.425MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/653",
-    "directStreamUrl": "http://relay.broadcastify.com/il_chicago_police.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/653",
+    "directStreamUrl": "http://relay.broadcastify.com/57s43ymgjpfh91t.mp3"
   },
   {
     "key": "Z13",
@@ -129,23 +120,15 @@
     "shortname": "Zone 13",
     "description": "9th District - Deering: Serving Bridgeport, McKinley Park, Brighton Park, New City, and Gage Park.",
     "frequency": "460.450MHz",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/17692",
-    "directStreamUrl": "http://relay.broadcastify.com/539709865.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/17692",
+    "directStreamUrl": "http://relay.broadcastify.com/s1fgh5v4kbjtc3y.mp3"
   },
   {
     "key": "CFD-Fire",
     "name": "CFD Fire - Main and Englewood, Citywide",
     "shortname": "CFD Fire",
     "description": "Chicago Fire Department (P25 Digital UHF) - MAIN/north & ENGLEWOOD/south, Fire Alarm Offices, including CITYWIDE Fire, radio system. CITYWIDE FIRE is also on the Chicago Fire & EMS Feed! (WPSG 985)  www.ChicagoFD.org",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/909",
-    "directStreamUrl": "http://relay.broadcastify.com/il_chicago_fire2.mp3"
-  },
-  {
-    "key": "CFD-EMS",
-    "name": "CFD EMS - Main and Englewood, EMS Command, CTA Fire. Citywide Fire, Joint Ops",
-    "shortname": "CFD EMS",
-    "description": "Chicago Fire Department (UHF) CTA-Fire, CITYWIDE Fire, Fire Tac., Joint Ops. Also in (P25 Digital-UHF)  EMS-MAIN/north, EMS-ENGLEWOOD/south & UHF-EMS Command. www.ChicagoFD.org",
-    "feedUrl": "http://www.broadcastify.com/listen/feed/13605",
-    "directStreamUrl": "http://relay.broadcastify.com/836454979.mp3"
+    "feedUrl": "https://www.broadcastify.com/listen/feed/909",
+    "directStreamUrl": "http://relay.broadcastify.com/g5pyc79xsb6jh4r.mp3"
   }
 ]
