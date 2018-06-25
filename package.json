@@ -20,7 +20,7 @@
     "url": "https://github.com/CrimeIsDown/crimeisdown-v3/issues"
   },
   "engines": {
-    "node": ">= 7"
+    "node": ">= 8"
   },
   "author": "Eric Tendian <eric@crimeisdown.com>",
   "license": "MIT",
@@ -33,7 +33,7 @@
     "broccoli-funnel": "^1.0.1",
     "dashjs": "^2.6.4",
     "ember-ajax": "^3.0.0",
-    "ember-cli": "~3.0.0",
+    "ember-cli": "~3.1.4",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-dependency-checker": "^2.0.0",
@@ -51,7 +51,7 @@
     "ember-cli-simple-auth-firebase": "Rastopyr/ember-cli-simple-auth-firebase#master",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
-    "ember-data": "~3.0.0",
+    "ember-data": "~3.1.0",
     "ember-emberfire-find-query": "^1.0.3",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^3.2.9",
@@ -63,7 +63,7 @@
     "ember-resolver": "^4.0.0",
     "ember-router-scroll": "^0.3.0",
     "ember-simple-auth": "^1.5.1",
-    "ember-source": "~3.0.0",
+    "ember-source": "~3.1.0",
     "ember-trix-editor": "lynnetye/ember-trix-editor",
     "ember-truth-helpers": "^2.0.0",
     "emberfire": "^2.0.9",
