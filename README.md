@@ -34,13 +34,14 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Running Tests
 
-### Linting
-
-* `yarn lint:js`
-* `yarn lint:js --fix`
-
 * `ember test`
 * `ember test --server`
+
+### Linting
+
+* `npm run lint:hbs`
+* `npm run lint:js`
+* `npm run lint:js -- --fix`
 
 ### Building
 
