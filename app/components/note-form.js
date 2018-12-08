@@ -12,22 +12,22 @@ export default Component.extend({
   },
   actions: {
     create() {
-      let note = this.get('store').createRecord('note', this.get('note'));
+      let note = this.store.createRecord('note', this.note);
       this.get('incident.notes').pushObject(note);
       note.save().then(() => {
-        this.get('incident').save().then(() => {
+        this.incident.save().then(() => {
           this.set('showForm', false);
         });
       });
     },
     update() {
-      this.get('note').save().then(() => {
+      this.note.save().then(() => {
         this.set('showForm', false);
       });
     },
     delete() {
-      this.get('incident.notes').removeObject(this.get('note'));
-      this.get('incident').save();
+      this.get('incident.notes').removeObject(this.note);
+      this.incident.save();
     }
   }
 });

@@ -11,7 +11,7 @@ export default Component.extend({
 
   actions: {
     logout: function() {
-      this.get('session').invalidate().then(function() {
+      this.session.invalidate().then(function() {
         this.transitionToRoute('login');
       }.bind(this));
     }

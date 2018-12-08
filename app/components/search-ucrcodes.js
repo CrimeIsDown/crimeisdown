@@ -21,7 +21,7 @@ export default Component.extend({
   },
   actions: {
     lookupUCR() {
-      let input = this.get('ucrCode');
+      let input = this.ucrCode;
       if (window.ga && typeof window.ga === "function") {
         ga('send', 'event', 'Searches UCR list', 'Tools', input);
       }

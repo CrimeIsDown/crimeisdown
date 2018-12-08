@@ -1,24 +1,26 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('incident-map', 'Integration | Component | incident map', {
-  integration: true
-});
+module('Integration | Component | incident map', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  test('it renders', async function(assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{incident-map}}`);
+    await render(hbs`{{incident-map}}`);
 
-  assert.equal(this.$().text().trim(), '');
+    assert.equal(find('*').textContent.trim(), '');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#incident-map}}
-      template block text
-    {{/incident-map}}
-  `);
+    // Template block usage:
+    await render(hbs`
+      {{#incident-map}}
+        template block text
+      {{/incident-map}}
+    `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+    assert.equal(find('*').textContent.trim(), 'template block text');
+  });
 });

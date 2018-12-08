@@ -9,7 +9,7 @@ export default Controller.extend({
   },
   actions: {
     closeTab(incident) {
-      this.get('openIncidents').removeObject(incident);
+      this.openIncidents.removeObject(incident);
       $('#cadTabs #map-tab').tab('show');
     }
   }

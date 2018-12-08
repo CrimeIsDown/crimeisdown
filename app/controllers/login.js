@@ -6,9 +6,9 @@ export default Controller.extend({
 
   actions: {
     login: function() {
-      this.get('session').authenticate('authenticator:firebase', {
-        'email': this.get('email'),
-        'password': this.get('password')
+      this.session.authenticate('authenticator:firebase', {
+        'email': this.email,
+        'password': this.password
       }).then(function() {
         this.transitionToRoute('index');
       }.bind(this));

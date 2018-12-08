@@ -89,13 +89,13 @@ export default Component.extend(FindQuery, {
         if (undefined !== unit.searchResult) {
           set(unit, 'searchResult', false); // set to false so it appears the same in template
           return new Promise((resolve, reject) => {
-            this.filterEqual(this.get('store'), 'unit', {radioId: unit.radioId}, (units) => {
+            this.filterEqual(this.store, 'unit', {radioId: unit.radioId}, (units) => {
               let first = units.get('firstObject');
               if (first) {
                 resolve(first);
               } else {
-                let record = this.get('store').createRecord('unit', {
-                  agency: this.get('agencies')[unit.agency.toLowerCase()],
+                let record = this.store.createRecord('unit', {
+                  agency: this.agencies[unit.agency.toLowerCase()],
                   radioId: unit.radioId
                 });
                 record.save().then(() => {
@@ -117,7 +117,7 @@ export default Component.extend(FindQuery, {
     setLocation(locationModel) {
       let address = get(locationModel, 'address');
       return new Promise((resolve, reject) => {
-        this.get('geosearchProvider').search({query: address}).then((results) => {
+        this.geosearchProvider.search({query: address}).then((results) => {
           if (results && results.length > 0) {
             let location = results[0].raw;
             let latlng = L.latLng(location.geometry.location.lat, location.geometry.location.lng);
@@ -149,18 +149,18 @@ export default Component.extend(FindQuery, {
       });
     },
     create() {
-      let incident = this.get('store').createRecord('incident', this.get('incident'));
+      let incident = this.store.createRecord('incident', this.incident);
 
-      let note = this.get('store').createRecord('note', this.get('note'));
+      let note = this.store.createRecord('note', this.note);
       incident.get('notes').pushObject(note);
 
-      let location = this.get('store').createRecord('location', this.get('location'));
+      let location = this.store.createRecord('location', this.location);
       incident.set('location', location);
       (this.actions.setLocation.bind(this))(location).then((updatedLocation) => {
         location = updatedLocation;
       });
 
-      incident.set('units', this.get('units'));
+      incident.set('units', this.units);
       location.save()
         .then(() => {
           note.save()
@@ -183,23 +183,23 @@ export default Component.extend(FindQuery, {
     },
     update() {
       // we use .content as the model is on the content property
-      (this.actions.setLocation.bind(this))(this.get('location').content).then((updatedLocation) => {
+      (this.actions.setLocation.bind(this))(this.location.content).then((updatedLocation) => {
         updatedLocation.save();
       });
-      this.set('incident.units', this.get('units'));
-      this.get('incident').save().then(() => {
+      this.set('incident.units', this.units);
+      this.incident.save().then(() => {
         $('#update-incident-modal').modal('hide');
         alert('Updated successfully!');
       });
     },
     close() {
-      this.get('openIncidents').removeObject(this.get('incident'));
+      this.openIncidents.removeObject(this.incident);
       $('#cadTabs #map-tab').tab('show');
     },
     delete() {
       // @TODO: delete related models
-      this.get('incident').destroyRecord().then(() => {
-        this.get('openIncidents').removeObject(this.get('incident'));
+      this.incident.destroyRecord().then(() => {
+        this.openIncidents.removeObject(this.incident);
         $('#cadTabs #map-tab').tab('show');
       });
     },

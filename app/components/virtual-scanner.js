@@ -36,7 +36,7 @@ export default Component.extend({
         x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
         y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
       let streamName = event.target.id.replace('drag-', '');
-      let streamData = this.get('enabledStreams').findBy('name', streamName);
+      let streamData = this.enabledStreams.findBy('name', streamName);
       if (streamData) {
         let roomPos = this.dragPositionToRoomPosition(x, y);
         streamData.soundSource.setPosition(roomPos.x, roomPos.y, roomPos.z);
@@ -49,7 +49,7 @@ export default Component.extend({
         let nodes = data.querySelectorAll('live stream name');
         // we would use forEach but it does not work on Safari <10
         for (let i = 0; i < nodes.length; i++) {
-          this.get('streams').pushObject(nodes[i].textContent);
+          this.streams.pushObject(nodes[i].textContent);
         }
       });
   },
@@ -75,10 +75,10 @@ export default Component.extend({
       }
     },
     seekStream(time) {
-      if (this.get('mediaSourceSupported')) {
-        this.get('player').seek(time);
+      if (this.mediaSourceSupported) {
+        this.player.seek(time);
       } else {
-        this.get('playerElement').fastSeek(time);
+        this.playerElement.fastSeek(time);
       }
     }
   },
@@ -99,7 +99,7 @@ export default Component.extend({
   },
   addStream(streamName) {
     let streamData = EmberObject.create({name: streamName});
-    this.get('enabledStreams').pushObject(streamData);
+    this.enabledStreams.pushObject(streamData);
 
     // wait for new elements to render so we can select them
     $('#stream-'+streamName).ready(bind(this, () => {
@@ -155,9 +155,9 @@ export default Component.extend({
     }
   },
   removeStream(streamName) {
-    let streamData = this.get('enabledStreams').findBy('name', streamName);
+    let streamData = this.enabledStreams.findBy('name', streamName);
     streamData.draggableElement.remove();
-    this.get('enabledStreams').removeObject(streamData);
+    this.enabledStreams.removeObject(streamData);
   },
   addDraggable(streamName, roomPosition) {
     let draggableElement = document.getElementById('drag-' + streamName);

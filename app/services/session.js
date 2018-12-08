@@ -8,9 +8,9 @@ export default ESASession.extend({
   store: service(),
 
   currentUser: computed('isAuthenticated', () => {
-    if (this.get('isAuthenticated')) {
+    if (this.isAuthenticated) {
       return DS.PromiseObject.create({
-        promise: this.get('store').queryRecord('user', {})
+        promise: this.store.queryRecord('user', {})
       });
     }
   })

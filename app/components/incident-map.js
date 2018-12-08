@@ -27,7 +27,7 @@ export default Component.extend({
     searchAddress(address) {
       $('.leaflet-control-geosearch.bar form input').val(address);
       $('#address-search').find('input[name="address"]').val(address);
-      this.get('searchControl').searchElement.handleSubmit({ query: address });
+      this.searchControl.searchElement.handleSubmit({ query: address });
     }
   },
 
@@ -42,12 +42,12 @@ export default Component.extend({
       this.initGeocoder(),
       this.initInfoBox(),
       this.initLayers(),
-      this.get('addressLookup').loadData()
+      this.addressLookup.loadData()
     ]).then(() => {
       let incidents = this.get('model.incidents');
       if (incidents) {
         incidents.forEach((incident) => {
-          get(incident, 'location.layer').addTo(this.get('overlay')['User Features']);
+          get(incident, 'location.layer').addTo(this.overlay['User Features']);
         });
       }
 
@@ -64,42 +64,42 @@ export default Component.extend({
 
     this.initEditableMap();
 
-    L.control.layers(this.get('baseLayers'), this.get('overlay'), {
+    L.control.layers(this.baseLayers, this.overlay, {
       collapse: false
-    }).addTo(this.get('map'));
+    }).addTo(this.map);
   },
 
   initBaseLayers() {
     return new Promise((resolve, reject) => {
-      this.get('baseLayers')["OpenStreetMap"] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      this.baseLayers["OpenStreetMap"] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
         maxNativeZoom: 19,
         minZoom: 0,
         maxZoom: 20
       });
 
-      this.get('baseLayers')["MapBox Streets"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
+      this.baseLayers["MapBox Streets"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
         attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         minZoom: 0,
         maxZoom: 20
       });
 
-      this.get('baseLayers')["MapBox Streets Dark"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/cj9ne99zz3e112rp4pxcpua1z/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
+      this.baseLayers["MapBox Streets Dark"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/cj9ne99zz3e112rp4pxcpua1z/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
         attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         minZoom: 0,
         maxZoom: 20
       });
 
-      this.get('baseLayers')["Google Hybrid"] = new L.gridLayer.googleMutant({
+      this.baseLayers["Google Hybrid"] = new L.gridLayer.googleMutant({
         type: 'hybrid',
         minZoom: 0,
         maxZoom: 20
       });
 
       if (localStorage.getItem('dark')) {
-        this.get('baseLayers')["MapBox Streets Dark"].addTo(this.get('map'));
+        this.baseLayers["MapBox Streets Dark"].addTo(this.map);
       } else {
-        this.get('baseLayers')["OpenStreetMap"].addTo(this.get('map'));
+        this.baseLayers["OpenStreetMap"].addTo(this.map);
       }
 
       resolve();
@@ -116,7 +116,7 @@ export default Component.extend({
       }));
 
       const searchControl = new GeoSearch.GeoSearchControl({
-        provider: this.get('geosearchProvider'),
+        provider: this.geosearchProvider,
         style: 'bar',
         autoComplete: false,
         showPopup: true,
@@ -124,16 +124,16 @@ export default Component.extend({
       });
       this.set('searchControl', searchControl);
 
-      this.get('map').addControl(searchControl);
+      this.map.addControl(searchControl);
 
-      this.get('map').on('geosearch/showlocation', (event) => {
+      this.map.on('geosearch/showlocation', (event) => {
         let query = $('.leaflet-control-geosearch.bar form input').val();
         $('#address-search').find('input[name="address"]').val(query);
         if (window.ga && typeof window.ga === "function") {
           ga('send', 'event', 'Looks up address', 'Tools', query);
         }
         window.location.hash = '#location_query=' + encodeURIComponent(query);
-        this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), event.location.raw));
+        this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
       });
 
       resolve();
@@ -204,12 +204,12 @@ export default Component.extend({
       }
     });
 
-    return this.loadLayerData(this.get('layers'));
+    return this.loadLayerData(this.layers);
   },
 
   loadLayerData(layers) {
-    let map = this.get('map');
-    let info = this.get('infobox');
+    let map = this.map;
+    let info = this.infobox;
 
     let promises = [];
 
@@ -254,7 +254,7 @@ export default Component.extend({
             geoJsonLayer.addTo(map);
           }
           layerObj.layer = geoJsonLayer;
-          this.get('overlay')[layerObj.label] = layerObj.layer;
+          this.overlay[layerObj.label] = layerObj.layer;
           fetch(layerObj.url).then((response) => {
             response.json().then((data) => {
               layerObj.layer.addData(data).setStyle(layerObj.style);
@@ -292,7 +292,7 @@ export default Component.extend({
         this._div.innerHTML = html;
       };
 
-      info.addTo(this.get('map'));
+      info.addTo(this.map);
 
       this.set('infobox', info);
       resolve();
@@ -300,12 +300,12 @@ export default Component.extend({
   },
 
   initEditableMap() {
-    this.get('overlay')['User Features'] = L.markerClusterGroup()
-      .addTo(this.get('map'));
+    this.overlay['User Features'] = L.markerClusterGroup()
+      .addTo(this.map);
 
-    this.get('map').addControl(new L.Control.Draw({
+    this.map.addControl(new L.Control.Draw({
       edit: {
-        featureGroup: this.get('overlay')['User Features'],
+        featureGroup: this.overlay['User Features'],
         poly: {
           allowIntersection: false
         }
@@ -322,9 +322,9 @@ export default Component.extend({
       let layer = event.layer;
       layer.bindPopup('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal"> Launch demo modal </button>').openPopup();
 
-      this.get('overlay')['User Features'].addLayer(layer);
+      this.overlay['User Features'].addLayer(layer);
     };
 
-    this.get('map').on(L.Draw.Event.CREATED, drawEventCreated.bind(this));
+    this.map.on(L.Draw.Event.CREATED, drawEventCreated.bind(this));
   }
 });

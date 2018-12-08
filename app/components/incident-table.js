@@ -13,7 +13,7 @@ export default Component.extend({
     openAddIncidentModal() {
       // only one incident form can be open at a time, so we must close all open incidents
       // and reopen them once the form has been un-rendered (after submission or cancel)
-      let openIncidents = this.get('openIncidents');
+      let openIncidents = this.openIncidents;
       this.set('openIncidents', []);
       this.set('showNewForm', true);
       $('#add-incident-modal').modal('show');
@@ -23,7 +23,7 @@ export default Component.extend({
       }));
     },
     openIncident(incident) {
-      this.get('openIncidents').pushObject(incident);
+      this.openIncidents.pushObject(incident);
       let selector = '#cadTabs #incident-tab-'+incident.id;
       $(selector).ready(bind(this, () => {
         $(selector).tab('show');
@@ -32,7 +32,7 @@ export default Component.extend({
     seedData() {
       // clear entire store
       (new Promise((resolve) => {
-        this.get('store').unloadAll();
+        this.store.unloadAll();
         resolve();
       })).then(() => {
         // populate agencies and units
@@ -57,13 +57,13 @@ export default Component.extend({
             radioId: 'Forest Park PD 1'
           }]
         }].forEach((v) => {
-          let agency = this.get('store').createRecord('agency', {
+          let agency = this.store.createRecord('agency', {
             slug: v.slug,
             name: v.name
           });
           agency.save();
           v.units.forEach((unit) => {
-            unit = this.get('store').createRecord('unit', unit);
+            unit = this.store.createRecord('unit', unit);
             unit.save();
             unit.set('agency', agency);
           });
@@ -75,7 +75,7 @@ export default Component.extend({
           value: '01',
           description: 'Report Taken'
         }].forEach((v) => {
-          this.get('store').createRecord('incident-disposition', v).save();
+          this.store.createRecord('incident-disposition', v).save();
         });
 
         // populate incident priorities
@@ -99,7 +99,7 @@ export default Component.extend({
           value: 5,
           description: "Alternate Response"
         }].forEach((v) => {
-          this.get('store').createRecord('incident-priority', v).save();
+          this.store.createRecord('incident-priority', v).save();
         });
 
         // populate incident statuses
@@ -108,7 +108,7 @@ export default Component.extend({
           value: 'Active',
           description: 'The incident is active.'
         }].forEach((v) => {
-          this.get('store').createRecord('incident-status', v).save();
+          this.store.createRecord('incident-status', v).save();
         });
 
         // populate incident types
@@ -117,7 +117,7 @@ export default Component.extend({
           value: 'ABDOM',
           description: 'ABDOMINAL - Abdominal pain or problems'
         }].forEach((v) => {
-          this.get('store').createRecord('incident-type', v).save();
+          this.store.createRecord('incident-type', v).save();
         });
       });
     }
