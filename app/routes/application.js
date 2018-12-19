@@ -7,11 +7,11 @@ export default Route.extend(ApplicationRouteMixin, {
   session: service('session'),
 
   init() {
-    if (!this.session.isAuthenticated) {
-      getOwner(this).lookup('authenticator:firebase').get('firebase')
-        .auth().signInAnonymously().catch(function(error) {
-          console.error(error)
-        });
-    }
+    // if (!this.session.isAuthenticated) {
+    //   getOwner(this).lookup('authenticator:firebase').get('firebase')
+    //     .auth().signInAnonymously().catch(function(error) {
+    //       console.error(error)
+    //     });
+    // }
   }
 });

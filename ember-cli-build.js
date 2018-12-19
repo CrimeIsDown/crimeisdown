@@ -57,6 +57,7 @@ module.exports = function(defaults) {
 
   app.import('node_modules/resonance-audio/build/resonance-audio.js');
 
+  app.import('node_modules/leaflet/dist/leaflet.css');
   app.import('node_modules/leaflet/dist/leaflet.js');
   app.import('node_modules/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet/dist/images/layers-2x.png', {destDir: 'assets/images'});
@@ -64,13 +65,17 @@ module.exports = function(defaults) {
   app.import('node_modules/leaflet/dist/images/marker-icon-2x.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet/dist/images/marker-shadow.png', {destDir: 'assets/images'});
 
+  app.import('node_modules/leaflet-geosearch/assets/css/leaflet.css');
   app.import('node_modules/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js');
 
+  app.import('node_modules/leaflet-draw/dist/leaflet.draw-src.css');
   app.import('node_modules/leaflet-draw/dist/leaflet.draw.js');
   app.import('node_modules/leaflet-draw/dist/images/spritesheet.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet-draw/dist/images/spritesheet-2x.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet-draw/dist/images/spritesheet.svg', {destDir: 'assets/images'});
 
+  app.import('node_modules/leaflet.markercluster/dist/MarkerCluster.css');
+  app.import('node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css');
   app.import('node_modules/leaflet.markercluster/dist/leaflet.markercluster.js');
 
   app.import('node_modules/leaflet.awesome-markers/dist/leaflet.awesome-markers.js');

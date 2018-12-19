@@ -3,10 +3,9 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { get, set } from '@ember/object';
-import FindQuery from 'ember-emberfire-find-query/mixins/find-query';
 import $ from 'jquery';
 
-export default Component.extend(FindQuery, {
+export default Component.extend({
   store: service(),
   init() {
     this._super(...arguments);
