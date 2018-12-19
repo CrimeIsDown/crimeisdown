@@ -1,5 +1,8 @@
 body {
-  padding-top: 5rem;
+  padding-top: 3.4rem;
+  .container {
+    padding-top: 1.6rem;
+  }
 }
 
 iframe {
@@ -118,9 +121,6 @@ ul.nav.nav-tabs {
   }
   .search-container {
     padding: 1rem;
-    * {
-      font-size: 0.8rem;
-    }
     trix-toolbar .button_group * {
       font-size: 0 !important;
     }
@@ -141,31 +141,40 @@ ul.nav.nav-tabs {
 }
 
 .accordion {
-  .card-header {
-    padding: 0.5rem 1.25rem;
-    margin-bottom: 0.5rem;
-    a[data-toggle="collapse"] {
-      &:hover {
-        text-decoration: none;
+  .card {
+    border: none;
+    .card-header {
+      padding: 0.5rem 1.25rem;
+      margin-bottom: 0.5rem;
+      border: $card-border-width solid $card-border-color;
+      border-radius: $card-border-radius !important;
+      &:last-of-type {
+        border-bottom: none;
       }
-      &::before {
-        @include fa-icon();
+      a[data-toggle="collapse"] {
+        display: block;
+        &:hover {
+          text-decoration: none;
+        }
+        &::before {
+          @include fa-icon();
 
-        content: $fa-var-caret-down;
-        width: 0.75rem;
+          content: $fa-var-caret-down;
+          width: 0.75rem;
+        }
+        &.collapsed::before {
+          content: $fa-var-caret-right;
+          padding-left: 0.125rem; // to ensure proper centering
+        }
       }
-      &.collapsed::before {
-        content: $fa-var-caret-right;
-        padding-left: 0.125rem; // to ensure proper centering
+      .draggable-handle {
+        cursor: pointer;
+        color: #777;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0.5rem 1rem;
       }
-    }
-    .draggable-handle {
-      cursor: pointer;
-      color: #777;
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 0.5rem 1rem;
     }
   }
 }
@@ -208,7 +217,7 @@ input#datetimepicker[readonly] {
 }
 
 .stream-options {
-  //max-height: 400px;
+  max-height: 300px;
   overflow-y: auto;
   label {
     cursor: pointer;
@@ -224,6 +233,11 @@ input#datetimepicker[readonly] {
   .row + audio {
     margin-top: 0.5rem;
   }
+}
+
+#streamplayer {
+  height: 40px;
+  width: 100%;
 }
 
 .draggable-parent {
@@ -250,11 +264,6 @@ input#datetimepicker[readonly] {
       font-weight: bold;
     }
   }
-}
-
-.broadcastify-streams {
-  list-style-type: none;
-  padding-left: 0;
 }
 
 #directiveViewer {
@@ -284,7 +293,7 @@ input#datetimepicker[readonly] {
       }
     }
     .search-container {
-      max-width: 40vw;
+      max-width: 25vw;
       max-height: $map-container-height;
       overflow-y: auto;
       .mobile {

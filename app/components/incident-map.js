@@ -1,10 +1,12 @@
 /*eslint-disable no-unused-vars*/
 /*global GeoSearch*/
+/*global dashjs*/
 
 import Component from '@ember/component';
 import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
+import ENV from '../config/environment';
 
 export default Component.extend({
   addressLookup: service(),
@@ -16,6 +18,8 @@ export default Component.extend({
     this.layers = {};
     this.overlay = {};
     this.location = {};
+    let isSafari = navigator.userAgent.search("Safari") > 0 && navigator.userAgent.search("Chrome") < 0;
+    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isSafari);
   },
 
   didInsertElement() {
@@ -28,6 +32,45 @@ export default Component.extend({
       $('.leaflet-control-geosearch.bar form input').val(address);
       $('#address-search').find('input[name="address"]').val(address);
       this.searchControl.searchElement.handleSubmit({ query: address });
+    },
+    startPlayer(zonenum) {
+      let playerElement = document.getElementById('streamplayer');
+      let player = dashjs.MediaPlayer().create();
+      player.getDebug().setLogToBrowserConsole(ENV.APP.MEDIA_PLAYER_DEBUG);
+      player.on(dashjs.MediaPlayer.events.ERROR, payload => {
+        // console.error(payload);
+        if (payload.error === 'capability' && payload.event === 'mediasource') {
+          this.mediaSourceSupported = false;
+        }
+      }, this);
+
+      fetch('https://audio.crimeisdown.com/streaming/stat')
+        .then(response => response.text())
+        .then(xml => (new window.DOMParser()).parseFromString(xml, 'text/xml'))
+        .then(data => {
+          let nodes = data.querySelectorAll('live stream name');
+          let streamOnline = false;
+
+          // we would use forEach but it does not work on Safari <10
+          for (let i = 0; i < nodes.length; i++) {
+            if (nodes[i].textContent === "zone"+zonenum) {
+              if (this.mediaSourceSupported) {
+                player.initialize(playerElement);
+                player.attachSource('https://audio.crimeisdown.com/streaming/dash/zone' + zonenum + '/');
+              } else {
+                playerElement.src = 'https://audio.crimeisdown.com/streaming/hls/zone' + zonenum + '/index.m3u8';
+                // console.error('Sorry, your browser does not support our live streaming functionality.');
+              }
+              this.set('currentZoneStream', zonenum);
+
+              streamOnline = true;
+              break;
+            }
+          }
+          if (!streamOnline) {
+            alert('Sorry, stream is currently unavailable');
+          }
+        });
     }
   },
 
@@ -320,7 +363,7 @@ export default Component.extend({
 
     let drawEventCreated = (event) => {
       let layer = event.layer;
-      layer.bindPopup('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal"> Launch demo modal </button>').openPopup();
+      // layer.bindPopup('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal"> Launch demo modal </button>').openPopup();
 
       this.overlay['User Features'].addLayer(layer);
     };

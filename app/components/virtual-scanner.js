@@ -94,7 +94,8 @@ export default Component.extend({
       up: 'transparent', down: 'transparent',
       front: 'uniform', back: 'uniform',
     };
-    this.resonanceScene.setRoomProperties(this.sceneDimensions, this.sceneMaterials);
+    // Commented out b/c of https://github.com/resonance-audio/resonance-audio-web-sdk/issues/16
+    // this.resonanceScene.setRoomProperties(this.sceneDimensions, this.sceneMaterials);
     this.resonanceScene.output.connect(this.audioContext.destination);
   },
   addStream(streamName) {

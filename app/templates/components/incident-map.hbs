@@ -1,10 +1,11 @@
 <section class="overall-container">
   <div class="search-container">
     <p><em>Interact with this map or use the search box to find information about a specific address. Police districts are outlined in blue.</em></p>
+    <p class="text-danger">If you use the map drawing features (below zoom in/out), they will not be saved. A refresh will clear the map. (save functionality coming soon)</p>
     <p class="mobile text-primary"><em>Scroll down for incident map</em></p>
-    <div class="accordion" role="tablist">
-      <div class="draggable">
-        <div class="card card-header" role="tab">
+    <div class="accordion" id="accordion" role="tablist">
+      {{!--<div class="card draggable">
+        <div class="card-header" role="tab">
           <a id="headingIncidents" data-toggle="collapse" href="#collapseIncidents" aria-expanded="true" aria-controls="collapseIncidents">
             Incidents
           </a>
@@ -13,10 +14,10 @@
         <div id="collapseIncidents" class="collapse show" role="tabpanel" aria-labelledby="headingIncidents" data-parent="#accordion">
           {{incident-table model=model incidents=incidents openIncidents=openIncidents}}
         </div>
-      </div>
-      <div class="draggable">
-        <div class="card card-header" role="tab">
-          <a class="headingAddrSearch" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
+      </div> --}}
+      <div class="card draggable">
+        <div class="card-header" role="tab">
+          <a class="card-heading" id="headingAddrSearch" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
             Address Search
           </a>
           <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
@@ -70,14 +71,12 @@
                 <td colspan="2">
                   <strong>Radio Zone {{ location.police.zone.num }}</strong>
                   {{#if location.police.zone.freq}}
-                  ({{ location.police.zone.freq }}
-                  {{#if location.police.zone.url}}
-                    /
-                  <a href="{{ location.police.zone.url }}" target="_blank">Audio from Broadcastify</a>
-                  {{/if}})
-                  {{#if location.police.zone.mp3}}
-                    <br><audio controls src="{{ location.police.zone.mp3 }}" preload="none">Your user agent does not support the HTML5 Audio element.</audio>
-                  {{/if}}
+                  ({{ location.police.zone.freq }})
+                  <button class="btn btn-sm btn-info" {{action "startPlayer" location.police.zone.num}}>Stream Live <i class="fa fa-circle text-danger"></i></button>
+                  <br><video id="streamplayer" controls></video>
+                    {{#if currentZoneStream}}
+                      Currently streaming Zone {{currentZoneStream}}
+                    {{/if}}
                   {{/if}}
                 </td>
               </tr>
@@ -93,7 +92,7 @@
                 <td>Nearest Ambo. {{ location.fire.nearestAmbo }}</td>
               </tr>
               <tr>
-                <td>Battalion {{ location.fire.battalion }} / Fire Dist. {{ location.fire.fireDistrict }}</td>
+                <td>Battalion {{ location.fire.battalion }}<br>Fire Dist. {{ location.fire.fireDistrict }}</td>
                 <td>EMS District {{ location.fire.emsDistrict }}</td>
               </tr>
               <tr>
@@ -148,9 +147,9 @@
           </div>
         </div>
       </div>
-      <div class="draggable">
-        <div class="card card-header" role="tab">
-          <a data-toggle="collapse" href="#collapseRIDSearch" aria-expanded="true" aria-controls="collapseRIDSearch">
+      <div class="card draggable">
+        <div class="card-header" role="tab">
+          <a class="card-heading" id="headingRIDSearch" data-toggle="collapse" href="#collapseRIDSearch" aria-expanded="true" aria-controls="collapseRIDSearch">
             Radio ID Search
           </a>
           <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
@@ -161,9 +160,9 @@
           </div>
         </div>
       </div>
-      <div class="draggable">
-        <div class="card card-header" role="tab">
-          <a data-toggle="collapse" href="#collapseUCRSearch" aria-expanded="true" aria-controls="collapseUCRSearch">
+      <div class="card draggable">
+        <div class="card-header" role="tab">
+          <a class="card-heading" id="headingUCRSearch" data-toggle="collapse" href="#collapseUCRSearch" aria-expanded="true" aria-controls="collapseUCRSearch">
             UCR Code Search
           </a>
           <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
@@ -174,9 +173,9 @@
           </div>
         </div>
       </div>
-      <div class="draggable">
-        <div class="card card-header" role="tab">
-          <a id="headingNotepad" class="collapsed" data-toggle="collapse" href="#collapseNotepad" aria-expanded="true" aria-controls="collapseNotepad">
+      <div class="card draggable">
+        <div class="card-header" role="tab">
+          <a class="card-heading collapsed" id="headingNotepad" data-toggle="collapse" href="#collapseNotepad" aria-expanded="true" aria-controls="collapseNotepad">
             Notepad
           </a>
           <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
