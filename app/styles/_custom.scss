@@ -281,6 +281,10 @@ input#datetimepicker[readonly] {
   }
 }
 
+#doorbell-button {
+  left: 5% !important;
+}
+
 @include media-breakpoint-up(md) {
   .overall-container {
     display: flex;
