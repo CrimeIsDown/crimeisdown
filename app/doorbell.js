@@ -1,5 +1,6 @@
 window.doorbellOptions = {
-  appKey: 'REDACTED_PUBLIC_CREDENTIAL'
+  appKey: 'REDACTED_PUBLIC_CREDENTIAL',
+  hideButton: true
 };
 (function(w, d, t) {
   var hasLoaded = false;
