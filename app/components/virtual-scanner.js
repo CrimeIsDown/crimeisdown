@@ -106,6 +106,9 @@ export default Component.extend({
     $('#stream-'+streamName).ready(bind(this, () => {
       let playerElement = document.getElementById('audio-player-' + streamName);
 
+      // AudioContext must be resumed after the document received a user gesture to enable audio playback.
+      this.audioContext.resume();
+
       this.startPlayer(streamName, playerElement);
 
       if (this.audioContext) {
