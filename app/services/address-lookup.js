@@ -95,6 +95,10 @@ export default Service.extend({
       let result = leafletPip.pointInLayer(location, layers.communityAreas.layer, true)[0];
       if (result) {
         meta.communityArea = result.feature.properties.community;
+        // Convert to title case instead of all caps
+        meta.communityArea = meta.communityArea.toLowerCase().replace(/(?:^|\s|-|\/)\S/g, function(m) {
+          return m.toUpperCase();
+        });
       }
     }
 
