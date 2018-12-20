@@ -1,6 +1,7 @@
 /*eslint-disable no-unused-vars*/
 /*global GeoSearch*/
-/*global dashjs*/
+/*global mejs*/
+/*global MediaElementPlayer*/
 
 import Component from '@ember/component';
 import { get } from '@ember/object';

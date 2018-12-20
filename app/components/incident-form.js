@@ -1,3 +1,4 @@
+/*eslint no-console: ["error", { allow: ["warn", "error"] }] */
 /*global GeoSearch*/
 
 import Component from '@ember/component';
@@ -115,7 +116,7 @@ export default Component.extend({
     },
     setLocation(locationModel) {
       let address = get(locationModel, 'address');
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         this.geosearchProvider.search({query: address}).then((results) => {
           if (results && results.length > 0) {
             let location = results[0].raw;
