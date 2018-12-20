@@ -71,12 +71,11 @@
                 <td colspan="2">
                   <strong>Radio Zone {{ location.police.zone.num }}</strong>
                   {{#if location.police.zone.freq}}
-                  ({{ location.police.zone.freq }})
-                  <button class="btn btn-sm btn-info" {{action "startPlayer" location.police.zone.num}}>Stream Live <i class="fa fa-circle text-danger"></i></button>
-                  <br><video id="streamplayer" controls></video>
-                    {{#if currentZoneStream}}
-                      Currently streaming Zone {{currentZoneStream}}
-                    {{/if}}
+                    ({{ location.police.zone.freq }})
+                  {{/if}}
+                  <audio id="streamplayer" style="width: 200px;"></audio>
+                  {{#if currentZoneStream}}
+                    Player streaming Zone {{currentZoneStream}}
                   {{/if}}
                 </td>
               </tr>
@@ -99,9 +98,9 @@
                 <td colspan="2">
                   Radio Channel: {{ location.fire.channel }}
                   {{#if location.fire.channel}}
-                  (Listen to <a href="http://www.broadcastify.com/listen/feed/909/web" target="_blank">Fire</a>
+                  (Listen to <a href="https://www.youtube.com/embed/live_stream?channel=UCsMo3qUWKgwL5IA2CZ8J7Zg" target="_blank">Fire</a>
                   or
-                  <a href="http://www.broadcastify.com/listen/feed/13605/web" target="_blank">EMS</a>)
+                  <a href="https://www.youtube.com/embed/live_stream?channel=UCHVvMupXCot6i9HaU5e6evQ" target="_blank">EMS</a>)
                   {{/if}}
                 </td>
               </tr>

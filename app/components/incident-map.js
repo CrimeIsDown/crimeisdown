@@ -25,6 +25,14 @@ export default Component.extend({
   didInsertElement() {
     L.Icon.Default.imagePath = '/assets/images/';
     this.initMap();
+    mejs.Renderers.order = ['native_dash', 'flash_dash'];
+    this.set('audioPlayer', new MediaElementPlayer('streamplayer', {
+      pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
+      shimScriptAccess: 'always',
+      renderers: ['native_dash', 'flash_dash'],
+      isVideo: false,
+      features: ['playpause', 'current', 'volume']
+    }));
   },
 
   actions: {
@@ -33,45 +41,6 @@ export default Component.extend({
       $('#address-search').find('input[name="address"]').val(address);
       this.searchControl.searchElement.handleSubmit({ query: address });
     },
-    startPlayer(zonenum) {
-      let playerElement = document.getElementById('streamplayer');
-      let player = dashjs.MediaPlayer().create();
-      player.getDebug().setLogToBrowserConsole(ENV.APP.MEDIA_PLAYER_DEBUG);
-      player.on(dashjs.MediaPlayer.events.ERROR, payload => {
-        // console.error(payload);
-        if (payload.error === 'capability' && payload.event === 'mediasource') {
-          this.mediaSourceSupported = false;
-        }
-      }, this);
-
-      fetch('https://audio.crimeisdown.com/streaming/stat')
-        .then(response => response.text())
-        .then(xml => (new window.DOMParser()).parseFromString(xml, 'text/xml'))
-        .then(data => {
-          let nodes = data.querySelectorAll('live stream name');
-          let streamOnline = false;
-
-          // we would use forEach but it does not work on Safari <10
-          for (let i = 0; i < nodes.length; i++) {
-            if (nodes[i].textContent === "zone"+zonenum) {
-              if (this.mediaSourceSupported) {
-                player.initialize(playerElement);
-                player.attachSource('https://audio.crimeisdown.com/streaming/dash/zone' + zonenum + '/');
-              } else {
-                playerElement.src = 'https://audio.crimeisdown.com/streaming/hls/zone' + zonenum + '/index.m3u8';
-                // console.error('Sorry, your browser does not support our live streaming functionality.');
-              }
-              this.set('currentZoneStream', zonenum);
-
-              streamOnline = true;
-              break;
-            }
-          }
-          if (!streamOnline) {
-            alert('Sorry, stream is currently unavailable');
-          }
-        });
-    }
   },
 
   initMap() {
@@ -177,6 +146,17 @@ export default Component.extend({
         }
         window.location.hash = '#location_query=' + encodeURIComponent(query);
         this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
+        if (!this.audioPlayer.duration || this.audioPlayer.paused) {
+          this.audioPlayer.setSrc({
+            src: 'https://audio.crimeisdown.com/streaming/dash/zone' + this.location.police.zone.num + '/',
+            type: 'application/dash+xml'
+          });
+          this.audioPlayer.load();
+          this.set('currentZoneStream', null);
+          this.audioPlayer.media.addEventListener('playing', () => {
+            this.set('currentZoneStream', this.location.police.zone.num);
+          });
+        }
       });
 
       resolve();

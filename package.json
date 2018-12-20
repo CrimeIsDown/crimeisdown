@@ -81,6 +81,7 @@
     "leaflet.gridlayer.googlemutant": "^0.6.2",
     "leaflet.markercluster": "^1.3.0",
     "loader.js": "^4.7.0",
+    "mediaelement": "^4.2.9",
     "nodent-runtime": "^3.0.3",
     "popper.js": "^1.11.1",
     "qunit-dom": "^0.8.0",

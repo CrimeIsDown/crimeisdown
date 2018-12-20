@@ -55,6 +55,11 @@ module.exports = function(defaults) {
   app.import('node_modules/flatpickr/dist/flatpickr.js');
   app.import('node_modules/flatpickr/dist/flatpickr.css');
 
+  app.import('node_modules/mediaelement/build/mediaelement-and-player.js');
+  app.import('node_modules/mediaelement/build/mediaelementplayer.css');
+  app.import('node_modules/mediaelement/build/mejs-controls.svg', {destDir: 'assets'});
+  app.import('node_modules/mediaelement/build/mejs-controls.png', {destDir: 'assets'});
+
   app.import('node_modules/resonance-audio/build/resonance-audio.js');
 
   app.import('node_modules/leaflet/dist/leaflet.css');
