@@ -15,7 +15,8 @@ module.exports = function(defaults) {
     },
 
     'ember-cli-babel': {
-      includePolyfill: true
+      includePolyfill: true,
+      compileModules: false
     },
 
     fingerprint: {
