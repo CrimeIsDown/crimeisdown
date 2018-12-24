@@ -16,7 +16,7 @@ export default Service.extend({
         resolve();
       }),
       new Promise((resolve, reject) => {
-        fetch('https://crimeisdown.com/data/city_data/aldermen.json').then((response) => {
+        fetch('/data/city_data/aldermen.json').then((response) => {
           response.json().then((data) => {
             this.aldermen = data;
             resolve(data);
@@ -28,7 +28,7 @@ export default Service.extend({
         });
       }),
       new Promise((resolve, reject) => {
-        fetch('https://crimeisdown.com/data/audio_data/online_streams.json').then((response) => {
+        fetch('/data/audio_data/online_streams.json').then((response) => {
           response.json().then((data) => {
             this.onlineStreams = data;
             resolve(data);
@@ -40,7 +40,7 @@ export default Service.extend({
         });
       }),
       new Promise((resolve, reject) => {
-        fetch('https://crimeisdown.com/data/city_data/fire_stations.json').then((response) => {
+        fetch('/data/city_data/fire_stations.json').then((response) => {
           response.json().then((data) => {
             this.fireStations = data;
             resolve(data);
@@ -52,7 +52,7 @@ export default Service.extend({
         });
       }),
       new Promise((resolve, reject) => {
-        fetch('https://crimeisdown.com/data/city_data/trauma_centers.json').then((response) => {
+        fetch('/data/city_data/trauma_centers.json').then((response) => {
           response.json().then((data) => {
             this.traumaCenters = data;
             resolve(data);
