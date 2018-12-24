@@ -198,6 +198,22 @@
     </script>
   </div>
   <div class="map-container">
-    <div id="leaflet-map"></div>
+    <ul class="nav nav-tabs bg-dark" id="cadTabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="map-tab" data-toggle="tab" href="#main-map" role="tab" aria-controls="main-map" aria-selected="true">Address Search Map</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="crime-tab" data-toggle="tab" href="#crimes-map" role="tab" aria-controls="crimes-map" aria-selected="false">Recent Crimes Map</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="main-map" role="tabpanel" aria-labelledby="map-tab">
+        <div id="leaflet-map"></div>
+      </div>
+      <div class="tab-pane fade" id="crimes-map" role="tabpanel" aria-labelledby="crime-tab">
+        <iframe id="crimereports-map" title="Crime reports map" src="https://www.crimereports.com/city/Chicago%2C%20IL?is_widget=true#!/dashboard?current_tab=list&start_date=2018-11-24&end_date=2018-12-24&date_type=relative&shapeIds=&shape_id=false"></iframe>
+      </div>
+    </div>
   </div>
 </section>

@@ -75,7 +75,9 @@ export default Service.extend({
 
     if (!result.meta.communityArea) {
       result.meta.formattedAddress = 'ADDRESS OUT OF BOUNDS: '+result.meta.formattedAddress;
+      result.meta.inChicago = false;
     } else {
+      result.meta.inChicago = true;
       result.police = this.buildPolice(layers, latlng);
       result.fire = this.buildFire(latlng);
       result.ems = this.buildEMS(latlng);
