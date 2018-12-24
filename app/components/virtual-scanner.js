@@ -17,8 +17,8 @@ export default Component.extend({
     this.audioContext = new (window.AudioContext || window.webkitAudioContext);
     this.setupResonanceScene();
 
-    let isSafari = navigator.userAgent.search("Safari") > 0 && navigator.userAgent.search("Chrome") < 0;
-    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isSafari);
+    let isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
+    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isMobileSafari);
 
     this.onMove = (event) => {
       let target = event.target,
