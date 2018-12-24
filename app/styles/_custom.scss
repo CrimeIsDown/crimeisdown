@@ -295,11 +295,21 @@ input#datetimepicker[readonly] {
   }
 }
 
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(lg) {
   .overall-container {
     display: flex;
     .map-container {
       flex: 1;
+      .nav-tabs {
+        background-color: $dark !important;
+        .nav-item .nav-link {
+          color: $white;
+          &.active, &:hover, &:focus {
+            color: darken($dark, 10%) !important;
+            background-color: $white;
+          }
+        }
+      }
       .leaflet-container {
         margin: 0;
         width: 100%;
