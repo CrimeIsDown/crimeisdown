@@ -60,8 +60,6 @@ module.exports = function(defaults) {
   app.import('node_modules/mediaelement/build/mejs-controls.svg', {destDir: 'assets'});
   app.import('node_modules/mediaelement/build/mejs-controls.png', {destDir: 'assets'});
 
-  app.import('node_modules/resonance-audio/build/resonance-audio.js');
-
   app.import('node_modules/leaflet/dist/leaflet.css');
   app.import('node_modules/leaflet/dist/leaflet.js');
   app.import('node_modules/leaflet/dist/images/layers.png', {destDir: 'assets/images'});
