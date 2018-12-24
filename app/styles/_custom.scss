@@ -3,6 +3,11 @@ body {
   .container {
     padding-top: 1.6rem;
   }
+  &.ember-application {
+    #loading {
+      display: none;
+    }
+  }
 }
 
 iframe {
@@ -46,6 +51,11 @@ nav.navbar .form-inline .form-check-label {
   a {
     text-decoration: underline;
   }
+}
+
+#news-alert {
+  border-radius: 0;
+  margin-bottom: 0;
 }
 
 blockquote {
