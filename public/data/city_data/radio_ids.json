@@ -1,0 +1,5690 @@
+[
+  {
+    "Agency": "CPD",
+    "ID_Number": "1",
+    "Level_1": "City",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Mayor"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2][A-Z][0-9]?",
+    "Level_1": "City",
+    "Level_2": "",
+    "Level_3": "City Government",
+    "Level_4": ""
+  },
+  {
+    "Agency": "",
+    "ID_Number": "1L3",
+    "Level_1": "City",
+    "Level_2": "",
+    "Level_3": "City Government",
+    "Level_4": "Area Coordinator, CPD Community Policing"
+  },
+  {
+    "Agency": "",
+    "ID_Number": "2",
+    "Level_1": "City",
+    "Level_2": "",
+    "Level_3": "City Government",
+    "Level_4": "Chairman, Committee on Finance"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "3",
+    "Level_1": "Superintendent",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Superintendent"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "3A",
+    "Level_1": "Superintendent",
+    "Level_2": "Superintendent",
+    "Level_3": "Office of Chief of Staff",
+    "Level_4": "Chief of Staff"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "3B",
+    "Level_1": "Superintendent",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Department Administration C.O."
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "3C",
+    "Level_1": "Superintendent",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "General Counsel"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "3D",
+    "Level_1": "Superintendent",
+    "Level_2": "News Affairs",
+    "Level_3": "",
+    "Level_4": "Director"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "3E",
+    "Level_1": "Superintendent",
+    "Level_2": "General Counsel",
+    "Level_3": "Management and Labor Affairs Cmdr",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "3G",
+    "Level_1": "Superintendent",
+    "Level_2": "First Deputy Superintendent",
+    "Level_3": "Special Events",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "3H",
+    "Level_1": "Patrol",
+    "Level_2": "CAPS",
+    "Level_3": "",
+    "Level_4": "Director"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4",
+    "Level_1": "Superintendent",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "First Deputy Superintendent"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4[A-D]",
+    "Level_1": "Superintendent",
+    "Level_2": "First Deputy Superintendent",
+    "Level_3": "Street Operations Unit",
+    "Level_4": "Deputy Chief (\"Street Deputy\")"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4E",
+    "Level_1": "Superintendent",
+    "Level_2": "First Deputy Superintendent",
+    "Level_3": "Special Events Unit",
+    "Level_4": "Coordinator"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "50",
+    "Level_1": "Superintendent",
+    "Level_2": "First Deputy Superintendent",
+    "Level_3": "Detached Services Unit",
+    "Level_4": "Deputy Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Chief of Patrol"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6",
+    "Level_1": "Detectives",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Bureau of Detectives Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7",
+    "Level_1": "Internal Affairs",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Chief - Investigations"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "8",
+    "Level_1": "Administration",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Chief - Prof Standards"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9",
+    "Level_1": "Administration",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Chief - Administrative Services"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "13",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions Division",
+    "Level_3": "",
+    "Level_4": "Deputy Chief - Special Functions (unconfirmed)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "8B",
+    "Level_1": "Internal Affairs",
+    "Level_2": "",
+    "Level_3": "Office of Management Accountability",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "80",
+    "Level_1": "Superintendent",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "8000",
+    "Level_1": "Superintendent",
+    "Level_2": "Internal Affairs",
+    "Level_3": "Investigations",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "8002",
+    "Level_1": "Superintendent",
+    "Level_2": "Internal Affairs",
+    "Level_3": "Department Advocate",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "8004",
+    "Level_1": "Superintendent",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Records Unit"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "8005",
+    "Level_1": "Superintendent",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Analytical Unit"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "80[1-4][0-9]",
+    "Level_1": "Superintendent",
+    "Level_2": "Internal Affairs",
+    "Level_3": "Investigations",
+    "Level_4": "General Investigations"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "805[0-9]",
+    "Level_1": "Superintendent",
+    "Level_2": "Internal Affairs",
+    "Level_3": "Investigations",
+    "Level_4": "Special Investigations"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "80[6-9][0-9]",
+    "Level_1": "Superintendent",
+    "Level_2": "Internal Affairs",
+    "Level_3": "Investigations",
+    "Level_4": "Confidential Investigations"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "81",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Education and Training",
+    "Level_3": "",
+    "Level_4": "Assistant Deputy Superintendent"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "8100",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Education and Training",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "81[0-9][0-9]",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Education and Training",
+    "Level_3": "",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "8200",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Inspections",
+    "Level_3": "Inspection Division, Commander",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "820[1-9]",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Inspections",
+    "Level_3": "Inspection Division, Field Inspectors",
+    "Level_4": "Field Inspector"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "82([0-7][0-9]|8[0-3])",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Inspections",
+    "Level_3": "Inspection Division, Audit Teams",
+    "Level_4": "Audit Team"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "8290",
+    "Level_1": "Administration",
+    "Level_2": "",
+    "Level_3": "Court Liason",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "829[1-8]",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Court Section",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9701",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Independent Police Review Authority",
+    "Level_3": "",
+    "Level_4": "First Deputy Chief Administrator"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9702",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Independent Police Review Authority",
+    "Level_3": "",
+    "Level_4": "Coordinator of Investigations"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "970[3-5]",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Independent Police Review Authority",
+    "Level_3": "",
+    "Level_4": "Deputy Chief Administrators"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9710",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Independent Police Review Authority",
+    "Level_3": "Investigations",
+    "Level_4": "Investigations Supervisor"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "97[1-2][0-9]",
+    "Level_1": "Internal Affairs",
+    "Level_2": "Independent Police Review Authority",
+    "Level_3": "Investigations",
+    "Level_4": "Investigator"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "91",
+    "Level_1": "Administration",
+    "Level_2": "",
+    "Level_3": "BAS, Field Support Group ADS",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "92",
+    "Level_1": "Administration",
+    "Level_2": "",
+    "Level_3": "BAS, Financial & Human Resources Group, ADS",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9000",
+    "Level_1": "Administration",
+    "Level_2": "Finance",
+    "Level_3": "Finance Division, Director",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "900[1-9]",
+    "Level_1": "Administration",
+    "Level_2": "Finance",
+    "Level_3": "Finance Division",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "901[0-4]",
+    "Level_1": "Administration",
+    "Level_2": "Facilities Management",
+    "Level_3": "",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "902[0-4]",
+    "Level_1": "Administration",
+    "Level_2": "Fleet",
+    "Level_3": "Fleet Liaison",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9030",
+    "Level_1": "Administration",
+    "Level_2": "Professional Counseling",
+    "Level_3": "",
+    "Level_4": "Director"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "903[1-4]",
+    "Level_1": "Administration",
+    "Level_2": "Professional Counseling",
+    "Level_3": "",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9040",
+    "Level_1": "Administration",
+    "Level_2": "Chaplain",
+    "Level_3": "",
+    "Level_4": "Directing Chaplain"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "904[1-9]",
+    "Level_1": "Administration",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9150",
+    "Level_1": "Administration",
+    "Level_2": "Records",
+    "Level_3": "Alternate Response",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "915[1-3]",
+    "Level_1": "Administration",
+    "Level_2": "Records",
+    "Level_3": "Alternate Response",
+    "Level_4": "Operations Desk"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "91([5-8][0-9]|9[0-8])",
+    "Level_1": "Administration",
+    "Level_2": "Records",
+    "Level_3": "Records Inquiry",
+    "Level_4": "Call Screeners and Reporters"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9200",
+    "Level_1": "Administration",
+    "Level_2": "Information Services",
+    "Level_3": "",
+    "Level_4": "Director"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "92[0-9][0-9]",
+    "Level_1": "Administration",
+    "Level_2": "Information Services",
+    "Level_3": "",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9300",
+    "Level_1": "Administration",
+    "Level_2": "Records",
+    "Level_3": "",
+    "Level_4": "Director"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "93[0-9][0-9]",
+    "Level_1": "Administration",
+    "Level_2": "Records",
+    "Level_3": "",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9400",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9410",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Equipment and Supply Section",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "941[1-4]",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Equipment and Supply Section",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9415",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Graphic Arts",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "941[6-9]",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Graphic Arts",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9420",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Auto Pounds Section, Chief Supervisor",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "942[1-9]",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Auto Pounds Section",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9430",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Police Documents",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "943[1-9]",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Police Documents",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9440",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Evidence and Recovered Property Section C.O.",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "944[1-9]",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Evidence and Recovered Property Section",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9500",
+    "Level_1": "Administration",
+    "Level_2": "Human Resources",
+    "Level_3": "",
+    "Level_4": "Director"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9510",
+    "Level_1": "Administration",
+    "Level_2": "Human Resources",
+    "Level_3": "Medical Section",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9510",
+    "Level_1": "Administration",
+    "Level_2": "Human Resources",
+    "Level_3": "A&B Medical Integrity Unit Sergeants",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "951[1-9]",
+    "Level_1": "Administration",
+    "Level_2": "Human Resources",
+    "Level_3": "Medical Integrity",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9520",
+    "Level_1": "Administration",
+    "Level_2": "Human Resources",
+    "Level_3": "Random Drug Testing",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "952[1-5]",
+    "Level_1": "Administration",
+    "Level_2": "Human Resources",
+    "Level_3": "Random Drug Testing",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9560",
+    "Level_1": "Administration",
+    "Level_2": "Human Resources",
+    "Level_3": "Investigation",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "95(6[1-9]|7[0-9])",
+    "Level_1": "Administration",
+    "Level_2": "Human Resources",
+    "Level_3": "Investigation",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "958[0-9]",
+    "Level_1": "Administration",
+    "Level_2": "Human Resources",
+    "Level_3": "Ambassador",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "9600",
+    "Level_1": "Organizational Development",
+    "Level_2": "Research and Development",
+    "Level_3": "",
+    "Level_4": "Director"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "96[0-9][0-9]",
+    "Level_1": "Organizational Development",
+    "Level_2": "Research and Development",
+    "Level_3": "",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "R[1-6]",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Fleet",
+    "Level_4": "Emergency Repair Service"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "RT1[0-5]",
+    "Level_1": "Administration",
+    "Level_2": "General Support",
+    "Level_3": "Fleet",
+    "Level_4": "Radio Technicians"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM1",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Executive Director"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM2",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "First Deputy"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM3",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Information Services"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM6",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Administration"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM8",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Director"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM10",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Fire Operations",
+    "Level_4": "Managing Deputy"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM11",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Police Operations",
+    "Level_4": "Managing Deputy"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM13",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "ISCN",
+    "Level_4": "Managing Deputy"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM14",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Information Services",
+    "Level_4": "Managing Deputy"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM18",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Media Services",
+    "Level_4": "Director"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM21",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "City Operations"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM3[3-5]",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Staff"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM51",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Mobile Intelligence"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM52",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Mobile Vehicle"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEMC53",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Mobile Video"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM54",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Mobile"
+  },
+  {
+    "Agency": "OEMC",
+    "ID_Number": "OEM55",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Vehicle"
+  },
+  {
+    "Agency": "USSS",
+    "ID_Number": "S10",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Secret Service detail guarding Obama home"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5[1-2]",
+    "Level_1": "Detectives",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Group A & B Deputy Chiefs"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "50[0-9][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "",
+    "Level_3": "Detective Administration",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5100",
+    "Level_1": "Detectives",
+    "Level_2": "Area South (1)",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5105",
+    "Level_1": "Detectives",
+    "Level_2": "Area South (1)",
+    "Level_3": "Violent Crimes",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5106",
+    "Level_1": "Detectives",
+    "Level_2": "Area South (1)",
+    "Level_3": "Property Crimes",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5107",
+    "Level_1": "Detectives",
+    "Level_2": "Area South (1)",
+    "Level_3": "Violent Crimes",
+    "Level_4": "Special Victims Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5200",
+    "Level_1": "Detectives",
+    "Level_2": "Area Central (2)",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5205",
+    "Level_1": "Detectives",
+    "Level_2": "Area Central (2)",
+    "Level_3": "Violent Crimes",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5206",
+    "Level_1": "Detectives",
+    "Level_2": "Area Central (2)",
+    "Level_3": "Property Crimes",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5207",
+    "Level_1": "Detectives",
+    "Level_2": "Area Central (2)",
+    "Level_3": "Violent Crimes",
+    "Level_4": "Special Victims Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5300",
+    "Level_1": "Detectives",
+    "Level_2": "Area North (3)",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5305",
+    "Level_1": "Detectives",
+    "Level_2": "Area North (3)",
+    "Level_3": "Violent Crimes",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5306",
+    "Level_1": "Detectives",
+    "Level_2": "Area North (3)",
+    "Level_3": "Property Crimes",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5307",
+    "Level_1": "Detectives",
+    "Level_2": "Area North (3)",
+    "Level_3": "Violent Crimes",
+    "Level_4": "Special Victims Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "51[1-4][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Area South (1)",
+    "Level_3": "Violent Crimes",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "51[5-8][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Area South (1)",
+    "Level_3": "Property Crimes",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "52[1-4][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Area Central (2)",
+    "Level_3": "Violent Crimes",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "52[5-8][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Area Central (2)",
+    "Level_3": "Property Crimes",
+    "Level_4": "Special Victims"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "53[1-4][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Area North (3)",
+    "Level_3": "Violent Crimes",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "53[5-8][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Area North (3)",
+    "Level_3": "Property Crimes",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5253",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Explosion Team"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "519[0-7]",
+    "Level_1": "Detectives",
+    "Level_2": "Area South (1)",
+    "Level_3": "Mission Teams",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "529[0-7]",
+    "Level_1": "Detectives",
+    "Level_2": "Area Central (2)",
+    "Level_3": "Mission Teams",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "539[0-7]",
+    "Level_1": "Detectives",
+    "Level_2": "Area North (3)",
+    "Level_3": "Mission Teams",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5600",
+    "Level_1": "Detectives",
+    "Level_2": "Youth Investigations",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "561[1-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Youth Investigations",
+    "Level_3": "Juvenile Intervention and Support Center",
+    "Level_4": "Juvenile Court Team"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "56[2-3][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Youth Investigations",
+    "Level_3": "Special Investigations Unit",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "564[0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Youth Investigations",
+    "Level_3": "Juvenile Intervention and Support Center",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5700",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5702[A-Z]?",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "Major Case",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5703[A-Z]?",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "CPD/FBI Violent Crimes Task Force",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5704[A-Z]?",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "DNA Unit",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5705",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "Cold Case Commanding Officer",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5706",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "Financial Crimes Commanding Officer",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5707",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "Fugitive Apprehension Commanding Officer",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5708",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "Major Accident Investigation Commanding Officer",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "57[1-2][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "Cold Case Unit",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "57[3-4][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "Financial Investigations Unit",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "57[5-7][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "Fugitive Apprehension Unit",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "57[8-9][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Central Investigations",
+    "Level_3": "Major Accident Investigations Unit",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5800",
+    "Level_1": "Detectives",
+    "Level_2": "Forensic Services",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "580[2-8]",
+    "Level_1": "Detectives",
+    "Level_2": "Forensic Services",
+    "Level_3": "Mobile Crime Lab",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "58[1-5][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Forensic Services",
+    "Level_3": "Crime Scene Processing",
+    "Level_4": "Evidence Technician Team"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "587[0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Forensic Services",
+    "Level_3": "Evidence and Recovered Property Unit",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5885",
+    "Level_1": "Detectives",
+    "Level_2": "Forensic Services",
+    "Level_3": "Detective Division Major Incident Response Vehicle",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5899",
+    "Level_1": "Detectives",
+    "Level_2": "Forensic Services",
+    "Level_3": "Mobile Unit Commanding Officer",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "60",
+    "Level_1": "Organized Crime",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "61",
+    "Level_1": "Organized Crime",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6200",
+    "Level_1": "Organized Crime",
+    "Level_2": "Narcotics",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "620[6-9]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Narcotics",
+    "Level_3": "HIDTA/DEA Teams",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "621[1-6]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Narcotics",
+    "Level_3": "General Enforcement Teams",
+    "Level_4": "Area Central"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "622[1-8]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Narcotics",
+    "Level_3": "General Enforcement Teams",
+    "Level_4": "Area South"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "623[1-7]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Narcotics",
+    "Level_3": "General Enforcement Teams",
+    "Level_4": "Area North"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6300",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Vice [Control]",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "631[0-9]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Violence Reduction Response Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "632[0-9]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Human Trafficking and Prostitution Call Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "63[3-4][0-9]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Investigation and Enforcement Unit",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6500",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6502",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "A-K Miscellaneous Detail",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6506",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Penitentiary Liaison",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "650[7-8]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Cook County Jail Liaison",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6510",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Area Central",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6515",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Incident Team - South?",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6520",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Area South",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6530",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Area North",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "655[6-7]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Surveillance Teams",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6558",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "FBI Task Force",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6559",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Animal Crimes Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6560",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Gang Investigative Team North/West",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6565",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Gang Investigative Team South",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6570",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "CAGE Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6575",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Area 4 Investigations Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6580",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Gang Investigative Team North/West",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6585",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Gang Investigative Team South",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6590",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Technical & Investigative Support Group",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "6700",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Enforcement",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "671[0-9]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Enforcement",
+    "Level_3": "Area Central",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "672[0-9]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Enforcement",
+    "Level_3": "Area South",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "673[0-9]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Enforcement",
+    "Level_3": "Area North",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "70",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Counterterrorism & Intelligence Division Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "71",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Counterterrorism & Intelligence Division Dep Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "705[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Counterterrorism Team"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "706[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Deployment Analysis Unit"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "707[0-2]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Technology and Mapping Unit"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "708[0-6]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Crime Prevention Information Center"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7099",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "CPIC Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7100",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Intelligence Section Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "711[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Criminal Enterprise Unit"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "712[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Joint Terrorism Task Force"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "71[4-5][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Field Investigative Unit"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "71[6-7][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Human Intelligence Task Force"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7200",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "720[7-8]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Traffic Enforcement"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7209",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Traffic Aide Coordinator"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "721[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Terminal 1"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "722[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Terminal 2"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "723[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Terminal 3"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "724[1-3]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Motorized Patrol"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7245",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Airfield Vehicle Motorized Patrol"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "725[1-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Terminal 5"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "726[2-4]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Tactical Teams"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "726[6-8]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Explosive Detection Canine Teams"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7270",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Midway Airport Unit Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "72([7[1-9]|8[0-9]|9[0-7])",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Midway Airport"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7298",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Airport Law Enforcement Section",
+    "Level_4": "Airfield Motorized Patrol"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7300",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7301",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "Watch Operations Desk"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7302",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "O'Hare post"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7303",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "Midway post"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "730[4-5]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "95th & Ryan post"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7310",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "732[1-5]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "Canine Handlers"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "734[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "Loop Sector"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "735[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "North Sector"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "736[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "South Sector"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "737[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "West Sector"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7380",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "Special Employment Watch Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "738[1-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "Special Employment"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "739[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Public Transportation Section",
+    "Level_4": "Tactical Teams"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7400",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Bomb and Arson",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7401",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Bomb and Arson",
+    "Level_4": "Explosive Technician III"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "740[2-8]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Bomb and Arson",
+    "Level_4": "Explosive Technician II"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7409",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Bomb and Arson",
+    "Level_4": "O'Hare Airport Explosive Technician – I"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7410-37",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Bomb and Arson",
+    "Level_4": "Arson Unit"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "743[8-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Bomb and Arson",
+    "Level_4": "Bomb and Arson Special Assignment"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "745[0-5]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Bomb and Arson",
+    "Level_4": "Arson Special Assignment"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7471",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Bomb and Arson",
+    "Level_4": "Arson Equipment Van"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7499",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Bomb and Arson",
+    "Level_4": "Bomb and Arson Executive Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "M100",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Marine & Helicopter Unit",
+    "Level_4": "Marine & Helicopter Unit C.O."
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "M([1-9]|1[0-9])",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Marine & Helicopter Unit",
+    "Level_4": "Marine Unit"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "PH1-2",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Marine & Helicopter Unit",
+    "Level_4": "Helicopter 1&2"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "MC[0-9]?[0-9][A-Z]?",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Motorcade Detail",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "30[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Traffic Section",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "32[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Traffic Section",
+    "Level_4": "Traffic Enforcement"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "37[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Traffic Section",
+    "Level_4": "Loop Traffic"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "39[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Traffic Section",
+    "Level_4": "Traffic Safety and Training"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4400",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Summer Mobile Patrol",
+    "Level_4": "Summer Mobile Patrol C.O."
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "44[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Summer Mobile Patrol",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4600",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "SWAT",
+    "Level_4": "SWAT Coordinator"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4600[A-B]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "SWAT",
+    "Level_4": "SWAT Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4600N",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "SWAT",
+    "Level_4": "SWAT Negotiation Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "47[1-3][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Canine",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "46(0|[5-8])[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "SWAT Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4800",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Department Deployment Initiatives",
+    "Level_4": "Department Deployment Initiatives C.O."
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4830-99’s",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Department Deployment Initiatives",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "48[3-8]0",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Department Deployment Initiatives",
+    "Level_4": "Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "48[3-8][1-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Department Deployment Initiatives",
+    "Level_4": "Police Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "49[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Special Functions",
+    "Level_3": "Mounted Unit",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?0?1[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "District 1",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?0?2[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "District 2",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?0?3[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "District 3",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?0?4[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "District 4",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?0?5[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "District 5",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?0?6[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "District 6",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?0?7[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "District 7",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?0?8[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "District 8",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?0?9[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "District 9",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?10[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "District 10",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?11[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "District 11",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?12[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "District 12",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?14[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "District 14",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?15[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "District 15",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?16[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "District 16",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?17[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "District 17",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?18[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "District 18",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?19[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "District 19",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?20[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "District 20",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?22[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "District 22",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?24[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "District 24",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "0?25[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "District 25",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]00",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]00A",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Administrative Manager"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]00X",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Executive Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]01",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Desk Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]02",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Desk Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]03",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Review Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]04",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Bicycle Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]05",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Park Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]06",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Incident Team Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]07",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "CAPS Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]07[A-D]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "CAPS Team Officers"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]08",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Crossing Guard Supervisor"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]10",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "10 Sector Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]20",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "20 Sector Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]30",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "30 Sector Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9][1-3][1-9]R?",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Beat Car"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9][4-5]0",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Rapid Response Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9][4-5][1-9]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Rapid Response Car"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]60",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Lieutenant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]61",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Sergeant (Team A)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]61[A-D]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Team A"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]62",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Sergeant (Team B)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]62[A-D]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Team B"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]63",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Sergeant (Team C)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]63[A-D]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Team C"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]64",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Sergeant (Team D)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]64[A-D]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Team D"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]65",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Sergeant (Team E)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]65[A-D]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Team E"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]68",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Gang Tactical Sergeant (Team A)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]68[A-D]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Gang Tactical Team A"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]69",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Gang Tactical Sergeant (Team B)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]69[A-D]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Gang Tactical Team B"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]70",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "School Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]71",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "10 Sector wagon (squadrol)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]72",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "20 Sector wagon (squadrol)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]73",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "30 Sector wagon (squadrol)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]7[4-9]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fixed Post School Officers"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]8[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Foot Post Assignments"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]9[0-1]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Field Lieutenant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]91C",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "CAPS Management Team Leader"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]93",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Traffic Enforcement"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]9[4-5]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Parking Enforcement"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "[1-2]?[0-9]99",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Watch Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "41",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "",
+    "Level_4": "Area Deputy Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "41X",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "",
+    "Level_4": "Area Executive Officer (Commander)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "41A",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "",
+    "Level_4": "CAPS Lieutenant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "41A1",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "",
+    "Level_4": "Administration Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "41G70",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "",
+    "Level_4": "PSN Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "41G71",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "",
+    "Level_4": "Gun Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "41T71",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "",
+    "Level_4": "Midnight Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "41S",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "",
+    "Level_4": "Saturation Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4100",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "Saturation Team",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "41[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "Saturation Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "CD[1-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area Central",
+    "Level_3": "Central Detention",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "42",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "",
+    "Level_4": "Area Deputy Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "42X",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "",
+    "Level_4": "Area Executive Officer (Commander)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "42A",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "",
+    "Level_4": "CAPS Lieutenant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "42A1",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "",
+    "Level_4": "Administration Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "42G70",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "",
+    "Level_4": "PSN Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "42G71",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "",
+    "Level_4": "Gun Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "42T71",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "",
+    "Level_4": "Midnight Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "42S",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "",
+    "Level_4": "Saturation Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4200",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "Saturation Team",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "42[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area South",
+    "Level_3": "Saturation Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "43",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "",
+    "Level_4": "Area Deputy Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "43X",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "",
+    "Level_4": "Area Executive Officer (Commander)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "43A",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "",
+    "Level_4": "CAPS Lieutenant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "43A1",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "",
+    "Level_4": "Administration Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "43G70",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "",
+    "Level_4": "PSN Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "43G71",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "",
+    "Level_4": "Gun Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "43T71",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "",
+    "Level_4": "Midnight Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "43S",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "",
+    "Level_4": "Saturation Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4300",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "Saturation Team",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "43[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area North",
+    "Level_3": "Saturation Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "47",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Central Control Group Deputy Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "47G71A",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Gun Team"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "47S[01|18]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Saturation Team"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "47B[1-2]0",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Bicycle Team Sergeants"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "49",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Special Functions Group ADS"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "49C",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Mobile Command Center"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "49D",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Covert Auto Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "49E",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "SWAT Weapons Truck"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "49F",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "SWAT Equipment Truck"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "49L",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "SWAT Light Truck"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "49R",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "SWAT Armored Vehicle"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "49W",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "WMD Truck"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "49T",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Troubled Buildings Unit"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "M100",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Marine & Helicopter Unit C.O."
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "M[1]?[0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Marine Unit Boat"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "PH[1-2]",
+    "Level_1": "Patrol",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Police Helicopter"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-1",
+    "Level_1": "OEMC",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Englewood Fire Alarm Office (South Dispatch)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-2",
+    "Level_1": "OEMC",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Main Fire Alarm Office (North Dispatch) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-3",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-3A",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Executive Assistant to the Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-4",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "First Deputy Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-5",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-6",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-7",
+    "Level_1": "Employee Relations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-8",
+    "Level_1": "Logistics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-9",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Assistant Deputy Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-10",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "",
+    "Level_4": "Assistant Deputy Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-11",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "",
+    "Level_4": "Assistant Deputy Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-12",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "",
+    "Level_4": "Assistant Deputy Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-20",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Chief, Office of the Fire Commissioner"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-21",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Chief, District 1"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-22",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Chief, District 2"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-23",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "District Chief, District 3"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-24",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Chief, District 4"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-25",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Chief, District 5"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-27",
+    "Level_1": "Logististics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Chief, Director of Fire Logistics"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-28",
+    "Level_1": "Logististics",
+    "Level_2": "Training",
+    "Level_3": "",
+    "Level_4": "District Chief, Director of Training"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-29",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Chief, Fire Prevention Bureau"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-30",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Chief, Director of Safety"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-31",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "District Chief, Special Projects"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-1-32",
+    "Level_1": "Logistics",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "",
+    "Level_4": "District Chief, EMS"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-2-1",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "1st District",
+    "Level_4": "Deputy District Chief (Engine 18)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-2-2",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "2nd District",
+    "Level_4": "Deputy District Chief (Engine 108)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-2-3",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "3rd District",
+    "Level_4": "Deputy District Chief (ORD Rescue 3)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-2-4",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "4th District",
+    "Level_4": "Deputy District Chief (Engine 38)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-2-5",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "5th District",
+    "Level_4": "Deputy District Chief (Engine 81)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-2-7",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "",
+    "Level_4": "Deputy District Chief, Manpower"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-7-0",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Tactical Operations Intelligence Center (TOIC) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-7-1",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Command Van (Engine 42)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-7-2",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Command Van (Engine 112)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-7-3",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Command Van (ORD Rescue 3)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-7-4",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Command Van (Engine 49)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-7-5",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Command Van (Engine 122)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-7-9",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Major Incident Command Van (Special Operations Warehouse)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-7-10",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Command Van Coordinator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-7-11",
+    "Level_1": "Operations",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy District Chief: Communications / Department Radio Coordinator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-1",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Commander:  Coordinator of Academy Operations"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-2",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Commander:  Coordinator of Field Training"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-3",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Commander:  Coordinator of Apparatus / Engineering Training"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-3A",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Training Ambulance"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-3B",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Training Ambulance"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-3C",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Training Ambulance"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-4",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Commander:  Coordinator of Emergency Medical Services Training"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-6",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Engine"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-7",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Hook and Ladder"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-8",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Engine"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-9",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Hook and Ladder"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-8-10",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Hook and Ladder"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-0",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Vehicle"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-1",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Bus"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-2",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Vehicle"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-7",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Coordinator of Hazardous Material Training"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-7A",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Haz Mat Training Ambulance"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-7B",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Quinn Fire Academy",
+    "Level_4": "Fire Academy Haz Mat Training Ambulance "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-8",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Airport Operations",
+    "Level_4": "ORD Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-9",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Airport Operations",
+    "Level_4": "ORD Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-10",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Airport Operations",
+    "Level_4": "MDW Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-11",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Airport Operations",
+    "Level_4": "Airport Fueling Inspector"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-12",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Airport Operations",
+    "Level_4": "ORD Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-13",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Airport Operations",
+    "Level_4": "Airport Driver’s Training Coordinator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-14",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Airport Operations",
+    "Level_4": "Airport District Aide "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-20",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Fire Suppression and Rescue Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-21",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Fire Suppression and Rescue Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-22",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Fire Suppression and Rescue Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-23",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Fire Suppression and Rescue Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-24",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Fire Suppression and Rescue Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-25",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Emergency Medical Service Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-26",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Emergency Medical Service Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-27",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Emergency Medical Service Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-28",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Emergency Medical Service Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-29",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Emergency Medical Service Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-9-30",
+    "Level_1": "Administrative Services",
+    "Level_2": "Training",
+    "Level_3": "Field Training",
+    "Level_4": "Emergency Medical Service Field Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-0-0",
+    "Level_1": "Logistics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Chief Canteen Supervisor"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-0-1",
+    "Level_1": "Logistics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Support Service Canteen 1 (Engine 106)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-0-2",
+    "Level_1": "Logistics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Support Service Canteen 2 (Engine 80)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-0-3",
+    "Level_1": "Logistics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Assistant Canteen Supervisor"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-0-4",
+    "Level_1": "Logistics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Canteen Duty Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-0-5",
+    "Level_1": "Logistics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Canteen Duty Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-0-6",
+    "Level_1": "Logistics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Salvation Army Unit (Engine 88)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-0-7",
+    "Level_1": "Logistics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Salvation Army Unit (Engine 11)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-0-9",
+    "Level_1": "Logistics",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Salvation Army Unit (Engine 122) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-1",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Department Chaplain / Catholic "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-2",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Department Chaplain / Protestant"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-3",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Department Chaplain / Jewish"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-4",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Department Physician"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-5",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Deputy District Chief, Coordinator of Medical Section"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-6",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Deputy District Chief, Coordinator of Employee Relations"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-7",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Director of Media Affairs and Community Relations"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-8",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Deputy District Chief, Coordinator of Fire Awareness and Public Education"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-9",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Deputy District Chief, Special Events Coordinator / Department Liaison"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-10",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Media Affairs Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-11",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Media Affairs Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-12",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Media Affairs Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-13",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Media Affairs Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-14",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Media Affairs Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-15",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "On Call Infection Control Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-16",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Director of Finance"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-17",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Director of Human Resources / Personnel"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-1-18",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff",
+    "Level_4": "Assistant Commissioner: Homeland Security and Emergency Preparedness"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-0",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Executive Director  "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-1",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "First Deputy Director"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-2",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Managing Deputy Director, Operations"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-3",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Director, Emergency Management"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-4",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Director, 9-1-1 Operations"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-5",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Deputy Director, Fire/Police Dispatch"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-6",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Office of Emergency Management Duty Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-7",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "OEMC Operations Center"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-8",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Radio Maintenance and Repair Foreman"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-9",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Radio Maintenance and Repair"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-10",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Radio Maintenance and Repair"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-2-12",
+    "Level_1": "Office of Emergency Management and Communications",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "OEMC Command Van"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-3-1",
+    "Level_1": "City of Chicago Officials",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Mayor of Chicago "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-3-2",
+    "Level_1": "City of Chicago Officials",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Mayor’s Escort Car"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-3-3",
+    "Level_1": "City of Chicago Officials",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Commissioner of Department of Streets and Sanitation"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-3-4",
+    "Level_1": "City of Chicago Officials",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Commissioner of Health Department"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-3-5",
+    "Level_1": "City of Chicago Officials",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Commissioner of Water Department "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-3-6",
+    "Level_1": "City of Chicago Officials",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Chairman of City Council Police and Fire Committee"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-3-7",
+    "Level_1": "City of Chicago Officials",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Chairman of City Council Finance Committee"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-3-8",
+    "Level_1": "City of Chicago Officials",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Mayor’s Mobile Office"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-3-9",
+    "Level_1": "City of Chicago Officials",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Superintendent of Police Department"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-4-0",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "",
+    "Level_4": "Director of Medical Administration and Regulatory Compliance (MARC) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-4-1",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "",
+    "Level_4": "Assistant Deputy Chief Paramedic: EMS Logistics"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-4-6",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "",
+    "Level_4": "Executive Assistant: Emergency Medical Services Division"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-4-11",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "North",
+    "Level_4": "Assistant Deputy Chief Paramedic: Field Division North (Engine 44)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-4-12",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "South",
+    "Level_4": "Assistant Deputy Chief Paramedic: Field Division South (Engine 16)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-5-1",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "District 1",
+    "Level_4": "Field Chief: EMS District 1 (Engine 42)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-5-2",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "District 2",
+    "Level_4": "Field Chief: EMS District 2 (Engine 112)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-5-3",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "District 3",
+    "Level_4": "Field Chief: EMS District 3 (Engine 79)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-5-4",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "District 4",
+    "Level_4": "Field Chief: EMS District 4 (Engine 117)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-5-5",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "District 5",
+    "Level_4": "Field Chief: EMS District 5 (Engine 88)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-5-6",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "District 6",
+    "Level_4": "Field Chief: EMS District 6 (Engine 121)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-5-7",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "District 7",
+    "Level_4": "Field Chief: EMS District 7 (Engine 23)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-5-8",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "District 8",
+    "Level_4": "Field Chief: EMS District 8 (Engine 63) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-0",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Deputy District Chief, Commanding Fire Marshal"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-1",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Commander: Assistant Commanding Fire Marshal"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-2",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Major Case Unit Coordinator, Supervising Fire Marshal"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-3",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "OFI Training Coordinator, Fire Marshal"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-4",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Juvenile Intervention Coordinator, Administrative Fire Marshal"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-5",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Digital Image Specialist and Photo Library Coordinator, Fire Marshal"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-6",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Supervisor Fire Marshall – 24 Hours (Engine 84)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-7",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Fire Marshall – 24 Hours (Engine 107)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-8",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Fire Marshall – 24 Hours (Engine 63)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-9",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Fire Marshall – 24 Hours (Engine 22)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-10",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Major Incident Response Unit (MIRU) – 24 Hours"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-11",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Bureau of Alcohol, Tobacco, Firearms and Explosives"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-12",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Chicago Police Department Responding Unit"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-19",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "State Fire Marshall Canine Unit"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-6-50",
+    "Level_1": "Operations",
+    "Level_2": "Fire Investigation",
+    "Level_3": "",
+    "Level_4": "Generic Response Unit for CAD "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-0",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Governor of the State of Illinois"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-1",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "State of Illinois Fire Marshal"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-2",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Director of Illinois Department of Public Health"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-3",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "IEMA Regional Coordinator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-4",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Sheriff of Cook County"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-5",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Cook County DHSEM Representative (Old ESDA)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-8",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Cook County DHSEM Representative (Old ESDA)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-9",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "MABAS Representative"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-10",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "MABAS Representative"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-11",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Orland Central Fire Alarm Office (South)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-7-12",
+    "Level_1": "State and Regional Officials, Offices",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Red Center Fire Alarm Office (North)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-8-0",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff Assistants",
+    "Level_4": "Commander:  Office of the Fire Commissioner "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-8-1",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff Assistants",
+    "Level_4": "Commander:  Office of the 1st Deputy Fire Commissioner "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-8-2",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff Assistants",
+    "Level_4": "Commander:  Bureau of Operations "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-8-3",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff Assistants",
+    "Level_4": "Commander:  Bureau of Administrative Services: Human Resources"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-8-4",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff Assistants",
+    "Level_4": "Commander:  Bureau of Administrative Services: Medical Section"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-8-5",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "Headquarters Staff Assistants",
+    "Level_4": "Commander:  Public Education and Fire Awareness"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-0",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Bureau, Chief Engineer "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-1",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-2",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force  "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-3",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-4",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-5",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-6",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Supervisor – Public Assemblies Section"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-9",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-10",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-11",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-12",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-13",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-14",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Fire Prevention Task Force"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-15",
+    "Level_1": "Fire Prevention",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Commander: Fire Prevention Bureau Training Officer"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-7A",
+    "Level_1": "Fire Prevention",
+    "Level_2": "Public Education",
+    "Level_3": "",
+    "Level_4": "Public Education Mobile Survive Alive Unit "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-7B",
+    "Level_1": "Fire Prevention",
+    "Level_2": "Public Education",
+    "Level_3": "",
+    "Level_4": "Public Education Vehicle"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-7C",
+    "Level_1": "Fire Prevention",
+    "Level_2": "Public Education",
+    "Level_3": "",
+    "Level_4": "Public Education Vehicle"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-7D",
+    "Level_1": "Fire Prevention",
+    "Level_2": "Public Education",
+    "Level_3": "",
+    "Level_4": "Public Education Vehicle"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-9-8",
+    "Level_1": "Fire Prevention",
+    "Level_2": "Public Education",
+    "Level_3": "",
+    "Level_4": "Public Education Vehicle "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-1-0",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Hazardous Materials",
+    "Level_4": "Deputy District Chief, Hazardous Materials Coordinator (Engine 16) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-1-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Hazardous Materials",
+    "Level_4": "Hazardous Incident Team 1 (Engine 16)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-1-1A",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Hazardous Materials",
+    "Level_4": "Hazardous Incident Team Auxiliary Apparatus (Engine 16)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-1-2",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Hazardous Materials",
+    "Level_4": "Hazardous Incident Team 2 (ORD Rescue 1)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-1-3",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Hazardous Materials",
+    "Level_4": "Joint Hazard Assessment Team (JHAT) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-1-4",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Hazardous Materials",
+    "Level_4": "Joint Hazard Assessment Team (JHAT)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-1-11",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Hazardous Materials",
+    "Level_4": "Hazardous Materials Mobile Laboratory (Engine 16)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-3-0",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Hazardous Materials",
+    "Level_4": "Hazardous Materials Decontamination Unit (Engine 22) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-3-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Hazardous Materials",
+    "Level_4": "Hazardous Materials Mass Decontamination Unit (ORD Rescue 1) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-2-0",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Technical Rescue",
+    "Level_4": "Technical Rescue Training Coordinator "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-2-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Technical Rescue",
+    "Level_4": "Collapse Rescue Unit (Engine 5)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-2-2",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Technical Rescue",
+    "Level_4": "Collapse Rescue Lumber Unit (Engine 14)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-2-3",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Technical Rescue",
+    "Level_4": "Compressor Truck Unit (Special Operations Warehouse)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-2-4",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Technical Rescue",
+    "Level_4": "Vacuum Truck Unit (Special Operations Warehouse)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-2-5",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Technical Rescue",
+    "Level_4": "Technical Rescue Team Unit (Special Operations Warehouse)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-2-6",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Technical Rescue",
+    "Level_4": "Tunnel Rescue Unit (Engine 91) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-2-7",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Technical Rescue",
+    "Level_4": "Specialty Extrication Equipment Unit (Special Operations Warehouse)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-4-0",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Department Liaison to CTA "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-4-1",
+    "Level_1": "",
+    "Level_2": "",
+    "Level_3": "",
+    "Level_4": "Department Liaison to OEMC "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-1-5",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Squad Companies",
+    "Level_4": "Battalion Chief: Special Operations (Engine 5) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-1-7",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Squad Companies",
+    "Level_4": "Commander: Special Operations Division"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-5-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Squad Companies",
+    "Level_4": "Squad Company 1 (Engine 42)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-5-2",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Squad Companies",
+    "Level_4": "Squad Company 2 (Engine 91)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-5-5",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Squad Companies",
+    "Level_4": "Squad Company 5 (Engine 116)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-5-7",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Squad Companies",
+    "Level_4": "Squad Company 7 (ORD Rescue 3)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-6-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Miscellaneous",
+    "Level_4": "Jump Bag / Trash Pump Unit (Engine 4) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-6-2",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Miscellaneous",
+    "Level_4": "Jump Bag / Trash Pump Unit (Engine 124)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-6-3",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Miscellaneous",
+    "Level_4": "Jump Bag / Trash Pump Unit (Engine 47)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-6-4",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Miscellaneous",
+    "Level_4": "Special Operations – Utility Unit (Special Operations Warehouse)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-6-5",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Miscellaneous",
+    "Level_4": "Special Operations Rig – Support Unit (Special Operations Warehouse)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-6-6",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Miscellaneous",
+    "Level_4": "Special Operations Rig – Box Truck (Special Operations Warehouse)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-6-7",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Miscellaneous",
+    "Level_4": "Special Operations Pod Truck (Special Operations Warehouse)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-7-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Rehab Unit (Engine 49) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-7-2",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Rehab Unit (Engine 68)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-7-3",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Rehab Unit (ORD Rescue 3) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-0",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Assistant Commissioner:  Internal Affairs Division (Headquarters) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-1",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Assistant Director"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-2",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Chief Investigator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-3",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Chief Investigator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-4",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Investigator Specialist"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-5",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Investigator Specialist"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-6",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Investigator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-7",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Investigator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-8",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Investigator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-9",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Investigator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-10",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Investigator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-11",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Investigator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "5-8-12",
+    "Level_1": "",
+    "Level_2": "Internal Affairs",
+    "Level_3": "",
+    "Level_4": "Investigator "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-1-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Hose Wagon (Engine 81) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-1-2",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Hose Wagon (Engine 26) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-2-4",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Dry Chemical Unit (Engine 4) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-2-5",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Dry Chemical Unit (Engine 46)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-3-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "High Expansion Foam Unit (Engine 26)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-3-2",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Bulk Foam Carrier Unit (Engine 28) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-3-9",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Battery Vehicle"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-0",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Deputy District Chief, Coordinator of Breathing Apparatus Service "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-1",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Commander: Bureau of Logistics"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-2",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Coordinator of Building Services"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-3",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Telecommunications Specialist"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-4",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Air Mask Bottle Truck – South"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-5",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Air Mask Bottle Truck – Central"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-6",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Air Mask Bottle Truck – North"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-7",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Gas Detection Service Unit"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-8",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Utility Pick-Up Truck"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-9",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Breathing Apparatus Technician Unit"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-10",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Passenger Delivery Van"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-11",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Repair Shops Ready Room Vehicle"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-12",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "House Supply / Warehouse Van"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-13",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Small Delivery Box Truck"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-14",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Large Delivery Box Truck"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-15",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Shop Vehicle – Auxiliary Gas Detection Service Unit"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-16",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "High-Rise Response Unit (Engine 18)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-17",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Utility Pick-Up Truck"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-18",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "MMRT Transport Vehicle"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-19",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Coordinator of Building Services"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-20",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Coordinator of Department Commissary  "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-3-4",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "Stairway Unit (Engine 127 – MDW) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-3-5",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "Stairway Unit (ORD Rescue 2)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-3-7",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "Mini Pumper Unit (Engine 127 – MDW)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-5-1",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "ARFF Crash Rig (MDW)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-5-2",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "ARFF Crash Rig (MDW) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-5-3",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "ARFF Crash Rig (ORD Rescue 1)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-5-4",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "ARFF Crash Rig (ORD Rescue 2)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-5-5",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "ARFF Crash Rig (ORD Rescue 2)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-5-6",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "ARFF Crash Rig (ORD Rescue 2)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-5-7",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "ARFF Crash Rig (ORD Rescue 1)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-5-8",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "ARFF Crash Rig (ORD Rescue 1)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-5-9",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "ARFF Crash Rig (ORD Rescue 4 - Reserve)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-5-10",
+    "Level_1": "Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
+    "Level_4": "ARFF Crash Rig (ORD Rescue 1)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-7-3",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Deluge Unit (Engine 108) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-7-6",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Deluge Unit (Engine 104) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-6-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Reserve Snorkel 1 (Engine 35)  "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-8-0",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Air and Sea Rescue",
+    "Level_4": "Deputy District Chief, Air Rescue"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-8-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Air and Sea Rescue",
+    "Level_4": "Helicopter "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-8-2",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Air and Sea Rescue",
+    "Level_4": "Helicopter "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-8-6",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Air and Sea Rescue",
+    "Level_4": "Deputy District Chief, SCUBA and Marine Safety Section Coordinator"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-8-7",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Air and Sea Rescue",
+    "Level_4": "SCUBA Dive Team Unit (Engine 13) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-8-7A",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Air and Sea Rescue",
+    "Level_4": "SCUBA Dive Team Spare Unit (ASR 95th)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-8-8",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Air and Sea Rescue",
+    "Level_4": "Fast Boat: “Eugene Blackmon” (CMSS – Seasonal)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-8-9",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Air and Sea Rescue",
+    "Level_4": "Trailered Boat (Special Operations Warehouse)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-8-10",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Air and Sea Rescue",
+    "Level_4": "Trailered Boat (Engine 104) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "7-7-0",
+    "Level_1": "Logistics",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "",
+    "Level_4": "EMS Logistics Equipment Specialist "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "7-7-1",
+    "Level_1": "Logistics",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "",
+    "Level_4": "EMS Logistics Supply Truck"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "7-7-2",
+    "Level_1": "Logistics",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "",
+    "Level_4": "EMS Logistics Supply Truck"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "7-7-3",
+    "Level_1": "Logistics",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "",
+    "Level_4": "EMS Logistics Supply Truck"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "7-7-5",
+    "Level_1": "Logistics",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "",
+    "Level_4": "Stair Chair / Stokes Basket Tender / Conveyance Wagon (Special Ops Warehouse) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-11",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Major Response",
+    "Level_4": "EMS Treatment / Oxygen Bus (Engine 107)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-12",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Major Response",
+    "Level_4": "EMS Transport Bus (Engine 84) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-13",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Mass Casualty",
+    "Level_4": "Pediatric Mass Casualty Unit - 50 Patient (EMS Logistics)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-14",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Mass Casualty",
+    "Level_4": "Mass Casualty Unit - 200 Patient (Engine 121)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-15",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Mass Casualty",
+    "Level_4": "Mass Casualty Unit - 50 Patient (EMS Logistics)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-16",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Mass Casualty",
+    "Level_4": "Mass Casualty Unit - 200 Patient (MDW – Engine 127) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-17",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Mass Casualty",
+    "Level_4": "Mass Casualty Unit - Command Support Unit (EMS Logistics)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-18",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Mass Casualty",
+    "Level_4": "Mass Casualty Unit - 200 Patient (EMS Logistics) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-19",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Mass Casualty",
+    "Level_4": "Mass Casualty Unit - 200 Patient (Engine 55)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-20",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Mass Casualty",
+    "Level_4": "Mass Casualty Unit - 250 Patient (ORD Rescue 1) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-20A",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Mass Casualty",
+    "Level_4": "Mass Casualty Unit - EMS Support Unit (Rescue 3)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "9-1-3",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Light Wagon (Engine 83) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "9-1-5",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Light Wagon (Engine 101) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "9-2-1",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Smoke Ejector (Engine 107) "
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "9-2-2",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Smoke Ejector (Engine 123)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "9-2-3",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Mobile Ventilation Unit (Engine 106)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "9-2-4",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "",
+    "Level_4": "Mobile Ventilation Unit (ORD Rescue 3)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "E[1-9]",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Engine Companies",
+    "Level_4": "Engine"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "E1[0-1]",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Engine Companies",
+    "Level_4": "Engine"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "E1-[3-9]",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Engine Companies",
+    "Level_4": "Engine"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "E[2-9]-[0-9]",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Engine Companies",
+    "Level_4": "Engine"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "E10-[1-9]",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Engine Companies",
+    "Level_4": "Engine"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "E1-10",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Engine Companies",
+    "Level_4": "Engine 110"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "1-[1-2]-[0-9]",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Engine Companies",
+    "Level_4": "Engine"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-3-1",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 1 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-3-2",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 2 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-3-3",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 3 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-3-4",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 4 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-3-5",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 5 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-3-6",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 6 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-3-7",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 7 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-3-8",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 8 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-3-9",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 9 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-3-10",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 10 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-4-1",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 11 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-4-2",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 12 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-4-3",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 13 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-4-4",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 14 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-4-5",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 15 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-4-6",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 16 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-4-7",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 17 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-4-8",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 18 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-4-9",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 19 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-4-10",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 20 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-5-1",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 21 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-5-2",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 22 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-5-3",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 23 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "2-5-4",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Battalion Chiefs",
+    "Level_4": "Battalion 24 Chief"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "3-[1-7]-[[1-9]|10]",
+    "Level_1": "Operations",
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Hook and Ladder / Tower Ladder Companies",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-[1-6]-[[1-9]|10]",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Ambulance Companies",
+    "Level_4": "Ambulance"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-8-10",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Ambulance Companies",
+    "Level_4": "Ambulance 80"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-9-[[1-9]|10]",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Ambulance Companies",
+    "Level_4": "Ambulance"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "8-10-[1-4]",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "Ambulance Companies",
+    "Level_4": "Ambulance"
+  }
+]
