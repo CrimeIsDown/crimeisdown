@@ -336,9 +336,9 @@ export default Component.extend({
                     (location.ambo ? '<br><strong>Ambulance:</strong> ' + location.ambo : '') +
                     (location.squad ? '<br><strong>Squad:</strong> ' + location.squad : '') +
                     (location.special ? '<br><strong>Special (search radio IDs):</strong> ' + location.special : '') +
-                    '<br><strong>Battalion:</strong> ' + location.batt + ' / <strong>District:</strong> ' + location.fireDist +
-                    '<br><strong>EMS District:</strong> ' + location.emsDist +
-                    '<br><strong>Radio Channel:</strong> ' + location.radio;
+                    (location.batt ? '<br><strong>Battalion:</strong> ' + location.batt + ' / <strong>District:</strong> ' + location.fireDist : '') +
+                    (location.emsDist ? '<br><strong>EMS District:</strong> ' + location.emsDist : '') +
+                    (location.radio ? '<br><strong>Radio Channel:</strong> ' + location.radio : '');
                   stationMarker.bindPopup(popupContents).openPopup();
 
                   layerGroup.addLayer(stationMarker);
