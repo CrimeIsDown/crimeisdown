@@ -3,7 +3,7 @@ import fetch from 'fetch';
 
 export default Route.extend({
   model() {
-    return fetch('https://crimeisdown.com/data/audio_data/online_streams.json')
+    return fetch('/data/audio_data/online_streams.json')
       .then((response) => {
         return response.json();
       });

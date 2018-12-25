@@ -1,0 +1,2612 @@
+[
+  {
+    "ucrCode": "0110",
+    "primaryDesc": "Homicide",
+    "secondaryDesc": "First Degree Murder",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0130",
+    "primaryDesc": "Homicide",
+    "secondaryDesc": "Second Degree Murder",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0141",
+    "primaryDesc": "Homicide",
+    "secondaryDesc": "Involuntary Manslaughter",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0142",
+    "primaryDesc": "Homicide",
+    "secondaryDesc": "Reckless Homicide",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0150",
+    "primaryDesc": "Homicide",
+    "secondaryDesc": "Justifiable Homicide",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "0261",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Aggravated – Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0262",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Aggravated – Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0263",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Aggravated – Knife or Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0264",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Aggravated – Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0265",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Aggravated – Other",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0266",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Predatory",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0271",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Attempt Aggravated – Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0272",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Attempt Aggravated – Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0273",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Attempt Aggravated – Knife/Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0274",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Attempt Aggravated – Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0275",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Attempt Aggravated – Other",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0281",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Non-Aggravated",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0291",
+    "primaryDesc": "Criminal Sexual Assault",
+    "secondaryDesc": "Attempt Non-Aggravated",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0312",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Armed – Knife/Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0313",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Armed – Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "031A",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Armed – Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "031B",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Armed – Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0320",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Strong Arm – No Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0325",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Vehicular Hijacking",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0326",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Aggravated Vehicular Hijacking",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0330",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Aggravated",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0331",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Attempt – Aggravated",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0334",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Attempt – Armed-Knife/Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0337",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Attempt – Armed-Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "033A",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Attempt – Armed-Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "033B",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Attempt – Armed-Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0340",
+    "primaryDesc": "Robbery",
+    "secondaryDesc": "Attempt – Strong Arm-No Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "041A",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated – Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "041B",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated – Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0420",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated – Knife or Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0430",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated – Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0440",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated – Hands, fists, feet, no/minor injury",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0450",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Police Officer – Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0451",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Police Officer – Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0452",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Police Officer – Knife or Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0453",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Police Officer Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0454",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Police Officer – Hands, fists, feet, no/minor injury",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0460",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Simple",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0461",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Police Officer – Hands, fists, feet serious injury",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0462",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Protected Employee – Hands, fists, feet, serious injury",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0470",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Reckless Conduct",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0475",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Of an Unborn Child",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0479",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated – Hands, fists, feet, serious injury",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0480",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Protected Employee – Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0481",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Protected Employee – Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0482",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Protected Employee – Knife or Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0483",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Protected Employee – Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0484",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Protected Employee – Hands, fists, feet no/minor injury",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0485",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of a Child",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0486",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Domestic Battery – Simple",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0487",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of Unborn Child",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0488",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated Domestic Battery – Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0489",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated Domestic Battery – Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0490",
+    "primaryDesc": "Ritualism",
+    "secondaryDesc": "Aggravated – Ritual Mutilation- Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0491",
+    "primaryDesc": "Ritualism",
+    "secondaryDesc": "Aggravated – Ritual Mutilation- Other  Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0492",
+    "primaryDesc": "Ritualism",
+    "secondaryDesc": "Aggravated – Ritual Mutilation- Knife or Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0493",
+    "primaryDesc": "Ritualism",
+    "secondaryDesc": "Aggravated – Ritual Mutilation- Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0494",
+    "primaryDesc": "Ritualism",
+    "secondaryDesc": "Aggravated – Ritual Mutilation- Hands, fists, feet/minor injury",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0495",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated of Senior Citizen",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0496",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated Domestic Battery – Knife/Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0497",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated Domestic Battery – Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0498",
+    "primaryDesc": "Battery",
+    "secondaryDesc": "Aggravated Domestic Battery – Hands, fists, feet serious injury",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0510",
+    "primaryDesc": "Ritualism",
+    "secondaryDesc": "Aggravated – Ritual Mutilation- Hands, fists, feet, serious injury",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "051A",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated – Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "051B",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated – Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0520",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated – Knife of Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0530",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated – Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0545",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated of a Protected Employee – Hands, Fists, Feet no injury",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0550",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated of a Police Officer – Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0551",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated of a Police Officer – Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0552",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated of a Police Officer – Knife or Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0553",
+    "primaryDesc": "",
+    "secondaryDesc": "Aggravated of a Police Officer – Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0554",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated of a Police Officer- Hands, fists, feet, no injury",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0555",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated of a Protected Employee – Handgun",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0556",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated of a Protected Employee – Other Firearm",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0557",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated of a Protected Employee – Knife of Cutting Instrument",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0558",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Aggravated of Protected Employee  – Other Dangerous Weapon",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0560",
+    "primaryDesc": "Assault",
+    "secondaryDesc": "Simple",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0580",
+    "primaryDesc": "Stalking",
+    "secondaryDesc": "Simple",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0581",
+    "primaryDesc": "Stalking",
+    "secondaryDesc": "Aggravated",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0582",
+    "primaryDesc": "Stalking",
+    "secondaryDesc": "Non-Criminal Offense",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "0583",
+    "primaryDesc": "Stalking",
+    "secondaryDesc": "Cyberstalking",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0584",
+    "primaryDesc": "Stalking",
+    "secondaryDesc": "Violation of Stalking No Contact Order",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "0585",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Notification of Stalking-No Contact Order",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "0610",
+    "primaryDesc": "Burglary",
+    "secondaryDesc": "Forcible Entry",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0620",
+    "primaryDesc": "Burglary",
+    "secondaryDesc": "Unlawful Entry – No Force",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0630",
+    "primaryDesc": "Burglary",
+    "secondaryDesc": "Attempt Forcible Entry",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0650",
+    "primaryDesc": "Burglary",
+    "secondaryDesc": "Home Invasion",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0810",
+    "primaryDesc": "Theft",
+    "secondaryDesc": "Over $500",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0820",
+    "primaryDesc": "Theft",
+    "secondaryDesc": "$500 & Under",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0850",
+    "primaryDesc": "Theft",
+    "secondaryDesc": "Attempt Theft",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0860",
+    "primaryDesc": "Theft",
+    "secondaryDesc": "Retail Theft",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0865",
+    "primaryDesc": "Theft",
+    "secondaryDesc": "Delivery Container Theft",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0870",
+    "primaryDesc": "Theft",
+    "secondaryDesc": "Pocket Picking",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0880",
+    "primaryDesc": "Theft",
+    "secondaryDesc": "Purse-Snatching",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0890",
+    "primaryDesc": "Theft",
+    "secondaryDesc": "Theft from Building",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0895",
+    "primaryDesc": "Theft",
+    "secondaryDesc": "From Coin-Operated Machine or Device",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0910",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Automobile",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0915",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Truck, Bus, Motor Home",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0917",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Cycle, Scooter, Bike w/ VIN",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0918",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Cycle, Scooter, Bike No VIN",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0920",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Attempt – Automobile",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0925",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Attempt – Truck, Bus, Motor Home",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0927",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Attempt – Cycle, Scooter, Bike w/ VIN",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0928",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Attempt – Cycle, Scooter, Bike No VIN",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0930",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Theft/Recovery – Automobile",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0935",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Theft/Recovery – Truck, Bus, Motorhome",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0937",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Theft/Recovery – Cycle, Scooter, Bike w/ VIN",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0938",
+    "primaryDesc": "Motor Vehicle Theft",
+    "secondaryDesc": "Theft/Recovery – Cycle, Scooter, Bike No VIN",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "0940",
+    "primaryDesc": "Non-Criminal (Subject Specified)",
+    "secondaryDesc": "Foreign Recovery – Automobile",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "0945",
+    "primaryDesc": "Non-Criminal (Subject Specified)",
+    "secondaryDesc": "Foreign Recovery – Trucks, Bus, Motorhome",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "0947",
+    "primaryDesc": "Non-Criminal (Subject Specified)",
+    "secondaryDesc": "Foreign Recovery – Cycle, Scooter, Bike w/ VIN",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "0948",
+    "primaryDesc": "Non-Criminal (Subject Specified)",
+    "secondaryDesc": "Foreign Recovery – Cycle, Scooter, Bike No VIN",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "1010",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "By Explosive",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "1020",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "By Fire",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "1025",
+    "primaryDesc": "Arson",
+    "secondaryDesc": "Aggravated",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "1030",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Possession – Explosive, Incendiary Device",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1035",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Possession – Chemical/Dry Ice Device",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1050",
+    "primaryDesc": "Human Trafficking",
+    "secondaryDesc": "Commercial Sex Acts",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1055",
+    "primaryDesc": "Human Trafficking",
+    "secondaryDesc": "Involuntary Servitude",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1090",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Attempt",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "1110",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Bogus Check",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1120",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Forgery",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1121",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Counterfeiting Document",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1122",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Counterfeit Check",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1130",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Fraud or Confidence Game",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1135",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Insurance Fraud",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1140",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Embezzlement",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1150",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Credit Card Fraud",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1151",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Illegal Possession of Cash Card",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1152",
+    "primaryDesc": "",
+    "secondaryDesc": "Illegal Use of Cash Card",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1153",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Financial Identity Theft Over $300",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1154",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Financial Identity Theft  $300 & Under",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1155",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Aggravated Financial Identity Theft",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1156",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Attempt – Financial Identity Theft",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1160",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Alter Coins",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1170",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Impersonation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1185",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Deceptive Collection Practices",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1195",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Financial Exploitation of Elderly/Disabled",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1200",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Stolen Property – Buy/ Receive/ Possess",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1205",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Theft by Lessee, Non-Motor Vehicle",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1206",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Theft by Lessee, Motor Vehicle",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1210",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Theft of Labor/Services",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1220",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Theft of Lost or Mislaid Property",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1230",
+    "primaryDesc": "",
+    "secondaryDesc": "Possession of Keys or Device to Coin Operated Machine",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1235",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Unlawful Use of Recorded Sound",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1240",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Unlawful Use of Computer",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1241",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Aggravated Computer Tampering",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1242",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Computer Fraud",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1245",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Pay  TV Service Offense",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1255",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Unidentifiable Recording Sound",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1260",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Library Theft",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1261",
+    "primaryDesc": "Deceptive Practice",
+    "secondaryDesc": "Unauthorized Videotaping",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1265",
+    "primaryDesc": "Criminal Damage",
+    "secondaryDesc": "Library Vandalism",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1305",
+    "primaryDesc": "Criminal Damage",
+    "secondaryDesc": "Criminal Defacement",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1310",
+    "primaryDesc": "Criminal Damage",
+    "secondaryDesc": "To Property",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1320",
+    "primaryDesc": "Criminal Damage",
+    "secondaryDesc": "To Vehicle",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1330",
+    "primaryDesc": "Criminal Trespass",
+    "secondaryDesc": "To Land",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1335",
+    "primaryDesc": "Criminal Trespass",
+    "secondaryDesc": "To Airport",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1340",
+    "primaryDesc": "Criminal Damage",
+    "secondaryDesc": "To State Supp. Property",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1345",
+    "primaryDesc": "Criminal Damage",
+    "secondaryDesc": "To City of Chicago Property",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1350",
+    "primaryDesc": "Criminal Trespass",
+    "secondaryDesc": "To State Supported Land",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1360",
+    "primaryDesc": "Criminal Trespass",
+    "secondaryDesc": "To Vehicle",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1365",
+    "primaryDesc": "Criminal Trespass",
+    "secondaryDesc": "To Residence",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1370",
+    "primaryDesc": "Criminal Damage",
+    "secondaryDesc": "To Fire Fighting Apparatus, Equipment",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1375",
+    "primaryDesc": "Criminal Damage",
+    "secondaryDesc": "Institutional Vandalism",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "141A",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Unlawful Use – Handgun",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "141B",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Unlawful Use – Other Firearm",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "141C",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Unlawful Use – Other Dangerous",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1435",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Unlawful Possession of a Firearm at School",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "143A",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Unlawful Possession – Handgun",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "143B",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Unlawful Possession – Other Firearm",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "143C",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Unlawful Possession – Ammunition",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1450",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Defacing Ident. Marks of Firearm",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1460",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Possession Firearm/Ammo – No FOID Card",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1475",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Unlawful Sale of Metal Piercing Bullets",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1476",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Unlawful Discharge of Metal Piercing Bullets",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1477",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Reckless Discharge Of a Firearm",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1478",
+    "primaryDesc": "Concealed Carry License Violation",
+    "secondaryDesc": "Prohibited Places ",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1479",
+    "primaryDesc": "Concealed Carry License Violation",
+    "secondaryDesc": "Armed While Under the Influence",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1480",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Conceal Carry License – Other",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1481",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Conceal Carry License – Revocation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1505",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Call Operation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1506",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Soliciting on the Public Way",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1507",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Soliciting off the Public Way",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1510",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Cab Operation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1511",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "In Tavern",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1512",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Soliciting for a Prostitute",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1513",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Prostitution – Soliciting for Business",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1515",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Pandering",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1520",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Keeping Place of Prostitution",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1521",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Keeping Place of Juvenile Prostitution",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1525",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Patronizing a Prostitute",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1526",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Patronizing a Juvenile Prostitute",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1530",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Pimping",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1531",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Juvenile Pimping",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1535",
+    "primaryDesc": "Obscenity",
+    "secondaryDesc": "Obscenity",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1536",
+    "primaryDesc": "Public Indecency",
+    "secondaryDesc": "Licensed Premise",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1537",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Possession of Pornographic Print",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1540",
+    "primaryDesc": "Obscenity",
+    "secondaryDesc": "Obscene Matter",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1541",
+    "primaryDesc": "Obscenity",
+    "secondaryDesc": "Sale/Distribution Obscene Matter to Minor",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1542",
+    "primaryDesc": "Obscenity",
+    "secondaryDesc": "Sale of Obscene Materials",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1544",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Sexual Exploitation of a Child",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1549",
+    "primaryDesc": "Prostitution",
+    "secondaryDesc": "Other Prostitution Offense",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1562",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Aggravated Criminal Sexual Abuse",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1563",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Criminal Sexual Abuse",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1564",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Criminal Transmission of HIV",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1565",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Indecent Solicitation of a Child",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1566",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Indecent Solicitation of an Adult",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1570",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Public Indecency",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1572",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Adultery",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1574",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Fornication",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1576",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Bigamy",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1578",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Marrying a Bigamist",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1580",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Sexual Relations in Family",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1582",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Child Pornography",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1585",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Other",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1590",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Attempt Aggravated Criminal Sexual Abuse",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1610",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Bookmaking/Horses",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1611",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Bookmaking/Sports",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1620",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Bolita or Boli Pul/Office",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1621",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Bolita or Boli Pul/Runner",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1622",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Bolita or Boli Pul/Writer",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1623",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Bolita or Boli Pul/Station",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1624",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Lottery/Pari-Mutuel",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1625",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "National Lottery",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1626",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Illegal Illinois Lottery",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1627",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Lottery/Other",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1630",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Wireroom/Horses",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1631",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Wire room/Sports",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1632",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Wire room/Numbers",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1633",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Sports Tampering",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1640",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Register Federal Gambling Stamp",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1650",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Violation Charitable Game Act",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1651",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Game/Cards",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1661",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Game/Dice",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1670",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Game/Amusement Device",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1680",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Other",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1681",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Lottery/Parlay Cards",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1682",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Animal Fighting",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1690",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Policy/Housebook",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1691",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Policy/Station",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1692",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Policy/Runner",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1693",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Policy/Turn-In",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1694",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Policy/Office",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1695",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Policy Press",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1696",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Policy/Wheel",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1697",
+    "primaryDesc": "Gambling",
+    "secondaryDesc": "Policy/Other",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1710",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Endangering Life/Health Child",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1715",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Sale of Tobacco Products to Minors",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1720",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Contribute to Delinquency of Child",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1725",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Contribute to Criminal Delinquency of a Juvenile",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1750",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Child Abuse",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1751",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Criminal Sexual Abuse by Family Member",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1752",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Aggravated Criminal Sexual Abuse by Family Member",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1753",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Sexual Assault of Child by Family Member",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "1754",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Aggravated Sexual Assault of Child by Family Member",
+    "indexCode": "Y"
+  },
+  {
+    "ucrCode": "1755",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Child Abandonment",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1775",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Unlawful Sale of Travel Ticket to Minor",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1780",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Other Offense",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1790",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Child Abduction",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1791",
+    "primaryDesc": "Offense Involving Children",
+    "secondaryDesc": "Harbor Runaway",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1811",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Cannabis 30 gms or less",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1812",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Cannabis more than 30 gms",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1821",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Del – Cannabis 10 gms or less",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1822",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Del – Cannabis over 10 gms",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1840",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Deliver Cannabis to Person Under18",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1850",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Cannabis Plant",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1860",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Calculated Cannabis Conspiracy",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "1900",
+    "primaryDesc": "Other Narcotic Violation",
+    "secondaryDesc": "Intoxicating Compounds",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2010",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – Amphetamines",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2011",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – Barbiturates",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2012",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – Cocaine",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2013",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – Heroin (Tan/Brown)",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2014",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – Heroin (White)",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2015",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – Hallucinogens",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2016",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – PCP",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2017",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – Crack",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2018",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – Synthetic Drugs",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2019",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – Heroin (Black Tar)",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2020",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Amphetamines",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2021",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Barbiturates",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2022",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Cocaine",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2023",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Heroin (Brown/Tan)",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2024",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Heroin (White)",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2025",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Hallucinogens",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2026",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – PCP",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2027",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Crack",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2028",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Synthetic Drugs",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2029",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Heroin (Black Tar)",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2030",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Deliver – Look-Alike Drug",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2031",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Methamphetamine",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2032",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Del – Methamphetamine",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2033",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Manu/Poss. W/Intent to Deliver – Synthetic Marijuana",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2034",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Synthetic Marijuana",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2040",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession – Look-Alike Drug",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2050",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Criminal Drug Conspiracy",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2060",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Fail to Register License – Controlled Substances",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2070",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Delivery Controlled Substance to Person Under 18",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2080",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Controlled Substances – Failure to Maintain Records",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2090",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Alter/Forge Prescription",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2091",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Forfeit Property",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2092",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Solicitation on the Public Way – Narcotics",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2093",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Found Suspect Narcotics",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2094",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Attempt Possession Cannabis",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2095",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Attempt Possession Narcotics",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2110",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession of a Hypodermic Needle",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2111",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Sale/Delivery Hypodermic Needle",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2120",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Failure to Keep Hypodermic Records",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2160",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Sale/Delivery Drug Paraphernalia",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2170",
+    "primaryDesc": "Narcotics",
+    "secondaryDesc": "Possession Of Drug Equipment",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2220",
+    "primaryDesc": "",
+    "secondaryDesc": "Illegal Possession by Minor",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2230",
+    "primaryDesc": "",
+    "secondaryDesc": "Illegal Consumption by Minor",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2240",
+    "primaryDesc": "Violation",
+    "secondaryDesc": "Minor Misrepresent Age",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2250",
+    "primaryDesc": "",
+    "secondaryDesc": "Liquor License Violation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2251",
+    "primaryDesc": "Liquor Law",
+    "secondaryDesc": "Employ Minor",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2500",
+    "primaryDesc": "Criminal Abortion",
+    "secondaryDesc": "Criminal Abortion",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2820",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Telephone Threat",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2825",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Harassment by Telephone",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2826",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Harassment by Electronic Means",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2830",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Obscene Telephone Calls",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2840",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "False Fire Alarm",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2850",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Bomb Threat",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2851",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Arson Threat",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2860",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "False Police Report",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2870",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Peeping Tom",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2890",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Other Violation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2895",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Interfere w/ Emergency Equip",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "2900",
+    "primaryDesc": "Weapons Violation",
+    "secondaryDesc": "Unlawful Use/Sale Air Rifle",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3000",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Sell/Advertise Fireworks",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3100",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Mob Action",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3200",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Armed Violence",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3300",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Public Demonstration",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3400",
+    "primaryDesc": "Public Peace Violation",
+    "secondaryDesc": "Looting",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3610",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Interfere with Higher Education",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3710",
+    "primaryDesc": "Interference With Public Officer",
+    "secondaryDesc": "Resist, Obstruct, Disarm an Officer",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3720",
+    "primaryDesc": "Interference With Public Officer",
+    "secondaryDesc": "Refusing to Aid an Officer",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3730",
+    "primaryDesc": "Interference With Public Officer",
+    "secondaryDesc": "Obstructing Justice",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3731",
+    "primaryDesc": "Interference With Public Officer",
+    "secondaryDesc": "Obstructing Identification",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3740",
+    "primaryDesc": "Interference With Public Officer",
+    "secondaryDesc": "Concealing or Aiding a Fugitive",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3750",
+    "primaryDesc": "Interference With Public Officer",
+    "secondaryDesc": "Escape",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3751",
+    "primaryDesc": "Interference With Public Officer",
+    "secondaryDesc": "Aiding Arrestee Escape",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3760",
+    "primaryDesc": "Interference With Public Officer",
+    "secondaryDesc": "Obstructing Service",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3770",
+    "primaryDesc": "Interference With Public Officer",
+    "secondaryDesc": "Contraband in Prison",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3800",
+    "primaryDesc": "Interference with Public Officer",
+    "secondaryDesc": "Interference Judicial Process",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3910",
+    "primaryDesc": "Interference with Public Officer",
+    "secondaryDesc": "Bribery",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3920",
+    "primaryDesc": "Interference with Public Officer",
+    "secondaryDesc": "Official Misconduct",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3960",
+    "primaryDesc": "Intimidation",
+    "secondaryDesc": "Intimidation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3961",
+    "primaryDesc": "Intimidation",
+    "secondaryDesc": "Intimidation of Law Enforcement Official",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "3962",
+    "primaryDesc": "Intimidation",
+    "secondaryDesc": "Law Enforcement Official: Noncriminal Offense",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "3966",
+    "primaryDesc": "Intimidation",
+    "secondaryDesc": "Educational Intimidation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3970",
+    "primaryDesc": "Intimidation",
+    "secondaryDesc": "Extortion",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3975",
+    "primaryDesc": "Intimidation",
+    "secondaryDesc": "Compelling Organization Membership",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "3980",
+    "primaryDesc": "Intimidation",
+    "secondaryDesc": "Compelling Confession",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4210",
+    "primaryDesc": "Kidnapping",
+    "secondaryDesc": "Kidnapping",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4220",
+    "primaryDesc": "Kidnapping",
+    "secondaryDesc": "Aggravated",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4230",
+    "primaryDesc": "",
+    "secondaryDesc": "Unlawful Restraint",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4310",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Possession of Burglary Tools",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4386",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Violation of Civil No Contact Order",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4387",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Violation of Order of Protection",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4388",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Violation of Bail Bond – Domestic Violence",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4389",
+    "primaryDesc": "Violation of Order of Protection",
+    "secondaryDesc": "GPS Monitoring Device",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4410",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Destruction of Draft Card",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4420",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Criminal Fortification",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4510",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Probation Violation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4625",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Parole Violation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4650",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Sex Offender : Fail to Register",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4651",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Sex Offender : Fail to Register New Address",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4652",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Sex Offender : Prohibited Zone",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4740",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Unlawful Use of Body Armor",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4750",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Disclose DV Victim Location",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4800",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Money Laundering",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "4810",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Compounding A Crime",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5000",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Other Crime Against Person",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5001",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Other Crime Involving Property",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5002",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Other Vehicle Offense",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5003",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Other Arson/Explosive Incident",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5004",
+    "primaryDesc": "Sex Offense",
+    "secondaryDesc": "Attempt Criminal Sexual Abuse",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5006",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Hazardous Materials Incident",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5007",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Other Weapons Violation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5009",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Violation of Smoking Ban",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "500E",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Eavesdropping",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "500N",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Abuse/Neglect – Care Facility",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5011",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "License Violation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5012",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Public Safety Threat – Summary",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5013",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Violation of Summary Closure",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "501A",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Animal Abuse/Neglect",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "501H",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Hazardous Materials Violation",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "502P",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "False/Stolen/Altered TRP",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "502R",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Vehicle Title/Reg Offense",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "502T",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Tamper with Motor Vehicle",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5060",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Unintentional Discharge of a Firearm by Police",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5061",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Destruction of Animal by Police",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5070",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Lost Property",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5071",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Found Property",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5072",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Weapon Turn-In",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5073",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Notification of Civil No Contact Order",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5078",
+    "primaryDesc": "Death",
+    "secondaryDesc": "Investigation",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5079",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Mental Health Transport",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5080",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Other Non-Criminal Persons",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5081",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Other Non-Criminal Property",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5082",
+    "primaryDesc": "Non-Criminal (Subject Specified)",
+    "secondaryDesc": "Notification of Order of Protection",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5083",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "AED Use By or On Dept Member",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5084",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Death",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5085",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Suicide",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5086",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Attempt Suicide",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5087",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Injury to Citizen on public way",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5088",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Injury to City Employee",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5089",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Accidental Injury",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5090",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Damage to Personal Property – Fire/Explosion",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5091",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Damage to Real Property – Fire/Explosion",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5093",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Lost Passport",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5094",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Found Passport",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5100",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Death-Natural Causes Police Custody",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5101",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Suicide Police Custody",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5102",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Attempt Suicide Police Custody",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5110",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Gun Offender: Duty to Register",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5111",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Gun Offender: Annual Registration",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5112",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Gun Offender: Duty to Report Change of Information",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5113",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Gun Offender Notification – No Contact",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "5120",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Arsonist: Duty to Register",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5121",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Arsonist: Annual Registration",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5122",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Arsonist: Fail to Register New Address",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5130",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Violent Offender : Duty to Register",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5131",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Violent Offender : Annual Registration",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "5132",
+    "primaryDesc": "Other Offense",
+    "secondaryDesc": "Violent Offender : Fail to Register New Address",
+    "indexCode": "N"
+  },
+  {
+    "ucrCode": "6050",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Missing Person",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "6055",
+    "primaryDesc": "Non-Criminal",
+    "secondaryDesc": "Found Person",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "9998",
+    "primaryDesc": "Cancellation",
+    "secondaryDesc": "Vice Cancellation",
+    "indexCode": "N/A"
+  },
+  {
+    "ucrCode": "9999",
+    "primaryDesc": "Cancellation",
+    "secondaryDesc": "Cancellation",
+    "indexCode": "N/A"
+  }
+]

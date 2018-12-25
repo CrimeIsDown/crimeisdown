@@ -21,10 +21,10 @@ export default Component.extend({
       this.note = {author: 'Original dispatcher', content: ''};
       this.units = [];
     }
-    fetch('https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbwdMu3lgUaMPqA-ESlmhD12Yo6Jz78LlCM8cMQXW7Cm4O94sAA/exec?id=1kiv-ELXw9Z-LcfZ87dFlBDN4GMdjZv_Iz5DSxTH_Cd4&sheet=Radio%20IDs')
+    fetch('/data/city_data/radio_ids.json')
       .then((response) => {
         response.json().then((data) => {
-          this.radioIds = data['Radio IDs'];
+          this.radioIds = data;
         })
       })
       .catch(() => {
