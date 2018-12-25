@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import $ from 'jquery';
 
-export default Ember.Component.extend({
+export default Component.extend({
   didRender() {
     let options = {
       enableTime: true,
@@ -13,6 +14,6 @@ export default Ember.Component.extend({
     options.maxDate.setMinutes(59);
     options.defaultDate = options.maxDate;
     options.defaultDate.setMinutes(0);
-    Ember.$('#datetimepicker').flatpickr(options);
+    $('#datetimepicker').flatpickr(options);
   }
 });

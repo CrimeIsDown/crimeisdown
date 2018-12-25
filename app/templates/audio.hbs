@@ -1,75 +1,133 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <h3>Look up scanner recording</h3>
-      {{ audio-search }}
-    </div>
-    <div class="col-md-3">
-      <p><em>The recording search is limited to a certain number of downloads per day, with Patreon patrons getting additional downloads. <a href="https://www.patreon.com/EricTendian/posts">Existing Patrons, login here.</a></em></p>
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Cost</th>
-          <th>Downloads / day</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>Free</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$1/mo Patron</a></td>
-          <td>10</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$5/mo Patron</a></td>
-          <td>20</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$10/mo Patron</a></td>
-          <td>30</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$20/mo Patron</a></td>
-          <td>50</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$50/mo Patron</a></td>
-          <td>Unlimited</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="col-md-6">
+      {{virtual-scanner}}
+      <div class="row">
+        <div class="col-md-12">
+          <h3>General #ChicagoScanner feed</h3>
+          <p>Scanner feed of ISP Dist. Chicago, Metra PD, CPD Citywides, various CFD incident channels, Marine 16, and aviation UNICOM. Scan list subject to change.</p>
+          <iframe src="https://www.youtube.com/embed/live_stream?channel=UCUS-tAwCyxBrrA3FtSjH2NA" style="width:100%;height:400px;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        </div>
+      </div>
     </div>
     <div class="col-md-6">
-      <iframe src="https://www.youtube.com/embed/live_stream?channel=UCUS-tAwCyxBrrA3FtSjH2NA" style="width:100%;height:400px;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-      {{virtual-scanner}}
+      <div class="row">
+          <div class="col-md-6">
+            <h3>Look up scanner recording</h3>
+            {{ audio-search }}
+          </div>
+          <div class="col-md-6">
+            <p><em>The recording search is limited to a certain number of downloads per day, with Patreon patrons getting additional downloads. <a href="https://www.patreon.com/EricTendian/posts">Existing Patrons, login here.</a></em></p>
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Cost</th>
+                <th>Downloads / day</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Free</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$1/mo Patron</a></td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$5/mo Patron</a></td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$10/mo Patron</a></td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$20/mo Patron</a></td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$50/mo Patron</a></td>
+                <td>Unlimited</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+        <div class="row">
+          <div class="col-md-12">
+          <h2>Online Streams</h2>
+          <h4>From CrimeIsDown.com</h4>
+          <ul>
+            <li>
+              <p><a href="https://openmhz.com/system/sc21102" target="_blank">STARCOM21</a></p>
+            </li>
+            <li>
+              <p><a href="https://openmhz.com/system/chi_cfd" target="_blank">Chicago Fire Department</a> (experimental)</p>
+            </li>
+          </ul>
+          <h4>From <a href="http://www.radioman911.com" target="_blank">Radioman911.com</a></h4>
+          <ul>
+            <li>
+              <p><a href="https://www.youtube.com/embed/live_stream?channel=UCHVvMupXCot6i9HaU5e6evQ" target="_blank">Chicago Fireground/EMS/CPD/IFERN Feed</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.youtube.com/embed/live_stream?channel=UCsMo3qUWKgwL5IA2CZ8J7Zg" target="_blank">Chicago Fire Dispatch Feed</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.youtube.com/embed/live_stream?channel=UC3vu0z7wwpKwelA5fUvGzqQ" target="_blank">Schamburg Feed</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.youtube.com/embed/live_stream?channel=UC-EK1vePROS4LV69TotekXw" target="_blank">Summit Feed</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.youtube.com/embed/live_stream?channel=UCQWzQXvUamoss-ZwcyWzDkQ" target="_blank">DeKalb Feed</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.youtube.com/embed/live_stream?channel=UCEz5kngIol48RtJZ04kjHZQ" target="_blank">Joliet Feed</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.youtube.com/embed/live_stream?channel=UCf8jDQZgivGOKCNOyE-UyjA" target="_blank">Orland Park Feed</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.youtube.com/embed/live_stream?channel=UC-KjYQSjUvyx7YjXlqFe75w" target="_blank">NW Indiana Feed</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.youtube.com/embed/live_stream?channel=UChVZUiJ1PmFEO90YzU33sHQ" target="_blank">Bartlett Feed</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.youtube.com/embed/live_stream?channel=UCIvdJihHHjCqhZZLXwX7Xbg" target="_blank">Riverwoods Feed</a></p>
+            </li>
+          </ul>
+          <h4>Broadcastify feed lists by county</h4>
+          <ul>
+            <li>
+              <p><a href="https://www.broadcastify.com/listen/ctid/606" target="_blank">Cook County (includes Chicago)</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.broadcastify.com/listen/ctid/639" target="_blank">Lake County (north suburbs)</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.broadcastify.com/listen/ctid/612" target="_blank">DuPage County (west suburbs)</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.broadcastify.com/listen/ctid/635" target="_blank">Kane County (far west/northwest suburbs)</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.broadcastify.com/listen/ctid/689" target="_blank">Will County (south/southwest suburbs)</a></p>
+            </li>
+          </ul>
+          <h4>Other Sources</h4>
+          <ul>
+            <li>
+              <p><a href="https://www.liveatc.net/search/?icao=kord" target="_blank">LiveATC O'Hare Airport</a></p>
+            </li>
+            <li>
+              <p><a href="https://www.liveatc.net/search/?icao=kmdw" target="_blank">LiveATC Midway Airport</a></p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Online Streams</h2>
-      <h4>From Broadcastify</h4>
-      {{!-- <div class="alert alert-warning">
-        Note: the "Get last minute" links are temporary and may not work if the replay server is not online.
-        Click on the links sparingly to avoid overloading the server.
-      </div> --}}
-      <ul>
-        {{#each model as |feed|}}
-          <li>
-            <h4><a href="{{ feed.feedUrl }}" target="_blank">{{ feed.name }}</a></h4>
-            {{!-- <p><a href="http://audio.crimeisdown.com:8080/replay/{{ feed.key}}?duration=60" target="_blank">Get last minute</a> (<a href="http://audio.crimeisdown.com:8080/replay/{{ feed.key}}?duration=60&trimsilence=true" target="_blank">with silence removed</a>)</p> --}}
-            <p>
-              {{#if feed.frequency }}<i>{{ feed.frequency }}</i> - {{/if}}
-              {{ feed.description }}
-            </p>
-            {{#if feed.directStreamUrl}}
-              <audio controls src="{{ feed.directStreamUrl }}" preload="none">Your user agent does not support the HTML5 Audio element.</audio>
-            {{/if}}
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-  </div>
-
 </div>

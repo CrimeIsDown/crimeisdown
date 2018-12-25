@@ -1,126 +1,182 @@
 /*eslint-disable no-unused-vars*/
 /*global GeoSearch*/
+/*global mejs*/
+/*global MediaElementPlayer*/
 
-import Ember from 'ember';
-import fetch from 'npm:whatwg-fetch'; // polyfill for fetch() used by leaflet-geosearch
-import L from 'npm:leaflet';
-import GoogleMutant from 'npm:leaflet.gridlayer.googlemutant';
+import Component from '@ember/component';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+import $ from 'jquery';
+import ENV from '../config/environment';
 
-export default Ember.Component.extend({
-  map: null,
-  geocoder: null,
-  addressLookup: Ember.inject.service(),
-  baseLayers: {},
-  layers: {},
-  overlay: {},
-  location: {},
+export default Component.extend({
+  addressLookup: service(),
+  init() {
+    this._super(...arguments);
+    this.map = null;
+    this.geocoder = null;
+    this.baseLayers = {};
+    this.layers = {};
+    this.overlay = {};
+    this.location = {};
+    let isSafari = navigator.userAgent.search("Safari") > 0 && navigator.userAgent.search("Chrome") < 0;
+    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isSafari);
+  },
 
   didInsertElement() {
     L.Icon.Default.imagePath = '/assets/images/';
     this.initMap();
+    mejs.Renderers.order = ['native_dash', 'flash_dash'];
+    this.set('audioPlayer', new MediaElementPlayer('streamplayer', {
+      pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
+      shimScriptAccess: 'always',
+      renderers: ['native_dash', 'flash_dash'],
+      isVideo: false,
+      features: ['playpause', 'current', 'volume']
+    }));
+  },
 
-    let searchControl = this.get('searchControl');
-    Ember.$('#address-search > form').submit(function (event) {
-      event.preventDefault();
-      Ember.$('.leaflet-control-geosearch.bar form input').val(Ember.$('#address-search > form input[name="address"]').val());
-      searchControl.searchElement.handleSubmit({ query: Ember.$('.leaflet-control-geosearch.bar form input').val() });
-    });
+  actions: {
+    searchAddress(address) {
+      $('.leaflet-control-geosearch.bar form input').val(address);
+      $('#address-search').find('input[name="address"]').val(address);
+      this.searchControl.searchElement.handleSubmit({ query: address });
+    },
+  },
 
-    setTimeout(() => {
+  initMap() {
+    this.set('map', L.map('leaflet-map', {
+      center: [41.85, -87.63],
+      zoom: 11
+    }));
+
+    Promise.all([
+      this.initBaseLayers(),
+      this.initGeocoder(),
+      this.initInfoBox(),
+      this.initLayers(),
+      this.addressLookup.loadData()
+    ]).then(() => {
+      let incidents = this.get('model.incidents');
+      if (incidents) {
+        incidents.forEach((incident) => {
+          get(incident, 'location.layer').addTo(this.overlay['User Features']);
+        });
+      }
+
+      // wait for everything to load before trying to geocode an address
       if (window.location.hash) {
         let hash = window.location.hash.substr(1),
           query = hash.substr(hash.indexOf('location_query='))
             .split('&')[0]
             .split('=')[1];
         query = decodeURIComponent(query.replace(/\+/g, " "));
-        Ember.$('.leaflet-control-geosearch.bar form input').val(query);
-        searchControl.searchElement.handleSubmit({ query: Ember.$('.leaflet-control-geosearch.bar form input').val() });
+        this.actions.searchAddress.bind(this)(query);
       }
-    }, 500); // wait until we have everything loaded
-  },
+    });
 
-  initMap() {
-    this.set('map', L.map('leaflet-map', {
-      center: [41.8781, -87.6298],
-      zoom: 10
-    }));
+    this.initEditableMap();
 
-    this.initBaseLayers();
-    this.initGeocoder();
-    this.initInfoBox();
-    this.initLayers();
-    this.get('addressLookup').loadData();
-
-    L.control.layers(this.get('baseLayers'), this.get('overlay'), {
+    L.control.layers(this.baseLayers, this.overlay, {
       collapse: false
-    }).addTo(this.get('map'));
+    }).addTo(this.map);
   },
 
   initBaseLayers() {
-    this.get('baseLayers')["OpenStreetMap"] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-      maxNativeZoom: 19,
-      minZoom: 0,
-      maxZoom: 20
-    });
+    return new Promise((resolve, reject) => {
+      this.baseLayers["OpenStreetMap"] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        maxNativeZoom: 19,
+        minZoom: 0,
+        maxZoom: 20
+      });
 
-    this.get('baseLayers')["MapBox Streets"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
-      attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      minZoom: 0,
-      maxZoom: 20
-    });
+      this.baseLayers["MapBox Streets"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
+        attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        minZoom: 0,
+        maxZoom: 20
+      });
 
-    this.get('baseLayers')["MapBox Streets Dark"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/cj9ne99zz3e112rp4pxcpua1z/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
-      attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      minZoom: 0,
-      maxZoom: 20
-    });
+      this.baseLayers["MapBox Streets Dark"] = L.tileLayer('https://api.mapbox.com/styles/v1/erictendian/cj9ne99zz3e112rp4pxcpua1z/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL', {
+        attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        minZoom: 0,
+        maxZoom: 20
+      });
 
-    this.get('baseLayers')["Google Hybrid"] = new L.gridLayer.googleMutant({
-      type: 'hybrid',
-      minZoom: 0,
-      maxZoom: 20
-    });
+      this.baseLayers["Google Hybrid"] = new L.gridLayer.googleMutant({
+        type: 'hybrid',
+        minZoom: 0,
+        maxZoom: 20
+      });
 
-    if (localStorage.getItem('dark')) {
-      this.get('baseLayers')["MapBox Streets Dark"].addTo(this.get('map'));
-    } else {
-      this.get('baseLayers')["OpenStreetMap"].addTo(this.get('map'));
-    }
+      if (localStorage.getItem('dark')) {
+        this.baseLayers["MapBox Streets Dark"].addTo(this.map);
+      } else {
+        this.baseLayers["OpenStreetMap"].addTo(this.map);
+      }
+
+      resolve();
+    });
   },
 
   initGeocoder() {
-    const provider = new GeoSearch.GoogleProvider({
-      params: {
-        key: 'REDACTED_PUBLIC_CREDENTIAL',
-        bounds: '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366'
-      },
-    });
+    return new Promise((resolve, reject) => {
+      this.set('geosearchProvider', new GeoSearch.GoogleProvider({
+        params: {
+          key: 'REDACTED_PUBLIC_CREDENTIAL',
+          bounds: '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366'
+        },
+      }));
 
-    const searchControl = new GeoSearch.GeoSearchControl({
-      provider: provider,
-      style: 'bar',
-      autoComplete: false,
-      showPopup: true,
-      maxMarkers: 3
-    });
-    this.set('searchControl', searchControl);
+      const searchControl = new GeoSearch.GeoSearchControl({
+        provider: this.geosearchProvider,
+        style: 'bar',
+        autoComplete: false,
+        showPopup: true,
+        maxMarkers: 3
+      });
+      this.set('searchControl', searchControl);
 
-    this.get('map').addControl(searchControl);
-    // Ember.$('.leaflet-control-geosearch.bar form input').attr('autofocus', true);
+      this.map.addControl(searchControl);
 
-    this.get('map').on('geosearch/showlocation', (event) => {
-      if (window.ga && typeof window.ga === "function") {
-        ga('send', 'event', 'Looks up address', 'Tools', Ember.$('.leaflet-control-geosearch.bar form input').val());
-      }
-      window.location.hash = '#location_query=' + encodeURIComponent(Ember.$('.leaflet-control-geosearch.bar form input').val());
-      let location = event.location.raw;
-      this.set('location', this.get('addressLookup').generateLocationDataForAddress(this.get('layers'), location));
+      this.map.on('geosearch/showlocation', (event) => {
+        let query = $('.leaflet-control-geosearch.bar form input').val();
+        $('#address-search').find('input[name="address"]').val(query);
+        if (window.ga && typeof window.ga === "function") {
+          ga('send', 'event', 'Looks up address', 'Tools', query);
+        }
+        window.location.hash = '#location_query=' + encodeURIComponent(query);
+        this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
+        if (this.location.meta.inChicago) {
+          let randomInt = Math.round(Math.random() * 1000);
+          let iframeUrl = 'https://www.crimereports.com/city/Chicago%2C%20IL?is_widget=true&_=' + randomInt + '#!/dashboard?lat=' + this.location.meta.latitude + '&lng=' + this.location.meta.longitude + '&zoom=17&start_date=2018-11-24&end_date=2018-12-24&date_type=relative&current_tab=list&shapeIds=&shape_id=false&incident_types=Alarm%252CArson%252CAssault%252CAssault%2520with%2520Deadly%2520Weapon%252CBreaking%2520%2526%2520Entering%252CCommunity%2520Policing%252CDeath%252CDisorder%252CDrugs%252CEmergency%252CFamily%2520Offense%252CFire%252CHomicide%252CKidnapping%252CLiquor%252CMissing%2520Person%252COther%252COther%2520Sexual%2520Offense%252CPedestrian%2520Stop%252CProactive%2520Policing%252CProperty%2520Crime%252CProperty%2520Crime%2520Commercial%252CProperty%2520Crime%2520Residential%252CQuality%2520of%2520Life%252CRobbery%252CSexual%2520Assault%252CSexual%2520Offense%252CTheft%252CTheft%2520from%2520Vehicle%252CTheft%2520of%2520Vehicle%252CTraffic%252CVehicle%2520Recovery%252CVehicle%2520Stop%252CWeapons%2520Offense';
+          $('#crimereports-map').attr('src', iframeUrl);
+          if (!this.audioPlayer.duration || this.audioPlayer.paused) {
+            this.audioPlayer.setSrc({
+              src: 'https://audio.crimeisdown.com/streaming/dash/zone' + this.location.police.zone.num + '/',
+              type: 'application/dash+xml'
+            });
+            this.audioPlayer.load();
+            this.set('currentZoneStream', null);
+            this.audioPlayer.media.addEventListener('playing', () => {
+              this.set('currentZoneStream', this.location.police.zone.num);
+            });
+          }
+        }
+      });
+
+      resolve();
     });
   },
 
   initLayers() {
     this.set('layers', {
+      fireStations: {
+        label: "Fire Stations",
+        layer: null,
+        url: '/data/city_data/fire_stations.json',
+        showByDefault: true
+      },
       policeDistricts: {
         label: "Police Districts",
         layer: null,
@@ -183,82 +239,191 @@ export default Ember.Component.extend({
       }
     });
 
-    this.loadLayerData(this.get('layers'));
+    return this.loadLayerData(this.layers);
   },
 
   loadLayerData(layers) {
-    let map = this.get('map');
-    let info = this.get('infobox');
+    let map = this.map;
+    let info = this.infobox;
+
+    let promises = [];
 
     for (let layerName in layers) {
-      if (layers.hasOwnProperty(layerName)) {
-        let layerObj = layers[layerName];
+      promises.push(new Promise((resolve, reject) => {
+        if (layers.hasOwnProperty(layerName)) {
+          let layerObj = layers[layerName];
 
-        let layerMouseover = (e) => {
-          let layer = e.target;
+          if (layerName != 'fireStations') {
+            let layerMouseover = (e) => {
+              let layer = e.target;
 
-          info.update(layer.feature.properties);
-          if (map.getZoom() < 14) {
-            layer.setStyle({
-              color: '#ff0',
-              fillOpacity: 0.15
-            });
-          } else {
-            e.target.setStyle(layerObj.style);
-          }
-
-          if (!L.Browser.ie && !L.Browser.opera) {
-            layer.bringToFront();
-          }
-        };
-
-        let geoJsonLayer = L.geoJson(null, {
-          onEachFeature: (feature, layer) => {
-            layer.on({
-              mouseover: layerMouseover,
-              mouseout: (e) => {
+              info.update(layer.feature.properties);
+              if (map.getZoom() < 14) {
+                layer.setStyle({
+                  color: '#ff0',
+                  fillOpacity: 0.15
+                });
+              } else {
                 e.target.setStyle(layerObj.style);
-                info.update();
-              },
-              click: (e) => {
-                map.fitBounds(e.target.getBounds());
+              }
+
+              if (!L.Browser.ie && !L.Browser.opera) {
+                layer.bringToFront();
+              }
+            };
+
+            let geoJsonLayer = L.geoJson(null, {
+              onEachFeature: (feature, layer) => {
+                layer.on({
+                  mouseover: layerMouseover,
+                  mouseout: (e) => {
+                    e.target.setStyle(layerObj.style);
+                    info.update();
+                  },
+                  click: (e) => {
+                    map.fitBounds(e.target.getBounds());
+                  }
+                });
               }
             });
+            if (layerObj.showByDefault) {
+              geoJsonLayer.addTo(map);
+            }
+            layerObj.layer = geoJsonLayer;
+            this.overlay[layerObj.label] = layerObj.layer;
+            fetch(layerObj.url).then((response) => {
+              response.json().then((data) => {
+                layerObj.layer.addData(data).setStyle(layerObj.style);
+                resolve();
+              }).catch((err) => {
+                reject(err);
+              })
+            }).catch((err) => {
+              reject(err);
+            });
+          } else {
+            let layerGroup = L.markerClusterGroup();
+            if (layerObj.showByDefault) {
+              layerGroup.addTo(map);
+            }
+            layerObj.layer = layerGroup;
+            this.overlay[layerObj.label] = layerObj.layer;
+            fetch(layerObj.url).then((response) => {
+              response.json().then((data) => {
+                data.forEach((location) => {
+                  let markerTitle = location.name ? location.name : [location.engine, location.truck, location.ambo, location.squad].filter(Boolean).join('-');
+
+                  let stationMarker = L.marker([location.latitude, location.longitude], {
+                    title: markerTitle,
+                    icon: L.AwesomeMarkers.icon({
+                      icon: 'fire-extinguisher',
+                      prefix: 'fa',
+                      markerColor: 'red'
+                    })
+                  });
+
+                  // Convert address to title case
+                  location.addr = location.addr.toLowerCase().replace(/(?:^|\s|-|\/)\S/g, function(m) {
+                    return m.toUpperCase();
+                  });
+
+                  // this is a really hacky way to make a popup, we should stop doing it
+                  // @TODO: Use Handlebars template to make Leaflet popup
+                  let popupContents = '<h6>' + markerTitle + '</h6>' +
+                    '<strong>' + location.addr + '</strong>' +
+                    (location.engine ? '<br><strong>Engine:</strong> ' + location.engine : '') +
+                    (location.truck ? '<br><strong>Truck/Tower:</strong> ' + location.truck : '') +
+                    (location.ambo ? '<br><strong>Ambulance:</strong> ' + location.ambo : '') +
+                    (location.squad ? '<br><strong>Squad:</strong> ' + location.squad : '') +
+                    (location.special ? '<br><strong>Special (search radio IDs):</strong> ' + location.special : '') +
+                    (location.batt ? '<br><strong>Battalion:</strong> ' + location.batt + ' / <strong>District:</strong> ' + location.fireDist : '') +
+                    (location.emsDist ? '<br><strong>EMS District:</strong> ' + location.emsDist : '') +
+                    (location.radio ? '<br><strong>Radio Channel:</strong> ' + location.radio : '');
+                  stationMarker.bindPopup(popupContents).openPopup();
+
+                  layerGroup.addLayer(stationMarker);
+                });
+                resolve();
+              }).catch((err) => {
+                reject(err);
+              })
+            }).catch((err) => {
+              reject(err);
+            });
           }
-        });
-        if (layerObj.showByDefault) {
-          geoJsonLayer.addTo(map);
         }
-        layerObj.layer = geoJsonLayer;
-        this.get('overlay')[layerObj.label] = layerObj.layer;
-        Ember.$.getJSON(layerObj.url).done((data) => {
-          layerObj.layer.addData(data).setStyle(layerObj.style);
-        });
-      }
+      }));
     }
+
+    return Promise.all(promises);
   },
 
   initInfoBox() {
-    let info = L.control();
+    return new Promise((resolve, reject) => {
+      let info = L.control();
 
-    info.onAdd = function () {
-      this._div = L.DomUtil.create('div', 'info');
-      this.update();
-      return this._div;
-    };
+      info.onAdd = function () {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+      };
 
-    info.update = function (props) {
-      let html = '<h4>Layer Info</h4>';
-      for (let key in props) {
-        if (props.hasOwnProperty(key)) {
-          html += '<p>' + key + ': ' + props[key] + '</p>';
+      info.update = function (props) {
+        let html = '<h4>Layer Info</h4>';
+        for (let key in props) {
+          if (props.hasOwnProperty(key)) {
+            html += '<p>' + key + ': ' + props[key] + '</p>';
+          }
+        }
+        this._div.innerHTML = html;
+      };
+
+      info.addTo(this.map);
+
+      this.set('infobox', info);
+      resolve();
+    });
+  },
+
+  initEditableMap() {
+    this.overlay['User Features'] = L.markerClusterGroup()
+      .addTo(this.map);
+
+    this.map.addControl(new L.Control.Draw({
+      edit: {
+        featureGroup: this.overlay['User Features'],
+        poly: {
+          allowIntersection: false
+        }
+      },
+      draw: {
+        polyline: {
+          shapeOptions: {
+            color: '#00ff00',
+            weight: 10
+          }
+        },
+        polygon: {
+          showArea: true,
+          allowIntersection: false,
+          drawError: {
+            color: '#da2600', // Color the shape will turn when intersects
+            message: '<strong>Error:<strong> Polygon cannot intersect with itself' // Message that will show when intersect
+          },
+          shapeOptions: {
+            color: '#00ff00'
+          }
         }
       }
-      this._div.innerHTML = html;
+    }));
+
+    let drawEventCreated = (event) => {
+      let layer = event.layer;
+      // layer.bindPopup('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal">Add Incident</button>').openPopup();
+
+      this.overlay['User Features'].addLayer(layer);
     };
 
-    info.addTo(this.get('map'));
-
-    this.set('infobox', info);
+    this.map.on(L.Draw.Event.CREATED, drawEventCreated.bind(this));
   }
 });

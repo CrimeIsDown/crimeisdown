@@ -1,0 +1,26 @@
+{{#if showForm}}
+  <h5>{{if update "Edit" "New"}} Note</h5>
+  <form {{action (if update "update" "create") on="submit"}}>
+    <div class="form-group">
+      <label for="author">Author</label>
+      {{input type="text" class="form-control" id="author" value=note.author}}
+    </div>
+    <div class="form-group">
+      <label for="content">Content</label>
+      {{trix-editor value=note.body}}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button class="btn btn-secondary" {{action (mut showForm) false}}>Cancel</button>
+  </form>
+{{else}}
+  <div class="btn-group">
+    {{#if update}}
+      <button type="button" class="btn btn-danger btn-sm" aria-label="Delete note" {{action "delete"}}>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <button class="btn btn-sm btn-info" {{action (mut showForm) true}}>Edit</button>
+    {{else}}
+      <button class="btn btn-info" {{action (mut showForm) true}}>New Note</button>
+    {{/if}}
+  </div>
+{{/if}}

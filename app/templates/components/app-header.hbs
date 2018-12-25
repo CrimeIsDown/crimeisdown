@@ -1,6 +1,9 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    {{#link-to "index" class="navbar-brand"}}CrimeIsDown.com{{/link-to}}
+    {{#link-to "index" class="navbar-brand"}}
+      <!--<i class="em em-rotating_light"></i> Sirens-->
+      CrimeIsDown.com
+    {{/link-to}}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,9 +22,16 @@
         <li class="nav-item">
           {{#link-to "directives" id="directives-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show"}}Police Directive Changes{{/link-to}}
         </li>
-        <li class="nav-item">
-          <a href="https://blog.crimeisdown.com" id="blog-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Blog</a>
-        </li>
+        <!--<li class="nav-item">-->
+          <!--<a href="https://blog.crimeisdown.com" id="blog-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Blog</a>-->
+        <!--</li>-->
+        {{!-- <li class="nav-item">
+          {{#if session.isAuthenticated}}
+            <a class="nav-link" href="javascript:" {{action "logout"}} title="Logged in as {{session.data.authenticated.email}}">Logout</a>
+          {{else}}
+            {{#link-to "login" id="login-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show"}}Login{{/link-to}}
+          {{/if}}
+        </li> --}}
       </ul>
       <form class="form-inline">
         <label class="form-check-label">
@@ -59,3 +69,4 @@
     </script>
   </nav>
 </header>
+{{news-alert}}

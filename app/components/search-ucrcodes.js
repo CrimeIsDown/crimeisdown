@@ -1,9 +1,12 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import fetch from 'fetch';
 
-export default Ember.Component.extend({
-  ucrCodes: [],
-  ucr: {},
+export default Component.extend({
+  init() {
+    this._super(...arguments);
+    this.ucrCodes = [];
+    this.ucr = {};
+  },
   didInsertElement() {
     fetch('https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbwdMu3lgUaMPqA-ESlmhD12Yo6Jz78LlCM8cMQXW7Cm4O94sAA/exec?id=1Zzx6UXOYL5BXXYTO_PanTESGS5nHLHDMxBi7u0k1ppg&sheet=UCR%20Codes')
       .then((response) => {
@@ -18,16 +21,16 @@ export default Ember.Component.extend({
   },
   actions: {
     lookupUCR() {
-      let input = this.get('ucrCode');
+      let input = this.ucrCode;
       if (window.ga && typeof window.ga === "function") {
         ga('send', 'event', 'Searches UCR list', 'Tools', input);
       }
-      Ember.set(this, 'ucr', {primaryDesc: 'Not Found', secondaryDesc: 'Not Found', indexCode: 'N/A'});
+      this.set('ucr', {primaryDesc: 'Not Found', secondaryDesc: 'Not Found', indexCode: 'N/A'});
       let code = transformUCR(input);
       this.ucrCodes.forEach((row) => {
         if (code === transformUCR(row.ucrCode)) {
-          Ember.set(this, 'ucr', row);
-          Ember.set(this, 'ucrCode', code);
+          this.set('ucr', row);
+          this.set('ucrCode', code);
           return;
         }
       });

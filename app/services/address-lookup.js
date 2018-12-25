@@ -1,33 +1,69 @@
-import Ember from 'ember';
+/*global leafletPip*/
+
+import Service from '@ember/service';
+import { set } from '@ember/object';
 import fetch from 'fetch';
-import L from 'npm:leaflet';
-import leafletPip from 'npm:@mapbox/leaflet-pip';
 
-export default Ember.Service.extend({
+export default Service.extend({
   loadData() {
-    fetch('https://crimeisdown.com/data/city_data/aldermen.json').then((response) => {
-      response.json().then((data) => {
-        this.aldermen = data;
-      });
-    });
-    fetch('https://crimeisdown.com/data/audio_data/online_streams.json').then((response) => {
-      response.json().then((data) => {
-        this.onlineStreams = data;
-      });
-    });
-    fetch('https://crimeisdown.com/data/city_data/fire_stations.json').then((response) => {
-      response.json().then((data) => {
-        this.fireStations = data;
-      });
-    });
-    fetch('https://crimeisdown.com/data/city_data/trauma_centers.json').then((response) => {
-      response.json().then((data) => {
-        this.traumaCenters = data;
-      });
-    });
-
-    this.policeZones = {'1': ['16', '17'], '2': ['19'], '3': ['12', '14'], '4': ['1', '18'], '5': ['2'], '6': ['7', '8'], '7': ['3'], '8': ['4', '6'], '9': ['5', '22'], '10': ['10', '11'], '11': ['20', '24'], '12': ['15', '25'], '13': ['9']};
-    this.policeAreas = {'North': ['11', '14', '15', '16', '17', '19', '20', '24'], 'Central': ['1', '2', '3', '8', '9', '10', '12', '18'], 'South': ['4', '5', '6', '7', '22']};
+    return Promise.all([
+      new Promise((resolve) => {
+        this.policeZones = {'1': ['16', '17'], '2': ['19'], '3': ['12', '14'], '4': ['1', '18'], '5': ['2'], '6': ['7', '8'], '7': ['3'], '8': ['4', '6'], '9': ['5', '22'], '10': ['10', '11'], '11': ['20', '24'], '12': ['15', '25'], '13': ['9']};
+        resolve();
+      }),
+      new Promise((resolve) => {
+        this.policeAreas = {'North': ['11', '14', '15', '16', '17', '19', '20', '24'], 'Central': ['1', '2', '3', '8', '9', '10', '12', '18'], 'South': ['4', '5', '6', '7', '22']};
+        resolve();
+      }),
+      new Promise((resolve, reject) => {
+        fetch('/data/city_data/aldermen.json').then((response) => {
+          response.json().then((data) => {
+            this.aldermen = data;
+            resolve(data);
+          }).catch((err) => {
+            reject(err);
+          });
+        }).catch((err) => {
+          reject(err);
+        });
+      }),
+      new Promise((resolve, reject) => {
+        fetch('/data/audio_data/online_streams.json').then((response) => {
+          response.json().then((data) => {
+            this.onlineStreams = data;
+            resolve(data);
+          }).catch((err) => {
+            reject(err);
+          });
+        }).catch((err) => {
+          reject(err);
+        });
+      }),
+      new Promise((resolve, reject) => {
+        fetch('/data/city_data/fire_stations.json').then((response) => {
+          response.json().then((data) => {
+            this.fireStations = data;
+            resolve(data);
+          }).catch((err) => {
+            reject(err);
+          });
+        }).catch((err) => {
+          reject(err);
+        });
+      }),
+      new Promise((resolve, reject) => {
+        fetch('/data/city_data/trauma_centers.json').then((response) => {
+          response.json().then((data) => {
+            this.traumaCenters = data;
+            resolve(data);
+          }).catch((err) => {
+            reject(err);
+          });
+        }).catch((err) => {
+          reject(err);
+        });
+      })
+    ]);
   },
 
   generateLocationDataForAddress(layers, location) {
@@ -39,7 +75,9 @@ export default Ember.Service.extend({
 
     if (!result.meta.communityArea) {
       result.meta.formattedAddress = 'ADDRESS OUT OF BOUNDS: '+result.meta.formattedAddress;
+      result.meta.inChicago = false;
     } else {
+      result.meta.inChicago = true;
       result.police = this.buildPolice(layers, latlng);
       result.fire = this.buildFire(latlng);
       result.ems = this.buildEMS(latlng);
@@ -59,6 +97,10 @@ export default Ember.Service.extend({
       let result = leafletPip.pointInLayer(location, layers.communityAreas.layer, true)[0];
       if (result) {
         meta.communityArea = result.feature.properties.community;
+        // Convert to title case instead of all caps
+        meta.communityArea = meta.communityArea.toLowerCase().replace(/(?:^|\s|-|\/)\S/g, function(m) {
+          return m.toUpperCase();
+        });
       }
     }
 
@@ -123,11 +165,11 @@ export default Ember.Service.extend({
       let distance = location.distanceTo(L.latLng(station.latitude, station.longitude));
       if (station.engine.length && nearestEngine.distance > distance) {
         nearestEngine = station;
-        Ember.set(nearestEngine, 'distance', distance);
+        set(nearestEngine, 'distance', distance);
       }
       if (station.ambo.length && nearestAmbo.distance > distance) {
         nearestAmbo = station;
-        Ember.set(nearestAmbo, 'distance', distance);
+        set(nearestAmbo, 'distance', distance);
       }
     });
 
@@ -149,13 +191,13 @@ export default Ember.Service.extend({
       let distance = location.distanceTo(L.latLng(hospital.latitude, hospital.longitude));
       if (hospital.level1Adult && nearestTraumaAdult.distance > distance) {
         nearestTraumaAdult = hospital;
-        Ember.set(nearestTraumaAdult, 'distance', distance);
-        Ember.set(nearestTraumaAdult, 'distanceMi', Math.round(distance*0.000621371192*100)/100);
+        set(nearestTraumaAdult, 'distance', distance);
+        set(nearestTraumaAdult, 'distanceMi', Math.round(distance*0.000621371192*100)/100);
       }
       if (hospital.level1Ped && nearestTraumaPed.distance > distance) {
         nearestTraumaPed = hospital;
-        Ember.set(nearestTraumaPed, 'distance', distance);
-        Ember.set(nearestTraumaPed, 'distanceMi', Math.round(distance*0.000621371192*100)/100);
+        set(nearestTraumaPed, 'distance', distance);
+        set(nearestTraumaPed, 'distanceMi', Math.round(distance*0.000621371192*100)/100);
       }
     });
 

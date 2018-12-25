@@ -1,8 +1,19 @@
-import Ember from 'ember';
+import LinkComponent from '@ember/routing/link-component';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
-Ember.LinkComponent.reopen({
+LinkComponent.reopen({
   attributeBindings: ['data-toggle', 'data-target']
 });
 
-export default Ember.Component.extend({
+export default Component.extend({
+  session: service('session'),
+
+  actions: {
+    logout: function() {
+      this.session.invalidate().then(function() {
+        this.transitionToRoute('login');
+      }.bind(this));
+    }
+  }
 });

@@ -1,9 +1,14 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { set } from '@ember/object';
+import $ from 'jquery';
 import fetch from 'fetch';
 
-export default Ember.Component.extend({
-  radioIds: [],
-  radio: {},
+export default Component.extend({
+  init() {
+    this._super(...arguments);
+    this.radioIds = [];
+    this.radio = {};
+  },
   didInsertElement() {
     fetch('https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbwdMu3lgUaMPqA-ESlmhD12Yo6Jz78LlCM8cMQXW7Cm4O94sAA/exec?id=1kiv-ELXw9Z-LcfZ87dFlBDN4GMdjZv_Iz5DSxTH_Cd4&sheet=Radio%20IDs')
       .then((response) => {
@@ -18,7 +23,7 @@ export default Ember.Component.extend({
   },
   actions: {
     lookupRadioId() {
-      let input = this.get('radioId');
+      let input = this.radioId;
       if (window.ga && typeof window.ga === "function") {
         ga('send', 'event', 'Searches radio ID list', 'Tools', input);
       }
@@ -28,9 +33,9 @@ export default Ember.Component.extend({
           matches.push(row);
         }
       });
-      Ember.$('#radioid-results td').empty();
+      $('#radioid-results td').empty();
       if (matches.length > 0) {
-        Ember.set(this, 'radio', {agency: '', level1: '', level2: '', level3: '', level4: ''});
+        set(this, 'radio', {agency: '', level1: '', level2: '', level3: '', level4: ''});
         matches.forEach((match) => {
           if (match.Agency.length) {
             this.radio.agency = match.Agency;
@@ -53,7 +58,7 @@ export default Ember.Component.extend({
           }
         });
       } else {
-        Ember.set(this, 'radio', {agency: 'N/A', level1: 'N/A', level2: 'N/A', level3: 'N/A', level4: 'N/A'});
+        set(this, 'radio', {agency: 'N/A', level1: 'N/A', level2: 'N/A', level3: 'N/A', level4: 'N/A'});
       }
     }
   }
