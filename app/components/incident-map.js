@@ -46,8 +46,8 @@ export default Component.extend({
 
   initMap() {
     this.set('map', L.map('leaflet-map', {
-      center: [41.8781, -87.6298],
-      zoom: 10
+      center: [41.85, -87.63],
+      zoom: 11
     }));
 
     Promise.all([
@@ -171,6 +171,12 @@ export default Component.extend({
 
   initLayers() {
     this.set('layers', {
+      fireStations: {
+        label: "Fire Stations",
+        layer: null,
+        url: '/data/city_data/fire_stations.json',
+        showByDefault: true
+      },
       policeDistricts: {
         label: "Police Districts",
         layer: null,
@@ -247,53 +253,104 @@ export default Component.extend({
         if (layers.hasOwnProperty(layerName)) {
           let layerObj = layers[layerName];
 
-          let layerMouseover = (e) => {
-            let layer = e.target;
+          if (layerName != 'fireStations') {
+            let layerMouseover = (e) => {
+              let layer = e.target;
 
-            info.update(layer.feature.properties);
-            if (map.getZoom() < 14) {
-              layer.setStyle({
-                color: '#ff0',
-                fillOpacity: 0.15
-              });
-            } else {
-              e.target.setStyle(layerObj.style);
-            }
+              info.update(layer.feature.properties);
+              if (map.getZoom() < 14) {
+                layer.setStyle({
+                  color: '#ff0',
+                  fillOpacity: 0.15
+                });
+              } else {
+                e.target.setStyle(layerObj.style);
+              }
 
-            if (!L.Browser.ie && !L.Browser.opera) {
-              layer.bringToFront();
-            }
-          };
+              if (!L.Browser.ie && !L.Browser.opera) {
+                layer.bringToFront();
+              }
+            };
 
-          let geoJsonLayer = L.geoJson(null, {
-            onEachFeature: (feature, layer) => {
-              layer.on({
-                mouseover: layerMouseover,
-                mouseout: (e) => {
-                  e.target.setStyle(layerObj.style);
-                  info.update();
-                },
-                click: (e) => {
-                  map.fitBounds(e.target.getBounds());
-                }
-              });
+            let geoJsonLayer = L.geoJson(null, {
+              onEachFeature: (feature, layer) => {
+                layer.on({
+                  mouseover: layerMouseover,
+                  mouseout: (e) => {
+                    e.target.setStyle(layerObj.style);
+                    info.update();
+                  },
+                  click: (e) => {
+                    map.fitBounds(e.target.getBounds());
+                  }
+                });
+              }
+            });
+            if (layerObj.showByDefault) {
+              geoJsonLayer.addTo(map);
             }
-          });
-          if (layerObj.showByDefault) {
-            geoJsonLayer.addTo(map);
-          }
-          layerObj.layer = geoJsonLayer;
-          this.overlay[layerObj.label] = layerObj.layer;
-          fetch(layerObj.url).then((response) => {
-            response.json().then((data) => {
-              layerObj.layer.addData(data).setStyle(layerObj.style);
-              resolve();
+            layerObj.layer = geoJsonLayer;
+            this.overlay[layerObj.label] = layerObj.layer;
+            fetch(layerObj.url).then((response) => {
+              response.json().then((data) => {
+                layerObj.layer.addData(data).setStyle(layerObj.style);
+                resolve();
+              }).catch((err) => {
+                reject(err);
+              })
             }).catch((err) => {
               reject(err);
-            })
-          }).catch((err) => {
-            reject(err);
-          });
+            });
+          } else {
+            let layerGroup = L.markerClusterGroup();
+            if (layerObj.showByDefault) {
+              layerGroup.addTo(map);
+            }
+            layerObj.layer = layerGroup;
+            this.overlay[layerObj.label] = layerObj.layer;
+            fetch(layerObj.url).then((response) => {
+              response.json().then((data) => {
+                data.forEach((location) => {
+                  let markerTitle = location.name ? location.name : [location.engine, location.truck, location.ambo, location.squad].filter(Boolean).join('-');
+
+                  let stationMarker = L.marker([location.latitude, location.longitude], {
+                    title: markerTitle,
+                    icon: L.AwesomeMarkers.icon({
+                      icon: 'fire-extinguisher',
+                      prefix: 'fa',
+                      markerColor: 'red'
+                    })
+                  });
+
+                  // Convert address to title case
+                  location.addr = location.addr.toLowerCase().replace(/(?:^|\s|-|\/)\S/g, function(m) {
+                    return m.toUpperCase();
+                  });
+
+                  // this is a really hacky way to make a popup, we should stop doing it
+                  // @TODO: Use Handlebars template to make Leaflet popup
+                  let popupContents = '<h6>' + markerTitle + '</h6>' +
+                    '<strong>' + location.addr + '</strong>' +
+                    (location.engine ? '<br><strong>Engine:</strong> ' + location.engine : '') +
+                    (location.truck ? '<br><strong>Truck/Tower:</strong> ' + location.truck : '') +
+                    (location.ambo ? '<br><strong>Ambulance:</strong> ' + location.ambo : '') +
+                    (location.squad ? '<br><strong>Squad:</strong> ' + location.squad : '') +
+                    (location.special ? '<br><strong>Special (search radio IDs):</strong> ' + location.special : '') +
+                    '<br><strong>Battalion:</strong> ' + location.batt + ' / <strong>District:</strong> ' + location.fireDist +
+                    '<br><strong>EMS District:</strong> ' + location.emsDist +
+                    '<br><strong>Radio Channel:</strong> ' + location.radio;
+                  stationMarker.bindPopup(popupContents).openPopup();
+
+                  layerGroup.addLayer(stationMarker);
+                });
+                resolve();
+              }).catch((err) => {
+                reject(err);
+              })
+            }).catch((err) => {
+              reject(err);
+            });
+          }
         }
       }));
     }
@@ -340,16 +397,29 @@ export default Component.extend({
         }
       },
       draw: {
+        polyline: {
+          shapeOptions: {
+            color: '#00ff00',
+            weight: 10
+          }
+        },
         polygon: {
+          showArea: true,
           allowIntersection: false,
-          showArea: true
+          drawError: {
+            color: '#da2600', // Color the shape will turn when intersects
+            message: '<strong>Error:<strong> Polygon cannot intersect with itself' // Message that will show when intersect
+          },
+          shapeOptions: {
+            color: '#00ff00'
+          }
         }
       }
     }));
 
     let drawEventCreated = (event) => {
       let layer = event.layer;
-      // layer.bindPopup('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal"> Launch demo modal </button>').openPopup();
+      // layer.bindPopup('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal">Add Incident</button>').openPopup();
 
       this.overlay['User Features'].addLayer(layer);
     };
