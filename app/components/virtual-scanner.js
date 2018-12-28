@@ -1,9 +1,9 @@
-/*global dashjs*/
+/*global mejs*/
+/*global MediaElementPlayer*/
 
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
 import { bind } from '@ember/runloop';
-import ENV from '../config/environment';
 import fetch from 'fetch';
 import $ from 'jquery';
 
@@ -19,12 +19,15 @@ export default Component.extend({
 
     let isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
     this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isMobileSafari);
+    mejs.Renderers.order = ['native_dash', 'flash_dash', 'native_hls', 'flash_hls'];
 
     this.onMove = (event) => {
       let target = event.target,
         // keep the dragged position in the data-x/data-y attributes
         x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
         y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+      x = Math.max(0, x);
+      y = Math.max(0, y);
 
       target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
 
@@ -89,11 +92,11 @@ export default Component.extend({
     this.sceneDimensions = {
       width: 4, height: 4, depth: 4,
     };
-    this.sceneMaterials = {
-      left: 'uniform', right: 'uniform',
-      up: 'transparent', down: 'transparent',
-      front: 'uniform', back: 'uniform',
-    };
+    // this.sceneMaterials = {
+    //   left: 'uniform', right: 'uniform',
+    //   up: 'transparent', down: 'transparent',
+    //   front: 'uniform', back: 'uniform',
+    // };
     // Commented out b/c of https://github.com/resonance-audio/resonance-audio-web-sdk/issues/16
     // this.resonanceScene.setRoomProperties(this.sceneDimensions, this.sceneMaterials);
     this.resonanceScene.output.connect(this.audioContext.destination);
@@ -109,9 +112,11 @@ export default Component.extend({
       // AudioContext must be resumed after the document received a user gesture to enable audio playback.
       this.audioContext.resume();
 
-      this.startPlayer(streamName, playerElement);
+      let player = this.startPlayer(streamName, playerElement);
 
       if (this.audioContext) {
+        // Get the real media element
+        playerElement = document.getElementById(player.media.renderer.id);
         let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
 
         let analyser = this.audioContext.createAnalyser();
@@ -119,10 +124,16 @@ export default Component.extend({
         analyser.fftSize = 512; // the total samples are half the fft size.
         audioElementSource.connect(analyser);
 
+        let volume = this.audioContext.createGain();
+        player.media.addEventListener('volumechange', () => {
+          volume.gain.setValueAtTime(player.getVolume(), this.audioContext.currentTime);
+        });
+        analyser.connect(volume);
+
         let soundSource = this.resonanceScene.createSource();
         let position = this.randomPosition(this.sceneDimensions.width, this.sceneDimensions.height, this.sceneDimensions.depth);
         soundSource.setPosition(position.x, 0, position.z);
-        analyser.connect(soundSource.input);
+        volume.connect(soundSource.input);
 
         let draggableElement = this.addDraggable(streamName, position);
         $('.draggable-parent').append(draggableElement);
@@ -131,6 +142,7 @@ export default Component.extend({
           name: streamName,
           audioElementSource: audioElementSource,
           analyser: analyser,
+          volume: volume,
           soundSource: soundSource,
           position: position,
           draggableElement: draggableElement
@@ -141,26 +153,45 @@ export default Component.extend({
     }));
   },
   startPlayer(stream, playerElement) {
-    let player = dashjs.MediaPlayer().create();
-    player.getDebug().setLogToBrowserConsole(ENV.APP.MEDIA_PLAYER_DEBUG);
-    player.on(dashjs.MediaPlayer.events.ERROR, payload => {
-      // console.error(payload);
-      if (payload.error === 'capability' && payload.event === 'mediasource') {
-        this.mediaSourceSupported = false;
-      }
-    }, this);
-
+    let audioPlayer;
     if (this.mediaSourceSupported) {
-      player.initialize(playerElement);
-      player.attachSource('https://audio.crimeisdown.com/streaming/dash/' + stream + '/');
+      audioPlayer = new MediaElementPlayer(playerElement, {
+        pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
+        shimScriptAccess: 'always',
+        renderers: ['native_dash', 'flash_dash'],
+        isVideo: false,
+        pauseOtherPlayers: false,
+        features: ['current', 'volume']
+      });
+      audioPlayer.setSrc({
+        src: 'https://audio.crimeisdown.com/streaming/dash/' + stream + '/',
+        type: 'application/dash+xml'
+      });
     } else {
-      playerElement.src = 'https://audio.crimeisdown.com/streaming/hls/' + stream + '/index.m3u8';
-      // console.error('Sorry, your browser does not support our live streaming functionality.');
+      audioPlayer = new MediaElementPlayer(playerElement, {
+        pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
+        shimScriptAccess: 'always',
+        renderers: ['native_hls', 'flash_hls'],
+        isVideo: false,
+        pauseOtherPlayers: false,
+        features: ['current', 'volume']
+      });
+      audioPlayer.setSrc({
+        src: 'https://audio.crimeisdown.com/streaming/hls/' + stream + '/index.m3u8',
+        type: 'application/x-mpegURL'
+      });
     }
+    audioPlayer.load();
+    audioPlayer.play();
+    return audioPlayer;
   },
   removeStream(streamName) {
     let streamData = this.enabledStreams.findBy('name', streamName);
     streamData.draggableElement.remove();
+    streamData.soundSource.input.disconnect();
+    streamData.volume.disconnect();
+    streamData.analyser.disconnect();
+    streamData.audioElementSource.disconnect();
     this.enabledStreams.removeObject(streamData);
   },
   addDraggable(streamName, roomPosition) {
@@ -199,21 +230,23 @@ export default Component.extend({
     }
     return {
       x: randomAxisPosition(width),
-      y: randomAxisPosition(height),
+      y: 0,
       z: randomAxisPosition(depth)
     };
   },
   roomPositionToDragPosition(position) {
     return {
-      dragX: Math.min((position.x + this.sceneDimensions.width/2) * this.dragScale, 180),
-      dragY: Math.min((position.z + this.sceneDimensions.depth/2) * this.dragScale, 180),
+      dragX: (position.x + this.sceneDimensions.width/2) * this.dragScale,
+      dragY: (position.z + this.sceneDimensions.depth/2) * this.dragScale,
     };
   },
   dragPositionToRoomPosition(x, y) {
+    let maxWidth = this.sceneDimensions.width/2;
+    let maxDepth = this.sceneDimensions.depth/2;
     return {
-      x: ((x+24) / this.dragScale) - this.sceneDimensions.width/2,
+      x: Math.min(maxWidth, Math.max(-maxWidth, (x / this.dragScale) - maxWidth)),
       y: 0,
-      z: ((y+8) / this.dragScale) - this.sceneDimensions.depth/2
+      z: Math.min(maxDepth, Math.max(-maxDepth, (y / this.dragScale) - maxDepth))
     };
   }
 });
