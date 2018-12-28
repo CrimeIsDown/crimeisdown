@@ -114,7 +114,7 @@ export default Component.extend({
 
       let player = this.startPlayer(streamName, playerElement);
 
-      if (this.audioContext) {
+      if (this.audioContext && this.mediaSourceSupported) {
         // Get the real media element
         playerElement = document.getElementById(player.media.renderer.id);
         let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
@@ -187,11 +187,13 @@ export default Component.extend({
   },
   removeStream(streamName) {
     let streamData = this.enabledStreams.findBy('name', streamName);
-    streamData.draggableElement.remove();
-    streamData.soundSource.input.disconnect();
-    streamData.volume.disconnect();
-    streamData.analyser.disconnect();
-    streamData.audioElementSource.disconnect();
+    if (this.mediaSourceSupported) {
+      streamData.draggableElement.remove();
+      streamData.soundSource.input.disconnect();
+      streamData.volume.disconnect();
+      streamData.analyser.disconnect();
+      streamData.audioElementSource.disconnect();
+    }
     this.enabledStreams.removeObject(streamData);
   },
   addDraggable(streamName, roomPosition) {
