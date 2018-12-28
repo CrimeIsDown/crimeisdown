@@ -174,7 +174,7 @@ export default Component.extend({
         renderers: ['native_hls', 'flash_hls'],
         isVideo: false,
         pauseOtherPlayers: false,
-        features: ['current', 'volume']
+        features: ['playpause', 'current', 'progress', 'volume']
       });
       audioPlayer.setSrc({
         src: 'https://audio.crimeisdown.com/streaming/hls/' + stream + '/index.m3u8',
