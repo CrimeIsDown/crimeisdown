@@ -19,21 +19,30 @@ export default Component.extend({
     this.layers = {};
     this.overlay = {};
     this.location = {};
-    let isSafari = navigator.userAgent.search("Safari") > 0 && navigator.userAgent.search("Chrome") < 0;
-    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isSafari);
+    let isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
+    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isMobileSafari);
   },
 
   didInsertElement() {
     L.Icon.Default.imagePath = '/assets/images/';
     this.initMap();
-    mejs.Renderers.order = ['native_dash', 'flash_dash'];
-    this.set('audioPlayer', new MediaElementPlayer('streamplayer', {
-      pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
-      shimScriptAccess: 'always',
-      renderers: ['native_dash', 'flash_dash'],
-      isVideo: false,
-      features: ['playpause', 'current', 'volume']
-    }));
+    if (this.mediaSourceSupported) {
+      this.set('audioPlayer', new MediaElementPlayer('streamplayer', {
+        pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
+        shimScriptAccess: 'always',
+        renderers: ['native_dash', 'flash_dash'],
+        isVideo: false,
+        features: ['playpause', 'current', 'volume']
+      }));
+    } else {
+      this.set('audioPlayer', new MediaElementPlayer('streamplayer', {
+        pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
+        shimScriptAccess: 'always',
+        renderers: ['html5', 'native_hls', 'flash_hls'],
+        isVideo: false,
+        features: ['playpause', 'current', 'volume']
+      }));
+    }
   },
 
   actions: {
@@ -152,10 +161,17 @@ export default Component.extend({
           let iframeUrl = 'https://www.crimereports.com/city/Chicago%2C%20IL?is_widget=true&_=' + randomInt + '#!/dashboard?lat=' + this.location.meta.latitude + '&lng=' + this.location.meta.longitude + '&zoom=17&start_date=2018-11-24&end_date=2018-12-24&date_type=relative&current_tab=list&shapeIds=&shape_id=false&incident_types=Alarm%252CArson%252CAssault%252CAssault%2520with%2520Deadly%2520Weapon%252CBreaking%2520%2526%2520Entering%252CCommunity%2520Policing%252CDeath%252CDisorder%252CDrugs%252CEmergency%252CFamily%2520Offense%252CFire%252CHomicide%252CKidnapping%252CLiquor%252CMissing%2520Person%252COther%252COther%2520Sexual%2520Offense%252CPedestrian%2520Stop%252CProactive%2520Policing%252CProperty%2520Crime%252CProperty%2520Crime%2520Commercial%252CProperty%2520Crime%2520Residential%252CQuality%2520of%2520Life%252CRobbery%252CSexual%2520Assault%252CSexual%2520Offense%252CTheft%252CTheft%2520from%2520Vehicle%252CTheft%2520of%2520Vehicle%252CTraffic%252CVehicle%2520Recovery%252CVehicle%2520Stop%252CWeapons%2520Offense';
           $('#crimereports-map').attr('src', iframeUrl);
           if (!this.audioPlayer.duration || this.audioPlayer.paused) {
-            this.audioPlayer.setSrc({
-              src: 'https://audio.crimeisdown.com/streaming/dash/zone' + this.location.police.zone.num + '/',
-              type: 'application/dash+xml'
-            });
+            if (this.mediaSourceSupported) {
+              this.audioPlayer.setSrc({
+                src: 'https://audio.crimeisdown.com/streaming/dash/zone' + this.location.police.zone.num + '/',
+                type: 'application/dash+xml'
+              });
+            } else {
+              this.audioPlayer.setSrc({
+                src: 'https://audio.crimeisdown.com/streaming/hls/zone' + this.location.police.zone.num + '/index.m3u8',
+                type: 'application/x-mpegURL'
+              });
+            }
             this.audioPlayer.load();
             this.set('currentZoneStream', null);
             this.audioPlayer.media.addEventListener('playing', () => {

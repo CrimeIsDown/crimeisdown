@@ -193,11 +193,17 @@ ul.nav.nav-tabs {
   }
 }
 
-#radio-search .results,
-#ucr-search .results {
-  margin-top: 1em;
-  tr > th {
-    width: 33.33333%;
+#radio-search,
+#ucr-search {
+  form label {
+    font-weight: bold;
+    font-style: italic;
+  }
+  .results {
+    margin-top: 1em;
+    tr > th {
+      width: 33.33333%;
+    }
   }
 }
 
@@ -231,8 +237,6 @@ input#datetimepicker[readonly] {
 }
 
 .stream-options {
-  max-height: 300px;
-  overflow-y: auto;
   label {
     cursor: pointer;
     margin-bottom: 0.2rem;
@@ -249,21 +253,21 @@ input#datetimepicker[readonly] {
   }
 }
 
-#streamplayer {
+.stream-player {
   height: 40px;
   width: 100%;
 }
 
 .draggable-parent {
-  width: 200px;
-  height: 200px;
+  width: 230px;
+  height: 216px;
   background: #fff;
   margin-bottom: 1em;
   border: 1px solid $gray-300;
   position: relative;
   .fa-user {
     position: absolute;
-    transform: translate(92px, 88px);
+    transform: translate(108px, 100px);
   }
   .draggable {
     position: absolute;
@@ -292,6 +296,13 @@ input#datetimepicker[readonly] {
     margin: 0 0.25em;
     padding: 0.4em;
     width: 50%;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .stream-options {
+    max-height: 300px;
+    overflow-y: auto;
   }
 }
 
