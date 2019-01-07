@@ -19,7 +19,6 @@ export default Component.extend({
 
     let isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
     this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isMobileSafari);
-    // mejs.Renderers.order = ['native_dash', 'flash_dash', 'html5', 'native_hls', 'flash_hls'];
 
     this.onMove = (event) => {
       let target = event.target,
@@ -114,7 +113,7 @@ export default Component.extend({
 
       let player = this.startPlayer(streamName, playerElement);
 
-      if (this.audioContext && this.mediaSourceSupported) {
+      if (this.audioContext) {
         // Get the real media element
         playerElement = document.getElementById(player.media.renderer.id);
         let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
