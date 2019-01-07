@@ -17,8 +17,7 @@ export default Component.extend({
     this.audioContext = new (window.AudioContext || window.webkitAudioContext);
     this.setupResonanceScene();
 
-    let isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
-    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isMobileSafari);
+    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !mejs.Features.isiOS);
 
     this.onMove = (event) => {
       let target = event.target,
@@ -113,7 +112,7 @@ export default Component.extend({
 
       let player = this.startPlayer(streamName, playerElement);
 
-      if (this.audioContext) {
+      if (this.audioContext && this.mediaSourceSupported) {
         // Get the real media element
         playerElement = document.getElementById(player.media.renderer.id);
         let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
@@ -181,9 +180,7 @@ export default Component.extend({
       });
     }
     audioPlayer.load();
-    if (!mejs.Features.isiOS && !mejs.Features.isAndroid) {
-      audioPlayer.play();
-    }
+    audioPlayer.play();
     return audioPlayer;
   },
   removeStream(streamName) {
