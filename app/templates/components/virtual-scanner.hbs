@@ -38,7 +38,7 @@
           <!--<button onclick={{action "seekStream" 999}} class="btn btn-sm btn-info"><i class="fa fa-circle text-danger"></i> Live</button>-->
         </div>
       </div>
-      <audio id="audio-player-{{stream.name}}" class="stream-player" style="width: 200px;"></audio>
+      <audio id="audio-player-{{stream.name}}" class="stream-player" preload="none" style="width: 200px;"></audio>
     </div>
     {{/each}}
   </div>

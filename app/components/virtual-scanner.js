@@ -19,7 +19,7 @@ export default Component.extend({
 
     let isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
     this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isMobileSafari);
-    mejs.Renderers.order = ['native_dash', 'flash_dash', 'native_hls', 'flash_hls'];
+    // mejs.Renderers.order = ['native_dash', 'flash_dash', 'html5', 'native_hls', 'flash_hls'];
 
     this.onMove = (event) => {
       let target = event.target,
@@ -161,7 +161,7 @@ export default Component.extend({
         renderers: ['native_dash', 'flash_dash'],
         isVideo: false,
         pauseOtherPlayers: false,
-        features: ['current', 'volume']
+        features: ['playpause', 'current', 'volume']
       });
       audioPlayer.setSrc({
         src: 'https://audio.crimeisdown.com/streaming/dash/' + stream + '/',
@@ -171,10 +171,10 @@ export default Component.extend({
       audioPlayer = new MediaElementPlayer(playerElement, {
         pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
         shimScriptAccess: 'always',
-        renderers: ['native_hls', 'flash_hls'],
+        renderers: ['html5', 'native_hls', 'flash_hls'],
         isVideo: false,
         pauseOtherPlayers: false,
-        features: ['playpause', 'current', 'progress', 'volume']
+        features: ['playpause', 'current', 'volume']
       });
       audioPlayer.setSrc({
         src: 'https://audio.crimeisdown.com/streaming/hls/' + stream + '/index.m3u8',
@@ -182,7 +182,9 @@ export default Component.extend({
       });
     }
     audioPlayer.load();
-    audioPlayer.play();
+    if (!mejs.Features.isiOS && !mejs.Features.isAndroid) {
+      audioPlayer.play();
+    }
     return audioPlayer;
   },
   removeStream(streamName) {
