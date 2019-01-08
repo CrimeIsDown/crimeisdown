@@ -23,7 +23,8 @@ export default Component.extend({
   },
   actions: {
     lookupRadioId() {
-      let input = this.radioId;
+      let input = this.radioId.toUpperCase();
+      set(this, 'radioId', input);
       if (window.ga && typeof window.ga === "function") {
         ga('send', 'event', 'Searches radio ID list', 'Tools', input);
       }

@@ -73,6 +73,14 @@
   },
   {
     "Agency": "CPD",
+    "ID_Number": "3D[0-9]+",
+    "Level_1": "Superintendent",
+    "Level_2": "News Affairs",
+    "Level_3": "",
+    "Level_4": "Media Car"
+  },
+  {
+    "Agency": "CPD",
     "ID_Number": "3E",
     "Level_1": "Superintendent",
     "Level_2": "General Counsel",
