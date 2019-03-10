@@ -7,7 +7,7 @@ export default Component.extend({
       enableTime: true,
       minDate: new Date('2016-12-11T08:00:00.000Z'),
       maxDate: new Date(),
-      dateFormat: 'm/j/Y h:i K',
+      dateFormat: 'n/j/Y h:i K',
       minuteIncrement: 60
     };
     options.maxDate.setHours(options.maxDate.getHours()-1);
