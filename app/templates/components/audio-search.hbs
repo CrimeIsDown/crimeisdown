@@ -31,6 +31,13 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="format">Audio format</label>
+    <select name="format" id="audioformat" class="form-control">
+      <option value="" selected>Default (auto-detect)</option>
+      <option value="aac">AAC, .aac</option>
+      <option value="ogg">Opus, .ogg</option>
+    </select>
+  <div class="form-group">
     <button type="submit" class="btn btn-primary">Get recording</button>
   </div>
   <p><em>Please note: the recording will start at the top of the hour, until better encoding resources are available.</em></p>
