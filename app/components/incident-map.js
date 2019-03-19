@@ -5,6 +5,7 @@
 
 import Component from '@ember/component';
 import { get } from '@ember/object';
+import { schedule } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
 import ENV from '../config/environment';
@@ -160,6 +161,11 @@ export default Component.extend({
           let randomInt = Math.round(Math.random() * 1000);
           let iframeUrl = 'https://www.crimereports.com/city/Chicago%2C%20IL?is_widget=true&_=' + randomInt + '#!/dashboard?lat=' + this.location.meta.latitude + '&lng=' + this.location.meta.longitude + '&zoom=17&start_date=2018-11-24&end_date=2018-12-24&date_type=relative&current_tab=list&shapeIds=&shape_id=false&incident_types=Alarm%252CArson%252CAssault%252CAssault%2520with%2520Deadly%2520Weapon%252CBreaking%2520%2526%2520Entering%252CCommunity%2520Policing%252CDeath%252CDisorder%252CDrugs%252CEmergency%252CFamily%2520Offense%252CFire%252CHomicide%252CKidnapping%252CLiquor%252CMissing%2520Person%252COther%252COther%2520Sexual%2520Offense%252CPedestrian%2520Stop%252CProactive%2520Policing%252CProperty%2520Crime%252CProperty%2520Crime%2520Commercial%252CProperty%2520Crime%2520Residential%252CQuality%2520of%2520Life%252CRobbery%252CSexual%2520Assault%252CSexual%2520Offense%252CTheft%252CTheft%2520from%2520Vehicle%252CTheft%2520of%2520Vehicle%252CTraffic%252CVehicle%2520Recovery%252CVehicle%2520Stop%252CWeapons%2520Offense';
           $('#crimereports-map').attr('src', iframeUrl);
+
+          schedule('afterRender', () => {
+            $('[data-toggle="tooltip"]').tooltip();
+          });
+
           if (!this.audioPlayer.duration || this.audioPlayer.paused) {
             if (this.mediaSourceSupported) {
               this.audioPlayer.setSrc({

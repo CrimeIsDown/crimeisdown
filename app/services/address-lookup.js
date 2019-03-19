@@ -159,6 +159,8 @@ export default Service.extend({
 
   buildFire(location) {
     let nearestEngine = {distance: 99999999};
+    let nearestTruck = {distance: 99999999};
+    let nearestSquad = {distance: 99999999};
     let nearestAmbo = {distance: 99999999};
 
     this.fireStations.forEach((station) => {
@@ -166,6 +168,14 @@ export default Service.extend({
       if (station.engine.length && nearestEngine.distance > distance) {
         nearestEngine = station;
         set(nearestEngine, 'distance', distance);
+      }
+      if (station.truck.length && nearestTruck.distance > distance) {
+        nearestTruck = station;
+        set(nearestTruck, 'distance', distance);
+      }
+      if (station.squad.length && nearestSquad.distance > distance) {
+        nearestSquad = station;
+        set(nearestSquad, 'distance', distance);
       }
       if (station.ambo.length && nearestAmbo.distance > distance) {
         nearestAmbo = station;
@@ -178,8 +188,10 @@ export default Service.extend({
       channel: nearestEngine.radio,
       emsDistrict: nearestEngine.emsDist.replace(' (HQ)', ''),
       fireDistrict: nearestEngine.fireDist.replace(' (HQ)', ''),
-      nearestAmbo: nearestAmbo.ambo,
-      nearestEngine: nearestEngine.engine
+      nearestAmbo: nearestAmbo,
+      nearestEngine: nearestEngine,
+      nearestTruck: nearestTruck,
+      nearestSquad: nearestSquad
     };
   },
 

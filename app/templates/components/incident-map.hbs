@@ -87,12 +87,19 @@
                 <th colspan="2">Chicago Fire Department</th>
               </tr>
               <tr>
-                <td>Nearest Engine {{ location.fire.nearestEngine }}</td>
-                <td>Nearest Ambo. {{ location.fire.nearestAmbo }}</td>
-              </tr>
-              <tr>
-                <td>Battalion {{ location.fire.battalion }}<br>Fire Dist. {{ location.fire.fireDistrict }}</td>
-                <td>EMS District {{ location.fire.emsDistrict }}</td>
+                <td>
+                  <i>Nearest Companies:</i><br>
+                  <span tabindex="0" data-toggle="tooltip" title="{{ location.fire.nearestEngine.addr }}">{{ location.fire.nearestEngine.engine }} (Engine)</span><br>
+                  <span tabindex="0" data-toggle="tooltip" title="{{ location.fire.nearestTruck.addr }}">{{ location.fire.nearestTruck.truck }} (Truck)</span><br>
+                  <span tabindex="0" data-toggle="tooltip" title="{{ location.fire.nearestAmbo.addr }}">{{ location.fire.nearestAmbo.ambo }} (Ambo.)</span><br>
+                  <span tabindex="0" data-toggle="tooltip" title="{{ location.fire.nearestSquad.addr }}">{{ location.fire.nearestSquad.squad }} (Squad)</span>
+                </td>
+                <td>
+                  <i>Loc. Within:</i><br>
+                  Battalion {{ location.fire.battalion }}<br>
+                  Fire Dist. {{ location.fire.fireDistrict }}<br>
+                  EMS District {{ location.fire.emsDistrict }}
+                </td>
               </tr>
               <tr>
                 <td colspan="2">
