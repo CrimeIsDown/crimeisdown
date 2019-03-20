@@ -4013,7 +4013,15 @@
     "Level_1": "Operations",
     "Level_2": "Emergency Medical Service",
     "Level_3": "District 8",
-    "Level_4": "Field Chief: EMS District 8 (Engine 63) "
+    "Level_4": "Field Chief: EMS District 8 (Engine 63)"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "4-5-9",
+    "Level_1": "Operations",
+    "Level_2": "Emergency Medical Service",
+    "Level_3": "District 9",
+    "Level_4": "Field Chief: EMS District 9 (Engine 46)"
   },
   {
     "Agency": "CFD",
