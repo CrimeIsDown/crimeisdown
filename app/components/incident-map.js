@@ -163,7 +163,7 @@ export default Component.extend({
           $('#crimereports-map').attr('src', iframeUrl);
 
           schedule('afterRender', () => {
-            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
           });
 
           if (!this.audioPlayer.duration || this.audioPlayer.paused) {
