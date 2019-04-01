@@ -8,12 +8,23 @@ LinkComponent.reopen({
 
 export default Component.extend({
   session: service('session'),
+  playmusic: false,
 
   actions: {
     logout: function() {
       this.session.invalidate().then(function() {
         this.transitionToRoute('login');
       }.bind(this));
+    },
+    togglemusic: function () {
+      this.set('playmusic', !this.playmusic);
+      let audioElem = document.getElementById('copstheme');
+      if (this.playmusic) {
+        audioElem.volume = 0.3;
+        audioElem.play();
+      } else {
+        audioElem.pause();
+      }
     }
   }
 });

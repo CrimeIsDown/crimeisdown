@@ -34,10 +34,22 @@
         </li> --}}
       </ul>
       <form class="form-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" id="nightmodetoggle">
-          Night Mode
-        </label>
+        <div class="form-check mr-sm-2">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" id="nightmodetoggle">
+            Night Mode
+          </label>
+        </div>
+        {{!-- April Fools 2019 --}}
+        <div class="form-check">
+          <label class="form-check-label red-blue-flashing">
+            {{input type="checkbox" class="form-check-input" id="copstoggle" checked=playmusic change=(action "togglemusic")}}
+            <i class="fa fa-volume-up" aria-hidden="true"></i>&nbsp;COPS Mode
+          </label>
+          <div class="d-none">
+            <audio id="copstheme" src="https://www.soundboard.com/mediafiles/Inner%20Circle%20-%20Bad%20Boys%20(COPS%20theme%20song)219275-1efae287-f275-499c-8ef5-878aa3795aed.mp3" loop preload="auto"></audio>
+          </div>
+        </div>
       </form>
     </div>
     <script>

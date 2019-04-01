@@ -337,3 +337,31 @@ input#datetimepicker[readonly] {
     }
   }
 }
+
+// April Fools 2019
+.red-blue-flashing {
+  font-weight: bold;
+	animation: blinkingText 1s infinite;
+}
+
+@keyframes blinkingText {
+	0% {
+	  color: $red;
+  }
+
+	49% {
+	  color: $blue;
+  }
+
+	50% {
+	  color: $blue;
+  }
+
+	99% {
+	  color: $red;
+  }
+
+	100% {
+	  color: $red;
+  }
+}
