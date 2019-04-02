@@ -90,6 +90,16 @@ export default Component.extend({
     L.control.layers(this.baseLayers, this.overlay, {
       collapse: false
     }).addTo(this.map);
+
+    L.streetView({
+      position: 'topleft',
+      google: true,
+      bing: false,
+      yandex: false,
+      mapillary: false,
+      openstreetcam: false,
+      mosatlas: false
+    }).addTo(this.map);
   },
 
   initBaseLayers() {
