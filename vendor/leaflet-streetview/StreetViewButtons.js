@@ -10,7 +10,7 @@ L.StreetView = L.Control.extend({
   },
 
   providers: [
-    ['google', 'GSV', 'Google Street View', false,
+    ['google', 'Street View', 'Google Street View', false,
       'https://www.google.com/maps?layer=c&cbll={lat},{lon}'],
     ['bing', 'Bing', 'Bing StreetSide',
       L.latLngBounds([[25, -168], [71.4, 8.8]]),
