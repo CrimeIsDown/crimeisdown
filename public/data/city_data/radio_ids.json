@@ -2313,11 +2313,11 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "[1-2]?[0-9][1-3][1-9]R?",
+    "ID_Number": "[1-2]?[0-9][1-3][1-9][A-Z]?",
     "Level_1": "Patrol",
     "Level_2": "",
     "Level_3": "",
-    "Level_4": "Beat Car"
+    "Level_4": "Beat #$1"
   },
   {
     "Agency": "CPD",
@@ -4601,7 +4601,7 @@
   },
   {
     "Agency": "CFD",
-    "ID_Number": "5-5-1",
+    "ID_Number": "5-5-1|SQD1A?",
     "Level_1": "Operations",
     "Level_2": "Special Operations",
     "Level_3": "Squad Companies",
@@ -4609,7 +4609,7 @@
   },
   {
     "Agency": "CFD",
-    "ID_Number": "5-5-2",
+    "ID_Number": "5-5-2|SQD2A?",
     "Level_1": "Operations",
     "Level_2": "Special Operations",
     "Level_3": "Squad Companies",
@@ -4617,7 +4617,7 @@
   },
   {
     "Agency": "CFD",
-    "ID_Number": "5-5-5",
+    "ID_Number": "5-5-5|SQD5A?",
     "Level_1": "Operations",
     "Level_2": "Special Operations",
     "Level_3": "Squad Companies",
@@ -4625,7 +4625,7 @@
   },
   {
     "Agency": "CFD",
-    "ID_Number": "5-5-7",
+    "ID_Number": "5-5-7|SQD7A?",
     "Level_1": "Operations",
     "Level_2": "Special Operations",
     "Level_3": "Squad Companies",
@@ -5417,290 +5417,50 @@
   },
   {
     "Agency": "CFD",
-    "ID_Number": "E[1-9]",
+    "ID_Number": "E[0-9][0-9]?[0-9]?",
     "Level_1": "Operations",
     "Level_2": "Fire Suppression and Rescue",
     "Level_3": "Engine Companies",
-    "Level_4": "Engine"
+    "Level_4": "Engine $1"
   },
   {
     "Agency": "CFD",
-    "ID_Number": "E1[0-1]",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Engine Companies",
-    "Level_4": "Engine"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "E1-[3-9]",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Engine Companies",
-    "Level_4": "Engine"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "E[2-9]-[0-9]",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Engine Companies",
-    "Level_4": "Engine"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "E10-[1-9]",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Engine Companies",
-    "Level_4": "Engine"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "E1-10",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Engine Companies",
-    "Level_4": "Engine 110"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "1-[1-2]-[0-9]",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Engine Companies",
-    "Level_4": "Engine"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-3-1",
+    "ID_Number": "BC[1-9][0-9]?",
     "Level_1": "Operations",
     "Level_2": "Fire Suppression and Rescue",
     "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 1 Chief"
+    "Level_4": "Battalion Chief $1"
   },
   {
     "Agency": "CFD",
-    "ID_Number": "2-3-2",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 2 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-3-3",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 3 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-3-4",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 4 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-3-5",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 5 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-3-6",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 6 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-3-7",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 7 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-3-8",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 8 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-3-9",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 9 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-3-10",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 10 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-4-1",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 11 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-4-2",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 12 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-4-3",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 13 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-4-4",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 14 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-4-5",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 15 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-4-6",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 16 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-4-7",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 17 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-4-8",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 18 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-4-9",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 19 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-4-10",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 20 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-5-1",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 21 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-5-2",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 22 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-5-3",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 23 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "2-5-4",
-    "Level_1": "Operations",
-    "Level_2": "Fire Suppression and Rescue",
-    "Level_3": "Battalion Chiefs",
-    "Level_4": "Battalion 24 Chief"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "3-[1-7]-[[1-9]|10]",
+    "ID_Number": "TL[0-9][0-9]?",
     "Level_1": "Operations",
     "Level_2": "Fire Suppression and Rescue",
     "Level_3": "Hook and Ladder / Tower Ladder Companies",
-    "Level_4": ""
+    "Level_4": "Tower Ladder $1"
   },
   {
     "Agency": "CFD",
-    "ID_Number": "8-[1-6]-[[1-9]|10]",
+    "ID_Number": "T[0-9][0-9]?",
     "Level_1": "Operations",
-    "Level_2": "Emergency Medical Service",
-    "Level_3": "Ambulance Companies",
-    "Level_4": "Ambulance"
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Hook and Ladder / Tower Ladder Companies",
+    "Level_4": "Truck $1"
   },
   {
     "Agency": "CFD",
-    "ID_Number": "8-8-10",
+    "ID_Number": "AT1",
     "Level_1": "Operations",
-    "Level_2": "Emergency Medical Service",
-    "Level_3": "Ambulance Companies",
-    "Level_4": "Ambulance 80"
+    "Level_2": "Fire Suppression and Rescue",
+    "Level_3": "Hook and Ladder / Tower Ladder Companies",
+    "Level_4": "Aerial Tower 1"
   },
   {
     "Agency": "CFD",
-    "ID_Number": "8-9-[[1-9]|10]",
+    "ID_Number": "A[0-9][0-9]?",
     "Level_1": "Operations",
     "Level_2": "Emergency Medical Service",
     "Level_3": "Ambulance Companies",
-    "Level_4": "Ambulance"
-  },
-  {
-    "Agency": "CFD",
-    "ID_Number": "8-10-[1-4]",
-    "Level_1": "Operations",
-    "Level_2": "Emergency Medical Service",
-    "Level_3": "Ambulance Companies",
-    "Level_4": "Ambulance"
+    "Level_4": "Ambulance $1"
   }
 ]

@@ -51,8 +51,9 @@ export default Component.extend({
             this.radio.level3 = match.Level_3;
           }
           if (match.Level_4.length) {
-            if (match.Level_4 === 'Beat Car') {
-              this.radio.level4 = 'Beat #' + input.match(/\d+/)[0];
+            // If ends with $1, then replace with the numeric part of the query
+            if (match.Level_4.match(/\$1$/)) {
+              this.radio.level4 = match.Level_4.replace('$1', input.match(/\d+/)[0]);
             } else {
               this.radio.level4 = match.Level_4;
             }
