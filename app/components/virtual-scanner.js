@@ -114,40 +114,41 @@ export default Component.extend({
       let draggableElement = this.addDraggable(streamName, position);
       $('.draggable-parent').append(draggableElement);
 
-      player.media.addEventListener('canplay', () => {
-        if (this.audioContext) {
-          // Get the real media element
-          playerElement = document.getElementById(player.media.renderer.id);
-          let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
-
-          let analyser = this.audioContext.createAnalyser();
-          analyser.smoothingTimeConstant = 0.5;
-          analyser.fftSize = 512; // the total samples are half the fft size.
-          audioElementSource.connect(analyser);
-
-          let volume = this.audioContext.createGain();
-          player.media.addEventListener('volumechange', () => {
-            volume.gain.setValueAtTime(player.getVolume(), this.audioContext.currentTime);
-          });
-          analyser.connect(volume);
-
-          let soundSource = this.resonanceScene.createSource();
-
-          soundSource.setPosition(position.x, 0, position.z);
-          volume.connect(soundSource.input);
-
-          streamData.setProperties({
-            audioElementSource: audioElementSource,
-            analyser: analyser,
-            volume: volume,
-            soundSource: soundSource,
-            position: position,
-            draggableElement: draggableElement
-          });
-
-          this.drawVU(analyser, draggableElement, 0);
-        }
+      streamData.setProperties({
+        position: position,
+        draggableElement: draggableElement
       });
+
+      player.media.addEventListener('canplay', bind(this, () => {
+        // Get the real media element
+        playerElement = document.getElementById(player.media.renderer.id);
+        let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
+
+        let analyser = this.audioContext.createAnalyser();
+        analyser.smoothingTimeConstant = 0.5;
+        analyser.fftSize = 512; // the total samples are half the fft size.
+        audioElementSource.connect(analyser);
+
+        let volume = this.audioContext.createGain();
+        player.media.addEventListener('volumechange', () => {
+          volume.gain.setValueAtTime(player.getVolume(), this.audioContext.currentTime);
+        });
+        analyser.connect(volume);
+
+        let soundSource = this.resonanceScene.createSource();
+
+        soundSource.setPosition(position.x, 0, position.z);
+        volume.connect(soundSource.input);
+
+        streamData.setProperties({
+          audioElementSource: audioElementSource,
+          analyser: analyser,
+          volume: volume,
+          soundSource: soundSource
+        });
+
+        this.drawVU(analyser, draggableElement, 0);
+      }));
     }));
   },
   startPlayer(stream, playerElement) {
@@ -186,12 +187,12 @@ export default Component.extend({
   removeStream(streamName) {
     let streamData = this.enabledStreams.findBy('name', streamName);
     if (this.mediaSourceSupported) {
-      streamData.draggableElement.remove();
       streamData.soundSource.input.disconnect();
       streamData.volume.disconnect();
       streamData.analyser.disconnect();
       streamData.audioElementSource.disconnect();
     }
+    streamData.draggableElement.remove();
     this.enabledStreams.removeObject(streamData);
   },
   addDraggable(streamName, roomPosition) {
