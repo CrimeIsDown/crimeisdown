@@ -1,4 +1,3 @@
-/*global mejs*/
 /*global MediaElementPlayer*/
 
 import Component from '@ember/component';
@@ -17,7 +16,7 @@ export default Component.extend({
     this.audioContext = new (window.AudioContext || window.webkitAudioContext);
     this.setupResonanceScene();
 
-    this.set('mediaSourceSupported', typeof this.audioContext.createMediaElementSource === 'function'/* && !mejs.Features.isiOS*/);
+    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window))/* && !mejs.Features.isiOS*/);
 
     this.onMove = (event) => {
       let target = event.target,
@@ -111,43 +110,44 @@ export default Component.extend({
       this.audioContext.resume();
 
       let player = this.startPlayer(streamName, playerElement);
+      let position = this.randomPosition(this.sceneDimensions.width, this.sceneDimensions.height, this.sceneDimensions.depth);
+      let draggableElement = this.addDraggable(streamName, position);
+      $('.draggable-parent').append(draggableElement);
 
-      if (this.audioContext && this.mediaSourceSupported) {
-        // Get the real media element
-        playerElement = document.getElementById(player.media.renderer.id);
-        let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
+      player.media.addEventListener('canplay', () => {
+        if (this.audioContext) {
+          // Get the real media element
+          playerElement = document.getElementById(player.media.renderer.id);
+          let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
 
-        let analyser = this.audioContext.createAnalyser();
-        analyser.smoothingTimeConstant = 0.5;
-        analyser.fftSize = 512; // the total samples are half the fft size.
-        audioElementSource.connect(analyser);
+          let analyser = this.audioContext.createAnalyser();
+          analyser.smoothingTimeConstant = 0.5;
+          analyser.fftSize = 512; // the total samples are half the fft size.
+          audioElementSource.connect(analyser);
 
-        let volume = this.audioContext.createGain();
-        player.media.addEventListener('volumechange', () => {
-          volume.gain.setValueAtTime(player.getVolume(), this.audioContext.currentTime);
-        });
-        analyser.connect(volume);
+          let volume = this.audioContext.createGain();
+          player.media.addEventListener('volumechange', () => {
+            volume.gain.setValueAtTime(player.getVolume(), this.audioContext.currentTime);
+          });
+          analyser.connect(volume);
 
-        let soundSource = this.resonanceScene.createSource();
-        let position = this.randomPosition(this.sceneDimensions.width, this.sceneDimensions.height, this.sceneDimensions.depth);
-        soundSource.setPosition(position.x, 0, position.z);
-        volume.connect(soundSource.input);
+          let soundSource = this.resonanceScene.createSource();
 
-        let draggableElement = this.addDraggable(streamName, position);
-        $('.draggable-parent').append(draggableElement);
+          soundSource.setPosition(position.x, 0, position.z);
+          volume.connect(soundSource.input);
 
-        streamData.setProperties({
-          name: streamName,
-          audioElementSource: audioElementSource,
-          analyser: analyser,
-          volume: volume,
-          soundSource: soundSource,
-          position: position,
-          draggableElement: draggableElement
-        });
+          streamData.setProperties({
+            audioElementSource: audioElementSource,
+            analyser: analyser,
+            volume: volume,
+            soundSource: soundSource,
+            position: position,
+            draggableElement: draggableElement
+          });
 
-        this.drawVU(analyser, draggableElement, 0);
-      }
+          this.drawVU(analyser, draggableElement, 0);
+        }
+      });
     }));
   },
   startPlayer(stream, playerElement) {

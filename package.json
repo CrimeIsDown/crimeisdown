@@ -26,8 +26,8 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "devDependencies": {
-    "@ember/jquery": "^0.5.2",
-    "@ember/optional-features": "^0.6.3",
+    "@ember/jquery": "^0.6.0",
+    "@ember/optional-features": "^0.7.0",
     "@jasonmit/ember-trix-editor": "^2.1.0",
     "@mapbox/leaflet-pip": "^1.1.0",
     "bootstrap": "^4.1.3",
