@@ -167,10 +167,12 @@ export default Component.extend({
         }
         window.location.hash = '#location_query=' + encodeURIComponent(query);
         this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
+        let wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=14&lat=' + this.location.meta.latitude + '&lon=' + this.location.meta.longitude;
+        $('#waze-map').attr('src', wazeIframeUrl);
         if (this.location.meta.inChicago) {
           let randomInt = Math.round(Math.random() * 1000);
-          let iframeUrl = 'https://www.crimereports.com/city/Chicago%2C%20IL?is_widget=true&_=' + randomInt + '#!/dashboard?lat=' + this.location.meta.latitude + '&lng=' + this.location.meta.longitude + '&zoom=17&start_date=2018-11-24&end_date=2018-12-24&date_type=relative&current_tab=list&shapeIds=&shape_id=false&incident_types=Alarm%252CArson%252CAssault%252CAssault%2520with%2520Deadly%2520Weapon%252CBreaking%2520%2526%2520Entering%252CCommunity%2520Policing%252CDeath%252CDisorder%252CDrugs%252CEmergency%252CFamily%2520Offense%252CFire%252CHomicide%252CKidnapping%252CLiquor%252CMissing%2520Person%252COther%252COther%2520Sexual%2520Offense%252CPedestrian%2520Stop%252CProactive%2520Policing%252CProperty%2520Crime%252CProperty%2520Crime%2520Commercial%252CProperty%2520Crime%2520Residential%252CQuality%2520of%2520Life%252CRobbery%252CSexual%2520Assault%252CSexual%2520Offense%252CTheft%252CTheft%2520from%2520Vehicle%252CTheft%2520of%2520Vehicle%252CTraffic%252CVehicle%2520Recovery%252CVehicle%2520Stop%252CWeapons%2520Offense';
-          $('#crimereports-map').attr('src', iframeUrl);
+          let crimereportsIframeUrl = 'https://www.crimereports.com/city/Chicago%2C%20IL?is_widget=true&_=' + randomInt + '#!/dashboard?lat=' + this.location.meta.latitude + '&lng=' + this.location.meta.longitude + '&zoom=17&start_date=2018-11-24&end_date=2018-12-24&date_type=relative&current_tab=list&shapeIds=&shape_id=false&incident_types=Alarm%252CArson%252CAssault%252CAssault%2520with%2520Deadly%2520Weapon%252CBreaking%2520%2526%2520Entering%252CCommunity%2520Policing%252CDeath%252CDisorder%252CDrugs%252CEmergency%252CFamily%2520Offense%252CFire%252CHomicide%252CKidnapping%252CLiquor%252CMissing%2520Person%252COther%252COther%2520Sexual%2520Offense%252CPedestrian%2520Stop%252CProactive%2520Policing%252CProperty%2520Crime%252CProperty%2520Crime%2520Commercial%252CProperty%2520Crime%2520Residential%252CQuality%2520of%2520Life%252CRobbery%252CSexual%2520Assault%252CSexual%2520Offense%252CTheft%252CTheft%2520from%2520Vehicle%252CTheft%2520of%2520Vehicle%252CTraffic%252CVehicle%2520Recovery%252CVehicle%2520Stop%252CWeapons%2520Offense';
+          $('#crimereports-map').attr('src', crimereportsIframeUrl);
 
           schedule('afterRender', () => {
             $('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
