@@ -167,7 +167,7 @@ export default Component.extend({
         }
         window.location.hash = '#location_query=' + encodeURIComponent(query);
         this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
-        let wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=14&lat=' + this.location.meta.latitude + '&lon=' + this.location.meta.longitude;
+        let wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=14&lat=' + this.location.meta.latitude + '&lon=' + this.location.meta.longitude + '&pin=1';
         $('#waze-map').attr('src', wazeIframeUrl);
         if (this.location.meta.inChicago) {
           let randomInt = Math.round(Math.random() * 1000);
