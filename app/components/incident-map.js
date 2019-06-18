@@ -48,6 +48,10 @@ export default Component.extend({
 
   actions: {
     searchAddress(address) {
+      let fireStationResults = this.addressLookup.findStation(address);
+      if (fireStationResults.length) {
+        address = fireStationResults[0].addr + ' ' + fireStationResults[0].zip;
+      }
       $('.leaflet-control-geosearch.bar form input').val(address);
       $('#address-search').find('input[name="address"]').val(address);
       this.searchControl.searchElement.handleSubmit({ query: address });
