@@ -217,5 +217,43 @@ export default Service.extend({
       nearestTraumaAdult: nearestTraumaAdult,
       nearestTraumaPed: nearestTraumaPed
     };
+  },
+
+  findStation(query) {
+    query = query.toUpperCase();
+    let HQ = ' (HQ)';
+    let results = [];
+    this.fireStations.forEach((station) => {
+      let searchable = [];
+      if (station.engine) {
+        searchable = searchable.concat(station.engine.split(/, ?/));
+      }
+      if (station.truck) {
+        searchable = searchable.concat(station.truck.split(/, ?/));
+      }
+      if (station.ambo) {
+        searchable = searchable.concat(station.ambo.split(/, ?/));
+      }
+      if (station.special) {
+        searchable = searchable.concat(station.special.split(/, ?/));
+      }
+      if (station.squad) {
+        searchable.push(station.squad.substring(0, station.squad.indexOf('/')));
+      }
+      if (station.batt.indexOf(HQ)) {
+        searchable.push('BC' + station.batt.substring(0, station.batt.indexOf(HQ)));
+      }
+      if (station.fireDist.indexOf(HQ)) {
+        searchable.push('2-2-' + station.fireDist.substring(0, station.fireDist.indexOf(HQ)));
+      }
+      if (station.emsDist.indexOf(HQ)) {
+        searchable.push('4-5-' + station.emsDist.substring(0, station.emsDist.indexOf(HQ)));
+      }
+
+      if (searchable.indexOf(query) !== -1) {
+        results.push(station);
+      }
+    });
+    return results;
   }
 });
