@@ -16,7 +16,6 @@
     </div>
   </div>
   <div class="col-md-7">
-    {{#if mediaSourceSupported}}
     <h4>Spatial Scanner Audio</h4>
     <p>Drag <i class="fa fa-volume-up"></i> to move stereo channels, use <i class="fa fa-headphones" aria-label="headphones"></i> to experience surround sound</p>
     <div class="draggable-parent">
@@ -25,10 +24,6 @@
         <i class="draggable fa fa-volume-up" id="drag-{{stream.name}}" title="{{stream.name}}"><span>&nbsp;{{stream.name}}</span></i>
       {{/each}}
     </div>
-    {{else}}
-    <h4>Scanner Audio</h4>
-    <p>Your currently playing streams:</p>
-    {{/if}}
     {{#each enabledStreams as |stream|}}
     <div class="stream" id="stream-{{stream.name}}">
       <div class="row">

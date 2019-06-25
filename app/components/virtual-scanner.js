@@ -17,8 +17,7 @@ export default Component.extend({
 
     this.setupResonanceScene();
 
-    //this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !mejs.Features.isiOS);
-    this.set('mediaSourceSupported', true);
+    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !mejs.Features.isiOS);
 
     this.onMove = (event) => {
       let target = event.target,
@@ -92,13 +91,14 @@ export default Component.extend({
     this.sceneDimensions = {
       width: 4, height: 4, depth: 4,
     };
-    // this.sceneMaterials = {
-    //   left: 'uniform', right: 'uniform',
-    //   up: 'transparent', down: 'transparent',
-    //   front: 'uniform', back: 'uniform',
-    // };
+    this.sceneMaterials = {
+      left: 'uniform', right: 'uniform',
+      up: 'transparent', down: 'transparent',
+      front: 'uniform', back: 'uniform',
+    };
 
-    if (!mejs.Features.isiOS) {
+    let resonanceAudioSupported = this.mediaSourceSupported;
+    if (resonanceAudioSupported) {
       this.resonanceScene = new window.ResonanceAudio(this.audioContext, {
         ambisonicOrder: 1,
       });
