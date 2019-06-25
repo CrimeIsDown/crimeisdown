@@ -15,9 +15,9 @@ export default Component.extend({
 
     this.audioContext = new (window.AudioContext || window.webkitAudioContext);
 
-    this.setupResonanceScene();
+    this.mediaSourceSupported = (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !mejs.Features.isiOS;
 
-    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !mejs.Features.isiOS);
+    this.setupResonanceScene();
 
     this.onMove = (event) => {
       let target = event.target,
