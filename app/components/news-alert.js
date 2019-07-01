@@ -8,7 +8,7 @@ export default Component.extend({
   },
   didInsertElement() {
     if (!this.hasSeenAlert) {
-      $('#news-alert').on('closed.bs.alert', function () {
+      $('#news-alert').on('closed.bs.alert', () => {
         localStorage.setItem('saw-alert-20181223', true);
       });
     }

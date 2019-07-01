@@ -1,0 +1,50 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <form>
+        <h1 id="title">Why do I hear sirens?</h1>
+        <div class="form-group">
+          <label for="whereInput" class="h2">Where?</label>
+          <input type="text" class="form-control" id="whereInput" aria-describedby="whereHelp" placeholder="Enter address">
+          <small id="whereHelp" class="form-text text-muted">Enter an address or place name</small>
+        </div>
+        <div class="form-group">
+          <label for="whenInput" class="h2">When?</label>
+          <input type="text" class="form-control" id="whenInput" aria-describedby="whenHelp" placeholder="This should be a datepicker">
+          <small id="whenHelp" class="form-text text-muted">Now, 20 minutes ago, etc</small>
+        </div>
+        <div class="form-group">
+          <label class="h2">Who is responding?</label>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="cpd" id="whoPolice">
+            <label class="form-check-label" for="whoPolice">Police (CPD)</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="cfd-fire" id="whoFire">
+            <label class="form-check-label" for="whoPolice">Fire truck (CFD)</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="cfd-ems" id="whoEms">
+            <label class="form-check-label" for="whoPolice">Ambulance (CFD)</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="other" id="whoOther">
+            <label class="form-check-label" for="whoOther">Other agency, or I don't know</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="specialDetails">Special Details</label>
+          <select id="specialDetails" class="form-control">
+            <option selected>No special details</option>
+            <option>On an expressway/interstate</option>
+            <option>On public transit (CTA)</option>
+            <option>On the river or lake</option>
+            <option>Crime scene tape up</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Find out!</button>
+      </form>
+    </div>
+  </div>
+</div>
