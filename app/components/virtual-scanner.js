@@ -13,12 +13,6 @@ export default Component.extend({
     this.streams = [];
     this.enabledStreams = [];
 
-    this.audioContext = new (window.AudioContext || window.webkitAudioContext);
-
-    this.mediaSourceSupported = (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !mejs.Features.isiOS;
-
-    this.setupResonanceScene();
-
     this.onMove = (event) => {
       let target = event.target,
         // keep the dragged position in the data-x/data-y attributes
@@ -73,6 +67,13 @@ export default Component.extend({
   },
   actions: {
     changeStreams(target) {
+      if (typeof this.audioContext === 'undefined') {
+        // Instantiate the context on user interaction
+        this.set('audioContext', new (window.AudioContext || window.webkitAudioContext));
+        this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !mejs.Features.isiOS);
+        this.setupResonanceScene();
+      }
+
       if (target.checked) {
         this.addStream(target.value);
       } else {
@@ -135,24 +136,17 @@ export default Component.extend({
         let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
         streamData.set('audioElementSource', audioElementSource);
 
-        let analyser;
-        if (this.resonanceScene) {
-          analyser = this.audioContext.createAnalyser();
-          analyser.smoothingTimeConstant = 0.5;
-          analyser.fftSize = 512; // the total samples are half the fft size.
-          audioElementSource.connect(analyser);
-          streamData.set('analyser', analyser);
-        }
+        let analyser = this.audioContext.createAnalyser();
+        analyser.smoothingTimeConstant = 0.5;
+        analyser.fftSize = 512; // the total samples are half the fft size.
+        audioElementSource.connect(analyser);
+        streamData.set('analyser', analyser);
 
         let volume = this.audioContext.createGain();
         player.media.addEventListener('volumechange', () => {
           volume.gain.setValueAtTime(player.getVolume(), this.audioContext.currentTime);
         });
-        if (this.resonanceScene) {
-          streamData.analyser.connect(volume);
-        } else {
-          audioElementSource.connect(volume);
-        }
+        streamData.analyser.connect(volume);
         streamData.set('volume', volume);
 
         if (this.resonanceScene) {
@@ -211,19 +205,17 @@ export default Component.extend({
   },
   removeStream(streamName) {
     let streamData = this.enabledStreams.findBy('name', streamName);
-    if (this.mediaSourceSupported) {
-      if (typeof streamData.soundSource !== 'undefined') {
-        streamData.soundSource.input.disconnect();
-      } else {
-        streamData.panner.disconnect();
-      }
-      streamData.volume.disconnect();
-      if (typeof streamData.analyser !== 'undefined') {
-        streamData.analyser.disconnect();
-      }
-      streamData.audioElementSource.disconnect();
-      streamData.draggableElement.remove();
+    if (typeof streamData.soundSource !== 'undefined') {
+      streamData.soundSource.input.disconnect();
+    } else {
+      streamData.panner.disconnect();
     }
+    streamData.volume.disconnect();
+    if (typeof streamData.analyser !== 'undefined') {
+      streamData.analyser.disconnect();
+    }
+    streamData.audioElementSource.disconnect();
+    streamData.draggableElement.remove();
     this.enabledStreams.removeObject(streamData);
   },
   addDraggable(streamName, roomPosition) {
@@ -234,7 +226,7 @@ export default Component.extend({
     draggableElement.setAttribute('data-y', dragPos.dragY);
     return draggableElement;
   },
-  drawVU(analyser, canvasContext, lastVal) {
+  drawVU(analyser, element, lastVal) {
     let array = new Uint8Array(analyser.fftSize);
     analyser.getByteTimeDomainData(array);
 
@@ -247,11 +239,11 @@ export default Component.extend({
 
     // optimization to avoid unnecessary repaints
     if (val !== lastVal) {
-      canvasContext.style.color = 'rgb(0,' + val + ',0)';
+      element.style.color = 'rgb(0,' + val + ',0)';
     }
 
     requestAnimationFrame(() => {
-      this.drawVU(analyser, canvasContext, val);
+      this.drawVU(analyser, element, val);
     });
   },
   randomPosition(width, height, depth) {
