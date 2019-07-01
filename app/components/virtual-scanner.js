@@ -121,11 +121,8 @@ export default Component.extend({
 
       let player = this.startPlayer(streamName, playerElement);
       let position = this.randomPosition(this.sceneDimensions.width, this.sceneDimensions.height, this.sceneDimensions.depth);
-      let draggableElement;
-      if (this.mediaSourceSupported) {
-        draggableElement = this.addDraggable(streamName, position);
-        $('.draggable-parent').append(draggableElement);
-      }
+      let draggableElement = this.addDraggable(streamName, position);
+      $('.draggable-parent').append(draggableElement);
 
       streamData.setProperties({
         position: position,
