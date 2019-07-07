@@ -5201,6 +5201,14 @@
   },
   {
     "Agency": "CFD",
+    "ID_Number": "6-8-5",
+    "Level_1": "Operations",
+    "Level_2": "Special Operations",
+    "Level_3": "Air and Sea Rescue",
+    "Level_4": "Training Officer, Marine and Dive Operations"
+  },
+  {
+    "Agency": "CFD",
     "ID_Number": "6-8-6",
     "Level_1": "Operations",
     "Level_2": "Special Operations",
