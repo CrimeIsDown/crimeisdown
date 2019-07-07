@@ -317,9 +317,6 @@ export default Component.extend({
                   mouseout: (e) => {
                     e.target.setStyle(layerObj.style);
                     info.update();
-                  },
-                  click: (e) => {
-                    map.fitBounds(e.target.getBounds());
                   }
                 });
               }
