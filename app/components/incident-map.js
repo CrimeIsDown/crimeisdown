@@ -32,6 +32,7 @@ export default Component.extend({
         pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
         shimScriptAccess: 'always',
         renderers: ['native_dash', 'flash_dash'],
+        dash: { path: 'https://cdn.dashjs.org/v2.9.3/dash.all.min.js' },
         isVideo: false,
         features: ['playpause', 'current', 'volume']
       }));
@@ -40,6 +41,7 @@ export default Component.extend({
         pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
         shimScriptAccess: 'always',
         renderers: ['html5', 'native_hls', 'flash_hls'],
+        hls: { path: 'https://cdn.jsdelivr.net/npm/hls.js@0.12.4' },
         isVideo: false,
         features: ['playpause', 'current', 'volume']
       }));
