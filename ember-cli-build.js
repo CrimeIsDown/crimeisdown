@@ -18,6 +18,11 @@ module.exports = function(defaults) {
       includePolyfill: true
     },
 
+    sourcemaps: {
+      enabled: true,
+      extensions: ['js']
+    },
+
     fingerprint: {
       exclude: [
         'assets/images/layers-2x.png',
