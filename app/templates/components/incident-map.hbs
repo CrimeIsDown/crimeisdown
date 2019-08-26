@@ -15,14 +15,14 @@
           {{incident-table model=model incidents=incidents openIncidents=openIncidents}}
         </div>
       </div> --}}
-      <div class="card draggable">
+      <div class="card">
         <div class="card-header" role="tab">
           <a class="card-heading" id="headingAddrSearch" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
             Address Search
           </a>
-          <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
+          {{!--<a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>--}}
         </div>
-        <div id="collapseAddrSearch" class="collapse show" role="tabpanel" aria-labelledby="headingAddrSearch" data-parent="#accordion">
+        <div id="collapseAddrSearch" class="collapse show" role="tabpanel" aria-labelledby="headingAddrSearch">
           <div id="address-search">
             <form {{action "searchAddress" address on="submit"}}>
               <div class="form-group">
@@ -153,40 +153,40 @@
           </div>
         </div>
       </div>
-      <div class="card draggable">
+      <div class="card">
         <div class="card-header" role="tab">
           <a class="card-heading" id="headingRIDSearch" data-toggle="collapse" href="#collapseRIDSearch" aria-expanded="true" aria-controls="collapseRIDSearch">
             Radio ID Search
           </a>
-          <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
+          {{!--<a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>--}}
         </div>
-        <div id="collapseRIDSearch" class="collapse show" role="tabpanel" aria-labelledby="headingRIDSearch" data-parent="#accordion">
+        <div id="collapseRIDSearch" class="collapse show" role="tabpanel" aria-labelledby="headingRIDSearch">
           <div id="search-radioids">
             {{search-radioids}}
           </div>
         </div>
       </div>
-      <div class="card draggable">
+      <div class="card">
         <div class="card-header" role="tab">
           <a class="card-heading" id="headingUCRSearch" data-toggle="collapse" href="#collapseUCRSearch" aria-expanded="true" aria-controls="collapseUCRSearch">
             UCR Code Search
           </a>
-          <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
+          {{!--<a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>--}}
         </div>
-        <div id="collapseUCRSearch" class="collapse show" role="tabpanel" aria-labelledby="headingUCRSearch" data-parent="#accordion">
+        <div id="collapseUCRSearch" class="collapse show" role="tabpanel" aria-labelledby="headingUCRSearch">
           <div id="search-ucrcodes">
             {{search-ucrcodes}}
           </div>
         </div>
       </div>
-      <div class="card draggable">
+      <div class="card">
         <div class="card-header" role="tab">
           <a class="card-heading collapsed" id="headingNotepad" data-toggle="collapse" href="#collapseNotepad" aria-expanded="true" aria-controls="collapseNotepad">
             Notepad
           </a>
-          <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
+          {{!--<a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>--}}
         </div>
-        <div id="collapseNotepad" class="collapse" role="tabpanel" aria-labelledby="headingNotepad" data-parent="#accordion">
+        <div id="collapseNotepad" class="collapse" role="tabpanel" aria-labelledby="headingNotepad">
           <div id="notepad">
             <p>Use the text area for any notes you may need to take when listening to the scanner.</p>
             {{trix-editor}}
@@ -195,7 +195,7 @@
         </div>
       </div>
     </div>
-    <script>
+    {{!--<script>
       // @TODO: Move outside the template
       var el = document.querySelector('.search-container > .accordion');
       var sortable = Sortable.create(el, {
@@ -203,7 +203,7 @@
         handle: '.draggable-handle',
         delay: 500
       });
-    </script>
+    </script>--}}
   </div>
   <div class="map-container">
     <ul class="nav nav-tabs" id="cadTabs" role="tablist">
