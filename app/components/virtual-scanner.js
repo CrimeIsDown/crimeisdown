@@ -172,13 +172,13 @@ export default Component.extend({
     let audioPlayer;
     if (this.mediaSourceSupported) {
       audioPlayer = new MediaElementPlayer(playerElement, {
-        pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
+        pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.12/build/",
         shimScriptAccess: 'always',
         renderers: ['native_dash', 'flash_dash'],
         dash: { path: 'https://cdn.dashjs.org/v2.9.3/dash.all.min.js' },
         isVideo: false,
         pauseOtherPlayers: false,
-        features: ['playpause', 'current', 'volume']
+        features: ['current', 'volume']
       });
       audioPlayer.setSrc({
         src: 'https://audio.crimeisdown.com/streaming/dash/' + stream + '/',
@@ -186,13 +186,13 @@ export default Component.extend({
       });
     } else {
       audioPlayer = new MediaElementPlayer(playerElement, {
-        pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
+        pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.12/build/",
         shimScriptAccess: 'always',
         renderers: ['html5', 'native_hls', 'flash_hls'],
         hls: { path: 'https://cdn.jsdelivr.net/npm/hls.js@0.12.4' },
         isVideo: false,
         pauseOtherPlayers: false,
-        features: ['playpause', 'current', 'volume']
+        features: ['current', 'volume']
       });
       audioPlayer.setSrc({
         src: 'https://audio.crimeisdown.com/streaming/hls/' + stream + '/index.m3u8',
