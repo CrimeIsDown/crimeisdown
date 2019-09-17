@@ -128,11 +128,11 @@ export default Component.extend({
       // Get the real media element
       playerElement = document.getElementById(player.media.renderer.id);
       let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
-      streamData.set('audioElementSource', audioElementSource);
 
       streamData.setProperties({
         position: position,
-        draggableElement: draggableElement
+        draggableElement: draggableElement,
+        audioElementSource: audioElementSource
       });
 
       player.media.addEventListener('canplay', bind(this, () => {
@@ -178,7 +178,7 @@ export default Component.extend({
         dash: { path: 'https://cdn.dashjs.org/v3.0.0/dash.all.min.js' },
         isVideo: false,
         pauseOtherPlayers: false,
-        features: ['current', 'volume']
+        features: ['playpause', 'current', 'volume']
       });
       audioPlayer.setSrc({
         src: 'https://audio.crimeisdown.com/streaming/dash/' + stream + '/',
@@ -192,7 +192,7 @@ export default Component.extend({
         hls: { path: 'https://cdn.jsdelivr.net/npm/hls.js@0.12.4' },
         isVideo: false,
         pauseOtherPlayers: false,
-        features: ['current', 'volume']
+        features: ['playpause', 'current', 'volume']
       });
       audioPlayer.setSrc({
         src: 'https://audio.crimeisdown.com/streaming/hls/' + stream + '/index.m3u8',
