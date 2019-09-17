@@ -125,17 +125,17 @@ export default Component.extend({
       let draggableElement = this.addDraggable(streamName, position);
       $('.draggable-parent').append(draggableElement);
 
+      // Get the real media element
+      playerElement = document.getElementById(player.media.renderer.id);
+      let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
+      streamData.set('audioElementSource', audioElementSource);
+
       streamData.setProperties({
         position: position,
         draggableElement: draggableElement
       });
 
       player.media.addEventListener('canplay', bind(this, () => {
-        // Get the real media element
-        playerElement = document.getElementById(player.media.renderer.id);
-        let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
-        streamData.set('audioElementSource', audioElementSource);
-
         let analyser = this.audioContext.createAnalyser();
         analyser.smoothingTimeConstant = 0.5;
         analyser.fftSize = 512; // the total samples are half the fft size.
@@ -175,7 +175,7 @@ export default Component.extend({
         pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.12/build/",
         shimScriptAccess: 'always',
         renderers: ['native_dash', 'flash_dash'],
-        dash: { path: 'https://cdn.dashjs.org/v2.9.3/dash.all.min.js' },
+        dash: { path: 'https://cdn.dashjs.org/v3.0.0/dash.all.min.js' },
         isVideo: false,
         pauseOtherPlayers: false,
         features: ['current', 'volume']
