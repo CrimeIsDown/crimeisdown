@@ -1107,15 +1107,6 @@
   resolved "https://registry.yarnpkg.com/@interactjs/utils/-/utils-1.5.4.tgz#392a03f14274be7288e342959d3bc4d140379f58"
   integrity sha512-K+aQdl9ipkwxRduZxUMfUHxIqkEq0N62BG5/7FE+bCYXVPTFWcBEkykDGHS/ZN7I53QJJvI/tGsj9sxtaQHD8Q==
 
-"@jasonmit/ember-trix-editor@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@jasonmit/ember-trix-editor/-/ember-trix-editor-2.1.0.tgz#62ca2b838a5393db540953eeb8b29294cef6e8c7"
-  integrity sha512-plwjeC6/+v9deTgu+Rdlf1maVxeHn8Ivrpkl+Co6jJ3vD3W4Z6O1Ok8AnlJfsUgNBqKRMeYUKV0lHRQaQ3KLeQ==
-  dependencies:
-    ember-cli-babel "^6.6.0"
-    ember-cli-htmlbars "2.0.3"
-    trix "0.9.1"
-
 "@mapbox/leaflet-pip@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@mapbox/leaflet-pip/-/leaflet-pip-1.1.0.tgz#4a7a4beb458c8cc24d84936fca5aba095de6e37d"
@@ -3221,7 +3212,7 @@ broccoli-node-info@^2.1.0:
   resolved "https://registry.yarnpkg.com/broccoli-node-info/-/broccoli-node-info-2.1.0.tgz#ca84560e8570ff78565bea1699866ddbf58ad644"
   integrity sha512-l6qDuboJThHfRVVWQVaTs++bFdrFTP0gJXgsWenczc1PavRVUmL1Eyb2swTAXXMpDOnr2zhNOBLx4w9AxkqbPQ==
 
-broccoli-persistent-filter@^1.0.3, broccoli-persistent-filter@^1.1.6, broccoli-persistent-filter@^1.4.3:
+broccoli-persistent-filter@^1.1.6, broccoli-persistent-filter@^1.4.3:
   version "1.4.6"
   resolved "https://registry.yarnpkg.com/broccoli-persistent-filter/-/broccoli-persistent-filter-1.4.6.tgz#80762d19000880a77da33c34373299c0f6a3e615"
   integrity sha512-0RejLwoC95kv4kta8KAa+FmECJCK78Qgm8SRDEK7YyU0N9Cx6KpY3UCDy9WELl3mCXLN8TokNxc7/hp3lL4lfw==
@@ -4961,16 +4952,6 @@ ember-cli-htmlbars-inline-precompile@^2.1.0:
     heimdalljs-logger "^0.1.9"
     silent-error "^1.1.0"
 
-ember-cli-htmlbars@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-2.0.3.tgz#e116e1500dba12f29c94b05b9ec90f52cb8bb042"
-  integrity sha512-oyWtJebOwxAqWZwMc0NKFJ8FJdxVixM7zl0FaXq1vTAG6bOgnU7yAhXEASlaO5f+PptZueZfOpdpvRwZW/Gk1A==
-  dependencies:
-    broccoli-persistent-filter "^1.0.3"
-    hash-for-dep "^1.0.2"
-    json-stable-stringify "^1.0.0"
-    strip-bom "^3.0.0"
-
 ember-cli-htmlbars@^3.0.1:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-3.1.0.tgz#87806c2a0bca2ab52d4fb8af8e2215c1ca718a99"
@@ -5424,6 +5405,14 @@ ember-moment@^7.6.0:
     ember-cli-babel "^6.7.2"
     ember-getowner-polyfill "^2.2.0"
     ember-macro-helpers "^2.1.0"
+
+ember-pell@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/ember-pell/-/ember-pell-1.4.5.tgz#e6ad46077caf28abca4185ce013b96e68583a487"
+  integrity sha512-9ZHJ1NXyWx+S0TMHxuZ11ulnDofkVeYwCcXdzqNKwdxezyzTesXoHwFpu5+KA1/VUHsAfGQiiQmZ+L80mLm4xA==
+  dependencies:
+    ember-cli-babel "^7.7.3"
+    pell "^1.0.6"
 
 ember-power-select@^2.0.0-beta.3:
   version "2.3.5"
@@ -9881,6 +9870,11 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+pell@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/pell/-/pell-1.0.6.tgz#9edb026f1edec2b4964251cdb2cd6fcadff08a76"
+  integrity sha512-wuackvgjFCHmVABy7ACSmY2u53w+TlYFrVL2hN6V3rGL/iWWwVXMw2uphpZSXNnqFQTI8nMpD3UNNX8+R4BAYw==
+
 performance-now@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
@@ -12025,11 +12019,6 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
-
-trix@0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-0.9.1.tgz#61c19fe80d3bb1bd0de7fbde4432479c1d7b9d98"
-  integrity sha1-YcGf6A07sb0N5/veRDJHnB17nZg=
 
 "true-case-path@^1.0.2":
   version "1.0.3"

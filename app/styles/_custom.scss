@@ -135,9 +135,6 @@ ul.nav.nav-tabs {
   }
   .search-container {
     padding: 1rem;
-    trix-toolbar .button_group * {
-      font-size: 0 !important;
-    }
     #address-search {
       table tr > td {
         width: 50%;
@@ -207,15 +204,6 @@ ul.nav.nav-tabs {
   }
 }
 
-
-#notepad {
-  trix-editor {
-    margin-bottom: 1em;
-  }
-  trix-toolbar {
-    display: none;
-  }
-}
 
 #site-footer {
   margin-top: 1rem;
