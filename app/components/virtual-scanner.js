@@ -125,17 +125,17 @@ export default Component.extend({
       let draggableElement = this.addDraggable(streamName, position);
       $('.draggable-parent').append(draggableElement);
 
-      // Get the real media element
-      playerElement = document.getElementById(player.media.renderer.id);
-      let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
-
       streamData.setProperties({
         position: position,
-        draggableElement: draggableElement,
-        audioElementSource: audioElementSource
+        draggableElement: draggableElement
       });
 
       player.media.addEventListener('canplay', bind(this, () => {
+        // Get the real media element
+        playerElement = document.getElementById(player.media.renderer.id);
+        let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
+        streamData.set('audioElementSource', audioElementSource);
+
         let analyser = this.audioContext.createAnalyser();
         analyser.smoothingTimeConstant = 0.5;
         analyser.fftSize = 512; // the total samples are half the fft size.
