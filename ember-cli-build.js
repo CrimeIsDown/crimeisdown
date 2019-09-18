@@ -46,9 +46,6 @@ module.exports = function(defaults) {
 
   app.import('node_modules/@mapbox/leaflet-pip/leaflet-pip.js');
 
-  app.import('node_modules/raven-js/dist/raven.js');
-  app.import('node_modules/raven-js/dist/plugins/ember.js');
-
   app.import('node_modules/popper.js/dist/umd/popper.js');
   app.import('node_modules/bootstrap/dist/js/bootstrap.js');
 

@@ -86,10 +86,13 @@
     "nodent-runtime": "^3.0.3",
     "popper.js": "^1.11.1",
     "qunit-dom": "^0.8.4",
-    "raven-js": "^3.17.0",
     "resonance-audio": "^1.0.0",
     "sortablejs": "^1.6.1",
     "whatwg-fetch": "^2.0.1"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@sentry/browser": "5.6.3",
+    "@sentry/integrations": "^5.6.1"
+  }
 }
