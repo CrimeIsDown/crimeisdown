@@ -138,7 +138,7 @@ export default Component.extend({
       if (localStorage.getItem('dark')) {
         this.baseLayers["MapBox Streets Dark"].addTo(this.map);
       } else {
-        this.baseLayers["OpenStreetMap"].addTo(this.map);
+        this.baseLayers["MapBox Streets"].addTo(this.map);
       }
 
       resolve();
