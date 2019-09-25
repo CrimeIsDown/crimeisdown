@@ -7,8 +7,8 @@
         <div class="stream-options">
           {{#each streams as |streamOption|}}
             <div class="form-check">
-              <input class="form-check-input" id="checkbox-{{streamOption}}" type="checkbox" name="stream" value={{streamOption}}>
-              <label class="form-check-label" for="checkbox-{{streamOption}}">{{streamOption}}</label>
+              <input class="form-check-input" id="checkbox-{{streamOption.name}}" type="checkbox" name="stream" value={{streamOption.name}}>
+              <label class="form-check-label" for="checkbox-{{streamOption.name}}">{{streamOption.desc}}</label>
             </div>
           {{/each}}
         </div>
@@ -21,13 +21,13 @@
     <div class="draggable-parent">
       <i class="fa fa-user"></i>
       {{#each enabledStreams as |stream|}}
-        <i class="draggable fa fa-volume-up" id="drag-{{stream.name}}" title="{{stream.name}}"><span>&nbsp;{{stream.name}}</span></i>
+        <i class="draggable fa fa-volume-up" id="drag-{{stream.name}}" title="{{stream.desc}}"><span>&nbsp;{{stream.name}}</span></i>
       {{/each}}
     </div>
     {{#each enabledStreams as |stream|}}
     <div class="stream" id="stream-{{stream.name}}">
       <div class="row">
-        <h5 class="col-sm-6 title">{{stream.name}}</h5>
+        <h5 class="col-sm-6 title">{{stream.desc}}</h5>
         <div class="col-sm-6 btn-group" role="group">
           <!--<button onclick={{action "seekStream" -10}} class="btn btn-sm btn-secondary" title="Rewind 10 seconds"><i class="fa fa-step-backward"></i> 10s</button>-->
           <!--<button onclick={{action "seekStream" 999}} class="btn btn-sm btn-info"><i class="fa fa-circle text-danger"></i> Live</button>-->

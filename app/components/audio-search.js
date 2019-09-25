@@ -2,7 +2,8 @@ import Component from '@ember/component';
 import $ from 'jquery';
 
 export default Component.extend({
-  didRender() {
+  init() {
+    this._super(...arguments);
     let options = {
       enableTime: true,
       minDate: new Date('2016-12-11T08:00:00.000Z'),
@@ -14,6 +15,6 @@ export default Component.extend({
     options.maxDate.setMinutes(59);
     options.defaultDate = options.maxDate;
     options.defaultDate.setMinutes(0);
-    $('#datetimepicker').flatpickr(options);
+    this.options = options;
   }
 });

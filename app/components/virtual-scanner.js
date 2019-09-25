@@ -12,6 +12,25 @@ export default Component.extend({
     this._super(...arguments);
     this.streams = [];
     this.enabledStreams = [];
+    this.nameDescMappings = {
+      zone1: "Zone 1 (016/017)",
+      zone2: "Zone 2 (019)",
+      zone3: "Zone 3 (012/014)",
+      zone4: "Zone 4 (001/018)",
+      zone5: "Zone 5 (002)",
+      zone6: "Zone 6 (007/008)",
+      zone7: "Zone 7 (003)",
+      zone8: "Zone 8 (004/006)",
+      zone9: "Zone 9 (005/022)",
+      zone10: "Zone 10 (010/011)",
+      zone11: "Zone 11 (020/024)",
+      zone12: "Zone 12 (015/025)",
+      zone13: "Zone 13 (009)",
+      citywide1: "Citywide 1",
+      citywide2: "Citywide 2",
+      citywide5: "Citywide 5",
+      citywide6: "Citywide 6"
+    };
 
     this.onMove = (event) => {
       let target = event.target,
@@ -48,7 +67,9 @@ export default Component.extend({
         let nodes = data.querySelectorAll('live stream name');
         // we would use forEach but it does not work on Safari <10
         for (let i = 0; i < nodes.length; i++) {
-          this.streams.pushObject(nodes[i].textContent);
+          let streamName = nodes[i].textContent;
+          let streamDesc = streamName in this.nameDescMappings ? this.nameDescMappings[streamName] : streamName;
+          this.streams.pushObject({name: streamName, desc: streamDesc});
         }
       });
   },
@@ -110,7 +131,8 @@ export default Component.extend({
     }
   },
   addStream(streamName) {
-    let streamData = EmberObject.create({name: streamName});
+    let streamDesc = streamName in this.nameDescMappings ? this.nameDescMappings[streamName] : streamName;
+    let streamData = EmberObject.create({name: streamName, desc: streamDesc});
     this.enabledStreams.pushObject(streamData);
 
     // wait for new elements to render so we can select them
@@ -132,8 +154,14 @@ export default Component.extend({
 
       player.media.addEventListener('canplay', bind(this, () => {
         // Get the real media element
-        playerElement = document.getElementById(player.media.renderer.id);
-        let audioElementSource = this.audioContext.createMediaElementSource(playerElement);
+        playerElement = player.media.renderer;
+        let audioElementSource;
+        try {
+          audioElementSource = this.audioContext.createMediaElementSource(playerElement);
+        } catch (e) {
+          // We already went thru this, stop here
+          return;
+        }
         streamData.set('audioElementSource', audioElementSource);
 
         let analyser = this.audioContext.createAnalyser();

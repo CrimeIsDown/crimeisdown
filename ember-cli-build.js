@@ -52,11 +52,6 @@ module.exports = function(defaults) {
   app.import('node_modules/bootstrap-table/dist/bootstrap-table.js');
   app.import('node_modules/bootstrap-table/dist/bootstrap-table.css');
 
-  app.import('node_modules/sortablejs/Sortable.js');
-
-  app.import('node_modules/flatpickr/dist/flatpickr.js');
-  app.import('node_modules/flatpickr/dist/flatpickr.css');
-
   app.import('node_modules/mediaelement/build/mediaelement-and-player.js');
   app.import('node_modules/mediaelement/build/mediaelementplayer.css');
   app.import('node_modules/mediaelement/build/mejs-controls.svg', {destDir: 'assets'});

@@ -6,7 +6,7 @@ module.exports = function(environment) {
     modulePrefix: 'crimeisdown',
     environment,
     rootURL: '/',
-    locationType: 'router-scroll',
+    locationType: 'auto',
     historySupportMiddleware: true,
     EmberENV: {
       FEATURES: {
@@ -27,9 +27,6 @@ module.exports = function(environment) {
       SITE_NAME_HTML: 'CrimeIsDown.com'
       // SITE_NAME_TEXT: 'Sirens',
       // SITE_NAME_HTML: '<i class="em em-rotating_light"></i> Sirens'
-    },
-    fastboot: {
-      hostWhitelist: ['crimeisdown.com', 'dev.crimeisdown.com', /^localhost:\d+$/]
     }
   };
 
