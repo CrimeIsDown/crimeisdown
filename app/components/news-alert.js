@@ -5,11 +5,12 @@ import $ from 'jquery';
 export default Component.extend({
   init() {
     this._super(...arguments);
-    try {
+    this.set('hasSeenAlert', true);
+    /*try {
       this.set('hasSeenAlert', localStorage.getItem('saw-alert-20181223') !== null);
     } catch (e) {
       return false;
-    }
+    }*/
   },
   didInsertElement() {
     if (!this.hasSeenAlert) {

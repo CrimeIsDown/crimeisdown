@@ -1,3 +1,4 @@
+/*eslint-disable no-console*/
 import Application from '@ember/application';
 import * as Sentry from '@sentry/browser'
 import * as Integrations from '@sentry/integrations';
