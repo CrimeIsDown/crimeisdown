@@ -190,6 +190,8 @@ export default Component.extend({
           streamData.set('panner', panner);
         }
 
+        draggableElement.classList.add('draggable'); // Make the element draggable now that we have completed setup
+
         if (analyser) {
           this.drawVU(analyser, draggableElement, 0);
         }
