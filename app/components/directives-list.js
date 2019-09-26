@@ -30,7 +30,7 @@ export default Component.extend({
 
     fetch('https://directives.crimeisdown.com/diff_list.json').then((response) => {
       response.json().then((directives) => {
-        this.table.bootstrapTable({
+        window.$('#directives').bootstrapTable({
           columns: [{
             field: 'link',
             title: 'Directive Title',
