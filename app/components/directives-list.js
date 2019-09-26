@@ -4,11 +4,12 @@ import fetch from 'fetch';
 
 export default Component.extend({
   openDirective(path, title) {
-    this.modal.find(' h4.modal-title').text(title);
-    this.modal.find('#directiveFrame a').attr('href', path); // Needed in case the browser doesn't support iframes
-    this.modal.find('#directiveFrame').attr('src', path);
-    this.modal.modal();
-    this.modal.find('input[type="text"]').val(window.location + '#' + path.substring(40));
+    let modal = $('#directiveViewer');
+    modal.find(' h4.modal-title').text(title);
+    modal.find('#directiveFrame a').attr('href', path); // Needed in case the browser doesn't support iframes
+    modal.find('#directiveFrame').attr('src', path);
+    window.$('#directiveViewer').modal();
+    modal.find('input[type="text"]').val(window.location + '#' + path.substring(40));
     if (window.ga && typeof window.ga === "function") {
       ga('send', 'event', 'Directive', 'open', title);
     }
@@ -25,7 +26,6 @@ export default Component.extend({
     return 0;
   },
   didRender() {
-    this.modal = $('#directiveViewer');
     this.table = $('#directives');
 
     fetch('https://directives.crimeisdown.com/diff_list.json').then((response) => {
@@ -73,7 +73,7 @@ export default Component.extend({
       });
     });
 
-    this.modal.find('form input').focus((event) => {
+    $('#directiveViewer').find('form input').focus((event) => {
       $(event.currentTarget).select();
       try {
         document.execCommand('copy');
