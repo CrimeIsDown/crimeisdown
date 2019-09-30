@@ -22,6 +22,10 @@ export default Component.extend({
   actions: {
     lookupUCR() {
       let input = this.ucrCode;
+      if (!input) {
+        alert('Please enter a UCR code before searching.');
+        return;
+      }
       if (window.ga && typeof window.ga === "function") {
         ga('send', 'event', 'Searches UCR list', 'Tools', input);
       }

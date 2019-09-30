@@ -23,6 +23,10 @@ export default Component.extend({
   },
   actions: {
     lookupRadioId() {
+      if (!this.radioId) {
+        alert('Please enter a radio ID before searching.');
+        return;
+      }
       let input = this.radioId.toUpperCase();
       set(this, 'radioId', input);
       if (window.ga && typeof window.ga === "function") {

@@ -10,7 +10,7 @@ export default Controller.extend({
   actions: {
     closeTab(incident) {
       this.openIncidents.removeObject(incident);
-      $('#cadTabs #map-tab').tab('show');
+      window.$('#cadTabs #map-tab').tab('show');
     }
   }
 });

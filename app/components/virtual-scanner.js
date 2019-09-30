@@ -53,9 +53,9 @@ export default Component.extend({
       let streamData = this.enabledStreams.findBy('name', streamName);
       if (streamData) {
         let roomPos = this.dragPositionToRoomPosition(x, y);
-        if (typeof streamData.soundSource !== 'undefined') {
+        if (streamData.soundSource) {
           streamData.soundSource.setPosition(roomPos.x, roomPos.y, roomPos.z);
-        } else {
+        } else if (streamData.panner) {
           streamData.panner.pan.setValueAtTime(roomPos.x/2, this.audioContext.currentTime);
         }
       }
@@ -89,6 +89,11 @@ export default Component.extend({
   actions: {
     changeStreams(target) {
       if (typeof this.audioContext === 'undefined') {
+        if (!(window.AudioContext || window.webkitAudioContext)) {
+          alert('Sorry, your browser does not support our own audio streaming. Please check out some of the other streaming links on this page, or switch to a browser like Chrome that is supported.');
+          return;
+        }
+
         // Instantiate the context on user interaction
         this.set('audioContext', new (window.AudioContext || window.webkitAudioContext));
         this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !mejs.Features.isiOS);
@@ -235,16 +240,11 @@ export default Component.extend({
   },
   removeStream(streamName) {
     let streamData = this.enabledStreams.findBy('name', streamName);
-    if (typeof streamData.soundSource !== 'undefined') {
-      streamData.soundSource.input.disconnect();
-    } else {
-      streamData.panner.disconnect();
-    }
-    streamData.volume.disconnect();
-    if (typeof streamData.analyser !== 'undefined') {
-      streamData.analyser.disconnect();
-    }
-    streamData.audioElementSource.disconnect();
+    if (streamData.soundSource) streamData.soundSource.input.disconnect();
+    if (streamData.panner) streamData.panner.disconnect();
+    if (streamData.volume) streamData.volume.disconnect();
+    if (streamData.analyser) streamData.analyser.disconnect();
+    if (streamData.audioElementSource) streamData.audioElementSource.disconnect();
     streamData.draggableElement.remove();
     this.enabledStreams.removeObject(streamData);
   },

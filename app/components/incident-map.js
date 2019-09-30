@@ -181,10 +181,10 @@ export default Component.extend({
           $('#crimereports-map').attr('src', crimereportsIframeUrl);
 
           schedule('afterRender', () => {
-            $('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
+            window.$('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
           });
 
-          if (!this.audioPlayer.duration || this.audioPlayer.paused) {
+          if (this.location.police.zone.num && (!this.audioPlayer.duration || this.audioPlayer.paused)) {
             if (this.mediaSourceSupported) {
               this.audioPlayer.setSrc({
                 src: 'https://audio.crimeisdown.com/streaming/dash/zone' + this.location.police.zone.num + '/',
