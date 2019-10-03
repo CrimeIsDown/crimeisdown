@@ -5,12 +5,16 @@
       <fieldset onchange={{action "changeStreams" value="target"}} id="streamlist">
         <legend>Check the streams to play</legend>
         <div class="stream-options">
+        {{#if streams.length}}
           {{#each streams as |streamOption|}}
             <div class="form-check">
               <input class="form-check-input" id="checkbox-{{streamOption.name}}" type="checkbox" name="stream" value={{streamOption.name}}>
               <label class="form-check-label" for="checkbox-{{streamOption.name}}">{{streamOption.desc}}</label>
             </div>
           {{/each}}
+        {{else}}
+          <p class="text-danger">Sorry, all streams are currently offline due to technical difficulties. Please try again later.</p>
+        {{/if}}
         </div>
       </fieldset>
     </div>
