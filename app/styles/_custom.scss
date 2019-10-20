@@ -224,6 +224,11 @@ input#datetimepicker[readonly] {
   background-color: $white;
 }
 
+input.flatpickr-mobile {
+  border-top-left-radius: 0.25rem !important;
+  border-bottom-left-radius: 0.25rem !important;
+}
+
 .stream-options {
   label {
     cursor: pointer;
