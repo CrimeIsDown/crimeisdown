@@ -13,7 +13,6 @@ Router.map(function() {
   this.route('directives');
   this.route('guide');
   this.route('audio');
-  this.route('login');
   this.route('sirens');
   this.route('not-found', {
     path: '/*path'
