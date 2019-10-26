@@ -66,6 +66,9 @@ module.exports = function(environment) {
       databaseURL: "https://crimeisdown.firebaseio.com",
       storageBucket: "crimeisdown.appspot.com"
     };
+    ENV.sentry = {
+      dsn: 'https://fc1365bf53c34718b4674383752e1080@sentry.io/154438'
+    };
     ENV.APP.MEDIA_PLAYER_DEBUG = false;
   }
 
