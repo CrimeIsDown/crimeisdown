@@ -2,6 +2,7 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const Funnel = require('broccoli-funnel');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
@@ -98,5 +99,22 @@ module.exports = function(defaults) {
 
   app.import('node_modules/interactjs/dist/interact.js');
 
-  return app.toTree();
+  app.import('node_modules/video.js/dist/video.js');
+  app.import('node_modules/video.js/dist/video-js.css');
+
+  app.import('node_modules/ogv/dist/ogv-support.js');
+  app.import('node_modules/ogv/dist/ogv.js');
+  app.import('vendor/videojs-ogvjs.js');
+
+  app.import('node_modules/wavesurfer.js/dist/wavesurfer.js');
+  app.import('vendor/videojs.wavesurfer.js');
+  app.import('node_modules/videojs-wavesurfer/dist/css/videojs.wavesurfer.css');
+
+  let ogvAssets = new Funnel('node_modules/ogv/dist', {
+    srcDir: '/',
+    include: ['**/*.*'],
+    destDir: 'assets/ogv'
+  });
+
+  return app.toTree([ogvAssets]);
 };

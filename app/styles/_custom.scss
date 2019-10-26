@@ -277,6 +277,13 @@ input.flatpickr-mobile {
   }
 }
 
+.video-js.vjs-fluid {
+  padding-top: 10rem;
+  .vjs-progress-control .vjs-progress-holder {
+    margin: 0 2.5rem 0 0.75rem !important;
+  }
+}
+
 #directiveViewer {
   margin-top: 3em;
   iframe {

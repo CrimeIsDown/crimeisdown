@@ -17,6 +17,9 @@ Router.map(function() {
   this.route('not-found', {
     path: '/*path'
   });
+  this.route('archiveplayer', {
+    path: '/audio/archive/:filename'
+  });
 });
 
 export default Router;

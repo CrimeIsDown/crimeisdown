@@ -59,10 +59,12 @@
 
     <!-- We are loading leaflet-geosearch via unpkg because it is incompatible with normal ember-cli imports -->
     <script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
+
     <!-- Same with resonance-audio -->
     <script src="https://cdn.jsdelivr.net/npm/resonance-audio/build/resonance-audio.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/mohayonao/stereo-panner-node@1.4.0/build/stereo-panner-node.js"></script>
     <script>StereoPannerNode.polyfill();</script>
+
     <script src="{{rootURL}}assets/vendor.js"></script>
     <!-- Sentry init -->
     {{content-for "raven"}}
