@@ -20,6 +20,9 @@ Router.map(function() {
   this.route('archiveplayer', {
     path: '/audio/archive/:filename'
   });
+  this.route('archiveplayer', {
+    path: '/audio/archive'
+  });
 });
 
 export default Router;
