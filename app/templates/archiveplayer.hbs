@@ -1,8 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
+      <form method="GET">
+        <div class="form-group">
+          <label for="url">Audio file URL</label>
+          <input type="text" name="url" class="form-control" value={{this.url}}>
+        </div>
+        <button type="submit" class="btn btn-primary">Play</button>
+      </form>
+    </div>
+    <div class="col-sm-12">
       <h4><a href="{{this.model.url}}" target="_blank">{{this.model.filename}}</a></h4>
-      {{oggplayer url=this.model.url}}
+      {{oggplayer src=this.model.url type=this.model.type}}
     </div>
   </div>
 </div>

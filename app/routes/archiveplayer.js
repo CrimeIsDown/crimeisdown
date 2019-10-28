@@ -2,20 +2,26 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   queryParams: {
-    url: false
+    url: false,
+    type: false
   },
   model(params) {
     if (!params.url) {
-      return {
-        url: 'https://storage.googleapis.com/crimeisdown-audio-temp/' + params.filename,
-        filename: params.filename
-      };
-    } else {
-      let filename = (new URL(params.url)).pathname.split('/').pop();
-      return {
-        url: params.url,
-        filename: filename
-      };
+      alert('ERROR: No URL param specified.');
+      return;
     }
+    let filename = (new URL(params.url)).pathname.split('/').pop();
+    let type;
+
+    if (params.type) {
+      type = params.type;
+    } else {
+      type = 'audio/' + filename.split('.').pop(); // use file extension
+    }
+    return {
+      url: params.url,
+      filename: filename,
+      type: type
+    };
   }
 });

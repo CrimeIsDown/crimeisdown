@@ -3,7 +3,7 @@ import Component from '@ember/component';
 export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
-    let player = window.videojs('videojs-ogvjs-player', {
+    let options = {
       controls: true,
       plugins: {
         wavesurfer: {
@@ -13,11 +13,16 @@ export default Component.extend({
           progressColor: '#0A0',
           cursorColor: '#FFF',
         }
-      },
-      techOrder: ['ogvjs'],
-      ogvjs: { base: '/assets/ogv' }
-    }, () => {
-      player.src({src: this.url, type: 'audio/ogg; codecs="opus"'});
+      }
+    };
+
+    if (this.type.includes('ogg')) {
+      options.techOrder = ['ogvjs'];
+      options.ogvjs = { base: '/assets/ogv' };
+    }
+
+    let player = window.videojs('videojs-player', options, () => {
+      player.src({src: this.src, type: this.type});
     });
   }
 });
