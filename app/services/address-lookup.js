@@ -6,7 +6,7 @@ import fetch from 'fetch';
 
 export default Service.extend({
   loadData() {
-    return Promise.all([
+    this.dataLoadedPromise = Promise.all([
       new Promise((resolve) => {
         this.policeZones = {'1': ['16', '17'], '2': ['19'], '3': ['12', '14'], '4': ['1', '18'], '5': ['2'], '6': ['7', '8'], '7': ['3'], '8': ['4', '6'], '9': ['5', '22'], '10': ['10', '11'], '11': ['20', '24'], '12': ['15', '25'], '13': ['9']};
         resolve();
@@ -64,6 +64,7 @@ export default Service.extend({
         });
       })
     ]);
+    return this.dataLoadedPromise;
   },
 
   generateLocationDataForAddress(layers, location) {
@@ -71,17 +72,25 @@ export default Service.extend({
 
     let latlng = L.latLng(location.geometry.location.lat, location.geometry.location.lng);
 
-    result.meta = this.buildMeta(layers, location.formatted_address, latlng);
+    result.meta = {
+      formattedAddress: location.formatted_address,
+      latitude: latlng.lat.toFixed(6),
+      longitude: latlng.lng.toFixed(6)
+    };
 
-    if (!result.meta.communityArea) {
-      result.meta.formattedAddress = 'ADDRESS OUT OF BOUNDS: '+result.meta.formattedAddress;
-      result.meta.inChicago = false;
-    } else {
-      result.meta.inChicago = true;
-      result.police = this.buildPolice(layers, latlng);
-      result.fire = this.buildFire(latlng);
-      result.ems = this.buildEMS(latlng);
-    }
+    this.dataLoadedPromise.then(() => {
+      result.meta = this.buildMeta(layers, location.formatted_address, latlng);
+
+      if (!result.meta.communityArea) {
+        result.meta.formattedAddress = result.meta.formattedAddress + " (Not in Chicago, no additional location info available)";
+        result.meta.inChicago = false;
+      } else {
+        result.meta.inChicago = true;
+        result.police = this.buildPolice(layers, latlng);
+        result.fire = this.buildFire(latlng);
+        result.ems = this.buildEMS(latlng);
+      }
+    });
 
     return result;
   },
