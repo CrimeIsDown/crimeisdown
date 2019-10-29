@@ -9,11 +9,11 @@ import config from './config/environment';
 if (config.sentry) {
   Sentry.init({
     dsn: config.sentry.dsn,
-    integrations: [new Integrations.Ember()],
-    beforeSend: (event, hint) => {
+    integrations: [new Integrations.Ember()]
+    /*beforeSend: (event, hint) => {
       console.error(hint.originalException || hint.syntheticException);
       return event;
-    }
+    }*/
   });
 }
 
