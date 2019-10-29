@@ -23,7 +23,7 @@
     "url": "https://github.com/CrimeIsDown/crimeisdown-v3/issues"
   },
   "engines": {
-    "node": "8.* || >= 10.*"
+    "node": ">= 10.*"
   },
   "devDependencies": {
     "@ember/jquery": "^0.6.0",
