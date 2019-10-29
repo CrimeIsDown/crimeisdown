@@ -11,6 +11,7 @@
 
 [build.environment]
   NODE_VERSION = "10"
+  RUBY_VERSION = "2.6.2"
 
 # Production context: All deploys from the Production branch set in your site's deploy settings will inherit these settings.
 [context.production]
