@@ -9,18 +9,21 @@
 # This will be your default build command
   command = "ember build"
 
+[build.environment]
+  NODE_VERSION = "10"
+
 # Production context: All deploys from the Production branch set in your site's deploy settings will inherit these settings.
 [context.production]
   command = "ember build -e production"
 
 # Deploy Preview context: All Deploy Previews (https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/)
 # will inherit these settings.
-#[context.deploy-preview]
-#  command = "ember build"
+[context.deploy-preview]
+  command = "ember build"
 
 # Branch Deploy context: All deploys that are not resulting from a Pull/Merge Request and not from the primary, linked branch will inherit these settings.
-#[context.branch-deploy]
-#  command = "ember build"
+[context.branch-deploy]
+  command = "ember build"
 
 [[redirects]]
   from = "/*"
