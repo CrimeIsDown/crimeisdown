@@ -19,6 +19,12 @@ module.exports = function(defaults) {
       includePolyfill: true
     },
 
+    'ember-cli-uglify': {
+      exclude: [
+        'assets/ogv/**/*'
+      ]
+    },
+
     sourcemaps: {
       enabled: true,
       extensions: ['js']
@@ -30,7 +36,8 @@ module.exports = function(defaults) {
         'assets/images/layers.png',
         'assets/images/marker-icon-2x.png',
         'assets/images/marker-icon.png',
-        'assets/images/marker-shadow.png'
+        'assets/images/marker-shadow.png',
+        'assets/ogv/**/*'
       ]
     }
   });
