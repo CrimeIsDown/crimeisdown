@@ -284,6 +284,19 @@ input.flatpickr-mobile {
   }
 }
 
+.vjs-wavedisplay {
+  &::-webkit-scrollbar {
+    height: 0.5rem;
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    outline: 1px solid #fff;
+  }
+}
+
 #directiveViewer {
   margin-top: 3em;
   iframe {

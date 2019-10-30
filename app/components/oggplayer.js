@@ -1,6 +1,9 @@
 import Component from '@ember/component';
+import { debounce } from '@ember/runloop';
 
 export default Component.extend({
+  zoomlevel: 9,
+  player: null,
   didInsertElement() {
     this._super(...arguments);
     let options = {
@@ -21,8 +24,15 @@ export default Component.extend({
       options.ogvjs = { base: '/assets/ogv' };
     }
 
-    let player = window.videojs('videojs-player', options, () => {
-      player.src({src: this.src, type: this.type});
+    this.player = window.videojs('videojs-player', options, () => {
+      this.player.src({src: this.src, type: this.type});
     });
+  },
+  actions: {
+    zoom(e) {
+      debounce(this, (value) => {
+        this.player.wavesurfer().surfer.zoom(Number(value));
+      }, e.target.value, 100);
+    }
   }
 });
