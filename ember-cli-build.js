@@ -113,6 +113,7 @@ module.exports = function(defaults) {
   app.import('vendor/videojs-ogvjs.js');
 
   app.import('node_modules/wavesurfer.js/dist/wavesurfer.js');
+  app.import('node_modules/wavesurfer.js/dist/plugin/wavesurfer.timeline.js');
   app.import('vendor/videojs.wavesurfer.js');
   app.import('node_modules/videojs-wavesurfer/dist/css/videojs.wavesurfer.css');
 

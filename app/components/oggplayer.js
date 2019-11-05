@@ -1,8 +1,9 @@
 import Component from '@ember/component';
-import { debounce } from '@ember/runloop';
 
 export default Component.extend({
-  zoomlevel: 9,
+  minZoom: 0,
+  maxZoom: 100,
+  currentZoom: 0,
   player: null,
   didInsertElement() {
     this._super(...arguments);
@@ -15,6 +16,11 @@ export default Component.extend({
           waveColor: '#0F0',
           progressColor: '#0A0',
           cursorColor: '#FFF',
+          plugins: [
+            window.WaveSurfer.timeline.create({
+              container: '#timeline'
+            })
+          ]
         }
       }
     };
@@ -30,9 +36,12 @@ export default Component.extend({
   },
   actions: {
     zoom(e) {
-      debounce(this, (value) => {
-        this.player.wavesurfer().surfer.zoom(Number(value));
-      }, e.target.value, 100);
+      let wavesurfer = this.player.wavesurfer().surfer;
+      let playerWidth = wavesurfer.drawer.getWidth();
+      let minPxPerSec = Math.round((playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration());
+      let defaultMinPxPerSec = 20;
+
+      wavesurfer.zoom(minPxPerSec * (Number(e.target.value)/defaultMinPxPerSec));
     }
   }
 });

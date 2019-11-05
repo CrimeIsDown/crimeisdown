@@ -1,12 +1,13 @@
 <audio id="videojs-player" class="video-js vjs-default-skin vjs-fluid">
   <!--<source src="{{this.src}}" type="{{this.type}}">-->
 </audio>
+<div id="timeline"></div>
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text"><i class="fa fa-search-minus"></i></span>
   </div>
-  <input class="form-control" name="zoom" type="range" min="9" max="200" step="1" value={{this.zoomlevel}} oninput={{action "zoom"}}>
+  <input class="form-control" name="zoom" type="range" min={{this.minZoom}} max={{this.maxZoom}} step="1" value={{this.currentZoom}} onchange={{action "zoom"}}>
   <div class="input-group-append">
     <span class="input-group-text"><i class="fa fa-search-plus"></i></span>
   </div>
