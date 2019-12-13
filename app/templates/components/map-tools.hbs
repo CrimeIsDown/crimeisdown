@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header" role="tab">
+    <a class="card-heading" id="headingRIDSearch" data-toggle="collapse" href="#collapseRIDSearch" aria-expanded="true" aria-controls="collapseRIDSearch">
+      Radio ID Search
+    </a>
+  </div>
+  <div id="collapseRIDSearch" class="collapse show" role="tabpanel" aria-labelledby="headingRIDSearch">
+    <div id="search-radioids">
+      {{search-radioids}}
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header" role="tab">
+    <a class="card-heading" id="headingUCRSearch" data-toggle="collapse" href="#collapseUCRSearch" aria-expanded="true" aria-controls="collapseUCRSearch">
+      UCR Code Search
+    </a>
+  </div>
+  <div id="collapseUCRSearch" class="collapse show" role="tabpanel" aria-labelledby="headingUCRSearch">
+    <div id="search-ucrcodes">
+      {{search-ucrcodes}}
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header" role="tab">
+    <a class="card-heading collapsed" id="headingNotepad" data-toggle="collapse" href="#collapseNotepad" aria-expanded="true" aria-controls="collapseNotepad">
+      Notepad
+    </a>
+  </div>
+  <div id="collapseNotepad" class="collapse" role="tabpanel" aria-labelledby="headingNotepad">
+    <div id="notepad">
+      <p>Use the text area for any notes you may need to take when listening to the scanner.</p>
+      {{pell-editor}}
+      <p><em>Refreshing the page or navigating away will clear anything you have written.</em></p>
+    </div>
+  </div>
+</div>
