@@ -62,10 +62,15 @@ export default Component.extend({
   },
 
   initMap() {
+    const defaultCenterLat = 41.85;
+    const defaultCenterLong = -87.63;
+    const defaultZoom = 11;
     this.set('map', L.map('leaflet-map', {
-      center: [41.85, -87.63],
-      zoom: 11
+      center: [defaultCenterLat, defaultCenterLong],
+      zoom: defaultZoom
     }));
+
+    $('#crimereports-map').attr('src', this.buildCrimeMapUrl(defaultCenterLat, defaultCenterLong, defaultZoom));
 
     Promise.all([
       this.initBaseLayers(),
@@ -146,6 +151,27 @@ export default Component.extend({
     });
   },
 
+  buildCrimeMapUrl(latitude, longitude, zoom = 16) {
+    let url = new URL('https://www.cityprotect.com/map/list/incidents');
+
+    let queryParams = {
+      fromUpdateDate: moment().subtract('months', 3).format('MM/DD/YYYY'),
+      toUpdateDate: moment().format('MM/DD/YYYY'),
+      pageSize: 2000,
+      parentIncidentTypeIds: '149,150,148,8,97,104,165,98,100,179,178,180,101,99,103,163,168,166,12,161,14,16,15,160,121,162,164,167,173,169,170,172,171,151',
+      zoomLevel: zoom,
+      latitude: latitude,
+      longitude: longitude,
+      days: '1,2,3,4,5,6,7',
+      startHour: 0,
+      endHour: 24,
+      timezone: '-06:00'
+    };
+    url.search = new URLSearchParams(queryParams);
+
+    return url.toString();
+  },
+
   initGeocoder() {
     return new Promise((resolve, reject) => {
       this.set('geosearchProvider', new GeoSearch.GoogleProvider({
@@ -178,9 +204,7 @@ export default Component.extend({
         let wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=15&lat=' + this.location.meta.latitude + '&lon=' + this.location.meta.longitude + '&pin=1&_=' + randomInt;
         $('#waze-map').attr('src', wazeIframeUrl);
         if (this.location.meta.inChicago) {
-          let startDate = moment().subtract('months', 3).format('YYYY-MM-DD');
-          let endDate = moment().format('YYYY-MM-DD');
-          let crimereportsIframeUrl = 'https://www.crimereports.com/city/Chicago%2C%20IL?is_widget=true&_=' + randomInt + '#!/dashboard?lat=' + this.location.meta.latitude + '&lng=' + this.location.meta.longitude + '&zoom=17&start_date=' + startDate + '&end_date=' + endDate + '&date_type=relative&current_tab=list&shapeIds=&shape_id=false&incident_types=Alarm%252CArson%252CAssault%252CAssault%2520with%2520Deadly%2520Weapon%252CBreaking%2520%2526%2520Entering%252CCommunity%2520Policing%252CDeath%252CDisorder%252CDrugs%252CEmergency%252CFamily%2520Offense%252CFire%252CHomicide%252CKidnapping%252CLiquor%252CMissing%2520Person%252COther%252COther%2520Sexual%2520Offense%252CPedestrian%2520Stop%252CProactive%2520Policing%252CProperty%2520Crime%252CProperty%2520Crime%2520Commercial%252CProperty%2520Crime%2520Residential%252CQuality%2520of%2520Life%252CRobbery%252CSexual%2520Assault%252CSexual%2520Offense%252CTheft%252CTheft%2520from%2520Vehicle%252CTheft%2520of%2520Vehicle%252CTraffic%252CVehicle%2520Recovery%252CVehicle%2520Stop%252CWeapons%2520Offense';
+          let crimereportsIframeUrl = this.buildCrimeMapUrl(this.location.meta.latitude, this.location.meta.longitude);
           $('#crimereports-map').attr('src', crimereportsIframeUrl);
 
           schedule('afterRender', () => {
