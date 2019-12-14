@@ -202,10 +202,10 @@ export default Component.extend({
         this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
         let randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
         let wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=15&lat=' + this.location.meta.latitude + '&lon=' + this.location.meta.longitude + '&pin=1&_=' + randomInt;
-        $('#waze-map').load(wazeIframeUrl);
+        $('#waze-map').attr('src', wazeIframeUrl);
         if (this.location.meta.inChicago) {
           let crimereportsIframeUrl = this.buildCrimeMapUrl(this.location.meta.latitude, this.location.meta.longitude);
-          $('#crimereports-map').load(crimereportsIframeUrl);
+          $('#crimereports-map').attr('src', crimereportsIframeUrl);
 
           schedule('afterRender', () => {
             window.$('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
