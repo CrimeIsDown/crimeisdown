@@ -1225,19 +1225,35 @@
   },
   {
     "Agency": "CPD",
+    "ID_Number": "6100",
+    "Level_1": "Organized Crime",
+    "Level_2": "Vice and Asset Forfeiture",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "61[0-9][0-9]",
+    "Level_1": "Organized Crime",
+    "Level_2": "Vice and Asset Forfeiture",
+    "Level_3": "Asset Forfeiture Investigation",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
     "ID_Number": "6200",
     "Level_1": "Organized Crime",
     "Level_2": "Narcotics",
     "Level_3": "",
-    "Level_4": "Commander"
+    "Level_4": "Narcotics Division Commander"
   },
   {
     "Agency": "CPD",
     "ID_Number": "620[6-9]",
     "Level_1": "Organized Crime",
     "Level_2": "Narcotics",
-    "Level_3": "HIDTA/DEA Teams",
-    "Level_4": ""
+    "Level_3": "",
+    "Level_4": "HIDTA/DEA Teams"
   },
   {
     "Agency": "CPD",
@@ -1267,8 +1283,8 @@
     "Agency": "CPD",
     "ID_Number": "6300",
     "Level_1": "Organized Crime",
-    "Level_2": "Gang Investigation",
-    "Level_3": "Vice [Control]",
+    "Level_2": "Vice and Asset Forfeiture",
+    "Level_3": "Vice",
     "Level_4": "Commander"
   },
   {
@@ -1283,17 +1299,17 @@
     "Agency": "CPD",
     "ID_Number": "632[0-9]",
     "Level_1": "Organized Crime",
-    "Level_2": "Gang Investigation",
-    "Level_3": "Human Trafficking and Prostitution Call Team",
-    "Level_4": ""
+    "Level_2": "Vice and Asset Forfeiture",
+    "Level_3": "Vice",
+    "Level_4": "Human Trafficking and Prostitution Call Team"
   },
   {
     "Agency": "CPD",
     "ID_Number": "63[3-4][0-9]",
     "Level_1": "Organized Crime",
-    "Level_2": "Gang Investigation",
-    "Level_3": "Investigation and Enforcement Unit",
-    "Level_4": ""
+    "Level_2": "Vice and Asset Forfeiture",
+    "Level_3": "Vice",
+    "Level_4": "License Investigation and Enforcement Unit"
   },
   {
     "Agency": "CPD",
@@ -1305,7 +1321,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "6502",
+    "ID_Number": "6502[A-K]?",
     "Level_1": "Organized Crime",
     "Level_2": "Gang Investigation",
     "Level_3": "A-K Miscellaneous Detail",
@@ -1372,16 +1388,16 @@
     "ID_Number": "6558",
     "Level_1": "Organized Crime",
     "Level_2": "Gang Investigation",
-    "Level_3": "FBI Task Force",
-    "Level_4": ""
+    "Level_3": "",
+    "Level_4": "FBI Joint Task Force on Gangs"
   },
   {
     "Agency": "CPD",
     "ID_Number": "6559",
     "Level_1": "Organized Crime",
     "Level_2": "Gang Investigation",
-    "Level_3": "Animal Crimes Team",
-    "Level_4": ""
+    "Level_3": "",
+    "Level_4": "Animal Crimes Team"
   },
   {
     "Agency": "CPD",
@@ -1498,57 +1514,57 @@
   {
     "Agency": "CPD",
     "ID_Number": "706[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
+    "Level_1": "First Deputy Superintendent",
+    "Level_2": "Deployment Operations",
     "Level_3": "",
     "Level_4": "Deployment Analysis Unit"
   },
   {
     "Agency": "CPD",
     "ID_Number": "707[0-2]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "",
-    "Level_4": "Technology and Mapping Unit"
+    "Level_1": "First Deputy Superintendent",
+    "Level_2": "Deployment Operations",
+    "Level_3": "Crime Control Strategies",
+    "Level_4": "CompStat Unit"
   },
   {
     "Agency": "CPD",
     "ID_Number": "708[0-6]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "",
-    "Level_4": "Crime Prevention Information Center"
+    "Level_1": "First Deputy Superintendent",
+    "Level_2": "Deployment Operations",
+    "Level_3": "Crime Prevention Information Center",
+    "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "7099",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "",
+    "Level_1": "First Deputy Superintendent",
+    "Level_2": "Deployment Operations",
+    "Level_3": "Crime Prevention Information Center",
     "Level_4": "CPIC Commanding Officer"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7100",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Intelligence",
     "Level_4": "Intelligence Section Commander"
   },
   {
     "Agency": "CPD",
     "ID_Number": "711[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
+    "Level_1": "Organized Crime",
+    "Level_2": "",
     "Level_3": "",
     "Level_4": "Criminal Enterprise Unit"
   },
   {
     "Agency": "CPD",
     "ID_Number": "712[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "",
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Intelligence",
     "Level_4": "Joint Terrorism Task Force"
   },
   {
@@ -1562,10 +1578,10 @@
   {
     "Agency": "CPD",
     "ID_Number": "71[6-7][0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "",
-    "Level_4": "Human Intelligence Task Force"
+    "Level_1": "Organized Crime",
+    "Level_2": "Gang Investigation",
+    "Level_3": "Intelligence",
+    "Level_4": "FBI Human Intelligence Task Force"
   },
   {
     "Agency": "CPD",
