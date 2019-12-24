@@ -59,6 +59,9 @@ module.exports = function(defaults) {
   app.import('node_modules/bootstrap-table/dist/bootstrap-table.js');
   app.import('node_modules/bootstrap-table/dist/bootstrap-table.css');
 
+  app.import('node_modules/resonance-audio/build/resonance-audio.min.js');
+  app.import('vendor/stereo-panner-node.js', {destDir: 'assets'});
+
   app.import('node_modules/mediaelement/build/mediaelement-and-player.js');
   app.import('node_modules/mediaelement/build/mediaelementplayer.css');
   app.import('node_modules/mediaelement/build/mejs-controls.svg', {destDir: 'assets'});
@@ -72,6 +75,8 @@ module.exports = function(defaults) {
   app.import('node_modules/leaflet/dist/images/marker-icon-2x.png', {destDir: 'assets/images'});
   app.import('node_modules/leaflet/dist/images/marker-shadow.png', {destDir: 'assets/images'});
 
+  // UMD build of leaflet-geosearch
+  app.import('vendor/leaflet-geosearch.bundle.min.js');
   app.import('node_modules/leaflet-geosearch/assets/css/leaflet.css');
   app.import('node_modules/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js');
   app.import('vendor/leaflet-streetview/StreetViewButtons.js');
