@@ -21,7 +21,8 @@ module.exports = function(defaults) {
 
     'ember-cli-uglify': {
       exclude: [
-        'assets/ogv/**/*'
+        'assets/ogv/**/*',
+        'assets/leaflet-geosearch.bundle.min.js'
       ]
     },
 
