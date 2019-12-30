@@ -335,7 +335,7 @@ export default Component.extend({
             });
           } else if (layerName === 'gangs') {
             let kmlLayer = new L.KML();
-            map.attributionControl.addAttribution('Gang map created by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank">u/ReggieG45 for r/Chiraqology</a>');
+            map.attributionControl.addAttribution('Gang map by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank">u/ReggieG45</a>');
             if (layerObj.showByDefault) {
               kmlLayer.addTo(map);
             }
