@@ -77,6 +77,7 @@ module.exports = function(defaults) {
 
   app.import('node_modules/leaflet-geosearch/assets/css/leaflet.css');
   app.import('node_modules/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js');
+  app.import('vendor/L.KML.js');
   app.import('vendor/leaflet-streetview/StreetViewButtons.js');
 
   app.import('node_modules/leaflet-draw/dist/leaflet.draw-src.css');

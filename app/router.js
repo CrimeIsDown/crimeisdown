@@ -23,6 +23,9 @@ Router.map(function() {
   this.route('archiveplayer', {
     path: '/audio/archive'
   });
+  this.route('audio-live', {
+    path: '/audio/live/:stream'
+  });
 });
 
 export default Router;

@@ -69,13 +69,11 @@
               </tr>
               <tr>
                 <td colspan="2">
-                  <strong>Radio Zone {{ location.police.zone.num }}</strong>
-                  {{#if location.police.zone.freq}}
-                    ({{ location.police.zone.freq }})
-                  {{/if}}
-                  <audio id="streamplayer" class="stream-player" style="width: 200px;"></audio>
-                  {{#if currentZoneStream}}
-                    Player streaming Zone {{currentZoneStream}}
+                  {{#if location.police.zone.name}}
+                    {{#link-to route="audio-live" model=location.police.zone.slug title=(concat "Listen to " location.police.zone.name)}}<strong>{{ location.police.zone.name }}</strong> <i class="fa fa-external-link"></i>{{/link-to}}
+                    ({{ location.police.zone.frequency }})<br>
+                    {{location.police.zone.description}}
+                    {{stream-player stream=location.police.zone.slug autoplay=false}}
                   {{/if}}
                 </td>
               </tr>

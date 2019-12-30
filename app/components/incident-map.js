@@ -1,7 +1,5 @@
 /*eslint-disable no-unused-vars*/
 /*global GeoSearch*/
-/*global mejs*/
-/*global MediaElementPlayer*/
 
 import Component from '@ember/component';
 import { get } from '@ember/object';
@@ -21,32 +19,11 @@ export default Component.extend({
     this.layers = {};
     this.overlay = {};
     this.location = {};
-    let isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
-    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isMobileSafari);
   },
 
   didInsertElement() {
     L.Icon.Default.imagePath = '/assets/images/';
     this.initMap();
-    if (this.mediaSourceSupported) {
-      this.set('audioPlayer', new MediaElementPlayer('streamplayer', {
-        pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
-        shimScriptAccess: 'always',
-        renderers: ['native_dash', 'flash_dash'],
-        dash: { path: 'https://cdn.dashjs.org/v2.9.3/dash.all.min.js' },
-        isVideo: false,
-        features: ['playpause', 'current', 'volume']
-      }));
-    } else {
-      this.set('audioPlayer', new MediaElementPlayer('streamplayer', {
-        pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.9/build/",
-        shimScriptAccess: 'always',
-        renderers: ['html5', 'native_hls', 'flash_hls'],
-        hls: { path: 'https://cdn.jsdelivr.net/npm/hls.js@0.12.4' },
-        isVideo: false,
-        features: ['playpause', 'current', 'volume']
-      }));
-    }
   },
 
   actions: {
@@ -70,7 +47,7 @@ export default Component.extend({
       zoom: defaultZoom
     }));
 
-    $('#crimereports-map').attr('src', this.buildCrimeMapUrl(defaultCenterLat, defaultCenterLong, defaultZoom));
+    $('#crimereports-map').attr('src', this.buildCrimeMapUrl(defaultCenterLat, defaultCenterLong, 13));
 
     Promise.all([
       this.initBaseLayers(),
@@ -210,25 +187,6 @@ export default Component.extend({
           schedule('afterRender', () => {
             window.$('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
           });
-
-          if (this.location.police.zone.num && (!this.audioPlayer.duration || this.audioPlayer.paused)) {
-            if (this.mediaSourceSupported) {
-              this.audioPlayer.setSrc({
-                src: 'https://audio.crimeisdown.com/streaming/dash/zone' + this.location.police.zone.num + '/',
-                type: 'application/dash+xml'
-              });
-            } else {
-              this.audioPlayer.setSrc({
-                src: 'https://audio.crimeisdown.com/streaming/hls/zone' + this.location.police.zone.num + '/index.m3u8',
-                type: 'application/x-mpegURL'
-              });
-            }
-            this.audioPlayer.load();
-            this.set('currentZoneStream', null);
-            this.audioPlayer.media.addEventListener('playing', () => {
-              this.set('currentZoneStream', this.location.police.zone.num);
-            });
-          }
         }
       });
 
@@ -251,7 +209,7 @@ export default Component.extend({
         showByDefault: true,
         style: {
           fill: true,
-          fillOpacity: 0.05,
+          fillOpacity: 0.01,
           color: '#00f',
           weight: 3
         }
@@ -303,6 +261,12 @@ export default Component.extend({
           color: '#030',
           weight: 2
         }
+      },
+      gangs: {
+        label: "Gangs (unofficial)",
+        layer: null,
+        url: 'https://cors-anywhere.herokuapp.com/https://www.google.com/maps/d/kml?forcekml=1&mid=1am7PF0tT25EztnOTAgUEL2E382VjVTc7',
+        showByDefault: false
       }
     });
 
@@ -320,52 +284,7 @@ export default Component.extend({
         if (layers.hasOwnProperty(layerName)) {
           let layerObj = layers[layerName];
 
-          if (layerName != 'fireStations') {
-            let layerMouseover = (e) => {
-              let layer = e.target;
-
-              info.update(layer.feature.properties);
-              if (map.getZoom() < 14) {
-                layer.setStyle({
-                  color: '#ff0',
-                  fillOpacity: 0.15
-                });
-              } else {
-                e.target.setStyle(layerObj.style);
-              }
-
-              if (!L.Browser.ie && !L.Browser.opera) {
-                layer.bringToFront();
-              }
-            };
-
-            let geoJsonLayer = L.geoJson(null, {
-              onEachFeature: (feature, layer) => {
-                layer.on({
-                  mouseover: layerMouseover,
-                  mouseout: (e) => {
-                    e.target.setStyle(layerObj.style);
-                    info.update();
-                  }
-                });
-              }
-            });
-            if (layerObj.showByDefault) {
-              geoJsonLayer.addTo(map);
-            }
-            layerObj.layer = geoJsonLayer;
-            this.overlay[layerObj.label] = layerObj.layer;
-            fetch(layerObj.url).then((response) => {
-              response.json().then((data) => {
-                layerObj.layer.addData(data).setStyle(layerObj.style);
-                resolve();
-              }).catch((err) => {
-                reject(err);
-              })
-            }).catch((err) => {
-              reject(err);
-            });
-          } else {
+          if (layerName === 'fireStations') {
             let layerGroup = L.markerClusterGroup();
             if (layerObj.showByDefault) {
               layerGroup.addTo(map);
@@ -414,6 +333,70 @@ export default Component.extend({
             }).catch((err) => {
               reject(err);
             });
+          } else if (layerName === 'gangs') {
+            let kmlLayer = new L.KML();
+            map.attributionControl.addAttribution('Gang map created by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank">u/ReggieG45 for r/Chiraqology</a>');
+            if (layerObj.showByDefault) {
+              kmlLayer.addTo(map);
+            }
+            layerObj.layer = kmlLayer;
+            this.overlay[layerObj.label] = layerObj.layer;
+
+            fetch(layerObj.url).then(response => response.text())
+              .then(kmltext => {
+                // Create new kml overlay
+                const parser = new DOMParser();
+                const kml = parser.parseFromString(kmltext, 'text/xml');
+                layerObj.layer.addKML(kml);
+                resolve();
+              }).catch((err) => {
+                reject(err);
+              });
+          } else {
+            let layerMouseover = (e) => {
+              let layer = e.target;
+
+              info.update(layer.feature.properties);
+              if (map.getZoom() < 14) {
+                layer.setStyle({
+                  color: '#ff0',
+                  fillOpacity: 0.15
+                });
+              } else {
+                e.target.setStyle(layerObj.style);
+              }
+
+              if (!L.Browser.ie && !L.Browser.opera) {
+                layer.bringToFront();
+              }
+            };
+
+            let geoJsonLayer = L.geoJson(null, {
+              onEachFeature: (feature, layer) => {
+                layer.on({
+                  mouseover: layerMouseover,
+                  mouseout: (e) => {
+                    e.target.setStyle(layerObj.style);
+                    info.update();
+                  }
+                });
+              }
+            });
+            if (layerObj.showByDefault) {
+              geoJsonLayer.addTo(map);
+            }
+            layerObj.layer = geoJsonLayer;
+            this.overlay[layerObj.label] = layerObj.layer;
+            fetch(layerObj.url).then((response) => {
+              response.json().then((data) => {
+                layerObj.layer.addData(data).setStyle(layerObj.style);
+                resolve();
+              }).catch((err) => {
+                reject(err);
+              })
+            }).catch((err) => {
+              reject(err);
+            });
           }
         }
       }));
@@ -423,6 +406,7 @@ export default Component.extend({
   },
 
   initInfoBox() {
+    const hiddenFeatureProperties = ['shape_len', 'shape_leng', 'shape_area', 'area', 'perimeter', 'comarea_', 'comarea_id', 'area_numbe', 'area_num_1'];
     return new Promise((resolve, reject) => {
       let info = L.control();
 
@@ -435,7 +419,7 @@ export default Component.extend({
       info.update = function (props) {
         let html = '<h4>Layer Info</h4>';
         for (let key in props) {
-          if (props.hasOwnProperty(key)) {
+          if (hiddenFeatureProperties.indexOf(key) === -1 && props.hasOwnProperty(key)) {
             html += '<p>' + key + ': ' + props[key] + '</p>';
           }
         }

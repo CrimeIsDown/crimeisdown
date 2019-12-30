@@ -116,6 +116,9 @@ ul.nav.nav-tabs {
           color: $light;
           margin: 0.25em 0;
         }
+        p {
+          font-size: 1rem;
+        }
       }
       .leaflet-control-geosearch.bar {
         z-index: 1000;
@@ -202,6 +205,10 @@ ul.nav.nav-tabs {
       width: 33.33333%;
     }
   }
+}
+
+#online-streams-list ul {
+  line-height: 1;
 }
 
 
