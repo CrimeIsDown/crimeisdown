@@ -1,3 +1,5 @@
+/*eslint-disable no-console*/
+
 import Route from '@ember/routing/route';
 import fetch from 'fetch';
 
