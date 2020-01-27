@@ -11,6 +11,8 @@ import ENV from '../config/environment';
 
 export default Component.extend({
   addressLookup: service(),
+  showIncidentTable: ENV.APP.INCIDENT_CAD_ENABLED,
+
   init() {
     this._super(...arguments);
     this.map = null;
@@ -36,6 +38,36 @@ export default Component.extend({
       $('#address-search').find('input[name="address"]').val(address);
       this.searchControl.searchElement.handleSubmit({ query: address });
     },
+    locateMe() {
+      this.map.locate({setView: true, maxZoom: 16});
+
+      this.map.on('locationfound', e => {
+        let radius = e.accuracy * 3.28084; // convert radius to feet
+
+        L.marker(e.latlng).addTo(this.map)
+            .bindPopup("You are within " + radius.toPrecision(5) + " feet of this point").openPopup();
+
+        L.circle(e.latlng, radius, {fill: false}).addTo(this.map);
+
+        this.showLocation({
+          location: {
+            raw: {
+              formatted_address: 'N/A - From device location',
+              geometry: {
+                location: {
+                  lat: e.latlng.lat,
+                  lng: e.latlng.lng
+                }
+              }
+            }
+          }
+        });
+      });
+
+      this.map.on('locationerror', e => {
+        alert(e.message);
+      });
+    }
   },
 
   initMap() {
@@ -149,6 +181,27 @@ export default Component.extend({
     return url.toString();
   },
 
+  showLocation(event) {
+    let query = $('.leaflet-control-geosearch.bar form input').val();
+    $('#address-search').find('input[name="address"]').val(query);
+    if (window.ga && typeof window.ga === "function") {
+      ga('send', 'event', 'Looks up address', 'Tools', query);
+    }
+    window.location.hash = '#location_query=' + encodeURIComponent(query);
+    this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
+    let randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
+    let wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=15&lat=' + this.location.meta.latitude + '&lon=' + this.location.meta.longitude + '&pin=1&_=' + randomInt;
+    $('#waze-map').attr('src', wazeIframeUrl);
+    if (this.location.meta.inChicago) {
+      let crimereportsIframeUrl = this.buildCrimeMapUrl(this.location.meta.latitude, this.location.meta.longitude);
+      $('#crimereports-map').attr('src', crimereportsIframeUrl);
+
+      schedule('afterRender', () => {
+        window.$('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
+      });
+    }
+  },
+
   initGeocoder() {
     return new Promise((resolve, reject) => {
       this.set('geosearchProvider', new GeoSearch.GoogleProvider({
@@ -169,26 +222,7 @@ export default Component.extend({
 
       this.map.addControl(searchControl);
 
-      this.map.on('geosearch/showlocation', (event) => {
-        let query = $('.leaflet-control-geosearch.bar form input').val();
-        $('#address-search').find('input[name="address"]').val(query);
-        if (window.ga && typeof window.ga === "function") {
-          ga('send', 'event', 'Looks up address', 'Tools', query);
-        }
-        window.location.hash = '#location_query=' + encodeURIComponent(query);
-        this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
-        let randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
-        let wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=15&lat=' + this.location.meta.latitude + '&lon=' + this.location.meta.longitude + '&pin=1&_=' + randomInt;
-        $('#waze-map').attr('src', wazeIframeUrl);
-        if (this.location.meta.inChicago) {
-          let crimereportsIframeUrl = this.buildCrimeMapUrl(this.location.meta.latitude, this.location.meta.longitude);
-          $('#crimereports-map').attr('src', crimereportsIframeUrl);
-
-          schedule('afterRender', () => {
-            window.$('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
-          });
-        }
-      });
+      this.map.on('geosearch/showlocation', this.showLocation);
 
       resolve();
     });

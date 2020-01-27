@@ -16,7 +16,7 @@ export default Component.extend({
       let openIncidents = this.openIncidents;
       this.set('openIncidents', []);
       this.set('showNewForm', true);
-      $('#add-incident-modal').modal('show');
+      window.$('#add-incident-modal').modal('show');
       $('#add-incident-modal').on('hidden.bs.modal', bind(this, () => {
         this.set('showNewForm', false);
         this.set('openIncidents', openIncidents);

@@ -4,17 +4,19 @@
     <small class="text-danger">If you use the map drawing features (below zoom in/out), they will not be saved. A refresh will clear the map.</small>
     <p class="mobile text-primary"><em>Scroll down for incident map</em></p>
     <div class="accordion" id="accordion" role="tablist">
-      {{!--<div class="card draggable">
+      {{#if showIncidentTable}}
+      <div class="card">
         <div class="card-header" role="tab">
           <a id="headingIncidents" data-toggle="collapse" href="#collapseIncidents" aria-expanded="true" aria-controls="collapseIncidents">
             Incidents
           </a>
-          <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>
+          {{!-- <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a> --}}
         </div>
         <div id="collapseIncidents" class="collapse show" role="tabpanel" aria-labelledby="headingIncidents" data-parent="#accordion">
           {{incident-table model=model incidents=incidents openIncidents=openIncidents}}
         </div>
-      </div> --}}
+      </div>
+      {{/if}}
       <div class="card">
         <div class="card-header" role="tab">
           <a class="card-heading" id="headingAddrSearch" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
@@ -35,6 +37,9 @@
                 </div>
               </div>
             </form>
+            <div class="form-group">
+              <button class="btn btn-info" {{action "locateMe" on="click"}} title="Device geolocation works best on mobile"><i class="fa fa-crosshairs" aria-hidden="true"></i> Use my location</button>
+            </div>
             <table class="table table-bordered table-condensed">
               <tbody>
               <tr class="info">
@@ -64,23 +69,20 @@
                 <th colspan="2">Chicago Police Department</th>
               </tr>
               <tr>
-                <td>Beat</td>
-                <td>{{ location.police.beat }}</td>
+                <td>{{ location.police.district }} District, Beat {{ location.police.beat }}</td>
+                <td>Area {{ location.police.area }}</td>
               </tr>
               <tr>
                 <td colspan="2">
                   {{#if location.police.zone.name}}
-                    {{#link-to route="audio-live" model=location.police.zone.slug title=(concat "Listen to " location.police.zone.name)}}<strong>{{ location.police.zone.name }}</strong> <i class="fa fa-external-link"></i>{{/link-to}}
-                    ({{ location.police.zone.frequency }})<br>
-                    {{location.police.zone.description}}
+                    <strong>{{ location.police.zone.name }}</strong> ({{ location.police.zone.frequency }})<br>
+                    <p>{{location.police.zone.description}}</p>
+                    <p>{{#link-to class="btn btn-primary" route="audio-live" model=location.police.zone.slug title=(concat "Listen to " location.police.zone.name)}}<i class="fa fa-volume-up" aria-hidden="true"></i> Listen to CPD with Instant Replay{{/link-to}}</p>
                     {{stream-player stream=location.police.zone.slug autoplay=false}}
                   {{/if}}
                 </td>
               </tr>
-              <tr>
-                <td>{{ location.police.district }} District</td>
-                <td>Area {{ location.police.area }}</td>
-              </tr>
+
               <tr class="info">
                 <th colspan="2">Chicago Fire Department</th>
               </tr>
@@ -101,11 +103,12 @@
               </tr>
               <tr>
                 <td colspan="2">
-                  Radio Channel: {{ location.fire.channel }}
+                  Radio Channel: <strong>{{ location.fire.channel }}</strong>
                   {{#if location.fire.channel}}
-                  (Listen to <a href="https://www.youtube.com/embed/live_stream?channel=UCsMo3qUWKgwL5IA2CZ8J7Zg" target="_blank">Fire</a>
-                  or
-                  <a href="https://www.youtube.com/embed/live_stream?channel=UCHVvMupXCot6i9HaU5e6evQ" target="_blank">EMS</a>)
+                  <a
+                    href="{{if (eq location.fire.channel "Main") "https://openmhz.com/system/chi_cfd?filter-type=group&filter-code=5a498e5e129ce10001425163" "https://openmhz.com/system/chi_cfd?filter-type=group&filter-code=5a498e6d129ce10001425164"}}"
+                    class="btn btn-primary" title="Listen to CFD {{ location.fire.channel }}"
+                  ><i class="fa fa-volume-up" aria-hidden="true"></i> Listen to CFD with Instant Replay</a>
                   {{/if}}
                 </td>
               </tr>

@@ -229,7 +229,7 @@ export default Service.extend({
     };
   },
 
-  findStation(query) {
+  findStation(query = '') {
     query = query.toUpperCase();
     let HQ = ' (HQ)';
     let results = [];
