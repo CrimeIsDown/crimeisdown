@@ -65,7 +65,7 @@ export default Component.extend({
       });
 
       this.map.on('locationerror', e => {
-        alert(e.message);
+        alert(e.message + ' If you are on iOS, make sure to enable Location Services first.');
       });
     }
   },
