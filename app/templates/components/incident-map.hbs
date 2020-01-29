@@ -38,7 +38,7 @@
               </div>
             </form>
             <div class="form-group">
-              <button class="btn btn-info" {{action "locateMe" on="click"}} title="Device geolocation works best on mobile"><i class="fa fa-crosshairs" aria-hidden="true"></i> Use my location</button>
+              <button class="btn btn-info{{if geolocationPending " disabled" ""}}" {{action "locateMe" on="click"}} title="Device geolocation works best on mobile"><i class="fa fa-crosshairs" aria-hidden="true"></i> Use my location</button>
             </div>
             <table class="table table-bordered table-condensed">
               <tbody>

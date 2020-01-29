@@ -12,11 +12,13 @@ import ENV from '../config/environment';
 export default Component.extend({
   addressLookup: service(),
   showIncidentTable: ENV.APP.INCIDENT_CAD_ENABLED,
+  map: null,
+  geocoder: null,
+  previousGeolocationMarker: null,
+  previousGeolocationCircle: null,
 
   init() {
     this._super(...arguments);
-    this.map = null;
-    this.geocoder = null;
     this.baseLayers = {};
     this.layers = {};
     this.overlay = {};
@@ -26,6 +28,20 @@ export default Component.extend({
   didInsertElement() {
     L.Icon.Default.imagePath = '/assets/images/';
     this.initMap();
+  },
+
+  removePreviousGeoLocationMarkers() {
+    if (this.previousGeolocationMarker) {
+      this.previousGeolocationMarker.remove();
+    }
+    if (this.previousGeolocationCircle) {
+      this.previousGeolocationCircle.remove();
+    }
+  },
+
+  setGeoLocationMarkers(marker, circle) {
+    this.set('previousGeolocationMarker', marker);
+    this.set('previousGeolocationCircle', circle);
   },
 
   actions: {
@@ -39,15 +55,24 @@ export default Component.extend({
       this.searchControl.searchElement.handleSubmit({ query: address });
     },
     locateMe() {
+      this.set('geolocationPending', true);
+
+      // Clear any form fields so it doesn't appear we are still using that address
+      $('.leaflet-control-geosearch.bar form input').val('');
+      $('#address-search').find('input[name="address"]').val('');
+
       this.map.locate({setView: true, maxZoom: 16});
 
       this.map.on('locationfound', e => {
+        this.removePreviousGeoLocationMarkers();
+
         let radius = e.accuracy * 3.28084; // convert radius to feet
 
-        L.marker(e.latlng).addTo(this.map)
+        let marker = L.marker(e.latlng).addTo(this.map)
             .bindPopup("You are within " + radius.toPrecision(5) + " feet of this point").openPopup();
+        let circle = L.circle(e.latlng, radius, {fill: radius < 1000}).addTo(this.map);
 
-        L.circle(e.latlng, radius, {fill: false}).addTo(this.map);
+        this.setGeoLocationMarkers(marker, circle);
 
         this.showLocation({
           location: {
@@ -62,10 +87,14 @@ export default Component.extend({
             }
           }
         });
+
+        this.set('geolocationPending', false);
       });
 
       this.map.on('locationerror', e => {
         alert(e.message + ' If you are on iOS, make sure to enable Location Services first.');
+
+        this.set('geolocationPending', false);
       });
     }
   },
@@ -81,13 +110,15 @@ export default Component.extend({
 
     $('#crimereports-map').attr('src', this.buildCrimeMapUrl(defaultCenterLat, defaultCenterLong, 13));
 
-    Promise.all([
+    this.set('initialized', Promise.all([
       this.initBaseLayers(),
       this.initGeocoder(),
       this.initInfoBox(),
       this.initLayers(),
       this.addressLookup.loadData()
-    ]).then(() => {
+    ]));
+
+    this.initialized.then(() => {
       let incidents = this.get('model.incidents');
       if (incidents) {
         incidents.forEach((incident) => {
@@ -183,23 +214,31 @@ export default Component.extend({
 
   showLocation(event) {
     let query = $('.leaflet-control-geosearch.bar form input').val();
-    $('#address-search').find('input[name="address"]').val(query);
-    if (window.ga && typeof window.ga === "function") {
-      ga('send', 'event', 'Looks up address', 'Tools', query);
-    }
-    window.location.hash = '#location_query=' + encodeURIComponent(query);
-    this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
-    let randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
-    let wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=15&lat=' + this.location.meta.latitude + '&lon=' + this.location.meta.longitude + '&pin=1&_=' + randomInt;
-    $('#waze-map').attr('src', wazeIframeUrl);
-    if (this.location.meta.inChicago) {
-      let crimereportsIframeUrl = this.buildCrimeMapUrl(this.location.meta.latitude, this.location.meta.longitude);
-      $('#crimereports-map').attr('src', crimereportsIframeUrl);
+    if (query) {
+      // We actually searched an address here, so don't show the geolocation marker anymore
+      this.removePreviousGeoLocationMarkers();
 
-      schedule('afterRender', () => {
-        window.$('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
-      });
+      $('#address-search').find('input[name="address"]').val(query);
+      window.location.hash = '#location_query=' + encodeURIComponent(query);
     }
+    if (window.ga && typeof window.ga === "function") {
+      ga('send', 'event', 'Looks up address', 'Tools', query || 'Geolocation');
+    }
+
+    this.initialized.then(() => {
+      this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
+      let randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
+      let wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=15&lat=' + this.location.meta.latitude + '&lon=' + this.location.meta.longitude + '&pin=1&_=' + randomInt;
+      $('#waze-map').attr('src', wazeIframeUrl);
+      if (this.location.meta.inChicago) {
+        let crimereportsIframeUrl = this.buildCrimeMapUrl(this.location.meta.latitude, this.location.meta.longitude);
+        $('#crimereports-map').attr('src', crimereportsIframeUrl);
+
+        schedule('afterRender', () => {
+          window.$('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
+        });
+      }
+    });
   },
 
   initGeocoder() {
@@ -222,7 +261,7 @@ export default Component.extend({
 
       this.map.addControl(searchControl);
 
-      this.map.on('geosearch/showlocation', this.showLocation);
+      this.map.on('geosearch/showlocation', this.showLocation.bind(this));
 
       resolve();
     });
