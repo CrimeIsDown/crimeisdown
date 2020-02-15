@@ -1,5 +1,6 @@
 /*eslint-disable no-unused-vars*/
 /*global GeoSearch*/
+/*global leafletPip*/
 
 import Component from '@ember/component';
 import { get } from '@ember/object';
@@ -153,7 +154,7 @@ export default Component.extend({
 
     this.set('layersControl', new L.Control.Layers(this.baseLayers, this.overlay, {
       // @TODO use CSS for this
-      collapsed: window.screen.availHeight > 1000 ? false : true
+      collapsed: window.innerHeight > 650 ? false : true
     }).addTo(this.map));
 
     L.streetView({
@@ -471,7 +472,6 @@ export default Component.extend({
               });
           } else {
             let layerMouseover = (e) => {
-              console.log(e);
               let layer = e.target;
 
               let allProps = {...layer.feature.properties};
