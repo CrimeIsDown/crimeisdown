@@ -139,9 +139,22 @@ export default Component.extend({
 
     this.initEditableMap();
 
-    L.control.layers(this.baseLayers, this.overlay, {
-      collapse: false
-    }).addTo(this.map);
+    L.Control.Layers.include({
+      getActiveOverlays: () => {
+        let active = [];
+        this.layersControl._layers.forEach(obj => {
+          if (obj.overlay && this.layersControl._map.hasLayer(obj.layer)) {
+            active.push(obj);
+          }
+        });
+        return active;
+      }
+    });
+
+    this.set('layersControl', new L.Control.Layers(this.baseLayers, this.overlay, {
+      // @TODO use CSS for this
+      collapsed: window.screen.availHeight > 1000 ? false : true
+    }).addTo(this.map));
 
     L.streetView({
       position: 'topleft',
@@ -280,6 +293,9 @@ export default Component.extend({
         layer: null,
         url: '/data/map_data/police_districts.geojson',
         showByDefault: true,
+        propMappings: {
+          dist_num: 'Police District'
+        },
         style: {
           fill: true,
           fillOpacity: 0.01,
@@ -292,6 +308,10 @@ export default Component.extend({
         layer: null,
         url: '/data/map_data/police_beats.geojson',
         showByDefault: false,
+        propMappings: {
+          district: 'Police District',
+          beat_num: 'Police Beat'
+        },
         style: {
           fill: true,
           fillOpacity: 0.05,
@@ -304,6 +324,9 @@ export default Component.extend({
         layer: null,
         url: '/data/map_data/neighborhoods.geojson',
         showByDefault: false,
+        propMappings: {
+          pri_neigh: 'Neighborhood'
+        },
         style: {
           fill: true,
           fillOpacity: 0.05,
@@ -316,6 +339,9 @@ export default Component.extend({
         layer: null,
         url: '/data/map_data/community_areas.geojson',
         showByDefault: false,
+        propMappings: {
+          community: 'Community Area'
+        },
         style: {
           fill: true,
           fillOpacity: 0.05,
@@ -328,10 +354,28 @@ export default Component.extend({
         layer: null,
         url: '/data/map_data/wards.geojson',
         showByDefault: false,
+        propMappings: {
+          ward: 'Ward'
+        },
         style: {
           fill: true,
           fillOpacity: 0.05,
           color: '#030',
+          weight: 2
+        }
+      },
+      municipalities: {
+        label: "Municipalities",
+        layer: null,
+        url: 'https://opendata.arcgis.com/datasets/534226c6b1034985aca1e14a2eb234af_2.geojson',
+        showByDefault: false,
+        propMappings: {
+          AGENCY_DESC: 'Jurisdiction'
+        },
+        style: {
+          fill: true,
+          fillOpacity: 0.05,
+          color: '#3A0',
           weight: 2
         }
       },
@@ -358,7 +402,7 @@ export default Component.extend({
           let layerObj = layers[layerName];
 
           if (layerName === 'fireStations') {
-            let layerGroup = L.markerClusterGroup();
+            let layerGroup = L.markerClusterGroup({showCoverageOnHover: false});
             if (layerObj.showByDefault) {
               layerGroup.addTo(map);
             }
@@ -427,16 +471,31 @@ export default Component.extend({
               });
           } else {
             let layerMouseover = (e) => {
+              console.log(e);
               let layer = e.target;
 
-              info.update(layer.feature.properties);
-              if (map.getZoom() < 14) {
-                layer.setStyle({
-                  color: '#ff0',
-                  fillOpacity: 0.15
-                });
-              } else {
-                e.target.setStyle(layerObj.style);
+              let allProps = {...layer.feature.properties};
+
+              let activeOverlays = this.layersControl.getActiveOverlays();
+              for (const overlayIndex in activeOverlays) {
+                let overlay = activeOverlays[overlayIndex];
+                if (!overlay.layer || typeof overlay.layer.eachLayer !== 'function') continue;
+                let result = leafletPip.pointInLayer(e.latlng, overlay.layer, true)[0];
+                if (result) {
+                  allProps = {...allProps, ...result.feature.properties};
+                }
+              }
+              info.update(allProps);
+
+              if (e.type === 'mouseover') {
+                if (map.getZoom() < 14) {
+                  layer.setStyle({
+                    color: '#ff0',
+                    fillOpacity: 0.15
+                  });
+                } else {
+                  e.target.setStyle(layerObj.style);
+                }
               }
 
               if (!L.Browser.ie && !L.Browser.opera) {
@@ -446,7 +505,16 @@ export default Component.extend({
 
             let geoJsonLayer = L.geoJson(null, {
               onEachFeature: (feature, layer) => {
+                let props = {};
+                for (const key in feature.properties) {
+                  if (layerObj.propMappings.hasOwnProperty(key)) {
+                    props[layerObj.propMappings[key]] = feature.properties[key];
+                  }
+                }
+                feature.properties = props;
+
                 layer.on({
+                  click: layerMouseover,
                   mouseover: layerMouseover,
                   mouseout: (e) => {
                     e.target.setStyle(layerObj.style);
@@ -479,7 +547,6 @@ export default Component.extend({
   },
 
   initInfoBox() {
-    const hiddenFeatureProperties = ['shape_len', 'shape_leng', 'shape_area', 'area', 'perimeter', 'comarea_', 'comarea_id', 'area_numbe', 'area_num_1'];
     return new Promise((resolve, reject) => {
       let info = L.control();
 
@@ -491,10 +558,12 @@ export default Component.extend({
 
       info.update = function (props) {
         let html = '<h4>Layer Info</h4>';
-        for (let key in props) {
-          if (hiddenFeatureProperties.indexOf(key) === -1 && props.hasOwnProperty(key)) {
+        if (props) {
+          for (let key in props) {
             html += '<p>' + key + ': ' + props[key] + '</p>';
           }
+        } else {
+          html += '<p>Hover/tap a layer</p>';
         }
         this._div.innerHTML = html;
       };
