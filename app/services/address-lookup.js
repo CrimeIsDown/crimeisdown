@@ -105,7 +105,7 @@ export default Service.extend({
     if (layers.hasOwnProperty('communityAreas')) {
       let result = leafletPip.pointInLayer(location, layers.communityAreas.layer, true)[0];
       if (result) {
-        meta.communityArea = result.feature.properties.community;
+        meta.communityArea = result.feature.properties['Community Area'];
         // Convert to title case instead of all caps
         meta.communityArea = meta.communityArea.toLowerCase().replace(/(?:^|\s|-|\/)\S/g, function(m) {
           return m.toUpperCase();
@@ -116,15 +116,15 @@ export default Service.extend({
     if (layers.hasOwnProperty('neighborhoods')) {
       let result = leafletPip.pointInLayer(location, layers.neighborhoods.layer, true)[0];
       if (result) {
-        meta.neighborhood = result.feature.properties.pri_neigh;
+        meta.neighborhood = result.feature.properties['Neighborhood'];
       }
     }
 
     if (layers.hasOwnProperty('wards')) {
       let result = leafletPip.pointInLayer(location, layers.wards.layer, true)[0];
       if (result) {
-        meta.ward = result.feature.properties.ward;
-        meta.alderman = this.aldermen[parseInt(result.feature.properties.ward)-1];
+        meta.ward = result.feature.properties['Ward'];
+        meta.alderman = this.aldermen[parseInt(meta.ward)-1];
       }
     }
 
@@ -137,10 +137,10 @@ export default Service.extend({
     if (layers.hasOwnProperty('policeDistricts')) {
       let result = leafletPip.pointInLayer(location, layers.policeDistricts.layer, true)[0];
       if (result) {
-        police.district = result.feature.properties.dist_label.toLowerCase();
+        police.district = result.feature.properties['Police District'].toLowerCase();
 
         for (let key in this.policeZones) {
-          if (this.policeZones[key].includes(result.feature.properties.dist_num)) {
+          if (this.policeZones[key].includes(police.district)) {
             this.onlineStreams.forEach((stream) => {
               if ('zone' + key === stream.slug) {
                 police.zone = stream;
@@ -150,7 +150,7 @@ export default Service.extend({
           }
         }
         for (let key in this.policeAreas) {
-          if (this.policeAreas[key].includes(result.feature.properties.dist_num)) {
+          if (this.policeAreas[key].includes(police.district)) {
             police.area = key;
           }
         }
@@ -160,7 +160,7 @@ export default Service.extend({
     if (layers.hasOwnProperty('policeBeats')) {
       let result = leafletPip.pointInLayer(location, layers.policeBeats.layer, true)[0];
       if (result) {
-        police.beat = result.feature.properties.beat_num;
+        police.beat = result.feature.properties['Police Beat'];
       }
     }
 
