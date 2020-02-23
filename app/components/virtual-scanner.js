@@ -170,8 +170,8 @@ export default Component.extend({
         streamData.set('audioElementSource', audioElementSource);
 
         let analyser = this.audioContext.createAnalyser();
-        analyser.smoothingTimeConstant = 0.5;
-        analyser.fftSize = 512; // the total samples are half the fft size.
+        analyser.smoothingTimeConstant = 1;
+        analyser.fftSize = 256; // the total samples are half the fft size.
         audioElementSource.connect(analyser);
         streamData.set('analyser', analyser);
 
@@ -265,7 +265,7 @@ export default Component.extend({
       max = Math.max(max, Math.abs(array[i] - 128));
     }
 
-    let val = Math.round(max * 4);
+    let val = Math.round(max * 16);
 
     // optimization to avoid unnecessary repaints
     if (val !== lastVal) {
