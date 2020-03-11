@@ -75,7 +75,7 @@ export default Component.extend({
           let streamDesc = streamName in this.nameDescMappings ? this.nameDescMappings[streamName] : streamName;
           this.streams.pushObject({name: streamName, desc: streamDesc});
         }
-        this.streams.sort((a, b) => (a.desc > b.desc) ? 1 : -1);
+        this.streams.sort((a, b) => a.desc.localeCompare(b.desc, 'en', {numeric: true}));
       });
   },
   didInsertElement() {
