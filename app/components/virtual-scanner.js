@@ -13,23 +13,27 @@ export default Component.extend({
     this.streams = [];
     this.enabledStreams = [];
     this.nameDescMappings = {
-      zone1: "Zone 1 (016/017)",
-      zone2: "Zone 2 (019)",
-      zone3: "Zone 3 (012/014)",
-      zone4: "Zone 4 (001/018)",
-      zone5: "Zone 5 (002)",
-      zone6: "Zone 6 (007/008)",
-      zone7: "Zone 7 (003)",
-      zone8: "Zone 8 (004/006)",
-      zone9: "Zone 9 (005/022)",
-      zone10: "Zone 10 (010/011)",
-      zone11: "Zone 11 (020/024)",
-      zone12: "Zone 12 (015/025)",
-      zone13: "Zone 13 (009)",
-      citywide1: "Citywide 1",
-      citywide2: "Citywide 2",
-      citywide5: "Citywide 5",
-      citywide6: "Citywide 6"
+      zone1:          "CPD Zone 1 (016/017)",
+      zone2:          "CPD Zone 2 (019)",
+      zone3:          "CPD Zone 3 (012/014)",
+      zone4:          "CPD Zone 4 (001/018)",
+      zone5:          "CPD Zone 5 (002)",
+      zone6:          "CPD Zone 6 (007/008)",
+      zone7:          "CPD Zone 7 (003)",
+      zone8:          "CPD Zone 8 (004/006)",
+      zone9:          "CPD Zone 9 (005/022)",
+      zone10:         "CPD Zone 10 (010/011)",
+      zone11:         "CPD Zone 11 (020/024)",
+      zone12:         "CPD Zone 12 (015/025)",
+      zone13:         "CPD Zone 13 (009)",
+      citywide1:      "CPD Citywide 1",
+      citywide2:      "CPD Citywide 2",
+      citywide5:      "CPD Citywide 5",
+      citywide6:      "CPD Citywide 6",
+      fire_main:      "CFD Fire North",
+      fire_englewood: "CFD Fire South",
+      ems_main:       "CFD EMS North",
+      ems_englewood:  "CFD EMS South"
     };
 
     this.onMove = (event) => {
@@ -71,6 +75,7 @@ export default Component.extend({
           let streamDesc = streamName in this.nameDescMappings ? this.nameDescMappings[streamName] : streamName;
           this.streams.pushObject({name: streamName, desc: streamDesc});
         }
+        this.streams.sort((a, b) => (a.desc > b.desc) ? 1 : -1);
       });
   },
   didInsertElement() {
