@@ -9,7 +9,7 @@ export default Component.extend({
   playmusic: false,
 
   actions: {
-    togglemusic: function () {
+    togglemusic() {
       this.set('playmusic', !this.playmusic);
       let audioElem = document.getElementById('copstheme');
       if (this.playmusic) {

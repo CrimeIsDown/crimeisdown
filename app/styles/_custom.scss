@@ -324,6 +324,11 @@ input.flatpickr-mobile {
     padding: 0.4em;
     width: 50%;
   }
+  @media (min-width: 992px) {
+    .modal-lg {
+      max-width: 850px;
+    }
+  }
 }
 
 @include media-breakpoint-up(md) {
