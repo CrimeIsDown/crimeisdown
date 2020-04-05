@@ -1,23 +1,25 @@
+import { action } from '@ember/object';
 import LinkComponent from '@ember/routing/link-component';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 
 LinkComponent.reopen({
   attributeBindings: ['data-toggle', 'data-target']
 });
 
-export default Component.extend({
-  playmusic: false,
+export default class AppHeader extends Component {
+  @tracked
+  playmusic = false;
 
-  actions: {
-    togglemusic() {
-      this.set('playmusic', !this.playmusic);
-      let audioElem = document.getElementById('copstheme');
-      if (this.playmusic) {
-        audioElem.volume = 0.3;
-        audioElem.play();
-      } else {
-        audioElem.pause();
-      }
+  @action
+  togglemusic() {
+    this.playmusic = !this.playmusic;
+    let audioElem = document.getElementById('copstheme');
+    if (this.playmusic) {
+      audioElem.volume = 0.3;
+      audioElem.play();
+    } else {
+      audioElem.pause();
     }
   }
-});
+}

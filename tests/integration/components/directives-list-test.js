@@ -12,7 +12,7 @@ module('Integration | Component | directives list', function(hooks) {
 
     await render(hbs`{{directives-list}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | directives list', function(hooks) {
       {{/directives-list}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });

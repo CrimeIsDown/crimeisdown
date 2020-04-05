@@ -6,30 +6,30 @@
       <p>We offer various tools to help monitor crime in Chicago. Check out some of them below, or read on to learn more about the site.</p>
     </div>
     <div class="col-md-3 col-sm-6">
-      {{#link-to "map"}}<h3>Incident Map</h3>{{/link-to}}
+      <LinkTo @route="map"><h3>Incident Map</h3></LinkTo>
       <figure class="figure">
-        {{#link-to "map"}}<img src="/img/incident_map.png" alt="Incident map page screenshot" class="img-fluid figure-img">{{/link-to}}
+        <LinkTo @route="map"><img src="/img/incident_map.png" alt="Incident map page screenshot" class="img-fluid figure-img"></LinkTo>
         <figcaption class="figure-caption">Find information about incidents in your area including a scanner feed for the searched area</figcaption>
       </figure>
     </div>
     <div class="col-md-3 col-sm-6">
-      {{#link-to "audio"}}<h3>Scanner Audio</h3>{{/link-to}}
+      <LinkTo @route="audio"><h3>Scanner Audio</h3></LinkTo>
       <figure class="figure">
-        {{#link-to "audio"}}<img src="/img/scanner_audio.png" alt="Scanner audio page screenshot" class="img-fluid figure-img">{{/link-to}}
+        <LinkTo @route="audio"><img src="/img/scanner_audio.png" alt="Scanner audio page screenshot" class="img-fluid figure-img"></LinkTo>
         <figcaption class="figure-caption">Listen to live police/fire radio traffic and access recordings from all CPD radio channels</figcaption>
       </figure>
     </div>
     <div class="col-md-3 col-sm-6">
-      {{#link-to "guide"}}<h3>Scanner Guide</h3>{{/link-to}}
+      <LinkTo @route="guide"><h3>Scanner Guide</h3></LinkTo>
       <figure class="figure">
-        {{#link-to "guide"}}<img src="/img/scanner_guide.png" alt="Scanner guide page screenshot" class="img-fluid figure-img">{{/link-to}}
+        <LinkTo @route="guide"><img src="/img/scanner_guide.png" alt="Scanner guide page screenshot" class="img-fluid figure-img"></LinkTo>
         <figcaption class="figure-caption">Learn the lingo of #ChicagoScanner on our comprehensive scanner guide</figcaption>
       </figure>
     </div>
     <div class="col-md-3 col-sm-6">
-      {{#link-to "directives"}}<h3>Directive Changes</h3>{{/link-to}}
+      <LinkTo @route="directives"><h3>Directive Changes</h3></LinkTo>
       <figure class="figure">
-        {{#link-to "directives"}}<img src="/img/directive_changes.png" alt="Police directive changes page screenshot" class="img-fluid figure-img">{{/link-to}}
+        <LinkTo @route="directives"><img src="/img/directive_changes.png" alt="Police directive changes page screenshot" class="img-fluid figure-img"></LinkTo>
         <figcaption class="figure-caption">See exactly what Chicago Police Department directives have changed recently</figcaption>
       </figure>
     </div>
@@ -44,7 +44,7 @@
         <p>The purpose of CrimeIsDown.com is to provide police scanner listeners in the Chicago area an easy way to lookup information quickly pertaining to what they hear. Journalists use the site to quickly know what neighborhood and police district an incident is happening in. Scanner enthusiasts use the site to find out what radio zone they should listen to. Average citizens use the site to find out what crime is happening around them and to tune in live.</p>
         <p>We hope to let people decide for themselves whether or not crime is down, based on independent statistics and listening to breaking news.</p>
         <h3>Why the name &ldquo;CrimeIsDown&rdquo;?</h3>
-        <p>The name CrimeIsDown comes from a hashtag of the same name that was popular starting in 2013 among those in the #ChicagoScanner community. City leadership often said how crime was down, but that seemed to conflict with the number of shootings. In 2014, <a href="https://www.chicagomag.com/Chicago-Magazine/May-2014/Chicago-crime-rates/" target="_blank">Chicago Magazine had published a story</a> about how Chicago Police was reclassifying crimes to make crime stats appear lower than they really were. The hashtag #CrimeIsDown is used in a sarcastic fashion to challenge the narrative that crime is/was down. On CrimeIsDown.com, someone can listen to police radio themselves and come up with their own conclusions.</p>
+        <p>The name CrimeIsDown comes from a hashtag of the same name that was popular starting in 2013 among those in the #ChicagoScanner community. City leadership often said how crime was down, but that seemed to conflict with the number of shootings. In 2014, <a href="https://www.chicagomag.com/Chicago-Magazine/May-2014/Chicago-crime-rates/" target="_blank" rel="noopener noreferrer">Chicago Magazine had published a story</a> about how Chicago Police was reclassifying crimes to make crime stats appear lower than they really were. The hashtag #CrimeIsDown is used in a sarcastic fashion to challenge the narrative that crime is/was down. On CrimeIsDown.com, someone can listen to police radio themselves and come up with their own conclusions.</p>
       </section>
       <section>
         <h3>Why Should You Care About Crime In Chicago?</h3>
@@ -58,21 +58,21 @@
         <div class="row">
           <div class="col-md-6">
             <ul>
-              <li><a href="http://cureviolence.org/" target="_blank">Cure Violence</a></li>
-              <li><a href="http://www.change4childreninc.org/" target="_blank">Change 4 Children Inc</a></li>
-              <li><a href="http://www.chicagoscitizensforchange.org/" target="_blank">Chicago Citizens for Change</a></li>
-              <li><a href="http://embarcchicago.org/" target="_blank">EMBARC</a></li>
-              <li><a href="http://fmsupreme.com/" target="_blank">FM Supreme</a></li>
-              <li><a href="http://www.igniteone.org/" target="_blank">Ignite One</a></li>
+              <li><a href="http://cureviolence.org/" target="_blank" rel="noopener noreferrer">Cure Violence</a></li>
+              <li><a href="http://www.change4childreninc.org/" target="_blank" rel="noopener noreferrer">Change 4 Children Inc</a></li>
+              <li><a href="http://www.chicagoscitizensforchange.org/" target="_blank" rel="noopener noreferrer">Chicago Citizens for Change</a></li>
+              <li><a href="http://embarcchicago.org/" target="_blank" rel="noopener noreferrer">EMBARC</a></li>
+              <li><a href="http://fmsupreme.com/" target="_blank" rel="noopener noreferrer">FM Supreme</a></li>
+              <li><a href="http://www.igniteone.org/" target="_blank" rel="noopener noreferrer">Ignite One</a></li>
             </ul>
           </div>
           <div class="col-md-6">
             <ul>
-              <li><a href="http://moran-center.org/" target="_blank">Moran Center for Youth Advocacy</a></li>
-              <li><a href="http://thekleocenter.org/" target="_blank">The K.L.E.O. Center</a></li>
-              <li><a href="http://ragenglewood.org/" target="_blank">R.A.G.E.</a></li>
-              <li><a href="http://www.scy-chicago.org/" target="_blank">Strengthening Chicago's Youth</a></li>
-              <li><a href="http://youngchicagoauthors.org/blog/" target="_blank">Young Chicago Authors</a></li>
+              <li><a href="http://moran-center.org/" target="_blank" rel="noopener noreferrer">Moran Center for Youth Advocacy</a></li>
+              <li><a href="http://thekleocenter.org/" target="_blank" rel="noopener noreferrer">The K.L.E.O. Center</a></li>
+              <li><a href="http://ragenglewood.org/" target="_blank" rel="noopener noreferrer">R.A.G.E.</a></li>
+              <li><a href="http://www.scy-chicago.org/" target="_blank" rel="noopener noreferrer">Strengthening Chicago's Youth</a></li>
+              <li><a href="http://youngchicagoauthors.org/blog/" target="_blank" rel="noopener noreferrer">Young Chicago Authors</a></li>
               <li>And many more!</li>
             </ul>
           </div>
@@ -107,9 +107,9 @@
           Contact <a href="https://twitter.com/EricTendian">Eric Tendian</a> (eric [at] crimeisdown.com) for support with the website and other inquiries. Please consider
           clicking the Donate button at the bottom of the page and donating a small sum of money to keep the site up and running.
         </p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SHEMCHJPV8KY&lc=US&item_name=CrimeIsDown%2ecom&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" target="_blank"><h2>Support the site by donating here.</h2></a>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SHEMCHJPV8KY&lc=US&item_name=CrimeIsDown%2ecom&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" target="_blank" rel="noopener noreferrer"><h2>Support the site by donating here.</h2></a>
         <p>Any donation amount is appreciated! We use the money to pay for web hosting, scanners used for live streaming, and other activities to continue adding features. Those who donate may get to try out exclusive features of the site and get access to all our scanner recordings.</p>
-        <a href="https://www.patreon.com/EricTendian" target="_blank">You can also support us on Patreon.</a>
+        <a href="https://www.patreon.com/EricTendian" target="_blank" rel="noopener noreferrer">You can also support us on Patreon.</a>
       </section>
     </div>
   </div>
@@ -126,9 +126,9 @@
       <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
     <div class="col-md-4">
-      <h3><a href="http://heyjackass.com/" target="_blank">HeyJackass.com</a> Crime Stats</h3>
+      <h3><a href="http://heyjackass.com/" target="_blank" rel="noopener noreferrer">HeyJackass.com</a> Crime Stats</h3>
       <p>These are very reliable (but unofficial) crime stats, gathered from scanner reports as well as media. The publisher has zero affiliation with CPD.</p>
-      <p>All images were created by HeyJackass.com. This is a very time consuming job, so please visit their website and consider buying from the <a href="http://heyjackass.com/shop/" target="_blank">HeyJackass! shop.</a></p>
+      <p>All images were created by HeyJackass.com. This is a very time consuming job, so please visit their website and consider buying from the <a href="http://heyjackass.com/shop/" target="_blank" rel="noopener noreferrer">HeyJackass! shop.</a></p>
     </div>
     <div class="col-md-4">
       <h3>Chicago Media</h3>

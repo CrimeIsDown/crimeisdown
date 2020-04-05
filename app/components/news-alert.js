@@ -1,18 +1,18 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { run } from '@ember/runloop';
 import $ from 'jquery';
 
-export default Component.extend({
-  init() {
-    this._super(...arguments);
-    this.set('hasSeenAlert', true);
+export default class NewsAlert extends Component {
+  hasSeenAlert = true;
+
+  constructor() {
+    super(...arguments);
     /*try {
-      this.set('hasSeenAlert', localStorage.getItem('saw-alert-20181223') !== null);
+      this.hasSeenAlert = localStorage.getItem('saw-alert-20181223') !== null;
     } catch (e) {
       return false;
     }*/
-  },
-  didInsertElement() {
+
     if (!this.hasSeenAlert) {
       $('#news-alert').on('closed.bs.alert', () => {
         run(() => {
@@ -25,4 +25,4 @@ export default Component.extend({
       });
     }
   }
-});
+}

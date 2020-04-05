@@ -2,34 +2,39 @@
 /*global GeoSearch*/
 /*global leafletPip*/
 
-import Component from '@ember/component';
-import { get } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action, get } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
 import moment from 'moment';
 import ENV from '../config/environment';
 
-export default Component.extend({
-  addressLookup: service(),
-  showIncidentTable: ENV.APP.INCIDENT_CAD_ENABLED,
-  map: null,
-  geocoder: null,
-  previousGeolocationMarker: null,
-  previousGeolocationCircle: null,
+export default class IncidentMap extends Component {
+  @service addressLookup;
 
-  init() {
-    this._super(...arguments);
+  @tracked geolocationPending;
+  @tracked location;
+  @tracked address;
+
+  showIncidentTable = ENV.APP.INCIDENT_CAD_ENABLED;
+  map = null;
+  geocoder = null;
+  previousGeolocationMarker = null;
+  previousGeolocationCircle = null;
+
+  constructor() {
+    super(...arguments);
     this.baseLayers = {};
     this.layers = {};
     this.overlay = {};
     this.location = {};
-  },
 
-  didInsertElement() {
     L.Icon.Default.imagePath = '/assets/images/';
-    this.initMap();
-  },
+
+    $('#leaflet-map').ready(this.initMap.bind(this));
+  }
 
   removePreviousGeoLocationMarkers() {
     if (this.previousGeolocationMarker) {
@@ -38,89 +43,98 @@ export default Component.extend({
     if (this.previousGeolocationCircle) {
       this.previousGeolocationCircle.remove();
     }
-  },
+  }
 
   setGeoLocationMarkers(marker, circle) {
-    this.set('previousGeolocationMarker', marker);
-    this.set('previousGeolocationCircle', circle);
-  },
+    this.previousGeolocationMarker = marker;
+    this.previousGeolocationCircle = circle;
+  }
 
-  actions: {
-    searchAddress(address) {
-      let fireStationResults = this.addressLookup.findStation(address);
-      if (fireStationResults.length) {
-        address = fireStationResults[0].addr + ' ' + fireStationResults[0].zip;
+  @action
+  searchAddress(event) {
+    if (event) {
+      event.preventDefault();
+    }
+    let address = this.address;
+    let fireStationResults = this.addressLookup.findStation(address);
+    if (fireStationResults.length) {
+      address = fireStationResults[0].addr + ' ' + fireStationResults[0].zip;
+    }
+    $('.leaflet-control-geosearch.bar form input').val(address);
+    $('#address-search').find('input[name="address"]').val(address);
+    this.searchControl.searchElement.handleSubmit({ query: address });
+  }
+
+  @action
+  locateMe() {
+    this.geolocationPending = true;
+
+    // Clear any form fields so it doesn't appear we are still using that address
+    $('.leaflet-control-geosearch.bar form input').val('');
+    $('#address-search').find('input[name="address"]').val('');
+
+    this.map.locate({setView: true, maxZoom: 16});
+
+    this.map.on('locationfound', e => {
+      this.removePreviousGeoLocationMarkers();
+
+      if (e.accuracy > 1000) {
+        alert('Warning: We were not able to determine a precise location, so your location results may be incorrect. Try a different device for better results.');
       }
-      $('.leaflet-control-geosearch.bar form input').val(address);
-      $('#address-search').find('input[name="address"]').val(address);
-      this.searchControl.searchElement.handleSubmit({ query: address });
-    },
-    locateMe() {
-      this.set('geolocationPending', true);
 
-      // Clear any form fields so it doesn't appear we are still using that address
-      $('.leaflet-control-geosearch.bar form input').val('');
-      $('#address-search').find('input[name="address"]').val('');
+      let radius = e.accuracy * 3.28084; // convert radius to feet
 
-      this.map.locate({setView: true, maxZoom: 16});
+      let marker = L.marker(e.latlng).addTo(this.map)
+          .bindPopup("You are within " + radius.toPrecision(5) + " feet of this point").openPopup();
+      let circle = L.circle(e.latlng, radius, {fill: radius < 1000}).addTo(this.map);
 
-      this.map.on('locationfound', e => {
-        this.removePreviousGeoLocationMarkers();
+      this.setGeoLocationMarkers(marker, circle);
 
-        let radius = e.accuracy * 3.28084; // convert radius to feet
-
-        let marker = L.marker(e.latlng).addTo(this.map)
-            .bindPopup("You are within " + radius.toPrecision(5) + " feet of this point").openPopup();
-        let circle = L.circle(e.latlng, radius, {fill: radius < 1000}).addTo(this.map);
-
-        this.setGeoLocationMarkers(marker, circle);
-
-        this.showLocation({
-          location: {
-            raw: {
-              formatted_address: 'N/A - From device location',
-              geometry: {
-                location: {
-                  lat: e.latlng.lat,
-                  lng: e.latlng.lng
-                }
+      this.showLocation({
+        location: {
+          raw: {
+            formatted_address: 'N/A - From device location',
+            geometry: {
+              location: {
+                lat: e.latlng.lat,
+                lng: e.latlng.lng
               }
             }
           }
-        });
-
-        this.set('geolocationPending', false);
+        }
       });
 
-      this.map.on('locationerror', e => {
-        alert(e.message + ' If you are on iOS, make sure to enable Location Services first.');
+      this.geolocationPending = false;
+    });
 
-        this.set('geolocationPending', false);
-      });
-    }
-  },
+    this.map.on('locationerror', e => {
+      alert(e.message + ' If you are on iOS, make sure to enable Location Services first.');
+
+      this.geolocationPending = false;
+    });
+  }
 
   initMap() {
     const defaultCenterLat = 41.85;
     const defaultCenterLong = -87.63;
     const defaultZoom = 11;
-    this.set('map', L.map('leaflet-map', {
+    this.map = L.map('leaflet-map', {
       center: [defaultCenterLat, defaultCenterLong],
       zoom: defaultZoom
-    }));
+    });
 
     $('#crimereports-map').attr('src', this.buildCrimeMapUrl(defaultCenterLat, defaultCenterLong, 13));
 
-    this.set('initialized', Promise.all([
+    this.initialized = Promise.all([
       this.initBaseLayers(),
       this.initGeocoder(),
       this.initInfoBox(),
       this.initLayers(),
       this.addressLookup.loadData()
-    ]));
+    ]);
 
     this.initialized.then(() => {
-      let incidents = this.get('model.incidents');
+      let incidents = []; // this.model.incidents;
       if (incidents) {
         incidents.forEach((incident) => {
           get(incident, 'location.layer').addTo(this.overlay['User Features']);
@@ -134,7 +148,8 @@ export default Component.extend({
             .split('&')[0]
             .split('=')[1];
         query = decodeURIComponent(query.replace(/\+/g, " "));
-        this.actions.searchAddress.bind(this)(query);
+        this.address = query;
+        this.searchAddress();
       }
     });
 
@@ -152,10 +167,10 @@ export default Component.extend({
       }
     });
 
-    this.set('layersControl', new L.Control.Layers(this.baseLayers, this.overlay, {
+    this.layersControl = new L.Control.Layers(this.baseLayers, this.overlay, {
       // @TODO use CSS for this
       collapsed: window.innerHeight > 650 ? false : true
-    }).addTo(this.map));
+    }).addTo(this.map);
 
     L.streetView({
       position: 'topleft',
@@ -166,7 +181,7 @@ export default Component.extend({
       openstreetcam: false,
       mosatlas: false
     }).addTo(this.map);
-  },
+  }
 
   initBaseLayers() {
     return new Promise((resolve, reject) => {
@@ -203,7 +218,7 @@ export default Component.extend({
 
       resolve();
     });
-  },
+  }
 
   buildCrimeMapUrl(latitude, longitude, zoom = 16) {
     let url = new URL('https://www.cityprotect.com/map/list/incidents');
@@ -224,7 +239,7 @@ export default Component.extend({
     url.search = new URLSearchParams(queryParams);
 
     return url.toString();
-  },
+  }
 
   showLocation(event) {
     let query = $('.leaflet-control-geosearch.bar form input').val();
@@ -240,7 +255,7 @@ export default Component.extend({
     }
 
     this.initialized.then(() => {
-      this.set('location', this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw));
+      this.location = this.addressLookup.generateLocationDataForAddress(this.layers, event.location.raw);
       let randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
       let wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=15&lat=' + this.location.meta.latitude + '&lon=' + this.location.meta.longitude + '&pin=1&_=' + randomInt;
       $('#waze-map').attr('src', wazeIframeUrl);
@@ -253,36 +268,35 @@ export default Component.extend({
         });
       }
     });
-  },
+  }
 
   initGeocoder() {
     return new Promise((resolve, reject) => {
-      this.set('geosearchProvider', new GeoSearch.GoogleProvider({
+      this.geosearchProvider = new GeoSearch.GoogleProvider({
         params: {
           key: 'REDACTED_PUBLIC_CREDENTIAL',
           bounds: '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366'
         },
-      }));
+      });
 
-      const searchControl = new GeoSearch.GeoSearchControl({
+      this.searchControl = new GeoSearch.GeoSearchControl({
         provider: this.geosearchProvider,
         style: 'bar',
         autoComplete: false,
         showPopup: true,
         maxMarkers: 3
       });
-      this.set('searchControl', searchControl);
 
-      this.map.addControl(searchControl);
+      this.map.addControl(this.searchControl);
 
       this.map.on('geosearch/showlocation', this.showLocation.bind(this));
 
       resolve();
     });
-  },
+  }
 
   initLayers() {
-    this.set('layers', {
+    this.layers = {
       fireStations: {
         label: "Fire Stations",
         layer: null,
@@ -386,10 +400,10 @@ export default Component.extend({
         url: 'https://cors-anywhere.herokuapp.com/https://www.google.com/maps/d/kml?forcekml=1&mid=1am7PF0tT25EztnOTAgUEL2E382VjVTc7',
         showByDefault: false
       }
-    });
+    };
 
     return this.loadLayerData(this.layers);
-  },
+  }
 
   loadLayerData(layers) {
     let map = this.map;
@@ -453,7 +467,7 @@ export default Component.extend({
             });
           } else if (layerName === 'gangs') {
             let kmlLayer = new L.KML();
-            map.attributionControl.addAttribution('Gang map by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank">u/ReggieG45</a>');
+            map.attributionControl.addAttribution('Gang map by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank" rel="noopener noreferrer">u/ReggieG45</a>');
             if (layerObj.showByDefault) {
               kmlLayer.addTo(map);
             }
@@ -544,7 +558,7 @@ export default Component.extend({
     }
 
     return Promise.all(promises);
-  },
+  }
 
   initInfoBox() {
     return new Promise((resolve, reject) => {
@@ -570,10 +584,10 @@ export default Component.extend({
 
       info.addTo(this.map);
 
-      this.set('infobox', info);
+      this.infobox = info;
       resolve();
     });
-  },
+  }
 
   initEditableMap() {
     this.overlay['User Features'] = L.markerClusterGroup()
@@ -616,4 +630,4 @@ export default Component.extend({
 
     this.map.on(L.Draw.Event.CREATED, drawEventCreated.bind(this));
   }
-});
+}

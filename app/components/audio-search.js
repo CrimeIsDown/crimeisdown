@@ -1,8 +1,8 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  init() {
-    this._super(...arguments);
+export default class AudioSearch extends Component {
+  constructor() {
+    super(...arguments);
     let options = {
       enableTime: true,
       minDate: new Date('2016-12-11T08:00:00.000Z'),
@@ -16,4 +16,4 @@ export default Component.extend({
     options.defaultDate.setMinutes(0);
     this.options = options;
   }
-});
+}

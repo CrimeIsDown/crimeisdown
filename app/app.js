@@ -2,7 +2,7 @@
 import Application from '@ember/application';
 import * as Sentry from '@sentry/browser'
 import * as Integrations from '@sentry/integrations';
-import Resolver from './resolver';
+import Resolver from 'ember-resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 
@@ -17,12 +17,10 @@ if (config.sentry) {
   });
 }
 
-const App = Application.extend({
-  modulePrefix: config.modulePrefix,
-  podModulePrefix: config.podModulePrefix,
-  Resolver
-});
+export default class App extends Application {
+  modulePrefix = config.modulePrefix;
+  podModulePrefix = config.podModulePrefix;
+  Resolver = Resolver;
+}
 
 loadInitializers(App, config.modulePrefix);
-
-export default App;

@@ -1,12 +1,13 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
 
-export default Component.extend({
-  minZoom: 0,
-  maxZoom: 100,
-  currentZoom: 0,
-  player: null,
+export default class Oggplayer extends Component {
+  minZoom = 0;
+  maxZoom = 100;
+  currentZoom = 0;
+  player = null;
+
   didInsertElement() {
-    this._super(...arguments);
     let options = {
       controls: true,
       plugins: {
@@ -33,15 +34,15 @@ export default Component.extend({
     this.player = window.videojs('videojs-player', options, () => {
       this.player.src({src: this.src, type: this.type});
     });
-  },
-  actions: {
-    zoom(e) {
-      let wavesurfer = this.player.wavesurfer().surfer;
-      let playerWidth = wavesurfer.drawer.getWidth();
-      let minPxPerSec = Math.round((playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration());
-      let defaultMinPxPerSec = 20;
-
-      wavesurfer.zoom(minPxPerSec * (Number(e.target.value)/defaultMinPxPerSec));
-    }
   }
-});
+
+  @action
+  zoom(e) {
+    let wavesurfer = this.player.wavesurfer().surfer;
+    let playerWidth = wavesurfer.drawer.getWidth();
+    let minPxPerSec = Math.round((playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration());
+    let defaultMinPxPerSec = 20;
+
+    wavesurfer.zoom(minPxPerSec * (Number(e.target.value)/defaultMinPxPerSec));
+  }
+}

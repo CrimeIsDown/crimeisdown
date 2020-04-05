@@ -13,7 +13,7 @@ module('Integration | Component | app footer', function(hooks) {
 
     await render(hbs`{{app-footer}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -22,6 +22,6 @@ module('Integration | Component | app footer', function(hooks) {
       {{/app-footer}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });

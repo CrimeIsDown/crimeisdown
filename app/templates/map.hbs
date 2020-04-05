@@ -1,14 +1,14 @@
-{{#if showTabs}}
+{{#if this.showTabs}}
 <ul class="nav nav-tabs bg-dark" id="cadTabs" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="home" aria-selected="true">Map/CAD</a>
   </li>
-  {{#each openIncidents as |incident|}}
+  {{#each this.openIncidents as |incident|}}
     <li class="nav-item">
       <a class="nav-link nav-close" id="incident-tab-{{incident.id}}" data-toggle="tab" href="#incident-{{incident.id}}" role="tab" aria-controls="incident-{{incident.id}}" aria-selected="false">
         {{incident.type.value}} - {{incident.location.address}}
       </a>
-      <span class="text-danger" onclick={{action "closeTab" incident}}>&times;</span>
+      <span role="button" class="text-danger" {{on "click" (fn this.closeTab incident)}}>&times;</span>
     </li>
   {{/each}}
 </ul>
@@ -16,12 +16,12 @@
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
-    {{incident-map model=model openIncidents=openIncidents}}
+    <IncidentMap @model={{this.model}} @openIncidents={{this.openIncidents}} />
   </div>
-  {{#each openIncidents as |incident|}}
+  {{#each this.openIncidents as |incident|}}
     <div class="tab-pane fade" id="incident-{{incident.id}}" role="tabpanel" aria-labelledby="incident-tab-{{incident.id}}">
       <div class="container">
-        {{incident-show model=model incident=incident openIncidents=openIncidents}}
+        <IncidentShow @model={{this.model}} @incident={{incident}} @openIncidents={{this.openIncidents}} />
       </div>
     </div>
   {{/each}}

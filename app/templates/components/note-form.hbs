@@ -1,26 +1,26 @@
-{{#if showForm}}
-  <h5>{{if update "Edit" "New"}} Note</h5>
-  <form {{action (if update "update" "create") on="submit"}}>
+{{#if this.showForm}}
+  <h5>{{if this.isUpdate "Edit" "New"}} Note</h5>
+  <form {{on "submit" (if this.isUpdate this.update this.create)}}>
     <div class="form-group">
       <label for="author">Author</label>
-      {{input type="text" class="form-control" id="author" value=note.author}}
+      <Input @type="text" class="form-control" @id="author" @value={{this.note.author}} />
     </div>
     <div class="form-group">
       <label for="content">Content</label>
-      {{pell-editor value=note.body}}
+      <PellEditor @value={{this.note.body}} />
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-    <button class="btn btn-secondary" {{action (mut showForm) false}}>Cancel</button>
+    <button type="button" class="btn btn-secondary" {{on "click" (fn (mut this.showForm) false)}}>Cancel</button>
   </form>
 {{else}}
   <div class="btn-group">
-    {{#if update}}
-      <button type="button" class="btn btn-danger btn-sm" aria-label="Delete note" {{action "delete"}}>
+    {{#if this.update}}
+      <button type="button" class="btn btn-danger btn-sm" aria-label="Delete note" {{on "click" this.delete}}>
         <span aria-hidden="true">&times;</span>
       </button>
-      <button class="btn btn-sm btn-info" {{action (mut showForm) true}}>Edit</button>
+      <button type="button" class="btn btn-sm btn-info" {{on "click" (fn (mut this.showForm) true)}}>Edit</button>
     {{else}}
-      <button class="btn btn-info" {{action (mut showForm) true}}>New Note</button>
+      <button type="button" class="btn btn-info" {{on "click" (fn (mut this.showForm) true)}}>New Note</button>
     {{/if}}
   </div>
 {{/if}}

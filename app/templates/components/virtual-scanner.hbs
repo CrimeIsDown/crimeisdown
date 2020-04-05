@@ -2,15 +2,16 @@
 <div class="row">
   <div class="col-md-6">
     <div class="form-group">
-      <fieldset onchange={{action "changeStreams" value="target"}} id="streamlist">
+      {{! template-lint-disable no-invalid-interactive }}
+      <fieldset id="streamlist" {{on "change" (fn this.changeStreams value="target")}}>
         <legend>Check the streams to play</legend>
         <div class="stream-options">
-        {{#if streams.length}}
-          {{#each streams as |streamOption|}}
+        {{#if this.streams.length}}
+          {{#each this.streams as |streamOption|}}
             <div class="form-check">
               <input class="form-check-input" id="checkbox-{{streamOption.name}}" type="checkbox" name="stream" value={{streamOption.name}}>
               <label class="form-check-label" for="checkbox-{{streamOption.name}}">{{streamOption.desc}}</label>
-              {{#link-to route="audio-live" model=streamOption.name target="_blank" title=(concat "Listen to only " streamOption.desc)}}<i class="fa fa-external-link"></i>{{/link-to}}
+              <LinkTo @route="audio-live" @model={{streamOption.name}} target="_blank" rel="noopener noreferrer" title={{concat "Listen to only " streamOption.desc}}><i class="fa fa-external-link"></i></LinkTo>
             </div>
           {{/each}}
         {{else}}
@@ -25,21 +26,21 @@
     <p>Drag <i class="fa fa-volume-up" aria-label="speaker"></i> to move stereo channels, put on <i class="fa fa-headphones" aria-label="headphones" alt="headphones"></i> for surround sound</p>
     <div class="draggable-parent">
       <i class="fa fa-user"></i>
-      {{#each enabledStreams as |stream|}}
+      {{#each this.enabledStreams as |stream|}}
         <i class="fa fa-volume-up" id="drag-{{stream.name}}" title="{{stream.desc}}"><span>&nbsp;{{stream.name}}</span></i>
       {{/each}}
     </div>
   </div>
   <div class="col-md-12">
     <div class="row">
-      {{#each enabledStreams as |stream|}}
+      {{#each this.enabledStreams as |stream|}}
       <div class="stream col-sm-6" id="stream-{{stream.name}}">
         <h5 class="title">
-          {{#link-to route="audio-live" model=stream.name title=(concat "Listen to only " stream.desc)}}
+          <LinkTo @route="audio-live" @model={{stream.name}} title={{concat "Listen to only " stream.desc}}>
             {{stream.desc}} <i class="fa fa-external-link"></i>
-          {{/link-to}}
+          </LinkTo>
         </h5>
-        <audio id="audio-player-{{stream.name}}" class="stream-player" preload="none" style="width: 200px;"></audio>
+        <audio id="audio-player-{{stream.name}}" class="stream-player" preload="none"></audio>
       </div>
       {{/each}}
     </div>

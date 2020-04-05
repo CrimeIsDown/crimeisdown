@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-6">
-      {{search-radioids}}
+      <SearchRadioids />
       <h4>Relevant links</h4>
       <ul>
         <li><a href="http://www.chicagofiremap.net/p/ems.html">EMS Triage Codes (Green/Yellow/Red/Black)</a></li>
@@ -11,15 +11,15 @@
       </ul>
     </div>
     <div class="col-sm-12 col-md-6">
-      {{search-ucrcodes}}
+      <SearchUcrcodes />
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-12">
       <h2>Scanner Guide</h2>
-      <p><a href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://crimeisdown.com/data/ChicagoScannerGuide.pdf" target="_blank">Open the viewer in a new window</a> or <a href="https://crimeisdown.com/data/ChicagoScannerGuide.pdf" target="_blank">Download the PDF</a>.</p>
-      <iframe id="scanner-guide" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://crimeisdown.com/data/ChicagoScannerGuide.pdf"></iframe>
+      <p><a href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://crimeisdown.com/data/ChicagoScannerGuide.pdf" target="_blank" rel="noopener noreferrer">Open the viewer in a new window</a> or <a href="https://crimeisdown.com/data/ChicagoScannerGuide.pdf" target="_blank" rel="noopener noreferrer">Download the PDF</a>.</p>
+      <iframe id="scanner-guide" title="Scanner guide" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://crimeisdown.com/data/ChicagoScannerGuide.pdf"></iframe>
     </div>
   </div>
 </div>

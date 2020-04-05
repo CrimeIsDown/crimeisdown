@@ -1,8 +1,8 @@
 <div id="ucr-search">
-  <form {{action "lookupUCR" ucrCode on="submit"}}>
+  <form {{on "submit" this.lookupUCR}}>
     <label for="ucr">UCR (Uniform Crime Reporting) Code to lookup</label>
     <div class="input-group">
-      {{input class="form-control" name="ucr" placeholder="041A" type="text" value=ucrCode}}
+      <Input class="form-control" @name="ucr" placeholder="041A" @type="text" @value={{this.ucrCode}} />
       <div class="input-group-append">
         <button class="btn btn-primary" type="submit">Define</button>
       </div>
@@ -13,20 +13,18 @@
       <tbody>
       <tr>
         <th scope="row">Primary Description</th>
-        <td id="primary_desc">{{ucr.primaryDesc}}</td>
+        <td id="primary_desc">{{this.ucr.primaryDesc}}</td>
       </tr>
       <tr>
         <th scope="row">Secondary Description</th>
-        <td id="secondary_desc">{{ucr.secondaryDesc}}</td>
+        <td id="secondary_desc">{{this.ucr.secondaryDesc}}</td>
       </tr>
       <tr>
         <th scope="row">Index Code?</th>
-        <td id="index_code">{{ucr.indexCode}}</td>
+        <td id="index_code">{{this.ucr.indexCode}}</td>
       </tr>
       </tbody>
     </table>
     <p>The full list of UCR codes and information about them can be found in the <a href="http://directives.chicagopolice.org/forms/CPD-63.451_Table.pdf">CPD's Incident Reporting Guide</a>.</p>
   </div>
 </div>
-
-{{yield}}

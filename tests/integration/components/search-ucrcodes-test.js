@@ -12,7 +12,7 @@ module('Integration | Component | search ucrcodes', function(hooks) {
 
     await render(hbs`{{search-ucrcodes}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | search ucrcodes', function(hooks) {
       {{/search-ucrcodes}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });

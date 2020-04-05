@@ -4,33 +4,33 @@
     <small class="text-danger">If you use the map drawing features (below zoom in/out), they will not be saved. A refresh will clear the map.</small>
     <p class="mobile text-primary"><em>Scroll down for incident map</em></p>
     <div class="accordion" id="accordion" role="tablist">
-      {{#if showIncidentTable}}
+      {{#if this.showIncidentTable}}
       <div class="card">
-        <div class="card-header" role="tab">
-          <a id="headingIncidents" data-toggle="collapse" href="#collapseIncidents" aria-expanded="true" aria-controls="collapseIncidents">
+        <div class="card-header">
+          <a id="headingIncidents" role="tab" data-toggle="collapse" href="#collapseIncidents" aria-expanded="true" aria-controls="collapseIncidents">
             Incidents
           </a>
           {{!-- <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a> --}}
         </div>
         <div id="collapseIncidents" class="collapse show" role="tabpanel" aria-labelledby="headingIncidents" data-parent="#accordion">
-          {{incident-table model=model incidents=incidents openIncidents=openIncidents}}
+          <IncidentTable @model={{this.model}} @incidents={{this.incidents}} @openIncidents={{this.openIncidents}}></IncidentTable>
         </div>
       </div>
       {{/if}}
       <div class="card">
-        <div class="card-header" role="tab">
-          <a class="card-heading" id="headingAddrSearch" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
+        <div class="card-header">
+          <a class="card-heading" id="headingAddrSearch" role="tab" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
             Address Search
           </a>
           {{!--<a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>--}}
         </div>
         <div id="collapseAddrSearch" class="collapse show" role="tabpanel" aria-labelledby="headingAddrSearch">
           <div id="address-search">
-            <form {{action "searchAddress" address on="submit"}}>
+            <form method="post" {{on "submit" this.searchAddress}}>
               <div class="form-group">
                 <label for="address">Address, intersection, place to search</label>
                 <div class="input-group">
-                  {{input class="form-control" name="address" placeholder="e.g. 3510 S Michigan, Chicago" type="text" value=address autofocus=true}}
+                  <Input class="form-control" @name="address" placeholder="e.g. 3510 S Michigan, Chicago" @type="text" @value={{this.address}} autofocus="true" />
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">Search</button>
                   </div>
@@ -38,7 +38,7 @@
               </div>
             </form>
             <div class="form-group">
-              <button class="btn btn-info{{if geolocationPending " disabled" ""}}" {{action "locateMe" on="click"}} title="Device geolocation works best on mobile"><i class="fa fa-crosshairs" aria-hidden="true"></i> Use my location</button>
+              <button type="button" class="btn btn-info{{if this.geolocationPending " disabled" ""}}" {{on "click" this.locateMe}} title="Device geolocation works best on mobile"><i class="fa fa-crosshairs" aria-hidden="true"></i> Use my location</button>
             </div>
             <table class="table table-bordered table-condensed">
               <tbody>
@@ -47,38 +47,38 @@
               </tr>
               <tr>
                 <td>Formatted Address</td>
-                <td>{{ location.meta.formattedAddress }}</td>
+                <td>{{ this.location.meta.formattedAddress }}</td>
               </tr>
               <tr>
-                <td>Latitude: {{ location.meta.latitude }}</td>
-                <td>Longitude: {{ location.meta.longitude }}</td>
+                <td>Latitude: {{ this.location.meta.latitude }}</td>
+                <td>Longitude: {{ this.location.meta.longitude }}</td>
               </tr>
               <tr>
                 <td>Neighborhood</td>
-                <td>{{ location.meta.neighborhood }}</td>
+                <td>{{ this.location.meta.neighborhood }}</td>
               </tr>
               <tr>
                 <td>Community Area</td>
-                <td>{{ location.meta.communityArea }}</td>
+                <td>{{ this.location.meta.communityArea }}</td>
               </tr>
               <tr>
                 <td>Ward / Alderman</td>
-                <td>{{#if location.meta.ward}}{{ location.meta.ward }} - <a href="{{ location.meta.alderman.website }}" target="_blank">Alderman {{ location.meta.alderman.name }}</a>{{/if}}</td>
+                <td>{{#if this.location.meta.ward}}{{ this.location.meta.ward }} - <a href="{{ this.location.meta.alderman.website }}" target="_blank" rel="noopener noreferrer">Alderman {{ this.location.meta.alderman.name }}</a>{{/if}}</td>
               </tr>
               <tr class="info">
                 <th colspan="2">Chicago Police Department</th>
               </tr>
               <tr>
-                <td>{{ location.police.district }} District, Beat {{ location.police.beat }}</td>
-                <td>Area {{ location.police.area }}</td>
+                <td>{{ this.location.police.district }} District, Beat {{ this.location.police.beat }}</td>
+                <td>Area {{ this.location.police.area }}</td>
               </tr>
               <tr>
                 <td colspan="2">
-                  {{#if location.police.zone.name}}
-                    <strong>{{ location.police.zone.name }}</strong> ({{ location.police.zone.frequency }})<br>
-                    <p>{{location.police.zone.description}}</p>
-                    <p>{{#link-to class="btn btn-primary" route="audio-live" model=location.police.zone.slug title=(concat "Listen to " location.police.zone.name)}}<i class="fa fa-volume-up" aria-hidden="true"></i> Listen to CPD with Instant Replay{{/link-to}}</p>
-                    {{stream-player stream=location.police.zone.slug autoplay=false}}
+                  {{#if this.location.police.zone.name}}
+                    <strong>{{ this.location.police.zone.name }}</strong> ({{ this.location.police.zone.frequency }})<br>
+                    <p>{{ this.location.police.zone.description }}</p>
+                    <p><LinkTo class="btn btn-primary" @route="audio-live" @model={{this.location.police.zone.slug}} title={{concat "Listen to " this.location.police.zone.name}}><i class="fa fa-volume-up" aria-hidden="true"></i> Listen to CPD with Instant Replay</LinkTo></p>
+                    <StreamPlayer @stream={{this.location.police.zone.slug}} @autoplay={{false}}></StreamPlayer>
                   {{/if}}
                 </td>
               </tr>
@@ -89,25 +89,25 @@
               <tr>
                 <td>
                   <i>Nearest Companies:</i><br>
-                  <span tabindex="0" data-toggle="tooltip" title="{{ location.fire.nearestEngine.addr }}">{{ location.fire.nearestEngine.engine }} (Engine)</span><br>
-                  <span tabindex="0" data-toggle="tooltip" title="{{ location.fire.nearestTruck.addr }}">{{ location.fire.nearestTruck.truck }} (Truck)</span><br>
-                  <span tabindex="0" data-toggle="tooltip" title="{{ location.fire.nearestAmbo.addr }}">{{ location.fire.nearestAmbo.ambo }} (Ambo.)</span><br>
-                  <span tabindex="0" data-toggle="tooltip" title="{{ location.fire.nearestSquad.addr }}">{{ location.fire.nearestSquad.squad }} (Squad)</span>
+                  <span tabindex="0" data-toggle="tooltip" title="{{ this.location.fire.nearestEngine.addr }}">{{ this.location.fire.nearestEngine.engine }} (Engine)</span><br>
+                  <span tabindex="0" data-toggle="tooltip" title="{{ this.location.fire.nearestTruck.addr }}">{{ this.location.fire.nearestTruck.truck }} (Truck)</span><br>
+                  <span tabindex="0" data-toggle="tooltip" title="{{ this.location.fire.nearestAmbo.addr }}">{{ this.location.fire.nearestAmbo.ambo }} (Ambo.)</span><br>
+                  <span tabindex="0" data-toggle="tooltip" title="{{ this.location.fire.nearestSquad.addr }}">{{ this.location.fire.nearestSquad.squad }} (Squad)</span>
                 </td>
                 <td>
                   <i>Loc. Within:</i><br>
-                  Battalion {{ location.fire.battalion }}<br>
-                  Fire Dist. {{ location.fire.fireDistrict }}<br>
-                  EMS District {{ location.fire.emsDistrict }}
+                  Battalion {{ this.location.fire.battalion }}<br>
+                  Fire Dist. {{ this.location.fire.fireDistrict }}<br>
+                  EMS District {{ this.location.fire.emsDistrict }}
                 </td>
               </tr>
               <tr>
                 <td colspan="2">
-                  Radio Channel: <strong>{{ location.fire.channel }}</strong>
-                  {{#if location.fire.channel}}
+                  Radio Channel: <strong>{{ this.location.fire.channel }}</strong>
+                  {{#if this.location.fire.channel}}
                   <a
-                    href="{{if (eq location.fire.channel "Main") "https://openmhz.com/system/chi_cfd?filter-type=group&filter-code=5a498e5e129ce10001425163" "https://openmhz.com/system/chi_cfd?filter-type=group&filter-code=5a498e6d129ce10001425164"}}"
-                    class="btn btn-primary" title="Listen to CFD {{ location.fire.channel }}"
+                    href="{{if (eq this.location.fire.channel "Main") "https://openmhz.com/system/chi_cfd?filter-type=group&filter-code=5a498e5e129ce10001425163" "https://openmhz.com/system/chi_cfd?filter-type=group&filter-code=5a498e6d129ce10001425164"}}"
+                    class="btn btn-primary" title="Listen to CFD {{ this.location.fire.channel }}"
                   ><i class="fa fa-volume-up" aria-hidden="true"></i> Listen to CFD with Instant Replay</a>
                   {{/if}}
                 </td>
@@ -118,34 +118,34 @@
               <tr>
                 <td colspan="2">
                   Adult Trauma Center:
-                  {{#if location.ems.nearestTraumaAdult.name}}
+                  {{#if this.location.ems.nearestTraumaAdult.name}}
                   <em>
-                    {{ location.ems.nearestTraumaAdult.name }}
+                    {{ this.location.ems.nearestTraumaAdult.name }}
                     -
-                    {{ location.ems.nearestTraumaAdult.distanceMi }}mi
+                    {{ this.location.ems.nearestTraumaAdult.distanceMi }}mi
                   </em>
-                  ({{ location.ems.nearestTraumaAdult.addr }},
-                    {{ location.ems.nearestTraumaAdult.city }},
-                    {{ location.ems.nearestTraumaAdult.state }},
-                    {{ location.ems.nearestTraumaAdult.zip }})
-                  - Patient Reports on {{ location.ems.nearestTraumaAdult.medChannel }}
+                  ({{ this.location.ems.nearestTraumaAdult.addr }},
+                    {{ this.location.ems.nearestTraumaAdult.city }},
+                    {{ this.location.ems.nearestTraumaAdult.state }},
+                    {{ this.location.ems.nearestTraumaAdult.zip }})
+                  - Patient Reports on {{ this.location.ems.nearestTraumaAdult.medChannel }}
                   {{/if}}
                 </td>
               </tr>
               <tr>
                 <td colspan="2">
                   Pediatric Trauma Center:
-                  {{#if location.ems.nearestTraumaPed.name}}
+                  {{#if this.location.ems.nearestTraumaPed.name}}
                   <em>
-                    {{ location.ems.nearestTraumaPed.name }}
+                    {{ this.location.ems.nearestTraumaPed.name }}
                     -
-                    {{ location.ems.nearestTraumaPed.distanceMi }}mi
+                    {{ this.location.ems.nearestTraumaPed.distanceMi }}mi
                   </em>
-                  ({{ location.ems.nearestTraumaPed.addr }},
-                    {{ location.ems.nearestTraumaPed.city }},
-                    {{ location.ems.nearestTraumaPed.state }},
-                    {{ location.ems.nearestTraumaPed.zip }})
-                  - Patient Reports on {{ location.ems.nearestTraumaPed.medChannel }}
+                  ({{ this.location.ems.nearestTraumaPed.addr }},
+                    {{ this.location.ems.nearestTraumaPed.city }},
+                    {{ this.location.ems.nearestTraumaPed.state }},
+                    {{ this.location.ems.nearestTraumaPed.zip }})
+                  - Patient Reports on {{ this.location.ems.nearestTraumaPed.medChannel }}
                   {{/if}}
                 </td>
               </tr>
@@ -154,7 +154,7 @@
           </div>
         </div>
       </div>
-      {{map-tools}}
+      <MapTools></MapTools>
     </div>
   </div>
   <div class="map-container">

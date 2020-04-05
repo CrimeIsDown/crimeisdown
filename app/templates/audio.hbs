@@ -6,16 +6,16 @@
           <p><em><a href="#lookuprecording">Jump to scanner recording download</a></em></p>
         </div>
         <div class="col-md-12">
-          {{virtual-scanner}}
+          <VirtualScanner />
         </div>
         <div class="col-md-12">
           <h3>General #ChicagoScanner feed</h3>
           <p>Scanner feed of ISP Dist. Chicago, Metra PD, CPD Citywides, various CFD incident channels, Marine 16, and aviation UNICOM. Scan list subject to change.</p>
-          <iframe src="https://www.youtube.com/embed/live_stream?channel=UCUS-tAwCyxBrrA3FtSjH2NA" style="width:100%;height:315px;border:none;overflow:hidden;margin-bottom:1em;" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+          <iframe src="https://www.youtube.com/embed/live_stream?channel=UCUS-tAwCyxBrrA3FtSjH2NA" id="youtube-feed" title="General scanner feed on YouTube" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
         </div>
         <div class="col-md-12">
           <div class="accordion" id="accordion" role="tablist">
-            {{map-tools}}
+            <MapTools />
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
       <div class="row">
         <div class="col-md-6">
           <h3 id="lookuprecording">Look up scanner recording</h3>
-          {{ audio-search }}
+          <AudioSearch />
         </div>
         <div class="col-md-6">
           <p><em>The recording search is limited to a certain number of downloads per day, with Patreon patrons getting additional downloads. <a href="https://www.patreon.com/EricTendian/posts">Existing Patrons, login here.</a></em></p>
@@ -41,23 +41,23 @@
               <td>5</td>
             </tr>
             <tr>
-              <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$1/mo Patron</a></td>
+              <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank" rel="noopener noreferrer">$1/mo Patron</a></td>
               <td>10</td>
             </tr>
             <tr>
-              <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$5/mo Patron</a></td>
+              <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank" rel="noopener noreferrer">$5/mo Patron</a></td>
               <td>20</td>
             </tr>
             <tr>
-              <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$10/mo Patron</a></td>
+              <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank" rel="noopener noreferrer">$10/mo Patron</a></td>
               <td>30</td>
             </tr>
             <tr>
-              <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$20/mo Patron</a></td>
+              <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank" rel="noopener noreferrer">$20/mo Patron</a></td>
               <td>50</td>
             </tr>
             <tr>
-              <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank">$50/mo Patron</a></td>
+              <td><a href="https://www.patreon.com/bePatron?u=4805116" target="_blank" rel="noopener noreferrer">$50/mo Patron</a></td>
               <td>Unlimited</td>
             </tr>
             </tbody>
@@ -71,40 +71,40 @@
           <p>These streams allow individual audio clips to be played, so you can rewind easily without need to download a full archive. They are more like a virtual police scanner.</p>
           <ul>
             <li>
-              <p><a href="https://openmhz.com/system/sc21102" target="_blank">STARCOM21</a></p>
+              <p><a href="https://openmhz.com/system/sc21102" target="_blank" rel="noopener noreferrer">STARCOM21</a></p>
             </li>
             <li>
-              <p><a href="https://openmhz.com/system/chi_cfd" target="_blank">Chicago Fire Department</a></p>
+              <p><a href="https://openmhz.com/system/chi_cfd" target="_blank" rel="noopener noreferrer">Chicago Fire Department</a></p>
             </li>
             <li>
-              <p><a href="https://openmhz.com/system/chi_cpd" target="_blank">Chicago Police Department</a></p>
+              <p><a href="https://openmhz.com/system/chi_cpd" target="_blank" rel="noopener noreferrer">Chicago Police Department</a></p>
             </li>
           </ul>
           <h4>Broadcastify feed lists by county</h4>
           <ul>
             <li>
-              <p><a href="https://www.broadcastify.com/listen/ctid/606" target="_blank">Cook County (includes Chicago)</a></p>
+              <p><a href="https://www.broadcastify.com/listen/ctid/606" target="_blank" rel="noopener noreferrer">Cook County (includes Chicago)</a></p>
             </li>
             <li>
-              <p><a href="https://www.broadcastify.com/listen/ctid/639" target="_blank">Lake County (north suburbs)</a></p>
+              <p><a href="https://www.broadcastify.com/listen/ctid/639" target="_blank" rel="noopener noreferrer">Lake County (north suburbs)</a></p>
             </li>
             <li>
-              <p><a href="https://www.broadcastify.com/listen/ctid/612" target="_blank">DuPage County (west suburbs)</a></p>
+              <p><a href="https://www.broadcastify.com/listen/ctid/612" target="_blank" rel="noopener noreferrer">DuPage County (west suburbs)</a></p>
             </li>
             <li>
-              <p><a href="https://www.broadcastify.com/listen/ctid/635" target="_blank">Kane County (far west/northwest suburbs)</a></p>
+              <p><a href="https://www.broadcastify.com/listen/ctid/635" target="_blank" rel="noopener noreferrer">Kane County (far west/northwest suburbs)</a></p>
             </li>
             <li>
-              <p><a href="https://www.broadcastify.com/listen/ctid/689" target="_blank">Will County (south/southwest suburbs)</a></p>
+              <p><a href="https://www.broadcastify.com/listen/ctid/689" target="_blank" rel="noopener noreferrer">Will County (south/southwest suburbs)</a></p>
             </li>
           </ul>
           <h4>Other Sources</h4>
           <ul>
             <li>
-              <p><a href="https://www.liveatc.net/search/?icao=kord" target="_blank">LiveATC O'Hare Airport</a></p>
+              <p><a href="https://www.liveatc.net/search/?icao=kord" target="_blank" rel="noopener noreferrer">LiveATC O'Hare Airport</a></p>
             </li>
             <li>
-              <p><a href="https://www.liveatc.net/search/?icao=kmdw" target="_blank">LiveATC Midway Airport</a></p>
+              <p><a href="https://www.liveatc.net/search/?icao=kmdw" target="_blank" rel="noopener noreferrer">LiveATC Midway Airport</a></p>
             </li>
           </ul>
         </div>
