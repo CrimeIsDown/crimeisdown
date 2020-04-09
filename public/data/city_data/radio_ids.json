@@ -9,7 +9,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "[1-2][A-Z][0-9]?",
+    "ID_Number": "1[A-Z][0-9]?",
     "Level_1": "City",
     "Level_2": "",
     "Level_3": "City Government",
@@ -24,16 +24,8 @@
     "Level_4": "Area Coordinator, CPD Community Policing"
   },
   {
-    "Agency": "",
-    "ID_Number": "2",
-    "Level_1": "City",
-    "Level_2": "",
-    "Level_3": "City Government",
-    "Level_4": "Chairman, Committee on Finance"
-  },
-  {
     "Agency": "CPD",
-    "ID_Number": "3",
+    "ID_Number": "2",
     "Level_1": "Superintendent",
     "Level_2": "",
     "Level_3": "",
@@ -41,7 +33,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "3A",
+    "ID_Number": "2A",
     "Level_1": "Superintendent",
     "Level_2": "Superintendent",
     "Level_3": "Office of Chief of Staff",
@@ -49,7 +41,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "3B",
+    "ID_Number": "2B",
     "Level_1": "Superintendent",
     "Level_2": "",
     "Level_3": "",
@@ -57,7 +49,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "3C",
+    "ID_Number": "2C",
     "Level_1": "Superintendent",
     "Level_2": "",
     "Level_3": "",
@@ -65,7 +57,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "3D",
+    "ID_Number": "2D",
     "Level_1": "Superintendent",
     "Level_2": "News Affairs",
     "Level_3": "",
@@ -73,7 +65,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "3D[0-9]+",
+    "ID_Number": "2D[0-9]+",
     "Level_1": "Superintendent",
     "Level_2": "News Affairs",
     "Level_3": "",
@@ -81,7 +73,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "3E",
+    "ID_Number": "2E",
     "Level_1": "Superintendent",
     "Level_2": "General Counsel",
     "Level_3": "Management and Labor Affairs Cmdr",
@@ -89,7 +81,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "3G",
+    "ID_Number": "2G",
     "Level_1": "Superintendent",
     "Level_2": "First Deputy Superintendent",
     "Level_3": "Special Events",
@@ -97,7 +89,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "3H",
+    "ID_Number": "2H",
     "Level_1": "Patrol",
     "Level_2": "CAPS",
     "Level_3": "",
@@ -105,7 +97,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "4",
+    "ID_Number": "3",
     "Level_1": "Superintendent",
     "Level_2": "",
     "Level_3": "",
@@ -113,7 +105,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "4[A-D]",
+    "ID_Number": "3[A-D]",
     "Level_1": "Superintendent",
     "Level_2": "First Deputy Superintendent",
     "Level_3": "Street Operations Unit",
@@ -121,7 +113,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "4E",
+    "ID_Number": "3E",
     "Level_1": "Superintendent",
     "Level_2": "First Deputy Superintendent",
     "Level_3": "Special Events Unit",
