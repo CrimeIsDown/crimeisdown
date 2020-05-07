@@ -165,15 +165,15 @@
     "Level_1": "Administration",
     "Level_2": "",
     "Level_3": "",
-    "Level_4": "Deputy Chief - Administrative Services"
+    "Level_4": "Deputy Superintendent - Constitutional Policing and Reform"
   },
   {
     "Agency": "CPD",
     "ID_Number": "13",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions Division",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
     "Level_3": "",
-    "Level_4": "Deputy Chief - Special Functions (unconfirmed)"
+    "Level_4": "Commander"
   },
   {
     "Agency": "CPD",
@@ -186,23 +186,23 @@
   {
     "Agency": "CPD",
     "ID_Number": "80",
-    "Level_1": "Superintendent",
-    "Level_2": "Internal Affairs",
+    "Level_1": "Internal Affairs",
+    "Level_2": "",
     "Level_3": "",
     "Level_4": "Chief"
   },
   {
     "Agency": "CPD",
     "ID_Number": "8000",
-    "Level_1": "Superintendent",
-    "Level_2": "Internal Affairs",
+    "Level_1": "Internal Affairs",
+    "Level_2": "",
     "Level_3": "Investigations",
     "Level_4": "Commander"
   },
   {
     "Agency": "CPD",
     "ID_Number": "8002",
-    "Level_1": "Superintendent",
+    "Level_1": "Internal Affairs",
     "Level_2": "Internal Affairs",
     "Level_3": "Department Advocate",
     "Level_4": ""
@@ -210,111 +210,111 @@
   {
     "Agency": "CPD",
     "ID_Number": "8004",
-    "Level_1": "Superintendent",
-    "Level_2": "Internal Affairs",
+    "Level_1": "Internal Affairs",
+    "Level_2": "",
     "Level_3": "",
     "Level_4": "Records Unit"
   },
   {
     "Agency": "CPD",
     "ID_Number": "8005",
-    "Level_1": "Superintendent",
-    "Level_2": "Internal Affairs",
+    "Level_1": "Internal Affairs",
+    "Level_2": "",
     "Level_3": "",
     "Level_4": "Analytical Unit"
   },
   {
     "Agency": "CPD",
     "ID_Number": "80[1-4][0-9]",
-    "Level_1": "Superintendent",
-    "Level_2": "Internal Affairs",
+    "Level_1": "Internal Affairs",
+    "Level_2": "",
     "Level_3": "Investigations",
     "Level_4": "General Investigations"
   },
   {
     "Agency": "CPD",
     "ID_Number": "805[0-9]",
-    "Level_1": "Superintendent",
-    "Level_2": "Internal Affairs",
+    "Level_1": "Internal Affairs",
+    "Level_2": "",
     "Level_3": "Investigations",
     "Level_4": "Special Investigations"
   },
   {
     "Agency": "CPD",
     "ID_Number": "80[6-9][0-9]",
-    "Level_1": "Superintendent",
-    "Level_2": "Internal Affairs",
+    "Level_1": "Internal Affairs",
+    "Level_2": "",
     "Level_3": "Investigations",
     "Level_4": "Confidential Investigations"
   },
   {
     "Agency": "CPD",
     "ID_Number": "81",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Education and Training",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Training and Support",
     "Level_3": "",
-    "Level_4": "Assistant Deputy Superintendent"
+    "Level_4": "Deputy Chief"
   },
   {
     "Agency": "CPD",
     "ID_Number": "8100",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Education and Training",
-    "Level_3": "",
-    "Level_4": "Commander"
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Training and Support",
+    "Level_3": "Training",
+    "Level_4": "Captain"
   },
   {
     "Agency": "CPD",
     "ID_Number": "81[0-9][0-9]",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Education and Training",
-    "Level_3": "",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Training and Support",
+    "Level_3": "Training",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "8200",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Inspections",
-    "Level_3": "Inspection Division, Commander",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Reform Management",
+    "Level_3": "Audits and Inspections",
     "Level_4": "Commander"
   },
   {
     "Agency": "CPD",
     "ID_Number": "820[1-9]",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Inspections",
-    "Level_3": "Inspection Division, Field Inspectors",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Reform Management",
+    "Level_3": "Audits and Inspections",
     "Level_4": "Field Inspector"
   },
   {
     "Agency": "CPD",
     "ID_Number": "82([0-7][0-9]|8[0-3])",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Inspections",
-    "Level_3": "Inspection Division, Audit Teams",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Reform Management",
+    "Level_3": "Audits and Inspections",
     "Level_4": "Audit Team"
   },
   {
     "Agency": "CPD",
     "ID_Number": "8290",
-    "Level_1": "Administration",
+    "Level_1": "Detectives",
     "Level_2": "",
-    "Level_3": "Court Liason",
+    "Level_3": "Court Section",
     "Level_4": "Commanding Officer"
   },
   {
     "Agency": "CPD",
     "ID_Number": "829[1-8]",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
+    "Level_1": "Detectives",
+    "Level_2": "",
     "Level_3": "Court Section",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "84[0-9][0-9][A-Z]?",
-    "Level_1": "Organizational Development",
+    "Level_1": "Constitutional Policing and Reform",
     "Level_2": "",
     "Level_3": "Force Review Unit",
     "Level_4": ""
@@ -322,40 +322,40 @@
   {
     "Agency": "CPD",
     "ID_Number": "9701",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Independent Police Review Authority",
+    "Level_1": "Civilian Office of Police Accountability",
+    "Level_2": "",
     "Level_3": "",
     "Level_4": "First Deputy Chief Administrator"
   },
   {
     "Agency": "CPD",
     "ID_Number": "9702",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Independent Police Review Authority",
+    "Level_1": "Civilian Office of Police Accountability",
+    "Level_2": "",
     "Level_3": "",
     "Level_4": "Coordinator of Investigations"
   },
   {
     "Agency": "CPD",
     "ID_Number": "970[3-5]",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Independent Police Review Authority",
+    "Level_1": "Civilian Office of Police Accountability",
+    "Level_2": "",
     "Level_3": "",
     "Level_4": "Deputy Chief Administrators"
   },
   {
     "Agency": "CPD",
     "ID_Number": "9710",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Independent Police Review Authority",
+    "Level_1": "Civilian Office of Police Accountability",
+    "Level_2": "",
     "Level_3": "Investigations",
     "Level_4": "Investigations Supervisor"
   },
   {
     "Agency": "CPD",
     "ID_Number": "97[1-2][0-9]",
-    "Level_1": "Internal Affairs",
-    "Level_2": "Independent Police Review Authority",
+    "Level_1": "Civilian Office of Police Accountability",
+    "Level_2": "",
     "Level_3": "Investigations",
     "Level_4": "Investigator"
   },
@@ -410,56 +410,56 @@
   {
     "Agency": "CPD",
     "ID_Number": "9030",
-    "Level_1": "Administration",
-    "Level_2": "Professional Counseling",
-    "Level_3": "",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Training and Support",
+    "Level_3": "Professional Counseling",
     "Level_4": "Director"
   },
   {
     "Agency": "CPD",
     "ID_Number": "903[1-4]",
-    "Level_1": "Administration",
-    "Level_2": "Professional Counseling",
-    "Level_3": "",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Training and Support",
+    "Level_3": "Professional Counseling",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "9040",
-    "Level_1": "Administration",
-    "Level_2": "Chaplain",
-    "Level_3": "",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Training and Support",
+    "Level_3": "Professional Counseling",
     "Level_4": "Directing Chaplain"
   },
   {
     "Agency": "CPD",
     "ID_Number": "904[1-9]",
-    "Level_1": "Administration",
-    "Level_2": "",
-    "Level_3": "",
-    "Level_4": ""
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Training and Support",
+    "Level_3": "Professional Counseling",
+    "Level_4": "Chaplain"
   },
   {
     "Agency": "CPD",
     "ID_Number": "9150",
-    "Level_1": "Administration",
-    "Level_2": "Records",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Admin Support",
     "Level_3": "Alternate Response",
     "Level_4": "Commanding Officer"
   },
   {
     "Agency": "CPD",
     "ID_Number": "915[1-3]",
-    "Level_1": "Administration",
-    "Level_2": "Records",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Admin Support",
     "Level_3": "Alternate Response",
     "Level_4": "Operations Desk"
   },
   {
     "Agency": "CPD",
     "ID_Number": "91([5-8][0-9]|9[0-8])",
-    "Level_1": "Administration",
-    "Level_2": "Records",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Admin Support",
     "Level_3": "Records Inquiry",
     "Level_4": "Call Screeners and Reporters"
   },
@@ -506,81 +506,81 @@
   {
     "Agency": "CPD",
     "ID_Number": "9410",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
-    "Level_3": "Equipment and Supply Section",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Research and Development",
+    "Level_3": "Uniform and Equipment",
     "Level_4": "Commanding Officer"
   },
   {
     "Agency": "CPD",
     "ID_Number": "941[1-4]",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
-    "Level_3": "Equipment and Supply Section",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Research and Development",
+    "Level_3": "Uniform and Equipment",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "9415",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
+    "Level_1": "Chief of Staff",
+    "Level_2": "Communications",
     "Level_3": "Graphic Arts",
     "Level_4": "Commanding Officer"
   },
   {
     "Agency": "CPD",
     "ID_Number": "941[6-9]",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
+    "Level_1": "Chief of Staff",
+    "Level_2": "Communications",
     "Level_3": "Graphic Arts",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "9420",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
-    "Level_3": "Auto Pounds Section, Chief Supervisor",
-    "Level_4": ""
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Admin Support",
+    "Level_3": "Auto Pounds",
+    "Level_4": "Chief Supervisor"
   },
   {
     "Agency": "CPD",
     "ID_Number": "942[1-9]",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
-    "Level_3": "Auto Pounds Section",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Admin Support",
+    "Level_3": "Auto Pounds",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "9430",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
-    "Level_3": "Police Documents",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Research and Development",
+    "Level_3": "Policy/Procedures",
     "Level_4": "Commanding Officer"
   },
   {
     "Agency": "CPD",
     "ID_Number": "943[1-9]",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
-    "Level_3": "Police Documents",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Research and Development",
+    "Level_3": "Policy/Procedures",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "9440",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
-    "Level_3": "Evidence and Recovered Property Section C.O.",
+    "Level_1": "Detectives",
+    "Level_2": "Forensic Services",
+    "Level_3": "Evidence and Recovered Property",
     "Level_4": "Commanding Officer"
   },
   {
     "Agency": "CPD",
     "ID_Number": "944[1-9]",
-    "Level_1": "Administration",
-    "Level_2": "General Support",
-    "Level_3": "Evidence and Recovered Property Section",
+    "Level_1": "Detectives",
+    "Level_2": "Forensic Services",
+    "Level_3": "Evidence and Recovered Property",
     "Level_4": ""
   },
   {
@@ -618,17 +618,17 @@
   {
     "Agency": "CPD",
     "ID_Number": "9520",
-    "Level_1": "Administration",
-    "Level_2": "Human Resources",
-    "Level_3": "Random Drug Testing",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Admin Support",
+    "Level_3": "Drug Testing",
     "Level_4": "Commanding Officer"
   },
   {
     "Agency": "CPD",
     "ID_Number": "952[1-5]",
-    "Level_1": "Administration",
-    "Level_2": "Human Resources",
-    "Level_3": "Random Drug Testing",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Admin Support",
+    "Level_3": "Drug Testing",
     "Level_4": ""
   },
   {
@@ -658,17 +658,17 @@
   {
     "Agency": "CPD",
     "ID_Number": "9600",
-    "Level_1": "Organizational Development",
-    "Level_2": "Research and Development",
-    "Level_3": "",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Reform Management",
+    "Level_3": "Research and Development",
     "Level_4": "Director"
   },
   {
     "Agency": "CPD",
     "ID_Number": "96[0-9][0-9]",
-    "Level_1": "Organizational Development",
-    "Level_2": "Research and Development",
-    "Level_3": "",
+    "Level_1": "Constitutional Policing and Reform",
+    "Level_2": "Reform Management",
+    "Level_3": "Research and Development",
     "Level_4": ""
   },
   {
@@ -851,7 +851,7 @@
     "Agency": "CPD",
     "ID_Number": "5100",
     "Level_1": "Detectives",
-    "Level_2": "Area South (1)",
+    "Level_2": "Area 1",
     "Level_3": "",
     "Level_4": "Commander"
   },
@@ -859,7 +859,7 @@
     "Agency": "CPD",
     "ID_Number": "5105",
     "Level_1": "Detectives",
-    "Level_2": "Area South (1)",
+    "Level_2": "Area 1",
     "Level_3": "Violent Crimes",
     "Level_4": "Commanding Officer"
   },
@@ -867,7 +867,7 @@
     "Agency": "CPD",
     "ID_Number": "5106",
     "Level_1": "Detectives",
-    "Level_2": "Area South (1)",
+    "Level_2": "Area 1",
     "Level_3": "Property Crimes",
     "Level_4": "Commanding Officer"
   },
@@ -875,7 +875,7 @@
     "Agency": "CPD",
     "ID_Number": "5107",
     "Level_1": "Detectives",
-    "Level_2": "Area South (1)",
+    "Level_2": "Area 1",
     "Level_3": "Violent Crimes",
     "Level_4": "Special Victims Commanding Officer"
   },
@@ -883,7 +883,7 @@
     "Agency": "CPD",
     "ID_Number": "5200",
     "Level_1": "Detectives",
-    "Level_2": "Area Central (2)",
+    "Level_2": "Area 2",
     "Level_3": "",
     "Level_4": "Commander"
   },
@@ -891,7 +891,7 @@
     "Agency": "CPD",
     "ID_Number": "5205",
     "Level_1": "Detectives",
-    "Level_2": "Area Central (2)",
+    "Level_2": "Area 2",
     "Level_3": "Violent Crimes",
     "Level_4": "Commanding Officer"
   },
@@ -899,7 +899,7 @@
     "Agency": "CPD",
     "ID_Number": "5206",
     "Level_1": "Detectives",
-    "Level_2": "Area Central (2)",
+    "Level_2": "Area 2",
     "Level_3": "Property Crimes",
     "Level_4": "Commanding Officer"
   },
@@ -907,7 +907,7 @@
     "Agency": "CPD",
     "ID_Number": "5207",
     "Level_1": "Detectives",
-    "Level_2": "Area Central (2)",
+    "Level_2": "Area 2",
     "Level_3": "Violent Crimes",
     "Level_4": "Special Victims Commanding Officer"
   },
@@ -915,7 +915,7 @@
     "Agency": "CPD",
     "ID_Number": "5300",
     "Level_1": "Detectives",
-    "Level_2": "Area North (3)",
+    "Level_2": "Area 3",
     "Level_3": "",
     "Level_4": "Commander"
   },
@@ -923,7 +923,7 @@
     "Agency": "CPD",
     "ID_Number": "5305",
     "Level_1": "Detectives",
-    "Level_2": "Area North (3)",
+    "Level_2": "Area 3",
     "Level_3": "Violent Crimes",
     "Level_4": "Commanding Officer"
   },
@@ -931,7 +931,7 @@
     "Agency": "CPD",
     "ID_Number": "5306",
     "Level_1": "Detectives",
-    "Level_2": "Area North (3)",
+    "Level_2": "Area 3",
     "Level_3": "Property Crimes",
     "Level_4": "Commanding Officer"
   },
@@ -939,7 +939,71 @@
     "Agency": "CPD",
     "ID_Number": "5307",
     "Level_1": "Detectives",
-    "Level_2": "Area North (3)",
+    "Level_2": "Area 3",
+    "Level_3": "Violent Crimes",
+    "Level_4": "Special Victims Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5400",
+    "Level_1": "Detectives",
+    "Level_2": "Area 4",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5405",
+    "Level_1": "Detectives",
+    "Level_2": "Area 4",
+    "Level_3": "Violent Crimes",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5406",
+    "Level_1": "Detectives",
+    "Level_2": "Area 4",
+    "Level_3": "Property Crimes",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5407",
+    "Level_1": "Detectives",
+    "Level_2": "Area 4",
+    "Level_3": "Violent Crimes",
+    "Level_4": "Special Victims Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5500",
+    "Level_1": "Detectives",
+    "Level_2": "Area 5",
+    "Level_3": "",
+    "Level_4": "Commander"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5505",
+    "Level_1": "Detectives",
+    "Level_2": "Area 5",
+    "Level_3": "Violent Crimes",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5506",
+    "Level_1": "Detectives",
+    "Level_2": "Area 5",
+    "Level_3": "Property Crimes",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "5507",
+    "Level_1": "Detectives",
+    "Level_2": "Area 5",
     "Level_3": "Violent Crimes",
     "Level_4": "Special Victims Commanding Officer"
   },
@@ -947,7 +1011,7 @@
     "Agency": "CPD",
     "ID_Number": "51[1-4][0-9]",
     "Level_1": "Detectives",
-    "Level_2": "Area South (1)",
+    "Level_2": "Area 1",
     "Level_3": "Violent Crimes",
     "Level_4": ""
   },
@@ -955,7 +1019,7 @@
     "Agency": "CPD",
     "ID_Number": "51[5-8][0-9]",
     "Level_1": "Detectives",
-    "Level_2": "Area South (1)",
+    "Level_2": "Area 1",
     "Level_3": "Property Crimes",
     "Level_4": ""
   },
@@ -963,7 +1027,7 @@
     "Agency": "CPD",
     "ID_Number": "52[1-4][0-9]",
     "Level_1": "Detectives",
-    "Level_2": "Area Central (2)",
+    "Level_2": "Area 2",
     "Level_3": "Violent Crimes",
     "Level_4": ""
   },
@@ -971,7 +1035,7 @@
     "Agency": "CPD",
     "ID_Number": "52[5-8][0-9]",
     "Level_1": "Detectives",
-    "Level_2": "Area Central (2)",
+    "Level_2": "Area 2",
     "Level_3": "Property Crimes",
     "Level_4": "Special Victims"
   },
@@ -979,7 +1043,7 @@
     "Agency": "CPD",
     "ID_Number": "53[1-4][0-9]",
     "Level_1": "Detectives",
-    "Level_2": "Area North (3)",
+    "Level_2": "Area 3",
     "Level_3": "Violent Crimes",
     "Level_4": ""
   },
@@ -987,7 +1051,39 @@
     "Agency": "CPD",
     "ID_Number": "53[5-8][0-9]",
     "Level_1": "Detectives",
-    "Level_2": "Area North (3)",
+    "Level_2": "Area 3",
+    "Level_3": "Property Crimes",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "54[1-4][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Area 4",
+    "Level_3": "Violent Crimes",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "54[5-8][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Area 4",
+    "Level_3": "Property Crimes",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "55[1-4][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Area 5",
+    "Level_3": "Violent Crimes",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "55[5-8][0-9]",
+    "Level_1": "Detectives",
+    "Level_2": "Area 5",
     "Level_3": "Property Crimes",
     "Level_4": ""
   },
@@ -1003,7 +1099,7 @@
     "Agency": "CPD",
     "ID_Number": "519[0-7]",
     "Level_1": "Detectives",
-    "Level_2": "Area South (1)",
+    "Level_2": "Area 1",
     "Level_3": "Mission Teams",
     "Level_4": ""
   },
@@ -1011,7 +1107,7 @@
     "Agency": "CPD",
     "ID_Number": "529[0-7]",
     "Level_1": "Detectives",
-    "Level_2": "Area Central (2)",
+    "Level_2": "Area 2",
     "Level_3": "Mission Teams",
     "Level_4": ""
   },
@@ -1019,7 +1115,23 @@
     "Agency": "CPD",
     "ID_Number": "539[0-7]",
     "Level_1": "Detectives",
-    "Level_2": "Area North (3)",
+    "Level_2": "Area 3",
+    "Level_3": "Mission Teams",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "549[0-7]",
+    "Level_1": "Detectives",
+    "Level_2": "Area 4",
+    "Level_3": "Mission Teams",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "559[0-7]",
+    "Level_1": "Detectives",
+    "Level_2": "Area 5",
     "Level_3": "Mission Teams",
     "Level_4": ""
   },
@@ -1202,7 +1314,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "60",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "",
     "Level_3": "",
     "Level_4": "Chief"
@@ -1210,7 +1322,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "61",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "",
     "Level_3": "",
     "Level_4": "Deputy Chief"
@@ -1218,7 +1330,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6100",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Vice and Asset Forfeiture",
     "Level_3": "",
     "Level_4": "Commander"
@@ -1226,7 +1338,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "61[0-9][0-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Vice and Asset Forfeiture",
     "Level_3": "Asset Forfeiture Investigation",
     "Level_4": ""
@@ -1234,7 +1346,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6200",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Narcotics",
     "Level_3": "",
     "Level_4": "Narcotics Division Commander"
@@ -1242,39 +1354,55 @@
   {
     "Agency": "CPD",
     "ID_Number": "620[6-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Narcotics",
     "Level_3": "",
     "Level_4": "HIDTA/DEA Teams"
   },
   {
     "Agency": "CPD",
-    "ID_Number": "621[1-6]",
-    "Level_1": "Organized Crime",
+    "ID_Number": "621[0-9]",
+    "Level_1": "Criminal Networks",
     "Level_2": "Narcotics",
     "Level_3": "General Enforcement Teams",
-    "Level_4": "Area Central"
+    "Level_4": "Area 1"
   },
   {
     "Agency": "CPD",
-    "ID_Number": "622[1-8]",
-    "Level_1": "Organized Crime",
+    "ID_Number": "622[0-9]",
+    "Level_1": "Criminal Networks",
     "Level_2": "Narcotics",
     "Level_3": "General Enforcement Teams",
-    "Level_4": "Area South"
+    "Level_4": "Area 2"
   },
   {
     "Agency": "CPD",
-    "ID_Number": "623[1-7]",
-    "Level_1": "Organized Crime",
+    "ID_Number": "623[0-9]",
+    "Level_1": "Criminal Networks",
     "Level_2": "Narcotics",
     "Level_3": "General Enforcement Teams",
-    "Level_4": "Area North"
+    "Level_4": "Area 3"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "624[0-9]",
+    "Level_1": "Criminal Networks",
+    "Level_2": "Narcotics",
+    "Level_3": "General Enforcement Teams",
+    "Level_4": "Area 4"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "625[0-9]",
+    "Level_1": "Criminal Networks",
+    "Level_2": "Narcotics",
+    "Level_3": "General Enforcement Teams",
+    "Level_4": "Area 5"
   },
   {
     "Agency": "CPD",
     "ID_Number": "6300",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Vice and Asset Forfeiture",
     "Level_3": "Vice",
     "Level_4": "Commander"
@@ -1282,7 +1410,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "631[0-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Violence Reduction Response Team",
     "Level_4": ""
@@ -1290,7 +1418,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "632[0-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Vice and Asset Forfeiture",
     "Level_3": "Vice",
     "Level_4": "Human Trafficking and Prostitution Call Team"
@@ -1298,7 +1426,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "63[3-4][0-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Vice and Asset Forfeiture",
     "Level_3": "Vice",
     "Level_4": "License Investigation and Enforcement Unit"
@@ -1306,7 +1434,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6500",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "",
     "Level_4": "Commander"
@@ -1314,7 +1442,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6502[A-K]?",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "A-K Miscellaneous Detail",
     "Level_4": ""
@@ -1322,7 +1450,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6506",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Penitentiary Liaison",
     "Level_4": ""
@@ -1330,47 +1458,23 @@
   {
     "Agency": "CPD",
     "ID_Number": "650[7-8]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Cook County Jail Liaison",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
-    "ID_Number": "6510",
-    "Level_1": "Organized Crime",
+    "ID_Number": "65[1-4][0-9]",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
-    "Level_3": "Area Central",
-    "Level_4": ""
-  },
-  {
-    "Agency": "CPD",
-    "ID_Number": "6515",
-    "Level_1": "Organized Crime",
-    "Level_2": "Gang Investigation",
-    "Level_3": "Incident Team - South?",
-    "Level_4": ""
-  },
-  {
-    "Agency": "CPD",
-    "ID_Number": "6520",
-    "Level_1": "Organized Crime",
-    "Level_2": "Gang Investigation",
-    "Level_3": "Area South",
-    "Level_4": ""
-  },
-  {
-    "Agency": "CPD",
-    "ID_Number": "6530",
-    "Level_1": "Organized Crime",
-    "Level_2": "Gang Investigation",
-    "Level_3": "Area North",
+    "Level_3": "",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "655[6-7]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Surveillance Teams",
     "Level_4": ""
@@ -1378,7 +1482,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6558",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "",
     "Level_4": "FBI Joint Task Force on Gangs"
@@ -1386,7 +1490,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6559",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "",
     "Level_4": "Animal Crimes Team"
@@ -1394,7 +1498,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6560",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Gang Investigative Team North/West",
     "Level_4": ""
@@ -1402,7 +1506,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6565",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Gang Investigative Team South",
     "Level_4": ""
@@ -1410,7 +1514,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6570",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "CAGE Team",
     "Level_4": ""
@@ -1418,7 +1522,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6575",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Area 4 Investigations Team",
     "Level_4": ""
@@ -1426,7 +1530,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6580",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Gang Investigative Team North/West",
     "Level_4": ""
@@ -1434,7 +1538,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6585",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Gang Investigative Team South",
     "Level_4": ""
@@ -1442,7 +1546,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6590",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Technical & Investigative Support Group",
     "Level_4": ""
@@ -1450,7 +1554,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "6700",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Enforcement",
     "Level_3": "",
     "Level_4": "Commander"
@@ -1458,55 +1562,71 @@
   {
     "Agency": "CPD",
     "ID_Number": "671[0-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Enforcement",
-    "Level_3": "Area Central",
+    "Level_3": "Area 1",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "672[0-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Enforcement",
-    "Level_3": "Area South",
+    "Level_3": "Area 2",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "673[0-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Enforcement",
-    "Level_3": "Area North",
+    "Level_3": "Area 3",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "674[0-9]",
+    "Level_1": "Criminal Networks",
+    "Level_2": "Gang Enforcement",
+    "Level_3": "Area 4",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "675[0-9]",
+    "Level_1": "Criminal Networks",
+    "Level_2": "Gang Enforcement",
+    "Level_3": "Area 5",
     "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "70",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Counter-Terrorism",
     "Level_3": "",
-    "Level_4": "Counterterrorism & Intelligence Division Chief"
+    "Level_4": "Commander"
   },
   {
     "Agency": "CPD",
     "ID_Number": "71",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "",
-    "Level_4": "Counterterrorism & Intelligence Division Dep Chief"
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Counter-Terrorism",
+    "Level_3": "Intelligence",
+    "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "705[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Counter-Terrorism",
     "Level_3": "",
-    "Level_4": "Counterterrorism Team"
+    "Level_4": "CPIC Counterterrorism Team"
   },
   {
     "Agency": "CPD",
     "ID_Number": "706[0-9]",
-    "Level_1": "First Deputy Superintendent",
+    "Level_1": "Office of Operations",
     "Level_2": "Deployment Operations",
     "Level_3": "",
     "Level_4": "Deployment Analysis Unit"
@@ -1514,7 +1634,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "707[0-2]",
-    "Level_1": "First Deputy Superintendent",
+    "Level_1": "Office of Operations",
     "Level_2": "Deployment Operations",
     "Level_3": "Crime Control Strategies",
     "Level_4": "CompStat Unit"
@@ -1522,7 +1642,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "708[0-6]",
-    "Level_1": "First Deputy Superintendent",
+    "Level_1": "Office of Operations",
     "Level_2": "Deployment Operations",
     "Level_3": "Crime Prevention Information Center",
     "Level_4": ""
@@ -1530,7 +1650,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "7099",
-    "Level_1": "First Deputy Superintendent",
+    "Level_1": "Office of Operations",
     "Level_2": "Deployment Operations",
     "Level_3": "Crime Prevention Information Center",
     "Level_4": "CPIC Commanding Officer"
@@ -1538,7 +1658,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "7100",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Intelligence",
     "Level_4": "Intelligence Section Commander"
@@ -1546,7 +1666,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "711[0-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "",
     "Level_3": "",
     "Level_4": "Criminal Enterprise Unit"
@@ -1554,7 +1674,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "712[0-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Intelligence",
     "Level_4": "Joint Terrorism Task Force"
@@ -1562,7 +1682,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "71[4-5][0-9]",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "",
     "Level_4": "Field Investigative Unit"
@@ -1570,7 +1690,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "71[6-7][0-9]",
-    "Level_1": "Organized Crime",
+    "Level_1": "Criminal Networks",
     "Level_2": "Gang Investigation",
     "Level_3": "Intelligence",
     "Level_4": "FBI Human Intelligence Task Force"
@@ -1578,231 +1698,231 @@
   {
     "Agency": "CPD",
     "ID_Number": "7200",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
     "Level_4": "Commander"
   },
   {
     "Agency": "CPD",
     "ID_Number": "720[7-8]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
     "Level_4": "Traffic Enforcement"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7209",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
     "Level_4": "Traffic Aide Coordinator"
   },
   {
     "Agency": "CPD",
     "ID_Number": "721[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "O'Hare Airport",
     "Level_4": "Terminal 1"
   },
   {
     "Agency": "CPD",
     "ID_Number": "722[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "O'Hare Airport",
     "Level_4": "Terminal 2"
   },
   {
     "Agency": "CPD",
     "ID_Number": "723[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "O'Hare Airport",
     "Level_4": "Terminal 3"
   },
   {
     "Agency": "CPD",
     "ID_Number": "724[1-3]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "O'Hare Airport",
     "Level_4": "Motorized Patrol"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7245",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "O'Hare Airport",
     "Level_4": "Airfield Vehicle Motorized Patrol"
   },
   {
     "Agency": "CPD",
     "ID_Number": "725[1-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "O'Hare Airport",
     "Level_4": "Terminal 5"
   },
   {
     "Agency": "CPD",
     "ID_Number": "726[2-4]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
     "Level_4": "Tactical Teams"
   },
   {
     "Agency": "CPD",
     "ID_Number": "726[6-8]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "",
     "Level_4": "Explosive Detection Canine Teams"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7270",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "Midway Airport",
     "Level_4": "Midway Airport Unit Commanding Officer"
   },
   {
     "Agency": "CPD",
     "ID_Number": "72([7[1-9]|8[0-9]|9[0-7])",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
-    "Level_4": "Midway Airport"
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "Midway Airport",
+    "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "7298",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Airport Law Enforcement Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Airport Operations",
+    "Level_3": "Midway Airport",
     "Level_4": "Airfield Motorized Patrol"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7300",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "Commander"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7301",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "Watch Operations Desk"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7302",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
-    "Level_4": "O'Hare post"
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
+    "Level_4": "O'Hare Airport Post"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7303",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
-    "Level_4": "Midway post"
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
+    "Level_4": "Midway Airport Post"
   },
   {
     "Agency": "CPD",
     "ID_Number": "730[4-5]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
-    "Level_4": "95th & Ryan post"
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
+    "Level_4": "95th & Dan Ryan Post"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7310",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "Sergeant"
   },
   {
     "Agency": "CPD",
     "ID_Number": "732[1-5]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "Canine Handlers"
   },
   {
     "Agency": "CPD",
     "ID_Number": "734[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "Loop Sector"
   },
   {
     "Agency": "CPD",
     "ID_Number": "735[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "North Sector"
   },
   {
     "Agency": "CPD",
     "ID_Number": "736[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "South Sector"
   },
   {
     "Agency": "CPD",
     "ID_Number": "737[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "West Sector"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7380",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "Special Employment Watch Commander"
   },
   {
     "Agency": "CPD",
     "ID_Number": "738[1-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "Special Employment"
   },
   {
     "Agency": "CPD",
     "ID_Number": "739[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Public Transportation Section",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Public Transportation",
+    "Level_3": "",
     "Level_4": "Tactical Teams"
   },
   {
     "Agency": "CPD",
     "ID_Number": "7400",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
     "Level_4": "Commander"
@@ -1810,7 +1930,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "7401",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
     "Level_4": "Explosive Technician III"
@@ -1818,7 +1938,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "740[2-8]",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
     "Level_4": "Explosive Technician II"
@@ -1826,7 +1946,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "7409",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
     "Level_4": "O'Hare Airport Explosive Technician – I"
@@ -1834,7 +1954,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "7410-37",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
     "Level_4": "Arson Unit"
@@ -1842,7 +1962,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "743[8-9]",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
     "Level_4": "Bomb and Arson Special Assignment"
@@ -1850,7 +1970,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "745[0-5]",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
     "Level_4": "Arson Special Assignment"
@@ -1858,7 +1978,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "7471",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
     "Level_4": "Arson Equipment Van"
@@ -1866,7 +1986,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "7499",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
     "Level_4": "Bomb and Arson Executive Officer"
@@ -1874,31 +1994,39 @@
   {
     "Agency": "CPD",
     "ID_Number": "M100",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Marine & Helicopter Unit",
     "Level_4": "Marine & Helicopter Unit C.O."
   },
   {
     "Agency": "CPD",
-    "ID_Number": "M([1-9]|1[0-9])",
-    "Level_1": "Patrol",
+    "ID_Number": "M[1]?[0-9]",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Marine & Helicopter Unit",
-    "Level_4": "Marine Unit"
+    "Level_4": "Marine Unit Boat"
   },
   {
     "Agency": "CPD",
-    "ID_Number": "PH1-2",
-    "Level_1": "Patrol",
+    "ID_Number": "PH1",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Marine & Helicopter Unit",
-    "Level_4": "Helicopter 1&2"
+    "Level_4": "Police Helicopter 1"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "PH2",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
+    "Level_3": "Marine & Helicopter Unit",
+    "Level_4": "Police Helicopter 2"
   },
   {
     "Agency": "CPD",
     "ID_Number": "MC[0-9]?[0-9][A-Z]?",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Motorcade Detail",
     "Level_4": ""
@@ -1954,7 +2082,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "4600",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "SWAT",
     "Level_4": "SWAT Coordinator"
@@ -1962,7 +2090,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "4600[A-B]",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "SWAT",
     "Level_4": "SWAT Sergeant"
@@ -1970,7 +2098,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "4600N",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "SWAT",
     "Level_4": "SWAT Negotiation Sergeant"
@@ -1978,7 +2106,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "47[1-3][0-9]",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Canine",
     "Level_4": ""
@@ -1986,7 +2114,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "46(0|[5-8])[0-9]",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "SWAT Team",
     "Level_4": ""
@@ -1998,14 +2126,6 @@
     "Level_2": "Special Functions",
     "Level_3": "Department Deployment Initiatives",
     "Level_4": "Department Deployment Initiatives C.O."
-  },
-  {
-    "Agency": "CPD",
-    "ID_Number": "4830-99’s",
-    "Level_1": "Patrol",
-    "Level_2": "Special Functions",
-    "Level_3": "Department Deployment Initiatives",
-    "Level_4": ""
   },
   {
     "Agency": "CPD",
@@ -2021,12 +2141,12 @@
     "Level_1": "Patrol",
     "Level_2": "Special Functions",
     "Level_3": "Department Deployment Initiatives",
-    "Level_4": "Police Officer"
+    "Level_4": ""
   },
   {
     "Agency": "CPD",
     "ID_Number": "49[0-9][0-9]",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Mounted Unit",
     "Level_4": ""
@@ -2035,7 +2155,7 @@
     "Agency": "CPD",
     "ID_Number": "0?0?1[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 3",
     "Level_3": "District 1",
     "Level_4": ""
   },
@@ -2043,7 +2163,7 @@
     "Agency": "CPD",
     "ID_Number": "0?0?2[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "District 2",
     "Level_4": ""
   },
@@ -2051,7 +2171,7 @@
     "Agency": "CPD",
     "ID_Number": "0?0?3[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "District 3",
     "Level_4": ""
   },
@@ -2059,7 +2179,7 @@
     "Agency": "CPD",
     "ID_Number": "0?0?4[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "District 4",
     "Level_4": ""
   },
@@ -2067,7 +2187,7 @@
     "Agency": "CPD",
     "ID_Number": "0?0?5[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "District 5",
     "Level_4": ""
   },
@@ -2075,7 +2195,7 @@
     "Agency": "CPD",
     "ID_Number": "0?0?6[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "District 6",
     "Level_4": ""
   },
@@ -2083,7 +2203,7 @@
     "Agency": "CPD",
     "ID_Number": "0?0?7[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 1",
     "Level_3": "District 7",
     "Level_4": ""
   },
@@ -2091,7 +2211,7 @@
     "Agency": "CPD",
     "ID_Number": "0?0?8[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "District 8",
     "Level_4": ""
   },
@@ -2099,7 +2219,7 @@
     "Agency": "CPD",
     "ID_Number": "0?0?9[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "District 9",
     "Level_4": ""
   },
@@ -2107,7 +2227,7 @@
     "Agency": "CPD",
     "ID_Number": "0?10[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 4",
     "Level_3": "District 10",
     "Level_4": ""
   },
@@ -2115,7 +2235,7 @@
     "Agency": "CPD",
     "ID_Number": "0?11[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 4",
     "Level_3": "District 11",
     "Level_4": ""
   },
@@ -2123,7 +2243,7 @@
     "Agency": "CPD",
     "ID_Number": "0?12[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 3",
     "Level_3": "District 12",
     "Level_4": ""
   },
@@ -2131,7 +2251,7 @@
     "Agency": "CPD",
     "ID_Number": "0?14[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 5",
     "Level_3": "District 14",
     "Level_4": ""
   },
@@ -2139,7 +2259,7 @@
     "Agency": "CPD",
     "ID_Number": "0?15[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 4",
     "Level_3": "District 15",
     "Level_4": ""
   },
@@ -2147,7 +2267,7 @@
     "Agency": "CPD",
     "ID_Number": "0?16[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 5",
     "Level_3": "District 16",
     "Level_4": ""
   },
@@ -2155,7 +2275,7 @@
     "Agency": "CPD",
     "ID_Number": "0?17[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 5",
     "Level_3": "District 17",
     "Level_4": ""
   },
@@ -2163,7 +2283,7 @@
     "Agency": "CPD",
     "ID_Number": "0?18[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 3",
     "Level_3": "District 18",
     "Level_4": ""
   },
@@ -2171,7 +2291,7 @@
     "Agency": "CPD",
     "ID_Number": "0?19[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "District 19",
     "Level_4": ""
   },
@@ -2179,7 +2299,7 @@
     "Agency": "CPD",
     "ID_Number": "0?20[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "District 20",
     "Level_4": ""
   },
@@ -2187,7 +2307,7 @@
     "Agency": "CPD",
     "ID_Number": "0?22[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "District 22",
     "Level_4": ""
   },
@@ -2195,7 +2315,7 @@
     "Agency": "CPD",
     "ID_Number": "0?24[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "District 24",
     "Level_4": ""
   },
@@ -2203,7 +2323,7 @@
     "Agency": "CPD",
     "ID_Number": "0?25[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 5",
     "Level_3": "District 25",
     "Level_4": ""
   },
@@ -2563,7 +2683,7 @@
     "Agency": "CPD",
     "ID_Number": "41",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "",
     "Level_4": "Area Deputy Chief"
   },
@@ -2571,7 +2691,7 @@
     "Agency": "CPD",
     "ID_Number": "41X",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "",
     "Level_4": "Area Executive Officer (Commander)"
   },
@@ -2579,7 +2699,7 @@
     "Agency": "CPD",
     "ID_Number": "41A",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "",
     "Level_4": "CAPS Lieutenant"
   },
@@ -2587,7 +2707,7 @@
     "Agency": "CPD",
     "ID_Number": "41A1",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "",
     "Level_4": "Administration Sergeant"
   },
@@ -2595,7 +2715,7 @@
     "Agency": "CPD",
     "ID_Number": "41G70",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "",
     "Level_4": "PSN Sergeant"
   },
@@ -2603,7 +2723,7 @@
     "Agency": "CPD",
     "ID_Number": "41G71",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "",
     "Level_4": "Gun Team Sergeant"
   },
@@ -2611,7 +2731,7 @@
     "Agency": "CPD",
     "ID_Number": "41T71",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "",
     "Level_4": "Midnight Team Sergeant"
   },
@@ -2619,7 +2739,7 @@
     "Agency": "CPD",
     "ID_Number": "41S",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "",
     "Level_4": "Saturation Team Sergeant"
   },
@@ -2627,7 +2747,7 @@
     "Agency": "CPD",
     "ID_Number": "4100",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "Saturation Team",
     "Level_4": "Commanding Officer"
   },
@@ -2635,7 +2755,7 @@
     "Agency": "CPD",
     "ID_Number": "41[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area Central",
+    "Level_2": "Area 1",
     "Level_3": "Saturation Team",
     "Level_4": ""
   },
@@ -2651,7 +2771,7 @@
     "Agency": "CPD",
     "ID_Number": "42",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "",
     "Level_4": "Area Deputy Chief"
   },
@@ -2659,7 +2779,7 @@
     "Agency": "CPD",
     "ID_Number": "42X",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "",
     "Level_4": "Area Executive Officer (Commander)"
   },
@@ -2667,7 +2787,7 @@
     "Agency": "CPD",
     "ID_Number": "42A",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "",
     "Level_4": "CAPS Lieutenant"
   },
@@ -2675,7 +2795,7 @@
     "Agency": "CPD",
     "ID_Number": "42A1",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "",
     "Level_4": "Administration Sergeant"
   },
@@ -2683,7 +2803,7 @@
     "Agency": "CPD",
     "ID_Number": "42G70",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "",
     "Level_4": "PSN Sergeant"
   },
@@ -2691,7 +2811,7 @@
     "Agency": "CPD",
     "ID_Number": "42G71",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "",
     "Level_4": "Gun Team Sergeant"
   },
@@ -2699,7 +2819,7 @@
     "Agency": "CPD",
     "ID_Number": "42T71",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "",
     "Level_4": "Midnight Team Sergeant"
   },
@@ -2707,7 +2827,7 @@
     "Agency": "CPD",
     "ID_Number": "42S",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "",
     "Level_4": "Saturation Team Sergeant"
   },
@@ -2715,7 +2835,7 @@
     "Agency": "CPD",
     "ID_Number": "4200",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "Saturation Team",
     "Level_4": "Commanding Officer"
   },
@@ -2723,7 +2843,7 @@
     "Agency": "CPD",
     "ID_Number": "42[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area South",
+    "Level_2": "Area 2",
     "Level_3": "Saturation Team",
     "Level_4": ""
   },
@@ -2731,7 +2851,7 @@
     "Agency": "CPD",
     "ID_Number": "43",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "",
     "Level_4": "Area Deputy Chief"
   },
@@ -2739,7 +2859,7 @@
     "Agency": "CPD",
     "ID_Number": "43X",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "",
     "Level_4": "Area Executive Officer (Commander)"
   },
@@ -2747,7 +2867,7 @@
     "Agency": "CPD",
     "ID_Number": "43A",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "",
     "Level_4": "CAPS Lieutenant"
   },
@@ -2755,7 +2875,7 @@
     "Agency": "CPD",
     "ID_Number": "43A1",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "",
     "Level_4": "Administration Sergeant"
   },
@@ -2763,7 +2883,7 @@
     "Agency": "CPD",
     "ID_Number": "43G70",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "",
     "Level_4": "PSN Sergeant"
   },
@@ -2771,7 +2891,7 @@
     "Agency": "CPD",
     "ID_Number": "43G71",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "",
     "Level_4": "Gun Team Sergeant"
   },
@@ -2779,7 +2899,7 @@
     "Agency": "CPD",
     "ID_Number": "43T71",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "",
     "Level_4": "Midnight Team Sergeant"
   },
@@ -2787,7 +2907,7 @@
     "Agency": "CPD",
     "ID_Number": "43S",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "",
     "Level_4": "Saturation Team Sergeant"
   },
@@ -2795,7 +2915,7 @@
     "Agency": "CPD",
     "ID_Number": "4300",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
     "Level_3": "Saturation Team",
     "Level_4": "Commanding Officer"
   },
@@ -2803,7 +2923,167 @@
     "Agency": "CPD",
     "ID_Number": "43[0-9][0-9]",
     "Level_1": "Patrol",
-    "Level_2": "Area North",
+    "Level_2": "Area 3",
+    "Level_3": "Saturation Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "44",
+    "Level_1": "Patrol",
+    "Level_2": "Area 4",
+    "Level_3": "",
+    "Level_4": "Area Deputy Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "44X",
+    "Level_1": "Patrol",
+    "Level_2": "Area 4",
+    "Level_3": "",
+    "Level_4": "Area Executive Officer (Commander)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "44A",
+    "Level_1": "Patrol",
+    "Level_2": "Area 4",
+    "Level_3": "",
+    "Level_4": "CAPS Lieutenant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "44A1",
+    "Level_1": "Patrol",
+    "Level_2": "Area 4",
+    "Level_3": "",
+    "Level_4": "Administration Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "44G70",
+    "Level_1": "Patrol",
+    "Level_2": "Area 4",
+    "Level_3": "",
+    "Level_4": "PSN Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "44G71",
+    "Level_1": "Patrol",
+    "Level_2": "Area 4",
+    "Level_3": "",
+    "Level_4": "Gun Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "44T71",
+    "Level_1": "Patrol",
+    "Level_2": "Area 4",
+    "Level_3": "",
+    "Level_4": "Midnight Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "44S",
+    "Level_1": "Patrol",
+    "Level_2": "Area 4",
+    "Level_3": "",
+    "Level_4": "Saturation Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4400",
+    "Level_1": "Patrol",
+    "Level_2": "Area 4",
+    "Level_3": "Saturation Team",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "44[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area 4",
+    "Level_3": "Saturation Team",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "45",
+    "Level_1": "Patrol",
+    "Level_2": "Area 5",
+    "Level_3": "",
+    "Level_4": "Area Deputy Chief"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "45X",
+    "Level_1": "Patrol",
+    "Level_2": "Area 5",
+    "Level_3": "",
+    "Level_4": "Area Executive Officer (Commander)"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "45A",
+    "Level_1": "Patrol",
+    "Level_2": "Area 5",
+    "Level_3": "",
+    "Level_4": "CAPS Lieutenant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "45A1",
+    "Level_1": "Patrol",
+    "Level_2": "Area 5",
+    "Level_3": "",
+    "Level_4": "Administration Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "45G70",
+    "Level_1": "Patrol",
+    "Level_2": "Area 5",
+    "Level_3": "",
+    "Level_4": "PSN Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "45G71",
+    "Level_1": "Patrol",
+    "Level_2": "Area 5",
+    "Level_3": "",
+    "Level_4": "Gun Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "45T71",
+    "Level_1": "Patrol",
+    "Level_2": "Area 5",
+    "Level_3": "",
+    "Level_4": "Midnight Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "45S",
+    "Level_1": "Patrol",
+    "Level_2": "Area 5",
+    "Level_3": "",
+    "Level_4": "Saturation Team Sergeant"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "4500",
+    "Level_1": "Patrol",
+    "Level_2": "Area 5",
+    "Level_3": "Saturation Team",
+    "Level_4": "Commanding Officer"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "45[0-9][0-9]",
+    "Level_1": "Patrol",
+    "Level_2": "Area 5",
     "Level_3": "Saturation Team",
     "Level_4": ""
   },
@@ -2842,7 +3122,7 @@
   {
     "Agency": "CPD",
     "ID_Number": "49",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "",
     "Level_3": "",
     "Level_4": "Special Functions Group ADS"
@@ -2850,15 +3130,15 @@
   {
     "Agency": "CPD",
     "ID_Number": "49C",
-    "Level_1": "Patrol",
-    "Level_2": "",
-    "Level_3": "",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
+    "Level_3": "SWAT",
     "Level_4": "Mobile Command Center"
   },
   {
     "Agency": "CPD",
     "ID_Number": "49D",
-    "Level_1": "Patrol",
+    "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "",
     "Level_3": "",
     "Level_4": "Covert Auto Team Sergeant"
@@ -2866,74 +3146,50 @@
   {
     "Agency": "CPD",
     "ID_Number": "49E",
-    "Level_1": "Patrol",
-    "Level_2": "",
-    "Level_3": "",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
+    "Level_3": "SWAT",
     "Level_4": "SWAT Weapons Truck"
   },
   {
     "Agency": "CPD",
     "ID_Number": "49F",
-    "Level_1": "Patrol",
-    "Level_2": "",
-    "Level_3": "",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
+    "Level_3": "SWAT",
     "Level_4": "SWAT Equipment Truck"
   },
   {
     "Agency": "CPD",
     "ID_Number": "49L",
-    "Level_1": "Patrol",
-    "Level_2": "",
-    "Level_3": "",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
+    "Level_3": "SWAT",
     "Level_4": "SWAT Light Truck"
   },
   {
     "Agency": "CPD",
     "ID_Number": "49R",
-    "Level_1": "Patrol",
-    "Level_2": "",
-    "Level_3": "",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
+    "Level_3": "SWAT",
     "Level_4": "SWAT Armored Vehicle"
   },
   {
     "Agency": "CPD",
     "ID_Number": "49W",
-    "Level_1": "Patrol",
-    "Level_2": "",
-    "Level_3": "",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
+    "Level_3": "SWAT",
     "Level_4": "WMD Truck"
   },
   {
     "Agency": "CPD",
     "ID_Number": "49T",
-    "Level_1": "Patrol",
-    "Level_2": "",
-    "Level_3": "",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
+    "Level_3": "Troubled Buildings",
     "Level_4": "Troubled Buildings Unit"
-  },
-  {
-    "Agency": "CPD",
-    "ID_Number": "M100",
-    "Level_1": "Patrol",
-    "Level_2": "",
-    "Level_3": "",
-    "Level_4": "Marine & Helicopter Unit C.O."
-  },
-  {
-    "Agency": "CPD",
-    "ID_Number": "M[1]?[0-9]",
-    "Level_1": "Patrol",
-    "Level_2": "",
-    "Level_3": "",
-    "Level_4": "Marine Unit Boat"
-  },
-  {
-    "Agency": "CPD",
-    "ID_Number": "PH[1-2]",
-    "Level_1": "Patrol",
-    "Level_2": "",
-    "Level_3": "",
-    "Level_4": "Police Helicopter"
   },
   {
     "Agency": "CFD",
