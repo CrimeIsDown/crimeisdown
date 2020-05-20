@@ -1,12 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <StreamPlayer @stream={{this.model.slug}} @autoplay={{false}}>
-        <h1>{{this.model.name}}</h1>
-        <p>{{this.model.description}} <strong><LinkTo @route="audio">Visit our Scanner Audio page for more streams, and to download archives of this channel.</LinkTo></strong></p>
+      <StreamPlayer @stream={{this.model.slug}} @autoplay={{this.model.autoplay}}>
+        {{#if this.model.name}}
+          <h1>{{this.model.name}}</h1>
+          <p>{{this.model.description}} <strong><LinkTo @route="audio">Visit our Scanner Audio page for more streams, and to download archives of this channel.</LinkTo></strong></p>
+        {{else}}
+          <h1>{{this.model.slug}}</h1>
+        {{/if}}
       </StreamPlayer>
-      <h2 class="h4">Transmission-based stream/archive</h2>
-      <iframe src="{{this.model.openmhz}}" title="OpenMHZ stream" class="openmhz"></iframe>
+      {{#if this.model.openmhz}}
+        <h2 class="h4">Transmission-based stream/archive</h2>
+        <iframe src="{{this.model.openmhz}}" title="OpenMHZ stream" class="openmhz"></iframe>
+      {{/if}}
     </div>
   </div>
 </div>

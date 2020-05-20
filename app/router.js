@@ -24,6 +24,6 @@ Router.map(function() {
     path: '/audio/archive'
   });
   this.route('audio-live', {
-    path: '/audio/live/:stream'
+    path: '/audio/live/:slug'
   });
 });
