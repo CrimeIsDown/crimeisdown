@@ -7,9 +7,16 @@ export default class Oggplayer extends Component {
   currentZoom = 0;
   player = null;
 
-  didInsertElement() {
+  constructor() {
+    super(...arguments);
+  }
+
+  initializeMediaPlayer(playerElement, args) {
+    let src = args[0];
+    let type = args[1];
     let options = {
       controls: true,
+      techOrder: ['html5'],
       plugins: {
         wavesurfer: {
           backend: 'MediaElement',
@@ -26,13 +33,13 @@ export default class Oggplayer extends Component {
       }
     };
 
-    if (this.type.includes('ogg')) {
+    if (type.includes('ogg')) {
       options.techOrder = ['ogvjs'];
       options.ogvjs = { base: '/assets/ogv' };
     }
 
-    this.player = window.videojs('videojs-player', options, () => {
-      this.player.src({src: this.src, type: this.type});
+    let player = window.videojs('videojs-player', options, () => {
+      player.src({src: src, type: type});
     });
   }
 

@@ -1,5 +1,4 @@
-<audio id="videojs-player" class="video-js vjs-default-skin vjs-fluid">
-  {{!-- <source src="{{this.src}}" type="{{this.type}}"> --}}
+<audio id="videojs-player" class="video-js vjs-default-skin vjs-fluid" src="{{@src}}" {{did-insert this.initializeMediaPlayer @src @type}}>
 </audio>
 <div id="timeline"></div>
 
