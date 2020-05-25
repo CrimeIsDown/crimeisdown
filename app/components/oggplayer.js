@@ -38,14 +38,15 @@ export default class Oggplayer extends Component {
       options.ogvjs = { base: '/assets/ogv' };
     }
 
-    let player = window.videojs('videojs-player', options, () => {
-      player.src({src: src, type: type});
+    // This is a bad idea, but it works for sharing scope
+    window.oggplayer = window.videojs('videojs-player', options, () => {
+      window.oggplayer.src({src: src, type: type});
     });
   }
 
   @action
   zoom(e) {
-    let wavesurfer = this.player.wavesurfer().surfer;
+    let wavesurfer = window.oggplayer.wavesurfer().surfer;
     let playerWidth = wavesurfer.drawer.getWidth();
     let minPxPerSec = Math.round((playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration());
     let defaultMinPxPerSec = 20;
