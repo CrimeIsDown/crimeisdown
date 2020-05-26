@@ -109,13 +109,13 @@
     "description": "Used by mass transit units operating in the subway, as well as as a channel for major/special events.",
     "frequency": "460.350MHz",
     "slug": "citywide5",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=17"
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=18"
   },
   {
     "name": "CPD Citywide 6",
     "description": "Channel for major/special events - marathon, parades, etc, or SWAT/HBT incidents",
     "frequency": "460.250MHz",
     "slug": "citywide6",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=18"
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=19"
   }
 ]
