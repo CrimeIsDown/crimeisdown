@@ -1,9 +1,7 @@
 body {
+  padding-top: 3.4rem;
   .container {
     padding-top: 1.6rem;
-  }
-  #news-alert.fixed-top {
-    margin-top: 3.5rem;
   }
   &.ember-application {
     #loading {
