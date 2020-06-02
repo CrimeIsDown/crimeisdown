@@ -123,7 +123,7 @@ export default class IncidentMap extends Component {
       zoom: defaultZoom
     });
 
-    $('#crimereports-map').attr('src', this.buildCrimeMapUrl(defaultCenterLat, defaultCenterLong, 13));
+    $('#crime-tab').attr('href', this.buildCrimeMapUrl(defaultCenterLat, defaultCenterLong, 13));
 
     this.initialized = Promise.all([
       this.initBaseLayers(),
@@ -261,7 +261,7 @@ export default class IncidentMap extends Component {
       $('#waze-map').attr('src', wazeIframeUrl);
       if (this.location.meta.inChicago) {
         let crimereportsIframeUrl = this.buildCrimeMapUrl(this.location.meta.latitude, this.location.meta.longitude);
-        $('#crimereports-map').attr('src', crimereportsIframeUrl);
+        $('#crime-tab').attr('href', crimereportsIframeUrl);
 
         schedule('afterRender', () => {
           window.$('[data-toggle="tooltip"]').removeAttr('data-original-title').tooltip();
@@ -397,7 +397,7 @@ export default class IncidentMap extends Component {
       gangs: {
         label: "Gangs (unofficial)",
         layer: null,
-        url: 'https://cors-anywhere.herokuapp.com/https://www.google.com/maps/d/kml?forcekml=1&mid=1am7PF0tT25EztnOTAgUEL2E382VjVTc7',
+        url: '/data/map_data/gang-map.kml',
         showByDefault: false
       }
     };

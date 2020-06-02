@@ -166,7 +166,7 @@
         <a class="nav-link" id="traffic-tab" data-toggle="tab" href="#traffic-map" role="tab" aria-controls="traffic-map" aria-selected="false">Traffic Map</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="crime-tab" data-toggle="tab" href="#crimes-map" role="tab" aria-controls="crimes-map" aria-selected="false">Recent Crimes Map</a>
+        <a class="nav-link" id="crime-tab" href="#" aria-selected="false" target="_blank" rel="noopener noreferrer">Recent Crimes Map</a>
       </li>
     </ul>
 
@@ -174,11 +174,8 @@
       <div class="tab-pane fade show active" id="main-map" role="tabpanel" aria-labelledby="map-tab">
         <div id="leaflet-map"></div>
       </div>
-      <div class="tab-pane fade" id="traffic-map" role="tabpanel" aria-labelledby="crime-tab">
+      <div class="tab-pane fade" id="traffic-map" role="tabpanel" aria-labelledby="traffic-tab">
         <iframe id="waze-map" title="Waze map" src="https://embed.waze.com/iframe?zoom=11&lat=41.85&lon=-87.63"></iframe>
-      </div>
-      <div class="tab-pane fade" id="crimes-map" role="tabpanel" aria-labelledby="crime-tab">
-        <iframe id="crimereports-map" title="Crime reports map" src="about:blank"></iframe>
       </div>
     </div>
   </div>
