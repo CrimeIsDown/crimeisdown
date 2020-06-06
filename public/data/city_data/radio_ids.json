@@ -5309,7 +5309,15 @@
     "Level_1": "Logistics",
     "Level_2": "Breathing Apparatus / Equipment and Supply",
     "Level_3": "",
-    "Level_4": "Coordinator of Department Commissary  "
+    "Level_4": "Coordinator of Department Commissary"
+  },
+  {
+    "Agency": "CFD",
+    "ID_Number": "6-4-21",
+    "Level_1": "Logistics",
+    "Level_2": "Breathing Apparatus / Equipment and Supply",
+    "Level_3": "",
+    "Level_4": "Logistics Support and Multi-Purpose Utility Vehicle"
   },
   {
     "Agency": "CFD",
