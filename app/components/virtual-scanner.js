@@ -70,12 +70,15 @@ export default class VirtualScanner extends Component {
       .then(response => response.text())
       .then(xml => (new window.DOMParser()).parseFromString(xml, 'text/xml'))
       .then(data => {
-        let nodes = data.querySelectorAll('live stream name');
+        let nodes = data.querySelectorAll('live stream');
         // we would use forEach but it does not work on Safari <10
         for (let i = 0; i < nodes.length; i++) {
-          let streamName = nodes[i].textContent;
-          let streamDesc = streamName in this.nameDescMappings ? this.nameDescMappings[streamName] : streamName;
-          this.streams.pushObject({name: streamName, desc: streamDesc});
+          let node = nodes[i];
+          if (node.querySelector('active')) {
+            let streamName = node.querySelector('name').textContent;
+            let streamDesc = streamName in this.nameDescMappings ? this.nameDescMappings[streamName] : streamName;
+            this.streams.pushObject({name: streamName, desc: streamDesc});
+          }
         }
         this.streams.sort((a, b) => a.desc.localeCompare(b.desc, 'en', {numeric: true}));
       });

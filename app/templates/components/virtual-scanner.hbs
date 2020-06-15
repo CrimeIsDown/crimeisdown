@@ -5,7 +5,7 @@
     <div class="form-group">
       {{! template-lint-disable no-invalid-interactive }}
       <fieldset id="streamlist" {{on "change" (fn this.changeStreams value="target")}}>
-        <legend>Check the streams to play</legend>
+        <legend>Select the streams to play</legend>
         <div class="stream-options">
         {{#if this.streams.length}}
           {{#each this.streams as |streamOption|}}

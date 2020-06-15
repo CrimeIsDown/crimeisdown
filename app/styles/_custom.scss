@@ -228,7 +228,6 @@ ul.nav.nav-tabs {
   line-height: 1;
 }
 
-
 #site-footer {
   margin-top: 1rem;
   .col-sm-7 {
@@ -253,10 +252,16 @@ input.flatpickr-mobile {
   border-bottom-left-radius: 0.25rem !important;
 }
 
-.stream-options {
-  label {
-    cursor: pointer;
-    margin-bottom: 0.2rem;
+fieldset#streamlist {
+  legend {
+    font-size: 1rem;
+    font-style: italic;
+  }
+  .stream-options {
+    label {
+      cursor: pointer;
+      margin-bottom: 0.2rem;
+    }
   }
 }
 
@@ -347,7 +352,7 @@ input.flatpickr-mobile {
 
 @include media-breakpoint-up(md) {
   .stream-options {
-    max-height: 300px;
+    max-height: 22rem;
     overflow-y: auto;
   }
 }
