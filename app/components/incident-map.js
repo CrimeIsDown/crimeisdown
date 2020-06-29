@@ -382,7 +382,7 @@ export default class IncidentMap extends Component {
       municipalities: {
         label: "Municipalities",
         layer: null,
-        url: 'https://opendata.arcgis.com/datasets/534226c6b1034985aca1e14a2eb234af_2.geojson',
+        url: '/data/map_data/municipalities.geojson',
         showByDefault: false,
         propMappings: {
           AGENCY_DESC: 'Jurisdiction'
