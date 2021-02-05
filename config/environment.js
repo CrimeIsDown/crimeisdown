@@ -1,7 +1,7 @@
 /* eslint-env node */
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'crimeisdown',
     environment,
@@ -15,8 +15,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
 
     APP: {
@@ -28,7 +28,7 @@ module.exports = function(environment) {
       SITE_NAME_HTML: 'CrimeIsDown.com'
       // SITE_NAME_TEXT: 'Sirens',
       // SITE_NAME_HTML: '<i class="em em-rotating_light"></i> Sirens'
-    }
+    },
   };
 
   if (environment === 'development') {
