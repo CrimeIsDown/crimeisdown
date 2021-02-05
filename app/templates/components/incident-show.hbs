@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-md-12">
     <h3 style="margin-top: 1rem;">Event #{{incident.id}}</h3>
-    {{incident-form update=true incident=incident openIncidents=openIncidents model=model}}
+    <IncidentForm @update={{true}} @incident={{incident}} @openIncidents={{openIncidents}} @model={{model}} />
     <h4>Notes</h4>
     {{#if incident.notes.length}}
       <ul>
         {{#each incident.notes as |note|}}
           <li>
-            {{note-form update=true note=note incident=incident}}
+            <NoteForm @update={{true}} @note={{note}} @incident={{incident}} />
             [{{moment-format note.createdAt 'HH:mm:ss'}}] {{note.author}} said {{note.body}}
           </li>
         {{/each}}
@@ -15,6 +15,6 @@
     {{else}}
       <p>Nobody has added a narrative to this incident yet.</p>
     {{/if}}
-    {{note-form update=false incident=incident}}
+    <NoteForm @update={{false}} @incident={{incident}} />
   </div>
 </div>

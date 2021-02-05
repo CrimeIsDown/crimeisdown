@@ -24,19 +24,7 @@
   <div class="form-group">
     <label for="datetimepicker">Time of recording</label>
     <div class="input-group date">
-      {{ember-flatpickr
-        name="datetime"
-        id="datetimepicker"
-        allowInput=true
-        classNames="form-control"
-        defaultDate=this.options.defaultDate
-        enableTime=this.options.enableTime
-        dateFormat=this.options.dateFormat
-        minuteIncrement=this.options.minuteIncrement
-        minDate=this.options.minDate
-        date=(readonly this.options.defaultDate)
-        onChange=null
-      }}
+      <EmberFlatpickr @name="datetime" @id="datetimepicker" @allowInput={{true}} @classNames="form-control" @defaultDate={{this.options.defaultDate}} @enableTime={{this.options.enableTime}} @dateFormat={{this.options.dateFormat}} @minuteIncrement={{this.options.minuteIncrement}} @minDate={{this.options.minDate}} @date={{readonly this.options.defaultDate}} @onChange={{null}} />
       <div class="input-group-append">
         <span class="input-group-text"><span class="fa fa-calendar"></span></span>
       </div>

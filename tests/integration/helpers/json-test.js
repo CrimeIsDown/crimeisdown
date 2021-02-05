@@ -12,6 +12,6 @@ module('Integration | Helper | json', function(hooks) {
 
     await render(hbs`{{json inputValue}}`);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.dom(this.element).hasText('1234');
   });
 });

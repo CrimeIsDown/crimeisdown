@@ -12,7 +12,7 @@ module('Integration | Component | address lookup', function(hooks) {
 
     await render(hbs`{{address-lookup}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | address lookup', function(hooks) {
       {{/address-lookup}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });

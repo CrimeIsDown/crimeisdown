@@ -1,7 +1,6 @@
-import DS from 'ember-data';
-const { attr, hasMany, belongsTo } = DS;
+import Model, { belongsTo, hasMany, attr } from '@ember-data/model';
 
-export default DS.Model.extend({
+export default Model.extend({
   createdAt: attr('date', {
     defaultValue() { return new Date(); }
   }),

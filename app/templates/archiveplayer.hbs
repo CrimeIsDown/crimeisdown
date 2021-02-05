@@ -11,7 +11,7 @@
     </div>
     <div class="col-sm-12">
       <h4><a href="{{this.model.url}}" target="_blank">{{this.model.filename}}</a></h4>
-      {{oggplayer src=this.model.url type=this.model.type}}
+      <Oggplayer @src={{this.model.url}} @type={{this.model.type}} />
     </div>
   </div>
 </div>

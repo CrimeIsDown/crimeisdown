@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         {{#if showNewForm}}
-          {{incident-form update=false model=model}}
+          <IncidentForm @update={{false}} @model={{model}} />
         {{/if}}
       </div>
     </div>

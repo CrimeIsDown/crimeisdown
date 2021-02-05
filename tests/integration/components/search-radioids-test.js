@@ -12,7 +12,7 @@ module('Integration | Component | search radioids', function(hooks) {
 
     await render(hbs`{{search-radioids}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | search radioids', function(hooks) {
       {{/search-radioids}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });

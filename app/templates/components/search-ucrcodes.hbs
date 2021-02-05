@@ -2,7 +2,7 @@
   <form {{action "lookupUCR" ucrCode on="submit"}}>
     <label for="ucr">UCR (Uniform Crime Reporting) Code to lookup</label>
     <div class="input-group">
-      {{input class="form-control" name="ucr" placeholder="041A" type="text" value=ucrCode}}
+      <Input class="form-control" @name="ucr" placeholder="041A" @type="text" @value={{ucrCode}} />
       <div class="input-group-append">
         <button class="btn btn-primary" type="submit">Define</button>
       </div>

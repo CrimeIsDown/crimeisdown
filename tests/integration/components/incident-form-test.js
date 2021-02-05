@@ -12,7 +12,7 @@ module('Integration | Component | incident-form', function(hooks) {
 
     await render(hbs`{{incident-form}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom(this.element).hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | incident-form', function(hooks) {
       {{/incident-form}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('template block text');
   });
 });

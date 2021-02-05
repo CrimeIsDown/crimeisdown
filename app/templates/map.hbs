@@ -16,12 +16,12 @@
 
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
-    {{incident-map model=model openIncidents=openIncidents}}
+    <IncidentMap @model={{model}} @openIncidents={{openIncidents}} />
   </div>
   {{#each openIncidents as |incident|}}
     <div class="tab-pane fade" id="incident-{{incident.id}}" role="tabpanel" aria-labelledby="incident-tab-{{incident.id}}">
       <div class="container">
-        {{incident-show model=model incident=incident openIncidents=openIncidents}}
+        <IncidentShow @model={{model}} @incident={{incident}} @openIncidents={{openIncidents}} />
       </div>
     </div>
   {{/each}}
