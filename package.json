@@ -39,6 +39,7 @@
     "@glimmer/component": "^1.0.3",
     "@glimmer/tracking": "^1.0.3",
     "@mapbox/leaflet-pip": "^1.1.0",
+    "@sentry/ember": "^6.1.0",
     "babel-eslint": "^10.1.0",
     "bootstrap": "^4.3.1",
     "bootstrap-table": "^1.15.4",
@@ -108,9 +109,5 @@
     "videojs-wavesurfer": "^2.11.0",
     "whatwg-fetch": "^2.0.1"
   },
-  "private": true,
-  "dependencies": {
-    "@sentry/browser": "^5.7.0",
-    "@sentry/integrations": "^5.7.0"
-  }
+  "private": true
 }
