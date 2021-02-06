@@ -4,19 +4,6 @@
     <small class="text-danger">If you use the map drawing features (below zoom in/out), they will not be saved. A refresh will clear the map.</small>
     <p class="mobile text-primary"><em>Scroll down for incident map</em></p>
     <div class="accordion" id="accordion" role="tablist">
-      {{#if showIncidentTable}}
-      <div class="card">
-        <div class="card-header" role="tab">
-          <a id="headingIncidents" data-toggle="collapse" href="#collapseIncidents" aria-expanded="true" aria-controls="collapseIncidents">
-            Incidents
-          </a>
-          {{!-- <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a> --}}
-        </div>
-        <div id="collapseIncidents" class="collapse show" role="tabpanel" aria-labelledby="headingIncidents" data-parent="#accordion">
-          {{incident-table model=model incidents=incidents openIncidents=openIncidents}}
-        </div>
-      </div>
-      {{/if}}
       <div class="card">
         <div class="card-header" role="tab">
           <a class="card-heading" id="headingAddrSearch" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">

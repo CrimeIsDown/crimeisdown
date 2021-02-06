@@ -12,7 +12,6 @@ import ENV from '../config/environment';
 
 export default Component.extend({
   addressLookup: service(),
-  showIncidentTable: ENV.APP.INCIDENT_CAD_ENABLED,
   map: null,
   geocoder: null,
   previousGeolocationMarker: null,
@@ -120,13 +119,6 @@ export default Component.extend({
     ]));
 
     this.initialized.then(() => {
-      let incidents = this.get('model.incidents');
-      if (incidents) {
-        incidents.forEach((incident) => {
-          get(incident, 'location.layer').addTo(this.overlay['User Features']);
-        });
-      }
-
       // wait for everything to load before trying to geocode an address
       if (window.location.hash) {
         let hash = window.location.hash.substr(1),

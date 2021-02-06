@@ -23,7 +23,6 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       MEDIA_PLAYER_DEBUG: false,
-      INCIDENT_CAD_ENABLED: false,
       SITE_NAME_TEXT: 'CrimeIsDown.com',
       SITE_NAME_HTML: 'CrimeIsDown.com'
       // SITE_NAME_TEXT: 'Sirens',

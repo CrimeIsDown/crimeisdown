@@ -1,28 +1,5 @@
-{{#if showTabs}}
-<ul class="nav nav-tabs bg-dark" id="cadTabs" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="home" aria-selected="true">Map/CAD</a>
-  </li>
-  {{#each openIncidents as |incident|}}
-    <li class="nav-item">
-      <a class="nav-link nav-close" id="incident-tab-{{incident.id}}" data-toggle="tab" href="#incident-{{incident.id}}" role="tab" aria-controls="incident-{{incident.id}}" aria-selected="false">
-        {{incident.type.value}} - {{incident.location.address}}
-      </a>
-      <span class="text-danger" onclick={{action "closeTab" incident}}>&times;</span>
-    </li>
-  {{/each}}
-</ul>
-{{/if}}
-
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
-    <IncidentMap @model={{model}} @openIncidents={{openIncidents}} />
+    <IncidentMap @model={{model}} />
   </div>
-  {{#each openIncidents as |incident|}}
-    <div class="tab-pane fade" id="incident-{{incident.id}}" role="tabpanel" aria-labelledby="incident-tab-{{incident.id}}">
-      <div class="container">
-        <IncidentShow @model={{model}} @incident={{incident}} @openIncidents={{openIncidents}} />
-      </div>
-    </div>
-  {{/each}}
 </div>
