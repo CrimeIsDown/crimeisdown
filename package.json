@@ -34,12 +34,14 @@
     "edition": "octane"
   },
   "devDependencies": {
+    "@ember/jquery": "^1.1.0",
     "@ember/optional-features": "^2.0.0",
+    "@ember/render-modifiers": "^1.0.2",
     "@ember/test-helpers": "^2.1.4",
     "@glimmer/component": "^1.0.3",
     "@glimmer/tracking": "^1.0.3",
     "@mapbox/leaflet-pip": "^1.1.0",
-    "@sentry/ember": "^6.1.0",
+    "@sentry/ember": "6.0.2",
     "babel-eslint": "^10.1.0",
     "bootstrap": "^4.3.1",
     "bootstrap-table": "^1.15.4",
@@ -70,7 +72,6 @@
     "ember-moment": "^7.6.0",
     "ember-page-title": "^6.0.3",
     "ember-pell": "^1.4.5",
-    "ember-power-select": "^2.0.0-beta.3",
     "ember-qunit": "^5.1.1",
     "ember-resolver": "^8.0.2",
     "ember-router-scroll": "^1.0.0",

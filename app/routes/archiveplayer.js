@@ -1,10 +1,11 @@
 import Route from '@ember/routing/route';
 
-export default Route.extend({
-  queryParams: {
+export default class ArchiveplayerRoute extends Route {
+  queryParams = {
     url: false,
     type: false
-  },
+  };
+
   model(params) {
     if (!params.url) {
       alert('ERROR: No URL param specified.');
@@ -24,4 +25,4 @@ export default Route.extend({
       type: type
     };
   }
-});
+}

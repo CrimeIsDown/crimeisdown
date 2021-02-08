@@ -21,9 +21,6 @@
         <li class="nav-item">
           <LinkTo @route="directives" @id="directives-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Police Directive Changes</LinkTo>
         </li>
-        <!--<li class="nav-item">-->
-          <!--<a href="https://blog.crimeisdown.com" id="blog-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Blog</a>-->
-        <!--</li>-->
       </ul>
       <form class="form-inline">
         <div class="form-check mr-sm-2">
@@ -35,7 +32,7 @@
         {{!-- April Fools 2019 --}}
         <div class="form-check">
           <label class="form-check-label red-blue-flashing">
-            <Input @type="checkbox" class="form-check-input" @id="copstoggle" @checked={{playmusic}} @change={{action "togglemusic"}} />
+            <Input @type="checkbox" class="form-check-input" @id="copstoggle" @checked={{this.playmusic}} {{on "change" this.togglemusic}} />
             <i class="fa fa-volume-up" aria-hidden="true"></i>&nbsp;COPS Mode
           </label>
           <div class="d-none">

@@ -1,24 +1,14 @@
 /*global MediaElementPlayer*/
 
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { set } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend({
-  init() {
-    this._super(...arguments);
-    let isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
-    this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isMobileSafari);
-  },
+export default class StreamPlayer extends Component {
+  initializeMediaPlayer(stream, autoplay) {
+    const isMobileSafari = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
+    const mediaSourceSupported = (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !isMobileSafari;
 
-  didInsertElement() {
-    this.set('audioPlayer', this.initializeMediaPlayer(this.stream, this.mediaSourceSupported));
-
-    if (this.autoplay) {
-      this.audioPlayer.load();
-      this.audioPlayer.play();
-    }
-  },
-
-  initializeMediaPlayer(stream, mediaSourceSupported) {
     let options = {
       pluginPath: "https://cdn.jsdelivr.net/npm/mediaelement@4.2.12/build/",
       shimScriptAccess: 'always',
@@ -50,6 +40,10 @@ export default Component.extend({
 
     let mediaElementPlayer = new MediaElementPlayer(playerElement, options);
     mediaElementPlayer.setSrc(src);
-    return mediaElementPlayer;
+
+    if (autoplay) {
+      mediaElementPlayer.load();
+      mediaElementPlayer.play();
+    }
   }
-});
+}

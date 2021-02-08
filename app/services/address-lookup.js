@@ -4,7 +4,7 @@ import Service from '@ember/service';
 import { set } from '@ember/object';
 import fetch from 'fetch';
 
-export default Service.extend({
+export default class AddressLookup extends Service {
   loadData() {
     this.dataLoadedPromise = Promise.all([
       new Promise((resolve) => {
@@ -65,7 +65,7 @@ export default Service.extend({
       })
     ]);
     return this.dataLoadedPromise;
-  },
+  }
 
   generateLocationDataForAddress(layers, location) {
     let result = {};
@@ -93,7 +93,7 @@ export default Service.extend({
     });
 
     return result;
-  },
+  }
 
   buildMeta(layers, address, location) {
     let meta = {
@@ -129,7 +129,7 @@ export default Service.extend({
     }
 
     return meta;
-  },
+  }
 
   buildPolice(layers, location) {
     let police = {};
@@ -165,7 +165,7 @@ export default Service.extend({
     }
 
     return police;
-  },
+  }
 
   buildFire(location) {
     let nearestEngine = {distance: 99999999};
@@ -203,7 +203,7 @@ export default Service.extend({
       nearestTruck: nearestTruck,
       nearestSquad: nearestSquad
     };
-  },
+  }
 
   buildEMS(location) {
     let nearestTraumaAdult = {distance: 99999999};
@@ -227,7 +227,7 @@ export default Service.extend({
       nearestTraumaAdult: nearestTraumaAdult,
       nearestTraumaPed: nearestTraumaPed
     };
-  },
+  }
 
   findStation(query = '') {
     query = query.toUpperCase();
@@ -266,4 +266,4 @@ export default Service.extend({
     });
     return results;
   }
-});
+}

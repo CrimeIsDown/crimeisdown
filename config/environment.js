@@ -30,18 +30,21 @@ module.exports = function (environment) {
     },
   };
 
+  ENV['@sentry/ember'] = {
+    disablePerformance: true,
+    sentry: {
+      dsn: 'https://fc1365bf53c34718b4674383752e1080@sentry.io/154438',
+      enabled: environment === 'production',
+      environment
+    },
+  };
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.firebase = {
-      apiKey: "REDACTED_PUBLIC_CREDENTIAL",
-      authDomain: "crimeisdown-dev.firebaseapp.com",
-      databaseURL: "https://crimeisdown-dev.firebaseio.com",
-      storageBucket: "crimeisdown-dev.appspot.com"
-    };
   }
 
   if (environment === 'test') {
@@ -59,17 +62,6 @@ module.exports = function (environment) {
   if (environment === 'production') {
     ENV.googleAnalytics = {
       webPropertyId: 'UA-EXAMPLE-1'
-    };
-    ENV.firebase = {
-      apiKey: "REDACTED_PUBLIC_CREDENTIAL",
-      authDomain: "crimeisdown.firebaseapp.com",
-      databaseURL: "https://crimeisdown.firebaseio.com",
-      storageBucket: "crimeisdown.appspot.com"
-    };
-    ENV['@sentry/ember'] = {
-      sentry: {
-        dsn: 'https://fc1365bf53c34718b4674383752e1080@sentry.io/154438'
-      },
     };
     ENV.APP.MEDIA_PLAYER_DEBUG = false;
   }

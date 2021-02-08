@@ -6,9 +6,7 @@ import config from 'crimeisdown/config/environment';
 
 import { InitSentryForEmber } from '@sentry/ember';
 
-if (config['@sentry/ember']) {
-  InitSentryForEmber();
-}
+InitSentryForEmber();
 
 export default class App extends Application {
   modulePrefix = config.modulePrefix;

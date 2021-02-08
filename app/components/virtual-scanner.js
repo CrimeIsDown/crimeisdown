@@ -1,17 +1,23 @@
 /*global MediaElementPlayer, mejs*/
 
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import EmberObject from '@ember/object';
+import { action, set, get } from '@ember/object';
 import { bind } from '@ember/runloop';
 import fetch from 'fetch';
 import $ from 'jquery';
 
-export default Component.extend({
-  dragScale: 50,
-  init() {
-    this._super(...arguments);
-    this.streams = [];
-    this.enabledStreams = [];
+export default class VirtualScanner extends Component {
+  dragScale = 50;
+
+  @tracked
+  streams = [];
+  @tracked
+  enabledStreams = [];
+
+  constructor() {
+    super(...arguments);
     this.nameDescMappings = {
       zone1:          "CPD Zone 1 (016/017)",
       zone2:          "CPD Zone 2 (019)",
@@ -77,8 +83,7 @@ export default Component.extend({
         }
         this.streams.sort((a, b) => a.desc.localeCompare(b.desc, 'en', {numeric: true}));
       });
-  },
-  didInsertElement() {
+
     window.interact('.draggable')
       .draggable({
         restrict: {
@@ -90,35 +95,40 @@ export default Component.extend({
         onmove: this.onMove,
         onend: this.onEnd
       });
-  },
-  actions: {
-    changeStreams(target) {
-      if (typeof this.audioContext === 'undefined') {
-        if (!(window.AudioContext || window.webkitAudioContext)) {
-          alert('Sorry, your browser does not support our own audio streaming. Please check out some of the other streaming links on this page, or switch to a browser like Chrome that is supported.');
-          return;
-        }
+  }
 
-        // Instantiate the context on user interaction
-        this.set('audioContext', new (window.AudioContext || window.webkitAudioContext));
-        this.set('mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !mejs.Features.isiOS);
-        this.setupResonanceScene();
+  @action
+  changeStreams(event) {
+    if (typeof this.audioContext === 'undefined') {
+      if (!(window.AudioContext || window.webkitAudioContext)) {
+        alert('Sorry, your browser does not support our own audio streaming. Please check out some of the other streaming links on this page, or switch to a browser like Chrome that is supported.');
+        return;
       }
 
-      if (target.checked) {
-        this.addStream(target.value);
-      } else {
-        this.removeStream(target.value);
-      }
-    },
-    seekStream(time) {
-      if (this.mediaSourceSupported) {
-        this.player.seek(time);
-      } else {
-        this.playerElement.fastSeek(time);
-      }
+      // Instantiate the context on user interaction
+      set(this, 'audioContext', new (window.AudioContext || window.webkitAudioContext));
+      set(this, 'mediaSourceSupported', (('MediaSource' in window) || ('WebKitMediaSource' in window)) && !mejs.Features.isiOS);
+      this.setupResonanceScene();
     }
-  },
+
+    let target = event.target;
+
+    if (target.checked) {
+      this.addStream(target.value);
+    } else {
+      this.removeStream(target.value);
+    }
+  }
+
+  @action
+  seekStream(time) {
+    if (this.mediaSourceSupported) {
+      this.player.seek(time);
+    } else {
+      this.playerElement.fastSeek(time);
+    }
+  }
+
   setupResonanceScene() {
     this.sceneDimensions = {
       width: 4, height: 4, depth: 4,
@@ -139,7 +149,8 @@ export default Component.extend({
       // this.resonanceScene.setRoomProperties(this.sceneDimensions, this.sceneMaterials);
       this.resonanceScene.output.connect(this.audioContext.destination);
     }
-  },
+  }
+
   addStream(streamName) {
     let streamDesc = streamName in this.nameDescMappings ? this.nameDescMappings[streamName] : streamName;
     let streamData = EmberObject.create({name: streamName, desc: streamDesc});
@@ -207,7 +218,8 @@ export default Component.extend({
         }
       }));
     }));
-  },
+  }
+
   startPlayer(stream, playerElement) {
     let audioPlayer;
     if (this.mediaSourceSupported) {
@@ -242,7 +254,8 @@ export default Component.extend({
     audioPlayer.load();
     audioPlayer.play();
     return audioPlayer;
-  },
+  }
+
   removeStream(streamName) {
     let streamData = this.enabledStreams.findBy('name', streamName);
     if (streamData.soundSource) streamData.soundSource.input.disconnect();
@@ -252,7 +265,8 @@ export default Component.extend({
     if (streamData.audioElementSource) streamData.audioElementSource.disconnect();
     streamData.draggableElement.remove();
     this.enabledStreams.removeObject(streamData);
-  },
+  }
+
   addDraggable(streamName, roomPosition) {
     let draggableElement = document.getElementById('drag-' + streamName);
     let dragPos = this.roomPositionToDragPosition(roomPosition);
@@ -260,7 +274,8 @@ export default Component.extend({
     draggableElement.setAttribute('data-x', dragPos.dragX);
     draggableElement.setAttribute('data-y', dragPos.dragY);
     return draggableElement;
-  },
+  }
+
   drawVU(analyser, element, lastVal) {
     let array = new Uint8Array(analyser.fftSize);
     analyser.getByteTimeDomainData(array);
@@ -280,7 +295,8 @@ export default Component.extend({
     requestAnimationFrame(() => {
       this.drawVU(analyser, element, val);
     });
-  },
+  }
+
   randomPosition(width, height, depth) {
     function randomAxisPosition(len) {
       let max = len/2;
@@ -292,13 +308,15 @@ export default Component.extend({
       y: 0,
       z: randomAxisPosition(depth)
     };
-  },
+  }
+
   roomPositionToDragPosition(position) {
     return {
       dragX: (position.x + this.sceneDimensions.width/2) * this.dragScale,
       dragY: (position.z + this.sceneDimensions.depth/2) * this.dragScale,
     };
-  },
+  }
+
   dragPositionToRoomPosition(x, y) {
     let maxWidth = this.sceneDimensions.width/2;
     let maxDepth = this.sceneDimensions.depth/2;
@@ -308,4 +326,4 @@ export default Component.extend({
       z: Math.min(maxDepth, Math.max(-maxDepth, (y / this.dragScale) - maxDepth))
     };
   }
-});
+}

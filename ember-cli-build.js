@@ -19,7 +19,7 @@ module.exports = function (defaults) {
       includePolyfill: true
     },
 
-    'ember-cli-uglify': {
+    'ember-cli-terser': {
       exclude: [
         'assets/ogv/**/*',
         'assets/leaflet-geosearch.bundle.min.js'

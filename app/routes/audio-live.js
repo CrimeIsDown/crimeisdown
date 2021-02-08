@@ -3,7 +3,7 @@
 import Route from '@ember/routing/route';
 import fetch from 'fetch';
 
-export default Route.extend({
+export default class AudioLiveRoute extends Route {
   model(params) {
     return new Promise(resolve => {
       fetch('/data/audio_data/online_streams.json').then(response => {
@@ -19,4 +19,4 @@ export default Route.extend({
       });
     });
   }
-});
+}
