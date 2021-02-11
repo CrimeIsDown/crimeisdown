@@ -16,18 +16,18 @@ iframe#scanner-guide {
   border: none;
 }
 
-iframe#youtube-feed {
+iframe#openmhz-iframe {
+  width: 100%;
+  height: 60vh;
+  border: none;
+}
+
+iframe#youtube-player {
   width: 100%;
   height: 315px;
   border: none;
   overflow: hidden;
   margin-bottom: 1em;
-}
-
-iframe.openmhz {
-  width: 100%;
-  height: 60vh;
-  border: none;
 }
 
 audio {
@@ -228,6 +228,7 @@ ul.nav.nav-tabs {
   line-height: 1;
 }
 
+
 #site-footer {
   margin-top: 1rem;
   .col-sm-7 {
@@ -252,16 +253,10 @@ input.flatpickr-mobile {
   border-bottom-left-radius: 0.25rem !important;
 }
 
-fieldset#streamlist {
-  legend {
-    font-size: 1rem;
-    font-style: italic;
-  }
-  .stream-options {
-    label {
-      cursor: pointer;
-      margin-bottom: 0.2rem;
-    }
+.stream-options {
+  label {
+    cursor: pointer;
+    margin-bottom: 0.2rem;
   }
 }
 
@@ -343,16 +338,11 @@ fieldset#streamlist {
     padding: 0.4em;
     width: 50%;
   }
-  @media (min-width: 992px) {
-    .modal-lg {
-      max-width: 850px;
-    }
-  }
 }
 
 @include media-breakpoint-up(md) {
   .stream-options {
-    max-height: 22rem;
+    max-height: 300px;
     overflow-y: auto;
   }
 }

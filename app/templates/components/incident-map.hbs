@@ -4,33 +4,20 @@
     <small class="text-danger">If you use the map drawing features (below zoom in/out), they will not be saved. A refresh will clear the map.</small>
     <p class="mobile text-primary"><em>Scroll down for incident map</em></p>
     <div class="accordion" id="accordion" role="tablist">
-      {{#if this.showIncidentTable}}
       <div class="card">
-        <div class="card-header">
-          <a id="headingIncidents" role="tab" data-toggle="collapse" href="#collapseIncidents" aria-expanded="true" aria-controls="collapseIncidents">
-            Incidents
-          </a>
-          {{!-- <a class="draggable-handle"><i class="fa fa-arrows-v"></i></a> --}}
-        </div>
-        <div id="collapseIncidents" class="collapse show" role="tabpanel" aria-labelledby="headingIncidents" data-parent="#accordion">
-          <IncidentTable @model={{this.model}} @incidents={{this.incidents}} @openIncidents={{this.openIncidents}}></IncidentTable>
-        </div>
-      </div>
-      {{/if}}
-      <div class="card">
-        <div class="card-header">
-          <a class="card-heading" id="headingAddrSearch" role="tab" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
+        <div class="card-header" role="tab">
+          <a class="card-heading" id="headingAddrSearch" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
             Address Search
           </a>
           {{!--<a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>--}}
         </div>
         <div id="collapseAddrSearch" class="collapse show" role="tabpanel" aria-labelledby="headingAddrSearch">
           <div id="address-search">
-            <form method="post" {{on "submit" this.searchAddress}}>
+            <form {{on "submit" this.searchAddress}}>
               <div class="form-group">
                 <label for="address">Address, intersection, place to search</label>
                 <div class="input-group">
-                  <Input class="form-control" @name="address" placeholder="e.g. 3510 S Michigan, Chicago" @type="text" @value={{this.address}} autofocus="true" />
+                  <Input class="form-control" name="address" placeholder="e.g. 3510 S Michigan, Chicago" @type="text" @value={{this.address}} autofocus="true" />
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">Search</button>
                   </div>
@@ -78,7 +65,7 @@
                     <strong>{{ this.location.police.zone.name }}</strong> ({{ this.location.police.zone.frequency }})<br>
                     <p>{{ this.location.police.zone.description }}</p>
                     <p><LinkTo class="btn btn-primary" @route="audio-live" @model={{this.location.police.zone.slug}} title={{concat "Listen to " this.location.police.zone.name}}><i class="fa fa-volume-up" aria-hidden="true"></i> Listen to CPD with Instant Replay</LinkTo></p>
-                    <StreamPlayer @stream={{this.location.police.zone.slug}} @autoplay={{false}}></StreamPlayer>
+                    <StreamPlayer @stream={{this.location.police.zone.slug}} @autoplay={{false}} />
                   {{/if}}
                 </td>
               </tr>
@@ -154,7 +141,7 @@
           </div>
         </div>
       </div>
-      <MapTools></MapTools>
+      <MapTools />
     </div>
   </div>
   <div class="map-container">
@@ -172,7 +159,7 @@
 
     <div class="tab-content">
       <div class="tab-pane fade show active" id="main-map" role="tabpanel" aria-labelledby="map-tab">
-        <div id="leaflet-map"></div>
+        <div id="leaflet-map" {{did-insert this.initMap}}></div>
       </div>
       <div class="tab-pane fade" id="traffic-map" role="tabpanel" aria-labelledby="traffic-tab">
         <iframe id="waze-map" title="Waze map" src="https://embed.waze.com/iframe?zoom=11&lat=41.85&lon=-87.63"></iframe>

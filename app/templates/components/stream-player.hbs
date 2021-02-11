@@ -1,6 +1,6 @@
 <figure>
   <figcaption>{{yield}}</figcaption>
-  <audio id="stream-player-{{@stream}}" class="stream-player" preload="none" {{did-insert this.initializeMediaPlayer @stream @autoplay}}>
+  <audio {{did-insert (fn this.initializeMediaPlayer @stream @autoplay)}} id="stream-player-{{@stream}}" class="stream-player stream-player-wide" preload="none">
     Your browser does not support the <code>audio</code> element.
   </audio>
 </figure>

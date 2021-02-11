@@ -3,7 +3,7 @@ language: node_js
 node_js:
   - "10"
 
-dist: trusty
+dist: xenial
 
 addons:
   chrome: stable
@@ -21,6 +21,4 @@ branches:
     - master
 
 script:
-  - npm run lint:hbs
-  - npm run lint:js
   - npm test

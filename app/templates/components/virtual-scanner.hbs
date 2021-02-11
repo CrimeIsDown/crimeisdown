@@ -1,18 +1,16 @@
 <h3>Live streaming from CrimeIsDown</h3>
-<p>Not sure which stream to play? <LinkTo @route="map">Search your address on our map</LinkTo> to find one near you.</p>
 <div class="row">
   <div class="col-md-6">
     <div class="form-group">
-      {{! template-lint-disable no-invalid-interactive }}
-      <fieldset id="streamlist" {{on "change" (fn this.changeStreams value="target")}}>
-        <legend>Select the streams to play</legend>
+      <fieldset {{on "change" (fn this.changeStreams)}} id="streamlist">
+        <legend>Check the streams to play</legend>
         <div class="stream-options">
         {{#if this.streams.length}}
           {{#each this.streams as |streamOption|}}
             <div class="form-check">
               <input class="form-check-input" id="checkbox-{{streamOption.name}}" type="checkbox" name="stream" value={{streamOption.name}}>
               <label class="form-check-label" for="checkbox-{{streamOption.name}}">{{streamOption.desc}}</label>
-              <LinkTo @route="audio-live" @model={{streamOption.name}} target="_blank" rel="noopener noreferrer" title={{concat "Listen to only " streamOption.desc}}><i class="fa fa-external-link"></i></LinkTo>
+              <LinkTo @route="audio-live" @model={{streamOption.name}} target="_blank" title={{concat "Listen to only " streamOption.desc}}><i class="fa fa-external-link"></i></LinkTo>
             </div>
           {{/each}}
         {{else}}

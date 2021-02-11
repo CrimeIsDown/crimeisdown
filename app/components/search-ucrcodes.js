@@ -1,16 +1,11 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
+import { action, set } from '@ember/object';
 import fetch from 'fetch';
 
 export default class SearchUcrcodes extends Component {
-  @tracked
-  ucrCode = null;
-
-  ucrCodes = [];
-
-  @tracked
-  ucr = {};
+  @tracked ucrCodes = [];
+  @tracked ucr = {};
 
   constructor() {
     super(...arguments);
@@ -30,21 +25,24 @@ export default class SearchUcrcodes extends Component {
   @action
   lookupUCR(event) {
     event.preventDefault();
-
     let input = this.ucrCode;
     if (!input) {
       alert('Please enter a UCR code before searching.');
       return;
     }
-    if (window.ga && typeof window.ga === "function") {
+    if (window.ga && typeof window.ga === 'function') {
       ga('send', 'event', 'Searches UCR list', 'Tools', input);
     }
-    this.ucr = {primaryDesc: 'Not Found', secondaryDesc: 'Not Found', indexCode: 'N/A'};
+    set(this, 'ucr', {
+      primaryDesc: 'Not Found',
+      secondaryDesc: 'Not Found',
+      indexCode: 'N/A',
+    });
     let code = transformUCR(input);
     this.ucrCodes.forEach((row) => {
       if (code === transformUCR(row.ucrCode)) {
-        this.ucr = row;
-        this.ucrCode = code;
+        set(this, 'ucr', row);
+        set(this, 'ucrCode', code);
         return;
       }
     });

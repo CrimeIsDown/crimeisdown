@@ -1,11 +1,14 @@
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class Oggplayer extends Component {
+  @tracked
   minZoom = 0;
+  @tracked
   maxZoom = 100;
+  @tracked
   currentZoom = 0;
-  player = null;
 
   constructor() {
     super(...arguments);
@@ -26,11 +29,11 @@ export default class Oggplayer extends Component {
           cursorColor: '#FFF',
           plugins: [
             window.WaveSurfer.timeline.create({
-              container: '#timeline'
-            })
-          ]
-        }
-      }
+              container: '#timeline',
+            }),
+          ],
+        },
+      },
     };
 
     if (type.includes('ogg')) {
@@ -40,7 +43,7 @@ export default class Oggplayer extends Component {
 
     // This is a bad idea, but it works for sharing scope
     window.oggplayer = window.videojs('videojs-player', options, () => {
-      window.oggplayer.src({src: src, type: type});
+      window.oggplayer.src({ src: src, type: type });
     });
   }
 
@@ -48,9 +51,13 @@ export default class Oggplayer extends Component {
   zoom(e) {
     let wavesurfer = window.oggplayer.wavesurfer().surfer;
     let playerWidth = wavesurfer.drawer.getWidth();
-    let minPxPerSec = Math.round((playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration());
+    let minPxPerSec = Math.round(
+      (playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration()
+    );
     let defaultMinPxPerSec = 20;
 
-    wavesurfer.zoom(minPxPerSec * (Number(e.target.value)/defaultMinPxPerSec));
+    wavesurfer.zoom(
+      minPxPerSec * (Number(e.target.value) / defaultMinPxPerSec)
+    );
   }
 }
