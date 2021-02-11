@@ -458,7 +458,7 @@ export default class IncidentMap extends Component {
         label: 'Gangs (unofficial)',
         layer: null,
         url:
-          'https://thingproxy.freeboard.io/fetch/https://www.google.com/maps/d/kml?forcekml=1&mid=1am7PF0tT25EztnOTAgUEL2E382VjVTc7',
+          'https://www.google.com/maps/d/kml?forcekml=1&mid=1am7PF0tT25EztnOTAgUEL2E382VjVTc7',
         showByDefault: false,
       },
     });
