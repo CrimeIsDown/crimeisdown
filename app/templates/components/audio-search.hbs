@@ -1,10 +1,11 @@
-<form id="recordingsearch" action="https://audio.crimeisdown.com/download-audio.php" method="get" target="_blank">
+<form id="recordingsearch" action="https://audio.crimeisdown.com/download-audio.php" method="get" target="_blank" rel="noopener noreferrer">
   <div class="form-group">
-    <label for="cpdfeed">CPD radio channel</label>
+    <label for="cpdfeed">Radio channel</label>
     <select name="feed" id="cpdfeed" class="form-control" required>
       <option value="" disabled selected>Select channel</option>
       <option value="citywide1">Citywide 1</option>
       <option value="citywide2">Citywide 2</option>
+      <option value="citywide5">Citywide 5</option>
       <option value="citywide6">Citywide 6</option>
       <option value="zone1">Zone 1 (016/017)</option>
       <option value="zone2">Zone 2 (019)</option>
@@ -19,6 +20,10 @@
       <option value="zone11">Zone 11 (020/024)</option>
       <option value="zone12">Zone 12 (015/025)</option>
       <option value="zone13">Zone 13 (009)</option>
+      <option value="fire_main">CFD Fire Main (North)</option>
+      <option value="fire_englewood">CFD Fire Englewood (South)</option>
+      <option value="ems_main">CFD EMS Main (North)</option>
+      <option value="ems_englewood">CFD EMS Englewood (South)</option>
     </select>
   </div>
   <div class="form-group">

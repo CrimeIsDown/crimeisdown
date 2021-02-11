@@ -3,7 +3,7 @@ import Route from '@ember/routing/route';
 export default class ArchiveplayerRoute extends Route {
   queryParams = {
     url: false,
-    type: false
+    type: false,
   };
 
   model(params) {
@@ -11,7 +11,7 @@ export default class ArchiveplayerRoute extends Route {
       alert('ERROR: No URL param specified.');
       return;
     }
-    let filename = (new URL(params.url)).pathname.split('/').pop();
+    let filename = new URL(params.url).pathname.split('/').pop();
     let type;
 
     if (params.type) {
@@ -22,7 +22,7 @@ export default class ArchiveplayerRoute extends Route {
     return {
       url: params.url,
       filename: filename,
-      type: type
+      type: type,
     };
   }
 }

@@ -30,10 +30,14 @@ export default class SearchUcrcodes extends Component {
       alert('Please enter a UCR code before searching.');
       return;
     }
-    if (window.ga && typeof window.ga === "function") {
+    if (window.ga && typeof window.ga === 'function') {
       ga('send', 'event', 'Searches UCR list', 'Tools', input);
     }
-    set(this, 'ucr', {primaryDesc: 'Not Found', secondaryDesc: 'Not Found', indexCode: 'N/A'});
+    set(this, 'ucr', {
+      primaryDesc: 'Not Found',
+      secondaryDesc: 'Not Found',
+      indexCode: 'N/A',
+    });
     let code = transformUCR(input);
     this.ucrCodes.forEach((row) => {
       if (code === transformUCR(row.ucrCode)) {

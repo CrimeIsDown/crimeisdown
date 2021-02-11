@@ -7,22 +7,22 @@ export default class Router extends EmberRouter {
   rootURL = config.rootURL;
 }
 
-Router.map(function() {
+Router.map(function () {
   this.route('map');
   this.route('directives');
   this.route('guide');
   this.route('audio');
   this.route('sirens');
   this.route('not-found', {
-    path: '/*path'
+    path: '/*path',
   });
   this.route('archiveplayer', {
-    path: '/audio/archive/:filename'
+    path: '/audio/archive/:filename',
   });
   this.route('archiveplayer', {
-    path: '/audio/archive'
+    path: '/audio/archive',
   });
   this.route('audio-live', {
-    path: '/audio/live/:stream'
+    path: '/audio/live/:stream',
   });
 });

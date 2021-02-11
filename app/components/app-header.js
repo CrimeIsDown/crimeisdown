@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { action, set } from '@ember/object';
 
 LinkComponent.reopen({
-  attributeBindings: ['data-toggle', 'data-target']
+  attributeBindings: ['data-toggle', 'data-target'],
 });
 
 export default class AppHeader extends Component {

@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action, set, get } from '@ember/object';
+import { action } from '@ember/object';
 
 export default class Oggplayer extends Component {
   @tracked
@@ -9,13 +9,17 @@ export default class Oggplayer extends Component {
   maxZoom = 100;
   @tracked
   currentZoom = 0;
-  @tracked
-  player = null;
 
   constructor() {
     super(...arguments);
+  }
+
+  initializeMediaPlayer(playerElement, args) {
+    let src = args[0];
+    let type = args[1];
     let options = {
       controls: true,
+      techOrder: ['html5'],
       plugins: {
         wavesurfer: {
           backend: 'MediaElement',
@@ -25,30 +29,35 @@ export default class Oggplayer extends Component {
           cursorColor: '#FFF',
           plugins: [
             window.WaveSurfer.timeline.create({
-              container: '#timeline'
-            })
-          ]
-        }
-      }
+              container: '#timeline',
+            }),
+          ],
+        },
+      },
     };
 
-    if (this.type.includes('ogg')) {
+    if (type.includes('ogg')) {
       options.techOrder = ['ogvjs'];
       options.ogvjs = { base: '/assets/ogv' };
     }
 
-    this.player = window.videojs('videojs-player', options, () => {
-      this.player.src({src: this.src, type: this.type});
+    // This is a bad idea, but it works for sharing scope
+    window.oggplayer = window.videojs('videojs-player', options, () => {
+      window.oggplayer.src({ src: src, type: type });
     });
   }
 
   @action
   zoom(e) {
-    let wavesurfer = this.player.wavesurfer().surfer;
+    let wavesurfer = window.oggplayer.wavesurfer().surfer;
     let playerWidth = wavesurfer.drawer.getWidth();
-    let minPxPerSec = Math.round((playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration());
+    let minPxPerSec = Math.round(
+      (playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration()
+    );
     let defaultMinPxPerSec = 20;
 
-    wavesurfer.zoom(minPxPerSec * (Number(e.target.value)/defaultMinPxPerSec));
+    wavesurfer.zoom(
+      minPxPerSec * (Number(e.target.value) / defaultMinPxPerSec)
+    );
   }
 }

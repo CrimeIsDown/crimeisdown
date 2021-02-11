@@ -24,7 +24,7 @@ module.exports = function (environment) {
       // when it is created
       MEDIA_PLAYER_DEBUG: false,
       SITE_NAME_TEXT: 'CrimeIsDown.com',
-      SITE_NAME_HTML: 'CrimeIsDown.com'
+      SITE_NAME_HTML: 'CrimeIsDown.com',
       // SITE_NAME_TEXT: 'Sirens',
       // SITE_NAME_HTML: '<i class="em em-rotating_light"></i> Sirens'
     },
@@ -35,7 +35,7 @@ module.exports = function (environment) {
     sentry: {
       dsn: 'https://fc1365bf53c34718b4674383752e1080@sentry.io/154438',
       enabled: environment === 'production',
-      environment
+      environment,
     },
   };
 
@@ -61,7 +61,7 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     ENV.googleAnalytics = {
-      webPropertyId: 'UA-EXAMPLE-1'
+      webPropertyId: 'UA-EXAMPLE-1',
     };
     ENV.APP.MEDIA_PLAYER_DEBUG = false;
   }

@@ -17,14 +17,17 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   env: {
-    browser: true
+    browser: true,
   },
   globals: {
-    "L": true,
-    "ga": true,
-    "rome": true
+    L: true,
+    ga: true,
+    rome: true,
   },
-  rules: {},
+  rules: {
+    'ember/no-jquery': 'off',
+    'ember/no-global-jquery': 'off',
+  },
   overrides: [
     // node files
     {

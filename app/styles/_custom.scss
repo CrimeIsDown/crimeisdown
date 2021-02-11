@@ -137,6 +137,12 @@ ul.nav.nav-tabs {
           font-size: 1rem;
         }
       }
+      .leaflet-control-geosearch.bar {
+        z-index: 1000;
+        max-width: 400px;
+        width: 100%;
+        position: relative !important;
+      }
       .awesome-marker i {
         font-size: 1rem;
       }
@@ -266,9 +272,6 @@ input.flatpickr-mobile {
 
 .stream-player {
   height: 40px;
-  width: 100%;
-}
-.stream-player-wide {
   width: 200px !important;
 }
 

@@ -1,6 +1,30 @@
 <div class="col-lg-12">
   <h1>Chicago Police Department Directive Changes</h1>
   <p>Diffs on all CPD directives updated since 2015. We check daily for new updates. A project of <a href="https://crimeisdown.com/">CrimeIsDown.com</a>. View the raw diffs on <a href="https://github.com/CrimeIsDown/cpd-directives">GitHub</a>.</p>
+
+  <p><strong>View what a directive looked like on a given date:</strong></p>
+  <form id="findDirectiveForm" class="form-inline" method="post" {{on "submit" (fn this.submitFindDirectiveForm)}}>
+    <label class="sr-only" for="url">
+      CPD directive URL
+    </label>
+    <div class="input-group mb-2 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">URL</div>
+      </div>
+      <input class="form-control" size="50" type="url" name="url" id="url" placeholder="http://directives.chicagopolice.org/directives/data/...">
+    </div>
+    <label class="sr-only" for="date">
+      Version as of date
+    </label>
+    <div class="input-group mb-2 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">Date to look at</div>
+      </div>
+      <input class="form-control" type="date" name="date" id="date">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Open</button>
+  </form>
+
   <table id="directives" class="table">
     <thead></thead>
     <tbody>
@@ -10,18 +34,17 @@
 </div>
 
 <div class="modal fade" id="directiveViewer" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Directive Name</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        <iframe id="directiveFrame" title="Directive viewer">
-          <p>Sorry, your browser does not support iframes.</p>
-        </iframe>
+        <iframe id="directiveFrame" title="Directive contents"></iframe>
       </div>
       <div class="modal-footer">
+        <a id="no-highlights-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-info mr-auto">View without highlights</a>
         <form class="form-inline">
           <label for="link">Shareable link</label>
           <input id="link" name="link" type="text" class="form-control" readonly>

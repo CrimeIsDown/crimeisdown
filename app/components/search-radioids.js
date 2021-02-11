@@ -15,7 +15,7 @@ export default class SearchRadioids extends Component {
       .then((response) => {
         response.json().then((data) => {
           this.radioIds = data;
-        })
+        });
       })
       .catch(() => {
         this.radioIds = {};
@@ -32,7 +32,7 @@ export default class SearchRadioids extends Component {
     }
     let input = this.radioId.toUpperCase();
     set(this, 'radioId', input);
-    if (window.ga && typeof window.ga === "function") {
+    if (window.ga && typeof window.ga === 'function') {
       ga('send', 'event', 'Searches radio ID list', 'Tools', input);
     }
     let matches = [];
@@ -43,7 +43,13 @@ export default class SearchRadioids extends Component {
     });
     $('#radioid-results td').empty();
     if (matches.length > 0) {
-      set(this, 'radio', {agency: '', level1: '', level2: '', level3: '', level4: ''});
+      set(this, 'radio', {
+        agency: '',
+        level1: '',
+        level2: '',
+        level3: '',
+        level4: '',
+      });
       matches.forEach((match) => {
         if (match.Agency.length) {
           this.radio.agency = match.Agency;
@@ -60,14 +66,23 @@ export default class SearchRadioids extends Component {
         if (match.Level_4.length) {
           // If ends with $1, then replace with the numeric part of the query
           if (match.Level_4.match(/\$1$/)) {
-            this.radio.level4 = match.Level_4.replace('$1', input.match(/\d+/)[0]);
+            this.radio.level4 = match.Level_4.replace(
+              '$1',
+              input.match(/\d+/)[0]
+            );
           } else {
             this.radio.level4 = match.Level_4;
           }
         }
       });
     } else {
-      set(this, 'radio', {agency: 'N/A', level1: 'N/A', level2: 'N/A', level3: 'N/A', level4: 'N/A'});
+      set(this, 'radio', {
+        agency: 'N/A',
+        level1: 'N/A',
+        level2: 'N/A',
+        level3: 'N/A',
+        level4: 'N/A',
+      });
     }
   }
 }

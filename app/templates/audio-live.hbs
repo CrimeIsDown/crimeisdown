@@ -1,13 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <StreamPlayer @stream={{this.model.slug}} @autoplay={{false}}>
-        <h1>{{this.model.name}}</h1>
-        <p>{{this.model.description}}</p>
+      <StreamPlayer @stream={{this.model.slug}} @autoplay={{this.model.autoplay}}>
+        {{#if this.model.name}}
+          <h1>{{this.model.name}}</h1>
+          <p>{{this.model.description}} <strong><LinkTo @route="audio">Visit our Scanner Audio page for more streams, and to download archives of this channel.</LinkTo></strong></p>
+        {{else}}
+          <h1>{{this.model.slug}}</h1>
+        {{/if}}
       </StreamPlayer>
-      <p><strong><LinkTo @route="audio">Visit our Scanner Audio page for more streams, and to download archives of this channel.</LinkTo></strong></p>
-      <h2 class="h4">Transmission-based stream/archive</h2>
-      <iframe id="openmhz-iframe" title="OpenMHz stream" src="{{this.model.openmhz}}"></iframe>
+      {{#if this.model.openmhz}}
+        <h2 class="h4">Transmission-based stream/archive</h2>
+        <p>Use the <i aria-hidden="true" class="fa fa-calendar-o"></i> <span class="desktop-only">Archive</span> button in the menu below to jump to a certain time. <i>Audio streamed by CrimeIsDown.com, player hosted by OpenMHz.com</i></p>
+        <iframe id="openmhz-iframe" title="OpenMHz stream" src="{{this.model.openmhz}}"></iframe>
+      {{/if}}
     </div>
   </div>
 </div>
