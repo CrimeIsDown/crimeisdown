@@ -36,6 +36,7 @@ module.exports = function (environment) {
       dsn: 'https://fc1365bf53c34718b4674383752e1080@sentry.io/154438',
       enabled: environment === 'production',
       environment,
+      denyUrls: ['platform.twitter.com'],
     },
   };
 

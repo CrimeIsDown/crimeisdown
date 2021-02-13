@@ -117,5 +117,33 @@
     "frequency": "460.250MHz",
     "slug": "citywide6",
     "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=19"
+  },
+  {
+    "name": "CFD Fire North",
+    "description": "",
+    "frequency": "",
+    "slug": "fire_main",
+    "openmhz": "https://openmhz.com/system/chi_cfd?filter-type=talkgroup&filter-code=1"
+  },
+  {
+    "name": "CFD Fire Englewood",
+    "description": "",
+    "frequency": "",
+    "slug": "fire_englewood",
+    "openmhz": "https://openmhz.com/system/chi_cfd?filter-type=talkgroup&filter-code=2"
+  },
+  {
+    "name": "CFD EMS North",
+    "description": "",
+    "frequency": "",
+    "slug": "ems_main",
+    "openmhz": "https://openmhz.com/system/chi_cfd?filter-type=talkgroup&filter-code=3"
+  },
+  {
+    "name": "CFD EMS South",
+    "description": "",
+    "frequency": "",
+    "slug": "ems_englewood",
+    "openmhz": "https://openmhz.com/system/chi_cfd?filter-type=talkgroup&filter-code=4"
   }
 ]

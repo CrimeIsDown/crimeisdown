@@ -12,7 +12,7 @@ export default class StreamPlayer extends Component {
       !isMobileSafari;
 
     let options = {
-      pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.12/build/',
+      pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.16/build/',
       shimScriptAccess: 'always',
       isVideo: false,
       pauseOtherPlayers: false,
@@ -23,7 +23,7 @@ export default class StreamPlayer extends Component {
     if (mediaSourceSupported) {
       options['renderers'] = ['native_dash', 'flash_dash'];
       options['dash'] = {
-        path: 'https://cdn.dashjs.org/v3.0.0/dash.all.min.js',
+        path: 'https://cdn.dashjs.org/v3.2.0/dash.all.min.js',
       };
 
       src = {
@@ -32,7 +32,7 @@ export default class StreamPlayer extends Component {
       };
     } else {
       options['renderers'] = ['html5', 'native_hls', 'flash_hls'];
-      options['hls'] = { path: 'https://cdn.jsdelivr.net/npm/hls.js@0.12.4' };
+      options['hls'] = { path: 'https://cdn.jsdelivr.net/npm/hls.js@0.14.17' };
 
       src = {
         src:

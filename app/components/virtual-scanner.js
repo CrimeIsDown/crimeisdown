@@ -167,7 +167,7 @@ export default class VirtualScanner extends Component {
     };
 
     let resonanceAudioSupported = this.mediaSourceSupported;
-    if (resonanceAudioSupported) {
+    if (resonanceAudioSupported && this.audioContext) {
       this.resonanceScene = new window.ResonanceAudio(this.audioContext, {
         ambisonicOrder: 1,
       });
@@ -270,10 +270,10 @@ export default class VirtualScanner extends Component {
     let audioPlayer;
     if (this.mediaSourceSupported) {
       audioPlayer = new MediaElementPlayer(playerElement, {
-        pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.12/build/',
+        pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.16/build/',
         shimScriptAccess: 'always',
         renderers: ['native_dash', 'flash_dash'],
-        dash: { path: 'https://cdn.dashjs.org/v3.0.0/dash.all.min.js' },
+        dash: { path: 'https://cdn.dashjs.org/v3.2.0/dash.all.min.js' },
         isVideo: false,
         pauseOtherPlayers: false,
         features: ['playpause', 'current', 'volume'],
@@ -284,10 +284,10 @@ export default class VirtualScanner extends Component {
       });
     } else {
       audioPlayer = new MediaElementPlayer(playerElement, {
-        pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.12/build/',
+        pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.16/build/',
         shimScriptAccess: 'always',
         renderers: ['html5', 'native_hls', 'flash_hls'],
-        hls: { path: 'https://cdn.jsdelivr.net/npm/hls.js@0.12.4' },
+        hls: { path: 'https://cdn.jsdelivr.net/npm/hls.js@0.14.17' },
         isVideo: false,
         pauseOtherPlayers: false,
         features: ['playpause', 'current', 'volume'],
