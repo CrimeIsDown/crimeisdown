@@ -9,7 +9,6 @@ import { schedule } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
 import moment from 'moment';
-import ENV from '../config/environment';
 
 export default class IncidentMap extends Component {
   @service addressLookup;

@@ -20,7 +20,7 @@ module.exports = function (defaults) {
     },
 
     'ember-cli-terser': {
-      exclude: ['assets/ogv/**/*', 'assets/leaflet-geosearch.bundle.min.js'],
+      exclude: ['assets/ogv/**/*'],
     },
 
     sourcemaps: {
@@ -87,6 +87,7 @@ module.exports = function (defaults) {
   });
 
   app.import('node_modules/leaflet-geosearch/assets/css/leaflet.css');
+  app.import('node_modules/leaflet-geosearch/dist/bundle.min.js');
   app.import(
     'node_modules/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js'
   );
