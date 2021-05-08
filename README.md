@@ -1,8 +1,5 @@
 # crimeisdown
 
-[ ![Codeship Status for
-CrimeIsDown/crimeisdown-v3](https://codeship.com/projects/d641cfa0-1e12-0134-9d42-0a1cf6c755a8/status?branch=master)](https://codeship.com/projects/160057)
-
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
