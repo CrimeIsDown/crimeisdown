@@ -40,11 +40,24 @@
         <h4 class="modal-title">Directive Name</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-      <div class="modal-body">
+      <div id="primaryDiffView" class="modal-body">
         <iframe id="directiveFrame" title="Directive contents"></iframe>
       </div>
+      <div id="sideBySideView" class="modal-body row" style="display: none">
+        <div class="col-md-6">
+          <h5 class="text-center">Old</h5>
+          <iframe id="oldVersion" title="Old directive contents"></iframe>
+        </div>
+        <div class="col-md-6">
+          <h5 class="text-center">New</h5>
+          <iframe id="newVersion" title="New directive contents"></iframe>
+        </div>
+      </div>
       <div class="modal-footer">
-        <a id="no-highlights-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-info mr-auto">View without highlights</a>
+        <div class="mr-auto">
+          <a id="no-highlights-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-info">View without highlights</a>
+          <a id="switch-diff-view" href="#" class="btn btn-sm btn-info">Toggle side-by-side view</a>
+        </div>
         <form class="form-inline">
           <label for="link">Shareable link</label>
           <input id="link" name="link" type="text" class="form-control" readonly>

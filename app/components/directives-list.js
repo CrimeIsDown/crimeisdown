@@ -82,6 +82,12 @@ export default class DirectivesList extends Component {
                   $(event.currentTarget).select();
                 });
 
+              $('#switch-diff-view').click((event) => {
+                $('#primaryDiffView').toggle();
+                $('#sideBySideView').toggle();
+                $('.modal-dialog').toggleClass('modal-fullwidth');
+              });
+
               if (window.location.hash) {
                 let path = window.location.hash.substring(1);
                 // Remove the hash
@@ -125,11 +131,18 @@ export default class DirectivesList extends Component {
     modal.find(' h4.modal-title').text(title);
     modal.find('#directiveFrame').attr('src', path);
     window.$('#directiveViewer').modal();
+
     let url = new URL(path).pathname.replace('/diff/', '');
     modal
       .find('#no-highlights-btn')
       .attr('href', 'https://directives.crimeisdown.com/' + url);
     modal.find('input[type="text"]').val(window.location + '#' + url);
+
+    let commit = url.substring(0, url.indexOf('/'));
+    url = path.replace('diff/' + commit + '/', '') + '?commit=' + commit;
+    modal.find('#oldVersion').attr('src', url + '^');
+    modal.find('#newVersion').attr('src', url);
+
     if (window.ga && typeof window.ga === 'function') {
       ga('send', 'event', 'Directive', 'open', title);
     }
