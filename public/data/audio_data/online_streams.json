@@ -145,5 +145,12 @@
     "frequency": "",
     "slug": "ems_englewood",
     "openmhz": "https://openmhz.com/system/chi_cfd?filter-type=talkgroup&filter-code=4"
+  },
+  {
+    "name": "All CPD Zones",
+    "description": "Automatically scans thru all CPD Zones (1 thru 13)",
+    "frequency": "",
+    "slug": "cpd_zone_scan",
+    "openmhz": null
   }
 ]

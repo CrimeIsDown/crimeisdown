@@ -19,6 +19,7 @@ export default class VirtualScanner extends Component {
   constructor() {
     super(...arguments);
     this.nameDescMappings = {
+      cpd_zone_scan: 'All CPD Zones Scanner',
       zone1: 'CPD Zone 1 (016/017)',
       zone2: 'CPD Zone 2 (019)',
       zone3: 'CPD Zone 3 (012/014)',
