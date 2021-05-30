@@ -1993,6 +1993,38 @@
   },
   {
     "Agency": "CPD",
+    "ID_Number": "7500",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": "Commander, Special Functions Division"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "7600",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Counter-Terrorism",
+    "Level_3": "",
+    "Level_4": "Commander, Counter-Terrorism Division"
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "75[0-9][0-9][A-Z]?",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Special Functions",
+    "Level_3": "",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
+    "ID_Number": "76[0-9][0-9][A-Z]?",
+    "Level_1": "Counter-Terrorism and Special Operations",
+    "Level_2": "Counter-Terrorism",
+    "Level_3": "",
+    "Level_4": ""
+  },
+  {
+    "Agency": "CPD",
     "ID_Number": "M100",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
