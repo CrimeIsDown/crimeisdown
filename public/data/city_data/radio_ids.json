@@ -1249,7 +1249,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "57[5-7][0-9]",
+    "ID_Number": "57[5-7][0-9][A-Z]?",
     "Level_1": "Detectives",
     "Level_2": "Central Investigations",
     "Level_3": "Fugitive Apprehension Unit",
