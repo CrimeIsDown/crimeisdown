@@ -18,30 +18,6 @@ export default class VirtualScanner extends Component {
 
   constructor() {
     super(...arguments);
-    this.nameDescMappings = {
-      cpd_zone_scan: 'All CPD Zones Scanner',
-      zone1: 'CPD Zone 1 (016/017)',
-      zone2: 'CPD Zone 2 (019)',
-      zone3: 'CPD Zone 3 (012/014)',
-      zone4: 'CPD Zone 4 (001/018)',
-      zone5: 'CPD Zone 5 (002)',
-      zone6: 'CPD Zone 6 (007/008)',
-      zone7: 'CPD Zone 7 (003)',
-      zone8: 'CPD Zone 8 (004/006)',
-      zone9: 'CPD Zone 9 (005/022)',
-      zone10: 'CPD Zone 10 (010/011)',
-      zone11: 'CPD Zone 11 (020/024)',
-      zone12: 'CPD Zone 12 (015/025)',
-      zone13: 'CPD Zone 13 (009)',
-      citywide1: 'CPD Citywide 1',
-      citywide2: 'CPD Citywide 2',
-      citywide5: 'CPD Citywide 5',
-      citywide6: 'CPD Citywide 6',
-      fire_main: 'CFD Fire North',
-      fire_englewood: 'CFD Fire South',
-      ems_main: 'CFD EMS North',
-      ems_englewood: 'CFD EMS South',
-    };
 
     this.onMove = (event) => {
       let target = event.target,
@@ -85,16 +61,23 @@ export default class VirtualScanner extends Component {
           let node = nodes[i];
           if (node.querySelector('active')) {
             let streamName = node.querySelector('name').textContent;
-            let streamDesc =
-              streamName in this.nameDescMappings
-                ? this.nameDescMappings[streamName]
-                : streamName;
-            this.streams.pushObject({ name: streamName, desc: streamDesc });
+            let streamDesc = streamName;
+            let streamOrder = 999;
+            this.args.streams.forEach((stream, index) => {
+              if (stream.slug === streamName) {
+                streamDesc = stream.shortname ?? stream.name;
+                streamOrder = index;
+                return;
+              }
+            });
+            this.streams.pushObject({ name: streamName, desc: streamDesc, order: streamOrder });
           }
         }
-        this.streams.sort((a, b) =>
-          a.desc.localeCompare(b.desc, 'en', { numeric: true })
-        );
+        this.streams.sort((a, b) => {
+          if (a.order < b.order) return -1;
+          if (a.order > b.order) return 1;
+          return 0;
+        });
       });
 
     window.interact('.draggable').draggable({
