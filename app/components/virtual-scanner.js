@@ -163,11 +163,7 @@ export default class VirtualScanner extends Component {
   }
 
   addStream(streamName) {
-    let streamDesc =
-      streamName in this.nameDescMappings
-        ? this.nameDescMappings[streamName]
-        : streamName;
-    let streamData = EmberObject.create({ name: streamName, desc: streamDesc });
+    let streamData =  EmberObject.create(this.streams.findBy('name', streamName));
     this.enabledStreams.pushObject(streamData);
 
     // wait for new elements to render so we can select them
