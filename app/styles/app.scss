@@ -1,7 +1,7 @@
 $icon-font-path: "../assets/fonts/";
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap.scss";
 
 $fa-font-path: "../assets/fonts";
-@import "../../node_modules/font-awesome/scss/font-awesome";
+@import "node_modules/font-awesome/scss/font-awesome";
 
 @import "custom";

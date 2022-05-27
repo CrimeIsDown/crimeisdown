@@ -28,6 +28,14 @@ module.exports = function (defaults) {
       extensions: ['js'],
     },
 
+    sassOptions: {
+      includePaths: [
+        'app',
+        'node_modules/bootstrap/scss',
+        'node_modules/font-awesome/scss',
+      ],
+    },
+
     fingerprint: {
       exclude: [
         'assets/images/layers-2x.png',
