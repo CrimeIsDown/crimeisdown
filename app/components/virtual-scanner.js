@@ -60,19 +60,31 @@ export default class VirtualScanner extends Component {
         for (let i = 0; i < nodes.length; i++) {
           let node = nodes[i];
           if (node.querySelector('active')) {
-            let streamName = node.querySelector('name').textContent;
-            let streamDesc = streamName;
-            let streamOrder = 999;
+            let streamData = {
+              name: node.querySelector('name').textContent,
+              desc: node.querySelector('name').textContent,
+              order: 999
+            };
             this.args.streams.forEach((stream, index) => {
-              if (stream.slug === streamName) {
-                streamDesc = stream.shortname ?? stream.name;
-                streamOrder = index;
+              if (stream.slug === streamData.name) {
+                streamData = {
+                  name: streamData.name,
+                  desc: stream.shortname ?? stream.name,
+                  order: index,
+                  broadcastify: stream.broadcastify,
+                  openmhz: stream.openmhz
+                };
                 return;
               }
             });
-            this.streams.pushObject({ name: streamName, desc: streamDesc, order: streamOrder });
+            this.streams.pushObject(streamData);
           }
         }
+        this.args.streams.forEach((stream, index) => {
+          if (stream.broadcastify) {
+            this.streams.pushObject({ name: stream.slug, desc: stream.shortname ?? stream.name, order: index, broadcastify: stream.broadcastify, openmhz: stream.openmhz });
+          }
+        });
         this.streams.sort((a, b) => {
           if (a.order < b.order) return -1;
           if (a.order > b.order) return 1;
@@ -176,7 +188,7 @@ export default class VirtualScanner extends Component {
         // AudioContext must be resumed after the document received a user gesture to enable audio playback.
         this.audioContext.resume();
 
-        let player = this.startPlayer(streamName, playerElement);
+        let player = this.startPlayer(streamData, playerElement);
         let position = this.randomPosition(
           this.sceneDimensions.width,
           this.sceneDimensions.height,
@@ -246,36 +258,44 @@ export default class VirtualScanner extends Component {
     );
   }
 
-  startPlayer(stream, playerElement) {
+  startPlayer(streamData, playerElement) {
     let audioPlayer;
-    if (this.mediaSourceSupported) {
+    let mediaElementConfig = {
+      pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.16/build/',
+      shimScriptAccess: 'always',
+      isVideo: false,
+      pauseOtherPlayers: false,
+      features: ['playpause', 'current', 'volume'],
+    };
+    if (streamData.broadcastify) {
       audioPlayer = new MediaElementPlayer(playerElement, {
-        pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.16/build/',
-        shimScriptAccess: 'always',
-        renderers: ['native_dash', 'flash_dash'],
-        dash: { path: 'https://cdn.dashjs.org/v3.2.0/dash.all.min.js' },
-        isVideo: false,
-        pauseOtherPlayers: false,
-        features: ['playpause', 'current', 'volume'],
+        renderers: ['html5'],
+        ...mediaElementConfig
       });
       audioPlayer.setSrc({
-        src: 'https://audio.crimeisdown.com/streaming/dash/' + stream + '/',
+        src: streamData.broadcastify,
+        type: 'audio/mpeg',
+      });
+    } else if (this.mediaSourceSupported) {
+      audioPlayer = new MediaElementPlayer(playerElement, {
+        renderers: ['native_dash', 'flash_dash'],
+        dash: { path: 'https://cdn.dashjs.org/v3.2.0/dash.all.min.js' },
+        ...mediaElementConfig
+      });
+      audioPlayer.setSrc({
+        src: 'https://audio.crimeisdown.com/streaming/dash/' + streamData.name + '/',
         type: 'application/dash+xml',
       });
     } else {
       audioPlayer = new MediaElementPlayer(playerElement, {
-        pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.16/build/',
-        shimScriptAccess: 'always',
         renderers: ['html5', 'native_hls', 'flash_hls'],
         hls: { path: 'https://cdn.jsdelivr.net/npm/hls.js@0.14.17' },
-        isVideo: false,
-        pauseOtherPlayers: false,
-        features: ['playpause', 'current', 'volume'],
+        ...mediaElementConfig
       });
       audioPlayer.setSrc({
         src:
           'https://audio.crimeisdown.com/streaming/hls/' +
-          stream +
+          streamData.name +
           '/index.m3u8',
         type: 'application/x-mpegURL',
       });

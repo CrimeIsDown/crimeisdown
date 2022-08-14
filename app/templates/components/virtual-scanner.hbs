@@ -4,13 +4,18 @@
     <div class="form-group">
       <fieldset {{on "change" (fn this.changeStreams)}} id="streamlist">
         <legend>Check the streams to play</legend>
+        <p><img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /> streams are provided by Broadcastify.com and OEMC, they are delayed at least 30 minutes.</p>
         <div class="stream-options">
         {{#if this.streams.length}}
           {{#each this.streams as |streamOption|}}
             <div class="form-check">
               <input class="form-check-input" id="checkbox-{{streamOption.name}}" type="checkbox" name="stream" value={{streamOption.name}}>
               <label class="form-check-label" for="checkbox-{{streamOption.name}}">{{streamOption.desc}}</label>
+              {{#if streamOption.broadcastify}}
+              <a href="https://www.broadcastify.com/listen/ctid/606" target="_blank" rel="noopener noreferrer"><img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /></a>
+              {{else}}
               <LinkTo @route="audio-live" @model={{streamOption.name}} target="_blank" title={{concat "Listen to only " streamOption.desc}}><i class="fa fa-external-link"></i></LinkTo>
+              {{/if}}
             </div>
           {{/each}}
         {{else}}
@@ -39,7 +44,7 @@
             {{stream.desc}} <i class="fa fa-external-link"></i>
           </LinkTo>
         </h5>
-        <audio id="audio-player-{{stream.name}}" class="stream-player" preload="none"></audio>
+        <audio id="audio-player-{{stream.name}}" class="stream-player" preload="none" crossorigin="anonymous"></audio>
       </div>
       {{/each}}
     </div>

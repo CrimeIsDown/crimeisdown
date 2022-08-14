@@ -56,7 +56,7 @@
     "description": "Covers Pilsen, the Near West Side (incl. Greektown, UIC), West Town, Humboldt Park, Logan Square, Avondale.",
     "frequency": "460.225MHz",
     "slug": "zone3",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=3"
+    "broadcastify": "https://listen.broadcastify.com/7mr5fnz9b2yjhp6.mp3"
   },
   {
     "name": "CPD Zone 4 - Districts 1 and 18",
@@ -72,7 +72,7 @@
     "description": "Covers Douglas/Bronzeville, Oakland, Grand Boulevard, Kenwood, Washington Park, and Hyde Park.",
     "frequency": "460.500MHz",
     "slug": "zone5",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=5"
+    "broadcastify": "https://listen.broadcastify.com/mcb4ghz91q2s8nk.mp3"
   },
   {
     "name": "CPD Zone 6 - Districts 7 and 8",
@@ -80,7 +80,7 @@
     "description": "Covers Englewood and West Englewood, Chicago Lawn, West Lawn, Ashburn, Archer Heights, West Elsdon, Garfield Ridge, and Clearing.",
     "frequency": "460.400MHz",
     "slug": "zone6",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=6"
+    "broadcastify": "https://listen.broadcastify.com/rnmxt5jg9d2f140.mp3"
   },
   {
     "name": "CPD Zone 7 - District 3",
@@ -88,7 +88,7 @@
     "description": "Covers Greater Grand Crossing, Woodlawn, and South Shore.",
     "frequency": "460.075MHz",
     "slug": "zone7",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=7"
+    "broadcastify": "https://listen.broadcastify.com/m8sdbhc1zp452qj.mp3"
   },
   {
     "name": "CPD Zone 8 - Districts 4 and 6",
@@ -96,7 +96,7 @@
     "description": "Covers the far East Side / Southeast Side, South Deering, Hegewisch, South Chicago, Avalon Park, Calumet Heights, Chatham, Burnside, and Auburn Gresham.",
     "frequency": "460.200MHz",
     "slug": "zone8",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=8"
+    "broadcastify": "https://listen.broadcastify.com/b28ms9dr5nk1wjv.mp3"
   },
   {
     "name": "CPD Zone 9 - Districts 5 and 22",
@@ -104,7 +104,7 @@
     "description": "Covers Roseland, Pullman, West Pullman, Riverdale, Morgan Park, Beverly, and Washington Heights.",
     "frequency": "460.025MHz",
     "slug": "zone9",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=9"
+    "broadcastify": "https://listen.broadcastify.com/psvtq2789zw1fd0.mp3"
   },
   {
     "name": "CPD Zone 10 - Districts 10 and 11",
