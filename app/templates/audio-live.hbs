@@ -1,12 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <StreamPlayer @stream={{this.model.slug}} @autoplay={{this.model.autoplay}}>
+      <StreamPlayer @stream={{this.model}} @autoplay={{this.model.autoplay}}>
         {{#if this.model.name}}
           <h1>{{this.model.name}}</h1>
           <p>{{this.model.description}} <strong><LinkTo @route="audio">Visit our Scanner Audio page for more streams, and to download archives of this channel.</LinkTo></strong></p>
         {{else}}
           <h1>{{this.model.slug}}</h1>
+        {{/if}}
+        {{#if this.model.broadcastify}}
+          <div class="alert alert-warning" role="alert">This stream is only available to Broadcastify Premium subscribers. If you are not a premium subscriber, you can only listen on Broadcastify.com.</div>
         {{/if}}
       </StreamPlayer>
       {{#if this.model.openmhz}}

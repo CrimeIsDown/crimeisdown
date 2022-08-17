@@ -20,14 +20,21 @@ export default class StreamPlayer extends Component {
     };
     let src;
 
-    if (mediaSourceSupported) {
+    if (stream.broadcastify) {
+      options['renderers'] = ['html5'];
+
+      src = {
+        src: stream.broadcastify,
+        type: 'audio/mpeg',
+      };
+    } else if (mediaSourceSupported) {
       options['renderers'] = ['native_dash', 'flash_dash'];
       options['dash'] = {
         path: 'https://cdn.dashjs.org/v3.2.0/dash.all.min.js',
       };
 
       src = {
-        src: 'https://audio.crimeisdown.com/streaming/dash/' + stream + '/',
+        src: 'https://audio.crimeisdown.com/streaming/dash/' + stream.slug + '/',
         type: 'application/dash+xml',
       };
     } else {
@@ -37,13 +44,13 @@ export default class StreamPlayer extends Component {
       src = {
         src:
           'https://audio.crimeisdown.com/streaming/hls/' +
-          stream +
+          stream.slug +
           '/index.m3u8',
         type: 'application/x-mpegURL',
       };
     }
 
-    let playerElement = document.getElementById('stream-player-' + stream);
+    let playerElement = document.getElementById('stream-player-' + stream.slug);
 
     let mediaElementPlayer = new MediaElementPlayer(playerElement, options);
     mediaElementPlayer.setSrc(src);
