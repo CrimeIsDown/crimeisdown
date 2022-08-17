@@ -93,7 +93,7 @@
                   Radio Channel: <strong>{{ this.location.fire.channel }}</strong>
                   {{#if this.location.fire.channel}}
                   <a
-                    href="{{if (eq this.location.fire.channel "Main") "https://openmhz.com/system/chi_cfd?filter-type=group&filter-code=5a498e5e129ce10001425163" "https://openmhz.com/system/chi_cfd?filter-type=group&filter-code=5a498e6d129ce10001425164"}}"
+                    href="{{if (eq this.location.fire.channel "Main") "https://openmhz.com/system/chi_oemc?filter-type=talkgroup&filter-code=1021,1023" "https://openmhz.com/system/chi_oemc?filter-type=talkgroup&filter-code=1022,1024"}}"
                     class="btn btn-primary" title="Listen to CFD {{ this.location.fire.channel }}"
                   ><i class="fa fa-volume-up" aria-hidden="true"></i> Listen to CFD with Instant Replay</a>
                   {{/if}}
