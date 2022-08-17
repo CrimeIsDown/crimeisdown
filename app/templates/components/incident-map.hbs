@@ -65,7 +65,7 @@
                     <strong>{{ this.location.police.zone.name }}</strong> ({{ this.location.police.zone.frequency }})<br>
                     <p>{{ this.location.police.zone.description }}</p>
                     <p><LinkTo class="btn btn-primary" @route="audio-live" @model={{this.location.police.zone.slug}} title={{concat "Listen to " this.location.police.zone.name}}><i class="fa fa-volume-up" aria-hidden="true"></i> Listen to CPD with Instant Replay</LinkTo></p>
-                    <StreamPlayer @stream={{this.location.police.zone.slug}} @autoplay={{false}} />
+                    <StreamPlayer @stream={{this.location.police.zone}} @autoplay={{false}} />
                   {{/if}}
                 </td>
               </tr>
