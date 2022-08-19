@@ -210,6 +210,9 @@ export default class VirtualScanner extends Component {
             playerElement = player.media.renderer;
             let audioElementSource;
             try {
+              if (streamData.broadcastify) {
+                throw new Error('Cannot use MediaElementAudioSource with Broadcastify due to basic auth CORS');
+              }
               audioElementSource = this.audioContext.createMediaElementSource(
                 playerElement
               );
