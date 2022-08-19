@@ -313,10 +313,10 @@ export default class IncidentMap extends Component {
         $('#crime-tab').attr('href', crimereportsIframeUrl);
 
         schedule('afterRender', () => {
-          window
-            .$('[data-toggle="tooltip"]')
-            .removeAttr('data-original-title')
-            .tooltip();
+          let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+          let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+          });
         });
       }
     });

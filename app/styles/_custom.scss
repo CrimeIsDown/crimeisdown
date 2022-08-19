@@ -176,21 +176,11 @@ ul.nav.nav-tabs {
 }
 
 .accordion {
-  .card {
+  .accordion-item {
     border: none;
-    .card-header {
-      padding: 0.5rem 1.25rem;
-      margin-bottom: 0.5rem;
-      border: $card-border-width solid $card-border-color;
-      border-radius: $card-border-radius !important;
-      &:last-of-type {
-        border-bottom: none;
-      }
-      a[data-toggle="collapse"] {
+    .accordion-header {
+      button[data-bs-toggle="collapse"] {
         display: block;
-        &:hover {
-          text-decoration: none;
-        }
         &::before {
           @include fa-icon();
 
@@ -210,6 +200,10 @@ ul.nav.nav-tabs {
         right: 0;
         padding: 0.5rem 1rem;
       }
+    }
+    .accordion-body {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 }
