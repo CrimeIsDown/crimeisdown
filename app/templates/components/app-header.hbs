@@ -28,14 +28,14 @@
         </ul>
         <form class="d-flex">
           <div class="form-check me-sm-2">
-            <label class="form-check-label text-body">
+            <label class="form-check-label text-muted">
               <input type="checkbox" class="form-check-input" id="nightmodetoggle">
               Night Mode
             </label>
           </div>
           {{!-- April Fools 2019 --}}
           <div class="form-check">
-            <label class="form-check-label text-body red-blue-flashing">
+            <label class="form-check-label text-muted red-blue-flashing">
               <Input @type="checkbox" class="form-check-input" @id="copstoggle" @checked={{this.playmusic}} {{on "change" this.togglemusic}} />
               <i class="fa fa-volume-up" aria-hidden="true"></i>&nbsp;COPS Mode
             </label>

@@ -9,7 +9,7 @@
         {{#if this.streams.length}}
           {{#each this.streams as |streamOption|}}
             <div class="form-check">
-              <input class="form-check-input" id="checkbox-{{streamOption.name}}" type="checkbox" name="stream" value={{streamOption.name}}>
+              <input class="form-check-input" id="checkbox-{{streamOption.name}}" type="checkbox" name="stream" value={{streamOption.name}} disabled={{if streamOption.disabled "disabled" ""}}>
               <label class="form-check-label" for="checkbox-{{streamOption.name}}">{{streamOption.desc}}</label>
               <LinkTo @route="audio-live" @model={{streamOption.name}} target="_blank" title={{concat "Listen to only " streamOption.desc}}><i class="fa fa-external-link"></i></LinkTo>
               {{#if streamOption.broadcastify}}
