@@ -1,35 +1,35 @@
-<div class="card">
-  <div class="card-header">
-    <a class="card-heading" id="headingRIDSearch" data-toggle="collapse" href="#collapseRIDSearch" aria-expanded="true" aria-controls="collapseRIDSearch" role="tab">
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingRIDSearch">
+    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseRIDSearch" aria-expanded="true" aria-controls="collapseRIDSearch" type="button">
       Radio ID Search
-    </a>
-  </div>
-  <div id="collapseRIDSearch" class="collapse show" role="tabpanel" aria-labelledby="headingRIDSearch">
-    <div id="search-radioids">
+    </button>
+  </h2>
+  <div id="collapseRIDSearch" class="accordion-collapse" aria-labelledby="headingRIDSearch">
+    <div id="search-radioids" class="accordion-body">
       <SearchRadioids />
     </div>
   </div>
 </div>
-<div class="card">
-  <div class="card-header">
-    <a class="card-heading" id="headingUCRSearch" data-toggle="collapse" href="#collapseUCRSearch" aria-expanded="true" aria-controls="collapseUCRSearch" role="tab">
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingUCRSearch">
+    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseUCRSearch" aria-expanded="true" aria-controls="collapseUCRSearch" type="button">
       UCR Code Search
-    </a>
-  </div>
-  <div id="collapseUCRSearch" class="collapse show" role="tabpanel" aria-labelledby="headingUCRSearch">
-    <div id="search-ucrcodes">
+    </button>
+  </h2>
+  <div id="collapseUCRSearch" class="accordion-collapse" aria-labelledby="headingUCRSearch">
+    <div id="search-ucrcodes" class="accordion-body">
       <SearchUcrcodes />
     </div>
   </div>
 </div>
-<div class="card">
-  <div class="card-header">
-    <a class="card-heading collapsed" id="headingNotepad" data-toggle="collapse" href="#collapseNotepad" aria-expanded="true" aria-controls="collapseNotepad" role="tab">
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingNotepad">
+    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseNotepad" aria-expanded="true" aria-controls="collapseNotepad" type="button">
       Notepad
-    </a>
-  </div>
-  <div id="collapseNotepad" class="collapse" role="tabpanel" aria-labelledby="headingNotepad">
-    <div id="notepad">
+    </button>
+  </h2>
+  <div id="collapseNotepad" class="accordion-collapse collapse" aria-labelledby="headingNotepad">
+    <div id="notepad" class="accordion-body">
       <p>Use the text area for any notes you may need to take when listening to the scanner.</p>
       <PellEditor />
       <p><em>Refreshing the page or navigating away will clear anything you have written.</em></p>

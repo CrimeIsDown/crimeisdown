@@ -5,7 +5,7 @@
     <div class="form-group">
       <fieldset {{on "change" (fn this.changeStreams)}} id="streamlist">
         <legend>Check the streams to play</legend>
-        <div class="stream-options">
+        <div class="stream-options mb-3">
         {{#if this.streams.length}}
           {{#each this.streams as |streamOption|}}
             <div class="form-check">

@@ -1,5 +1,5 @@
 <form id="recordingsearch" action="https://audio.crimeisdown.com/download-audio.php" method="get" target="_blank" rel="noopener noreferrer">
-  <div class="form-group">
+  <div class="mb-3">
     <label for="cpdfeed">Radio channel</label>
     <select name="feed" id="cpdfeed" class="form-control" required>
       <option value="" disabled selected>Select channel</option>
@@ -26,16 +26,14 @@
       <option value="ems_englewood">CFD EMS Englewood (South)</option>
     </select>
   </div>
-  <div class="form-group">
+  <div class="mb-3">
     <label for="datetimepicker">Time of recording</label>
     <div class="input-group date">
       <EmberFlatpickr @name="datetime" @id="datetimepicker" @allowInput={{true}} @classNames="form-control" @defaultDate={{this.options.defaultDate}} @enableTime={{this.options.enableTime}} @dateFormat={{this.options.dateFormat}} @minuteIncrement={{this.options.minuteIncrement}} @minDate={{this.options.minDate}} @date={{readonly this.options.defaultDate}} @onChange={{null}} />
-      <div class="input-group-append">
-        <span class="input-group-text"><span class="fa fa-calendar"></span></span>
-      </div>
+      <span class="input-group-text"><span class="fa fa-calendar"></span></span>
     </div>
   </div>
-  <div class="form-group">
+  <div class="mb-3">
     <label for="audioformat">Audio format</label>
     <select name="format" id="audioformat" class="form-control">
       <option value="" selected>Auto (most compatible)</option>
@@ -44,7 +42,7 @@
       <option value="ogg">Opus, .ogg (for non-iOS)</option>
     </select>
   </div>
-  <div class="form-group">
+  <div class="mb-3">
     <button type="submit" class="btn btn-primary">Get recording</button>
   </div>
 </form>

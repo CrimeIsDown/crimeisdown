@@ -3,28 +3,26 @@
     <p><em>Interact with this map or use the search box to find information about a specific address. Police districts are outlined in blue.</em></p>
     <small class="text-danger">If you use the map drawing features (below zoom in/out), they will not be saved. A refresh will clear the map.</small>
     <p class="mobile text-primary"><em>Scroll down for incident map</em></p>
-    <div class="accordion" id="accordion" role="tablist">
-      <div class="card">
-        <div class="card-header" role="tab">
-          <a class="card-heading" id="headingAddrSearch" data-toggle="collapse" href="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch">
+    <div class="accordion" id="accordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingAddrSearch">
+          <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch" type="button">
             Address Search
-          </a>
+          </button>
           {{!--<a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>--}}
-        </div>
+        </h2>
         <div id="collapseAddrSearch" class="collapse show" role="tabpanel" aria-labelledby="headingAddrSearch">
-          <div id="address-search">
+          <div id="address-search" class="accordion-body">
             <form {{on "submit" this.searchAddress}}>
               <div class="form-group">
                 <label for="address">Address, intersection, place to search</label>
                 <div class="input-group">
                   <Input class="form-control" name="address" placeholder="e.g. 3510 S Michigan, Chicago" @type="text" @value={{this.address}} autofocus="true" />
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Search</button>
-                  </div>
+                  <button class="btn btn-primary" type="submit">Search</button>
                 </div>
               </div>
             </form>
-            <div class="form-group">
+            <div class="form-group mt-1 mb-3">
               <button type="button" class="btn btn-info{{if this.geolocationPending " disabled" ""}}" {{on "click" this.locateMe}} title="Device geolocation works best on mobile"><i class="fa fa-crosshairs" aria-hidden="true"></i> Use my location</button>
             </div>
             <table class="table table-bordered table-condensed">
@@ -162,7 +160,7 @@
         <div id="leaflet-map" {{did-insert this.initMap}}></div>
       </div>
       <div class="tab-pane fade" id="traffic-map" role="tabpanel" aria-labelledby="traffic-tab">
-        <iframe id="waze-map" title="Waze map" src="https://embed.waze.com/iframe?zoom=11&lat=41.85&lon=-87.63"></iframe>
+        <iframe id="waze-map" title="Waze map" src="https://embed.waze.com/iframe?zoom=11&lat=41.85&lon=-87.63&ct=livemap"></iframe>
       </div>
     </div>
   </div>

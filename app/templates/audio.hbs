@@ -5,7 +5,7 @@
         <div class="col-md-12 d-lg-none">
           <p><em><a href="#lookuprecording">Jump to scanner recording download</a></em></p>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 mb-3">
           <VirtualScanner @streams={{this.model}} />
         </div>
         <div class="col-md-12">
@@ -14,7 +14,7 @@
           <iframe id="youtube-player" title="YouTube scanner feed" src="https://www.youtube.com/embed/live_stream?channel=UCUS-tAwCyxBrrA3FtSjH2NA" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
         </div>
         <div class="col-md-12">
-          <div class="accordion" id="accordion" role="tablist">
+          <div class="accordion" id="accordion">
             <MapTools />
           </div>
         </div>
@@ -24,10 +24,10 @@
       <div class="row">
         <div class="col-md-6">
           <h3 id="lookuprecording">Look up scanner recording</h3>
+          <p class="text-secondary">Encrypted channels (those provided by Broadcastify) are not available for archive download.</p>
           <AudioSearch />
         </div>
         <div class="col-md-6">
-          <p>Encrypted channels (those provided by Broadcastify) are not available for archive download.</p>
           <p><em>The recording search is limited to a certain number of downloads per day, with Patreon patrons getting additional downloads. <a href="https://www.patreon.com/EricTendian/posts">Existing Patrons, login here.</a></em></p>
           <table class="table">
             <thead>

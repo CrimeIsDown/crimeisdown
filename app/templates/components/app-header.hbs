@@ -1,48 +1,50 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <LinkTo @route="index" class="navbar-brand">
-      CrimeIsDown.com
-    </LinkTo>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container-fluid">
+      <LinkTo @route="index" class="navbar-brand">
+        CrimeIsDown.com
+      </LinkTo>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbar">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <LinkTo @route="map" @id="map-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Incident Map</LinkTo>
-        </li>
-        <li class="nav-item">
-          <LinkTo @route="audio" @id="audio-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Scanner Audio</LinkTo>
-        </li>
-        <li class="nav-item">
-          <LinkTo @route="guide" @id="guide-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Scanner Guide</LinkTo>
-        </li>
-        <li class="nav-item">
-          <LinkTo @route="directives" @id="directives-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Police Directive Changes</LinkTo>
-        </li>
-        {{!-- <li class="nav-item">
-          <a href="https://blog.crimeisdown.com" id="blog-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Blog</a>
-        </li> --}}
-      </ul>
-      <form class="form-inline">
-        <div class="form-check mr-sm-2">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="nightmodetoggle">
-            Night Mode
-          </label>
-        </div>
-        {{!-- April Fools 2019 --}}
-        <div class="form-check">
-          <label class="form-check-label red-blue-flashing">
-            <Input @type="checkbox" class="form-check-input" @id="copstoggle" @checked={{this.playmusic}} {{on "change" this.togglemusic}} />
-            <i class="fa fa-volume-up" aria-hidden="true"></i>&nbsp;COPS Mode
-          </label>
-          <div class="d-none">
-            <audio id="copstheme" src="https://www.soundboard.com/mediafiles/Inner%20Circle%20-%20Bad%20Boys%20(COPS%20theme%20song)219275-1efae287-f275-499c-8ef5-878aa3795aed.mp3" loop preload="auto"></audio>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <LinkTo @route="map" @id="map-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Incident Map</LinkTo>
+          </li>
+          <li class="nav-item">
+            <LinkTo @route="audio" @id="audio-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Scanner Audio</LinkTo>
+          </li>
+          <li class="nav-item">
+            <LinkTo @route="guide" @id="guide-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Scanner Guide</LinkTo>
+          </li>
+          <li class="nav-item">
+            <LinkTo @route="directives" @id="directives-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Police Directive Changes</LinkTo>
+          </li>
+          {{!-- <li class="nav-item">
+            <a href="https://blog.crimeisdown.com" id="blog-link" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">Blog</a>
+          </li> --}}
+        </ul>
+        <form class="d-flex">
+          <div class="form-check me-sm-2">
+            <label class="form-check-label text-body">
+              <input type="checkbox" class="form-check-input" id="nightmodetoggle">
+              Night Mode
+            </label>
           </div>
-        </div>
-      </form>
+          {{!-- April Fools 2019 --}}
+          <div class="form-check">
+            <label class="form-check-label text-body red-blue-flashing">
+              <Input @type="checkbox" class="form-check-input" @id="copstoggle" @checked={{this.playmusic}} {{on "change" this.togglemusic}} />
+              <i class="fa fa-volume-up" aria-hidden="true"></i>&nbsp;COPS Mode
+            </label>
+            <div class="d-none">
+              <audio id="copstheme" src="https://www.soundboard.com/mediafiles/Inner%20Circle%20-%20Bad%20Boys%20(COPS%20theme%20song)219275-1efae287-f275-499c-8ef5-878aa3795aed.mp3" loop preload="auto"></audio>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
     <script>
       // @TODO: Move to actual .js file
