@@ -82,7 +82,7 @@ export default class VirtualScanner extends Component {
         }
         this.args.streams.forEach((stream, index) => {
           if (stream.broadcastify) {
-            stream.broadcastifyUrl = stream.broadcastify.replace('https://audio.broadcastify.com/', 'https://www.broadcastify.com/listen/feed/').replace('.mp3', '');
+            stream.broadcastifyUrl = 'https://www.broadcastify.com/listen/feed/' + stream.broadcastifyId;
           }
           if (stream.broadcastify || stream.name.startsWith('CFD')) {
             this.streams.pushObject({ name: stream.slug, desc: stream.shortname ?? stream.name, order: index, broadcastify: stream.broadcastify, broadcastifyUrl: stream.broadcastifyUrl, openmhz: stream.openmhz, disabled: stream.name.startsWith('CFD') })
