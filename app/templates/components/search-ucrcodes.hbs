@@ -2,7 +2,7 @@
   <form {{on "submit" this.lookupUCR}}>
     <label for="ucr">UCR (Uniform Crime Reporting) Code to lookup</label>
     <div class="input-group">
-      <Input class="form-control" @name="ucr" placeholder="041A" @type="text" @value={{this.ucrCode}} />
+      <Input class="form-control" name="ucr" placeholder="041A" @type="text" @value={{this.ucrCode}} aria-label="UCR (Uniform Crime Reporting) Code to lookup" />
       <button class="btn btn-primary" type="submit">Define</button>
     </div>
   </form>

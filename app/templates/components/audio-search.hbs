@@ -1,4 +1,4 @@
-<form id="recordingsearch" action="https://audio.crimeisdown.com/download-audio.php" method="get" target="_blank" rel="noopener noreferrer">
+<form id="recordingsearch" {{on "submit" this.submit}}>
   <div class="mb-3">
     <label for="cpdfeed">Radio channel</label>
     <select name="feed" id="cpdfeed" class="form-control" required>
@@ -29,7 +29,7 @@
   <div class="mb-3">
     <label for="datetimepicker">Time of recording (in US Central time)</label>
     <div class="input-group date">
-      <EmberFlatpickr @name="datetime" @id="datetimepicker" @allowInput={{true}} class="form-control" @defaultDate={{this.options.defaultDate}} @enableTime={{this.options.enableTime}} @dateFormat={{this.options.dateFormat}} @minuteIncrement={{this.options.minuteIncrement}} @minDate={{this.options.minDate}} @date={{readonly this.options.defaultDate}} @onChange={{null}} />
+      <EmberFlatpickr name="datetime" @id="datetimepicker" @allowInput={{true}} class="form-control" @defaultDate={{this.options.defaultDate}} @enableTime={{this.options.enableTime}} @dateFormat={{this.options.dateFormat}} @minuteIncrement={{this.options.minuteIncrement}} @minDate={{this.options.minDate}} @date={{readonly this.options.defaultDate}} @onChange={{null}} @altInput={{this.options.altInput}} @altFormat={{this.options.altFormat}} />
       <span class="input-group-text"><FaIcon @icon="calendar" /></span>
     </div>
   </div>
