@@ -10,8 +10,8 @@
   command = "ember build"
 
 [build.environment]
-  NODE_VERSION = "14"
-  RUBY_VERSION = "2.6.2"
+  NODE_VERSION = "16"
+  RUBY_VERSION = "2.7.6"
 
 # Production context: All deploys from the Production branch set in your site's deploy settings will inherit these settings.
 [context.production]
