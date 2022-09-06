@@ -2,8 +2,7 @@
 
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import EmberObject from '@ember/object';
-import { action, set } from '@ember/object';
+import EmberObject, { action, set } from '@ember/object';
 import { bind } from '@ember/runloop';
 import fetch from 'fetch';
 import $ from 'jquery';
