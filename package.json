@@ -34,7 +34,7 @@
     "edition": "octane"
   },
   "devDependencies": {
-    "@ember/jquery": "^1.1.0",
+    "@ember/jquery": "^2.0.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^1.0.2",
     "@ember/test-helpers": "^2.7.0",
@@ -74,7 +74,7 @@
     "ember-pell": "^1.4.5",
     "ember-qunit": "^5.1.5",
     "ember-resolver": "^8.0.3",
-    "ember-router-scroll": "^1.3.3",
+    "ember-router-scroll": "^4.1.2",
     "ember-source": "~4.4.0",
     "ember-template-lint": "^4.8.0",
     "ember-truth-helpers": "^3.1.1",
