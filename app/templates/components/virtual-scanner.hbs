@@ -11,7 +11,7 @@
             <div class="form-check">
               <input class="form-check-input" id="checkbox-{{streamOption.name}}" type="checkbox" name="stream" value={{streamOption.name}} disabled={{if streamOption.disabled "disabled" ""}}>
               <label class="form-check-label" for="checkbox-{{streamOption.name}}">{{streamOption.desc}}</label>
-              <LinkTo @route="audio-live" @model={{streamOption.name}} target="_blank" title={{concat "Listen to only " streamOption.desc}}><i class="fa fa-external-link"></i></LinkTo>
+              <LinkTo @route="audio-live" @model={{streamOption.name}} target="_blank" title={{concat "Listen to only " streamOption.desc}}><FaIcon @icon="external-link" /></LinkTo>
               {{#if streamOption.broadcastify}}
               <a href="{{ streamOption.broadcastifyUrl }}" target="_blank" rel="noopener noreferrer"><img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /></a>
               {{/if}}
@@ -26,11 +26,11 @@
   </div>
   <div class="col-md-6">
     <h4>Spatial Scanner Audio</h4>
-    <p>Drag <i class="fa fa-volume-up" aria-label="speaker"></i> to move stereo channels, put on <i class="fa fa-headphones" aria-label="headphones" alt="headphones"></i> for surround sound</p>
+    <p>Drag <FaIcon @icon="volume-up" /> to move stereo channels, put on <FaIcon @icon="headphones" /> for surround sound</p>
     <div class="draggable-parent">
-      <i class="fa fa-user"></i>
+      <FaIcon @icon="user" />
       {{#each this.enabledStreams as |stream|}}
-        <i class="fa fa-volume-up" id="drag-{{stream.name}}" title="{{stream.desc}}"><span>&nbsp;{{stream.name}}</span></i>
+        <span id="drag-{{stream.name}}" title="{{stream.desc}}"><FaIcon @icon="volume-up" />&nbsp;{{stream.name}}</span>
       {{/each}}
     </div>
   </div>
@@ -40,7 +40,7 @@
       <div class="stream col-sm-6" id="stream-{{stream.name}}">
         <h5 class="title">
           <LinkTo @route="audio-live" @model={{stream.name}} title={{concat "Listen to only " stream.desc}}>
-            {{stream.desc}} <i class="fa fa-external-link"></i>
+            {{stream.desc}} <FaIcon @icon="external-link" />
           </LinkTo>
           {{#if stream.broadcastify}}
           <a href="{{ stream.broadcastifyUrl }}" target="_blank" rel="noopener noreferrer"><img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /></a>

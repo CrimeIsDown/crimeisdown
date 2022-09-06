@@ -9,7 +9,7 @@
           <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseAddrSearch" aria-expanded="true" aria-controls="collapseAddrSearch" type="button">
             Address Search
           </button>
-          {{!--<a class="draggable-handle"><i class="fa fa-arrows-v"></i></a>--}}
+          {{!--<a class="draggable-handle"><FaIcon @icon="arrows-v" /></a>--}}
         </h2>
         <div id="collapseAddrSearch" class="collapse show" role="tabpanel" aria-labelledby="headingAddrSearch">
           <div id="address-search" class="accordion-body">
@@ -23,7 +23,7 @@
               </div>
             </form>
             <div class="form-group mt-1 mb-3">
-              <button type="button" class="btn btn-info{{if this.geolocationPending " disabled" ""}}" {{on "click" this.locateMe}} title="Device geolocation works best on mobile"><i class="fa fa-crosshairs" aria-hidden="true"></i> Use my location</button>
+              <button type="button" class="btn btn-info{{if this.geolocationPending " disabled" ""}}" {{on "click" this.locateMe}} title="Device geolocation works best on mobile"><FaIcon @icon="crosshairs" /> Use my location</button>
             </div>
             <table class="table table-bordered table-condensed">
               <tbody>
@@ -62,7 +62,7 @@
                   {{#if this.location.police.zone.name}}
                     <strong>{{ this.location.police.zone.name }}</strong> ({{ this.location.police.zone.frequency }})<br>
                     <p>{{ this.location.police.zone.description }}</p>
-                    <p><LinkTo class="btn btn-primary" @route="audio-live" @model={{this.location.police.zone.slug}} title={{concat "Listen to " this.location.police.zone.name}}><i class="fa fa-volume-up" aria-hidden="true"></i> Listen to CPD with Instant Replay</LinkTo></p>
+                    <p><LinkTo class="btn btn-primary" @route="audio-live" @model={{this.location.police.zone.slug}} title={{concat "Listen to " this.location.police.zone.name}}><FaIcon @icon="volume-up" /> Listen to CPD with Instant Replay</LinkTo></p>
                     <StreamPlayer @stream={{this.location.police.zone}} @autoplay={{false}} />
                   {{/if}}
                 </td>
@@ -93,7 +93,7 @@
                   <a
                     href="{{if (eq this.location.fire.channel "Main") "https://openmhz.com/system/chi_oemc?filter-type=talkgroup&filter-code=1021,1023" "https://openmhz.com/system/chi_oemc?filter-type=talkgroup&filter-code=1022,1024"}}"
                     class="btn btn-primary" title="Listen to CFD {{ this.location.fire.channel }}"
-                  ><i class="fa fa-volume-up" aria-hidden="true"></i> Listen to CFD with Instant Replay</a>
+                  ><FaIcon @icon="volume-up" /> Listen to CFD with Instant Replay</a>
                   {{/if}}
                 </td>
               </tr>

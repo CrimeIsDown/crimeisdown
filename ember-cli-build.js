@@ -32,7 +32,6 @@ module.exports = function (defaults) {
       includePaths: [
         'app',
         'node_modules/bootstrap/scss',
-        'node_modules/font-awesome/scss',
       ],
     },
 
@@ -156,25 +155,6 @@ module.exports = function (defaults) {
     'node_modules/leaflet.awesome-markers/dist/images/markers-soft@2x.png',
     { destDir: 'assets/images' }
   );
-
-  app.import('node_modules/font-awesome/fonts/FontAwesome.otf', {
-    destDir: 'assets/fonts',
-  });
-  app.import('node_modules/font-awesome/fonts/fontawesome-webfont.eot', {
-    destDir: 'assets/fonts',
-  });
-  app.import('node_modules/font-awesome/fonts/fontawesome-webfont.svg', {
-    destDir: 'assets/fonts',
-  });
-  app.import('node_modules/font-awesome/fonts/fontawesome-webfont.ttf', {
-    destDir: 'assets/fonts',
-  });
-  app.import('node_modules/font-awesome/fonts/fontawesome-webfont.woff', {
-    destDir: 'assets/fonts',
-  });
-  app.import('node_modules/font-awesome/fonts/fontawesome-webfont.woff2', {
-    destDir: 'assets/fonts',
-  });
 
   app.import('node_modules/interactjs/dist/interact.js');
 

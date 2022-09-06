@@ -27,10 +27,10 @@
     </select>
   </div>
   <div class="mb-3">
-    <label for="datetimepicker">Time of recording</label>
+    <label for="datetimepicker">Time of recording (in US Central time)</label>
     <div class="input-group date">
       <EmberFlatpickr @name="datetime" @id="datetimepicker" @allowInput={{true}} class="form-control" @defaultDate={{this.options.defaultDate}} @enableTime={{this.options.enableTime}} @dateFormat={{this.options.dateFormat}} @minuteIncrement={{this.options.minuteIncrement}} @minDate={{this.options.minDate}} @date={{readonly this.options.defaultDate}} @onChange={{null}} />
-      <span class="input-group-text"><span class="fa fa-calendar"></span></span>
+      <span class="input-group-text"><FaIcon @icon="calendar" /></span>
     </div>
   </div>
   <div class="mb-3">

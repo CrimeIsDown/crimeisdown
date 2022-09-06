@@ -179,19 +179,6 @@ ul.nav.nav-tabs {
   .accordion-item {
     border: none;
     .accordion-header {
-      button[data-bs-toggle="collapse"] {
-        display: block;
-        &::before {
-          @include fa-icon();
-
-          content: $fa-var-caret-down;
-          width: 0.75rem;
-        }
-        &.collapsed::before {
-          content: $fa-var-caret-right;
-          padding-left: 0.125rem; // to ensure proper centering
-        }
-      }
       .draggable-handle {
         cursor: pointer;
         color: #777;

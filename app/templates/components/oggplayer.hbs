@@ -4,10 +4,10 @@
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-search-minus"></i></span>
+    <span class="input-group-text"><FaIcon @icon="search-minus" /></span>
   </div>
   <input class="form-control" name="zoom" type="range" min={{this.minZoom}} max={{this.maxZoom}} step="1" value={{this.currentZoom}} {{on "change" this.zoom}}>
   <div class="input-group-append">
-    <span class="input-group-text"><i class="fa fa-search-plus"></i></span>
+    <span class="input-group-text"><FaIcon @icon="search-plus" /></span>
   </div>
 </div>

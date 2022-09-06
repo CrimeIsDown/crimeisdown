@@ -37,7 +37,7 @@
           <div class="form-check">
             <label class="form-check-label text-muted red-blue-flashing">
               <Input @type="checkbox" class="form-check-input" @id="copstoggle" @checked={{this.playmusic}} {{on "change" this.togglemusic}} />
-              <i class="fa fa-volume-up" aria-hidden="true"></i>&nbsp;COPS Mode
+              <FaIcon @icon="volume-up" />&nbsp;COPS Mode
             </label>
             <div class="d-none">
               <audio id="copstheme" src="https://www.soundboard.com/mediafiles/Inner%20Circle%20-%20Bad%20Boys%20(COPS%20theme%20song)219275-1efae287-f275-499c-8ef5-878aa3795aed.mp3" loop preload="auto"></audio>
