@@ -283,6 +283,9 @@ input.flatpickr-mobile {
     font-weight: bold;
     -ms-touch-action: none;
     touch-action: none;
+    white-space: nowrap;
+    width: 6em;
+    position: absolute;
   }
 }
 
