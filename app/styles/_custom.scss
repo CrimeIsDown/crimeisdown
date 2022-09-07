@@ -334,10 +334,8 @@ input.flatpickr-mobile {
     border: none;
     background: #fff;
   }
-  form input {
-    margin: 0 0.25em;
-    padding: 0.4em;
-    width: 50%;
+  .modal-footer .input-group {
+    width: auto;
   }
 }
 

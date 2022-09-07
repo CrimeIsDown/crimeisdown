@@ -3,26 +3,32 @@
   <p>Diffs on all CPD directives updated since 2015. We check daily for new updates. A project of <a href="https://crimeisdown.com/">CrimeIsDown.com</a>. View the raw diffs on <a href="https://github.com/CrimeIsDown/cpd-directives">GitHub</a>.</p>
 
   <p><strong>View what a directive looked like on a given date:</strong></p>
-  <form id="findDirectiveForm" class="form-inline" aria-label="Directive viewer" method="post" {{on "submit" this.submitFindDirectiveForm}}>
-    <label class="sr-only" for="url">
-      CPD directive URL
-    </label>
-    <div class="input-group mb-2 me-sm-2">
-      <div class="input-group-prepend">
-        <div class="input-group-text">URL</div>
+  <form id="findDirectiveForm" class="row" aria-label="Directive viewer" method="post" {{on "submit" this.submitFindDirectiveForm}}>
+    <div class="col">
+      <label class="sr-only" for="url">
+        CPD directive URL
+      </label>
+      <div class="input-group mb-2 me-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">URL</div>
+        </div>
+        <input class="form-control" size="50" type="url" name="url" id="url" placeholder="http://directives.chicagopolice.org/directives/data/...">
       </div>
-      <input class="form-control" size="50" type="url" name="url" id="url" placeholder="http://directives.chicagopolice.org/directives/data/...">
     </div>
-    <label class="sr-only" for="date">
-      Version as of date
-    </label>
-    <div class="input-group mb-2 me-sm-2">
-      <div class="input-group-prepend">
-        <div class="input-group-text">Date to look at</div>
+    <div class="col-2">
+      <label class="sr-only" for="date">
+        Version as of date
+      </label>
+      <div class="input-group mb-2 me-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Date to look at</div>
+        </div>
+        <input class="form-control" type="date" name="date" id="date">
       </div>
-      <input class="form-control" type="date" name="date" id="date">
     </div>
-    <button type="submit" class="btn btn-primary mb-2">Open</button>
+    <div class="col">
+      <button type="submit" class="btn btn-primary mb-2">Open</button>
+    </div>
   </form>
 
   <table id="directives" class="table">
@@ -38,12 +44,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Directive Name</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div id="primaryDiffView" class="modal-body">
         <iframe id="directiveFrame" title="Directive contents"></iframe>
       </div>
-      <div id="sideBySideView" class="modal-body row d-none">
+      {{!-- template-lint-disable no-inline-styles --}}
+      <div id="sideBySideView" class="modal-body row" style="display: none">
         <div class="col-md-6">
           <h5 class="text-center">Old</h5>
           <iframe id="oldVersion" title="Old directive contents"></iframe>
@@ -53,16 +60,20 @@
           <iframe id="newVersion" title="New directive contents"></iframe>
         </div>
       </div>
-      <div class="modal-footer">
-        <div class="me-auto">
+      <div class="modal-footer justify-content-between">
+        <div>
           <a id="no-highlights-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-info">View without highlights</a>
           <a id="switch-diff-view" href="#" class="btn btn-sm btn-info">Toggle side-by-side view</a>
         </div>
-        <form class="form-inline" aria-label="Modal buttons">
-          <label for="link">Shareable link</label>
-          <input id="link" name="link" type="text" class="form-control" readonly>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </form>
+        <div>
+          <div class="input-group">
+            <label for="link" class="input-group-text">Shareable link</label>
+            <input id="link" name="link" type="text" class="form-control" readonly>
+          </div>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>

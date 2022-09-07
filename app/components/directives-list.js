@@ -68,7 +68,7 @@ export default class DirectivesList extends Component {
             onPostBody: () => {
               $('#directives')
                 .find('td > a')
-                .click((event) => {
+                .on('click', (event) => {
                   event.preventDefault();
                   this.openDirective(
                     $(event.currentTarget).attr('href'),
@@ -77,14 +77,14 @@ export default class DirectivesList extends Component {
                 });
 
               $('#directiveViewer')
-                .find('form input')
-                .focus((event) => {
-                  $(event.currentTarget).select();
+                .find('#link')
+                .on('focus', (event) => {
+                  $(event.currentTarget).trigger('select');
                 });
 
-              $('#switch-diff-view').click(() => {
-                $('#primaryDiffView').toggle();
-                $('#sideBySideView').toggle();
+              $('#switch-diff-view').on('click', () => {
+                window.$('#primaryDiffView').toggle();
+                window.$('#sideBySideView').toggle();
                 $('.modal-dialog').toggleClass('modal-fullwidth');
               });
 
@@ -130,18 +130,20 @@ export default class DirectivesList extends Component {
     let modal = $('#directiveViewer');
     modal.find(' h4.modal-title').text(title);
     modal.find('#directiveFrame').attr('src', path);
-    window.$('#directiveViewer').modal();
 
     let url = new URL(path).pathname.replace('/diff/', '');
     modal
       .find('#no-highlights-btn')
       .attr('href', 'https://directives.crimeisdown.com/' + url);
-    modal.find('input[type="text"]').val(window.location + '#' + url);
+    modal.find('input#link').val(window.location + '#' + url);
 
     let commit = url.substring(0, url.indexOf('/'));
     url = path.replace('diff/' + commit + '/', '') + '?commit=' + commit;
     modal.find('#oldVersion').attr('src', url + '^');
     modal.find('#newVersion').attr('src', url);
+
+    const bsModal = new bootstrap.Modal(document.getElementById('directiveViewer'));
+    bsModal.show();
 
     if (window.ga && typeof window.ga === 'function') {
       ga('send', 'event', 'Directive', 'open', title);
