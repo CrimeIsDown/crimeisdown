@@ -3,7 +3,7 @@
   <p>Diffs on all CPD directives updated since 2015. We check daily for new updates. A project of <a href="https://crimeisdown.com/">CrimeIsDown.com</a>. View the raw diffs on <a href="https://github.com/CrimeIsDown/cpd-directives">GitHub</a>.</p>
 
   <p><strong>View what a directive looked like on a given date:</strong></p>
-  <form id="findDirectiveForm" class="form-inline" method="post" {{on "submit" this.submitFindDirectiveForm}}>
+  <form id="findDirectiveForm" class="form-inline" aria-label="Directive viewer" method="post" {{on "submit" this.submitFindDirectiveForm}}>
     <label class="sr-only" for="url">
       CPD directive URL
     </label>
@@ -43,7 +43,7 @@
       <div id="primaryDiffView" class="modal-body">
         <iframe id="directiveFrame" title="Directive contents"></iframe>
       </div>
-      <div id="sideBySideView" class="modal-body row" style="display: none">
+      <div id="sideBySideView" class="modal-body row d-none">
         <div class="col-md-6">
           <h5 class="text-center">Old</h5>
           <iframe id="oldVersion" title="Old directive contents"></iframe>
@@ -58,7 +58,7 @@
           <a id="no-highlights-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-info">View without highlights</a>
           <a id="switch-diff-view" href="#" class="btn btn-sm btn-info">Toggle side-by-side view</a>
         </div>
-        <form class="form-inline">
+        <form class="form-inline" aria-label="Modal buttons">
           <label for="link">Shareable link</label>
           <input id="link" name="link" type="text" class="form-control" readonly>
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

@@ -315,6 +315,14 @@ input.flatpickr-mobile {
   padding: 0;
 }
 
+/* Needed to avoid browser scrolling down too far */
+#lookuprecording:target::before {
+  content: "";
+  display: block;
+  height: 70px;
+  margin: -70px 0 0;
+}
+
 #directiveViewer {
   margin-top: 3em;
   iframe {

@@ -17,7 +17,7 @@
               <div class="form-group">
                 <label for="address">Address, intersection, place to search</label>
                 <div class="input-group">
-                  <Input class="form-control" name="address" placeholder="e.g. 3510 S Michigan, Chicago" @type="text" @value={{this.address}} autofocus="true" />
+                  <Input class="form-control" name="address" placeholder="e.g. 3510 S Michigan, Chicago" @type="text" @value={{this.address}} aria-label="Address, intersection, place to search" />
                   <button class="btn btn-primary" type="submit">Search</button>
                 </div>
               </div>
@@ -145,10 +145,10 @@
   <div class="map-container">
     <ul class="nav nav-tabs" id="cadTabs" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="map-tab" data-bs-toggle="tab" href="#main-map" role="tab" aria-controls="main-map" aria-selected="true">Address Search Map</a>
+        <a class="nav-link active" id="map-tab" data-bs-toggle="tab" href="#main-map" aria-controls="main-map" aria-selected="true">Address Search Map</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="traffic-tab" data-bs-toggle="tab" href="#traffic-map" role="tab" aria-controls="traffic-map" aria-selected="false">Traffic Map</a>
+        <a class="nav-link" id="traffic-tab" data-bs-toggle="tab" href="#traffic-map" aria-controls="traffic-map" aria-selected="false">Traffic Map</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="crime-tab" href="#" aria-selected="false" target="_blank" rel="noopener noreferrer">Recent Crimes Map</a>

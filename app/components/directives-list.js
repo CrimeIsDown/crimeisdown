@@ -82,7 +82,7 @@ export default class DirectivesList extends Component {
                   $(event.currentTarget).select();
                 });
 
-              $('#switch-diff-view').click((event) => {
+              $('#switch-diff-view').click(() => {
                 $('#primaryDiffView').toggle();
                 $('#sideBySideView').toggle();
                 $('.modal-dialog').toggleClass('modal-fullwidth');

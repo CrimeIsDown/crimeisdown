@@ -23,6 +23,7 @@ module.exports = {
     L: true,
     ga: true,
     rome: true,
+    bootstrap: true,
   },
   rules: {
     'ember/no-jquery': 'off',
@@ -33,6 +34,7 @@ module.exports = {
     {
       files: [
         './.eslintrc.js',
+        './tests/.eslintrc.js',
         './.prettierrc.js',
         './.template-lintrc.js',
         './ember-cli-build.js',
