@@ -106,9 +106,8 @@ export default class VirtualScanner extends Component {
 
     window.interact('.draggable').draggable({
       restrict: {
-        restriction: 'parent',
+        restriction: '.draggable-parent',
         endOnly: true,
-        elementRect: { top: 0.05, left: 0.05, bottom: 0.95, right: 0.95 },
       },
       autoScroll: true,
       onmove: this.onMove,
@@ -223,11 +222,6 @@ export default class VirtualScanner extends Component {
             playerElement = player.media.renderer;
             let audioElementSource;
             try {
-              if (streamData.broadcastify) {
-                throw new Error(
-                  'Cannot use MediaElementAudioSource with Broadcastify due to basic auth CORS'
-                );
-              }
               audioElementSource =
                 this.audioContext.createMediaElementSource(playerElement);
             } catch (e) {

@@ -271,18 +271,18 @@ input.flatpickr-mobile {
     position: absolute;
     transform: translate(108px, 100px);
   }
-  .fa-volume-up {
-    position: absolute;
+  .fa-volume-high {
+    vertical-align: -0.25em;
     width: 32px;
     height: 16px;
     text-align: center;
+  }
+  div {
+    font-family: Arial, sans-serif;
+    font-size: 0.75em;
+    font-weight: bold;
     -ms-touch-action: none;
     touch-action: none;
-    span {
-      font-family: Arial, sans-serif;
-      font-size: 0.75em;
-      font-weight: bold;
-    }
   }
 }
 

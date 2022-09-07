@@ -30,7 +30,7 @@
     <div class="draggable-parent">
       <FaIcon @icon="user" />
       {{#each this.enabledStreams as |stream|}}
-        <span id="drag-{{stream.name}}" title="{{stream.desc}}"><FaIcon @icon="volume-up" />&nbsp;{{stream.name}}</span>
+        <div id="drag-{{stream.name}}" title="{{stream.desc}}"><FaIcon @icon="volume-high" />{{stream.name}}</div>
       {{/each}}
     </div>
   </div>
