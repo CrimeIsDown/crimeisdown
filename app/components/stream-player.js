@@ -34,7 +34,8 @@ export default class StreamPlayer extends Component {
       };
 
       src = {
-        src: 'https://audio.crimeisdown.com/streaming/dash/' + stream.slug + '/',
+        src:
+          'https://audio.crimeisdown.com/streaming/dash/' + stream.slug + '/',
         type: 'application/dash+xml',
       };
     } else {

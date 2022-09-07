@@ -11,16 +11,16 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <LinkTo @route="map" @id="map-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Incident Map</LinkTo>
+            <LinkTo @route="map" id="map-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Incident Map</LinkTo>
           </li>
           <li class="nav-item">
-            <LinkTo @route="audio" @id="audio-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Scanner Audio</LinkTo>
+            <LinkTo @route="audio" id="audio-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Scanner Audio</LinkTo>
           </li>
           <li class="nav-item">
-            <LinkTo @route="guide" @id="guide-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Scanner Guide</LinkTo>
+            <LinkTo @route="guide" id="guide-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Scanner Guide</LinkTo>
           </li>
           <li class="nav-item">
-            <LinkTo @route="directives" @id="directives-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Police Directive Changes</LinkTo>
+            <LinkTo @route="directives" id="directives-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Police Directive Changes</LinkTo>
           </li>
           {{!-- <li class="nav-item">
             <a href="https://blog.crimeisdown.com" id="blog-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Blog</a>
@@ -36,7 +36,7 @@
           {{!-- April Fools 2019 --}}
           <div class="form-check">
             <label class="form-check-label text-muted red-blue-flashing">
-              <Input @type="checkbox" class="form-check-input" @id="copstoggle" @checked={{this.playmusic}} {{on "change" this.togglemusic}} />
+              <Input @type="checkbox" class="form-check-input" id="copstoggle" @checked={{this.playmusic}} {{on "change" this.togglemusic}} />
               <FaIcon @icon="volume-up" />&nbsp;COPS Mode
             </label>
             <div class="d-none">

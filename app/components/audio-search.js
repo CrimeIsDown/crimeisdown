@@ -21,12 +21,12 @@ export default class AudioSearch extends Component {
     this.options = options;
 
     this.encryptedZones = {
-      'zone3': '2022-09-02 00:00:00',
-      'zone5': '2022-06-30 12:00:00',
-      'zone6': '2022-08-12 00:00:00',
-      'zone7': '2022-06-30 12:00:00',
-      'zone8': '2022-05-25 00:00:00',
-      'zone9': '2022-05-12 12:00:00',
+      zone3: '2022-09-02 00:00:00',
+      zone5: '2022-06-30 12:00:00',
+      zone6: '2022-08-12 00:00:00',
+      zone7: '2022-06-30 12:00:00',
+      zone8: '2022-05-25 00:00:00',
+      zone9: '2022-05-12 12:00:00',
     };
   }
 
@@ -40,7 +40,10 @@ export default class AudioSearch extends Component {
         inputs[element.name] = element.value;
       }
     }
-    if (Object.keys(this.encryptedZones).includes(inputs.feed) && moment(inputs.datetime).isAfter(this.encryptedZones[inputs.feed])) {
+    if (
+      Object.keys(this.encryptedZones).includes(inputs.feed) &&
+      moment(inputs.datetime).isAfter(this.encryptedZones[inputs.feed])
+    ) {
       downloadUrl = 'https://audio.crimeisdown.com/download-bcfy-audio.php';
     }
     const queryParams = new URLSearchParams(inputs);

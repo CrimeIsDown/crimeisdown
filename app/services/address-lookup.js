@@ -198,9 +198,8 @@ export default class AddressLookup extends Service {
         true
       )[0];
       if (result) {
-        police.district = result.feature.properties[
-          'Police District'
-        ].toLowerCase();
+        police.district =
+          result.feature.properties['Police District'].toLowerCase();
 
         for (let key in this.policeZones) {
           if (this.policeZones[key].includes(police.district)) {

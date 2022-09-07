@@ -29,10 +29,7 @@ module.exports = function (defaults) {
     },
 
     sassOptions: {
-      includePaths: [
-        'app',
-        'node_modules/bootstrap/scss',
-      ],
+      includePaths: ['app', 'node_modules/bootstrap/scss'],
     },
 
     fingerprint: {

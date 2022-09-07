@@ -3,7 +3,7 @@
   <p>Diffs on all CPD directives updated since 2015. We check daily for new updates. A project of <a href="https://crimeisdown.com/">CrimeIsDown.com</a>. View the raw diffs on <a href="https://github.com/CrimeIsDown/cpd-directives">GitHub</a>.</p>
 
   <p><strong>View what a directive looked like on a given date:</strong></p>
-  <form id="findDirectiveForm" class="form-inline" method="post" {{on "submit" (fn this.submitFindDirectiveForm)}}>
+  <form id="findDirectiveForm" class="form-inline" method="post" {{on "submit" this.submitFindDirectiveForm}}>
     <label class="sr-only" for="url">
       CPD directive URL
     </label>

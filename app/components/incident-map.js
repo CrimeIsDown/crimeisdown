@@ -313,9 +313,11 @@ export default class IncidentMap extends Component {
         $('#crime-tab').attr('href', crimereportsIframeUrl);
 
         schedule('afterRender', () => {
-          let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+          let tooltipTriggerList = [].slice.call(
+            document.querySelectorAll('[data-bs-toggle="tooltip"]')
+          );
           let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
+            return new bootstrap.Tooltip(tooltipTriggerEl);
           });
         });
       }
@@ -440,8 +442,7 @@ export default class IncidentMap extends Component {
       municipalities: {
         label: 'Municipalities',
         layer: null,
-        url:
-          'https://opendata.arcgis.com/datasets/534226c6b1034985aca1e14a2eb234af_2.geojson',
+        url: 'https://opendata.arcgis.com/datasets/534226c6b1034985aca1e14a2eb234af_2.geojson',
         showByDefault: false,
         propMappings: {
           AGENCY_DESC: 'Jurisdiction',
@@ -456,8 +457,7 @@ export default class IncidentMap extends Component {
       gangs: {
         label: 'Gangs (unofficial)',
         layer: null,
-        url:
-          'https://www.google.com/maps/d/kml?forcekml=1&mid=1am7PF0tT25EztnOTAgUEL2E382VjVTc7',
+        url: 'https://www.google.com/maps/d/kml?forcekml=1&mid=1am7PF0tT25EztnOTAgUEL2E382VjVTc7',
         showByDefault: false,
       },
     });
@@ -509,13 +509,14 @@ export default class IncidentMap extends Component {
                             title: markerTitle,
                             icon: L.divIcon({
                               iconSize: [35, 45],
-                              iconAnchor:   [17, 42],
+                              iconAnchor: [17, 42],
                               popupAnchor: [1, -32],
                               shadowAnchor: [10, 12],
                               shadowSize: [36, 16],
-                              className: 'awesome-marker-icon-red awesome-marker',
-                              html: '<svg class="svg-inline--fa fa-fire-extinguisher" data-prefix="fas" data-icon="fire-extinguisher" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: #fff;font-size: 1rem;margin-top: 10px;"><path fill="currentColor" d="M500.3 7.3C507.7 13.3 512 22.4 512 32v96c0 9.6-4.3 18.7-11.7 24.7s-17.2 8.5-26.6 6.6l-160-32C301.5 124.9 292 115.7 289 104H224v34.8c37.8 18 64 56.5 64 101.2V384H64V240c0-44.7 26.2-83.2 64-101.2V110c-36.2 11.1-66 36.9-82.3 70.5c-5.8 11.9-20.2 16.9-32.1 11.1S-3.3 171.4 2.5 159.5C26.7 109.8 72.7 72.6 128 60.4V32c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V56h65c3-11.7 12.5-20.9 24.7-23.4l160-32c9.4-1.9 19.1 .6 26.6 6.6zM288 416v32c0 35.3-28.7 64-64 64H128c-35.3 0-64-28.7-64-64V416H288zM176 96c8.8 0 16-7.2 16-16s-7.2-16-16-16s-16 7.2-16 16s7.2 16 16 16z"></path></svg>'
-                            })
+                              className:
+                                'awesome-marker-icon-red awesome-marker',
+                              html: '<svg class="svg-inline--fa fa-fire-extinguisher" data-prefix="fas" data-icon="fire-extinguisher" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: #fff;font-size: 1rem;margin-top: 10px;"><path fill="currentColor" d="M500.3 7.3C507.7 13.3 512 22.4 512 32v96c0 9.6-4.3 18.7-11.7 24.7s-17.2 8.5-26.6 6.6l-160-32C301.5 124.9 292 115.7 289 104H224v34.8c37.8 18 64 56.5 64 101.2V384H64V240c0-44.7 26.2-83.2 64-101.2V110c-36.2 11.1-66 36.9-82.3 70.5c-5.8 11.9-20.2 16.9-32.1 11.1S-3.3 171.4 2.5 159.5C26.7 109.8 72.7 72.6 128 60.4V32c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V56h65c3-11.7 12.5-20.9 24.7-23.4l160-32c9.4-1.9 19.1 .6 26.6 6.6zM288 416v32c0 35.3-28.7 64-64 64H128c-35.3 0-64-28.7-64-64V416H288zM176 96c8.8 0 16-7.2 16-16s-7.2-16-16-16s-16 7.2-16 16s7.2 16 16 16z"></path></svg>',
+                            }),
                           }
                         );
 
