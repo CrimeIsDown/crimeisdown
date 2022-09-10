@@ -10,9 +10,7 @@ export default class AudioSearch extends Component {
       minDate: new Date('2016-12-11T08:00:00.000Z'),
       maxDate: new Date(),
       minuteIncrement: 60,
-      altInput: true,
-      altFormat: 'n/j/Y h:i K',
-      dateFormat: 'Z',
+      dateFormat: 'n/j/Y h:i K',
     };
     options.maxDate.setHours(options.maxDate.getHours() - 1);
     options.maxDate.setMinutes(59);
@@ -40,12 +38,18 @@ export default class AudioSearch extends Component {
         inputs[element.name] = element.value;
       }
     }
+    let datetime = moment.tz(
+      inputs.datetime,
+      'M/D/YYYY h:mm A',
+      'America/Chicago'
+    );
     if (
       Object.keys(this.encryptedZones).includes(inputs.feed) &&
-      moment(inputs.datetime).isAfter(this.encryptedZones[inputs.feed])
+      datetime.isAfter(this.encryptedZones[inputs.feed])
     ) {
       downloadUrl = 'https://audio.crimeisdown.com/download-bcfy-audio.php';
     }
+    inputs.datetime = datetime.utc().toISOString();
     const queryParams = new URLSearchParams(inputs);
     window.open(downloadUrl + '?' + queryParams.toString(), '_blank');
   }
