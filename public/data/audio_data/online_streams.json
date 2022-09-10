@@ -29,7 +29,7 @@
     "frequency": "460.225MHz",
     "slug": "zone3",
     "broadcastifyId": 37356,
-    "broadcastify": "https://listen.broadcastify.com/mdpvz4k8sy1gf72.mp3"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37356"
   },
   {
     "name": "CPD Zone 4 - Districts 1 and 18",
@@ -46,7 +46,7 @@
     "frequency": "460.500MHz",
     "slug": "zone5",
     "broadcastifyId": 37358,
-    "broadcastify": "https://listen.broadcastify.com/0045gj3vwh2cqpb.mp3"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37358"
   },
   {
     "name": "CPD Zone 6 - Districts 7 and 8",
@@ -55,7 +55,7 @@
     "frequency": "460.400MHz",
     "slug": "zone6",
     "broadcastifyId": 37359,
-    "broadcastify": "https://listen.broadcastify.com/4kxqt92bpzhm0y5.mp3"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37359"
   },
   {
     "name": "CPD Zone 7 - District 3",
@@ -64,7 +64,7 @@
     "frequency": "460.075MHz",
     "slug": "zone7",
     "broadcastifyId": 37360,
-    "broadcastify": "https://listen.broadcastify.com/8bfp1ckmr200n45.mp3"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37360"
   },
   {
     "name": "CPD Zone 8 - Districts 4 and 6",
@@ -73,7 +73,7 @@
     "frequency": "460.200MHz",
     "slug": "zone8",
     "broadcastifyId": 37361,
-    "broadcastify": "https://listen.broadcastify.com/cjv0f17259rz68b.mp3"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37361"
   },
   {
     "name": "CPD Zone 9 - Districts 5 and 22",
@@ -82,7 +82,7 @@
     "frequency": "460.025MHz",
     "slug": "zone9",
     "broadcastifyId": 37362,
-    "broadcastify": "https://listen.broadcastify.com/jq1vnp50wtbr268.mp3"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37362"
   },
   {
     "name": "CPD Zone 10 - Districts 10 and 11",
