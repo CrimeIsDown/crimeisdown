@@ -83,9 +83,12 @@ export default class DirectivesList extends Component {
                 });
 
               $('#switch-diff-view').on('click', () => {
+                // eslint-disable-next-line ember/jquery-ember-run
                 window.$('#primaryDiffView').toggle();
+                // eslint-disable-next-line ember/jquery-ember-run
                 window.$('#sideBySideView').toggle();
-                $('.modal-dialog').toggleClass('modal-fullwidth');
+                // eslint-disable-next-line ember/jquery-ember-run
+                window.$('.modal-dialog').toggleClass('modal-fullwidth');
               });
 
               if (window.location.hash) {
@@ -142,7 +145,9 @@ export default class DirectivesList extends Component {
     modal.find('#oldVersion').attr('src', url + '^');
     modal.find('#newVersion').attr('src', url);
 
-    const bsModal = new bootstrap.Modal(document.getElementById('directiveViewer'));
+    const bsModal = new bootstrap.Modal(
+      document.getElementById('directiveViewer')
+    );
     bsModal.show();
 
     if (window.ga && typeof window.ga === 'function') {
