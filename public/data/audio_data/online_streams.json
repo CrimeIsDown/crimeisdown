@@ -98,7 +98,9 @@
     "description": "Dist. 20 and 24, serving the far North side of Chicago, including community areas of Rodgers Park, West Ridge, and Edgewater",
     "frequency": "460.375MHz",
     "slug": "zone11",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=11"
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=11",
+    "broadcastifyId": 37364,
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37364"
   },
   {
     "name": "CPD Zone 12 - Districts 15 and 25",
