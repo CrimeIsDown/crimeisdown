@@ -26,6 +26,7 @@ export default class AudioSearch extends Component {
       zone8: '2022-05-25 00:00:00',
       zone9: '2022-05-12 12:00:00',
       zone11: '2022-10-03 12:00:00',
+      zone13: '2022-10-04 06:00:00',
     };
   }
 

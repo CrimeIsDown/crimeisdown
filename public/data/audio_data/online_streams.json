@@ -116,7 +116,8 @@
     "description": "Covers Armour Square (incl. Chinatown), Bridgeport, McKinley Park, Brighton Park, Back of the Yards/New City, Gage Park.",
     "frequency": "460.450MHz",
     "slug": "zone13",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=13"
+    "broadcastifyId": 37366,
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37366"
   },
   {
     "name": "CPD Citywide 1",
