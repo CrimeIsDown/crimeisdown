@@ -10,10 +10,11 @@ export default class AudioSearch extends Component {
       minuteIncrement: 60,
       dateFormat: 'n/j/Y h:i K',
     };
-    options.defaultDate = new Date();
-    options.defaultDate.setHours(options.defaultDate.getHours() - 1);
-    options.defaultDate.setMinutes(0);
-    options.defaultDate.setSeconds(0);
+    options.defaultDate = moment
+      .tz('America/Chicago')
+      .subtract(1, 'hours')
+      .startOf('hour')
+      .toDate();
     this.options = options;
 
     this.encryptedZones = {
