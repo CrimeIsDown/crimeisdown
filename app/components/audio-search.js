@@ -7,15 +7,13 @@ export default class AudioSearch extends Component {
     super(...arguments);
     let options = {
       enableTime: true,
-      minDate: new Date('2016-12-11T08:00:00.000Z'),
-      maxDate: new Date(),
       minuteIncrement: 60,
       dateFormat: 'n/j/Y h:i K',
     };
-    options.maxDate.setHours(options.maxDate.getHours() - 1);
-    options.maxDate.setMinutes(59);
-    options.defaultDate = options.maxDate;
+    options.defaultDate = new Date();
+    options.defaultDate.setHours(options.defaultDate.getHours() - 1);
     options.defaultDate.setMinutes(0);
+    options.defaultDate.setSeconds(0);
     this.options = options;
 
     this.encryptedZones = {
