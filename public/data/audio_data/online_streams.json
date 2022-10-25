@@ -90,7 +90,8 @@
     "description": "Covers part of the west side of Chicago, including North Lawndale, South Lawndale, the Lower West Side, West Garfield Park, East Garfield Park, and southwest of Humboldt Park.",
     "frequency": "460.100MHz",
     "slug": "zone10",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=10"
+    "broadcastifyId": 37363,
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37363"
   },
   {
     "name": "CPD Zone 11 - Districts 20 and 24",
