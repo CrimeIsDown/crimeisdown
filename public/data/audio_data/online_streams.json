@@ -55,9 +55,9 @@
     "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37359"
   },
   {
-    "name": "CPD Zone 7 - District 3",
-    "shortname": "CPD Zone 7 (003)",
-    "description": "[DELAYED ENCRYPTED FEED] Covers Greater Grand Crossing, Woodlawn, and South Shore.",
+    "name": "CPD Zone 7 - Districts 2 and 3",
+    "shortname": "CPD Zone 7 (002/003)",
+    "description": "[DELAYED ENCRYPTED FEED] 002: Covers Douglas/Bronzeville, Oakland, Grand Boulevard, Kenwood, Washington Park, and Hyde Park; 003: Greater Grand Crossing, Woodlawn, and South Shore.",
     "frequency": "460.075MHz",
     "slug": "zone7",
     "broadcastifyId": 37360,
