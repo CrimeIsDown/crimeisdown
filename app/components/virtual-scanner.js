@@ -85,7 +85,7 @@ export default class VirtualScanner extends Component {
               'https://www.broadcastify.com/listen/feed/' +
               stream.broadcastifyId;
           }
-          if (stream.broadcastify || stream.name.startsWith('CFD')) {
+          if (!this.streams.find((streamObj) => streamObj.slug === stream.slug) && (stream.broadcastify || stream.name.startsWith('CFD'))) {
             this.streams.pushObject({
               name: stream.slug,
               desc: stream.shortname ?? stream.name,
