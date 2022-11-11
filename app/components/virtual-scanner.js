@@ -70,7 +70,6 @@ export default class VirtualScanner extends Component {
                   name: streamData.name,
                   desc: stream.shortname ?? stream.name,
                   order: index,
-                  broadcastify: stream.broadcastify,
                   openmhz: stream.openmhz,
                 };
                 return;
