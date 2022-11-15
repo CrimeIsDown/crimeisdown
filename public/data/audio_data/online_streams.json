@@ -106,7 +106,6 @@
     "description": "Covers the far west side of Chicago, including Austin, Belmont Cragin, Hermosa, and Montclare.",
     "frequency": "460.425MHz",
     "slug": "zone12",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=12",
     "broadcastifyId": 37365,
     "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37365"
   },
