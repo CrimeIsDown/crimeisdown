@@ -9,7 +9,7 @@
           <h1>{{this.model.slug}}</h1>
         {{/if}}
         {{#if this.model.broadcastify}}
-          <div class="alert alert-warning" role="alert">This feed is hosted by Broadcastify. Since you are listening on a 3rd party website, you may hear a 30 second audio advertisement before the scanner audio starts playing. CrimeIsDown.com has no control over this, we are not affiliated with Broadcastify. <a href="https://www.broadcastify.com/listen/feed/{{ this.model.broadcastifyId }}" target="_blank" rel="noopener noreferrer"><img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /> Listen on Broadcastify.com</a></div>
+          <div class="alert alert-warning" role="alert">This feed is hosted by Broadcastify.com, as it is of an encrypted radio channel. Radio traffic is delayed 30-35 minutes. CrimeIsDown.com has no control over these streams and is not affiliated with Broadcastify. <a href="https://www.broadcastify.com/listen/feed/{{ this.model.broadcastifyId }}" target="_blank" rel="noopener noreferrer"><img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /> Listen on Broadcastify.com</a></div>
         {{/if}}
       </StreamPlayer>
       {{#if this.model.openmhz}}
