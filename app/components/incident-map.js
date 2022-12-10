@@ -397,10 +397,10 @@ export default class IncidentMap extends Component {
       neighborhoods: {
         label: 'Neighborhoods',
         layer: null,
-        url: '/data/map_data/neighborhoods.geojson',
+        url: '/data/map_data/neighborhoods_v2.geojson',
         showByDefault: false,
         propMappings: {
-          pri_neigh: 'Neighborhood',
+          PRI_NEIGH: 'Neighborhood',
         },
         style: {
           fill: true,
