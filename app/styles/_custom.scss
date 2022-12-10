@@ -141,6 +141,12 @@ ul.nav.nav-tabs {
           font-size: 1rem;
         }
       }
+      .leaflet-popup-content h4 {
+        font-size: 1rem;
+      }
+      .leaflet-popup-content p {
+        margin: 0;
+      }
       .leaflet-control-geosearch.bar {
         z-index: 1000;
         max-width: 400px;

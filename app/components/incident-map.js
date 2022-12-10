@@ -5,7 +5,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action, set, get } from '@ember/object';
-import { schedule } from '@ember/runloop';
+import { debounce, schedule } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
 import moment from 'moment-timezone';
@@ -604,46 +604,6 @@ export default class IncidentMap extends Component {
                   reject(err);
                 });
             } else {
-              let layerMouseover = (e) => {
-                let layer = e.target;
-
-                let allProps = { ...layer.feature.properties };
-
-                let activeOverlays = this.layersControl.getActiveOverlays();
-                for (const overlayIndex in activeOverlays) {
-                  let overlay = activeOverlays[overlayIndex];
-                  if (
-                    !overlay.layer ||
-                    typeof overlay.layer.eachLayer !== 'function'
-                  )
-                    continue;
-                  let result = leafletPip.pointInLayer(
-                    e.latlng,
-                    overlay.layer,
-                    true
-                  )[0];
-                  if (result) {
-                    allProps = { ...allProps, ...result.feature.properties };
-                  }
-                }
-                info.update(allProps);
-
-                if (e.type === 'mouseover') {
-                  if (map.getZoom() < 14) {
-                    layer.setStyle({
-                      color: '#ff0',
-                      fillOpacity: 0.15,
-                    });
-                  } else {
-                    e.target.setStyle(layerObj.style);
-                  }
-                }
-
-                if (!L.Browser.ie && !L.Browser.opera) {
-                  layer.bringToFront();
-                }
-              };
-
               let geoJsonLayer = L.geoJson(null, {
                 onEachFeature: (feature, layer) => {
                   let props = {};
@@ -659,15 +619,6 @@ export default class IncidentMap extends Component {
                     }
                   }
                   feature.properties = props;
-
-                  layer.on({
-                    click: layerMouseover,
-                    mouseover: layerMouseover,
-                    mouseout: (e) => {
-                      e.target.setStyle(layerObj.style);
-                      info.update();
-                    },
-                  });
                 },
               });
               if (layerObj.showByDefault) {
@@ -696,6 +647,35 @@ export default class IncidentMap extends Component {
       );
     }
 
+    let onMouseMove = (e) => {
+      let allProps = {};
+
+      this.layersControl._layers.forEach((obj) => {
+        if (obj.layer && typeof obj.layer.eachLayer === 'function') {
+          let result = leafletPip.pointInLayer(e.latlng, obj.layer, true)[0];
+          if (result) {
+            allProps = { ...allProps, ...result.feature.properties };
+          }
+        }
+      });
+      info.update(allProps);
+
+      if (e.type === 'click') {
+        L.popup()
+          .setLatLng(e.latlng)
+          .setContent(info._div.innerHTML)
+          .openOn(map);
+      }
+    };
+
+    this.map.on('mousemove', (e) => {
+      if (e.originalEvent.buttons === 0) {
+        debounce(this, onMouseMove, e, 2, true);
+      }
+    });
+
+    this.map.on('click', onMouseMove);
+
     return Promise.all(promises);
   }
 
@@ -711,9 +691,9 @@ export default class IncidentMap extends Component {
 
       info.update = function (props) {
         let html = '<h4>Layer Info</h4>';
-        if (props) {
+        if (props && Object.keys(props).length) {
           for (let key in props) {
-            html += '<p>' + key + ': ' + props[key] + '</p>';
+            html += '<p><em>' + key + '</em>: ' + props[key] + '</p>';
           }
         } else {
           html += '<p>Hover/tap a layer</p>';
