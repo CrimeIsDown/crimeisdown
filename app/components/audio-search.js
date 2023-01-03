@@ -18,6 +18,7 @@ export default class AudioSearch extends Component {
     this.options = options;
 
     this.encryptedZones = {
+      zone2: '2023-01-03 06:00:00',
       zone3: '2022-09-02 00:00:00',
       zone5: '2022-06-30 12:00:00',
       zone6: '2022-08-12 00:00:00',
