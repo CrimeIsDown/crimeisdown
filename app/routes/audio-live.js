@@ -12,33 +12,23 @@ export default class AudioLiveRoute extends Route {
 
   autoplay = false;
 
-  model(params) {
+  async model(params) {
     params.autoplay = params.autoplay === 'true';
 
-    return new Promise((resolve) => {
-      fetch('/data/audio_data/online_streams.json')
-        .then((response) => {
-          response
-            .json()
-            .then((onlineStreams) => {
-              const stream = onlineStreams.filter(
-                (stream) => stream.slug === params.stream
-              )[0];
-              if (stream) {
-                resolve(stream);
-              } else {
-                resolve(params);
-              }
-            })
-            .catch((err) => {
-              console.error(err);
-              resolve(params);
-            });
-        })
-        .catch((err) => {
-          console.error(err);
-          resolve(params);
-        });
-    });
+    try {
+      const response = await fetch('/data/audio_data/online_streams.json');
+      const onlineStreams = await response.json();
+      const stream = onlineStreams.filter(
+        (stream) => stream.slug === params.stream
+      )[0];
+      if (stream) {
+        return stream;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    params.slug = params.stream;
+    delete params.stream;
+    return params;
   }
 }
