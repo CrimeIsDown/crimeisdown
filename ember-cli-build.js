@@ -61,6 +61,8 @@ module.exports = function (defaults) {
   app.import('node_modules/bootstrap-table/dist/bootstrap-table.js');
   app.import('node_modules/bootstrap-table/dist/bootstrap-table.css');
 
+  app.import('node_modules/instantsearch.css/themes/satellite-min.css');
+
   app.import('node_modules/resonance-audio/build/resonance-audio.min.js');
 
   app.import('node_modules/mediaelement/build/mediaelement-and-player.js');

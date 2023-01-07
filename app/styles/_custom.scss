@@ -1,6 +1,7 @@
 body {
   padding-top: 3.4rem;
-  .container {
+  > .container,
+  > .container-fluid {
     padding-top: 1.6rem;
   }
   &.ember-application {
@@ -70,11 +71,6 @@ nav.navbar .form-inline .form-check-label {
 #news-alert {
   border-radius: 0;
   margin-bottom: 0;
-}
-
-blockquote {
-  font-size: 1em;
-  font-style: italic;
 }
 
 #searchpane {
@@ -342,6 +338,28 @@ input.flatpickr-mobile {
   }
   .modal-footer .input-group {
     width: auto;
+  }
+}
+
+.ais-RangeSlider {
+  .rheostat {
+    margin-top: 2rem;
+  }
+  .rheostat-tooltip {
+    padding-top: 3rem;
+    font-weight: normal;
+    font-size: 0.75rem;
+  }
+}
+
+.ais-Hits-item, .ais-InfiniteHits-item {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  p {
+    margin-bottom: 0.5rem;
+  }
+  p:last-of-type {
+    margin-bottom: 0;
   }
 }
 

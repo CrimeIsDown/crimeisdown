@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
-export default class Oggplayer extends Component {
+export default class MediaPlayer extends Component {
   @tracked
   minZoom = 0;
   @tracked
@@ -10,26 +10,31 @@ export default class Oggplayer extends Component {
   @tracked
   currentZoom = 0;
 
+  idSuffix = '';
+
   constructor() {
     super(...arguments);
   }
 
-  initializeMediaPlayer(playerElement, args) {
-    let src = args[0];
-    let type = args[1];
+  @action
+  initializeMediaPlayer(src, type, idSuffix) {
+    this.idSuffix = idSuffix;
+    const playerElement = document.querySelector('#videojs-player' + idSuffix);
+    const timelineElement = document.querySelector('#timeline' + idSuffix);
     let options = {
       controls: true,
       techOrder: ['html5'],
       plugins: {
         wavesurfer: {
           backend: 'MediaElement',
-          msDisplayMax: 0,
+          displayMilliseconds: false,
+          interact: true,
           waveColor: '#0F0',
           progressColor: '#0A0',
           cursorColor: '#FFF',
           plugins: [
             window.WaveSurfer.timeline.create({
-              container: '#timeline',
+              container: timelineElement,
             }),
           ],
         },
@@ -42,14 +47,23 @@ export default class Oggplayer extends Component {
     }
 
     // This is a bad idea, but it works for sharing scope
-    window.oggplayer = window.videojs('videojs-player', options, () => {
-      window.oggplayer.src({ src: src, type: type });
-    });
+    window['player' + this.idSuffix] = window.videojs(
+      playerElement,
+      options,
+      () => {
+        window['player' + this.idSuffix].src({ src: src, type: type });
+      }
+    );
+  }
+
+  @action
+  teardownMediaPlayer() {
+    window['player' + this.idSuffix].dispose();
   }
 
   @action
   zoom(e) {
-    let wavesurfer = window.oggplayer.wavesurfer().surfer;
+    let wavesurfer = window['player' + this.idSuffix].wavesurfer().surfer;
     let playerWidth = wavesurfer.drawer.getWidth();
     let minPxPerSec = Math.round(
       (playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration()

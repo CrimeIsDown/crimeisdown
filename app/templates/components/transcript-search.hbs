@@ -1,0 +1,26 @@
+<div class="search-panel row" {{did-insert this.setupSearch}}>
+  <div class="search-panel__filters col-md-3">
+    <h5>Talkgroups</h5>
+    <div id="tg-menu" class="mb-3"></div>
+    <h5>Radio IDs</h5>
+    <div id="radioid-menu" class="mb-3"></div>
+    <h5>Call Time</h5>
+    <div id="time-slider" class="ms-4 mb-3"></div>
+  </div>
+  <div class="search-panel__results col">
+    <div class="row mb-3">
+      <div id="searchbox" class="col"></div>
+      <div id="sort-by" class="col-md-2"></div>
+    </div>
+    <div id="stats" class="mb-1"></div>
+    <div id="hits"></div>
+    <div id="pagination" class="mt-3"></div>
+  </div>
+</div>
+
+{{#if this.useMediaPlayerComponent}}
+{{#each this.hits as |hit|}}
+<MediaPlayer @src="{{hit.raw_audio_url}}" @type="audio/mpeg" @idSuffix="-{{hit.id}}" @shadow="true" />
+<div id="timeline-{{hit.id}}" class="d-none"></div>
+{{/each}}
+{{/if}}

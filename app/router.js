@@ -25,4 +25,7 @@ Router.map(function () {
   this.route('audio-live', {
     path: '/audio/live/:stream',
   });
+  this.route('search-transcripts', {
+    path: '/transcripts/search',
+  });
 });

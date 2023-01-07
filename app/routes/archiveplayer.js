@@ -2,8 +2,12 @@ import Route from '@ember/routing/route';
 
 export default class ArchiveplayerRoute extends Route {
   queryParams = {
-    url: false,
-    type: false,
+    url: {
+      refreshModel: true,
+    },
+    type: {
+      refreshModel: true,
+    },
   };
 
   model(params) {
