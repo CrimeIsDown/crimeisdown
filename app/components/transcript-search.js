@@ -20,6 +20,19 @@ import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 export default class TranscriptSearchComponent extends Component {
   @tracked hits = [];
   @tracked useMediaPlayerComponent = false;
+  @tracked autoRefreshInterval = '0';
+  autoRefresh = undefined;
+  search = undefined;
+
+  @action
+  restartAutoRefresh() {
+    clearInterval(this.autoRefresh);
+    if (parseInt(this.autoRefreshInterval) > 0) {
+      this.autoRefresh = setInterval(() => {
+        this.search.refresh();
+      }, parseInt(this.autoRefreshInterval) * 1000);
+    }
+  }
 
   @action
   setupSearch() {
@@ -45,7 +58,7 @@ export default class TranscriptSearchComponent extends Component {
     });
     const searchClient = typesenseInstantsearchAdapter.searchClient;
 
-    const search = instantsearch({
+    this.search = instantsearch({
       searchClient,
       indexName: 'calls',
       routing: {
@@ -65,7 +78,7 @@ export default class TranscriptSearchComponent extends Component {
 
     const globalThis = this;
 
-    search.addWidgets([
+    this.search.addWidgets([
       searchBox({
         container: '#searchbox',
       }),
@@ -188,6 +201,7 @@ export default class TranscriptSearchComponent extends Component {
         container: '#tg-menu',
         attribute: 'talkgroup_tag',
         searchable: true,
+        showMore: true,
         cssClasses: {
           label: ['form-check-label'],
           checkbox: ['form-check-input'],
@@ -199,6 +213,8 @@ export default class TranscriptSearchComponent extends Component {
         container: '#radioid-menu',
         attribute: 'srcList',
         searchable: true,
+        showMore: true,
+        showMoreLimit: 40,
         cssClasses: {
           label: ['form-check-label'],
           checkbox: ['form-check-input'],
@@ -222,10 +238,10 @@ export default class TranscriptSearchComponent extends Component {
       }),
     ]);
 
-    search.start();
+    this.search.start();
 
-    if (search.getUiState().calls.sortBy === undefined) {
-      search.setUiState({
+    if (this.search.getUiState().calls.sortBy === undefined) {
+      this.search.setUiState({
         calls: {
           sortBy: 'calls/sort/start_time:desc',
         },
