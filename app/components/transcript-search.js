@@ -41,9 +41,10 @@ export default class TranscriptSearchComponent extends Component {
         apiKey: 'REDACTED_PUBLIC_CREDENTIAL', // Be sure to use an API key that only allows searches, in production
         nodes: [
           {
-            host: 'crimeisdown',
-            port: '8108',
-            protocol: 'http',
+            host: 'api.crimeisdown.com',
+            path: '/search',
+            port: '443',
+            protocol: 'https',
           },
         ],
       },
