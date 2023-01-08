@@ -1,10 +1,13 @@
 <div class="col-lg-12">
   <h1>Chicago Police Department Directive Changes</h1>
-  <p>Diffs on all CPD directives updated since 2015. We check daily for new updates. A project of <a href="https://crimeisdown.com/">CrimeIsDown.com</a>. View the raw diffs on <a href="https://github.com/CrimeIsDown/cpd-directives">GitHub</a>.</p>
+  <p>Diffs on all CPD directives updated since 2015. View the raw diffs on <a href="https://github.com/CrimeIsDown/cpd-directives">GitHub</a>.</p>
+  <div class="alert alert-warning" role="alert">
+    Due to changes with the CPD directives website that impact our ability to scrape it, this list has not been updated since 2021. Refer to the <a href="https://directives.chicagopolice.org/#search">Search page of the official CPD directives website</a> to see the most recent directives.
+  </div>
 
   <p><strong>View what a directive looked like on a given date:</strong></p>
   <form id="findDirectiveForm" class="row" aria-label="Directive viewer" method="post" {{on "submit" this.submitFindDirectiveForm}}>
-    <div class="col">
+    <div class="col-sm">
       <label class="sr-only" for="url">
         CPD directive URL
       </label>
@@ -13,16 +16,16 @@
         <input class="form-control" size="50" type="url" name="url" id="url" placeholder="http://directives.chicagopolice.org/directives/data/...">
       </div>
     </div>
-    <div class="col-2">
+    <div class="col-sm">
       <label class="sr-only" for="date">
         Version as of date
       </label>
       <div class="input-group mb-2 me-sm-2">
-        <span class="input-group-text">Date to look at</span>
+        <span class="input-group-text">Date</span>
         <input class="form-control" type="date" name="date" id="date">
       </div>
     </div>
-    <div class="col">
+    <div class="col-sm">
       <button type="submit" class="btn btn-primary mb-2">Open</button>
     </div>
   </form>
