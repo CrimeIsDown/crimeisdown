@@ -3,7 +3,7 @@ import fetch from 'fetch';
 
 export default class AudioRoute extends Route {
   async model() {
-    const response = await fetch('/data/audio_data/online_streams.json')
+    const response = await fetch('/data/audio_data/online_streams.json');
     return response.json();
   }
 }
