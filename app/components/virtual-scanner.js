@@ -318,7 +318,11 @@ export default class VirtualScanner extends Component {
       });
     }
     audioPlayer.load();
-    audioPlayer.play();
+    try {
+      audioPlayer.play();
+    } catch (e) {
+      alert(`Error playing ${streamData.name}: ${e}`);
+    }
     return audioPlayer;
   }
 

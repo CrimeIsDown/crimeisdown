@@ -102,6 +102,7 @@ export default class TranscriptSearchComponent extends Component {
         escapeHTML: false,
         templates: {
           item(hit, { html }) {
+            // TODO: add button to see call in context of transcripts
             return html`
               <div>
                 <h4 title="${hit.talkgroup_description}">
