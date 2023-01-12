@@ -34,7 +34,7 @@ export default class AudioSearch extends Component {
   @action
   submit(event) {
     event.preventDefault();
-    let downloadUrl = 'https://audio.crimeisdown.com/download-audio.php';
+    let downloadUrl = 'https://api.crimeisdown.com/recordings/download-audio';
     const inputs = {};
     for (const element of event.target.elements) {
       if (element.name) {
@@ -50,7 +50,7 @@ export default class AudioSearch extends Component {
       Object.keys(this.encryptedZones).includes(inputs.feed) &&
       datetime.isAfter(this.encryptedZones[inputs.feed])
     ) {
-      downloadUrl = 'https://audio.crimeisdown.com/download-bcfy-audio.php';
+      downloadUrl = 'https://api.crimeisdown.com/recordings/download-bcfy-audio';
     }
     inputs.datetime = datetime.utc().toISOString();
     const queryParams = new URLSearchParams(inputs);
