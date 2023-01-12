@@ -50,7 +50,8 @@ export default class AudioSearch extends Component {
       Object.keys(this.encryptedZones).includes(inputs.feed) &&
       datetime.isAfter(this.encryptedZones[inputs.feed])
     ) {
-      downloadUrl = 'https://api.crimeisdown.com/recordings/download-bcfy-audio';
+      downloadUrl =
+        'https://api.crimeisdown.com/recordings/download-bcfy-audio';
     }
     inputs.datetime = datetime.utc().toISOString();
     const queryParams = new URLSearchParams(inputs);
