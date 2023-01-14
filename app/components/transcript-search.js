@@ -66,6 +66,7 @@ export default class TranscriptSearchComponent extends Component {
       this.apiKey,
       {
         finitePagination: true,
+        keepZeroFacets: true,
       }
     );
 
@@ -290,7 +291,6 @@ export default class TranscriptSearchComponent extends Component {
       refinementList({
         container: '#radioid-menu',
         attribute: 'srcList',
-        operator: 'or',
         showMore: true,
         showMoreLimit: 60,
         cssClasses: {
