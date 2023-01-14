@@ -1,5 +1,18 @@
+{{#if (eq this.isLoggedIn undefined)}}
+<p {{did-insert this.login}}>Logging in...</p>
+{{else}}
 <div class="search-panel row" {{did-insert this.setupSearch}}>
   <div class="search-panel__filters col-md-3">
+    {{#if (eq this.isLoggedIn false)}}
+    <p>
+      <a href="https://api.crimeisdown.com/auth/redirect" class="ptrn-button"><img src="https://cdn.jsdelivr.net/gh/Patreon/patreon-wordpress@master/assets/img/patreon%20login@2x.png" alt="Log in with Patreon" width="272" height="42"></a>
+      or
+      <a href="https://www.patreon.com/bePatron?u=4805116" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+      {{!-- template-lint-disable no-forbidden-elements --}}
+      <script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+      to use the full version.
+    </p>
+    {{/if}}
     <div id="auto-refresh" class="mb-2">
       <div class="input-group">
         <span class="input-group-text" id="refresh-interval-val">
@@ -10,8 +23,15 @@
           {{this.autoRefreshInterval}}s
         {{/if}}
         </span>
-        <Input @type="range" class="form-control form-range" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} {{on "change" this.restartAutoRefresh}}  />
+        {{#if this.isLoggedIn}}
+        <Input @type="range" class="form-control form-range" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} {{on "change" this.restartAutoRefresh}} />
+        {{else}}
+        <Input @type="range" class="form-control form-range disabled" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} disabled />
+        {{/if}}
       </div>
+      {{#unless this.isLoggedIn}}
+      <p class="caption">This demo does not have live updates as it runs off of a small demonstration dataset.</p>
+      {{/unless}}
     </div>
     <div class="accordion mb-3" id="filtersAccordion">
       <div class="accordion-item">
@@ -22,11 +42,12 @@
         </h2>
         <div id="filters" class="accordion-collapse collapse" aria-labelledby="filtersHeading" data-bs-parent="#filtersAccordion">
           <div class="accordion-body">
-            <h5>Talkgroups</h5>
+            <h5 id="tg-heading">Talkgroups</h5>
             <div id="tg-menu" class="mb-4"></div>
-            <h5>Radio IDs</h5>
+            <h5 id="radioid-heading">Radio IDs</h5>
+            <p class="text-muted caption mb-0">* Digital transmissions only</p>
             <div id="radioid-menu" class="mb-4"></div>
-            <h5 class="mb-0">Call Time</h5>
+            <h5 id="time-heading" class="mb-0">Call Time</h5>
             <div id="time-slider"></div>
           </div>
         </div>
@@ -34,7 +55,11 @@
     </div>
   </div>
   <div class="search-panel__results col">
+    {{#if (eq this.isLoggedIn false)}}
+    <h1 class="display-5">Call Transcript Search Demo</h1>
+    {{else}}
     <h1 class="display-5 sr-only">Call Transcript Search</h1>
+    {{/if}}
     <div class="row mb-1">
       <div id="searchbox" class="col mb-2"></div>
       <div id="sort-by" class="col-md-3 mb-2"></div>
@@ -51,4 +76,6 @@
 <MediaPlayer @src="{{hit.raw_audio_url}}" @type="audio/mpeg" @idSuffix="-{{hit.id}}" @shadow="true" />
 <div id="timeline-{{hit.id}}" class="d-none"></div>
 {{/each}}
+{{/if}}
+
 {{/if}}

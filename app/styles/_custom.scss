@@ -341,6 +341,18 @@ input.flatpickr-mobile {
   }
 }
 
+.ptrn-button {
+  display: block;
+  img {
+    width: 272px;
+    height: 42px;
+  }
+}
+
+p.caption {
+  font-size: 0.8rem;
+}
+
 .input-group .form-control.form-range {
   height: 2.5rem;
   padding: 1rem;

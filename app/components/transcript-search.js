@@ -20,6 +20,9 @@ import { history } from 'instantsearch.js/es/lib/routers';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
 
 export default class TranscriptSearchComponent extends Component {
+  @tracked isLoggedIn = undefined;
+  @tracked apiKey = undefined;
+  @tracked indexName = 'calls';
   @tracked hits = [];
   @tracked useMediaPlayerComponent = false;
   @tracked autoRefreshInterval = '0';
@@ -37,21 +40,36 @@ export default class TranscriptSearchComponent extends Component {
   }
 
   @action
-  async setupSearch() {
-    const response = await fetch('https://api.crimeisdown.com/api/search-key', {
-      credentials: 'include',
-    });
-    const apiKey = await response.text();
+  async login() {
+    try {
+      const response = await fetch(
+        'https://api.crimeisdown.com/api/search-key',
+        {
+          credentials: 'include',
+        }
+      );
+      this.apiKey = await response.text();
+      this.isLoggedIn = true;
+    } catch (e) {
+      console.error(e);
+      this.isLoggedIn = false;
+      this.apiKey =
+        'REDACTED_PUBLIC_CREDENTIAL';
+      this.indexName = 'calls_demo';
+    }
+  }
 
+  @action
+  async setupSearch() {
     const searchClient = new instantMeiliSearch(
       'https://api.crimeisdown.com/search',
-      apiKey,
+      this.apiKey,
       {
         finitePagination: true,
       }
     );
 
-    const defaultSort = 'calls:start_time:desc';
+    const defaultSort = `${this.indexName}:start_time:desc`;
     const minStartTime = Math.floor(new Date(2023, 0, 1).getTime() / 1000);
     const maxStartTime = Math.floor(
       new Date().setDate(new Date().getDate() + 1) / 1000
@@ -125,10 +143,10 @@ export default class TranscriptSearchComponent extends Component {
         container: '#sort-by',
         items: [
           { label: 'Newest First', value: defaultSort },
-          { label: 'Oldest First', value: 'calls:start_time:asc' },
+          { label: 'Oldest First', value: `${this.indexName}:start_time:asc` },
           {
             label: 'Relevance',
-            value: 'calls',
+            value: this.indexName,
           },
         ],
       }),
