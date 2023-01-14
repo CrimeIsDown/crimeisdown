@@ -277,6 +277,7 @@ export default class TranscriptSearchComponent extends Component {
       refinementList({
         container: '#tg-menu',
         attribute: 'talkgroup_tag',
+        operator: 'or',
         showMore: true,
         showMoreLimit: 60,
         cssClasses: {
@@ -289,6 +290,7 @@ export default class TranscriptSearchComponent extends Component {
       refinementList({
         container: '#radioid-menu',
         attribute: 'srcList',
+        operator: 'or',
         showMore: true,
         showMoreLimit: 60,
         cssClasses: {
