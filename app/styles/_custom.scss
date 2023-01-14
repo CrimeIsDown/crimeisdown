@@ -342,10 +342,14 @@ input.flatpickr-mobile {
 }
 
 .ptrn-button {
-  display: block;
   img {
+    display: inline-block;
     width: 272px;
     height: 42px;
+  }
+  img:hover, img:focus {
+    filter: brightness(92%);
+    transition: all 0.5s ease;
   }
 }
 

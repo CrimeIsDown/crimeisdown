@@ -5,12 +5,10 @@
   <div class="search-panel__filters col-md-3">
     {{#if (eq this.isLoggedIn false)}}
     <p>
-      <a href="https://api.crimeisdown.com/auth/redirect" class="ptrn-button" referrerpolicy="unsafe-url"><img src="https://cdn.jsdelivr.net/gh/Patreon/patreon-wordpress@master/assets/img/patreon%20login@2x.png" alt="Log in with Patreon" width="272" height="42"></a>
-      or
-      <a href="https://www.patreon.com/bePatron?u=4805116" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
-      {{!-- template-lint-disable no-forbidden-elements --}}
-      <script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
-      to use the full version.
+      <a href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/login-with-patreon.png" alt="Log in with Patreon"></a>
+      <br>or<br>
+      <a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/become-a-patron.png" alt="Become a Patron!"></a>
+      <br>to use the full version.
     </p>
     {{/if}}
     <div id="auto-refresh" class="mb-2">
