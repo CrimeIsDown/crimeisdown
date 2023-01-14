@@ -1,32 +1,45 @@
 <div class="search-panel row" {{did-insert this.setupSearch}}>
   <div class="search-panel__filters col-md-3">
-    <h2 class="fs-4">Filters</h2>
-    <h5>Talkgroups</h5>
-    <div id="tg-menu" class="mb-3"></div>
-    <h5>Radio IDs</h5>
-    <div id="radioid-menu" class="mb-3"></div>
-    <h5>Call Time</h5>
-    <div id="time-slider" class="ms-4 mb-3"></div>
-  </div>
-  <div class="search-panel__results col">
-    <h1 class="display-5">Call Transcript Search</h1>
-    <div class="row mb-3">
-      <div id="searchbox" class="col"></div>
-      <div id="sort-by" class="col-md-2"></div>
-      <div id="auto-refresh" class="col-md-3">
-        <div class="input-group">
-          <span class="input-group-text" id="refresh-interval-val">
-          Auto-refresh:
-          {{#if (eq this.autoRefreshInterval "0")}}
-            Off
-          {{else}}
-            {{this.autoRefreshInterval}}s
-          {{/if}}
-          </span>
-          <Input @type="range" class="form-control form-range" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} {{on "change" this.restartAutoRefresh}}  />
+    <div id="auto-refresh" class="mb-2">
+      <div class="input-group">
+        <span class="input-group-text" id="refresh-interval-val">
+        Auto Refresh:
+        {{#if (eq this.autoRefreshInterval "0")}}
+          Off
+        {{else}}
+          {{this.autoRefreshInterval}}s
+        {{/if}}
+        </span>
+        <Input @type="range" class="form-control form-range" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} {{on "change" this.restartAutoRefresh}}  />
+      </div>
+    </div>
+    <div class="accordion mb-3" id="filtersAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="filtersHeading">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters" aria-expanded="true" aria-controls="filters">
+            Filters
+          </button>
+        </h2>
+        <div id="filters" class="accordion-collapse collapse" aria-labelledby="filtersHeading" data-bs-parent="#filtersAccordion">
+          <div class="accordion-body">
+            <h5>Talkgroups</h5>
+            <div id="tg-menu" class="mb-4"></div>
+            <h5>Radio IDs</h5>
+            <div id="radioid-menu" class="mb-4"></div>
+            <h5 class="mb-0">Call Time</h5>
+            <div id="time-slider"></div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="search-panel__results col">
+    <h1 class="display-5 sr-only">Call Transcript Search</h1>
+    <div class="row mb-1">
+      <div id="searchbox" class="col mb-2"></div>
+      <div id="sort-by" class="col-md-3 mb-2"></div>
+    </div>
+    <div id="current-refinements"></div>
     <div id="stats" class="mb-1"></div>
     <div id="hits"></div>
     <div id="pagination" class="mt-3"></div>

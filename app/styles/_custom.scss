@@ -166,6 +166,26 @@ ul.nav.nav-tabs {
         width: 50%;
       }
     }
+
+    .accordion {
+      .accordion-item {
+        border: none;
+        .accordion-header {
+          .draggable-handle {
+            cursor: pointer;
+            color: #777;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0.5rem 1rem;
+          }
+        }
+        .accordion-body {
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+    }
   }
 
   h3 {
@@ -174,26 +194,6 @@ ul.nav.nav-tabs {
 
   label {
     display: block;
-  }
-}
-
-.accordion {
-  .accordion-item {
-    border: none;
-    .accordion-header {
-      .draggable-handle {
-        cursor: pointer;
-        color: #777;
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 0.5rem 1rem;
-      }
-    }
-    .accordion-body {
-      padding-left: 0;
-      padding-right: 0;
-    }
   }
 }
 
@@ -346,17 +346,6 @@ input.flatpickr-mobile {
   padding: 1rem;
 }
 
-.ais-RangeSlider {
-  .rheostat {
-    margin-top: 2rem;
-  }
-  .rheostat-tooltip {
-    padding-top: 3rem;
-    font-weight: normal;
-    font-size: 0.75rem;
-  }
-}
-
 .ais-Hits-item, .ais-InfiniteHits-item {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -368,10 +357,61 @@ input.flatpickr-mobile {
   }
 }
 
+.ais-Highlight-highlighted, .ais-Snippet-highlighted {
+  font-style: inherit;
+}
+
+.ais-CurrentRefinements--noRefinement > .ais-CurrentRefinements-list {
+  display: none;
+}
+
+.ais-CurrentRefinements:not(.ais-CurrentRefinements--noRefinement) {
+  margin-bottom: 1rem;
+}
+
+.ais-Pagination-list {
+  flex-wrap: wrap;
+}
+
+#time-slider {
+  margin: 0 2rem 3rem;
+  .ais-RangeSlider {
+    .rheostat {
+      margin-top: 2rem;
+    }
+    .rheostat-tooltip {
+      padding-top: 3rem;
+      font-weight: normal;
+      font-size: 0.75rem;
+      width: 4rem;
+    }
+  }
+}
+
+audio.call-audio {
+  height: 100px;
+  width: 100%;
+  max-width: 400px;
+}
+
 @include media-breakpoint-up(md) {
   .stream-options {
     max-height: 300px;
     overflow-y: auto;
+  }
+  #filtersHeading > .accordion-button {
+    color: var(--bs-accordion-active-color);
+    background-color: var(--bs-accordion-active-bg);
+    box-shadow: inset 0 calc(var(--bs-accordion-border-width) * -1) 0 var(--bs-accordion-border-color);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    &::after {
+      background-image: var(--bs-accordion-btn-active-icon);
+      transform: var(--bs-accordion-btn-icon-transform);
+    }
+  }
+  #filters.collapse {
+    display: block;
   }
 }
 

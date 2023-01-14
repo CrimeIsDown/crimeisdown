@@ -1,0 +1,6 @@
+{{#unless this.hasSeenAlert}}
+<div class="alert alert-{{or @type 'primary'}} alert-dismissible fade show" role="alert">
+  {{yield}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" {{on "click" this.dismiss}}></button>
+</div>
+{{/unless}}

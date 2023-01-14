@@ -6,6 +6,7 @@ import instantsearch from 'instantsearch.js';
 import { highlight } from 'instantsearch.js/es/helpers';
 import {
   configure,
+  currentRefinements,
   hits,
   pagination,
   rangeSlider,
@@ -14,8 +15,9 @@ import {
   sortBy,
   stats,
 } from 'instantsearch.js/es/widgets';
+import { defaultTemplates as statsTemplates } from 'instantsearch.js/es/widgets/stats/stats';
 import { history } from 'instantsearch.js/es/lib/routers';
-import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
+import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
 
 export default class TranscriptSearchComponent extends Component {
   @tracked hits = [];
@@ -35,33 +37,29 @@ export default class TranscriptSearchComponent extends Component {
   }
 
   @action
-  setupSearch() {
-    const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
-      server: {
-        apiKey: 'REDACTED_PUBLIC_CREDENTIAL', // Be sure to use an API key that only allows searches, in production
-        nodes: [
-          {
-            host: 'api.crimeisdown.com',
-            path: '/search',
-            port: '443',
-            protocol: 'https',
-          },
-        ],
-      },
-      // The following parameters are directly passed to Typesense's search API endpoint.
-      //  So you can pass any parameters supported by the search endpoint below.
-      //  queryBy is required.
-      //  filterBy is managed and overridden by InstantSearch.js. To set it, you want to use one of the filter widgets like refinementList or use the `configure` widget.
-      additionalSearchParameters: {
-        query_by: 'transcript,srcList',
-        sort_by: 'start_time:desc',
-      },
+  async setupSearch() {
+    const response = await fetch('https://api.crimeisdown.com/api/search-key', {
+      credentials: 'include',
     });
-    const searchClient = typesenseInstantsearchAdapter.searchClient;
+    const apiKey = await response.text();
+
+    const searchClient = new instantMeiliSearch(
+      'https://api.crimeisdown.com/search',
+      apiKey,
+      {
+        finitePagination: true,
+      }
+    );
+
+    const defaultSort = 'calls:start_time:desc';
+    const minStartTime = Math.floor(new Date(2023, 0, 1).getTime() / 1000);
+    const maxStartTime = Math.floor(
+      new Date().setDate(new Date().getDate() + 1) / 1000
+    );
 
     this.search = instantsearch({
       searchClient,
-      indexName: 'calls',
+      indexName: defaultSort,
       routing: {
         router: history({
           windowTitle(routeState) {
@@ -72,6 +70,46 @@ export default class TranscriptSearchComponent extends Component {
             }
 
             return `${indexState.query} - Search Scanner Transcripts | CrimeIsDown.com`;
+          },
+          createURL({ qsModule, location, routeState }) {
+            const { origin, pathname, hash } = location;
+            const indexState = routeState['instant_search'] || {};
+            // Remove the sort suffix from the index name
+            const indexName = defaultSort.split(':')[0];
+            delete Object.assign(routeState, {
+              [indexName]: routeState[defaultSort],
+            })[defaultSort];
+
+            if (
+              routeState[indexName].range.start_time ===
+              `${minStartTime}:${maxStartTime}`
+            ) {
+              delete routeState[indexName].range.start_time;
+            }
+
+            const queryString = qsModule.stringify(routeState);
+
+            if (
+              !indexState.query &&
+              routeState[indexName].sortBy === defaultSort
+            ) {
+              return `${origin}${pathname}${hash}`;
+            }
+
+            return `${origin}${pathname}?${queryString}${hash}`;
+          },
+          parseURL({ qsModule, location }) {
+            const routeState = qsModule.parse(location.search.slice(1), {
+              arrayLimit: 99,
+            });
+            // Re-add the sort suffix to the index name
+            const indexName = defaultSort.split(':')[0];
+            if (indexName in routeState) {
+              delete Object.assign(routeState, {
+                [defaultSort]: routeState[indexName],
+              })[indexName];
+            }
+            return routeState;
           },
         }),
       },
@@ -86,16 +124,45 @@ export default class TranscriptSearchComponent extends Component {
       sortBy({
         container: '#sort-by',
         items: [
-          { label: 'Newest First', value: 'calls/sort/start_time:desc' },
-          { label: 'Oldest First', value: 'calls/sort/start_time:asc' },
+          { label: 'Newest First', value: defaultSort },
+          { label: 'Oldest First', value: 'calls:start_time:asc' },
           {
             label: 'Relevance',
-            value: 'calls/sort/_text_match:desc,start_time:desc',
+            value: 'calls',
           },
         ],
       }),
+      currentRefinements({
+        container: '#current-refinements',
+        excludedAttributes: ['start_time'],
+        transformItems(items) {
+          return items.map((item) => {
+            switch (item.attribute) {
+              case 'talkgroup_tag':
+                item.label = 'Talkgroup';
+                break;
+              case 'srcList':
+                item.label = 'Radio ID';
+                break;
+              case 'start_time':
+                item.label = 'Call Time';
+                break;
+            }
+            return item;
+          });
+        },
+      }),
       stats({
         container: '#stats',
+        templates: {
+          text: function text(props) {
+            let text = statsTemplates.text(props);
+            if (props.hasManyResults && props.nbHits === 1000) {
+              text = `&ge;${text}`;
+            }
+            return text;
+          },
+        },
       }),
       hits({
         container: '#hits',
@@ -138,7 +205,7 @@ export default class TranscriptSearchComponent extends Component {
                     aria-expanded="true"
                     aria-controls="metadata-${hit.id}"
                   >
-                    Call Metadata
+                    Open Raw Metadata
                   </button>
                 </p>
                 <div class="collapse mt-3 mb-3" id="metadata-${hit.id}">
@@ -151,11 +218,10 @@ export default class TranscriptSearchComponent extends Component {
                   id="videojs-player-${hit.id}"
                   class="${globalThis.useMediaPlayerComponent
                     ? 'video-js vjs-default-skin vjs-fill'
-                    : ''}"
+                    : 'call-audio'}"
                   src="${hit.raw_audio_url}"
                   controls
                   preload="none"
-                  style="height: 100px; width: 100%"
                 ></audio>
                 <p
                   dangerouslySetInnerHTML=${{
@@ -178,18 +244,9 @@ export default class TranscriptSearchComponent extends Component {
             item._highlightResult.transcript.value =
               item._highlightResult.transcript.value
                 .trim()
-                .replace(/\n/g, '<br/>');
-            for (const src of item._highlightResult.srcList) {
-              if (src.value.includes('<mark>')) {
-                const callsign = src.value.replace(/<\/?mark>/g, '');
-                item._highlightResult.transcript.value =
-                  item._highlightResult.transcript.value.replace(
-                    new RegExp(callsign, 'g'),
-                    src.value
-                  );
-              }
-            }
-            item.transcript = item.transcript.trim().replace(/\n/g, '<br/>');
+                .replace(/\n/g, '<br/>')
+                .replace(/__ais-highlight__/g, '<mark>')
+                .replace(/__\/ais-highlight__/g, '</mark>');
             return item;
           });
           globalThis.hits = transformedItems;
@@ -202,8 +259,8 @@ export default class TranscriptSearchComponent extends Component {
       refinementList({
         container: '#tg-menu',
         attribute: 'talkgroup_tag',
-        searchable: true,
         showMore: true,
+        showMoreLimit: 60,
         cssClasses: {
           label: ['form-check-label'],
           checkbox: ['form-check-input'],
@@ -214,22 +271,35 @@ export default class TranscriptSearchComponent extends Component {
       refinementList({
         container: '#radioid-menu',
         attribute: 'srcList',
-        searchable: true,
         showMore: true,
-        showMoreLimit: 40,
+        showMoreLimit: 60,
         cssClasses: {
           label: ['form-check-label'],
           checkbox: ['form-check-input'],
           item: ['form-check'],
           count: ['ms-1'],
         },
+        transformItems(items) {
+          return items.filter(
+            (item) => item.value !== '\\-1' && item.value !== '0'
+          );
+        },
       }),
       rangeSlider({
         container: '#time-slider',
         attribute: 'start_time',
+        min: minStartTime,
+        max: maxStartTime,
         pips: false,
         tooltips: {
-          format: (value) => new Date(value * 1000).toLocaleString(),
+          format: (value) =>
+            new Date(value * 1000).toLocaleString([], {
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: '2-digit',
+            }),
         },
         cssClasses: {
           tooltip: ['pt-5'],
@@ -241,13 +311,5 @@ export default class TranscriptSearchComponent extends Component {
     ]);
 
     this.search.start();
-
-    if (this.search.getUiState().calls.sortBy === undefined) {
-      this.search.setUiState({
-        calls: {
-          sortBy: 'calls/sort/start_time:desc',
-        },
-      });
-    }
   }
 }
