@@ -9,7 +9,6 @@ import {
   currentRefinements,
   hits,
   pagination,
-  rangeSlider,
   refinementList,
   searchBox,
   sortBy,
@@ -18,6 +17,7 @@ import {
 import { defaultTemplates as statsTemplates } from 'instantsearch.js/es/widgets/stats/stats';
 import { history } from 'instantsearch.js/es/lib/routers';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
+import connectRange from 'instantsearch.js/es/connectors/range/connectRange';
 
 export default class TranscriptSearchComponent extends Component {
   @tracked isLoggedIn = undefined;
@@ -26,8 +26,50 @@ export default class TranscriptSearchComponent extends Component {
   @tracked hits = [];
   @tracked useMediaPlayerComponent = false;
   @tracked autoRefreshInterval = '0';
+  @tracked minStartTime;
+  @tracked maxStartTime;
   autoRefresh = undefined;
   search = undefined;
+
+  constructor() {
+    super(...arguments);
+    this.minStartTime = new Date(2023, 0, 1);
+    this.maxStartTime = new Date();
+    this.maxStartTime.setDate(new Date().getDate() + 1);
+    this.flatpickrOptions = {
+      enableTime: true,
+      altFormat: 'n/j/Y h:i K',
+      altInput: true,
+      dateFormat: 'U',
+      minDefaultDate: this.minStartTime,
+      maxDefaultDate: this.maxStartTime,
+    };
+  }
+
+  updateStartTimeFilter() {
+    const min = Math.floor(this.minStartTime.getTime() / 1000);
+    const max = Math.floor(this.maxStartTime.getTime() / 1000);
+    this.search.setUiState({
+      // Replace instant_search with your index name
+      [this.search.indexName]: {
+        range: {
+          start_time: `${min}:${max}`,
+        },
+      },
+    });
+  }
+
+  @action
+  setMinStartTime(selectedDates) {
+    this.minStartTime = selectedDates[0];
+    this.updateStartTimeFilter();
+  }
+
+  @action
+  setMaxStartTime(selectedDates) {
+    this.maxStartTime = selectedDates[0];
+    this.updateStartTimeFilter();
+  }
 
   @action
   restartAutoRefresh() {
@@ -72,6 +114,8 @@ export default class TranscriptSearchComponent extends Component {
 
   @action
   async setupSearch() {
+    const globalThis = this;
+
     const searchClient = new instantMeiliSearch(
       'https://api.crimeisdown.com/search',
       this.apiKey,
@@ -81,10 +125,6 @@ export default class TranscriptSearchComponent extends Component {
     );
 
     const defaultSort = `${this.indexName}:start_time:desc`;
-    const minStartTime = Math.floor(new Date(2023, 0, 1).getTime() / 1000);
-    const maxStartTime = Math.floor(
-      new Date().setDate(new Date().getDate() + 1) / 1000
-    );
 
     this.search = instantsearch({
       searchClient,
@@ -109,13 +149,6 @@ export default class TranscriptSearchComponent extends Component {
               [indexName]: routeState[defaultSort],
             })[defaultSort];
 
-            if (
-              routeState[indexName].range.start_time ===
-              `${minStartTime}:${maxStartTime}`
-            ) {
-              delete routeState[indexName].range.start_time;
-            }
-
             const queryString = qsModule.stringify(routeState);
 
             if (
@@ -131,6 +164,19 @@ export default class TranscriptSearchComponent extends Component {
             const routeState = qsModule.parse(location.search.slice(1), {
               arrayLimit: 99,
             });
+            // Set start_time filter
+            if (
+              routeState[globalThis.indexName]?.range?.start_time !== undefined
+            ) {
+              const start_time =
+                routeState[globalThis.indexName].range.start_time.split(':');
+              globalThis.minStartTime = new Date(
+                parseInt(start_time[0]) * 1000
+              );
+              globalThis.maxStartTime = new Date(
+                parseInt(start_time[1]) * 1000
+              );
+            }
             // Re-add the sort suffix to the index name
             const indexName = defaultSort.split(':')[0];
             if (indexName in routeState) {
@@ -144,7 +190,7 @@ export default class TranscriptSearchComponent extends Component {
       },
     });
 
-    const globalThis = this;
+    const virtualRangeInput = connectRange(() => null);
 
     this.search.addWidgets([
       searchBox({
@@ -316,25 +362,9 @@ export default class TranscriptSearchComponent extends Component {
           );
         },
       }),
-      rangeSlider({
-        container: '#time-slider',
+      virtualRangeInput({
+        container: '#time-input',
         attribute: 'start_time',
-        min: minStartTime,
-        max: maxStartTime,
-        pips: false,
-        tooltips: {
-          format: (value) =>
-            new Date(value * 1000).toLocaleString([], {
-              year: 'numeric',
-              month: 'numeric',
-              day: 'numeric',
-              hour: 'numeric',
-              minute: '2-digit',
-            }),
-        },
-        cssClasses: {
-          tooltip: ['pt-5'],
-        },
       }),
       pagination({
         container: '#pagination',

@@ -46,7 +46,22 @@
             <p class="text-muted caption mb-0">* Digital transmissions only</p>
             <div id="radioid-menu" class="mb-4"></div>
             <h5 id="time-heading" class="mb-0">Call Time</h5>
-            <div id="time-slider"></div>
+            <div id="time-input">
+              <div class="col">
+                <label for="minStartTime">From Time</label>
+                <div class="input-group date">
+                  <EmberFlatpickr name="minStartTime" @id="minStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.minDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.minStartTime}} @onChange={{null}} @onClose={{this.setMinStartTime}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
+                  <span class="input-group-text"><FaIcon @icon="calendar" /></span>
+                </div>
+              </div>
+              <div class="col">
+                <label for="maxStartTime">To Time</label>
+                <div class="input-group date">
+                  <EmberFlatpickr name="maxStartTime" @id="maxStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.maxDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.maxStartTime}} @onChange={{null}} @onClose={{this.setMaxStartTime}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
+                  <span class="input-group-text"><FaIcon @icon="calendar" /></span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -69,11 +84,19 @@
   </div>
 </div>
 
+{{!-- {{#each this.hits as |hit|}}
 {{#if this.useMediaPlayerComponent}}
-{{#each this.hits as |hit|}}
 <MediaPlayer @src="{{hit.raw_audio_url}}" @type="audio/mpeg" @idSuffix="-{{hit.id}}" @shadow="true" />
 <div id="timeline-{{hit.id}}" class="d-none"></div>
-{{/each}}
+{{else}}
+<audio
+  id="player-{{hit.id}}"
+  src="{{hit.raw_audio_url}}"
+  preload="none"
+  controls
+></audio>
 {{/if}}
+{{/each}} --}}
+
 
 {{/if}}

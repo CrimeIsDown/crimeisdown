@@ -389,21 +389,6 @@ p.caption {
   flex-wrap: wrap;
 }
 
-#time-slider {
-  margin: 0 2rem 3rem;
-  .ais-RangeSlider {
-    .rheostat {
-      margin-top: 2rem;
-    }
-    .rheostat-tooltip {
-      padding-top: 3rem;
-      font-weight: normal;
-      font-size: 0.75rem;
-      width: 4rem;
-    }
-  }
-}
-
 audio.call-audio {
   height: 100px;
   width: 100%;
