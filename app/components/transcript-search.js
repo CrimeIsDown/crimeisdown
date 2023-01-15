@@ -184,9 +184,22 @@ export default class TranscriptSearchComponent extends Component {
       }),
       currentRefinements({
         container: '#current-refinements',
-        // excludedAttributes: ['start_time'],
         transformItems(items) {
           return items.map((item) => {
+            if (item.attribute == 'start_time') {
+              for (const refinement of item.refinements) {
+                refinement.label = refinement.label.replace(
+                  refinement.value,
+                  new Date(refinement.value * 1000).toLocaleString([], {
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: '2-digit',
+                  })
+                );
+              }
+            }
             switch (item.attribute) {
               case 'talkgroup_tag':
                 item.label = 'Talkgroup';
@@ -348,7 +361,7 @@ export default class TranscriptSearchComponent extends Component {
         if (isFinite(max)) {
           globalThis.maxStartTime = new Date(max * 1000);
         } else {
-          globalThis.maxStartTime = this.flatpickrOptions.maxDefaultDate;
+          globalThis.maxStartTime = new Date();
         }
         if (isFirstRender) {
           globalThis.updateStartTimeFilter = refine;
