@@ -43,7 +43,7 @@
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "@mapbox/leaflet-pip": "^1.1.0",
-    "@meilisearch/instant-meilisearch": "^0.10.1",
+    "@meilisearch/instant-meilisearch": "^0.10.1-multi-index-search.0",
     "@popperjs/core": "^2.11.5",
     "@sentry/ember": "^7.12.1",
     "babel-eslint": "^10.1.0",

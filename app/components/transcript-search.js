@@ -42,6 +42,17 @@ export default class TranscriptSearchComponent extends Component {
   @action
   async login() {
     try {
+      // For debugging
+      let apiKey = localStorage.getItem('search-key');
+      if (apiKey) {
+        this.apiKey = apiKey;
+        this.isLoggedIn = true;
+        return;
+      }
+    } catch (e) {
+      // Do nothing, we don't have localStorage
+    }
+    try {
       const response = await fetch(
         'https://api.crimeisdown.com/api/search-key',
         {
@@ -66,7 +77,6 @@ export default class TranscriptSearchComponent extends Component {
       this.apiKey,
       {
         finitePagination: true,
-        keepZeroFacets: true,
       }
     );
 
@@ -291,6 +301,7 @@ export default class TranscriptSearchComponent extends Component {
       refinementList({
         container: '#radioid-menu',
         attribute: 'srcList',
+        operator: 'or',
         showMore: true,
         showMoreLimit: 60,
         cssClasses: {
