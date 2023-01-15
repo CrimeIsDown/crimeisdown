@@ -86,7 +86,9 @@ export default class VirtualScanner extends Component {
           }
           if (
             !this.streams.find((streamObj) => streamObj.name == stream.slug) &&
-            (stream.broadcastify || stream.name.startsWith('CFD'))
+            (stream.broadcastify ||
+              stream.name.startsWith('CFD') ||
+              stream.name.startsWith('CPD Citywide'))
           ) {
             this.streams.pushObject({
               name: stream.slug,
@@ -95,7 +97,9 @@ export default class VirtualScanner extends Component {
               broadcastify: stream.broadcastify,
               broadcastifyUrl: stream.broadcastifyUrl,
               openmhz: stream.openmhz,
-              disabled: stream.name.startsWith('CFD'),
+              disabled:
+                stream.name.startsWith('CFD') ||
+                stream.name.startsWith('CPD Citywide'),
             });
           }
         });
