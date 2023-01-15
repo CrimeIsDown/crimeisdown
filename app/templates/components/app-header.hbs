@@ -29,7 +29,7 @@
             <a href="https://blog.crimeisdown.com" id="blog-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Blog</a>
           </li> --}}
         </ul>
-        <form class="d-flex">
+        <form class="d-none">
           <div class="form-check me-3">
             <label class="form-check-label text-muted">
               <input type="checkbox" class="form-check-input" id="nightmodetoggle">
@@ -49,33 +49,5 @@
         </form>
       </div>
     </div>
-    {{!-- template-lint-disable no-forbidden-elements --}}
-    <script>
-      // @TODO: Move to actual .js file
-
-      $(function () {
-        function toggleStylesheets(dark = false) {
-          $('html').toggleClass('dark', dark !== false);
-          for (var i = document.styleSheets.length-1; i >= 0; i--){
-            var styleSheet = document.styleSheets[i];
-            if (styleSheet.ownerNode.id === "defaulttheme") {
-              styleSheet.disabled = (dark !== false);
-            } else if (styleSheet.ownerNode.id === "darktheme") {
-              styleSheet.disabled = (dark === false);
-            }
-          }
-          if (dark) localStorage.setItem('dark', true);
-          else localStorage.removeItem('dark');
-        }
-
-        if (localStorage.getItem('dark')) {
-          $("#nightmodetoggle").attr('checked', true);
-        }
-        toggleStylesheets(localStorage.getItem('dark') !== null);
-        $("#nightmodetoggle").click(function () {
-          toggleStylesheets(this.checked);
-        });
-      });
-    </script>
   </nav>
 </header>

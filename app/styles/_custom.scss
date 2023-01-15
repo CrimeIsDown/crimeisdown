@@ -89,13 +89,6 @@ ul.nav.nav-tabs {
   li:first-child {
     margin-left: 1rem;
   }
-  &.bg-dark .nav-item .nav-link {
-    color: $white;
-    &.active, &:hover, &:focus {
-      color: $gray-800;
-      background-color: $white;
-    }
-  }
 }
 
 .nav-close {
@@ -130,7 +123,7 @@ ul.nav.nav-tabs {
         padding: 0.5em 1em;
         text-align: right;
         h4, p {
-          color: $light;
+          color: var(--bs-light);
           margin: 0.25em 0;
         }
         p {
@@ -232,7 +225,7 @@ th.rd-day-head {
 }
 
 input#datetimepicker[readonly] {
-  background-color: $white;
+  background-color: var(--bs-white);
 }
 
 input.flatpickr-mobile {
@@ -265,9 +258,8 @@ input.flatpickr-mobile {
 .draggable-parent {
   width: 230px;
   height: 216px;
-  background: #fff;
   margin-bottom: 1em;
-  border: 1px solid $gray-300;
+  border: 1px solid var(--bs-gray-300);
   position: relative;
   .fa-user {
     position: absolute;
@@ -365,6 +357,7 @@ p.caption {
 .ais-Hits-item, .ais-InfiniteHits-item {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  background: var(--bs-body-bg-rgb);
   p {
     margin-bottom: 0.5rem;
   }
@@ -421,16 +414,6 @@ audio.call-audio {
     display: flex;
     .map-container {
       flex: 1;
-      .nav-tabs {
-        background-color: $dark !important;
-        .nav-item .nav-link {
-          color: $white;
-          &.active, &:hover, &:focus {
-            color: darken($dark, 10%) !important;
-            background-color: $white;
-          }
-        }
-      }
       .leaflet-container {
         margin: 0;
         width: 100%;
@@ -448,33 +431,5 @@ audio.call-audio {
         display: none;
       }
     }
-  }
-}
-
-// April Fools 2019
-/*.red-blue-flashing {
-  font-weight: bold;
-	animation: blinkingText 1s infinite;
-}*/
-
-@keyframes blinkingText {
-	0% {
-	  color: $red;
-  }
-
-	49% {
-	  color: $blue;
-  }
-
-	50% {
-	  color: $blue;
-  }
-
-	99% {
-	  color: $red;
-  }
-
-	100% {
-	  color: $red;
   }
 }
