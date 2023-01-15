@@ -1,5 +1,5 @@
 import { capitalize } from '@ember/string';
-import { action } from '@ember/object';
+import { action, set } from '@ember/object';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import instantsearch from 'instantsearch.js';
@@ -35,40 +35,30 @@ export default class TranscriptSearchComponent extends Component {
     super(...arguments);
     this.minStartTime = new Date(2023, 0, 1);
     this.maxStartTime = new Date();
-    this.maxStartTime.setDate(new Date().getDate() + 1);
     this.flatpickrOptions = {
       enableTime: true,
       altFormat: 'n/j/Y h:i K',
       altInput: true,
       dateFormat: 'U',
-      minDefaultDate: this.minStartTime,
-      maxDefaultDate: this.maxStartTime,
+      minDefaultDate: new Date(this.minStartTime.getTime()),
+      maxDefaultDate: new Date(this.maxStartTime.getTime()),
     };
   }
 
-  updateStartTimeFilter() {
-    const min = Math.floor(this.minStartTime.getTime() / 1000);
-    const max = Math.floor(this.maxStartTime.getTime() / 1000);
-    this.search.setUiState({
-      // Replace instant_search with your index name
-      [this.search.indexName]: {
-        range: {
-          start_time: `${min}:${max}`,
-        },
-      },
-    });
-  }
-
   @action
-  setMinStartTime(selectedDates) {
-    this.minStartTime = selectedDates[0];
-    this.updateStartTimeFilter();
-  }
-
-  @action
-  setMaxStartTime(selectedDates) {
-    this.maxStartTime = selectedDates[0];
-    this.updateStartTimeFilter();
+  setStartTimeRange(selectedDates, dateStr, instance) {
+    set(this, instance.input.name, selectedDates[0]);
+    let min = this.minStartTime.getTime();
+    min =
+      min === this.flatpickrOptions.minDefaultDate.getTime()
+        ? undefined
+        : Math.floor(min / 1000);
+    let max = this.maxStartTime.getTime();
+    max =
+      max === this.flatpickrOptions.maxDefaultDate.getTime()
+        ? undefined
+        : Math.floor(max / 1000);
+    this.updateStartTimeFilter([min, max]);
   }
 
   @action
@@ -164,19 +154,6 @@ export default class TranscriptSearchComponent extends Component {
             const routeState = qsModule.parse(location.search.slice(1), {
               arrayLimit: 99,
             });
-            // Set start_time filter
-            if (
-              routeState[globalThis.indexName]?.range?.start_time !== undefined
-            ) {
-              const start_time =
-                routeState[globalThis.indexName].range.start_time.split(':');
-              globalThis.minStartTime = new Date(
-                parseInt(start_time[0]) * 1000
-              );
-              globalThis.maxStartTime = new Date(
-                parseInt(start_time[1]) * 1000
-              );
-            }
             // Re-add the sort suffix to the index name
             const indexName = defaultSort.split(':')[0];
             if (indexName in routeState) {
@@ -189,8 +166,6 @@ export default class TranscriptSearchComponent extends Component {
         }),
       },
     });
-
-    const virtualRangeInput = connectRange(() => null);
 
     this.search.addWidgets([
       searchBox({
@@ -209,7 +184,7 @@ export default class TranscriptSearchComponent extends Component {
       }),
       currentRefinements({
         container: '#current-refinements',
-        excludedAttributes: ['start_time'],
+        // excludedAttributes: ['start_time'],
         transformItems(items) {
           return items.map((item) => {
             switch (item.attribute) {
@@ -362,7 +337,23 @@ export default class TranscriptSearchComponent extends Component {
           );
         },
       }),
-      virtualRangeInput({
+      connectRange((renderOptions, isFirstRender) => {
+        const { start, refine } = renderOptions;
+        const [min, max] = start;
+        if (isFinite(min)) {
+          globalThis.minStartTime = new Date(min * 1000);
+        } else {
+          globalThis.minStartTime = this.flatpickrOptions.minDefaultDate;
+        }
+        if (isFinite(max)) {
+          globalThis.maxStartTime = new Date(max * 1000);
+        } else {
+          globalThis.maxStartTime = this.flatpickrOptions.maxDefaultDate;
+        }
+        if (isFirstRender) {
+          globalThis.updateStartTimeFilter = refine;
+        }
+      })({
         container: '#time-input',
         attribute: 'start_time',
       }),

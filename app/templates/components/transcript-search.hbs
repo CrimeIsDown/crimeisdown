@@ -50,14 +50,14 @@
               <div class="col">
                 <label for="minStartTime">From Time</label>
                 <div class="input-group date">
-                  <EmberFlatpickr name="minStartTime" @id="minStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.minDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.minStartTime}} @onChange={{null}} @onClose={{this.setMinStartTime}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
+                  <EmberFlatpickr name="minStartTime" @id="minStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.minDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.minStartTime}} @onChange={{null}} @onClose={{this.setStartTimeRange}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
                   <span class="input-group-text"><FaIcon @icon="calendar" /></span>
                 </div>
               </div>
               <div class="col">
                 <label for="maxStartTime">To Time</label>
                 <div class="input-group date">
-                  <EmberFlatpickr name="maxStartTime" @id="maxStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.maxDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.maxStartTime}} @onChange={{null}} @onClose={{this.setMaxStartTime}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
+                  <EmberFlatpickr name="maxStartTime" @id="maxStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.maxDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.maxStartTime}} @onChange={{null}} @onClose={{this.setStartTimeRange}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
                   <span class="input-group-text"><FaIcon @icon="calendar" /></span>
                 </div>
               </div>
