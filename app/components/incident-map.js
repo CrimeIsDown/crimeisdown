@@ -242,7 +242,7 @@ export default class IncidentMap extends Component {
         maxZoom: 20,
       });
 
-      if (localStorage.getItem('dark')) {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         this.baseLayers['MapBox Streets Dark'].addTo(this.map);
       } else {
         this.baseLayers['MapBox Streets'].addTo(this.map);

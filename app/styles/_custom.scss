@@ -119,7 +119,7 @@ ul.nav.nav-tabs {
         margin-bottom: 0rem;
       }
       .info.leaflet-control {
-        background: rgba(26,26,26,0.7);
+        background: rgba(var(--bs-dark-rgb), 0.7);
         padding: 0.5em 1em;
         text-align: right;
         h4, p {
