@@ -1,14 +1,18 @@
-{{#if (eq this.isLoggedIn undefined)}}
+{{#if (eq this.hasAccess undefined)}}
 <p {{did-insert this.login}}>Logging in...</p>
 {{else}}
 <div class="search-panel row" {{did-insert this.setupSearch}}>
   <div class="search-panel__filters col-md-3">
-    {{#if (eq this.isLoggedIn false)}}
-    <p>
+    {{#if (eq this.hasAccess false)}}
+    <p class="alert alert-danger">
+      {{#if this.session.isAuthenticated}}
+      You are not at a high enough membership tier. Please upgrade your membership on Patreon to the Sergeant tier or above to access.
+      {{else}}
       <a href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/login-with-patreon.png" alt="Log in with Patreon"></a>
       <br>or<br>
       <a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/become-a-patron.png" alt="Become a Patron!"></a>
       <br>to use the full version. You must pledge at least $5/mo to access.
+      {{/if}}
     </p>
     {{/if}}
     <div id="auto-refresh" class="mb-2">
@@ -21,13 +25,13 @@
           {{this.autoRefreshInterval}}s
         {{/if}}
         </span>
-        {{#if this.isLoggedIn}}
+        {{#if this.hasAccess}}
         <Input @type="range" class="form-control form-range" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} {{on "change" this.restartAutoRefresh}} />
         {{else}}
         <Input @type="range" class="form-control form-range disabled" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} disabled />
         {{/if}}
       </div>
-      {{#unless this.isLoggedIn}}
+      {{#unless this.hasAccess}}
       <p class="caption">This demo does not have live updates as it runs off of a small demonstration dataset.</p>
       {{/unless}}
     </div>
@@ -68,7 +72,7 @@
     </div>
   </div>
   <div class="search-panel__results col">
-    {{#if (eq this.isLoggedIn false)}}
+    {{#if (eq this.hasAccess false)}}
     <h1 class="display-5">Call Transcript Search Demo</h1>
     {{else}}
     <h1 class="display-5 sr-only">Call Transcript Search</h1>

@@ -29,14 +29,31 @@
             <a href="https://blog.crimeisdown.com" id="blog-link" class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Blog</a>
           </li> --}}
         </ul>
-        <form class="d-none">
+
+        <ul class="navbar-nav ms-auto">
+          {{#if this.session.isAuthenticated}}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarAuthDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{this.session.user.patreon_tier.name}} {{this.session.user.name}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarAuthDropdown">
+              <a class="dropdown-item" href="https://api.crimeisdown.com/profile">Profile</a>
+              <a class="dropdown-item" href="https://api.crimeisdown.com/logout" referrerpolicy="unsafe-url">Logout</a>
+            </div>
+          </li>
+          {{else}}
+          <li class="nav-item">
+            <a href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/login-with-patreon.png" alt="Log in with Patreon"></a>
+          </li>
+          {{/if}}
+        </ul>
+        {{!-- <form class="d-flex">
           <div class="form-check me-3">
             <label class="form-check-label text-muted">
               <input type="checkbox" class="form-check-input" id="nightmodetoggle">
               Night Mode
             </label>
           </div>
-          {{!-- April Fools 2019 --}}
           <div class="form-check">
             <label class="form-check-label text-muted red-blue-flashing">
               <Input @type="checkbox" class="form-check-input" id="copstoggle" @checked={{this.playmusic}} {{on "change" this.togglemusic}} />
@@ -46,7 +63,7 @@
               <audio id="copstheme" src="https://www.soundboard.com/mediafiles/Inner%20Circle%20-%20Bad%20Boys%20(COPS%20theme%20song)219275-1efae287-f275-499c-8ef5-878aa3795aed.mp3" loop preload="auto"></audio>
             </div>
           </div>
-        </form>
+        </form> --}}
       </div>
     </div>
   </nav>
