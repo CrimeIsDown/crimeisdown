@@ -323,6 +323,19 @@ export default class TranscriptSearchComponent extends Component {
         hitsPerPage: 20,
       }),
       refinementList({
+        container: '#dept-menu',
+        attribute: 'talkgroup_group',
+        operator: 'or',
+        showMore: true,
+        showMoreLimit: 60,
+        cssClasses: {
+          label: ['form-check-label'],
+          checkbox: ['form-check-input'],
+          item: ['form-check'],
+          count: ['ms-1'],
+        },
+      }),
+      refinementList({
         container: '#tg-menu',
         attribute: 'talkgroup_tag',
         operator: 'or',
