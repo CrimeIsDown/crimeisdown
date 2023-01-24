@@ -1,9 +1,13 @@
-import { capitalize } from '@ember/string';
 import { action, set } from '@ember/object';
+import { service } from '@ember/service';
+import { capitalize } from '@ember/string';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
 import instantsearch from 'instantsearch.js';
+import connectRange from 'instantsearch.js/es/connectors/range/connectRange';
 import { highlight } from 'instantsearch.js/es/helpers';
+import { history } from 'instantsearch.js/es/lib/routers';
 import {
   configure,
   currentRefinements,
@@ -15,10 +19,7 @@ import {
   stats,
 } from 'instantsearch.js/es/widgets';
 import { defaultTemplates as statsTemplates } from 'instantsearch.js/es/widgets/stats/stats';
-import { history } from 'instantsearch.js/es/lib/routers';
-import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
-import connectRange from 'instantsearch.js/es/connectors/range/connectRange';
-import { service } from '@ember/service';
+import moment from 'moment-timezone';
 
 export default class TranscriptSearchComponent extends Component {
   @service session;
@@ -236,6 +237,7 @@ export default class TranscriptSearchComponent extends Component {
         templates: {
           item(hit, { html }) {
             // TODO: add button to see call in context of transcripts
+            const start_time = new Date(hit.start_time * 1000);
             return html`
               <div>
                 <h4 title="${hit.talkgroup_description}">
@@ -243,7 +245,10 @@ export default class TranscriptSearchComponent extends Component {
                 </h4>
                 <p>
                   <strong>
-                    ${new Date(hit.start_time * 1000).toLocaleString()}
+                    ${start_time.toLocaleString() +
+                    ' (' +
+                    moment(start_time).fromNow() +
+                    ')'}
                   </strong>
                 </p>
                 <p>
