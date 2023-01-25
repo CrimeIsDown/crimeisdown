@@ -35,42 +35,93 @@
       <p class="caption">This demo does not have live updates as it runs off of a small demonstration dataset.</p>
       {{/unless}}
     </div>
-    <div class="accordion mb-3" id="filtersAccordion">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="filtersHeading">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filters" aria-expanded="true" aria-controls="filters">
-            Filters
-          </button>
-        </h2>
-        <div id="filters" class="accordion-collapse collapse" aria-labelledby="filtersHeading" data-bs-parent="#filtersAccordion">
-          <div class="accordion-body">
-            <h5 id="dept-heading">Departments</h5>
-            <div id="dept-menu" class="mb-4"></div>
-            <h5 id="tg-heading">Talkgroups</h5>
-            <div id="tg-menu" class="mb-4"></div>
-            <h5 id="radioid-heading">Radio IDs</h5>
-            <p class="text-muted caption mb-0">* Digital transmissions only</p>
-            <div id="radioid-menu" class="mb-4"></div>
-            <h5 id="time-heading" class="mb-0">Call Time</h5>
-            <div id="time-input">
-              <div class="col">
-                <label for="minStartTime">From Time</label>
-                <div class="input-group date">
-                  <EmberFlatpickr name="minStartTime" @id="minStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.minDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.minStartTime}} @onChange={{null}} @onClose={{this.setStartTimeRange}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
-                  <span class="input-group-text"><FaIcon @icon="calendar" /></span>
-                </div>
+    <div class="accordion">
+      <h2 id="filtersHeadingAccordion" data-bs-toggle="collapse" data-bs-target="#filters" aria-expanded="true" aria-controls="filters">
+        <button class="accordion-button" type="button" >
+          Filters
+        </button>
+      </h2>
+    </div>
+    <h2 id="filtersHeading">Filters</h2>
+    <div id="filters" class="collapse">
+      <div id="clear-refinements"></div>
+      <div class="accordion accordion-flush" id="filterOptionsAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="dept-heading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dept-collapse" aria-expanded="false" aria-controls="dept-collapse">
+                  Departments
+                </button>
+              </h2>
+              <div id="dept-collapse" class="accordion-collapse collapse show" aria-labelledby="dept-heading">
+                <div id="dept-menu" class="accordion-body"></div>
               </div>
-              <div class="col">
-                <label for="maxStartTime">To Time</label>
-                <div class="input-group date">
-                  <EmberFlatpickr name="maxStartTime" @id="maxStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.maxDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.maxStartTime}} @onChange={{null}} @onClose={{this.setStartTimeRange}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
-                  <span class="input-group-text"><FaIcon @icon="calendar" /></span>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="tg-heading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tg-collapse" aria-expanded="false" aria-controls="tg-collapse">
+                  Talkgroups
+                </button>
+              </h2>
+              <div id="tg-collapse" class="accordion-collapse collapse show" aria-labelledby="tg-heading">
+                <div id="tg-menu" class="accordion-body"></div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="units-heading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#units-collapse" aria-expanded="false" aria-controls="units-collapse">
+                  Units
+                </button>
+              </h2>
+              <div id="units-collapse" class="accordion-collapse collapse show" aria-labelledby="units-heading">
+                <div id="units-menu" class="accordion-body"></div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="radios-heading">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#radios-collapse" aria-expanded="false" aria-controls="radios-collapse">
+                  Radio IDs
+                </button>
+              </h2>
+              <div id="radios-collapse" class="accordion-collapse collapse" aria-labelledby="radios-heading">
+                <div id="radios-menu" class="accordion-body"></div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="srclist-heading">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#srclist-collapse" aria-expanded="false" aria-controls="srclist-collapse">
+                  Sources
+                </button>
+              </h2>
+              <div id="srclist-collapse" class="accordion-collapse collapse" aria-labelledby="srclist-heading">
+                <div id="srclist-menu" class="accordion-body"></div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="calltime-heading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#time-input-collapse" aria-expanded="false" aria-controls="time-input-collapse">
+                  Call Time
+                </button>
+              </h2>
+              <div id="time-input-collapse" class="accordion-collapse collapse show" aria-labelledby="calltime-heading">
+                <div id="time-input" class="accordion-body">
+                  <div class="col">
+                    <label for="minStartTime">From Time</label>
+                    <div class="input-group date">
+                      <EmberFlatpickr name="minStartTime" @id="minStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.minDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.minStartTime}} @onChange={{null}} @onClose={{this.setStartTimeRange}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
+                      <span class="input-group-text"><FaIcon @icon="calendar" /></span>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="maxStartTime">To Time</label>
+                    <div class="input-group date">
+                      <EmberFlatpickr name="maxStartTime" @id="maxStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.maxDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.maxStartTime}} @onChange={{null}} @onClose={{this.setStartTimeRange}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
+                      <span class="input-group-text"><FaIcon @icon="calendar" /></span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
   </div>
   <div class="search-panel__results col">

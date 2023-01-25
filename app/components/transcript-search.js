@@ -10,6 +10,7 @@ import { highlight } from 'instantsearch.js/es/helpers';
 import { history } from 'instantsearch.js/es/lib/routers';
 import {
   configure,
+  clearRefinements,
   currentRefinements,
   hits,
   pagination,
@@ -37,7 +38,7 @@ export default class TranscriptSearchComponent extends Component {
 
   constructor() {
     super(...arguments);
-    this.minStartTime = new Date(2023, 0, 1);
+    this.minStartTime = moment().subtract(1, 'day').toDate();
     this.maxStartTime = new Date();
     this.flatpickrOptions = {
       enableTime: true,
@@ -186,6 +187,20 @@ export default class TranscriptSearchComponent extends Component {
           },
         ],
       }),
+      clearRefinements({
+        container: '#clear-refinements',
+        cssClasses: {
+          button: ['mb-4'],
+          disabledButton: ['d-none'],
+        },
+        templates: {
+          resetLabel({ hasRefinements }, { html }) {
+            return html`<span
+              >${hasRefinements ? 'Clear filters' : 'No filters'}</span
+            >`;
+          },
+        },
+      }),
       currentRefinements({
         container: '#current-refinements',
         transformItems(items) {
@@ -205,6 +220,9 @@ export default class TranscriptSearchComponent extends Component {
               }
             }
             switch (item.attribute) {
+              case 'talkgroup_group':
+                item.label = 'Department';
+                break;
               case 'talkgroup_tag':
                 item.label = 'Talkgroup';
                 break;
@@ -237,6 +255,7 @@ export default class TranscriptSearchComponent extends Component {
         templates: {
           item(hit, { html }) {
             // TODO: add button to see call in context of transcripts
+            // TODO: allow unit IDs to be clicked and searched
             const start_time = new Date(hit.start_time * 1000);
             return html`
               <div>
@@ -354,8 +373,8 @@ export default class TranscriptSearchComponent extends Component {
         },
       }),
       refinementList({
-        container: '#radioid-menu',
-        attribute: 'srcList',
+        container: '#units-menu',
+        attribute: 'units',
         operator: 'or',
         showMore: true,
         showMoreLimit: 60,
@@ -365,10 +384,31 @@ export default class TranscriptSearchComponent extends Component {
           item: ['form-check'],
           count: ['ms-1'],
         },
-        transformItems(items) {
-          return items.filter(
-            (item) => item.value !== '\\-1' && item.value !== '0'
-          );
+      }),
+      refinementList({
+        container: '#radios-menu',
+        attribute: 'radios',
+        operator: 'or',
+        showMore: true,
+        showMoreLimit: 60,
+        cssClasses: {
+          label: ['form-check-label'],
+          checkbox: ['form-check-input'],
+          item: ['form-check'],
+          count: ['ms-1'],
+        },
+      }),
+      refinementList({
+        container: '#srclist-menu',
+        attribute: 'srcList',
+        operator: 'or',
+        showMore: true,
+        showMoreLimit: 60,
+        cssClasses: {
+          label: ['form-check-label'],
+          checkbox: ['form-check-input'],
+          item: ['form-check'],
+          count: ['ms-1'],
         },
       }),
       connectRange((renderOptions, isFirstRender) => {
