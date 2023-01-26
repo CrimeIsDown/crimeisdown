@@ -125,7 +125,7 @@ export default class IncidentMap extends Component {
   }
 
   @action
-  initMap() {
+  async initMap() {
     const defaultCenterLat = 41.85;
     const defaultCenterLong = -87.63;
     const defaultZoom = 11;
@@ -138,36 +138,22 @@ export default class IncidentMap extends Component {
       })
     );
 
-    $('#crime-tab').attr(
-      'href',
-      this.buildCrimeMapUrl(defaultCenterLat, defaultCenterLong, 13)
-    );
+    this.initBaseLayers();
+    this.initGeocoder();
+    this.initInfoBox();
+    await this.initLayers();
+    await this.addressLookup.loadData();
 
-    set(
-      this,
-      'initialized',
-      Promise.all([
-        this.initBaseLayers(),
-        this.initGeocoder(),
-        this.initInfoBox(),
-        this.initLayers(),
-        this.addressLookup.loadData(),
-      ])
-    );
-
-    this.initialized.then(() => {
-      // wait for everything to load before trying to geocode an address
-      if (window.location.hash) {
-        let hash = window.location.hash.substr(1),
-          query = hash
-            .substr(hash.indexOf('location_query='))
-            .split('&')[0]
-            .split('=')[1];
-        query = decodeURIComponent(query.replace(/\+/g, ' '));
-        set(this, 'address', query);
-        this.searchAddress();
-      }
-    });
+    if (window.location.hash) {
+      let hash = window.location.hash.substr(1),
+        query = hash
+          .substr(hash.indexOf('location_query='))
+          .split('&')[0]
+          .split('=')[1];
+      query = decodeURIComponent(query.replace(/\+/g, ' '));
+      set(this, 'address', query);
+      this.searchAddress();
+    }
 
     this.initEditableMap();
 
@@ -204,77 +190,58 @@ export default class IncidentMap extends Component {
   }
 
   initBaseLayers() {
-    return new Promise((resolve, reject) => {
-      this.baseLayers['OpenStreetMap'] = L.tileLayer(
-        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        {
-          attribution:
-            'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-          maxNativeZoom: 19,
-          minZoom: 0,
-          maxZoom: 20,
-        }
-      );
-
-      this.baseLayers['MapBox Streets'] = L.tileLayer(
-        'https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL',
-        {
-          attribution:
-            '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-          minZoom: 0,
-          maxZoom: 20,
-        }
-      );
-
-      this.baseLayers['MapBox Streets Dark'] = L.tileLayer(
-        'https://api.mapbox.com/styles/v1/erictendian/cj9ne99zz3e112rp4pxcpua1z/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL',
-        {
-          attribution:
-            '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-          minZoom: 0,
-          maxZoom: 20,
-        }
-      );
-
-      this.baseLayers['Google Hybrid'] = new L.gridLayer.googleMutant({
-        type: 'hybrid',
+    this.baseLayers['OpenStreetMap'] = L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      {
+        attribution:
+          'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        maxNativeZoom: 19,
         minZoom: 0,
         maxZoom: 20,
-      });
-
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        this.baseLayers['MapBox Streets Dark'].addTo(this.map);
-      } else {
-        this.baseLayers['MapBox Streets'].addTo(this.map);
       }
+    );
 
-      resolve();
+    this.baseLayers['MapBox Streets'] = L.tileLayer(
+      'https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL',
+      {
+        attribution:
+          '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        minZoom: 0,
+        maxZoom: 20,
+      }
+    );
+
+    this.baseLayers['MapBox Streets Dark'] = L.tileLayer(
+      'https://api.mapbox.com/styles/v1/erictendian/cj9ne99zz3e112rp4pxcpua1z/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL',
+      {
+        attribution:
+          '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        minZoom: 0,
+        maxZoom: 20,
+      }
+    );
+
+    this.baseLayers['Google Hybrid'] = new L.gridLayer.googleMutant({
+      type: 'hybrid',
+      minZoom: 0,
+      maxZoom: 20,
     });
+
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      this.baseLayers['MapBox Streets Dark'].addTo(this.map);
+    } else {
+      this.baseLayers['MapBox Streets'].addTo(this.map);
+    }
   }
 
-  buildCrimeMapUrl(latitude, longitude, zoom = 16) {
-    let url = new URL('https://www.cityprotect.com/map/list/incidents');
-
-    let queryParams = {
-      fromUpdateDate: moment().subtract('months', 3).format('MM/DD/YYYY'),
-      toUpdateDate: moment().format('MM/DD/YYYY'),
-      pageSize: 2000,
-      parentIncidentTypeIds:
-        '149,150,148,8,97,104,165,98,100,179,178,180,101,99,103,163,168,166,12,161,14,16,15,160,121,162,164,167,173,169,170,172,171,151',
-      zoomLevel: zoom,
-      latitude: latitude,
-      longitude: longitude,
-      days: '1,2,3,4,5,6,7',
-      startHour: 0,
-      endHour: 24,
-      timezone: '-06:00',
-    };
-    url.search = new URLSearchParams(queryParams);
-
-    return url.toString();
+  buildCrimeMapUrl(address) {
+    return (
+      'https://chicagopd.maps.arcgis.com/apps/webappviewer/index.html?id=96ca65e89cd54b8c808b136a66778369&find=' +
+      encodeURIComponent(address)
+    );
   }
 
-  showLocation(event) {
+  async showLocation(event) {
     let query = this.address;
     if (query) {
       // We actually searched an address here, so don't show the geolocation marker anymore
@@ -287,72 +254,65 @@ export default class IncidentMap extends Component {
       ga('send', 'event', 'Looks up address', 'Tools', query || 'Geolocation');
     }
 
-    this.initialized.then(() => {
-      set(
-        this,
-        'location',
-        this.addressLookup.generateLocationDataForAddress(
-          this.layers,
-          event.location.raw
-        )
+    set(
+      this,
+      'location',
+      await this.addressLookup.generateLocationDataForAddress(
+        this.layers,
+        event.location.raw
+      )
+    );
+    let randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
+    let wazeIframeUrl =
+      'https://embed.waze.com/iframe?zoom=15&lat=' +
+      this.location.meta.latitude +
+      '&lon=' +
+      this.location.meta.longitude +
+      '&pin=1&_=' +
+      randomInt;
+    $('#waze-map').attr('src', wazeIframeUrl);
+    if (this.location.meta.inChicago) {
+      let crimereportsIframeUrl = this.buildCrimeMapUrl(
+        this.location.meta.formattedAddress
       );
-      let randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
-      let wazeIframeUrl =
-        'https://embed.waze.com/iframe?zoom=15&lat=' +
-        this.location.meta.latitude +
-        '&lon=' +
-        this.location.meta.longitude +
-        '&pin=1&_=' +
-        randomInt;
-      $('#waze-map').attr('src', wazeIframeUrl);
-      if (this.location.meta.inChicago) {
-        let crimereportsIframeUrl = this.buildCrimeMapUrl(
-          this.location.meta.latitude,
-          this.location.meta.longitude
-        );
-        $('#crime-tab').attr('href', crimereportsIframeUrl);
+      $('#clear-map').attr('src', crimereportsIframeUrl);
 
-        schedule('afterRender', () => {
-          let tooltipTriggerList = [].slice.call(
-            document.querySelectorAll('[data-bs-toggle="tooltip"]')
-          );
-          let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-          });
+      schedule('afterRender', () => {
+        let tooltipTriggerList = [].slice.call(
+          document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        );
+        let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl);
         });
-      }
-    });
+      });
+    }
   }
 
   initGeocoder() {
-    return new Promise((resolve, reject) => {
-      set(
-        this,
-        'geosearchProvider',
-        new GeoSearch.GoogleProvider({
-          params: {
-            key: 'REDACTED_PUBLIC_CREDENTIAL',
-            bounds:
-              '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366',
-          },
-        })
-      );
+    set(
+      this,
+      'geosearchProvider',
+      new GeoSearch.GoogleProvider({
+        params: {
+          key: 'REDACTED_PUBLIC_CREDENTIAL',
+          bounds:
+            '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366',
+        },
+      })
+    );
 
-      const searchControl = new GeoSearch.GeoSearchControl({
-        provider: this.geosearchProvider,
-        style: 'button',
-        autoComplete: false,
-        showPopup: true,
-        maxMarkers: 3,
-      });
-      set(this, 'searchControl', searchControl);
-
-      this.map.addControl(searchControl);
-
-      this.map.on('geosearch/showlocation', this.showLocation.bind(this));
-
-      resolve();
+    const searchControl = new GeoSearch.GeoSearchControl({
+      provider: this.geosearchProvider,
+      style: 'button',
+      autoComplete: false,
+      showPopup: true,
+      maxMarkers: 3,
     });
+    set(this, 'searchControl', searchControl);
+
+    this.map.addControl(searchControl);
+
+    this.map.on('geosearch/showlocation', this.showLocation.bind(this));
   }
 
   initLayers() {
@@ -465,186 +425,139 @@ export default class IncidentMap extends Component {
     return this.loadLayerData(this.layers);
   }
 
-  loadLayerData(layers) {
+  async loadLayerData(layers) {
     let map = this.map;
     let info = this.infobox;
 
-    let promises = [];
-
     for (let layerName in layers) {
-      promises.push(
-        new Promise((resolve, reject) => {
-          if (Object.prototype.hasOwnProperty.call(layers, layerName)) {
-            let layerObj = layers[layerName];
+      if (Object.prototype.hasOwnProperty.call(layers, layerName)) {
+        let layerObj = layers[layerName];
 
-            if (layerName === 'fireStations') {
-              let layerGroup = L.markerClusterGroup({
-                showCoverageOnHover: false,
-              });
-              if (layerObj.showByDefault) {
-                layerGroup.addTo(map);
-              }
-              layerObj.layer = layerGroup;
-              this.overlay[layerObj.label] = layerObj.layer;
-              fetch(layerObj.url)
-                .then((response) => {
-                  response
-                    .json()
-                    .then((data) => {
-                      data.forEach((location) => {
-                        let markerTitle = location.name
-                          ? location.name
-                          : [
-                              location.engine,
-                              location.truck,
-                              location.ambo,
-                              location.squad,
-                            ]
-                              .filter(Boolean)
-                              .join('-');
-
-                        let stationMarker = L.marker(
-                          [location.latitude, location.longitude],
-                          {
-                            title: markerTitle,
-                            icon: L.divIcon({
-                              iconSize: [35, 45],
-                              iconAnchor: [17, 42],
-                              popupAnchor: [1, -32],
-                              shadowAnchor: [10, 12],
-                              shadowSize: [36, 16],
-                              className:
-                                'awesome-marker-icon-red awesome-marker',
-                              html: '<svg class="svg-inline--fa fa-fire-extinguisher" data-prefix="fas" data-icon="fire-extinguisher" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: #fff;font-size: 1rem;margin-top: 10px;"><path fill="currentColor" d="M500.3 7.3C507.7 13.3 512 22.4 512 32v96c0 9.6-4.3 18.7-11.7 24.7s-17.2 8.5-26.6 6.6l-160-32C301.5 124.9 292 115.7 289 104H224v34.8c37.8 18 64 56.5 64 101.2V384H64V240c0-44.7 26.2-83.2 64-101.2V110c-36.2 11.1-66 36.9-82.3 70.5c-5.8 11.9-20.2 16.9-32.1 11.1S-3.3 171.4 2.5 159.5C26.7 109.8 72.7 72.6 128 60.4V32c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V56h65c3-11.7 12.5-20.9 24.7-23.4l160-32c9.4-1.9 19.1 .6 26.6 6.6zM288 416v32c0 35.3-28.7 64-64 64H128c-35.3 0-64-28.7-64-64V416H288zM176 96c8.8 0 16-7.2 16-16s-7.2-16-16-16s-16 7.2-16 16s7.2 16 16 16z"></path></svg>',
-                            }),
-                          }
-                        );
-
-                        // Convert address to title case
-                        location.addr = location.addr
-                          .toLowerCase()
-                          .replace(/(?:^|\s|-|\/)\S/g, function (m) {
-                            return m.toUpperCase();
-                          });
-
-                        // this is a really hacky way to make a popup, we should stop doing it
-                        // @TODO: Use Handlebars template to make Leaflet popup
-                        let popupContents =
-                          '<h6>' +
-                          markerTitle +
-                          '</h6>' +
-                          '<strong>' +
-                          location.addr +
-                          '</strong>' +
-                          (location.engine
-                            ? '<br><strong>Engine:</strong> ' + location.engine
-                            : '') +
-                          (location.truck
-                            ? '<br><strong>Truck/Tower:</strong> ' +
-                              location.truck
-                            : '') +
-                          (location.ambo
-                            ? '<br><strong>Ambulance:</strong> ' + location.ambo
-                            : '') +
-                          (location.squad
-                            ? '<br><strong>Squad:</strong> ' + location.squad
-                            : '') +
-                          (location.special
-                            ? '<br><strong>Special (search radio IDs):</strong> ' +
-                              location.special
-                            : '') +
-                          (location.batt
-                            ? '<br><strong>Battalion:</strong> ' +
-                              location.batt +
-                              ' / <strong>District:</strong> ' +
-                              location.fireDist
-                            : '') +
-                          (location.emsDist
-                            ? '<br><strong>EMS District:</strong> ' +
-                              location.emsDist
-                            : '') +
-                          (location.radio
-                            ? '<br><strong>Radio Channel:</strong> ' +
-                              location.radio
-                            : '');
-                        stationMarker.bindPopup(popupContents).openPopup();
-
-                        layerGroup.addLayer(stationMarker);
-                      });
-                      resolve();
-                    })
-                    .catch((err) => {
-                      reject(err);
-                    });
-                })
-                .catch((err) => {
-                  reject(err);
-                });
-            } else if (layerName === 'gangs') {
-              let kmlLayer = new L.KML();
-              map.attributionControl.addAttribution(
-                'Gang map by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank">u/ReggieG45</a>'
-              );
-              if (layerObj.showByDefault) {
-                kmlLayer.addTo(map);
-              }
-              layerObj.layer = kmlLayer;
-              this.overlay[layerObj.label] = layerObj.layer;
-
-              fetch(layerObj.url)
-                .then((response) => response.text())
-                .then((kmltext) => {
-                  // Create new kml overlay
-                  const parser = new DOMParser();
-                  const kml = parser.parseFromString(kmltext, 'text/xml');
-                  layerObj.layer.addKML(kml);
-                  resolve();
-                })
-                .catch((err) => {
-                  reject(err);
-                });
-            } else {
-              let geoJsonLayer = L.geoJson(null, {
-                onEachFeature: (feature, layer) => {
-                  let props = {};
-                  for (const key in feature.properties) {
-                    if (
-                      Object.prototype.hasOwnProperty.call(
-                        layerObj.propMappings,
-                        key
-                      )
-                    ) {
-                      props[layerObj.propMappings[key]] =
-                        feature.properties[key];
-                    }
-                  }
-                  feature.properties = props;
-                },
-              });
-              if (layerObj.showByDefault) {
-                geoJsonLayer.addTo(map);
-              }
-              layerObj.layer = geoJsonLayer;
-              this.overlay[layerObj.label] = layerObj.layer;
-              fetch(layerObj.url)
-                .then((response) => {
-                  response
-                    .json()
-                    .then((data) => {
-                      layerObj.layer.addData(data).setStyle(layerObj.style);
-                      resolve();
-                    })
-                    .catch((err) => {
-                      reject(err);
-                    });
-                })
-                .catch((err) => {
-                  reject(err);
-                });
-            }
+        if (layerName === 'fireStations') {
+          let layerGroup = L.markerClusterGroup({
+            showCoverageOnHover: false,
+          });
+          if (layerObj.showByDefault) {
+            layerGroup.addTo(map);
           }
-        })
-      );
+          layerObj.layer = layerGroup;
+          this.overlay[layerObj.label] = layerObj.layer;
+          const data = await (await fetch(layerObj.url)).json();
+
+          data.forEach((location) => {
+            let markerTitle = location.name
+              ? location.name
+              : [location.engine, location.truck, location.ambo, location.squad]
+                  .filter(Boolean)
+                  .join('-');
+
+            let stationMarker = L.marker(
+              [location.latitude, location.longitude],
+              {
+                title: markerTitle,
+                icon: L.divIcon({
+                  iconSize: [35, 45],
+                  iconAnchor: [17, 42],
+                  popupAnchor: [1, -32],
+                  shadowAnchor: [10, 12],
+                  shadowSize: [36, 16],
+                  className: 'awesome-marker-icon-red awesome-marker',
+                  html: '<svg class="svg-inline--fa fa-fire-extinguisher" data-prefix="fas" data-icon="fire-extinguisher" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: #fff;font-size: 1rem;margin-top: 10px;"><path fill="currentColor" d="M500.3 7.3C507.7 13.3 512 22.4 512 32v96c0 9.6-4.3 18.7-11.7 24.7s-17.2 8.5-26.6 6.6l-160-32C301.5 124.9 292 115.7 289 104H224v34.8c37.8 18 64 56.5 64 101.2V384H64V240c0-44.7 26.2-83.2 64-101.2V110c-36.2 11.1-66 36.9-82.3 70.5c-5.8 11.9-20.2 16.9-32.1 11.1S-3.3 171.4 2.5 159.5C26.7 109.8 72.7 72.6 128 60.4V32c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V56h65c3-11.7 12.5-20.9 24.7-23.4l160-32c9.4-1.9 19.1 .6 26.6 6.6zM288 416v32c0 35.3-28.7 64-64 64H128c-35.3 0-64-28.7-64-64V416H288zM176 96c8.8 0 16-7.2 16-16s-7.2-16-16-16s-16 7.2-16 16s7.2 16 16 16z"></path></svg>',
+                }),
+              }
+            );
+
+            // Convert address to title case
+            location.addr = location.addr
+              .toLowerCase()
+              .replace(/(?:^|\s|-|\/)\S/g, function (m) {
+                return m.toUpperCase();
+              });
+
+            // this is a really hacky way to make a popup, we should stop doing it
+            // @TODO: Use Handlebars template to make Leaflet popup
+            let popupContents =
+              '<h6>' +
+              markerTitle +
+              '</h6>' +
+              '<strong>' +
+              location.addr +
+              '</strong>' +
+              (location.engine
+                ? '<br><strong>Engine:</strong> ' + location.engine
+                : '') +
+              (location.truck
+                ? '<br><strong>Truck/Tower:</strong> ' + location.truck
+                : '') +
+              (location.ambo
+                ? '<br><strong>Ambulance:</strong> ' + location.ambo
+                : '') +
+              (location.squad
+                ? '<br><strong>Squad:</strong> ' + location.squad
+                : '') +
+              (location.special
+                ? '<br><strong>Special (search radio IDs):</strong> ' +
+                  location.special
+                : '') +
+              (location.batt
+                ? '<br><strong>Battalion:</strong> ' +
+                  location.batt +
+                  ' / <strong>District:</strong> ' +
+                  location.fireDist
+                : '') +
+              (location.emsDist
+                ? '<br><strong>EMS District:</strong> ' + location.emsDist
+                : '') +
+              (location.radio
+                ? '<br><strong>Radio Channel:</strong> ' + location.radio
+                : '');
+            stationMarker.bindPopup(popupContents).openPopup();
+
+            layerGroup.addLayer(stationMarker);
+          });
+        } else if (layerName === 'gangs') {
+          let kmlLayer = new L.KML();
+          map.attributionControl.addAttribution(
+            'Gang map by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank">u/ReggieG45</a>'
+          );
+          if (layerObj.showByDefault) {
+            kmlLayer.addTo(map);
+          }
+          layerObj.layer = kmlLayer;
+          this.overlay[layerObj.label] = layerObj.layer;
+
+          const response = await fetch(layerObj.url);
+          const kmltext = await response.text();
+          // Create new kml overlay
+          const parser = new DOMParser();
+          const kml = parser.parseFromString(kmltext, 'text/xml');
+          layerObj.layer.addKML(kml);
+        } else {
+          let geoJsonLayer = L.geoJson(null, {
+            onEachFeature: (feature, layer) => {
+              let props = {};
+              for (const key in feature.properties) {
+                if (
+                  Object.prototype.hasOwnProperty.call(
+                    layerObj.propMappings,
+                    key
+                  )
+                ) {
+                  props[layerObj.propMappings[key]] = feature.properties[key];
+                }
+              }
+              feature.properties = props;
+            },
+          });
+          if (layerObj.showByDefault) {
+            geoJsonLayer.addTo(map);
+          }
+          layerObj.layer = geoJsonLayer;
+          this.overlay[layerObj.label] = layerObj.layer;
+          const data = await (await fetch(layerObj.url)).json();
+          layerObj.layer.addData(data).setStyle(layerObj.style);
+        }
+      }
     }
 
     let onMouseMove = (e) => {
@@ -675,37 +588,32 @@ export default class IncidentMap extends Component {
     });
 
     this.map.on('click', onMouseMove);
-
-    return Promise.all(promises);
   }
 
   initInfoBox() {
-    return new Promise((resolve, reject) => {
-      let info = L.control();
+    let info = L.control();
 
-      info.onAdd = function () {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-      };
+    info.onAdd = function () {
+      this._div = L.DomUtil.create('div', 'info');
+      this.update();
+      return this._div;
+    };
 
-      info.update = function (props) {
-        let html = '<h4>Layer Info</h4>';
-        if (props && Object.keys(props).length) {
-          for (let key in props) {
-            html += '<p><em>' + key + '</em>: ' + props[key] + '</p>';
-          }
-        } else {
-          html += '<p>Hover/tap a layer</p>';
+    info.update = function (props) {
+      let html = '<h4>Layer Info</h4>';
+      if (props && Object.keys(props).length) {
+        for (let key in props) {
+          html += '<p><em>' + key + '</em>: ' + props[key] + '</p>';
         }
-        this._div.innerHTML = html;
-      };
+      } else {
+        html += '<p>Hover/tap a layer</p>';
+      }
+      this._div.innerHTML = html;
+    };
 
-      info.addTo(this.map);
+    info.addTo(this.map);
 
-      set(this, 'infobox', info);
-      resolve();
-    });
+    set(this, 'infobox', info);
   }
 
   initEditableMap() {

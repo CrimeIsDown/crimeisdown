@@ -5,107 +5,40 @@ import { set } from '@ember/object';
 import fetch from 'fetch';
 
 export default class AddressLookup extends Service {
-  loadData() {
-    this.dataLoadedPromise = Promise.all([
-      new Promise((resolve) => {
-        this.policeZones = {
-          1: ['16', '17'],
-          2: ['19'],
-          3: ['12', '14'],
-          4: ['1', '18'],
-          5: ['2'],
-          6: ['7', '8'],
-          7: ['3'],
-          8: ['4', '6'],
-          9: ['5', '22'],
-          10: ['10', '11'],
-          11: ['20', '24'],
-          12: ['15', '25'],
-          13: ['9'],
-        };
-        resolve();
-      }),
-      new Promise((resolve) => {
-        this.policeAreas = {
-          North: ['11', '14', '15', '16', '17', '19', '20', '24'],
-          Central: ['1', '2', '3', '8', '9', '10', '12', '18'],
-          South: ['4', '5', '6', '7', '22'],
-        };
-        resolve();
-      }),
-      new Promise((resolve, reject) => {
-        fetch('/data/city_data/aldermen.json')
-          .then((response) => {
-            response
-              .json()
-              .then((data) => {
-                this.aldermen = data;
-                resolve(data);
-              })
-              .catch((err) => {
-                reject(err);
-              });
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      }),
-      new Promise((resolve, reject) => {
-        fetch('/data/audio_data/online_streams.json')
-          .then((response) => {
-            response
-              .json()
-              .then((data) => {
-                this.onlineStreams = data;
-                resolve(data);
-              })
-              .catch((err) => {
-                reject(err);
-              });
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      }),
-      new Promise((resolve, reject) => {
-        fetch('/data/city_data/fire_stations.json')
-          .then((response) => {
-            response
-              .json()
-              .then((data) => {
-                this.fireStations = data;
-                resolve(data);
-              })
-              .catch((err) => {
-                reject(err);
-              });
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      }),
-      new Promise((resolve, reject) => {
-        fetch('/data/city_data/trauma_centers.json')
-          .then((response) => {
-            response
-              .json()
-              .then((data) => {
-                this.traumaCenters = data;
-                resolve(data);
-              })
-              .catch((err) => {
-                reject(err);
-              });
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      }),
-    ]);
-    return this.dataLoadedPromise;
+  async loadData() {
+    this.policeZones = {
+      1: ['16', '17'],
+      2: ['19'],
+      3: ['12', '14'],
+      4: ['1', '18'],
+      5: ['2'],
+      6: ['7', '8'],
+      7: ['3'],
+      8: ['4', '6'],
+      9: ['5', '22'],
+      10: ['10', '11'],
+      11: ['20', '24'],
+      12: ['15', '25'],
+      13: ['9'],
+    };
+    this.policeAreas = {
+      North: ['11', '14', '15', '16', '17', '19', '20', '24'],
+      Central: ['1', '2', '3', '8', '9', '10', '12', '18'],
+      South: ['4', '5', '6', '7', '22'],
+    };
+    this.onlineStreams = await (
+      await fetch('/data/audio_data/online_streams.json')
+    ).json();
+    this.aldermen = await (await fetch('/data/city_data/aldermen.json')).json();
+    this.fireStations = await (
+      await fetch('/data/city_data/fire_stations.json')
+    ).json();
+    this.traumaCenters = await (
+      await fetch('/data/city_data/trauma_centers.json')
+    ).json();
   }
 
-  generateLocationDataForAddress(layers, location) {
+  async generateLocationDataForAddress(layers, location) {
     let result = {};
 
     let latlng = L.latLng(
@@ -119,21 +52,21 @@ export default class AddressLookup extends Service {
       longitude: latlng.lng.toFixed(6),
     };
 
-    this.dataLoadedPromise.then(() => {
-      result.meta = this.buildMeta(layers, location.formatted_address, latlng);
+    await this.dataLoadedPromise;
 
-      if (!result.meta.communityArea) {
-        result.meta.formattedAddress =
-          result.meta.formattedAddress +
-          ' (Not in Chicago, no additional location info available)';
-        result.meta.inChicago = false;
-      } else {
-        result.meta.inChicago = true;
-        result.police = this.buildPolice(layers, latlng);
-        result.fire = this.buildFire(latlng);
-        result.ems = this.buildEMS(latlng);
-      }
-    });
+    result.meta = this.buildMeta(layers, location.formatted_address, latlng);
+
+    if (!result.meta.communityArea) {
+      result.meta.formattedAddress =
+        result.meta.formattedAddress +
+        ' (Not in Chicago, no additional location info available)';
+      result.meta.inChicago = false;
+    } else {
+      result.meta.inChicago = true;
+      result.police = this.buildPolice(layers, latlng);
+      result.fire = this.buildFire(latlng);
+      result.ems = this.buildEMS(latlng);
+    }
 
     return result;
   }

@@ -30,7 +30,7 @@
     <link rel="preload" href="{{rootURL}}assets/crimeisdown.css" as="style">
     <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/cyborg/bootstrap.min.css" integrity="sha256-5VtblVKKKwvwGyDA7qcGYiZUaS//r532pzmSTYjicQQ=" crossorigin="anonymous" media="(prefers-color-scheme: dark)">
     <link rel="preload" href="{{rootURL}}assets/crimeisdown-dark.css" as="style">
-    <link rel="preload" href="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL" as="script">
+    <link rel="preload" href="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL&callback=googleCallback" as="script">
     <link rel="preload" href="{{rootURL}}assets/stereo-panner-node.js" as="script">
     <link rel="preload" href="{{rootURL}}assets/vendor.js" as="script">
     <link rel="preload" href="{{rootURL}}assets/crimeisdown.js" as="script">
@@ -52,7 +52,10 @@
     {{content-for "body"}}
 
     <script src="https://crimeisdown.statuspage.io/embed/script.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL"></script>
+    <script>
+      function googleCallback() {}
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL&callback=googleCallback"></script>
     <!-- Doorbell.io widget -->
     {{content-for "doorbell"}}
     <!-- Hotjar Tracking Code for https://crimeisdown.com/ -->
