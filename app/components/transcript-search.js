@@ -6,13 +6,13 @@ import { tracked } from '@glimmer/tracking';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
 import instantsearch from 'instantsearch.js';
 import connectRange from 'instantsearch.js/es/connectors/range/connectRange';
-import { highlight } from 'instantsearch.js/es/helpers';
+import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
+import { unescape } from 'instantsearch.js/es/lib/utils';
 import { history } from 'instantsearch.js/es/lib/routers';
 import {
   configure,
   clearRefinements,
   currentRefinements,
-  hits,
   pagination,
   refinementList,
   searchBox,
@@ -90,13 +90,11 @@ export default class TranscriptSearchComponent extends Component {
       // Do nothing, we don't have localStorage
     }
     try {
-      const response = await fetch(
-        'https://api.crimeisdown.com/api/search-key',
-        {
+      this.apiKey = await (
+        await fetch('https://api.crimeisdown.com/api/search-key', {
           credentials: 'include',
-        }
-      );
-      this.apiKey = await response.text();
+        })
+      ).text();
       this.hasAccess = true;
     } catch (e) {
       console.error(e);
@@ -105,6 +103,31 @@ export default class TranscriptSearchComponent extends Component {
         'REDACTED_PUBLIC_CREDENTIAL';
       this.indexName = 'calls_demo';
     }
+  }
+
+  processHit(hit) {
+    hit._highlightResult.transcript.value = unescape(
+      hit._highlightResult.transcript.value
+    )
+      .trim()
+      .replace(/\n/g, '<br/>');
+    hit.audio_type = capitalize(hit.audio_type);
+    const start_time = moment.unix(hit.start_time);
+    let time_warning = '';
+    if (
+      hit.short_name == 'chi_cpd' &&
+      hit.raw_metadata.includes('"encrypted": 1,')
+    ) {
+      const original_time = start_time.clone().subtract(30, 'minutes');
+      time_warning = ` - encrypted broadcast approx. ${original_time
+        .toDate()
+        .toLocaleString()}`;
+    }
+    hit.time_warning = time_warning;
+    hit.start_time_string = start_time.toDate().toLocaleString();
+    hit.relative_time = start_time.fromNow();
+    hit.raw_metadata = JSON.stringify(JSON.parse(hit.raw_metadata), null, 4);
+    return hit;
   }
 
   @action
@@ -249,100 +272,11 @@ export default class TranscriptSearchComponent extends Component {
           },
         },
       }),
-      hits({
-        container: '#hits',
-        escapeHTML: false,
-        templates: {
-          item(hit, { html }) {
-            // TODO: add button to see call in context of transcripts
-            // TODO: allow unit IDs to be clicked and searched
-            const start_time = new Date(hit.start_time * 1000);
-            return html`
-              <div>
-                <h4 title="${hit.talkgroup_description}">
-                  ${hit.talkgroup_tag} - ${hit.talkgroup_group}
-                </h4>
-                <p>
-                  <strong>
-                    ${start_time.toLocaleString() +
-                    ' (' +
-                    moment(start_time).fromNow() +
-                    ')'}
-                  </strong>
-                </p>
-                <p>
-                  <span class="badge bg-secondary me-1">
-                    TG ${hit.talkgroup}
-                  </span>
-                  <span class="badge bg-secondary me-1">
-                    ${hit.talkgroup_group_tag}
-                  </span>
-                  <span
-                    class="badge ${hit.audio_type == 'digital'
-                      ? 'bg-danger'
-                      : 'bg-primary'} me-1"
-                  >
-                    ${capitalize(hit.audio_type)}
-                  </span>
-                  <span class="badge bg-secondary me-1">
-                    Duration: ${hit.call_length}s
-                  </span>
-                  <button
-                    class="badge btn btn-sm btn-info"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#metadata-${hit.id}"
-                    aria-expanded="true"
-                    aria-controls="metadata-${hit.id}"
-                  >
-                    Open Raw Metadata
-                  </button>
-                </p>
-                <div class="collapse mt-3 mb-3" id="metadata-${hit.id}">
-                  <pre>
-                    ${JSON.stringify(JSON.parse(hit.raw_metadata), null, 4)}
-                  </pre
-                  >
-                </div>
-                <audio
-                  id="videojs-player-${hit.id}"
-                  class="${globalThis.useMediaPlayerComponent
-                    ? 'video-js vjs-default-skin vjs-fill'
-                    : 'call-audio'}"
-                  src="${hit.raw_audio_url}"
-                  controls
-                  preload="none"
-                ></audio>
-                <p
-                  dangerouslySetInnerHTML=${{
-                    // We need to do this hacky thing to get the HTML from the transcript to render
-                    __html: highlight({
-                      attribute: 'transcript',
-                      hit,
-                    }),
-                  }}
-                ></p>
-              </div>
-            `;
-          },
-          empty(results, { html }) {
-            return html`No results for <q>${results.query}</q>`;
-          },
-        },
-        transformItems(items) {
-          const transformedItems = items.map((item) => {
-            item._highlightResult.transcript.value =
-              item._highlightResult.transcript.value
-                .trim()
-                .replace(/\n/g, '<br/>')
-                .replace(/__ais-highlight__/g, '<mark>')
-                .replace(/__\/ais-highlight__/g, '</mark>');
-            return item;
-          });
-          globalThis.hits = transformedItems;
-          return transformedItems;
-        },
-      }),
+      connectHits((renderOptions) => {
+        const { hits } = renderOptions;
+        hits.map(this.processHit);
+        this.hits = hits;
+      })(),
       configure({
         hitsPerPage: 20,
       }),
