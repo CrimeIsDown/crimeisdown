@@ -138,7 +138,7 @@
     <div id="stats" class="mb-1"></div>
     <div id="hits" class="ais-Hits">
       <ol class="ais-Hits-list">
-        {{#each this.hits as |hit|}}
+        {{#each this.hits key="id" as |hit|}}
         <li class="ais-Hits-item">
           <div>
             <h4 class="fs-5" title="{{hit.talkgroup_description}}">

@@ -195,9 +195,15 @@ export default class TranscriptSearchComponent extends Component {
       },
     });
 
+    let timerId;
+
     this.search.addWidgets([
       searchBox({
         container: '#searchbox',
+        queryHook(query, refine) {
+          clearTimeout(timerId);
+          timerId = setTimeout(() => refine(query), 300);
+        },
       }),
       sortBy({
         container: '#sort-by',
