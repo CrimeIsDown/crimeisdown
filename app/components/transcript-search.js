@@ -207,6 +207,9 @@ export default class TranscriptSearchComponent extends Component {
         // Do nothing, we don't have localStorage
       }
     }
+    if (this.hasAccess === undefined) {
+      this.hasAccess = false;
+    }
   }
 
   @action
