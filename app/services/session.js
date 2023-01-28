@@ -3,13 +3,14 @@ import { tracked } from '@glimmer/tracking';
 
 export default class SessionService extends Service {
   @tracked isAuthenticated = false;
-
   @tracked user = undefined;
 
   constructor() {
     super(...arguments);
 
-    this.getUser();
+    this.authenticated = new Promise((resolve) => {
+      this.getUser().then(() => resolve(this.isAuthenticated));
+    });
   }
 
   async getUser() {

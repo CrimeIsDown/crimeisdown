@@ -122,11 +122,16 @@ export default class TranscriptSearchComponent extends Component {
   }
 
   buildContextState(hit) {
+    let sortBy = this.defaultSort;
+    if (
+      this.search.getUiState()[this.indexName] &&
+      this.search.getUiState()[this.indexName]['sortBy']
+    ) {
+      sortBy = this.search.getUiState()[this.indexName]['sortBy'];
+    }
     return {
       [this.indexName]: {
-        sortBy:
-          this.search.getUiState()[this.indexName]['sortBy'] ||
-          this.defaultSort,
+        sortBy,
         hitsPerPage: 60,
         refinementList: {
           talkgroup_tag: [hit.talkgroup_tag],
@@ -172,18 +177,7 @@ export default class TranscriptSearchComponent extends Component {
   }
 
   async login() {
-    try {
-      // For debugging
-      let apiKey = localStorage.getItem('search-key');
-      if (apiKey) {
-        this.apiKey = apiKey;
-        this.indexName = 'calls';
-        return (this.hasAccess = true);
-      }
-    } catch {
-      // Do nothing, we don't have localStorage
-    }
-    // if (this.session.isAuthenticated) {
+    if (await this.session.authenticated) {
       try {
         this.apiKey = await (
           await fetch('https://api.crimeisdown.com/api/search-key', {
@@ -198,7 +192,19 @@ export default class TranscriptSearchComponent extends Component {
         //   'Could not load search, please try again or check that you are at the right Patreon tier.'
         // );
       }
-    // }
+    } else {
+      try {
+        // For debugging
+        const apiKey = localStorage.getItem('search-key');
+        if (apiKey) {
+          this.apiKey = apiKey;
+          this.indexName = 'calls';
+          return (this.hasAccess = true);
+        }
+      } catch {
+        // Do nothing, we don't have localStorage
+      }
+    }
     return (this.hasAccess = false);
   }
 
