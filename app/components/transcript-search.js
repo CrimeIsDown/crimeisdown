@@ -183,7 +183,7 @@ export default class TranscriptSearchComponent extends Component {
     } catch {
       // Do nothing, we don't have localStorage
     }
-    if (this.session.isAuthenticated) {
+    // if (this.session.isAuthenticated) {
       try {
         this.apiKey = await (
           await fetch('https://api.crimeisdown.com/api/search-key', {
@@ -194,11 +194,11 @@ export default class TranscriptSearchComponent extends Component {
         return (this.hasAccess = true);
       } catch (e) {
         console.error(e);
-        alert(
-          'Could not load search, please try again or check that you are at the right Patreon tier.'
-        );
+        // alert(
+        //   'Could not load search, please try again or check that you are at the right Patreon tier.'
+        // );
       }
-    }
+    // }
     return (this.hasAccess = false);
   }
 
