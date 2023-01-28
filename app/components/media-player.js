@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class MediaPlayer extends Component {
+  options = {};
   @tracked
   minZoom = 0;
   @tracked
@@ -14,56 +15,65 @@ export default class MediaPlayer extends Component {
 
   constructor() {
     super(...arguments);
-  }
-
-  @action
-  initializeMediaPlayer(src, type, idSuffix) {
-    this.idSuffix = idSuffix;
-    const playerElement = document.querySelector('#videojs-player' + idSuffix);
-    const timelineElement = document.querySelector('#timeline' + idSuffix);
-    let options = {
+    this.options = {
+      preload: this.args.preload,
       controls: true,
       techOrder: ['html5'],
-      plugins: {
-        wavesurfer: {
-          backend: 'MediaElement',
-          displayMilliseconds: false,
-          interact: true,
-          waveColor: '#0F0',
-          progressColor: '#0A0',
-          cursorColor: '#FFF',
-          plugins: [
-            window.WaveSurfer.timeline.create({
-              container: timelineElement,
-            }),
-          ],
-        },
+    };
+
+    if (this.args.type.includes('ogg')) {
+      this.options.techOrder = ['ogvjs'];
+      this.options.ogvjs = { base: '/assets/ogv' };
+    }
+
+    this.plugins = {
+      wavesurfer: {
+        displayMilliseconds: false,
+        interact: true,
+        waveColor: '#0F0',
+        progressColor: '#0A0',
+        cursorColor: '#FFF',
+        plugins: [],
       },
     };
 
-    if (type.includes('ogg')) {
-      options.techOrder = ['ogvjs'];
-      options.ogvjs = { base: '/assets/ogv' };
+    if (!this.args.hideZoom) {
+      this.plugins.wavesurfer.plugins.push(
+        window.WaveSurfer.timeline.create({
+          container: '#timeline' + this.idSuffix,
+        })
+      );
     }
 
-    // This is a bad idea, but it works for sharing scope
-    window['player' + this.idSuffix] = window.videojs(
-      playerElement,
-      options,
-      () => {
-        window['player' + this.idSuffix].src({ src: src, type: type });
-      }
-    );
+    this.options.plugins = this.plugins;
+  }
+
+  @action
+  initializeMediaPlayer(target) {
+    this.player = window.videojs(target, this.options, () => {
+      this.player.src({
+        src: this.args.src,
+        type: this.args.type,
+        peaks:
+          'data:application/json;charset=utf-8,%7B%22version%22%3A2%2C%22channels%22%3A1%2C%22sample_rate%22%3A8000%2C%22samples_per_pixel%22%3A400%2C%22bits%22%3A8%2C%22length%22%3A108%2C%22data%22%3A%5B0%5D%7D',
+      });
+      this.player.one('play', () => {
+        const element = this.player.tech_.el();
+        this.player.wavesurfer().load(element);
+        this.player.play();
+        this.player.wavesurfer().surfer.play();
+      });
+    });
   }
 
   @action
   teardownMediaPlayer() {
-    window['player' + this.idSuffix].dispose();
+    this.player.dispose();
   }
 
   @action
   zoom(e) {
-    let wavesurfer = window['player' + this.idSuffix].wavesurfer().surfer;
+    let wavesurfer = this.player.wavesurfer().surfer;
     let playerWidth = wavesurfer.drawer.getWidth();
     let minPxPerSec = Math.round(
       (playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration()

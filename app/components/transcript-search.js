@@ -5,13 +5,13 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
 import instantsearch from 'instantsearch.js';
-import connectRange from 'instantsearch.js/es/connectors/range/connectRange';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
-import { unescape } from 'instantsearch.js/es/lib/utils';
+import connectRange from 'instantsearch.js/es/connectors/range/connectRange';
 import { history } from 'instantsearch.js/es/lib/routers';
+import { unescape } from 'instantsearch.js/es/lib/utils';
 import {
-  configure,
   clearRefinements,
+  configure,
   currentRefinements,
   pagination,
   refinementList,
@@ -26,15 +26,15 @@ export default class TranscriptSearchComponent extends Component {
   @service session;
 
   @tracked hasAccess = undefined;
-  @tracked apiKey = undefined;
-  @tracked indexName = 'calls';
+  @tracked apiKey =
+    'REDACTED_PUBLIC_CREDENTIAL';
+  @tracked indexName = 'calls_demo';
   @tracked hits = [];
   @tracked useMediaPlayerComponent = false;
   @tracked autoRefreshInterval = '0';
   @tracked minStartTime;
   @tracked maxStartTime;
   autoRefresh = undefined;
-  search = undefined;
 
   constructor() {
     super(...arguments);
@@ -76,62 +76,105 @@ export default class TranscriptSearchComponent extends Component {
     }
   }
 
+  processHit(hit) {
+    hit._highlightResult.transcript.value = unescape(
+      hit._highlightResult.transcript.value
+    ).trim();
+
+    const parsed_metadata = JSON.parse(hit.raw_metadata);
+    hit.raw_metadata = JSON.stringify(parsed_metadata, null, 4);
+
+    hit.audio_type = capitalize(hit.audio_type);
+
+    let start_time = moment.unix(hit.start_time);
+    if (hit.short_name == 'chi_cpd' && parsed_metadata['encrypted'] == 1) {
+      hit.time_warning = ` - received at ${start_time
+        .toDate()
+        .toLocaleString()}`;
+      start_time = start_time.subtract(30, 'minutes');
+      hit.encrypted = true;
+    }
+    hit.start_time_string = start_time.toDate().toLocaleString();
+    hit.relative_time = start_time.fromNow();
+
+    hit.permalink = this.search.createURL({
+      [this.indexName]: {
+        refinementList: {
+          talkgroup_tag: [hit.talkgroup_tag],
+        },
+        range: {
+          start_time: `${hit.start_time}:${hit.start_time}`,
+        },
+      },
+    });
+
+    hit.contextUrl = this.search.createURL(this.buildContextState(hit));
+    return hit;
+  }
+
+  buildContextState(hit) {
+    return {
+      [this.indexName]: {
+        sortBy:
+          this.search.getUiState()[this.indexName].sortBy || this.defaultSort,
+        refinementList: {
+          talkgroup_tag: [hit.talkgroup_tag],
+        },
+        range: {
+          start_time: [hit.start_time - 60 * 20, hit.start_time + 60 * 10].join(
+            ':'
+          ),
+        },
+      },
+    };
+  }
+
   @action
-  async login() {
+  getContext(hit, event) {
+    event.preventDefault();
+    const state = this.buildContextState(hit);
+    this.search.setUiState(state);
+    this.search.once('render', () => {
+      const backgroundClass = 'bg-light';
+      document
+        .querySelectorAll('.ais-Hits-item')
+        .forEach((elem) => elem.classList.remove(backgroundClass));
+      const hitElement = document.getElementById(`hit-${hit.id}`);
+      hitElement.classList.add(backgroundClass);
+      const y =
+        hitElement.getBoundingClientRect().top + window.pageYOffset - 60;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  }
+
+  @action
+  async setupSearch() {
     try {
       // For debugging
       let apiKey = localStorage.getItem('search-key');
       if (apiKey) {
         this.apiKey = apiKey;
         this.hasAccess = true;
-        return;
+        this.indexName = 'calls';
       }
     } catch (e) {
       // Do nothing, we don't have localStorage
     }
-    try {
-      this.apiKey = await (
-        await fetch('https://api.crimeisdown.com/api/search-key', {
-          credentials: 'include',
-        })
-      ).text();
-      this.hasAccess = true;
-    } catch (e) {
-      console.error(e);
-      this.hasAccess = false;
-      this.apiKey =
-        'REDACTED_PUBLIC_CREDENTIAL';
-      this.indexName = 'calls_demo';
+    if (this.hasAccess === undefined) {
+      try {
+        this.apiKey = await (
+          await fetch('https://api.crimeisdown.com/api/search-key', {
+            credentials: 'include',
+          })
+        ).text();
+        this.hasAccess = true;
+        this.indexName = 'calls';
+      } catch {
+        this.hasAccess = false;
+      }
     }
-  }
+    this.defaultSort = `${this.indexName}:start_time:desc`;
 
-  processHit(hit) {
-    hit._highlightResult.transcript.value = unescape(
-      hit._highlightResult.transcript.value
-    )
-      .trim()
-      .replace(/\n/g, '<br/>');
-    hit.audio_type = capitalize(hit.audio_type);
-    const start_time = moment.unix(hit.start_time);
-    let time_warning = '';
-    if (
-      hit.short_name == 'chi_cpd' &&
-      hit.raw_metadata.includes('"encrypted": 1,')
-    ) {
-      const original_time = start_time.clone().subtract(30, 'minutes');
-      time_warning = ` - encrypted broadcast approx. ${original_time
-        .toDate()
-        .toLocaleString()}`;
-    }
-    hit.time_warning = time_warning;
-    hit.start_time_string = start_time.toDate().toLocaleString();
-    hit.relative_time = start_time.fromNow();
-    hit.raw_metadata = JSON.stringify(JSON.parse(hit.raw_metadata), null, 4);
-    return hit;
-  }
-
-  @action
-  async setupSearch() {
     const globalThis = this;
 
     const searchClient = new instantMeiliSearch(
@@ -142,11 +185,9 @@ export default class TranscriptSearchComponent extends Component {
       }
     );
 
-    const defaultSort = `${this.indexName}:start_time:desc`;
-
     this.search = instantsearch({
       searchClient,
-      indexName: defaultSort,
+      indexName: this.indexName,
       routing: {
         router: history({
           windowTitle(routeState) {
@@ -158,36 +199,16 @@ export default class TranscriptSearchComponent extends Component {
 
             return `${indexState.query} - Search Scanner Transcripts | CrimeIsDown.com`;
           },
-          createURL({ qsModule, location, routeState }) {
-            const { origin, pathname, hash } = location;
-            const indexState = routeState['instant_search'] || {};
-            // Remove the sort suffix from the index name
-            const indexName = defaultSort.split(':')[0];
-            delete Object.assign(routeState, {
-              [indexName]: routeState[defaultSort],
-            })[defaultSort];
-
-            const queryString = qsModule.stringify(routeState);
-
-            if (
-              !indexState.query &&
-              routeState[indexName].sortBy === defaultSort
-            ) {
-              return `${origin}${pathname}${hash}`;
-            }
-
-            return `${origin}${pathname}?${queryString}${hash}`;
-          },
           parseURL({ qsModule, location }) {
             const routeState = qsModule.parse(location.search.slice(1), {
               arrayLimit: 99,
             });
-            // Re-add the sort suffix to the index name
-            const indexName = defaultSort.split(':')[0];
-            if (indexName in routeState) {
-              delete Object.assign(routeState, {
-                [defaultSort]: routeState[indexName],
-              })[indexName];
+            if (routeState[globalThis.indexName] === undefined) {
+              routeState[globalThis.indexName] = {};
+            }
+            if (routeState[globalThis.indexName]['sortBy'] === undefined) {
+              routeState[globalThis.indexName]['sortBy'] =
+                globalThis.defaultSort;
             }
             return routeState;
           },
@@ -208,7 +229,7 @@ export default class TranscriptSearchComponent extends Component {
       sortBy({
         container: '#sort-by',
         items: [
-          { label: 'Newest First', value: defaultSort },
+          { label: 'Newest First', value: this.defaultSort },
           { label: 'Oldest First', value: `${this.indexName}:start_time:asc` },
           {
             label: 'Relevance',
@@ -232,6 +253,9 @@ export default class TranscriptSearchComponent extends Component {
       }),
       currentRefinements({
         container: '#current-refinements',
+        cssClasses: {
+          list: 'input-group',
+        },
         transformItems(items) {
           return items.map((item) => {
             if (item.attribute == 'start_time') {
@@ -249,6 +273,9 @@ export default class TranscriptSearchComponent extends Component {
               }
             }
             switch (item.attribute) {
+              case 'short_name':
+                item.label = 'System';
+                break;
               case 'talkgroup_group':
                 item.label = 'Department';
                 break;
@@ -280,11 +307,11 @@ export default class TranscriptSearchComponent extends Component {
       }),
       connectHits((renderOptions) => {
         const { hits } = renderOptions;
-        hits.map(this.processHit);
+        hits.map(this.processHit.bind(globalThis));
         this.hits = hits;
       })(),
       configure({
-        hitsPerPage: 20,
+        hitsPerPage: 40,
       }),
       refinementList({
         container: '#dept-menu',

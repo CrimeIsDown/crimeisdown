@@ -1,7 +1,7 @@
 {{#if (eq this.hasAccess undefined)}}
-<p {{did-insert this.login}}>Logging in...</p>
-{{else}}
-<div class="search-panel row" {{did-insert this.setupSearch}}>
+<p {{did-insert this.setupSearch}}>Logging in...</p>
+{{/if}}
+<div class="search-panel row {{if (eq this.hasAccess undefined) "d-none" ""}}">
   <div class="search-panel__filters col-md-3">
     {{#if (eq this.hasAccess false)}}
     <p class="alert alert-danger">
@@ -139,61 +139,72 @@
     <div id="hits" class="ais-Hits">
       <ol class="ais-Hits-list">
         {{#each this.hits key="id" as |hit|}}
-        <li class="ais-Hits-item">
-          <div>
-            <h4 class="fs-5" title="{{hit.talkgroup_description}}">
-              {{hit.talkgroup_tag}} - {{hit.talkgroup_group}}
-            </h4>
-            <p>
-              <strong>
-                {{hit.start_time_string}} ({{hit.relative_time}})
-              </strong>
-              {{hit.time_warning}}
-            </p>
-            <p>
-              <span class="badge bg-secondary me-1">
-                TG {{hit.talkgroup}}
-              </span>
-              <span class="badge bg-secondary me-1">
-                {{hit.talkgroup_group_tag}}
-              </span>
-              <span
-                class="badge {{if (eq hit.audio_type "digital") "bg-danger" "bg-primary"}} me-1"
-              >
-                {{hit.audio_type}}
-              </span>
-              <span class="badge bg-secondary me-1">
-                Duration: {{hit.call_length}}s
-              </span>
-              <button
-                class="badge btn btn-sm btn-info"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#metadata-{{hit.id}}"
-                aria-expanded="true"
-                aria-controls="metadata-{{hit.id}}"
-              >
-                Open Raw Metadata
-              </button>
-            </p>
-            <div class="collapse mt-3 mb-3" id="metadata-{{hit.id}}">
-              <pre>{{hit.raw_metadata}}</pre>
+        <li id="hit-{{hit.id}}" class="ais-Hits-item">
+          <div class="row">
+            <div class="col">
+              <h4 class="fs-5" title="{{hit.talkgroup_description}}">
+                <a href="{{hit.contextUrl}}" {{on "click" (fn this.getContext hit)}}>{{hit.talkgroup_tag}}</a>
+              </h4>
+              <h5 class="fs-6">
+                {{hit.talkgroup_group}}
+              </h5>
+              <p>
+                <strong>
+                  <a href="{{hit.permalink}}">{{hit.start_time_string}}</a> ({{hit.relative_time}})
+                </strong>
+                {{hit.time_warning}}
+              </p>
+              <p>
+                <span class="badge text-bg-light me-1">
+                  Duration: {{hit.call_length}}s
+                </span>
+                <span class="badge text-bg-info me-1">
+                  TG {{hit.talkgroup}}
+                </span>
+                <span class="badge text-bg-info me-1">
+                  {{hit.talkgroup_group_tag}}
+                </span>
+                <span
+                  class="badge {{if (eq hit.audio_type "digital") "text-bg-primary" "text-bg-secondary"}} me-1"
+                >
+                  {{hit.audio_type}}
+                </span>
+                {{#if hit.encrypted}}
+                <span class="badge text-bg-danger me-1" data-bs-toggle="tooltip" title="From an official Broadcastify.com stream of an encrypted channel">
+                  Encrypted / Delayed 30mins
+                </span>
+                {{/if}}
+                <button
+                  class="badge text-bg-light btn btn-sm btn-light"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#metadata-{{hit.id}}"
+                  aria-expanded="true"
+                  aria-controls="metadata-{{hit.id}}"
+                >
+                  Open Raw Metadata
+                </button>
+              </p>
+              <div class="collapse mt-3 mb-3" id="metadata-{{hit.id}}">
+                <pre>{{hit.raw_metadata}}</pre>
+              </div>
+              <audio
+                id="call-audio-{{hit.id}}"
+                class="call-audio{{if this.useMediaPlayerComponent " d-lg-none" ""}}"
+                src="{{hit.raw_audio_url}}"
+                controls
+                preload="none"
+              ></audio>
+              <p>
+                {{!-- template-lint-disable no-triple-curlies --}}
+                {{{hit._highlightResult.transcript.value}}}
+              </p>
             </div>
-            <audio
-              id="videojs-player-{{hit.id}}"
-              class="{{if this.useMediaPlayerComponent "video-js vjs-default-skin vjs-fill" "call-audio"}}"
-              src="{{hit.raw_audio_url}}"
-              controls
-              preload="none"
-            ></audio>
             {{#if this.useMediaPlayerComponent}}
-            <MediaPlayer @src="{{hit.raw_audio_url}}" @type="audio/mpeg" @idSuffix="-{{hit.id}}" @shadow="true" />
-            <div id="timeline-{{hit.id}}" class="d-none"></div>
+            <div class="col ms-3 d-none d-lg-block">
+              <MediaPlayer @src="{{hit.raw_audio_url}}" @type="audio/mpeg" @idSuffix="-{{hit.id}}" @hideZoom="false" @preload="none" />
+            </div>
             {{/if}}
-            <p>
-              {{!-- template-lint-disable no-triple-curlies --}}
-              {{{hit._highlightResult.transcript.value}}}
-            </p>
           </div>
         </li>
         {{/each}}
@@ -202,5 +213,3 @@
     <div id="pagination" class="mt-3"></div>
   </div>
 </div>
-
-{{/if}}
