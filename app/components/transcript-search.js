@@ -11,8 +11,8 @@ import { history } from 'instantsearch.js/es/lib/routers';
 import { unescape } from 'instantsearch.js/es/lib/utils';
 import {
   clearRefinements,
-  configure,
   currentRefinements,
+  hitsPerPage,
   pagination,
   refinementList,
   searchBox,
@@ -30,11 +30,13 @@ export default class TranscriptSearchComponent extends Component {
     'REDACTED_PUBLIC_CREDENTIAL';
   @tracked indexName = 'calls_demo';
   @tracked hits = [];
+  @tracked selectedHit = null;
   @tracked useMediaPlayerComponent = false;
   @tracked autoRefreshInterval = '0';
   @tracked minStartTime;
   @tracked maxStartTime;
   autoRefresh = undefined;
+  scrollTimer;
 
   constructor() {
     super(...arguments);
@@ -48,6 +50,9 @@ export default class TranscriptSearchComponent extends Component {
       minDefaultDate: new Date(this.minStartTime.getTime()),
       maxDefaultDate: new Date(this.maxStartTime.getTime()),
     };
+    if (window.location.hash.startsWith('#hit-')) {
+      this.selectedHit = window.location.hash.split('#hit-')[1];
+    }
   }
 
   @action
@@ -108,7 +113,11 @@ export default class TranscriptSearchComponent extends Component {
       },
     });
 
-    hit.contextUrl = this.search.createURL(this.buildContextState(hit));
+    hit.contextUrl =
+      this.search.createURL(this.buildContextState(hit)).split('#')[0] +
+      '#hit-' +
+      hit.id;
+
     return hit;
   }
 
@@ -116,7 +125,9 @@ export default class TranscriptSearchComponent extends Component {
     return {
       [this.indexName]: {
         sortBy:
-          this.search.getUiState()[this.indexName].sortBy || this.defaultSort,
+          this.search.getUiState()[this.indexName]['sortBy'] ||
+          this.defaultSort,
+        hitsPerPage: 60,
         refinementList: {
           talkgroup_tag: [hit.talkgroup_tag],
         },
@@ -133,49 +144,83 @@ export default class TranscriptSearchComponent extends Component {
   getContext(hit, event) {
     event.preventDefault();
     const state = this.buildContextState(hit);
+    this.selectedHit = hit.id;
     this.search.setUiState(state);
-    this.search.once('render', () => {
-      const backgroundClass = 'bg-light';
-      document
-        .querySelectorAll('.ais-Hits-item')
-        .forEach((elem) => elem.classList.remove(backgroundClass));
-      const hitElement = document.getElementById(`hit-${hit.id}`);
-      hitElement.classList.add(backgroundClass);
-      const y =
-        hitElement.getBoundingClientRect().top + window.pageYOffset - 60;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    });
+    this.scrollToHit(this.selectedHit);
   }
 
   @action
-  async setupSearch() {
+  scrollToHit(selectedHit) {
+    if (selectedHit) {
+      clearTimeout(this.scrollTimer);
+      this.scrollTimer = setTimeout(() => {
+        const elementId = `hit-${selectedHit}`;
+        const hitElement = document.getElementById(elementId);
+        if (hitElement) {
+          const y =
+            hitElement.getBoundingClientRect().top + window.pageYOffset - 60;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+
+          const oldhash = window.location.hash;
+          const newhash = '#' + elementId;
+          if (oldhash != newhash) {
+            window.history.pushState(window.history.state, '', newhash);
+          }
+        }
+      }, 100);
+    }
+  }
+
+  async login() {
     try {
       // For debugging
       let apiKey = localStorage.getItem('search-key');
       if (apiKey) {
         this.apiKey = apiKey;
-        this.hasAccess = true;
         this.indexName = 'calls';
+        return (this.hasAccess = true);
       }
-    } catch (e) {
+    } catch {
       // Do nothing, we don't have localStorage
     }
-    if (this.hasAccess === undefined) {
+    if (this.session.isAuthenticated) {
       try {
         this.apiKey = await (
           await fetch('https://api.crimeisdown.com/api/search-key', {
             credentials: 'include',
           })
         ).text();
-        this.hasAccess = true;
         this.indexName = 'calls';
-      } catch {
-        this.hasAccess = false;
+        return (this.hasAccess = true);
+      } catch (e) {
+        console.error(e);
+        alert(
+          'Could not load search, please try again or check that you are at the right Patreon tier.'
+        );
       }
     }
-    this.defaultSort = `${this.indexName}:start_time:desc`;
+    return (this.hasAccess = false);
+  }
 
-    const globalThis = this;
+  @action
+  async setupSearch() {
+    if (await !this.login()) {
+      return;
+    }
+
+    this.defaultSort = `${this.indexName}:start_time:desc`;
+    this.defaultRouteState = {
+      [this.indexName]: {
+        sortBy: this.defaultSort,
+      },
+    };
+    if (this.indexName !== 'calls_demo') {
+      this.defaultRouteState[this.indexName].range = {
+        start_time:
+          Math.floor(this.flatpickrOptions.minDefaultDate.getTime() / 1000) +
+          ':',
+      };
+    }
 
     const searchClient = new instantMeiliSearch(
       'https://api.crimeisdown.com/search',
@@ -189,220 +234,233 @@ export default class TranscriptSearchComponent extends Component {
       searchClient,
       indexName: this.indexName,
       routing: {
-        router: history({
-          windowTitle(routeState) {
-            const indexState = routeState.calls || {};
-
-            if (!indexState.query) {
-              return 'Search Scanner Transcripts | CrimeIsDown.com';
-            }
-
-            return `${indexState.query} - Search Scanner Transcripts | CrimeIsDown.com`;
-          },
-          parseURL({ qsModule, location }) {
-            const routeState = qsModule.parse(location.search.slice(1), {
-              arrayLimit: 99,
-            });
-            if (routeState[globalThis.indexName] === undefined) {
-              routeState[globalThis.indexName] = {};
-            }
-            if (routeState[globalThis.indexName]['sortBy'] === undefined) {
-              routeState[globalThis.indexName]['sortBy'] =
-                globalThis.defaultSort;
-            }
-            return routeState;
-          },
-        }),
+        router: this.getSearchRouter(),
       },
     });
 
-    let timerId;
+    const sidebarWidgets = [
+      this.getClearRefinementsWidget(),
+      this.getRefinementListWidget('#dept-menu', 'talkgroup_group'),
+      this.getRefinementListWidget('#tg-menu', 'talkgroup_tag'),
+      this.getRefinementListWidget('#units-menu', 'units'),
+      this.getRefinementListWidget('#radios-menu', 'radios'),
+      this.getRefinementListWidget('#srclist-menu', 'srcList'),
+      this.getStartTimeRangeWidget(),
+    ];
 
-    this.search.addWidgets([
-      searchBox({
-        container: '#searchbox',
-        queryHook(query, refine) {
-          clearTimeout(timerId);
-          timerId = setTimeout(() => refine(query), 300);
-        },
-      }),
-      sortBy({
-        container: '#sort-by',
-        items: [
-          { label: 'Newest First', value: this.defaultSort },
-          { label: 'Oldest First', value: `${this.indexName}:start_time:asc` },
-          {
-            label: 'Relevance',
-            value: this.indexName,
-          },
-        ],
-      }),
-      clearRefinements({
-        container: '#clear-refinements',
-        cssClasses: {
-          button: ['mb-4'],
-          disabledButton: ['d-none'],
-        },
-        templates: {
-          resetLabel({ hasRefinements }, { html }) {
-            return html`<span
-              >${hasRefinements ? 'Clear filters' : 'No filters'}</span
-            >`;
-          },
-        },
-      }),
-      currentRefinements({
-        container: '#current-refinements',
-        cssClasses: {
-          list: 'input-group',
-        },
-        transformItems(items) {
-          return items.map((item) => {
-            if (item.attribute == 'start_time') {
-              for (const refinement of item.refinements) {
-                refinement.label = refinement.label.replace(
-                  refinement.value,
-                  new Date(refinement.value * 1000).toLocaleString([], {
-                    year: 'numeric',
-                    month: 'numeric',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: '2-digit',
-                  })
-                );
-              }
-            }
-            switch (item.attribute) {
-              case 'short_name':
-                item.label = 'System';
-                break;
-              case 'talkgroup_group':
-                item.label = 'Department';
-                break;
-              case 'talkgroup_tag':
-                item.label = 'Talkgroup';
-                break;
-              case 'srcList':
-                item.label = 'Radio ID';
-                break;
-              case 'start_time':
-                item.label = 'Call Time';
-                break;
-            }
-            return item;
-          });
-        },
-      }),
-      stats({
-        container: '#stats',
-        templates: {
-          text: function text(props) {
-            let text = statsTemplates.text(props);
-            if (props.hasManyResults && props.nbHits === 1000) {
-              text = `&ge;${text}`;
-            }
-            return text;
-          },
-        },
-      }),
-      connectHits((renderOptions) => {
-        const { hits } = renderOptions;
-        hits.map(this.processHit.bind(globalThis));
-        this.hits = hits;
-      })(),
-      configure({
-        hitsPerPage: 40,
-      }),
-      refinementList({
-        container: '#dept-menu',
-        attribute: 'talkgroup_group',
-        operator: 'or',
-        showMore: true,
-        showMoreLimit: 60,
-        cssClasses: {
-          label: ['form-check-label'],
-          checkbox: ['form-check-input'],
-          item: ['form-check'],
-          count: ['ms-1'],
-        },
-      }),
-      refinementList({
-        container: '#tg-menu',
-        attribute: 'talkgroup_tag',
-        operator: 'or',
-        showMore: true,
-        showMoreLimit: 60,
-        cssClasses: {
-          label: ['form-check-label'],
-          checkbox: ['form-check-input'],
-          item: ['form-check'],
-          count: ['ms-1'],
-        },
-      }),
-      refinementList({
-        container: '#units-menu',
-        attribute: 'units',
-        operator: 'or',
-        showMore: true,
-        showMoreLimit: 60,
-        cssClasses: {
-          label: ['form-check-label'],
-          checkbox: ['form-check-input'],
-          item: ['form-check'],
-          count: ['ms-1'],
-        },
-      }),
-      refinementList({
-        container: '#radios-menu',
-        attribute: 'radios',
-        operator: 'or',
-        showMore: true,
-        showMoreLimit: 60,
-        cssClasses: {
-          label: ['form-check-label'],
-          checkbox: ['form-check-input'],
-          item: ['form-check'],
-          count: ['ms-1'],
-        },
-      }),
-      refinementList({
-        container: '#srclist-menu',
-        attribute: 'srcList',
-        operator: 'or',
-        showMore: true,
-        showMoreLimit: 60,
-        cssClasses: {
-          label: ['form-check-label'],
-          checkbox: ['form-check-input'],
-          item: ['form-check'],
-          count: ['ms-1'],
-        },
-      }),
-      connectRange((renderOptions, isFirstRender) => {
-        const { start, refine } = renderOptions;
-        const [min, max] = start;
-        if (isFinite(min)) {
-          globalThis.minStartTime = new Date(min * 1000);
-        } else {
-          globalThis.minStartTime = this.flatpickrOptions.minDefaultDate;
-        }
-        if (isFinite(max)) {
-          globalThis.maxStartTime = new Date(max * 1000);
-        } else {
-          globalThis.maxStartTime = new Date();
-        }
-        if (isFirstRender) {
-          globalThis.updateStartTimeFilter = refine;
-        }
-      })({
-        container: '#time-input',
-        attribute: 'start_time',
-      }),
-      pagination({
-        container: '#pagination',
-      }),
-    ]);
+    const mainWidgets = [
+      this.getSearchBoxWidget(),
+      this.getSortByWidget(),
+      this.getCurrentRefinementsWidget(),
+      this.getStatsWidget(),
+      this.getHitsWidget(),
+      this.getPaginationWidget(),
+      this.getHitsPerPageWidget(),
+    ];
+
+    this.search.addWidgets(mainWidgets.concat(sidebarWidgets));
 
     this.search.start();
+
+    return this.search;
+  }
+
+  getSearchRouter() {
+    const windowTitle = (routeState) => {
+      const indexState = routeState.calls || {};
+
+      if (!indexState.query) {
+        return 'Search Scanner Transcripts | CrimeIsDown.com';
+      }
+
+      return `${indexState.query} - Search Scanner Transcripts | CrimeIsDown.com`;
+    };
+    const parseURL = ({ qsModule, location }) => {
+      const routeState = qsModule.parse(location.search.slice(1), {
+        arrayLimit: 99,
+      });
+      if (!Object.keys(routeState).length) {
+        return this.defaultRouteState;
+      }
+      if (routeState['calls_demo'] && this.hasAccess) {
+        delete Object.assign(routeState, {
+          [this.indexName]: routeState['calls_demo'],
+        })['calls_demo'];
+      }
+      return routeState;
+    };
+    return history({
+      windowTitle,
+      parseURL,
+    });
+  }
+
+  getSearchBoxWidget() {
+    let timerId;
+    return searchBox({
+      container: '#searchbox',
+      queryHook(query, refine) {
+        clearTimeout(timerId);
+        timerId = setTimeout(() => refine(query), 500);
+      },
+    });
+  }
+
+  getSortByWidget() {
+    return sortBy({
+      container: '#sort-by',
+      items: [
+        { label: 'Newest First', value: this.defaultSort },
+        { label: 'Oldest First', value: `${this.indexName}:start_time:asc` },
+        {
+          label: 'Relevance',
+          value: this.indexName,
+        },
+      ],
+    });
+  }
+
+  getClearRefinementsWidget() {
+    return clearRefinements({
+      container: '#clear-refinements',
+      cssClasses: {
+        button: ['mb-4'],
+        disabledButton: ['d-none'],
+      },
+      templates: {
+        resetLabel({ hasRefinements }, { html }) {
+          return html`<span
+            >${hasRefinements ? 'Clear filters' : 'No filters'}</span
+          >`;
+        },
+      },
+    });
+  }
+
+  getCurrentRefinementsWidget() {
+    const transformItems = (items) => {
+      return items.map((item) => {
+        if (item.attribute == 'start_time') {
+          for (const refinement of item.refinements) {
+            refinement.label = refinement.label.replace(
+              refinement.value,
+              new Date(refinement.value * 1000).toLocaleString([], {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+              })
+            );
+          }
+        }
+        switch (item.attribute) {
+          case 'short_name':
+            item.label = 'System';
+            break;
+          case 'talkgroup_group':
+            item.label = 'Department';
+            break;
+          case 'talkgroup_tag':
+            item.label = 'Talkgroup';
+            break;
+          case 'srcList':
+            item.label = 'Radio ID';
+            break;
+          case 'start_time':
+            item.label = 'Call Time';
+            break;
+        }
+        return item;
+      });
+    };
+    return currentRefinements({
+      container: '#current-refinements',
+      cssClasses: {
+        list: 'input-group',
+      },
+      transformItems,
+    });
+  }
+
+  getStatsWidget() {
+    return stats({
+      container: '#stats',
+      templates: {
+        text: function text(props) {
+          let text = statsTemplates.text(props);
+          if (props.hasManyResults && props.nbHits === 1000) {
+            text = `&ge;${text}`;
+          }
+          return text;
+        },
+      },
+    });
+  }
+
+  getHitsWidget() {
+    const render = (renderOptions) => {
+      const { hits } = renderOptions;
+      hits.map(this.processHit.bind(this));
+      this.hits = hits;
+    };
+    return connectHits(render)();
+  }
+
+  getRefinementListWidget(container, attribute) {
+    return refinementList({
+      container,
+      attribute,
+      operator: 'or',
+      showMore: true,
+      showMoreLimit: 60,
+      cssClasses: {
+        label: ['form-check-label'],
+        checkbox: ['form-check-input'],
+        item: ['form-check'],
+        count: ['ms-1'],
+      },
+    });
+  }
+
+  getStartTimeRangeWidget() {
+    const render = (renderOptions, isFirstRender) => {
+      const { start, refine } = renderOptions;
+      const [min, max] = start;
+      if (isFinite(min)) {
+        this.minStartTime = new Date(min * 1000);
+      } else {
+        this.minStartTime = this.flatpickrOptions.minDefaultDate;
+      }
+      if (isFinite(max)) {
+        this.maxStartTime = new Date(max * 1000);
+      } else {
+        this.maxStartTime = new Date();
+      }
+      if (isFirstRender) {
+        this.updateStartTimeFilter = refine;
+      }
+    };
+    return connectRange(render.bind(this))({
+      container: '#time-input',
+      attribute: 'start_time',
+    });
+  }
+
+  getPaginationWidget() {
+    return pagination({
+      container: '#pagination',
+    });
+  }
+
+  getHitsPerPageWidget() {
+    return hitsPerPage({
+      container: '#hits-per-page',
+      items: [
+        { label: '20 per page', value: 20, default: true },
+        { label: '40 per page', value: 40 },
+        { label: '60 per page', value: 60 },
+      ],
+    });
   }
 }

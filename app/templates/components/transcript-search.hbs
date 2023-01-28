@@ -4,16 +4,14 @@
 <div class="search-panel row {{if (eq this.hasAccess undefined) "d-none" ""}}">
   <div class="search-panel__filters col-md-3">
     {{#if (eq this.hasAccess false)}}
-    <p class="alert alert-danger">
+    <div class="alert alert-danger">
       {{#if this.session.isAuthenticated}}
-      You are not at a high enough membership tier. Please upgrade your membership on Patreon to the Sergeant tier or above to access.
+      <p>You are not at a high enough membership tier. Please upgrade your membership on Patreon to the Sergeant tier or above to access.</p>
       {{else}}
-      <a href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/login-with-patreon.png" alt="Log in with Patreon"></a>
-      <br>or<br>
-      <a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/become-a-patron.png" alt="Become a Patron!"></a>
-      <br>to use the full version. You must pledge at least $5/mo to access.
+      <p>You are currently using a demo version with old transmissions. To search the latest scanner traffic, become a patron of at least $5/mo and then <a href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url">login</a>.</p>
+      <p class="mt-2"><a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/become-a-patron.png" alt="Become a Patron!"></a></p>
       {{/if}}
-    </p>
+    </div>
     {{/if}}
     <div id="auto-refresh" class="mb-2">
       <div class="input-group">
@@ -31,9 +29,6 @@
         <Input @type="range" class="form-control form-range disabled" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} disabled />
         {{/if}}
       </div>
-      {{#unless this.hasAccess}}
-      <p class="caption">This demo does not have live updates as it runs off of a small demonstration dataset.</p>
-      {{/unless}}
     </div>
     <div class="accordion">
       <h2 id="filtersHeadingAccordion" data-bs-toggle="collapse" data-bs-target="#filters" aria-expanded="true" aria-controls="filters">
@@ -133,13 +128,14 @@
     <div class="row mb-1">
       <div id="searchbox" class="col mb-2"></div>
       <div id="sort-by" class="col-md-3 mb-2"></div>
+      <div id="hits-per-page" class="col-md-2 mb-2"></div>
     </div>
     <div id="current-refinements"></div>
     <div id="stats" class="mb-1"></div>
     <div id="hits" class="ais-Hits">
       <ol class="ais-Hits-list">
         {{#each this.hits key="id" as |hit|}}
-        <li id="hit-{{hit.id}}" class="ais-Hits-item">
+        <li id="hit-{{hit.id}}" class="ais-Hits-item{{if (eq hit.id this.selectedHit) " bg-light" ""}}" {{did-insert (fn this.scrollToHit this.selectedHit)}}>
           <div class="row">
             <div class="col">
               <h4 class="fs-5" title="{{hit.talkgroup_description}}">
