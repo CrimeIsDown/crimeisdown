@@ -28,13 +28,15 @@ export default class TranscriptSearchComponent extends Component {
   @tracked hasAccess = undefined;
   @tracked apiKey =
     'REDACTED_PUBLIC_CREDENTIAL';
-  @tracked indexName = 'calls_demo';
+  @tracked indexName = this.demoIndexName;
   @tracked hits = [];
   @tracked selectedHit = null;
   @tracked useMediaPlayerComponent = false;
   @tracked autoRefreshInterval = '0';
   @tracked minStartTime;
   @tracked maxStartTime;
+  demoIndexName = 'calls_demo';
+  paidIndexName = 'calls';
   autoRefresh = undefined;
   scrollTimer;
 
@@ -184,13 +186,13 @@ export default class TranscriptSearchComponent extends Component {
             credentials: 'include',
           })
         ).text();
-        this.indexName = 'calls';
-        return (this.hasAccess = true);
+        this.indexName = this.paidIndexName;
+        this.hasAccess = true;
       } catch (e) {
         console.error(e);
-        // alert(
-        //   'Could not load search, please try again or check that you are at the right Patreon tier.'
-        // );
+        alert(
+          'Could not load search, please try again or check that you are at the right Patreon tier.'
+        );
       }
     } else {
       try {
@@ -198,21 +200,18 @@ export default class TranscriptSearchComponent extends Component {
         const apiKey = localStorage.getItem('search-key');
         if (apiKey) {
           this.apiKey = apiKey;
-          this.indexName = 'calls';
-          return (this.hasAccess = true);
+          this.indexName = this.paidIndexName;
+          this.hasAccess = true;
         }
       } catch {
         // Do nothing, we don't have localStorage
       }
     }
-    return (this.hasAccess = false);
   }
 
   @action
   async setupSearch() {
-    if (await !this.login()) {
-      return;
-    }
+    await this.login();
 
     this.defaultSort = `${this.indexName}:start_time:desc`;
     this.defaultRouteState = {
@@ -220,7 +219,7 @@ export default class TranscriptSearchComponent extends Component {
         sortBy: this.defaultSort,
       },
     };
-    if (this.indexName !== 'calls_demo') {
+    if (this.indexName !== this.demoIndexName) {
       this.defaultRouteState[this.indexName].range = {
         start_time:
           Math.floor(this.flatpickrOptions.minDefaultDate.getTime() / 1000) +
@@ -288,10 +287,10 @@ export default class TranscriptSearchComponent extends Component {
       if (!Object.keys(routeState).length) {
         return this.defaultRouteState;
       }
-      if (routeState['calls_demo'] && this.hasAccess) {
+      if (routeState[this.demoIndexName] && this.hasAccess) {
         delete Object.assign(routeState, {
-          [this.indexName]: routeState['calls_demo'],
-        })['calls_demo'];
+          [this.indexName]: routeState[this.demoIndexName],
+        })[this.demoIndexName];
       }
       return routeState;
     };
