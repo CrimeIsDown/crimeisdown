@@ -6,31 +6,31 @@
       <p>We offer various tools to help monitor crime in Chicago. Check out some of them below, or read on to learn more about the site.</p>
     </div>
     <div class="col-md-3 col-sm-6">
-      <LinkTo @route="map"><h3>Incident Map</h3></LinkTo>
+      <LinkTo @route="map"><h3 class="fs-4">Incident Map</h3></LinkTo>
       <figure class="figure">
         <LinkTo @route="map"><img src="/img/incident_map.png" alt="Incident map page screenshot" class="img-fluid figure-img"></LinkTo>
         <figcaption class="figure-caption">Find information about incidents in your area including a scanner feed for the searched area</figcaption>
       </figure>
     </div>
     <div class="col-md-3 col-sm-6">
-      <LinkTo @route="audio"><h3>Scanner Audio</h3></LinkTo>
+      <LinkTo @route="audio"><h3 class="fs-4">Scanner Audio</h3></LinkTo>
       <figure class="figure">
         <LinkTo @route="audio"><img src="/img/scanner_audio.png" alt="Scanner audio page screenshot" class="img-fluid figure-img"></LinkTo>
         <figcaption class="figure-caption">Listen to live police/fire radio traffic and access recordings from all CPD radio channels</figcaption>
       </figure>
     </div>
     <div class="col-md-3 col-sm-6">
-      <LinkTo @route="guide"><h3>Scanner Guide</h3></LinkTo>
+      <LinkTo @route="search-transcripts"><h3 class="fs-4">Scanner Transcripts</h3></LinkTo>
       <figure class="figure">
-        <LinkTo @route="guide"><img src="/img/scanner_guide.png" alt="Scanner guide page screenshot" class="img-fluid figure-img"></LinkTo>
-        <figcaption class="figure-caption">Learn the lingo of #ChicagoScanner on our comprehensive scanner guide</figcaption>
+        <LinkTo @route="directives"><img src="/img/transcript_search.png" alt="Transcript search page screenshot" class="img-fluid figure-img"></LinkTo>
+        <figcaption class="figure-caption">Search thru transcripts of radio traffic to quickly find what happened (Patrons only)</figcaption>
       </figure>
     </div>
     <div class="col-md-3 col-sm-6">
-      <LinkTo @route="directives"><h3>Directive Changes</h3></LinkTo>
+      <LinkTo @route="guide"><h3 class="fs-4">Scanner Guide</h3></LinkTo>
       <figure class="figure">
-        <LinkTo @route="directives"><img src="/img/directive_changes.png" alt="Police directive changes page screenshot" class="img-fluid figure-img"></LinkTo>
-        <figcaption class="figure-caption">See exactly what Chicago Police Department directives have changed recently</figcaption>
+        <LinkTo @route="guide"><img src="/img/scanner_guide.png" alt="Scanner guide page screenshot" class="img-fluid figure-img"></LinkTo>
+        <figcaption class="figure-caption">Learn the lingo of #ChicagoScanner on our comprehensive scanner guide</figcaption>
       </figure>
     </div>
   </div>
@@ -107,9 +107,12 @@
           Contact <a href="https://twitter.com/EricTendian">Eric Tendian</a> (eric [at] crimeisdown.com) for support with the website and other inquiries. Please consider
           clicking the Donate button at the bottom of the page and donating a small sum of money to keep the site up and running.
         </p>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SHEMCHJPV8KY&lc=US&item_name=CrimeIsDown%2ecom&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" target="_blank" rel="noopener noreferrer"><h2>Support the site by donating here.</h2></a>
-        <p>Any donation amount is appreciated! We use the money to pay for web hosting, scanners used for live streaming, and other activities to continue adding features. Those who donate may get to try out exclusive features of the site and get access to all our scanner recordings.</p>
-        <a href="https://www.patreon.com/EricTendian" target="_blank" rel="noopener noreferrer">You can also support us on Patreon.</a>
+        <h3>Support Us</h3>
+        <p>The best way to support us is thru Patreon, where you can get exclusive features for becoming a patron. PayPal donations are also accepted, any donation amount is appreciated! We use the money to pay for web hosting, scanners used for live streaming, and other activities to continue adding features. Those who donate may get to try out exclusive features of the site and get access to all our scanner recordings.</p>
+        <ul>
+          <li><a href="https://www.patreon.com/EricTendian" target="_blank" rel="noopener noreferrer">Become a Patron on Patreon</a></li>
+          <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4SHEMCHJPV8KY&lc=US&item_name=CrimeIsDown%2ecom&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" target="_blank" rel="noopener noreferrer">Send us a donation via PayPal</a></li>
+        </ul>
       </section>
     </div>
   </div>
@@ -127,18 +130,19 @@
       <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
     <div class="col-md-4">
-      <h3><a href="http://heyjackass.com/" target="_blank" rel="noopener noreferrer">HeyJackass.com</a> Crime Stats</h3>
+      <h4><a href="https://cwbchicago.com/">CWBChicago</a></h4>
+      <p>Unlike major news media, CWBChicago is exclusively focused on Chicago crime and tells the story of crimes from start to finish. Many larger media outlets often pick up news that was originally reported by CWBChicago. Many of our followers use them as their go-to source for crime news in their neighborhoods, and CWB is a big supporter and user of CrimeIsDown.com.</p>
+      <h4><a href="http://heyjackass.com/" target="_blank" rel="noopener noreferrer">HeyJackass.com</a> Crime Stats</h4>
       <p>These are very reliable (but unofficial) crime stats, gathered from scanner reports as well as media. The publisher has zero affiliation with CPD.</p>
-      <p>All images were created by HeyJackass.com. This is a very time consuming job, so please visit their website and consider buying from the <a href="http://heyjackass.com/shop/" target="_blank" rel="noopener noreferrer">HeyJackass! shop.</a></p>
     </div>
     <div class="col-md-4">
-      <h3>Chicago Media</h3>
+      <h4>Chicago Media</h4>
       <p>Various links from Chicago-area media covering crime in the city:</p>
       <ul>
-        <li><a href="http://www.chicagotribune.com/news/local/breaking/">Chicago Tribune Breaking News</a></li>
-        <li><a href="http://chicago.suntimes.com/category/7/71/news/crime/">Chicago Sun-Times Crime News</a></li>
-        <li><a href="http://www.dnainfo.com/chicago/topics/crime-mayhem">Crime &amp; Mayhem - DNAinfo.com Chicago</a></li>
-        <li><a href="http://crime.chicagotribune.com/">Crime in Chicagoland - Chicago Tribune</a> - current crime stats from CPD</li>
+
+        <li><a href="https://chicago.suntimes.com/crime">Chicago Sun-Times Crime News</a></li>
+        <li><a href="https://blockclubchicago.org/tag/crime/">Block Club Chicago Crime News</a></li>
+        <li><a href="https://www.chicagotribune.com/news/breaking/">Chicago Tribune Breaking News</a></li>
         <li><a href="http://graphics.chicagotribune.com/under-the-gun/2014/">Chicago Under The Gun - Chicago Tribune</a></li>
         <li><a href="http://www.chicagomag.com/Chicago-Magazine/May-2014/Chicago-crime-rates/">The Truth About Chicago’s Crime Rates</a> (also check out subsequent articles)</li>
       </ul>
