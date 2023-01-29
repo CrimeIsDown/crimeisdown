@@ -16,6 +16,7 @@ export default class MediaPlayer extends Component {
   constructor() {
     super(...arguments);
     this.options = {
+      aspectRatio: '4:1',
       preload: this.args.preload,
       controls: true,
       techOrder: ['html5'],
@@ -51,18 +52,23 @@ export default class MediaPlayer extends Component {
   @action
   initializeMediaPlayer(target) {
     this.player = window.videojs(target, this.options, () => {
-      this.player.src({
+      const src = {
         src: this.args.src,
         type: this.args.type,
-        peaks:
-          'data:application/json;charset=utf-8,%7B%22version%22%3A2%2C%22channels%22%3A1%2C%22sample_rate%22%3A8000%2C%22samples_per_pixel%22%3A400%2C%22bits%22%3A8%2C%22length%22%3A108%2C%22data%22%3A%5B0%5D%7D',
-      });
-      this.player.one('play', () => {
-        const element = this.player.tech_.el();
-        this.player.wavesurfer().load(element);
-        this.player.play();
-        this.player.wavesurfer().surfer.play();
-      });
+      };
+      if (this.args.preload === 'none') {
+        src.peaks =
+          'data:application/json;charset=utf-8,%7B%22version%22%3A2%2C%22channels%22%3A1%2C%22sample_rate%22%3A8000%2C%22samples_per_pixel%22%3A1%2C%22bits%22%3A8%2C%22length%22%3A108%2C%22data%22%3A%5B0%5D%7D';
+      }
+      this.player.src(src);
+      if (this.args.preload === 'none') {
+        this.player.one('play', () => {
+          const element = this.player.tech_.el();
+          this.player.wavesurfer().load(element);
+          this.player.play();
+          this.player.wavesurfer().surfer.play();
+        });
+      }
     });
   }
 

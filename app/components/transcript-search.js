@@ -31,7 +31,9 @@ export default class TranscriptSearchComponent extends Component {
   @tracked indexName = this.demoIndexName;
   @tracked hits = [];
   @tracked selectedHit = null;
-  @tracked useMediaPlayerComponent = false;
+  @tracked useMediaPlayerComponent =
+    // Check if we are at the lg Bootstrap breakpoint
+    window.matchMedia('(min-width: 992px)').matches;
   @tracked autoRefreshInterval = '0';
   @tracked minStartTime;
   @tracked maxStartTime;

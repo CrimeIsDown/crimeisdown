@@ -318,7 +318,6 @@ input.flatpickr-mobile {
 }
 
 .video-js.vjs-fluid {
-  padding-top: 10rem;
   .vjs-progress-control .vjs-progress-holder {
     margin: 0 2.5rem 0 0.75rem !important;
   }
@@ -384,14 +383,22 @@ p.caption {
 }
 
 .ais-Hits-item, .ais-InfiniteHits-item {
-  padding: 0.5rem 0;
+  display: block;
+  margin-left: -0.5rem;
+  padding: 0.5rem;
   background: var(--bs-body-bg-rgb);
   box-shadow: none;
+  &.selected {
+    background: var(--bs-light);
+  }
   p {
     margin-bottom: 0.5rem;
   }
   p:last-of-type {
     margin-bottom: 0;
+  }
+  .media-player-container {
+    margin: 0.25rem;
   }
 }
 
