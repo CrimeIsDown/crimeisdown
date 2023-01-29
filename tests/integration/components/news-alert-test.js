@@ -16,9 +16,9 @@ module('Integration | Component | news alert', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#news-alert}}
+      <NewsAlert>
         template block text
-      {{/news-alert}}
+      </NewsAlert>
     `);
 
     assert.dom('*').hasText('template block text');

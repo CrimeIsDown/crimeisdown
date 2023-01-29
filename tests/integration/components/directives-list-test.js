@@ -16,9 +16,9 @@ module('Integration | Component | directives list', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#directives-list}}
+      <DirectivesList>
         template block text
-      {{/directives-list}}
+      </DirectivesList>
     `);
 
     assert.dom('*').hasText('template block text');

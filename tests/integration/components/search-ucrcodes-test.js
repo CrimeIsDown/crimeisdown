@@ -16,9 +16,9 @@ module('Integration | Component | search ucrcodes', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#search-ucrcodes}}
+      <SearchUcrcodes>
         template block text
-      {{/search-ucrcodes}}
+      </SearchUcrcodes>
     `);
 
     assert.dom('*').hasText('template block text');

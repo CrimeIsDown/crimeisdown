@@ -16,9 +16,9 @@ module('Integration | Component | audio stream', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#audio-stream}}
+      <AudioStream>
         template block text
-      {{/audio-stream}}
+      </AudioStream>
     `);
 
     assert.dom('*').hasText('template block text');

@@ -16,9 +16,9 @@ module('Integration | Component | search radioids', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#search-radioids}}
+      <SearchRadioids>
         template block text
-      {{/search-radioids}}
+      </SearchRadioids>
     `);
 
     assert.dom('*').hasText('template block text');

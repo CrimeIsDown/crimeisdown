@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="accordion">
-      <h2 id="filtersHeadingAccordion" data-bs-toggle="collapse" data-bs-target="#filters" aria-expanded="true" aria-controls="filters">
+      <h2 id="filtersHeadingAccordion" data-bs-toggle="collapse" data-bs-target="#filters" aria-controls="filters">
         <button class="accordion-button" type="button" >
           Filters
         </button>
@@ -201,12 +201,12 @@
               {{/unless}}
               <p>
                 {{#each hit.raw_transcript as |segment|}}
-                  {{#if segment.[0]}}
+                  {{#if (get segment "0")}}
                   {{!-- template-lint-disable no-triple-curlies --}}
-                  <a href="{{segment.[0].filter_link}}" data-src="{{segment.[0].src}}" {{on "click" (fn this.filterSrc segment.[0] hit)}}>{{{segment.[0].label}}}</a>:
+                  <a href="{{get segment "0.filter_link"}}" data-src="{{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>:
                   {{/if}}
                   {{!-- template-lint-disable no-triple-curlies --}}
-                  {{{segment.[1]}}}<br>
+                  {{{get segment "1"}}}<br>
                 {{/each}}
               </p>
             </div>

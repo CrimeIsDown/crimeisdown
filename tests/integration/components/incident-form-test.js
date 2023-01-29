@@ -16,9 +16,9 @@ module('Integration | Component | incident-form', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#incident-form}}
+      <IncidentForm>
         template block text
-      {{/incident-form}}
+      </IncidentForm>
     `);
 
     assert.dom(this.element).hasText('template block text');

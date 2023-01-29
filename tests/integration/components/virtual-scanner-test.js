@@ -16,9 +16,9 @@ module('Integration | Component | virtual scanner', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#virtual-scanner}}
+      <VirtualScanner>
         template block text
-      {{/virtual-scanner}}
+      </VirtualScanner>
     `);
 
     assert.dom('*').hasText('template block text');

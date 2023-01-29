@@ -16,9 +16,9 @@ module('Integration | Component | comment-form', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#comment-form}}
+      <CommentForm>
         template block text
-      {{/comment-form}}
+      </CommentForm>
     `);
 
     assert.dom(this.element).hasText('template block text');

@@ -16,9 +16,9 @@ module('Integration | Component | incident map', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#incident-map}}
+      <IncidentMap>
         template block text
-      {{/incident-map}}
+      </IncidentMap>
     `);
 
     assert.dom('*').hasText('template block text');

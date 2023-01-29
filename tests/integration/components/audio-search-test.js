@@ -16,9 +16,9 @@ module('Integration | Component | audio search', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#audio-search}}
+      <AudioSearch>
         template block text
-      {{/audio-search}}
+      </AudioSearch>
     `);
 
     assert.dom('*').hasText('template block text');

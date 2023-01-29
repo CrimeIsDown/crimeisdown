@@ -16,9 +16,9 @@ module('Integration | Component | app footer', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#app-footer}}
+      <AppFooter>
         template block text
-      {{/app-footer}}
+      </AppFooter>
     `);
 
     assert.dom('*').hasText('template block text');

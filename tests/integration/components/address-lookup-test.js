@@ -16,9 +16,9 @@ module('Integration | Component | address lookup', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#address-lookup}}
+      <AddressLookup>
         template block text
-      {{/address-lookup}}
+      </AddressLookup>
     `);
 
     assert.dom('*').hasText('template block text');

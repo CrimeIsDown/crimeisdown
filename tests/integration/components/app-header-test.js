@@ -16,9 +16,9 @@ module('Integration | Component | app header', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#app-header}}
+      <AppHeader>
         template block text
-      {{/app-header}}
+      </AppHeader>
     `);
 
     assert.dom('*').hasText('template block text');
