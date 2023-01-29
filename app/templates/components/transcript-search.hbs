@@ -32,7 +32,7 @@
     </div>
     <div id="waveform-setting" class="mb-2">
       <div class="form-check form-switch">
-        <Input class="form-check-input" @type="checkbox" role="switch" id="waveform-toggle" @checked={{this.useMediaPlayerComponent}} />
+        <Input class="form-check-input" @type="checkbox" role="switch" id="waveform-toggle" @checked={{this.useMediaPlayerComponent}} aria-checked="{{this.useMediaPlayerComponent}}" />
         <label class="form-check-label" for="waveform-toggle">Show waveform when playing audio</label>
       </div>
     </div>

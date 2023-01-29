@@ -2,4 +2,8 @@
 
 module.exports = {
   extends: 'recommended',
+
+  rules: {
+    'require-media-caption': false,
+  },
 };
