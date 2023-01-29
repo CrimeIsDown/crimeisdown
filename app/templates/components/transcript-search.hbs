@@ -200,8 +200,14 @@
               ></audio>
               {{/unless}}
               <p>
-                {{!-- template-lint-disable no-triple-curlies --}}
-                {{{hit._highlightResult.transcript.value}}}
+                {{#each hit.raw_transcript as |segment|}}
+                  {{#if segment.[0]}}
+                  {{!-- template-lint-disable no-triple-curlies --}}
+                  <a href="{{segment.[0].filter_link}}" data-src="{{segment.[0].src}}" {{on "click" (fn this.filterSrc segment.[0] hit)}}>{{{segment.[0].label}}}</a>:
+                  {{/if}}
+                  {{!-- template-lint-disable no-triple-curlies --}}
+                  {{{segment.[1]}}}<br>
+                {{/each}}
               </p>
             </div>
             {{#if this.useMediaPlayerComponent}}

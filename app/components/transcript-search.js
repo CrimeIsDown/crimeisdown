@@ -90,6 +90,31 @@ export default class TranscriptSearchComponent extends Component {
       hit._highlightResult.transcript.value
     ).trim();
 
+    hit.raw_transcript = JSON.parse(hit.raw_transcript);
+    try {
+      hit.highlighted_transcript = JSON.parse(
+        unescape(hit._highlightResult.raw_transcript.value)
+      );
+    } catch (e) {
+      console.log(e);
+      hit.highlighted_transcript = hit.raw_transcript;
+    }
+
+    // Apply highlights
+    for (let i = 0; i < hit.raw_transcript.length; i++) {
+      const segment = hit.raw_transcript[i];
+      const highlightedSegment = hit.highlighted_transcript[i];
+      const src = segment[0];
+      if (src) {
+        src.filter_link = this.getSrcFilterLink(src);
+        src.label =
+          highlightedSegment[0].tag.length > 0
+            ? highlightedSegment[0].tag
+            : String(src.src);
+      }
+      segment[1] = highlightedSegment[1];
+    }
+
     const parsed_metadata = JSON.parse(hit.raw_metadata);
     hit.raw_metadata = JSON.stringify(parsed_metadata, null, 4);
 
@@ -178,6 +203,50 @@ export default class TranscriptSearchComponent extends Component {
         }
       }, 100);
     }
+  }
+
+  buildSrcFilter(src) {
+    let sortBy = this.defaultSort;
+    let hitsPerPage = 20;
+    if (
+      this.search.getUiState()[this.indexName] &&
+      this.search.getUiState()[this.indexName]['sortBy']
+    ) {
+      sortBy = this.search.getUiState()[this.indexName]['sortBy'];
+    }
+    if (
+      this.search.getUiState()[this.indexName] &&
+      this.search.getUiState()[this.indexName]['hitsPerPage']
+    ) {
+      hitsPerPage = this.search.getUiState()[this.indexName]['hitsPerPage'];
+    }
+    const uiState = {
+      [this.indexName]: {
+        sortBy,
+        hitsPerPage,
+        refinementList: {},
+      },
+    };
+    if (src.tag) {
+      uiState[this.indexName].refinementList['units'] = [src.tag];
+    } else {
+      uiState[this.indexName].refinementList['radios'] = [src.src];
+    }
+    return uiState;
+  }
+
+  @action
+  getSrcFilterLink(src) {
+    return this.search.createURL(this.buildSrcFilter(src));
+  }
+
+  @action
+  filterSrc(src, hit, event) {
+    event.preventDefault();
+    const state = this.buildSrcFilter(src);
+    this.selectedHit = hit.id;
+    this.search.setUiState(state);
+    this.scrollToHit(this.selectedHit);
   }
 
   async login() {
