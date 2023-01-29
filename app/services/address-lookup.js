@@ -42,8 +42,8 @@ export default class AddressLookup extends Service {
     let result = {};
 
     let latlng = L.latLng(
-      location.geometry.location.lat,
-      location.geometry.location.lng
+      location.geometry.location.lat(),
+      location.geometry.location.lng()
     );
 
     result.meta = {

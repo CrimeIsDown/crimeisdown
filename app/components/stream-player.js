@@ -12,7 +12,7 @@ export default class StreamPlayer extends Component {
       !isMobileSafari;
 
     let options = {
-      pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.16/build/',
+      pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@5.1.0/build/',
       shimScriptAccess: 'always',
       isVideo: false,
       pauseOtherPlayers: false,

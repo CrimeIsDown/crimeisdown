@@ -51,8 +51,6 @@ module.exports = function (defaults) {
     };
   }
 
-  app.import('node_modules/whatwg-fetch/fetch.js'); // polyfill for fetch() used by leaflet-geosearch
-
   app.import('node_modules/@mapbox/leaflet-pip/leaflet-pip.js');
 
   app.import('node_modules/@popperjs/core/dist/umd/popper.js');
@@ -68,10 +66,7 @@ module.exports = function (defaults) {
   app.import('node_modules/mediaelement/build/mediaelement-and-player.js');
   app.import('node_modules/mediaelement/build/mediaelementplayer.css');
   app.import('node_modules/mediaelement/build/mejs-controls.svg', {
-    destDir: 'assets',
-  });
-  app.import('node_modules/mediaelement/build/mejs-controls.png', {
-    destDir: 'assets',
+    destDir: '/',
   });
 
   app.import('node_modules/leaflet/dist/leaflet.css');

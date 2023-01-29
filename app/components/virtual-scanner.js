@@ -279,7 +279,7 @@ export default class VirtualScanner extends Component {
   startPlayer(streamData, playerElement) {
     let audioPlayer;
     let mediaElementConfig = {
-      pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.16/build/',
+      pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@5.1.0/build/',
       shimScriptAccess: 'always',
       isVideo: false,
       pauseOtherPlayers: false,
