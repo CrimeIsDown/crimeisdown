@@ -1,9 +1,11 @@
+import { action, set } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action, set } from '@ember/object';
 import fetch from 'fetch';
 
 export default class SearchUcrcodes extends Component {
+  @service metrics;
   @tracked ucrCodes = [];
   @tracked ucr = {};
 
@@ -30,9 +32,11 @@ export default class SearchUcrcodes extends Component {
       alert('Please enter a UCR code before searching.');
       return;
     }
-    if (window.ga && typeof window.ga === 'function') {
-      ga('send', 'event', 'Searches UCR list', 'Tools', input);
-    }
+    this.metrics.trackEvent({
+      category: 'Tools',
+      action: 'Searches UCR list',
+      label: input,
+    });
     set(this, 'ucr', {
       primaryDesc: 'Not Found',
       secondaryDesc: 'Not Found',

@@ -4,13 +4,13 @@
 
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action, set, get } from '@ember/object';
+import { action, set } from '@ember/object';
 import { debounce, schedule } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
-import moment from 'moment-timezone';
 
 export default class IncidentMap extends Component {
+  @service metrics;
   @service addressLookup;
   map = null;
   geocoder = null;
@@ -250,9 +250,11 @@ export default class IncidentMap extends Component {
       $('#address-search').find('input[name="address"]').val(query);
       window.location.hash = '#location_query=' + encodeURIComponent(query);
     }
-    if (window.ga && typeof window.ga === 'function') {
-      ga('send', 'event', 'Looks up address', 'Tools', query || 'Geolocation');
-    }
+    this.metrics.trackEvent({
+      category: 'Tools',
+      action: 'Looks up address',
+      label: query || 'Geolocation',
+    });
 
     set(
       this,

@@ -1,9 +1,12 @@
-import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import $ from 'jquery';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
 import fetch from 'fetch';
+import $ from 'jquery';
 
 export default class DirectivesList extends Component {
+  @service metrics;
+
   constructor() {
     super(...arguments);
 
@@ -150,8 +153,10 @@ export default class DirectivesList extends Component {
     );
     bsModal.show();
 
-    if (window.ga && typeof window.ga === 'function') {
-      ga('send', 'event', 'Directive', 'open', title);
-    }
+    this.metrics.trackEvent({
+      category: 'Directive',
+      action: 'Opens directive',
+      label: title,
+    });
   }
 }

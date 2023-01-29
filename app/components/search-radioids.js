@@ -1,10 +1,12 @@
+import { action, set } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action, set } from '@ember/object';
-import $ from 'jquery';
 import fetch from 'fetch';
+import $ from 'jquery';
 
 export default class SearchRadioids extends Component {
+  @service metrics;
   @tracked radioIds = [];
   @tracked radio = {};
 
@@ -32,9 +34,11 @@ export default class SearchRadioids extends Component {
     }
     let input = this.radioId.toUpperCase();
     set(this, 'radioId', input);
-    if (window.ga && typeof window.ga === 'function') {
-      ga('send', 'event', 'Searches radio ID list', 'Tools', input);
-    }
+    this.metrics.trackEvent({
+      category: 'Tools',
+      action: 'Searches radio ID list',
+      label: input,
+    });
     let matches = [];
     this.radioIds.forEach((row) => {
       if (input.match('^' + row.ID_Number + '$')) {

@@ -17,12 +17,36 @@ module.exports = function (environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      MEDIA_PLAYER_DEBUG: false,
-      SITE_NAME_TEXT: 'CrimeIsDown.com',
-      SITE_NAME_HTML: 'CrimeIsDown.com',
-      // SITE_NAME_TEXT: 'Sirens',
-      // SITE_NAME_HTML: '<i class="em em-rotating_light"></i> Sirens'
     },
+
+    metricsAdapters: [
+      {
+        name: 'GoogleAnalytics',
+        environments: ['development', 'production'],
+        config: {
+          id: 'UA-EXAMPLE-1',
+          // Use `analytics_debug.js` in development
+          debug: environment === 'development',
+          // Use verbose tracing of GA events
+          trace: environment === 'development',
+          // Ensure development env hits aren't sent to GA
+          sendHitTask: environment !== 'development',
+          // Specify Google Analytics plugins
+          require: [],
+        },
+      },
+      {
+        name: 'GoogleAnalyticsFour',
+        environments: ['development', 'production'],
+        config: {
+          id: 'G-TEST',
+          options: {
+            anonymize_ip: true,
+            debug_mode: environment === 'development',
+          },
+        },
+      },
+    ],
   };
 
   ENV['@sentry/ember'] = {
@@ -53,13 +77,6 @@ module.exports = function (environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
-  }
-
-  if (environment === 'production') {
-    ENV.googleAnalytics = {
-      webPropertyId: 'UA-EXAMPLE-1',
-    };
-    ENV.APP.MEDIA_PLAYER_DEBUG = false;
   }
 
   return ENV;

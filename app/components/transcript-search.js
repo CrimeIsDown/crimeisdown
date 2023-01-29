@@ -23,6 +23,7 @@ import { defaultTemplates as statsTemplates } from 'instantsearch.js/es/widgets/
 import moment from 'moment-timezone';
 
 export default class TranscriptSearchComponent extends Component {
+  @service metrics;
   @service session;
 
   @tracked hasAccess = undefined;
@@ -331,6 +332,11 @@ export default class TranscriptSearchComponent extends Component {
       } else {
         container.classList.remove('opacity-75');
         body.classList.remove('show-loading');
+        this.metrics.trackEvent({
+          category: 'Transcript',
+          action: 'Performed search',
+          label: JSON.stringify(this.search.getUiState()),
+        });
       }
     });
 
