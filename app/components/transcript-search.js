@@ -246,6 +246,23 @@ export default class TranscriptSearchComponent extends Component {
       },
     });
 
+    this.search.on('render', () => {
+      const body = document.querySelector('body.ember-application');
+      const container = document.querySelector(
+        'body > div.container, body > div.container-fluid'
+      );
+      if (
+        this.search.status === 'loading' ||
+        this.search.status === 'stalled'
+      ) {
+        body.classList.add('show-loading');
+        container.classList.add('opacity-75');
+      } else {
+        container.classList.remove('opacity-75');
+        body.classList.remove('show-loading');
+      }
+    });
+
     const sidebarWidgets = [
       this.getClearRefinementsWidget(),
       this.getRefinementListWidget('#dept-menu', 'talkgroup_group'),

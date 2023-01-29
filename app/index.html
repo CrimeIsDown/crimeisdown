@@ -44,9 +44,10 @@
     {{content-for "head-footer"}}
   </head>
   <body>
-    <div id="loading" class="col-md-6 offset-md-3">
-      <h1 class="text-dark">Loading...</h1>
-      <p>This website is designed to support the latest web browsers. We support the current versions of <a href="https://www.google.com/chrome/">Chrome</a>, <a href="http://www.mozilla.org/firefox/">Firefox</a>, <a href="http://www.apple.com/safari/">Safari</a>, and <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Microsoft Edge</a>. Try <a href="http://outdatedbrowser.com/en">updating to the newest version of one of those browsers</a> if the site does not load.</p>
+    <div id="loading-indicator" class="loading">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
 
     {{content-for "body"}}
