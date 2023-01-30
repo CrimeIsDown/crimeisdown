@@ -23,6 +23,7 @@ import { defaultTemplates as statsTemplates } from 'instantsearch.js/es/widgets/
 import moment from 'moment-timezone';
 
 export default class TranscriptSearchComponent extends Component {
+  @service config;
   @service metrics;
   @service session;
 
@@ -87,11 +88,20 @@ export default class TranscriptSearchComponent extends Component {
   }
 
   processHit(hit) {
+    hit.raw_metadata = JSON.parse(hit.raw_metadata);
+    hit.raw_transcript = JSON.parse(hit.raw_transcript);
+    const hitClone = { ...hit };
+    delete hitClone['_highlightResult'];
+    delete hitClone['_snippetResult'];
+    delete hitClone['__position'];
+    delete hitClone['raw_metadata'];
+
+    hit.json = JSON.stringify(hitClone, null, 2);
+
     hit._highlightResult.transcript.value = unescape(
       hit._highlightResult.transcript.value
     ).trim();
 
-    hit.raw_transcript = JSON.parse(hit.raw_transcript);
     try {
       hit.highlighted_transcript = JSON.parse(
         unescape(hit._highlightResult.raw_transcript.value)
@@ -116,13 +126,10 @@ export default class TranscriptSearchComponent extends Component {
       segment[1] = highlightedSegment[1];
     }
 
-    const parsed_metadata = JSON.parse(hit.raw_metadata);
-    hit.raw_metadata = JSON.stringify(parsed_metadata, null, 4);
-
     hit.audio_type = capitalize(hit.audio_type);
 
     let start_time = moment.unix(hit.start_time);
-    if (hit.short_name == 'chi_cpd' && parsed_metadata['encrypted'] == 1) {
+    if (hit.short_name == 'chi_cpd' && hit.raw_metadata['encrypted'] == 1) {
       hit.time_warning = ` - received at ${start_time
         .toDate()
         .toLocaleString()}`;
@@ -251,35 +258,21 @@ export default class TranscriptSearchComponent extends Component {
   }
 
   async login() {
-    if (await this.session.authenticated) {
-      try {
-        this.apiKey = await (
-          await fetch('https://api.crimeisdown.com/api/search-key', {
-            credentials: 'include',
-          })
-        ).text();
-        this.indexName = this.paidIndexName;
-        this.hasAccess = true;
-      } catch (e) {
+    const loggedIn = await this.session.authenticated;
+    try {
+      this.apiKey = await this.session.getSearchAPIKey();
+      this.indexName =
+        this.config.get('MEILISEARCH_INDEX') || this.paidIndexName;
+      this.hasAccess = true;
+    } catch (e) {
+      if (loggedIn) {
         console.error(e);
         alert(
-          'Could not load search, please try again or check that you are at the right Patreon tier.'
+          `Could not load search, please try again or check that you are at the right Patreon tier.\nGot error: ${
+            e.message || e
+          }`
         );
       }
-    } else {
-      try {
-        // For debugging
-        const apiKey = localStorage.getItem('search-key');
-        if (apiKey) {
-          this.apiKey = apiKey;
-          this.indexName = this.paidIndexName;
-          this.hasAccess = true;
-        }
-      } catch {
-        // Do nothing, we don't have localStorage
-      }
-    }
-    if (this.hasAccess === undefined) {
       this.hasAccess = false;
     }
   }
@@ -303,7 +296,7 @@ export default class TranscriptSearchComponent extends Component {
     }
 
     const searchClient = new instantMeiliSearch(
-      'https://api.crimeisdown.com/search',
+      this.config.get('MEILISEARCH_URL'),
       this.apiKey,
       {
         finitePagination: true,

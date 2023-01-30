@@ -176,20 +176,17 @@
                   Encrypted / Delayed 30mins
                 </span>
                 {{/if}}
+                {{#if (eq this.session.user.id 1)}}
                 <button
                   class="badge text-bg-light btn btn-sm btn-light"
                   type="button"
-                  data-bs-toggle="collapse"
+                  data-bs-toggle="modal"
                   data-bs-target="#metadata-{{hit.id}}"
-                  aria-expanded="true"
-                  aria-controls="metadata-{{hit.id}}"
                 >
-                  Open Raw Metadata
+                  Raw Data
                 </button>
+                {{/if}}
               </p>
-              <div class="collapse mt-3 mb-3" id="metadata-{{hit.id}}">
-                <pre>{{hit.raw_metadata}}</pre>
-              </div>
               {{#unless this.useMediaPlayerComponent}}
               <audio
                 id="call-audio-{{hit.id}}"
@@ -203,7 +200,7 @@
                 {{#each hit.raw_transcript as |segment|}}
                   {{#if (get segment "0")}}
                   {{!-- template-lint-disable no-triple-curlies --}}
-                  <a href="{{get segment "0.filter_link"}}" data-src="{{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>:
+                  <a href="{{get segment "0.filter_link"}}" title="Radio ID {{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>:
                   {{/if}}
                   {{!-- template-lint-disable no-triple-curlies --}}
                   {{{get segment "1"}}}<br>
@@ -216,6 +213,21 @@
             </div>
             {{/if}}
           </div>
+          {{#if (eq this.session.user.id 1)}}
+          <div class="modal fade metadata-modal" id="metadata-{{hit.id}}" tabindex="-1" aria-labelledby="metadata-modal-heading-{{hit.id}}" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="metadata-modal-heading-{{hit.id}}">Raw Result Data</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <pre>{{hit.json}}</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/if}}
         </li>
         {{/each}}
       </ol>

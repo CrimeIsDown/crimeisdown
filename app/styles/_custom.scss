@@ -433,6 +433,10 @@ audio.call-audio {
   display: none;
 }
 
+.metadata-modal pre {
+  height: 80vh;
+}
+
 @include media-breakpoint-up(md) {
   .stream-options {
     max-height: 300px;
