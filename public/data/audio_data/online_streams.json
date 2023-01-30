@@ -8,11 +8,10 @@
   },
   {
     "name": "CPD Zone 1 - Districts 16 and 17",
-    "shortname": "CPD Zone 1 (016/017)",
-    "description": "Covers the Far Northwest Side: Edison Park, Norwood Park, Dunning, Jefferson Park, Portage Park, Irving Park, Albany Park, North Park, Forest Glen, O'Hare (excluding airport)",
+    "shortname": "CPD Zone 1 (016/017) [ENC]",
+    "description": "[DELAYED ENCRYPTED FEED] Covers the Far Northwest Side: Edison Park, Norwood Park, Dunning, Jefferson Park, Portage Park, Irving Park, Albany Park, North Park, Forest Glen, O'Hare (excluding airport)",
     "frequency": "460.475MHz",
     "slug": "zone1",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=1",
     "broadcastifyId": 37354,
     "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37354"
   },
