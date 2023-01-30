@@ -235,6 +235,10 @@ export default class VirtualScanner extends Component {
 
   async onCanPlay(streamData, event) {
     const target = event.detail.target;
+    target.removeEventListener(
+      'canplay',
+      this.onCanPlay.bind(this, streamData)
+    );
     // Get the real media element
     let playerElement = target.renderer;
     if (!playerElement) {
