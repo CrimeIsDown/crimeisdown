@@ -284,8 +284,9 @@ input.flatpickr-mobile {
   width: 230px;
   height: 216px;
   margin-bottom: 1em;
-  border: 1px solid var(--bs-gray-300);
+  border: 2px solid var(--bs-primary);
   position: relative;
+  background: var(--bs-gray-100);
   .fa-user {
     position: absolute;
     transform: translate(108px, 100px);

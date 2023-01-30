@@ -66,7 +66,7 @@ module.exports = function (defaults) {
   app.import('node_modules/mediaelement/build/mediaelement-and-player.js');
   app.import('node_modules/mediaelement/build/mediaelementplayer.css');
   app.import('node_modules/mediaelement/build/mejs-controls.svg', {
-    destDir: '/',
+    destDir: 'assets/images',
   });
 
   app.import('node_modules/leaflet/dist/leaflet.css');

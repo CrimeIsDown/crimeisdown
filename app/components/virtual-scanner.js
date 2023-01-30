@@ -2,10 +2,8 @@
 
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import EmberObject, { action, set } from '@ember/object';
-import { bind } from '@ember/runloop';
+import EmberObject, { action } from '@ember/object';
 import fetch from 'fetch';
-import $ from 'jquery';
 
 export default class VirtualScanner extends Component {
   dragScale = 50;
@@ -18,7 +16,83 @@ export default class VirtualScanner extends Component {
   constructor() {
     super(...arguments);
 
-    this.onMove = (event) => {
+    this.loadStreamsPromise = this.loadStreams();
+  }
+
+  async loadStreams() {
+    let nodes = [];
+    try {
+      const response = await fetch(
+        'https://audio.crimeisdown.com/streaming/stat'
+      );
+      if (response.status == 200) {
+        const parser = new window.DOMParser().parseFromString(
+          await response.text(),
+          'text/xml'
+        );
+        nodes = parser.querySelectorAll('live stream');
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    for (const node of nodes) {
+      if (node.querySelector('active')) {
+        let streamData = {
+          name: node.querySelector('name').textContent,
+          desc: node.querySelector('name').textContent,
+          order: 999,
+        };
+        this.args.streams.forEach((stream, index) => {
+          if (stream.slug === streamData.name) {
+            streamData = {
+              name: streamData.name,
+              desc: stream.shortname ?? stream.name,
+              order: index,
+              openmhz: stream.openmhz,
+            };
+            return;
+          }
+        });
+        this.streams.pushObject(streamData);
+      }
+    }
+
+    for (const [index, stream] of this.args.streams.entries()) {
+      if (stream.broadcastify) {
+        stream.broadcastifyUrl =
+          'https://www.broadcastify.com/listen/feed/' + stream.broadcastifyId;
+      }
+      if (
+        !this.streams.find((streamObj) => streamObj.name == stream.slug) &&
+        (stream.broadcastify ||
+          stream.name.startsWith('CFD') ||
+          stream.name.startsWith('CPD Citywide'))
+      ) {
+        this.streams.pushObject({
+          name: stream.slug,
+          desc: stream.shortname ?? stream.name,
+          order: index,
+          broadcastify: stream.broadcastify,
+          broadcastifyUrl: stream.broadcastifyUrl,
+          openmhz: stream.openmhz,
+          disabled:
+            stream.name.startsWith('CFD') ||
+            stream.name.startsWith('CPD Citywide'),
+        });
+      }
+    }
+
+    this.streams.sort((a, b) => {
+      if (a.order < b.order) return -1;
+      if (a.order > b.order) return 1;
+      return 0;
+    });
+  }
+
+  @action
+  setupDraggable() {
+    const onmove = (event) => {
       let target = event.target,
         // keep the dragged position in the data-x/data-y attributes
         x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
@@ -32,7 +106,7 @@ export default class VirtualScanner extends Component {
       target.setAttribute('data-x', x);
       target.setAttribute('data-y', y);
     };
-    this.onEnd = (event) => {
+    const onend = (event) => {
       let target = event.target,
         x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
         y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
@@ -50,65 +124,6 @@ export default class VirtualScanner extends Component {
         }
       }
     };
-    fetch('https://audio.crimeisdown.com/streaming/stat')
-      .then((response) => response.text())
-      .then((xml) => new window.DOMParser().parseFromString(xml, 'text/xml'))
-      .then((data) => {
-        let nodes = data.querySelectorAll('live stream');
-        // we would use forEach but it does not work on Safari <10
-        for (let i = 0; i < nodes.length; i++) {
-          let node = nodes[i];
-          if (node.querySelector('active')) {
-            let streamData = {
-              name: node.querySelector('name').textContent,
-              desc: node.querySelector('name').textContent,
-              order: 999,
-            };
-            this.args.streams.forEach((stream, index) => {
-              if (stream.slug === streamData.name) {
-                streamData = {
-                  name: streamData.name,
-                  desc: stream.shortname ?? stream.name,
-                  order: index,
-                  openmhz: stream.openmhz,
-                };
-                return;
-              }
-            });
-            this.streams.pushObject(streamData);
-          }
-        }
-        this.args.streams.forEach((stream, index) => {
-          if (stream.broadcastify) {
-            stream.broadcastifyUrl =
-              'https://www.broadcastify.com/listen/feed/' +
-              stream.broadcastifyId;
-          }
-          if (
-            !this.streams.find((streamObj) => streamObj.name == stream.slug) &&
-            (stream.broadcastify ||
-              stream.name.startsWith('CFD') ||
-              stream.name.startsWith('CPD Citywide'))
-          ) {
-            this.streams.pushObject({
-              name: stream.slug,
-              desc: stream.shortname ?? stream.name,
-              order: index,
-              broadcastify: stream.broadcastify,
-              broadcastifyUrl: stream.broadcastifyUrl,
-              openmhz: stream.openmhz,
-              disabled:
-                stream.name.startsWith('CFD') ||
-                stream.name.startsWith('CPD Citywide'),
-            });
-          }
-        });
-        this.streams.sort((a, b) => {
-          if (a.order < b.order) return -1;
-          if (a.order > b.order) return 1;
-          return 0;
-        });
-      });
 
     window.interact('.draggable').draggable({
       restrict: {
@@ -116,42 +131,22 @@ export default class VirtualScanner extends Component {
         endOnly: true,
       },
       autoScroll: true,
-      onmove: this.onMove,
-      onend: this.onEnd,
+      onmove,
+      onend,
     });
   }
 
   @action
-  changeStreams(event) {
-    if (typeof this.audioContext === 'undefined') {
-      if (!(window.AudioContext || window.webkitAudioContext)) {
-        alert(
-          'Sorry, your browser does not support our own audio streaming. Please check out some of the other streaming links on this page, or switch to a browser like Chrome that is supported.'
-        );
-        return;
-      }
+  async changeStreams(event) {
+    await this.loadStreamsPromise;
 
-      // Instantiate the context on user interaction
-      set(
-        this,
-        'audioContext',
-        new (window.AudioContext || window.webkitAudioContext)()
-      );
-      set(
-        this,
-        'mediaSourceSupported',
-        ('MediaSource' in window || 'WebKitMediaSource' in window) &&
-          !mejs.Features.isiOS
-      );
+    if (event.target.checked) {
       this.setupResonanceScene();
-    }
-
-    let target = event.target;
-
-    if (target.checked) {
-      this.addStream(target.value);
+      this.enabledStreams.pushObject(
+        EmberObject.create(this.streams.findBy('name', event.target.value))
+      );
     } else {
-      this.removeStream(target.value);
+      this.removeStream(event.target.value);
     }
   }
 
@@ -165,6 +160,23 @@ export default class VirtualScanner extends Component {
   }
 
   setupResonanceScene() {
+    // Only do this if we haven't run it before
+    if (this.audioContext) return;
+
+    if (!(window.AudioContext || window.webkitAudioContext)) {
+      alert(
+        'Sorry, your browser does not support our own audio streaming. Please check out some of the other streaming links on this page, or switch to a browser like Chrome that is supported.'
+      );
+      return;
+    }
+
+    // Instantiate the context on user interaction
+    this.audioContext = new (window.AudioContext ||
+      window.webkitAudioContext)();
+    this.mediaSourceSupported =
+      ('MediaSource' in window || 'WebKitMediaSource' in window) &&
+      !mejs.Features.isiOS;
+
     this.sceneDimensions = {
       width: 4,
       height: 4,
@@ -179,7 +191,7 @@ export default class VirtualScanner extends Component {
       back: 'uniform',
     };
 
-    let resonanceAudioSupported = this.mediaSourceSupported;
+    const resonanceAudioSupported = this.mediaSourceSupported;
     if (resonanceAudioSupported && this.audioContext) {
       this.resonanceScene = new window.ResonanceAudio(this.audioContext, {
         ambisonicOrder: 1,
@@ -191,95 +203,93 @@ export default class VirtualScanner extends Component {
     }
   }
 
-  addStream(streamName) {
-    let streamData = EmberObject.create(
-      this.streams.findBy('name', streamName)
+  @action
+  async startStream(streamName) {
+    let streamData = this.enabledStreams.findBy('name', streamName);
+
+    let playerElement = document.getElementById('audio-player-' + streamName);
+
+    // AudioContext must be resumed after the document received a user gesture to enable audio playback.
+    this.audioContext.resume();
+
+    let player = await this.buildPlayer(streamData, playerElement);
+    await player.load();
+    streamData.set(
+      'position',
+      this.randomPosition(
+        this.sceneDimensions.width,
+        this.sceneDimensions.height,
+        this.sceneDimensions.depth
+      )
     );
-    this.enabledStreams.pushObject(streamData);
+    streamData.set(
+      'draggableElement',
+      this.addDraggable(streamName, streamData.position)
+    );
 
-    // wait for new elements to render so we can select them
-    $('#stream-' + streamName).ready(
-      bind(this, () => {
-        let playerElement = document.getElementById(
-          'audio-player-' + streamName
-        );
-
-        // AudioContext must be resumed after the document received a user gesture to enable audio playback.
-        this.audioContext.resume();
-
-        let player = this.startPlayer(streamData, playerElement);
-        let position = this.randomPosition(
-          this.sceneDimensions.width,
-          this.sceneDimensions.height,
-          this.sceneDimensions.depth
-        );
-        let draggableElement = this.addDraggable(streamName, position);
-        $('.draggable-parent').append(draggableElement);
-
-        streamData.setProperties({
-          position: position,
-          draggableElement: draggableElement,
-        });
-
-        player.media.addEventListener(
-          'canplay',
-          bind(this, () => {
-            // Get the real media element
-            playerElement = player.media.renderer;
-            let audioElementSource;
-            try {
-              audioElementSource =
-                this.audioContext.createMediaElementSource(playerElement);
-            } catch (e) {
-              // We already went thru this, stop here
-              return;
-            }
-            streamData.set('audioElementSource', audioElementSource);
-
-            let analyser = this.audioContext.createAnalyser();
-            analyser.smoothingTimeConstant = 1;
-            analyser.fftSize = 256; // the total samples are half the fft size.
-            audioElementSource.connect(analyser);
-            streamData.set('analyser', analyser);
-
-            let volume = this.audioContext.createGain();
-            player.media.addEventListener('volumechange', () => {
-              volume.gain.setValueAtTime(
-                player.getVolume(),
-                this.audioContext.currentTime
-              );
-            });
-            streamData.analyser.connect(volume);
-            streamData.set('volume', volume);
-
-            if (this.resonanceScene) {
-              let soundSource = this.resonanceScene.createSource();
-              soundSource.setPosition(position.x, 0, position.z);
-              volume.connect(soundSource.input);
-              streamData.set('soundSource', soundSource);
-            } else {
-              let panner = this.audioContext.createStereoPanner();
-              panner.pan.value = position.x / 2;
-              volume.connect(panner);
-              panner.connect(this.audioContext.destination);
-              streamData.set('panner', panner);
-            }
-
-            draggableElement.classList.add('draggable'); // Make the element draggable now that we have completed setup
-
-            if (analyser) {
-              this.drawVU(analyser, draggableElement, 0);
-            }
-          })
-        );
-      })
+    player.media.addEventListener(
+      'canplay',
+      this.onCanPlay.bind(this, streamData)
     );
   }
 
-  startPlayer(streamData, playerElement) {
+  async onCanPlay(streamData, event) {
+    const target = event.detail.target;
+    // Get the real media element
+    let playerElement = target.renderer;
+    if (!playerElement) {
+      playerElement = target.player.domNode;
+    }
+
+    const audioElementSource =
+      this.audioContext.createMediaElementSource(playerElement);
+    streamData.set('audioElementSource', audioElementSource);
+
+    let analyser = this.audioContext.createAnalyser();
+    analyser.smoothingTimeConstant = 1;
+    analyser.fftSize = 256; // the total samples are half the fft size.
+    audioElementSource.connect(analyser);
+    streamData.set('analyser', analyser);
+
+    let volume = this.audioContext.createGain();
+    target.addEventListener('volumechange', () => {
+      volume.gain.setValueAtTime(
+        target.getVolume(),
+        this.audioContext.currentTime
+      );
+    });
+    streamData.analyser.connect(volume);
+    streamData.set('volume', volume);
+
+    if (this.resonanceScene) {
+      const soundSource = this.resonanceScene.createSource();
+      soundSource.setPosition(streamData.position.x, 0, streamData.position.z);
+      volume.connect(soundSource.input);
+      streamData.set('soundSource', soundSource);
+    } else {
+      const panner = this.audioContext.createStereoPanner();
+      panner.pan.value = streamData.position.x / 2;
+      volume.connect(panner);
+      panner.connect(this.audioContext.destination);
+      streamData.set('panner', panner);
+    }
+
+    if (analyser) {
+      this.drawVU(analyser, streamData.draggableElement, 0);
+    }
+
+    try {
+      await target.play();
+    } catch (e) {
+      alert(`Error playing ${streamData.name}: ${e}`);
+    }
+  }
+
+  async buildPlayer(streamData, playerElement) {
     let audioPlayer;
     let mediaElementConfig = {
       pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@5.1.0/build/',
+      iconSprite: '/assets/images/mejs-controls.svg',
       shimScriptAccess: 'always',
       isVideo: false,
       pauseOtherPlayers: false,
@@ -321,30 +331,23 @@ export default class VirtualScanner extends Component {
         type: 'application/x-mpegURL',
       });
     }
-    audioPlayer.load();
-    try {
-      audioPlayer.play();
-    } catch (e) {
-      alert(`Error playing ${streamData.name}: ${e}`);
-    }
     return audioPlayer;
   }
 
   removeStream(streamName) {
-    let streamData = this.enabledStreams.findBy('name', streamName);
+    const streamData = this.enabledStreams.findBy('name', streamName);
     if (streamData.soundSource) streamData.soundSource.input.disconnect();
     if (streamData.panner) streamData.panner.disconnect();
     if (streamData.volume) streamData.volume.disconnect();
     if (streamData.analyser) streamData.analyser.disconnect();
     if (streamData.audioElementSource)
       streamData.audioElementSource.disconnect();
-    streamData.draggableElement.remove();
     this.enabledStreams.removeObject(streamData);
   }
 
   addDraggable(streamName, roomPosition) {
-    let draggableElement = document.getElementById('drag-' + streamName);
-    let dragPos = this.roomPositionToDragPosition(roomPosition);
+    const draggableElement = document.getElementById('drag-' + streamName);
+    const dragPos = this.roomPositionToDragPosition(roomPosition);
     draggableElement.style.transform =
       'translate(' + dragPos.dragX + 'px, ' + dragPos.dragY + 'px)';
     draggableElement.setAttribute('data-x', dragPos.dragX);
@@ -353,7 +356,7 @@ export default class VirtualScanner extends Component {
   }
 
   drawVU(analyser, element, lastVal) {
-    let array = new Uint8Array(analyser.fftSize);
+    const array = new Uint8Array(analyser.fftSize);
     analyser.getByteTimeDomainData(array);
 
     let max = 0;
@@ -361,7 +364,7 @@ export default class VirtualScanner extends Component {
       max = Math.max(max, Math.abs(array[i] - 128));
     }
 
-    let val = Math.round(max * 16);
+    const val = Math.round(max * 16);
 
     // optimization to avoid unnecessary repaints
     if (val !== lastVal) {
@@ -375,8 +378,8 @@ export default class VirtualScanner extends Component {
 
   randomPosition(width, height, depth) {
     function randomAxisPosition(len) {
-      let max = len / 2;
-      let min = -len / 2;
+      const max = len / 2;
+      const min = -len / 2;
       return (Math.random() * (max - min) + min) * 0.9;
     }
     return {
@@ -394,8 +397,8 @@ export default class VirtualScanner extends Component {
   }
 
   dragPositionToRoomPosition(x, y) {
-    let maxWidth = this.sceneDimensions.width / 2;
-    let maxDepth = this.sceneDimensions.depth / 2;
+    const maxWidth = this.sceneDimensions.width / 2;
+    const maxDepth = this.sceneDimensions.depth / 2;
     return {
       x: Math.min(maxWidth, Math.max(-maxWidth, x / this.dragScale - maxWidth)),
       y: 0,

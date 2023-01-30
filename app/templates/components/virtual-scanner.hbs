@@ -29,10 +29,11 @@
   <div class="col-md-6">
     <h4>Spatial Scanner Audio</h4>
     <p>Drag <FaIcon @icon="volume-up" /> to move stereo channels, put on <FaIcon @icon="headphones" /> for surround sound</p>
-    <div class="draggable-parent">
+    <div class="draggable-parent" {{did-insert this.setupDraggable}}>
       <FaIcon @icon="user" />
       {{#each this.enabledStreams as |stream|}}
-        <div id="drag-{{stream.name}}" title="{{stream.desc}}"><FaIcon @icon="volume-high" />{{stream.name}}</div>
+        {{!-- template-lint-disable no-inline-styles --}}
+        <div id="drag-{{stream.name}}" title="{{stream.desc}}" class="draggable" style="color: rgb(0, 0, 0);"><FaIcon @icon="volume-high" />{{stream.name}}</div>
       {{/each}}
     </div>
   </div>
@@ -48,7 +49,7 @@
           <a href="{{ stream.broadcastifyUrl }}" target="_blank" rel="noopener noreferrer"><img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /></a>
           {{/if}}
         </h5>
-        <audio id="audio-player-{{stream.name}}" class="stream-player" preload="none" crossorigin="anonymous"></audio>
+        <audio id="audio-player-{{stream.name}}" class="stream-player" preload="none" crossorigin="anonymous" {{did-insert (fn this.startStream stream.name)}}></audio>
       </div>
       {{/each}}
     </div>

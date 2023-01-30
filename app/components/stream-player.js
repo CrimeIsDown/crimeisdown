@@ -13,6 +13,7 @@ export default class StreamPlayer extends Component {
 
     let options = {
       pluginPath: 'https://cdn.jsdelivr.net/npm/mediaelement@5.1.0/build/',
+      iconSprite: '/assets/images/mejs-controls.svg',
       shimScriptAccess: 'always',
       isVideo: false,
       pauseOtherPlayers: false,
