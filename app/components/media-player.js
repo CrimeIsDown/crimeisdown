@@ -31,6 +31,7 @@ export default class MediaPlayer extends Component {
       wavesurfer: {
         displayMilliseconds: false,
         interact: true,
+        normalize: true,
         waveColor: '#0F0',
         progressColor: '#0A0',
         cursorColor: '#FFF',
