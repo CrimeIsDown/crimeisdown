@@ -8,9 +8,13 @@ export default class Alert extends Component {
 
   constructor() {
     super(...arguments);
-    this.hasSeenAlert = localStorage.getItem(`alert-${this.args.key}`)
-      ? true
-      : false;
+    try {
+      this.hasSeenAlert = localStorage.getItem(`alert-${this.args.key}`)
+        ? true
+        : false;
+    } catch {
+      // No localStorage
+    }
   }
 
   @action
