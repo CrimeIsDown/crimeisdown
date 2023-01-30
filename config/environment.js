@@ -56,12 +56,6 @@ module.exports = function (environment) {
 
   ENV['@sentry/ember'] = {
     disablePerformance: true,
-    sentry: {
-      dsn: 'https://fc1365bf53c34718b4674383752e1080@sentry.io/154438',
-      enabled: environment === 'production',
-      environment,
-      denyUrls: ['platform.twitter.com'],
-    },
   };
 
   if (environment === 'development') {

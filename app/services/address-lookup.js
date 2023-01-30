@@ -5,6 +5,10 @@ import { set } from '@ember/object';
 import fetch from 'fetch';
 
 export default class AddressLookup extends Service {
+  constructor() {
+    super(...arguments);
+    this.dataLoadedPromise = this.loadData();
+  }
   async loadData() {
     this.policeZones = {
       1: ['16', '17'],
@@ -36,6 +40,8 @@ export default class AddressLookup extends Service {
     this.traumaCenters = await (
       await fetch('/data/city_data/trauma_centers.json')
     ).json();
+
+    return true;
   }
 
   async generateLocationDataForAddress(layers, location) {

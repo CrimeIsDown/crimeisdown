@@ -103,8 +103,8 @@ export default class IncidentMap extends Component {
             formatted_address: 'N/A - From device location',
             geometry: {
               location: {
-                lat: e.latlng.lat,
-                lng: e.latlng.lng,
+                lat: () => e.latlng.lat,
+                lng: () => e.latlng.lng,
               },
             },
           },
