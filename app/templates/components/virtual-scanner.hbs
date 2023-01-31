@@ -41,14 +41,14 @@
     <div class="row">
       {{#each this.enabledStreams as |stream|}}
       <div class="stream col-sm-6" id="stream-{{stream.name}}">
-        <h5 class="title">
+        <p class="title">
           <LinkTo @route="audio-live" @model={{stream.name}} title={{concat "Listen to only " stream.desc}}>
-            {{stream.desc}} <FaIcon @icon="external-link" />
+            {{stream.desc}}
           </LinkTo>
           {{#if stream.broadcastify}}
           <a href="{{ stream.broadcastifyUrl }}" target="_blank" rel="noopener noreferrer"><img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /></a>
           {{/if}}
-        </h5>
+        </p>
         <audio id="audio-player-{{stream.name}}" class="stream-player" preload="none" crossorigin="anonymous" {{did-insert (fn this.startStream stream.name)}}></audio>
       </div>
       {{/each}}

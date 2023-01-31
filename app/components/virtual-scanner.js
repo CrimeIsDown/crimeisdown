@@ -245,14 +245,20 @@ export default class VirtualScanner extends Component {
       playerElement = target.player.domNode;
     }
 
+    if (streamData.audioElementSource) {
+      console.error(
+        'Already existing audioElementSource for element ' + playerElement.id
+      );
+      return;
+    }
     const audioElementSource =
       this.audioContext.createMediaElementSource(playerElement);
     streamData.set('audioElementSource', audioElementSource);
 
-    let analyser = this.audioContext.createAnalyser();
+    const analyser = this.audioContext.createAnalyser();
     analyser.smoothingTimeConstant = 1;
     analyser.fftSize = 256; // the total samples are half the fft size.
-    audioElementSource.connect(analyser);
+    streamData.audioElementSource.connect(analyser);
     streamData.set('analyser', analyser);
 
     let volume = this.audioContext.createGain();
