@@ -14,7 +14,13 @@ Sentry.init({
   release: config.APP.version,
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0,
-  integrations: [new Sentry.Replay()],
+  integrations: [
+    new Sentry.Replay({
+      maskAllText: false,
+      maskAllInputs: false,
+      blockAllMedia: false,
+    }),
+  ],
 });
 
 export default class App extends Application {
