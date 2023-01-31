@@ -3,8 +3,10 @@
 import Service from '@ember/service';
 import { set } from '@ember/object';
 import fetch from 'fetch';
+import { tracked } from '@glimmer/tracking';
 
 export default class AddressLookup extends Service {
+  @tracked
   policeZones = {
     1: ['16', '17'],
     2: ['19'],
@@ -19,14 +21,19 @@ export default class AddressLookup extends Service {
     12: ['15', '25'],
     13: ['9'],
   };
+  @tracked
   policeAreas = {
     North: ['11', '14', '15', '16', '17', '19', '20', '24'],
     Central: ['1', '2', '3', '8', '9', '10', '12', '18'],
     South: ['4', '5', '6', '7', '22'],
   };
+  @tracked
   onlineStreams = [];
+  @tracked
   aldermen = [];
+  @tracked
   fireStations = [];
+  @tracked
   traumaCenters = [];
 
   constructor() {

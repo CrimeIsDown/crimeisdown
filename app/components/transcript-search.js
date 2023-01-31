@@ -321,9 +321,13 @@ export default class TranscriptSearchComponent extends Component {
         this.search.status === 'stalled'
       ) {
         body.classList.add('show-loading');
-        container.classList.add('opacity-75');
+        if (container) {
+          container.classList.add('opacity-75');
+        }
       } else {
-        container.classList.remove('opacity-75');
+        if (container) {
+          container.classList.remove('opacity-75');
+        }
         body.classList.remove('show-loading');
         this.metrics.trackEvent({
           category: 'Transcript',
