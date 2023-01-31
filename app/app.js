@@ -11,14 +11,10 @@ Sentry.init({
   enabled: config.environment === 'production',
   environment: config.environment,
   denyUrls: ['platform.twitter.com'],
-  // Called for message and error events
-  beforeSend(event, hint) {
-    const error = hint.originalException;
-    if (error && error.message && error.message.match(/AbortError/)) {
-      return null;
-    }
-    return event;
-  },
+  release: config.APP.version,
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0,
+  integrations: [new Sentry.Replay()],
 });
 
 export default class App extends Application {

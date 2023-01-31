@@ -1,6 +1,7 @@
 import { getOwner } from '@ember/application';
 import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import * as Sentry from '@sentry/ember';
 
 export default class SessionService extends Service {
   @tracked isAuthenticated = false;
@@ -21,7 +22,12 @@ export default class SessionService extends Service {
     }
 
     this.authenticated = new Promise((resolve) => {
-      this.getUser().then(() => resolve(this.isAuthenticated));
+      this.getUser().then(() => {
+        if (this.isAuthenticated) {
+          Sentry.setUser({ email: this.user.email });
+        }
+        resolve(this.isAuthenticated);
+      });
     });
   }
 
@@ -36,6 +42,7 @@ export default class SessionService extends Service {
     } catch (e) {
       this.isAuthenticated = false;
     }
+    return this.user;
   }
 
   async getSearchAPIKey() {
