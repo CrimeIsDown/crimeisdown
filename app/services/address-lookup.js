@@ -5,31 +5,36 @@ import { set } from '@ember/object';
 import fetch from 'fetch';
 
 export default class AddressLookup extends Service {
+  policeZones = {
+    1: ['16', '17'],
+    2: ['19'],
+    3: ['12', '14'],
+    4: ['1', '18'],
+    6: ['7', '8'],
+    7: ['2', '3'],
+    8: ['4', '6'],
+    9: ['5', '22'],
+    10: ['10', '11'],
+    11: ['20', '24'],
+    12: ['15', '25'],
+    13: ['9'],
+  };
+  policeAreas = {
+    North: ['11', '14', '15', '16', '17', '19', '20', '24'],
+    Central: ['1', '2', '3', '8', '9', '10', '12', '18'],
+    South: ['4', '5', '6', '7', '22'],
+  };
+  onlineStreams = [];
+  aldermen = [];
+  fireStations = [];
+  traumaCenters = [];
+
   constructor() {
     super(...arguments);
     this.dataLoadedPromise = this.loadData();
   }
+
   async loadData() {
-    this.policeZones = {
-      1: ['16', '17'],
-      2: ['19'],
-      3: ['12', '14'],
-      4: ['1', '18'],
-      5: ['2'],
-      6: ['7', '8'],
-      7: ['3'],
-      8: ['4', '6'],
-      9: ['5', '22'],
-      10: ['10', '11'],
-      11: ['20', '24'],
-      12: ['15', '25'],
-      13: ['9'],
-    };
-    this.policeAreas = {
-      North: ['11', '14', '15', '16', '17', '19', '20', '24'],
-      Central: ['1', '2', '3', '8', '9', '10', '12', '18'],
-      South: ['4', '5', '6', '7', '22'],
-    };
     this.onlineStreams = await (
       await fetch('/data/audio_data/online_streams.json')
     ).json();
