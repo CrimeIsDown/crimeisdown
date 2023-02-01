@@ -464,7 +464,7 @@ export default class TranscriptSearchComponent extends Component {
             item.label = 'Talkgroup';
             break;
           case 'srcList':
-            item.label = 'Radio ID';
+            item.label = 'Sources';
             break;
           case 'start_time':
             item.label = 'Call Time';
