@@ -18,6 +18,9 @@ export default class IncidentMap extends Component {
   previousGeolocationCircle = null;
 
   @tracked
+  geolocationPending = false;
+
+  @tracked
   baseLayers = {};
 
   @tracked
@@ -45,8 +48,8 @@ export default class IncidentMap extends Component {
   }
 
   setGeoLocationMarkers(marker, circle) {
-    set(this, 'previousGeolocationMarker', marker);
-    set(this, 'previousGeolocationCircle', circle);
+    this.previousGeolocationMarker = marker;
+    this.previousGeolocationCircle = circle;
   }
 
   @action
@@ -54,7 +57,7 @@ export default class IncidentMap extends Component {
     if (event) {
       event.preventDefault();
     }
-    let fireStationResults = this.addressLookup.findStation(this.address);
+    const fireStationResults = this.addressLookup.findStation(this.address);
     if (fireStationResults.length) {
       this.address =
         fireStationResults[0].addr + ' ' + fireStationResults[0].zip;
@@ -66,7 +69,7 @@ export default class IncidentMap extends Component {
 
   @action
   locateMe() {
-    set(this, 'geolocationPending', true);
+    this.geolocationPending = true;
 
     // Clear any form fields so it doesn't appear we are still using that address
     $('.leaflet-control-geosearch.bar form input').val('');
@@ -83,15 +86,15 @@ export default class IncidentMap extends Component {
         );
       }
 
-      let radius = e.accuracy * 3.28084; // convert radius to feet
+      const radius = e.accuracy * 3.28084; // convert radius to feet
 
-      let marker = L.marker(e.latlng)
+      const marker = L.marker(e.latlng)
         .addTo(this.map)
         .bindPopup(
           'You are within ' + radius.toPrecision(5) + ' feet of this point'
         )
         .openPopup();
-      let circle = L.circle(e.latlng, radius, { fill: radius < 1000 }).addTo(
+      const circle = L.circle(e.latlng, radius, { fill: radius < 1000 }).addTo(
         this.map
       );
 
@@ -111,7 +114,7 @@ export default class IncidentMap extends Component {
         },
       });
 
-      set(this, 'geolocationPending', false);
+      this.geolocationPending = false;
     });
 
     this.map.on('locationerror', (e) => {
@@ -120,7 +123,7 @@ export default class IncidentMap extends Component {
           ' If you are on iOS, make sure to enable Location Services first.'
       );
 
-      set(this, 'geolocationPending', false);
+      this.geolocationPending = false;
     });
   }
 
@@ -129,54 +132,32 @@ export default class IncidentMap extends Component {
     const defaultCenterLat = 41.85;
     const defaultCenterLong = -87.63;
     const defaultZoom = 11;
-    set(
-      this,
-      'map',
-      L.map('leaflet-map', {
-        center: [defaultCenterLat, defaultCenterLong],
-        zoom: defaultZoom,
-      })
-    );
+    this.map = L.map('leaflet-map', {
+      center: [defaultCenterLat, defaultCenterLong],
+      zoom: defaultZoom,
+    });
 
-    this.initBaseLayers();
-    this.initGeocoder();
+    // Initilize this first to put it above the layers control
     this.initInfoBox();
-    await this.initLayers();
-    await this.addressLookup.loadData();
-
-    if (window.location.hash) {
-      let hash = window.location.hash.substr(1),
-        query = hash
-          .substr(hash.indexOf('location_query='))
-          .split('&')[0]
-          .split('=')[1];
-      query = decodeURIComponent(query.replace(/\+/g, ' '));
-      set(this, 'address', query);
-      this.searchAddress();
-    }
-
-    this.initEditableMap();
 
     L.Control.Layers.include({
       getActiveOverlays: () => {
-        let active = [];
-        this.layersControl._layers.forEach((obj) => {
-          if (obj.overlay && this.layersControl._map.hasLayer(obj.layer)) {
-            active.push(obj);
-          }
-        });
+        const active = [];
+        if (this.layersControl._layers) {
+          this.layersControl._layers.forEach((obj) => {
+            if (obj.overlay && this.layersControl._map.hasLayer(obj.layer)) {
+              active.push(obj);
+            }
+          });
+        }
         return active;
       },
     });
 
-    set(
-      this,
-      'layersControl',
-      new L.Control.Layers(this.baseLayers, this.overlay, {
-        // @TODO use CSS for this
-        collapsed: window.innerHeight > 650 ? false : true,
-      }).addTo(this.map)
-    );
+    this.layersControl = new L.Control.Layers(undefined, undefined, {
+      // @TODO use CSS for this
+      collapsed: window.innerHeight > 650 ? false : true,
+    }).addTo(this.map);
 
     L.streetView({
       position: 'topleft',
@@ -187,21 +168,30 @@ export default class IncidentMap extends Component {
       openstreetcam: false,
       mosatlas: false,
     }).addTo(this.map);
+
+    this.initBaseLayers();
+
+    this.initGeocoder();
+
+    this.initEditableMap();
+
+    await this.initLayers();
+    await this.addressLookup.loadData();
+
+    if (window.location.hash) {
+      const hash = window.location.hash.substr(1),
+        query = hash
+          .substr(hash.indexOf('location_query='))
+          .split('&')[0]
+          .split('=')[1];
+      query = decodeURIComponent(query.replace(/\+/g, ' '));
+      this.address = query;
+      this.searchAddress();
+    }
   }
 
   initBaseLayers() {
-    this.baseLayers['OpenStreetMap'] = L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      {
-        attribution:
-          'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-        maxNativeZoom: 19,
-        minZoom: 0,
-        maxZoom: 20,
-      }
-    );
-
-    this.baseLayers['MapBox Streets'] = L.tileLayer(
+    const mapbox = L.tileLayer(
       'https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL',
       {
         attribution:
@@ -211,7 +201,9 @@ export default class IncidentMap extends Component {
       }
     );
 
-    this.baseLayers['MapBox Streets Dark'] = L.tileLayer(
+    this.layersControl.addBaseLayer(mapbox, 'MapBox Streets');
+
+    const mapboxDark = L.tileLayer(
       'https://api.mapbox.com/styles/v1/erictendian/cj9ne99zz3e112rp4pxcpua1z/tiles/256/{z}/{x}/{y}?access_token=REDACTED_PUBLIC_CREDENTIAL',
       {
         attribution:
@@ -220,18 +212,33 @@ export default class IncidentMap extends Component {
         maxZoom: 20,
       }
     );
-
-    this.baseLayers['Google Hybrid'] = new L.gridLayer.googleMutant({
-      type: 'hybrid',
-      minZoom: 0,
-      maxZoom: 20,
-    });
+    this.layersControl.addBaseLayer(mapboxDark, 'MapBox Streets Dark');
 
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      this.baseLayers['MapBox Streets Dark'].addTo(this.map);
+      mapboxDark.addTo(this.map);
     } else {
-      this.baseLayers['MapBox Streets'].addTo(this.map);
+      mapbox.addTo(this.map);
     }
+
+    this.layersControl.addBaseLayer(
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:
+          'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        maxNativeZoom: 19,
+        minZoom: 0,
+        maxZoom: 20,
+      }),
+      'OpenStreetMap'
+    );
+
+    this.layersControl.addBaseLayer(
+      new L.gridLayer.googleMutant({
+        type: 'hybrid',
+        minZoom: 0,
+        maxZoom: 20,
+      }),
+      'Google Hybrid'
+    );
   }
 
   buildCrimeMapUrl(address) {
@@ -242,7 +249,7 @@ export default class IncidentMap extends Component {
   }
 
   async showLocation(event) {
-    let query = this.address;
+    const query = this.address;
     if (query) {
       // We actually searched an address here, so don't show the geolocation marker anymore
       this.removePreviousGeoLocationMarkers();
@@ -256,16 +263,12 @@ export default class IncidentMap extends Component {
       label: query || 'Geolocation',
     });
 
-    set(
-      this,
-      'location',
-      await this.addressLookup.generateLocationDataForAddress(
-        this.layers,
-        event.location.raw
-      )
+    this.location = await this.addressLookup.generateLocationDataForAddress(
+      this.layers,
+      event.location.raw
     );
-    let randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
-    let wazeIframeUrl =
+    const randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
+    const wazeIframeUrl =
       'https://embed.waze.com/iframe?zoom=15&lat=' +
       this.location.meta.latitude +
       '&lon=' +
@@ -274,16 +277,16 @@ export default class IncidentMap extends Component {
       randomInt;
     $('#waze-map').attr('src', wazeIframeUrl);
     if (this.location.meta.inChicago) {
-      let crimereportsIframeUrl = this.buildCrimeMapUrl(
+      const crimereportsIframeUrl = this.buildCrimeMapUrl(
         this.location.meta.formattedAddress
       );
       $('#clear-map').attr('src', crimereportsIframeUrl);
 
       schedule('afterRender', () => {
-        let tooltipTriggerList = [].slice.call(
+        const tooltipTriggerList = [].slice.call(
           document.querySelectorAll('[data-bs-toggle="tooltip"]')
         );
-        let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl);
         });
       });
@@ -291,17 +294,13 @@ export default class IncidentMap extends Component {
   }
 
   initGeocoder() {
-    set(
-      this,
-      'geosearchProvider',
-      new GeoSearch.GoogleProvider({
-        params: {
-          key: 'REDACTED_PUBLIC_CREDENTIAL',
-          bounds:
-            '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366',
-        },
-      })
-    );
+    this.geosearchProvider = new GeoSearch.GoogleProvider({
+      params: {
+        key: 'REDACTED_PUBLIC_CREDENTIAL',
+        bounds:
+          '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366',
+      },
+    });
 
     const searchControl = new GeoSearch.GeoSearchControl({
       provider: this.geosearchProvider,
@@ -310,7 +309,7 @@ export default class IncidentMap extends Component {
       showPopup: true,
       maxMarkers: 3,
     });
-    set(this, 'searchControl', searchControl);
+    this.searchControl = searchControl;
 
     this.map.addControl(searchControl);
 
@@ -318,7 +317,7 @@ export default class IncidentMap extends Component {
   }
 
   initLayers() {
-    set(this, 'layers', {
+    this.layers = {
       fireStations: {
         label: 'Fire Stations',
         layer: null,
@@ -422,38 +421,38 @@ export default class IncidentMap extends Component {
         url: 'https://www.google.com/maps/d/kml?forcekml=1&mid=1am7PF0tT25EztnOTAgUEL2E382VjVTc7',
         showByDefault: false,
       },
-    });
+    };
 
     return this.loadLayerData(this.layers);
   }
 
   async loadLayerData(layers) {
-    let map = this.map;
-    let info = this.infobox;
+    const map = this.map;
+    const info = this.infobox;
 
-    for (let layerName in layers) {
+    for (const layerName in layers) {
       if (Object.prototype.hasOwnProperty.call(layers, layerName)) {
-        let layerObj = layers[layerName];
+        const layerObj = layers[layerName];
 
         if (layerName === 'fireStations') {
-          let layerGroup = L.markerClusterGroup({
+          const layerGroup = L.markerClusterGroup({
             showCoverageOnHover: false,
           });
           if (layerObj.showByDefault) {
             layerGroup.addTo(map);
           }
           layerObj.layer = layerGroup;
-          this.overlay[layerObj.label] = layerObj.layer;
+          this.layersControl.addOverlay(layerObj.layer, layerObj.label);
           const data = await (await fetch(layerObj.url)).json();
 
           data.forEach((location) => {
-            let markerTitle = location.name
+            const markerTitle = location.name
               ? location.name
               : [location.engine, location.truck, location.ambo, location.squad]
                   .filter(Boolean)
                   .join('-');
 
-            let stationMarker = L.marker(
+            const stationMarker = L.marker(
               [location.latitude, location.longitude],
               {
                 title: markerTitle,
@@ -478,7 +477,7 @@ export default class IncidentMap extends Component {
 
             // this is a really hacky way to make a popup, we should stop doing it
             // @TODO: Use Handlebars template to make Leaflet popup
-            let popupContents =
+            const popupContents =
               '<h6>' +
               markerTitle +
               '</h6>' +
@@ -518,7 +517,7 @@ export default class IncidentMap extends Component {
             layerGroup.addLayer(stationMarker);
           });
         } else if (layerName === 'gangs') {
-          let kmlLayer = new L.KML();
+          const kmlLayer = new L.KML();
           map.attributionControl.addAttribution(
             'Gang map by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank">u/ReggieG45</a>'
           );
@@ -526,7 +525,7 @@ export default class IncidentMap extends Component {
             kmlLayer.addTo(map);
           }
           layerObj.layer = kmlLayer;
-          this.overlay[layerObj.label] = layerObj.layer;
+          this.layersControl.addOverlay(layerObj.layer, layerObj.label);
 
           const response = await fetch(layerObj.url);
           const kmltext = await response.text();
@@ -535,9 +534,9 @@ export default class IncidentMap extends Component {
           const kml = parser.parseFromString(kmltext, 'text/xml');
           layerObj.layer.addKML(kml);
         } else {
-          let geoJsonLayer = L.geoJson(null, {
+          const geoJsonLayer = L.geoJson(null, {
             onEachFeature: (feature, layer) => {
-              let props = {};
+              const props = {};
               for (const key in feature.properties) {
                 if (
                   Object.prototype.hasOwnProperty.call(
@@ -555,24 +554,30 @@ export default class IncidentMap extends Component {
             geoJsonLayer.addTo(map);
           }
           layerObj.layer = geoJsonLayer;
-          this.overlay[layerObj.label] = layerObj.layer;
+          this.layersControl.addOverlay(layerObj.layer, layerObj.label);
           const data = await (await fetch(layerObj.url)).json();
           layerObj.layer.addData(data).setStyle(layerObj.style);
         }
       }
     }
 
-    let onMouseMove = (e) => {
-      let allProps = {};
+    const onMouseMove = (e) => {
+      const allProps = {};
 
-      this.layersControl._layers.forEach((obj) => {
-        if (obj.layer && typeof obj.layer.eachLayer === 'function') {
-          let result = leafletPip.pointInLayer(e.latlng, obj.layer, true)[0];
-          if (result) {
-            allProps = { ...allProps, ...result.feature.properties };
+      if (this.layersControl._layers) {
+        this.layersControl._layers.forEach((obj) => {
+          if (obj.layer && typeof obj.layer.eachLayer === 'function') {
+            const result = leafletPip.pointInLayer(
+              e.latlng,
+              obj.layer,
+              true
+            )[0];
+            if (result) {
+              Object.assign(allProps, result.feature.properties);
+            }
           }
-        }
-      });
+        });
+      }
       info.update(allProps);
 
       if (e.type === 'click') {
@@ -593,7 +598,7 @@ export default class IncidentMap extends Component {
   }
 
   initInfoBox() {
-    let info = L.control();
+    const info = L.control();
 
     info.onAdd = function () {
       this._div = L.DomUtil.create('div', 'info');
@@ -604,7 +609,7 @@ export default class IncidentMap extends Component {
     info.update = function (props) {
       let html = '<h4>Layer Info</h4>';
       if (props && Object.keys(props).length) {
-        for (let key in props) {
+        for (const key in props) {
           html += '<p><em>' + key + '</em>: ' + props[key] + '</p>';
         }
       } else {
@@ -615,16 +620,17 @@ export default class IncidentMap extends Component {
 
     info.addTo(this.map);
 
-    set(this, 'infobox', info);
+    this.infobox = info;
   }
 
   initEditableMap() {
-    this.overlay['User Features'] = L.markerClusterGroup().addTo(this.map);
+    this.editableLayer = L.markerClusterGroup().addTo(this.map);
+    this.layersControl.addOverlay(this.editableLayer, 'User Features');
 
     this.map.addControl(
       new L.Control.Draw({
         edit: {
-          featureGroup: this.overlay['User Features'],
+          featureGroup: this.editableLayer,
           poly: {
             allowIntersection: false,
           },
@@ -652,11 +658,11 @@ export default class IncidentMap extends Component {
       })
     );
 
-    let drawEventCreated = (event) => {
-      let layer = event.layer;
+    const drawEventCreated = (event) => {
+      const layer = event.layer;
       // layer.bindPopup('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal">Add Incident</button>').openPopup();
 
-      this.overlay['User Features'].addLayer(layer);
+      this.editableLayer.addLayer(layer);
     };
 
     this.map.on(L.Draw.Event.CREATED, drawEventCreated.bind(this));
