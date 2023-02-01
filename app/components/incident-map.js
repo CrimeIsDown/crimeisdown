@@ -179,13 +179,14 @@ export default class IncidentMap extends Component {
     await this.addressLookup.loadData();
 
     if (window.location.hash) {
-      const hash = window.location.hash.substr(1),
-        query = hash
-          .substr(hash.indexOf('location_query='))
+      const hash = window.location.hash.substring(1);
+      this.address = decodeURIComponent(
+        hash
+          .substring(hash.indexOf('location_query='))
           .split('&')[0]
-          .split('=')[1];
-      query = decodeURIComponent(query.replace(/\+/g, ' '));
-      this.address = query;
+          .split('=')[1]
+          .replace(/\+/g, ' ')
+      );
       this.searchAddress();
     }
   }
