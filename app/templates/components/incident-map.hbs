@@ -25,6 +25,7 @@
             <div class="form-group mt-1 mb-3">
               <button type="button" class="btn btn-info{{if this.geolocationPending " disabled" ""}}" {{on "click" this.locateMe}} title="Device geolocation works best on mobile"><FaIcon @icon="crosshairs" /> Use my location</button>
             </div>
+            {{#if this.location.meta.latitude}}
             <table class="table table-bordered table-condensed">
               <tbody>
               <tr class="info">
@@ -54,7 +55,7 @@
                 <th colspan="2">Chicago Police Department</th>
               </tr>
               <tr>
-                <td>{{ this.location.police.district }} District, Beat {{ this.location.police.beat }}</td>
+                <td>District {{ this.location.police.district }}, Beat {{ this.location.police.beat }}</td>
                 <td>Area {{ this.location.police.area }}</td>
               </tr>
               <tr>
@@ -136,6 +137,7 @@
               </tr>
               </tbody>
             </table>
+            {{/if}}
           </div>
         </div>
       </div>

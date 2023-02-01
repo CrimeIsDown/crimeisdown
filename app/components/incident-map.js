@@ -428,9 +428,6 @@ export default class IncidentMap extends Component {
   }
 
   async loadLayerData(layers) {
-    const map = this.map;
-    const info = this.infobox;
-
     for (const layerName in layers) {
       if (Object.prototype.hasOwnProperty.call(layers, layerName)) {
         const layerObj = layers[layerName];
@@ -440,7 +437,7 @@ export default class IncidentMap extends Component {
             showCoverageOnHover: false,
           });
           if (layerObj.showByDefault) {
-            layerGroup.addTo(map);
+            layerGroup.addTo(this.map);
           }
           layerObj.layer = layerGroup;
           this.layersControl.addOverlay(layerObj.layer, layerObj.label);
@@ -519,11 +516,11 @@ export default class IncidentMap extends Component {
           });
         } else if (layerName === 'gangs') {
           const kmlLayer = new L.KML();
-          map.attributionControl.addAttribution(
+          this.map.attributionControl.addAttribution(
             'Gang map by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank">u/ReggieG45</a>'
           );
           if (layerObj.showByDefault) {
-            kmlLayer.addTo(map);
+            kmlLayer.addTo(this.map);
           }
           layerObj.layer = kmlLayer;
           this.layersControl.addOverlay(layerObj.layer, layerObj.label);
@@ -552,7 +549,7 @@ export default class IncidentMap extends Component {
             },
           });
           if (layerObj.showByDefault) {
-            geoJsonLayer.addTo(map);
+            geoJsonLayer.addTo(this.map);
           }
           layerObj.layer = geoJsonLayer;
           this.layersControl.addOverlay(layerObj.layer, layerObj.label);
@@ -561,6 +558,30 @@ export default class IncidentMap extends Component {
         }
       }
     }
+  }
+
+  initInfoBox() {
+    this.infobox = L.control();
+
+    this.infobox.onAdd = function () {
+      this._div = L.DomUtil.create('div', 'info');
+      this.update();
+      return this._div;
+    };
+
+    this.infobox.update = function (props) {
+      let html = '<h4>Layer Info</h4>';
+      if (props && Object.keys(props).length) {
+        for (const key in props) {
+          html += '<p><em>' + key + '</em>: ' + props[key] + '</p>';
+        }
+      } else {
+        html += '<p>Hover/tap a layer</p>';
+      }
+      this._div.innerHTML = html;
+    };
+
+    this.infobox.addTo(this.map);
 
     const onMouseMove = (e) => {
       const allProps = {};
@@ -579,13 +600,13 @@ export default class IncidentMap extends Component {
           }
         });
       }
-      info.update(allProps);
+      this.infobox.update(allProps);
 
       if (e.type === 'click') {
         L.popup()
           .setLatLng(e.latlng)
-          .setContent(info._div.innerHTML)
-          .openOn(map);
+          .setContent(this.infobox._div.innerHTML)
+          .openOn(this.map);
       }
     };
 
@@ -596,32 +617,6 @@ export default class IncidentMap extends Component {
     });
 
     this.map.on('click', onMouseMove);
-  }
-
-  initInfoBox() {
-    const info = L.control();
-
-    info.onAdd = function () {
-      this._div = L.DomUtil.create('div', 'info');
-      this.update();
-      return this._div;
-    };
-
-    info.update = function (props) {
-      let html = '<h4>Layer Info</h4>';
-      if (props && Object.keys(props).length) {
-        for (const key in props) {
-          html += '<p><em>' + key + '</em>: ' + props[key] + '</p>';
-        }
-      } else {
-        html += '<p>Hover/tap a layer</p>';
-      }
-      this._div.innerHTML = html;
-    };
-
-    info.addTo(this.map);
-
-    this.infobox = info;
   }
 
   initEditableMap() {
