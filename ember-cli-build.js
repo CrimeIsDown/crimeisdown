@@ -10,7 +10,6 @@ module.exports = function (defaults) {
       app: {
         css: {
           app: '/assets/crimeisdown.css',
-          'app-dark': '/assets/crimeisdown-dark.css',
         },
       },
     },
@@ -53,8 +52,8 @@ module.exports = function (defaults) {
 
   app.import('node_modules/@mapbox/leaflet-pip/leaflet-pip.js');
 
-  app.import('node_modules/@popperjs/core/dist/umd/popper.js');
-  app.import('node_modules/bootstrap/dist/js/bootstrap.js');
+  app.import('node_modules/bootstrap/dist/js/bootstrap.bundle.js');
+  app.import('node_modules/bootstrap/dist/css/bootstrap.css');
 
   app.import('node_modules/bootstrap-table/dist/bootstrap-table.js');
   app.import('node_modules/bootstrap-table/dist/bootstrap-table.css');

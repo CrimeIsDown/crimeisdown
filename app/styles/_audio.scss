@@ -1,0 +1,106 @@
+#online-streams-list ul {
+  line-height: 1;
+}
+
+input#datetimepicker[readonly] {
+  background-color: var(--bs-white);
+}
+
+input.flatpickr-mobile {
+  border-top-left-radius: 0.25rem !important;
+  border-bottom-left-radius: 0.25rem !important;
+}
+
+.stream-options {
+  label {
+    cursor: pointer;
+    margin-bottom: 0.2rem;
+  }
+}
+
+.stream {
+  .title {
+    font-size: 1.25rem;
+    margin-bottom: 0;
+  }
+  .row + audio {
+    margin-top: 0.5rem;
+  }
+}
+
+.stream-player {
+  height: 40px;
+  width: 200px !important;
+}
+
+.draggable-parent {
+  width: 230px;
+  height: 216px;
+  margin-bottom: 1em;
+  border: 2px solid var(--bs-secondary);
+  position: relative;
+  background: var(--bs-gray-100);
+  .fa-user {
+    position: absolute;
+    transform: translate(108px, 100px);
+  }
+  .fa-volume-high {
+    vertical-align: -0.25em;
+    width: 32px;
+    height: 16px;
+    text-align: center;
+  }
+  div {
+    font-family: Arial, sans-serif;
+    font-size: 0.75em;
+    font-weight: bold;
+    -ms-touch-action: none;
+    touch-action: none;
+    white-space: nowrap;
+    width: 6em;
+    position: absolute;
+  }
+}
+
+.bcfy-favicon {
+  height: 1rem;
+  width: auto;
+}
+
+.video-js.vjs-fluid {
+  .vjs-progress-control .vjs-progress-holder {
+    margin: 0 2.5rem 0 0.75rem !important;
+  }
+}
+
+.vjs-wavedisplay {
+  &::-webkit-scrollbar {
+    height: 0rem;
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    outline: 1px solid #fff;
+  }
+}
+
+.pell-button {
+  padding: 0;
+}
+
+/* Needed to avoid browser scrolling down too far */
+#lookuprecording:target::before {
+  content: "";
+  display: block;
+  height: 70px;
+  margin: -70px 0 0;
+}
+
+@include media-breakpoint-up(md) {
+  .stream-options {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}

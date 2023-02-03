@@ -1,0 +1,94 @@
+// From the Bootstrap docs
+.bi {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentcolor;
+}
+
+audio {
+  max-width: 100%;
+  max-height: 3em;
+}
+
+.navbar {
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28173, 181, 189, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")
+}
+
+nav.navbar .form-inline .form-check-label {
+  color: rgba(255, 255, 255, 0.5);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.em {
+  height: 1.25rem;
+  width: 1.25rem;
+  vertical-align: text-top;
+}
+
+.alert {
+  p {
+    margin: 0;
+  }
+  a {
+    text-decoration: underline;
+  }
+}
+
+.table {
+  th, td {
+    padding: 0.25rem !important;
+  }
+}
+
+ul.nav.nav-tabs {
+  margin-top: -1.5rem;
+  padding-top: 0.5rem;
+  li:first-child {
+    margin-left: 1rem;
+  }
+}
+
+.nav-close {
+  display: inline-block;
+  padding-right: 1.75rem;
+  & + span {
+    position: relative;
+    display: inline-block;
+    margin-left: -2rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+  }
+}
+
+.modal-fullwidth {
+  max-width: 98% !important;
+}
+
+.accordion {
+  --bs-accordion-active-color: var(--bs-white);
+  --bs-accordion-active-bg: var(--bs-gray-800);
+  --bs-accordion-btn-color: var(--bs-gray-300);
+  --bs-accordion-btn-bg: var(--bs-gray-800);
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23dee2e6'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-border-width: 0;
+}
+
+#site-footer {
+  margin-top: 1rem;
+  .col-sm-7 {
+    text-align: right;
+  }
+}
+
+.ptrn-button {
+  img {
+    max-height: 2.5rem;
+  }
+  img:hover, img:focus {
+    filter: brightness(92%);
+    transition: all 0.5s ease;
+  }
+}

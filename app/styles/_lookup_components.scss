@@ -1,0 +1,13 @@
+#radio-search,
+#ucr-search {
+  form label {
+    font-weight: bold;
+    font-style: italic;
+  }
+  .results {
+    margin-top: 1em;
+    tr > th {
+      width: 33.33333%;
+    }
+  }
+}

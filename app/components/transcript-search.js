@@ -506,7 +506,8 @@ export default class TranscriptSearchComponent extends Component {
     return currentRefinements({
       container: '#current-refinements',
       cssClasses: {
-        list: 'input-group',
+        list: 'd-block',
+        item: 'me-2',
       },
       transformItems,
     });
