@@ -148,30 +148,37 @@
         <li id="hit-{{hit.id}}" class="ais-Hits-item{{if (eq hit.id this.selectedHit) " selected" ""}}" {{did-insert (fn this.scrollToHit this.selectedHit)}}>
           <div class="row">
             <div class="col">
-              <h4 class="fs-5" title="{{hit.talkgroup_description}}">
-                <a href="{{hit.contextUrl}}" {{on "click" (fn this.getContext hit)}}>{{hit.talkgroup_tag}}</a>
+              <h4 class="fs-5">
+                {{#if (eq hit.id this.selectedHit)}}
+                <span type="button" class="btn btn-sm btn-warning"><FaIcon @icon="star" /></span>
+                {{else}}
+                <a class="btn btn-sm btn-primary" href="{{hit.contextUrl}}" {{on "click" (fn this.getContext hit)}}>
+                  <FaIcon @icon="filter" />
+                </a>
+                {{/if}}
+                {{hit.talkgroup_group}} {{hit.talkgroup_description}}
               </h4>
-              <h5 class="fs-6">
-                {{hit.talkgroup_group}}
-              </h5>
               <p>
                 <strong>
-                  <a href="{{hit.permalink}}">{{hit.start_time_string}}</a> ({{hit.relative_time}})
+                  <a href="{{hit.permalink}}"><FaIcon @icon="link" /> {{hit.start_time_string}}</a> ({{hit.relative_time}})
                 </strong>
                 {{hit.time_warning}}
               </p>
               <p>
+                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#call-audio-{{hit.id}}" {{on "click" (fn this.playAudio hit.id)}}>
+                  <FaIcon @icon="play" /><span class="visually-hidden">Play Audio</span>
+                </button>
                 <span class="badge text-bg-light me-1">
                   Duration: {{hit.call_length}}s
                 </span>
-                <span class="badge text-bg-info me-1">
+                <span class="badge text-bg-secondary me-1">
                   TG {{hit.talkgroup}}
                 </span>
-                <span class="badge text-bg-info me-1">
+                <span class="badge {{if (or (eq hit.talkgroup_group_tag "Law Dispatch") (eq hit.talkgroup_group_tag "Law Talk")) "text-bg-primary" "text-bg-danger"}} me-1">
                   {{hit.talkgroup_group_tag}}
                 </span>
                 <span
-                  class="badge {{if (eq hit.audio_type "digital") "text-bg-primary" "text-bg-secondary"}} me-1"
+                  class="badge text-bg-secondary me-1"
                 >
                   {{hit.audio_type}}
                 </span>
@@ -194,7 +201,7 @@
               {{#unless this.useMediaPlayerComponent}}
               <audio
                 id="call-audio-{{hit.id}}"
-                class="call-audio"
+                class="call-audio collapse"
                 src="{{hit.raw_audio_url}}"
                 controls
                 preload="none"

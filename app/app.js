@@ -21,6 +21,19 @@ Sentry.init({
       blockAllMedia: false,
     }),
   ],
+  beforeSend(event, hint) {
+    const error = hint.originalException;
+    if (
+      error &&
+      error.message &&
+      error.message.match(
+        /The play\(\) request was interrupted by a call to pause\(\)/i
+      )
+    ) {
+      return null;
+    }
+    return event;
+  },
 });
 
 export default class App extends Application {

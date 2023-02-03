@@ -63,11 +63,11 @@ export default class MediaPlayer extends Component {
       }
       this.player.src(src);
       if (this.args.preload === 'none') {
-        this.player.one('play', () => {
+        this.player.one('play', async () => {
           const element = this.player.tech_.el();
-          this.player.wavesurfer().load(element);
-          this.player.play();
-          this.player.wavesurfer().surfer.play();
+          await this.player.wavesurfer().load(element);
+          await this.player.play();
+          await this.player.wavesurfer().surfer.play();
         });
       }
     });

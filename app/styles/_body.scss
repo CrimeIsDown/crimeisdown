@@ -14,6 +14,11 @@ body {
   }
 }
 
+[data-bs-theme=dark] {
+  --bs-body-color: #d6dade;
+  --bs-body-color-rgb: 214, 218, 222;
+}
+
 @include media-breakpoint-between(lg, xl) {
   body {
     padding-top: 4.4rem;

@@ -129,12 +129,20 @@ export default class TranscriptSearchComponent extends Component {
     hit.audio_type = capitalize(hit.audio_type);
 
     let start_time = moment.unix(hit.start_time);
-    if (hit.short_name == 'chi_cpd' && hit.raw_metadata['encrypted'] == 1) {
-      hit.time_warning = ` - received at ${start_time
-        .toDate()
-        .toLocaleString()}`;
-      start_time = start_time.subtract(30, 'minutes');
-      hit.encrypted = true;
+    if (hit.short_name == 'chi_cpd') {
+      hit.talkgroup_group = 'CPD';
+      hit.talkgroup_description = hit.talkgroup_description
+        .replace('Police: ', '')
+        .replace('Dispatch ', '');
+      if (hit.raw_metadata['encrypted'] == 1) {
+        hit.time_warning = ` - received at ${start_time
+          .toDate()
+          .toLocaleString()}`;
+        start_time = start_time.subtract(30, 'minutes');
+        hit.encrypted = true;
+      }
+    } else if (hit.short_name == 'chi_cfd') {
+      hit.talkgroup_group = 'CFD';
     }
     hit.start_time_string = start_time.toDate().toLocaleString();
     hit.relative_time = start_time.fromNow();
@@ -210,6 +218,18 @@ export default class TranscriptSearchComponent extends Component {
           }
         }
       }, 100);
+    }
+  }
+
+  @action
+  playAudio(hitId) {
+    const elementId = this.useMediaPlayerComponent
+      ? `videojs-player-${hitId}_html5_api`
+      : `call-audio-${hitId}`;
+    const audioElem = document.getElementById(elementId);
+    if (audioElem) {
+      audioElem.classList.add('show');
+      audioElem.play();
     }
   }
 
