@@ -145,7 +145,7 @@
     <div id="hits" class="ais-Hits">
       <ol class="ais-Hits-list">
         {{#each this.hits key="id" as |hit|}}
-        <li id="hit-{{hit.id}}" class="ais-Hits-item{{if (eq hit.id this.selectedHit) " selected" ""}}" {{did-insert (fn this.scrollToHit this.selectedHit)}}>
+        <li id="hit-{{hit.id}}" class="ais-Hits-item{{if (eq hit.id this.selectedHit) " selected" ""}}" {{did-insert this.didInsertHit}}>
           <div class="row">
             <div class="col">
               <h4 class="fs-5">
@@ -165,7 +165,7 @@
                 {{hit.time_warning}}
               </p>
               <p>
-                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#call-audio-{{hit.id}}" {{on "click" (fn this.playAudio hit.id)}}>
+                <button type="button" class="btn btn-sm btn-success" {{on "click" (fn this.playAudio hit)}}>
                   <FaIcon @icon="play" /><span class="visually-hidden">Play Audio</span>
                 </button>
                 <span class="badge text-bg-light me-1">
@@ -198,15 +198,15 @@
                 </button>
                 {{/if}}
               </p>
-              {{#unless this.useMediaPlayerComponent}}
+              {{#if (and hit.showPlayer (not this.useMediaPlayerComponent))}}
               <audio
                 id="call-audio-{{hit.id}}"
-                class="call-audio collapse"
+                class="call-audio"
                 src="{{hit.raw_audio_url}}"
                 controls
-                preload="none"
+                autoplay
               ></audio>
-              {{/unless}}
+              {{/if}}
               <p>
                 {{#each hit.raw_transcript as |segment|}}
                   {{#if (get segment "0")}}
@@ -218,9 +218,11 @@
                 {{/each}}
               </p>
             </div>
-            {{#if this.useMediaPlayerComponent}}
-            <div class="col-lg-5 media-player-container">
-              <MediaPlayer @src="{{hit.raw_audio_url}}" @type="audio/mpeg" @idSuffix="-{{hit.id}}" @hideZoom="true" @preload="none" />
+            {{#if (and this.useMediaPlayerComponent hit.showPlayer)}}
+            <div class="col-lg-5">
+              <div id="call-audio-{{hit.id}}" class="media-player-container">
+                <MediaPlayer @src="{{hit.raw_audio_url}}" @type="audio/mpeg" @idSuffix="-{{hit.id}}" @hideZoom="true" @autoplay="true" />
+              </div>
             </div>
             {{/if}}
           </div>

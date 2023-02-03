@@ -19,6 +19,7 @@ export default class MediaPlayer extends Component {
       aspectRatio: '4:1',
       preload: this.args.preload,
       controls: true,
+      autoplay: this.args.autoplay ? 'play' : false,
       techOrder: ['html5'],
     };
 

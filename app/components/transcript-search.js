@@ -200,11 +200,11 @@ export default class TranscriptSearchComponent extends Component {
   }
 
   @action
-  scrollToHit(selectedHit) {
-    if (selectedHit) {
+  didInsertHit() {
+    if (this.selectedHit) {
       clearTimeout(this.scrollTimer);
       this.scrollTimer = setTimeout(() => {
-        const elementId = `hit-${selectedHit}`;
+        const elementId = `hit-${this.selectedHit}`;
         const hitElement = document.getElementById(elementId);
         if (hitElement) {
           const y =
@@ -222,15 +222,8 @@ export default class TranscriptSearchComponent extends Component {
   }
 
   @action
-  playAudio(hitId) {
-    const elementId = this.useMediaPlayerComponent
-      ? `videojs-player-${hitId}_html5_api`
-      : `call-audio-${hitId}`;
-    const audioElem = document.getElementById(elementId);
-    if (audioElem) {
-      audioElem.classList.add('show');
-      audioElem.play();
-    }
+  playAudio(hit) {
+    set(hit, 'showPlayer', true);
   }
 
   buildSrcFilter(src) {
