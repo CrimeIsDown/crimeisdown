@@ -1,142 +1,144 @@
+<h1 class="visually-hidden">Call Transcript Search</h1>
+<div class="row mb-2 {{if (eq this.hasAccess undefined) "d-none" ""}}">
+  <div class="col-lg-3 d-none d-lg-block">
+    <h2 class="fs-4">Filters</h2>
+  </div>
+  <div id="searchbox" class="col-lg mb-2 mb-lg-0"></div>
+  <div id="sort-by" class="col-lg-auto col"></div>
+  <div id="hits-per-page" class="col-lg-auto col"></div>
+  <div class="col-auto d-flex justify-content-end">
+    <button type="button" class="btn btn-primary me-2 d-lg-none" data-bs-toggle="collapse" data-bs-target="#filters" aria-controls="filters">
+      <span class="visually-hidden">Filters</span>
+      <FaIcon @icon="filter" />
+    </button>
+    <button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#settings" aria-controls="settings">
+      <span class="visually-hidden">Settings</span>
+      <FaIcon @icon="gear" />
+    </button>
+  </div>
+</div>
 {{#if (eq this.hasAccess undefined)}}
 <p {{did-insert this.setupSearch}}>Logging in...</p>
 {{/if}}
 <div class="search-panel row {{if (eq this.hasAccess undefined) "d-none" ""}}">
-  <div class="search-panel__filters col-md-3">
+  <div class="search-panel__filters col-lg-3">
     {{#if (eq this.hasAccess false)}}
     <div class="alert alert-danger">
       {{#if this.session.isAuthenticated}}
       <p>You are not at a high enough membership tier. Please upgrade your membership on Patreon to the Sergeant tier or above to access.</p>
       {{else}}
       <p>You are currently using a demo version with old transmissions. To search the latest scanner traffic, become a patron of at least $5/mo and then <a href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url">login</a>.</p>
-      <p class="mt-2"><a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/become-a-patron.png" alt="Become a Patron!"></a></p>
+      <p class="mt-2"><a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img class="img-fluid" src="/img/become-a-patron.png" alt="Become a Patron!"></a></p>
       {{/if}}
     </div>
     {{/if}}
-    <div id="auto-refresh" class="mb-2">
-      <div class="input-group">
-        <span class="input-group-text" id="refresh-interval-val">
-        Auto Refresh:
-        {{#if (eq this.autoRefreshInterval "0")}}
-          Off
-        {{else}}
-          {{this.autoRefreshInterval}}s
-        {{/if}}
-        </span>
-        {{#if this.hasAccess}}
-        <Input @type="range" class="form-control form-range" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} {{on "change" this.restartAutoRefresh}} />
-        {{else}}
-        <Input @type="range" class="form-control form-range disabled" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} disabled />
-        {{/if}}
-      </div>
-    </div>
-    <div id="waveform-setting" class="mb-2">
-      <div class="form-check form-switch">
-        <Input class="form-check-input" @type="checkbox" role="switch" id="waveform-toggle" @checked={{this.useMediaPlayerComponent}} aria-checked="{{this.useMediaPlayerComponent}}" />
-        <label class="form-check-label" for="waveform-toggle">Show waveform when playing audio</label>
-      </div>
-    </div>
-    <div class="accordion">
-      <h2 id="filtersHeadingAccordion" data-bs-toggle="collapse" data-bs-target="#filters" aria-controls="filters">
-        <button class="accordion-button" type="button" >
-          Filters
-        </button>
-      </h2>
-    </div>
-    <h2 id="filtersHeading">Filters</h2>
     <div id="filters" class="collapse">
+      <h2 id="filtersHeading" class="d-lg-none">Filters</h2>
       <div id="clear-refinements"></div>
-      <div class="accordion accordion-flush" id="filterOptionsAccordion">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="dept-heading">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dept-collapse" aria-expanded="false" aria-controls="dept-collapse">
-                  Departments
-                </button>
-              </h2>
-              <div id="dept-collapse" class="accordion-collapse collapse show" aria-labelledby="dept-heading">
-                <div id="dept-menu" class="accordion-body"></div>
-              </div>
+        <div class="accordion accordion-flush" id="filterOptionsAccordion">
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="dept-heading">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dept-collapse" aria-expanded="false" aria-controls="dept-collapse">
+                Departments
+              </button>
+            </h3>
+            <div id="dept-collapse" class="accordion-collapse collapse show" aria-labelledby="dept-heading">
+              <div id="dept-menu" class="accordion-body"></div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="tg-heading">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tg-collapse" aria-expanded="false" aria-controls="tg-collapse">
-                  Talkgroups
-                </button>
-              </h2>
-              <div id="tg-collapse" class="accordion-collapse collapse show" aria-labelledby="tg-heading">
-                <div id="tg-menu" class="accordion-body"></div>
-              </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="tg-heading">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tg-collapse" aria-expanded="false" aria-controls="tg-collapse">
+                Talkgroups
+              </button>
+            </h3>
+            <div id="tg-collapse" class="accordion-collapse collapse show" aria-labelledby="tg-heading">
+              <div id="tg-menu" class="accordion-body"></div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="units-heading">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#units-collapse" aria-expanded="false" aria-controls="units-collapse">
-                  Units
-                </button>
-              </h2>
-              <div id="units-collapse" class="accordion-collapse collapse show" aria-labelledby="units-heading">
-                <div id="units-menu" class="accordion-body"></div>
-              </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="units-heading">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#units-collapse" aria-expanded="false" aria-controls="units-collapse">
+                Units
+              </button>
+            </h3>
+            <div id="units-collapse" class="accordion-collapse collapse show" aria-labelledby="units-heading">
+              <div id="units-menu" class="accordion-body"></div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="radios-heading">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#radios-collapse" aria-expanded="false" aria-controls="radios-collapse">
-                  Radio IDs
-                </button>
-              </h2>
-              <div id="radios-collapse" class="accordion-collapse collapse" aria-labelledby="radios-heading">
-                <div id="radios-menu" class="accordion-body"></div>
-              </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="radios-heading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#radios-collapse" aria-expanded="false" aria-controls="radios-collapse">
+                Radio IDs
+              </button>
+            </h3>
+            <div id="radios-collapse" class="accordion-collapse collapse" aria-labelledby="radios-heading">
+              <div id="radios-menu" class="accordion-body"></div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="srclist-heading">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#srclist-collapse" aria-expanded="false" aria-controls="srclist-collapse">
-                  Sources
-                </button>
-              </h2>
-              <div id="srclist-collapse" class="accordion-collapse collapse" aria-labelledby="srclist-heading">
-                <div id="srclist-menu" class="accordion-body"></div>
-              </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="srclist-heading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#srclist-collapse" aria-expanded="false" aria-controls="srclist-collapse">
+                Sources
+              </button>
+            </h3>
+            <div id="srclist-collapse" class="accordion-collapse collapse" aria-labelledby="srclist-heading">
+              <div id="srclist-menu" class="accordion-body"></div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="calltime-heading">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#time-input-collapse" aria-expanded="false" aria-controls="time-input-collapse">
-                  Call Time
-                </button>
-              </h2>
-              <div id="time-input-collapse" class="accordion-collapse collapse show" aria-labelledby="calltime-heading">
-                <div id="time-input" class="accordion-body">
-                  <div class="col">
-                    <label for="minStartTime">From Time</label>
-                    <div class="input-group date">
-                      <EmberFlatpickr name="minStartTime" @id="minStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.minDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.minStartTime}} @onChange={{null}} @onClose={{this.setStartTimeRange}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
-                      <span class="input-group-text"><FaIcon @icon="calendar" /></span>
-                    </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="calltime-heading">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#time-input-collapse" aria-expanded="false" aria-controls="time-input-collapse">
+                Call Time
+              </button>
+            </h3>
+            <div id="time-input-collapse" class="accordion-collapse collapse show" aria-labelledby="calltime-heading">
+              <div id="time-input" class="accordion-body">
+                <div class="col">
+                  <label for="minStartTime">From Time</label>
+                  <div class="input-group date">
+                    <EmberFlatpickr name="minStartTime" @id="minStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.minDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.minStartTime}} @onChange={{null}} @onClose={{this.setStartTimeRange}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
+                    <span class="input-group-text"><FaIcon @icon="calendar" /></span>
                   </div>
-                  <div class="col">
-                    <label for="maxStartTime">To Time</label>
-                    <div class="input-group date">
-                      <EmberFlatpickr name="maxStartTime" @id="maxStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.maxDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.maxStartTime}} @onChange={{null}} @onClose={{this.setStartTimeRange}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
-                      <span class="input-group-text"><FaIcon @icon="calendar" /></span>
-                    </div>
+                </div>
+                <div class="col">
+                  <label for="maxStartTime">To Time</label>
+                  <div class="input-group date">
+                    <EmberFlatpickr name="maxStartTime" @id="maxStartTime" @allowInput={{true}} class="form-control" @defaultDate={{this.flatpickrOptions.maxDefaultDate}} @enableTime={{this.flatpickrOptions.enableTime}} @dateFormat={{this.flatpickrOptions.dateFormat}} @date={{this.maxStartTime}} @onChange={{null}} @onClose={{this.setStartTimeRange}} @altInput={{this.flatpickrOptions.altInput}} @altFormat={{this.flatpickrOptions.altFormat}} />
+                    <span class="input-group-text"><FaIcon @icon="calendar" /></span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
     </div>
   </div>
   <div class="search-panel__results col">
-    {{#if (eq this.hasAccess false)}}
-    <h1 class="display-5">Call Transcript Search Demo</h1>
-    {{else}}
-    <h1 class="display-5 sr-only">Call Transcript Search</h1>
-    {{/if}}
-    <div class="row mb-1">
-      <div id="searchbox" class="col mb-2"></div>
-      <div id="sort-by" class="col-md-3 mb-2"></div>
-      <div id="hits-per-page" class="col-md-2 mb-2"></div>
+    <div id="settings" class="collapse row justify-content-end mb-1">
+      <div class="col-md-auto mb-2">
+        <div class="input-group">
+          <span class="input-group-text" id="refresh-interval-val">
+          Auto Refresh:
+          {{#if (eq this.autoRefreshInterval "0")}}
+            Off
+          {{else}}
+            {{this.autoRefreshInterval}}s
+          {{/if}}
+          </span>
+          {{#if this.hasAccess}}
+          <Input @type="range" class="form-control form-range" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} {{on "change" this.restartAutoRefresh}} />
+          {{else}}
+          <Input @type="range" class="form-control form-range disabled" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} disabled />
+          {{/if}}
+        </div>
+        <div class="form-check form-switch">
+          <Input class="form-check-input" @type="checkbox" role="switch" id="waveform-toggle" @checked={{this.useMediaPlayerComponent}} aria-checked="{{this.useMediaPlayerComponent}}" />
+          <label class="form-check-label" for="waveform-toggle">Show waveform when playing audio</label>
+        </div>
+      </div>
     </div>
-    <div id="current-refinements"></div>
+    <div id="current-refinements" class="mt-2"></div>
     <div id="stats" class="mb-1"></div>
     <div id="hits" class="ais-Hits">
       <ol class="ais-Hits-list">

@@ -155,8 +155,7 @@ export default class IncidentMap extends Component {
     });
 
     this.layersControl = new L.Control.Layers(undefined, undefined, {
-      // @TODO use CSS for this
-      collapsed: window.innerHeight > 650 ? false : true,
+      collapsed: !window.matchMedia('(min-width: 768px)').matches,
     }).addTo(this.map);
 
     L.streetView({

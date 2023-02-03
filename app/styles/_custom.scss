@@ -14,6 +14,16 @@ body {
   }
 }
 
+@include media-breakpoint-between(lg, xl) {
+  body {
+    padding-top: 4.4rem;
+    > .container,
+    > .container-fluid {
+      padding-top: 2rem;
+    }
+  }
+}
+
 #loading-indicator {
   position: fixed;
   z-index: 9999;
@@ -132,76 +142,70 @@ ul.nav.nav-tabs {
   --bs-accordion-border-width: 0;
 }
 
-.overall-container {
-  .map-container {
-    position: relative;
-    padding-top: 1.6rem;
-    .leaflet-container {
-      margin: 0 1rem;
-      height: 75vh;
-      color: #000;
-      .leaflet-control-layers-list label {
-        margin-bottom: 0rem;
+.map-container {
+  .leaflet-container {
+    height: 80vh;
+    color: #000;
+    .leaflet-control-layers-list label {
+      margin-bottom: 0.5rem;
+    }
+    .info.leaflet-control {
+      background: rgba(var(--bs-dark-rgb), 0.7);
+      padding: 0.5em 1em;
+      text-align: right;
+      h4, p {
+        color: var(--bs-light);
+        margin: 0.25em 0;
       }
-      .info.leaflet-control {
-        background: rgba(var(--bs-dark-rgb), 0.7);
-        padding: 0.5em 1em;
-        text-align: right;
-        h4, p {
-          color: var(--bs-light);
-          margin: 0.25em 0;
-        }
-        p {
-          font-size: 1rem;
-        }
-      }
-      .leaflet-popup-content h4 {
-        font-size: 1rem;
-      }
-      .leaflet-popup-content p {
-        margin: 0;
-      }
-      .leaflet-control-geosearch.bar {
-        z-index: 1000;
-        max-width: 400px;
-        width: 100%;
-        position: relative !important;
-      }
-      .awesome-marker i {
+      p {
         font-size: 1rem;
       }
     }
-    .tab-pane > iframe {
+    .leaflet-popup-content h4 {
+      font-size: 1rem;
+    }
+    .leaflet-popup-content p {
+      margin: 0;
+    }
+    .leaflet-control-geosearch.bar {
+      z-index: 1000;
+      max-width: 400px;
       width: 100%;
-      height: 85vh;
-      border: none;
+      position: relative !important;
+    }
+    .awesome-marker i {
+      font-size: 1rem;
     }
   }
-  .search-container {
-    padding: 1rem;
-    #address-search {
-      table tr > td {
-        width: 50%;
-      }
+  .tab-pane > iframe {
+    width: 100%;
+    height: 80vh;
+    border: none;
+  }
+}
+.search-container {
+  #address-search {
+    table tr > td {
+      width: 50%;
     }
+  }
 
-    .accordion {
-      .accordion-item {
-        border: none;
-        .accordion-header {
-          .draggable-handle {
-            cursor: pointer;
-            color: #777;
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 0.5rem 1rem;
-          }
+  .accordion {
+    .accordion-item {
+      border: none;
+      .accordion-header {
+        .draggable-handle {
+          cursor: pointer;
+          color: #777;
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 0.5rem 1rem;
         }
-        .accordion-body {
-          padding-left: 0;
-          padding-right: 0;
-        }
+      }
+      .accordion-body {
+        padding-left: 0;
+        padding-right: 0;
       }
     }
   }
@@ -360,9 +364,7 @@ input.flatpickr-mobile {
 
 .ptrn-button {
   img {
-    display: inline-block;
-    height: 2.5rem;
-    width: auto;
+    max-height: 2.5rem;
   }
   img:hover, img:focus {
     filter: brightness(92%);
@@ -430,10 +432,6 @@ audio.call-audio {
   max-width: 400px;
 }
 
-#filtersHeading {
-  display: none;
-}
-
 .metadata-modal pre {
   height: 80vh;
 }
@@ -443,39 +441,14 @@ audio.call-audio {
     max-height: 300px;
     overflow-y: auto;
   }
-  #filtersHeadingAccordion {
-    display: none;
-  }
-  #filtersHeading {
-    display: block;
-    font-size: 1.5rem;
-  }
-  #filters.collapse {
-    display: block;
-  }
 }
 
 @include media-breakpoint-up(lg) {
-  .overall-container {
-    display: flex;
-    .map-container {
-      flex: 1;
-      .leaflet-container {
-        margin: 0;
-        width: 100%;
-        height: 85vh;
-        .leaflet-control-layers-list label {
-          margin-bottom: 0.5rem;
-        }
-      }
-    }
-    .search-container {
-      max-width: 25vw;
-      max-height: 92vh;
-      overflow-y: auto;
-      .mobile {
-        display: none;
-      }
-    }
+  .search-container {
+    overflow-y: auto;
+    height: 80vh;
+  }
+  #filters.collapse {
+    display: block;
   }
 }

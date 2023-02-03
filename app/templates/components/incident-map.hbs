@@ -1,8 +1,6 @@
-<section class="overall-container">
-  <div class="search-container">
+<div class="row">
+  <div class="col-md-4 col-lg-3 search-container mb-4 mb-md-0">
     <p><em>Interact with this map or use the search box to find information about a specific address. Police districts are outlined in blue.</em></p>
-    <small class="text-danger">If you use the map drawing features (below zoom in/out), they will not be saved. A refresh will clear the map.</small>
-    <p class="mobile text-primary"><em>Scroll down for incident map</em></p>
     <div class="accordion" id="accordion">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingAddrSearch">
@@ -144,16 +142,16 @@
       <MapTools />
     </div>
   </div>
-  <div class="map-container">
+  <div class="col map-container">
     <ul class="nav nav-tabs" id="cadTabs" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="map-tab" data-bs-toggle="tab" href="#main-map" aria-controls="main-map">Address Search Map</a>
+        <a class="nav-link active" id="map-tab" data-bs-toggle="tab" href="#main-map" aria-controls="main-map"><span class="d-none d-md-inline">Address Search</span> Map</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="traffic-tab" data-bs-toggle="tab" href="#traffic-map" aria-controls="traffic-map">Traffic Map</a>
+        <a class="nav-link" id="traffic-tab" data-bs-toggle="tab" href="#traffic-map" aria-controls="traffic-map">Traffic<span class="d-none d-md-inline"> Map</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="crime-tab" data-bs-toggle="tab" href="#crime-map" aria-controls="crime-map">Crime Map</a>
+        <a class="nav-link" id="crime-tab" data-bs-toggle="tab" href="#crime-map" aria-controls="crime-map">Crime<span class="d-none d-md-inline"> Map</span></a>
       </li>
     </ul>
 
@@ -169,4 +167,4 @@
       </div>
     </div>
   </div>
-</section>
+</div>

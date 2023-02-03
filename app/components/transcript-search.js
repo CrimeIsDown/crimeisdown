@@ -274,6 +274,16 @@ export default class TranscriptSearchComponent extends Component {
         );
       }
       this.hasAccess = false;
+
+      const generateWatermark = (name) => {
+        return `<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='200px' width='200px'><text transform='translate(20, 100) rotate(-30)' fill='rgba(45,45,45,0.08)' font-size='32' font-family='Arial, Helvetica, sans-serif'>${name}</text></svg>`;
+      };
+
+      const base64Mark = btoa(generateWatermark('DEMO'));
+
+      document.querySelector(
+        '#hits'
+      ).style.background = `url("data:image/svg+xml;base64,${base64Mark}") repeat`;
     }
   }
 
