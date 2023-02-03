@@ -6,7 +6,7 @@
   <div id="searchbox" class="col-lg mb-2 mb-lg-0"></div>
   <div id="sort-by" class="col-lg-auto col"></div>
   <div id="hits-per-page" class="col-lg-auto col"></div>
-  <div class="col-auto d-flex justify-content-end">
+  <div id="option-buttons" class="col-auto d-flex justify-content-end">
     <button type="button" class="btn btn-primary me-2 d-lg-none" data-bs-toggle="collapse" data-bs-target="#filters" aria-controls="filters">
       <span class="visually-hidden">Filters</span>
       <FaIcon @icon="filter" />
@@ -115,8 +115,14 @@
     </div>
   </div>
   <div class="search-panel__results col">
-    <div id="settings" class="collapse row justify-content-end mb-1">
-      <div class="col-md-auto mb-2">
+    <div id="settings" class="collapse row justify-content-between mb-1">
+      <div class="col-md-auto">
+        <div class="form-check form-switch mt-2 mb-1">
+          <Input class="form-check-input" @type="checkbox" role="switch" id="waveform-toggle" @checked={{this.useMediaPlayerComponent}} aria-checked="{{this.useMediaPlayerComponent}}" />
+          <label class="form-check-label" for="waveform-toggle">Show waveform when playing audio</label>
+        </div>
+      </div>
+      <div class="col-md-auto">
         <div class="input-group">
           <span class="input-group-text" id="refresh-interval-val">
           Auto Refresh:
@@ -131,10 +137,6 @@
           {{else}}
           <Input @type="range" class="form-control form-range disabled" min="0" max="120" step="10" id="refresh-interval" @value={{this.autoRefreshInterval}} disabled />
           {{/if}}
-        </div>
-        <div class="form-check form-switch">
-          <Input class="form-check-input" @type="checkbox" role="switch" id="waveform-toggle" @checked={{this.useMediaPlayerComponent}} aria-checked="{{this.useMediaPlayerComponent}}" />
-          <label class="form-check-label" for="waveform-toggle">Show waveform when playing audio</label>
         </div>
       </div>
     </div>

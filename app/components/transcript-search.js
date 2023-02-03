@@ -408,6 +408,9 @@ export default class TranscriptSearchComponent extends Component {
     let timerId;
     return searchBox({
       container: '#searchbox',
+      cssClasses: {
+        input: 'form-control',
+      },
       queryHook(query, refine) {
         clearTimeout(timerId);
         timerId = setTimeout(() => refine(query), 500);
@@ -418,6 +421,9 @@ export default class TranscriptSearchComponent extends Component {
   getSortByWidget() {
     return sortBy({
       container: '#sort-by',
+      cssClasses: {
+        select: 'form-select',
+      },
       items: [
         { label: 'Newest First', value: this.defaultSort },
         { label: 'Oldest First', value: `${this.indexName}:start_time:asc` },
@@ -425,6 +431,20 @@ export default class TranscriptSearchComponent extends Component {
           label: 'Relevance',
           value: this.indexName,
         },
+      ],
+    });
+  }
+
+  getHitsPerPageWidget() {
+    return hitsPerPage({
+      container: '#hits-per-page',
+      cssClasses: {
+        select: 'form-select',
+      },
+      items: [
+        { label: '20 per page', value: 20, default: true },
+        { label: '40 per page', value: 40 },
+        { label: '60 per page', value: 60 },
       ],
     });
   }
@@ -559,17 +579,6 @@ export default class TranscriptSearchComponent extends Component {
   getPaginationWidget() {
     return pagination({
       container: '#pagination',
-    });
-  }
-
-  getHitsPerPageWidget() {
-    return hitsPerPage({
-      container: '#hits-per-page',
-      items: [
-        { label: '20 per page', value: 20, default: true },
-        { label: '40 per page', value: 40 },
-        { label: '60 per page', value: 60 },
-      ],
     });
   }
 }
