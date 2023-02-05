@@ -13,6 +13,14 @@ Sentry.init({
   denyUrls: ['platform.twitter.com'],
   release: config.APP.version,
   tracesSampleRate: 0.1,
+  browserTracingOptions: {
+    tracePropagationTargets: [
+      'localhost',
+      'crimeisdown.com',
+      'api.crimeisdown.com',
+      /^\//,
+    ],
+  },
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0,
   integrations: [
