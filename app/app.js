@@ -12,6 +12,7 @@ Sentry.init({
   environment: config.environment,
   denyUrls: ['platform.twitter.com'],
   release: config.APP.version,
+  tracesSampleRate: 0.1,
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0,
   integrations: [
