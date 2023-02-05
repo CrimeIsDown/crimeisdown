@@ -163,6 +163,15 @@ export default class TranscriptSearchComponent extends Component {
       '#hit-' +
       hit.id;
 
+    if (this.hits) {
+      const existingHit = this.hits.filter(
+        (existingHit) => existingHit.id === hit.id
+      )[0];
+      if (existingHit) {
+        hit.showPlayer = existingHit.showPlayer || false;
+      }
+    }
+
     return hit;
   }
 
@@ -196,7 +205,6 @@ export default class TranscriptSearchComponent extends Component {
     const state = this.buildContextState(hit);
     this.selectedHit = hit.id;
     this.search.setUiState(state);
-    this.scrollToHit(this.selectedHit);
   }
 
   @action
@@ -267,7 +275,6 @@ export default class TranscriptSearchComponent extends Component {
     const state = this.buildSrcFilter(src);
     this.selectedHit = hit.id;
     this.search.setUiState(state);
-    this.scrollToHit(this.selectedHit);
   }
 
   async login() {
