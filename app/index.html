@@ -26,12 +26,15 @@
 
     <link rel="preconnect" href="//maps.googleapis.com">
     <link rel="preload" href="{{rootURL}}assets/vendor.css" as="style">
-
     <link rel="preload" href="{{rootURL}}assets/crimeisdown.css" as="style">
-    <link rel="preload" href="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL&callback=googleCallback" as="script">
-    <link rel="preload" href="{{rootURL}}assets/stereo-panner-node.js" as="script">
     <link rel="preload" href="{{rootURL}}assets/vendor.js" as="script">
     <link rel="preload" href="{{rootURL}}assets/crimeisdown.js" as="script">
+
+    <link rel="preload" href="https://crimeisdown.statuspage.io/embed/script.js" as="script">
+    <link rel="preload" href="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL&callback=googleCallback" as="script">
+    <link rel="preload" href="{{rootURL}}assets/stereo-panner-node.js" as="script">
+    <link rel="preload" href="{{rootURL}}assets/doorbell.js" as="script">
+    <link rel="preload" href="{{rootURL}}assets/hotjar.js" as="script">
 
     <link rel="stylesheet" href="{{rootURL}}assets/vendor.css">
     <link rel="stylesheet" href="{{rootURL}}assets/crimeisdown.css">
@@ -47,7 +50,6 @@
 
     {{content-for "body"}}
 
-    <script src="{{rootURL}}assets/theme-toggle.js"></script>
     <script src="https://crimeisdown.statuspage.io/embed/script.js"></script>
     <script>
       function googleCallback() {}
