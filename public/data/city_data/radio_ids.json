@@ -1953,7 +1953,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "3310-37",
+    "ID_Number": "33([1-2][0-9]|3[0-7])[A-Z]?",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
