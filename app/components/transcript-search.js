@@ -36,9 +36,10 @@ export default class TranscriptSearchComponent extends Component {
   @tracked useMediaPlayerComponent =
     // Check if we are at the lg Bootstrap breakpoint
     window.matchMedia('(min-width: 992px)').matches;
-  @tracked autoRefreshInterval = '0';
+  @tracked autoRefreshInterval = 0;
   @tracked minStartTime;
   @tracked maxStartTime;
+  @tracked currentSearch;
   demoIndexName = 'calls_demo';
   paidIndexName = 'calls';
   autoRefresh = undefined;
@@ -78,12 +79,23 @@ export default class TranscriptSearchComponent extends Component {
   }
 
   @action
-  restartAutoRefresh() {
+  refresh(event) {
+    event.target.classList.add('spin');
+    this.search.refresh();
+    setTimeout(() => {
+      event.target.classList.remove('spin');
+    }, 1000);
+  }
+
+  @action
+  toggleAutoRefresh() {
     clearInterval(this.autoRefresh);
-    if (parseInt(this.autoRefreshInterval) > 0) {
+    this.autoRefreshInterval = this.autoRefreshInterval ? 0 : 10;
+    if (this.autoRefreshInterval > 0) {
+      this.search.refresh();
       this.autoRefresh = setInterval(() => {
         this.search.refresh();
-      }, parseInt(this.autoRefreshInterval) * 1000);
+      }, this.autoRefreshInterval * 1000);
     }
   }
 
@@ -365,6 +377,10 @@ export default class TranscriptSearchComponent extends Component {
           label: JSON.stringify(this.search.getUiState()),
         });
       }
+      const uiState = { ...this.search.getUiState()[this.indexName] };
+      delete uiState['range'];
+      delete uiState['sortBy'];
+      this.currentSearch = uiState;
     });
 
     const sidebarWidgets = [
@@ -392,6 +408,11 @@ export default class TranscriptSearchComponent extends Component {
     this.search.start();
 
     return this.search;
+  }
+
+  @action
+  resetFilters() {
+    this.search.setUiState(this.defaultRouteState);
   }
 
   getSearchRouter() {
@@ -472,10 +493,6 @@ export default class TranscriptSearchComponent extends Component {
   getClearRefinementsWidget() {
     return clearRefinements({
       container: '#clear-refinements',
-      cssClasses: {
-        button: ['mb-4'],
-        disabledButton: ['d-none'],
-      },
       templates: {
         resetLabel({ hasRefinements }, { html }) {
           return html`<span

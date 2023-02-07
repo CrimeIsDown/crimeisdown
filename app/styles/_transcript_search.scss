@@ -26,6 +26,18 @@
 
 #option-buttons {
   height: 2.5rem;
+  margin-top: 0.5rem;
+  > * {
+    margin-right: 0.5rem;
+  }
+  #refresh-buttons {
+    svg.spin {
+      animation: 2s linear infinite spinner-border;
+    }
+    button.spin svg {
+      animation: 0.75s linear 1 spinner-border;
+    }
+  }
 }
 
 .ais-Hits-item, .ais-InfiniteHits-item {
@@ -95,5 +107,10 @@ audio.call-audio {
 @include media-breakpoint-up(lg) {
   #filters.collapse {
     display: block;
+  }
+}
+@include media-breakpoint-up(md) {
+  #option-buttons {
+    margin-top: 0;
   }
 }
