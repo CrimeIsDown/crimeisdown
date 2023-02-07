@@ -1921,7 +1921,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "7400",
+    "ID_Number": "3300",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
@@ -1929,7 +1929,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "7401",
+    "ID_Number": "3301",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
@@ -1937,7 +1937,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "740[2-8]",
+    "ID_Number": "330[2-8]",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
@@ -1945,7 +1945,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "7409",
+    "ID_Number": "3309",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
@@ -1953,15 +1953,15 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "7410-37",
+    "ID_Number": "3310-37",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
-    "Level_4": "Arson Unit"
+    "Level_4": "Bomb and Arson Unit"
   },
   {
     "Agency": "CPD",
-    "ID_Number": "743[8-9]",
+    "ID_Number": "333[8-9]",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
@@ -1969,7 +1969,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "745[0-5]",
+    "ID_Number": "335[0-5]",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
@@ -1977,7 +1977,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "7471",
+    "ID_Number": "3371",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
@@ -1985,7 +1985,7 @@
   },
   {
     "Agency": "CPD",
-    "ID_Number": "7499",
+    "ID_Number": "3399",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
     "Level_3": "Bomb and Arson",
