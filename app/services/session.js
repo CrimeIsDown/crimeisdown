@@ -7,7 +7,9 @@ export default class SessionService extends Service {
   @tracked isAuthenticated = false;
   @tracked user = undefined;
   fetchOptions = {
-    headers: {},
+    headers: {
+      Accept: 'application/json',
+    },
     credentials: 'include',
   };
 
@@ -37,8 +39,12 @@ export default class SessionService extends Service {
         this.config.get('API_BASE_URL') + '/api/user',
         this.fetchOptions
       );
-      this.user = await response.json();
-      this.isAuthenticated = true;
+      if (response.status === 200) {
+        this.user = await response.json();
+        this.isAuthenticated = true;
+      } else {
+        throw new Error();
+      }
     } catch (e) {
       this.isAuthenticated = false;
     }
@@ -52,7 +58,12 @@ export default class SessionService extends Service {
     if (this.isAuthenticated) {
       const response = await fetch(
         this.config.get('API_BASE_URL') + '/api/search-key',
-        this.fetchOptions
+        {
+          headers: {
+            Accept: 'text/plain',
+          },
+          credentials: 'include',
+        }
       );
       if (response.status != 200) {
         return Promise.reject(response.status);

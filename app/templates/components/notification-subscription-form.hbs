@@ -1,0 +1,39 @@
+<h2 id="subscription-form-heading" class="fs-4">{{if @subscription "Edit" "Add a new"}} subscription</h2>
+<form id="subscription-form" aria-label="New subscription form" {{on "submit" this.submit}} {{did-insert this.initData}}>
+  <div class="mb-3">
+    <label for="nameInput" class="form-label">Subscription name</label>
+    <input type="text" class="form-control" id="nameInput" name="name" value={{@subscription.name}} required />
+  </div>
+  <div class="mb-3">
+    <label for="keywordList" class="form-label">Keywords to match, one per line</label>
+    <textarea class="form-control" id="keywordList" rows="3" name="keywords" value={{@subscription.keywordsString}} required></textarea>
+  </div>
+  <fieldset class="row mb-3" name="topic" required>
+    <legend>Talkgroups to match</legend>
+    {{#each this.availableTalkgroups as |dept|}}
+    <div class="col-12 mt-3">
+      <p><strong>{{dept.group}}</strong></p>
+    </div>
+    {{#each dept.talkgroups as |tg|}}
+    <div class="col-md-4">
+      <div class="form-check">
+        {{#if @subscription}}
+        <input class="form-check-input" type="checkbox" value="{{tg.value}}" id="talkgroup_{{tg.value}}" name="topic"
+          checked={{includes @subscription.topics tg.value}}>
+        {{else}}
+        <input class="form-check-input" type="checkbox" value="{{tg.value}}" id="talkgroup_{{tg.value}}" name="topic">
+        {{/if}}
+        <label class="form-check-label" for="talkgroup_{{tg.value}}">
+          {{tg.label}}
+        </label>
+      </div>
+    </div>
+    {{/each}}
+    {{/each}}
+  </fieldset>
+  <fieldset class="row mb-3" name="notification_channels" required>
+    <legend>Notification channels to send on</legend>
+    <NotificationChannelList @form="true" @selectedChannels={{@subscription.notification_channels}} />
+  </fieldset>
+  <button type="submit" class="btn btn-primary">{{if @subscription "Update" "Add"}} Subscription</button>
+</form>

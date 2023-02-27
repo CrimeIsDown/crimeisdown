@@ -1,0 +1,45 @@
+<h2 class="fs-4">Your current subscriptions</h2>
+{{#unless this.subscriptions}}
+<p>No subscriptions.</p>
+{{/unless}}
+<ul class="ps-0" {{did-insert this.initData}}>
+  {{#each this.subscriptions as |subscription|}}
+  <li class="d-block">
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">
+            <h5 class="mt-1 mb-0">{{subscription.name}}</h5>
+          </div>
+          <div class="col-3 d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary btn-sm me-2" aria-label="Edit" {{on "click" (fn @onEdit subscription)}}><FaIcon @icon="pencil-alt" /></button>
+            <button type="button" class="btn btn-danger btn-sm" aria-label="Delete" {{on "click" (fn this.deleteSubscription subscription)}}><FaIcon @icon="trash-alt" /></button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <p class="fw-bold">Keywords to match, one per line</p>
+          <Textarea class="form-control" id="keywordList" rows="3" @value={{subscription.keywordsString}} disabled></Textarea>
+        </div>
+        <div class="mb-3">
+          <p class="fw-bold">Talkgroups to match</p>
+          <ul>
+          {{#each this.availableTalkgroups as |dept|}}
+          {{#each dept.talkgroups as |tg|}}
+          {{#if (includes subscription.topics tg.value)}}
+            <li>{{tg.label}}</li>
+          {{/if}}
+          {{/each}}
+          {{/each}}
+          </ul>
+        </div>
+        <div class="mb-3">
+          <p class="fw-bold">Will notify via:</p>
+          <NotificationChannelList @channels={{subscription.notification_channels}} />
+        </div>
+      </div>
+    </div>
+  </li>
+  {{/each}}
+</ul>

@@ -1,0 +1,33 @@
+<h2 id="channel-form-heading" class="fs-4 mt-4">{{if @channel "Edit" "Add a new"}} notification channel</h2>
+<form id="channel-form" {{on "submit" this.submit}}>
+  <div class="mb-3">
+    <label for="serviceInput" class="form-label">Service name:</label>
+    <select id="serviceInput" name="service" class="form-select" {{on "change" this.setService}} required>
+      <option value="">Choose a service</option>
+      <option value="tgram" selected={{eq @channel.service "tgram"}}>Telegram</option>
+      <option value="mailgun" selected={{eq @channel.service "mailgun"}}>Email</option>
+      <option value="sns" selected={{eq @channel.service "sns"}}>SMS</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="pathInput" class="form-label">
+      Destination:
+      {{#if (or (eq @channel.service "tgram") (eq this.service "tgram"))}}
+      Telegram Chat ID
+      {{/if}}
+      {{#if (or (eq @channel.service "mailgun") (eq this.service "mailgun"))}}
+      Email Address
+      {{/if}}
+      {{#if (or (eq @channel.service "sns") (eq this.service "sns"))}}
+      Phone Number
+      {{/if}}
+    </label>
+    <Input @type="text" class="form-control" id="pathInput" name="path" @value={{@channel.path}} required />
+  </div>
+  {{#if (or (eq @channel.service "tgram") (eq this.service "tgram"))}}
+  <div class="alert alert-info" role="alert">
+    Get your Telegram chat ID by sending a message to <a href="https://t.me/get_my_telegram_chat_id_bot" target="_blank" rel="noopener noreferrer">@get_my_telegram_chat_id_bot</a>.
+  </div>
+  {{/if}}
+  <button type="submit" class="btn btn-primary">{{if @channel "Update" "Add"}} Channel</button>
+</form>

@@ -28,5 +28,8 @@ Router.map(function () {
   this.route('search-transcripts', {
     path: '/transcripts/search',
   });
+  this.route('notifications', {
+    path: '/transcripts/notifications',
+  });
   this.route('settings');
 });
