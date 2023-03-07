@@ -35,11 +35,10 @@
   },
   {
     "name": "CPD Zone 4 - Districts 1 and 18",
-    "shortname": "CPD Zone 4 (001/018)",
-    "description": "Covers downtown Chicago (The Loop), Near South Side (South Loop), Near North Side (River North, Mag Mile), south Lincoln Park",
+    "shortname": "CPD Zone 4 (001/018) [ENC]",
+    "description": "[DELAYED ENCRYPTED FEED] Covers downtown Chicago (The Loop), Near South Side (South Loop), Near North Side (River North, Mag Mile), south Lincoln Park",
     "frequency": "460.150MHz",
     "slug": "zone4",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=4",
     "broadcastifyId": 37357,
     "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37357"
   },
