@@ -1924,7 +1924,7 @@
     "ID_Number": "3300",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
-    "Level_3": "Bomb and Arson",
+    "Level_3": "Bomb Squad",
     "Level_4": "Commander"
   },
   {
@@ -1932,7 +1932,7 @@
     "ID_Number": "3301",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
-    "Level_3": "Bomb and Arson",
+    "Level_3": "Bomb Squad",
     "Level_4": "Explosive Technician III"
   },
   {
@@ -1940,7 +1940,7 @@
     "ID_Number": "330[2-8]",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
-    "Level_3": "Bomb and Arson",
+    "Level_3": "Bomb Squad",
     "Level_4": "Explosive Technician II"
   },
   {
@@ -1948,7 +1948,7 @@
     "ID_Number": "3309",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
-    "Level_3": "Bomb and Arson",
+    "Level_3": "Bomb Squad",
     "Level_4": "O'Hare Airport Explosive Technician – I"
   },
   {
@@ -1956,40 +1956,40 @@
     "ID_Number": "33([1-2][0-9]|3[0-7])[A-Z]?",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
-    "Level_3": "Bomb and Arson",
-    "Level_4": "Bomb and Arson Unit"
+    "Level_3": "Bomb Squad",
+    "Level_4": "Bomb Squad Unit"
   },
   {
     "Agency": "CPD",
     "ID_Number": "333[8-9]",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
-    "Level_3": "Bomb and Arson",
-    "Level_4": "Bomb and Arson Special Assignment"
+    "Level_3": "Bomb Squad",
+    "Level_4": "Bomb Squad Special Assignment"
   },
   {
     "Agency": "CPD",
     "ID_Number": "335[0-5]",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
-    "Level_3": "Bomb and Arson",
-    "Level_4": "Arson Special Assignment"
+    "Level_3": "Bomb Squad",
+    "Level_4": "Bomb Squad Special Assignment"
   },
   {
     "Agency": "CPD",
     "ID_Number": "3371",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
-    "Level_3": "Bomb and Arson",
-    "Level_4": "Arson Equipment Van"
+    "Level_3": "Bomb Squad",
+    "Level_4": "Bomb Squad Equipment Van"
   },
   {
     "Agency": "CPD",
     "ID_Number": "3399",
     "Level_1": "Counter-Terrorism and Special Operations",
     "Level_2": "Special Functions",
-    "Level_3": "Bomb and Arson",
-    "Level_4": "Bomb and Arson Executive Officer"
+    "Level_3": "Bomb Squad",
+    "Level_4": "Bomb Squad Executive Officer"
   },
   {
     "Agency": "CPD",
