@@ -163,14 +163,17 @@
             <div class="col">
               <h4 class="fs-5">
                 {{#if (eq hit.id this.selectedHit)}}
-                <span type="button" class="btn btn-sm btn-warning"><FaIcon @icon="star" /></span>
+                <a class="btn btn-sm btn-warning" href="{{hit.contextUrl}}" {{on "click" (fn this.getContext hit)}}>
+                  <FaIcon @icon="star" />
+                </a>
                 {{else}}
                 <a class="btn btn-sm btn-primary" href="{{hit.contextUrl}}" {{on "click" (fn this.getContext hit)}}>
                   <FaIcon @icon="filter" />
                 </a>
                 {{/if}}
-                {{hit.talkgroup_group}} {{hit.talkgroup_description}}
+                {{hit.talkgroup_tag}}
               </h4>
+              <h5 class="fs-6">{{hit.talkgroup_group}} - {{hit.talkgroup_description}}</h5>
               <p>
                 <strong>
                   <a href="{{hit.permalink}}"><FaIcon @icon="link" /> {{hit.start_time_string}}</a> ({{hit.relative_time}})

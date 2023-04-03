@@ -138,14 +138,13 @@ export default class TranscriptSearchComponent extends Component {
       segment[1] = highlightedSegment[1];
     }
 
+    if (hit.audio_type == 'digital tdma') {
+      hit.audio_type = 'digital';
+    }
     hit.audio_type = capitalize(hit.audio_type);
 
     let start_time = moment.unix(hit.start_time);
     if (hit.short_name == 'chi_cpd') {
-      hit.talkgroup_group = 'CPD';
-      hit.talkgroup_description = hit.talkgroup_description
-        .replace('Police: ', '')
-        .replace('Dispatch ', '');
       if (hit.raw_metadata['encrypted'] == 1) {
         hit.time_warning = ` - received at ${start_time
           .toDate()
@@ -153,8 +152,6 @@ export default class TranscriptSearchComponent extends Component {
         start_time = start_time.subtract(30, 'minutes');
         hit.encrypted = true;
       }
-    } else if (hit.short_name == 'chi_cfd') {
-      hit.talkgroup_group = 'CFD';
     }
     hit.start_time_string = start_time.toDate().toLocaleString();
     hit.relative_time = start_time.fromNow();

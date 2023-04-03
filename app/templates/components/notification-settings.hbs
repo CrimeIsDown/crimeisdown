@@ -1,3 +1,4 @@
+{{#if this.session.isAuthenticated}}
 <ul class="nav nav-tabs mt-0" role="tablist">
   {{!-- template-lint-disable no-invalid-role require-context-role --}}
   <li class="nav-item" role="presentation" aria-label="Subscriptions tab">
@@ -47,3 +48,6 @@
   </div>
   {{/if}}
 </div>
+{{else}}
+<a href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/login-with-patreon.png" alt="Log in with Patreon"></a>
+{{/if}}
