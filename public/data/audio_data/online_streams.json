@@ -89,11 +89,10 @@
   },
   {
     "name": "CPD Zone 11 - Districts 20 and 24",
-    "shortname": "CPD Zone 11 (020/024)",
-    "description": "Dist. 20 and 24, serving the far North side of Chicago, including community areas of Rodgers Park, West Ridge, and Edgewater",
+    "shortname": "CPD Zone 11 (020/024) [ENC]",
+    "description": "[DELAYED ENCRYPTED FEED] Dist. 20 and 24, serving the far North side of Chicago, including community areas of Rodgers Park, West Ridge, and Edgewater",
     "frequency": "460.375MHz",
     "slug": "zone11",
-    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=11",
     "broadcastifyId": 37364,
     "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37364"
   },
