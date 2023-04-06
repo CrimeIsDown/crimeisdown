@@ -143,6 +143,33 @@ export default class TranscriptSearchComponent extends Component {
     }
     hit.audio_type = capitalize(hit.audio_type);
 
+    switch (hit.talkgroup_group_tag) {
+      case 'Law Dispatch':
+      case 'Law Tac':
+      case 'Law Talk':
+      case 'Security':
+        hit.talkgroup_group_tag_color = 'primary';
+        break;
+      case 'Fire Dispatch':
+      case 'Fire-Tac':
+      case 'Fire-Talk':
+      case 'EMS Dispatch':
+      case 'EMS-Tac':
+      case 'EMS-Talk':
+        hit.talkgroup_group_tag_color = 'danger';
+        break;
+      case 'Public Works':
+      case 'Utilities':
+        hit.talkgroup_group_tag_color = 'success';
+        break;
+      case 'Multi-Tac':
+      case 'Emergency Ops':
+        hit.talkgroup_group_tag_color = 'warning';
+        break;
+      default:
+        hit.talkgroup_group_tag_color = 'secondary';
+    }
+
     let start_time = moment.unix(hit.start_time);
     if (hit.short_name == 'chi_cpd') {
       if (hit.raw_metadata['encrypted'] == 1) {
@@ -382,8 +409,10 @@ export default class TranscriptSearchComponent extends Component {
 
     const sidebarWidgets = [
       this.getClearRefinementsWidget(),
+      this.getRefinementListWidget('#system-menu', 'short_name'),
       this.getRefinementListWidget('#dept-menu', 'talkgroup_group'),
       this.getRefinementListWidget('#tg-menu', 'talkgroup_tag'),
+      this.getRefinementListWidget('#tg-type-menu', 'talkgroup_group_tag'),
       this.getRefinementListWidget('#units-menu', 'units'),
       this.getRefinementListWidget('#radios-menu', 'radios'),
       this.getRefinementListWidget('#srclist-menu', 'srcList'),
@@ -410,6 +439,16 @@ export default class TranscriptSearchComponent extends Component {
   @action
   resetFilters() {
     this.search.setUiState(this.defaultRouteState);
+  }
+
+  @action
+  setChicagoFilters() {
+    // Deep copy the default state
+    const uiState = JSON.parse(JSON.stringify(this.defaultRouteState));
+    uiState[this.indexName]['refinementList'] = {
+      short_name: ['chi_cpd', 'chi_cfd', 'chi_oemc'],
+    };
+    this.search.setUiState(uiState);
   }
 
   getSearchRouter() {

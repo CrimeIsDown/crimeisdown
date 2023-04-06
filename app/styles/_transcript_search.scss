@@ -64,6 +64,12 @@
   font-style: inherit;
 }
 
+#filters {
+  .ais-ClearRefinements-button {
+      min-height: 2.75rem;
+  }
+}
+
 .ais-CurrentRefinements--noRefinement > .ais-CurrentRefinements-list {
   display: none;
 }
