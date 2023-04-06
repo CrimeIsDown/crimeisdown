@@ -10,26 +10,28 @@
   </div>
   <fieldset class="row mb-3" name="topic" required>
     <legend>Talkgroups to match</legend>
-    {{#each this.availableTalkgroups as |dept|}}
-    <div class="col-12 mt-3">
-      <p><strong>{{dept.group}}</strong></p>
-    </div>
-    {{#each dept.talkgroups as |tg|}}
-    <div class="col-md-4">
-      <div class="form-check">
-        {{#if @subscription}}
-        <input class="form-check-input" type="checkbox" value="{{tg.value}}" id="talkgroup_{{tg.value}}" name="topic"
-          checked={{includes @subscription.topics tg.value}}>
-        {{else}}
-        <input class="form-check-input" type="checkbox" value="{{tg.value}}" id="talkgroup_{{tg.value}}" name="topic">
-        {{/if}}
-        <label class="form-check-label" for="talkgroup_{{tg.value}}">
-          {{tg.label}}
-        </label>
+    <div class="talkgroup-list">
+      {{#each this.availableTalkgroups as |dept|}}
+      <div class="col-12 mt-3">
+        <p><strong>{{dept.group}}</strong></p>
       </div>
+      {{#each dept.talkgroups as |tg|}}
+      <div class="col-md-4">
+        <div class="form-check">
+          {{#if @subscription}}
+          <input class="form-check-input" type="checkbox" value="{{tg.value}}" id="talkgroup_{{tg.value}}" name="topic"
+            checked={{includes @subscription.topics tg.value}}>
+          {{else}}
+          <input class="form-check-input" type="checkbox" value="{{tg.value}}" id="talkgroup_{{tg.value}}" name="topic">
+          {{/if}}
+          <label class="form-check-label" for="talkgroup_{{tg.value}}">
+            {{tg.label}}
+          </label>
+        </div>
+      </div>
+      {{/each}}
+      {{/each}}
     </div>
-    {{/each}}
-    {{/each}}
   </fieldset>
   <fieldset class="row mb-3" name="notification_channels" required>
     <legend>Notification channels to send on</legend>

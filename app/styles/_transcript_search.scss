@@ -110,6 +110,11 @@ audio.call-audio {
   height: 80vh;
 }
 
+fieldset .talkgroup-list {
+  height: 50vh;
+  overflow: auto;
+}
+
 @include media-breakpoint-up(lg) {
   #filters.collapse {
     display: block;
