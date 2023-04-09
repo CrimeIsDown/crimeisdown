@@ -90,7 +90,7 @@
   {
     "name": "CPD Zone 11 - Districts 20 and 24",
     "shortname": "CPD Zone 11 (020/024) [ENC]",
-    "description": "[DELAYED ENCRYPTED FEED] Dist. 20 and 24, serving the far North side of Chicago, including community areas of Rodgers Park, West Ridge, and Edgewater",
+    "description": "[DELAYED ENCRYPTED FEED] Dist. 20 and 24, serving the far North side of Chicago, including community areas of Rogers Park, West Ridge, and Edgewater",
     "frequency": "460.375MHz",
     "slug": "zone11",
     "broadcastifyId": 37364,
