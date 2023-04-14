@@ -5,8 +5,8 @@
     <input type="text" class="form-control" id="nameInput" name="name" value={{@subscription.name}} required />
   </div>
   <div class="mb-3">
-    <label for="keywordList" class="form-label">Keywords to match, one per line</label>
-    <textarea class="form-control" id="keywordList" rows="3" name="keywords" value={{@subscription.keywordsString}} required></textarea>
+    <label for="keywordList" class="form-label">Keywords to match, one per line (will be interpreted as exact matches, case insensitive)</label>
+    <textarea class="form-control" id="keywordList" rows="3" name="keywords" value={{@subscription.keywordsString}} placeholder="Examples: person shot&#10;still and box&#10;still in box" required></textarea>
   </div>
   <fieldset class="row mb-3" name="topic" required>
     <legend>Talkgroups to match</legend>
