@@ -10,8 +10,13 @@
   </div>
   <fieldset class="row mb-3" name="topic" required>
     <legend>Talkgroups to match</legend>
+    <i>Scroll for a full list.</i>
     <div class="talkgroup-list row">
-      {{#each this.availableTalkgroups as |dept|}}
+      {{#each this.availableTalkgroups as |system|}}
+      <div class="col-12 mt-3">
+        <h4>{{system.group}}</h4>
+      </div>
+      {{#each system.talkgroups as |dept|}}
       <div class="col-12 mt-3">
         <p><strong>{{dept.group}}</strong></p>
       </div>
@@ -29,6 +34,7 @@
           </label>
         </div>
       </div>
+      {{/each}}
       {{/each}}
       {{/each}}
     </div>

@@ -25,11 +25,13 @@
         <div class="mb-3">
           <p class="fw-bold">Talkgroups to match</p>
           <ul>
-          {{#each this.availableTalkgroups as |dept|}}
+          {{#each this.availableTalkgroups as |system|}}
+          {{#each system.talkgroups as |dept|}}
           {{#each dept.talkgroups as |tg|}}
           {{#if (includes subscription.topics tg.value)}}
-            <li>{{tg.label}}</li>
+            <li>{{tg.label}} ({{tg.system}})</li>
           {{/if}}
+          {{/each}}
           {{/each}}
           {{/each}}
           </ul>
