@@ -297,17 +297,12 @@ export default class IncidentMap extends Component {
     this.geosearchProvider = new GeoSearch.LegacyGoogleProvider({
       params: {
         key: 'REDACTED_PUBLIC_CREDENTIAL',
-        bounds:
-          '41.60218817897012,-87.9728821400663|42.05134582102988,-87.37011785993366',
+        bounds: '41.6,-87.9|42,-87.5',
       },
     });
-
-    const searchControl = new GeoSearch.GeoSearchControl({
+    const searchControl = new GeoSearch.SearchControl({
       provider: this.geosearchProvider,
       style: 'button',
-      autoComplete: false,
-      showPopup: true,
-      maxMarkers: 3,
     });
     this.searchControl = searchControl;
 
