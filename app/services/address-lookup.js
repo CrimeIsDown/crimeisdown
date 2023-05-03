@@ -56,23 +56,20 @@ export default class AddressLookup extends Service {
     return true;
   }
 
-  async generateLocationDataForAddress(layers, location) {
+  async generateLocationDataForAddress(layers, loc) {
     let result = {};
 
-    let latlng = L.latLng(
-      location.geometry.location.lat(),
-      location.geometry.location.lng()
-    );
+    let latlng = L.latLng(loc.geometry.location.lat, loc.geometry.location.lng);
 
     result.meta = {
-      formattedAddress: location.formatted_address,
+      formattedAddress: loc.formatted_address,
       latitude: latlng.lat.toFixed(6),
       longitude: latlng.lng.toFixed(6),
     };
 
     await this.dataLoadedPromise;
 
-    result.meta = this.buildMeta(layers, location.formatted_address, latlng);
+    result.meta = this.buildMeta(layers, loc.formatted_address, latlng);
 
     if (!result.meta.communityArea) {
       result.meta.formattedAddress =
@@ -89,16 +86,16 @@ export default class AddressLookup extends Service {
     return result;
   }
 
-  buildMeta(layers, address, location) {
+  buildMeta(layers, address, loc) {
     let meta = {
       formattedAddress: address,
-      latitude: location.lat.toFixed(6),
-      longitude: location.lng.toFixed(6),
+      latitude: loc.lat.toFixed(6),
+      longitude: loc.lng.toFixed(6),
     };
 
     if (Object.prototype.hasOwnProperty.call(layers, 'communityAreas')) {
       let result = leafletPip.pointInLayer(
-        location,
+        loc,
         layers.communityAreas.layer,
         true
       )[0];
@@ -115,7 +112,7 @@ export default class AddressLookup extends Service {
 
     if (Object.prototype.hasOwnProperty.call(layers, 'neighborhoods')) {
       let result = leafletPip.pointInLayer(
-        location,
+        loc,
         layers.neighborhoods.layer,
         true
       )[0];
@@ -125,11 +122,7 @@ export default class AddressLookup extends Service {
     }
 
     if (Object.prototype.hasOwnProperty.call(layers, 'wards')) {
-      let result = leafletPip.pointInLayer(
-        location,
-        layers.wards.layer,
-        true
-      )[0];
+      let result = leafletPip.pointInLayer(loc, layers.wards.layer, true)[0];
       if (result) {
         meta.ward = result.feature.properties['Ward'];
         meta.alderman = this.aldermen[parseInt(meta.ward) - 1];
@@ -139,12 +132,12 @@ export default class AddressLookup extends Service {
     return meta;
   }
 
-  buildPolice(layers, location) {
+  buildPolice(layers, loc) {
     let police = {};
 
     if (Object.prototype.hasOwnProperty.call(layers, 'policeDistricts')) {
       let result = leafletPip.pointInLayer(
-        location,
+        loc,
         layers.policeDistricts.layer,
         true
       )[0];
@@ -172,7 +165,7 @@ export default class AddressLookup extends Service {
 
     if (Object.prototype.hasOwnProperty.call(layers, 'policeBeats')) {
       let result = leafletPip.pointInLayer(
-        location,
+        loc,
         layers.policeBeats.layer,
         true
       )[0];
@@ -184,14 +177,14 @@ export default class AddressLookup extends Service {
     return police;
   }
 
-  buildFire(location) {
+  buildFire(loc) {
     let nearestEngine = { distance: 99999999 };
     let nearestTruck = { distance: 99999999 };
     let nearestSquad = { distance: 99999999 };
     let nearestAmbo = { distance: 99999999 };
 
     this.fireStations.forEach((station) => {
-      let distance = location.distanceTo(
+      let distance = loc.distanceTo(
         L.latLng(station.latitude, station.longitude)
       );
       if (station.engine.length && nearestEngine.distance > distance) {
@@ -224,12 +217,12 @@ export default class AddressLookup extends Service {
     };
   }
 
-  buildEMS(location) {
+  buildEMS(loc) {
     let nearestTraumaAdult = { distance: 99999999 };
     let nearestTraumaPed = { distance: 99999999 };
 
     this.traumaCenters.forEach((hospital) => {
-      let distance = location.distanceTo(
+      let distance = loc.distanceTo(
         L.latLng(hospital.latitude, hospital.longitude)
       );
       if (hospital.level1Adult && nearestTraumaAdult.distance > distance) {
