@@ -13,7 +13,8 @@
     "frequency": "460.475MHz",
     "slug": "zone1",
     "broadcastifyId": 37354,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37354"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37354",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=1"
   },
   {
     "name": "CPD Zone 2 - District 19",
@@ -22,7 +23,8 @@
     "frequency": "460.050MHz",
     "slug": "zone2",
     "broadcastifyId": 37355,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37355"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37355",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=2"
   },
   {
     "name": "CPD Zone 3 - Districts 12 and 14",
@@ -31,7 +33,8 @@
     "frequency": "460.225MHz",
     "slug": "zone3",
     "broadcastifyId": 37356,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37356"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37356",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=3"
   },
   {
     "name": "CPD Zone 4 - Districts 1 and 18",
@@ -40,7 +43,8 @@
     "frequency": "460.150MHz",
     "slug": "zone4",
     "broadcastifyId": 37357,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37357"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37357",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=4"
   },
   {
     "name": "CPD Zone 6 - Districts 7 and 8",
@@ -49,7 +53,8 @@
     "frequency": "460.400MHz",
     "slug": "zone6",
     "broadcastifyId": 37359,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37359"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37359",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=6"
   },
   {
     "name": "CPD Zone 7 - Districts 2 and 3",
@@ -58,7 +63,8 @@
     "frequency": "460.075MHz",
     "slug": "zone7",
     "broadcastifyId": 37360,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37360"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37360",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=7"
   },
   {
     "name": "CPD Zone 8 - Districts 4 and 6",
@@ -67,7 +73,8 @@
     "frequency": "460.200MHz",
     "slug": "zone8",
     "broadcastifyId": 37361,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37361"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37361",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=8"
   },
   {
     "name": "CPD Zone 9 - Districts 5 and 22",
@@ -76,7 +83,8 @@
     "frequency": "460.025MHz",
     "slug": "zone9",
     "broadcastifyId": 37362,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37362"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37362",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=9"
   },
   {
     "name": "CPD Zone 10 - Districts 10 and 11",
@@ -85,7 +93,8 @@
     "frequency": "460.100MHz",
     "slug": "zone10",
     "broadcastifyId": 37363,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37363"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37363",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=10"
   },
   {
     "name": "CPD Zone 11 - Districts 20 and 24",
@@ -94,7 +103,8 @@
     "frequency": "460.375MHz",
     "slug": "zone11",
     "broadcastifyId": 37364,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37364"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37364",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=11"
   },
   {
     "name": "CPD Zone 12 - Districts 15 and 25",
@@ -103,7 +113,8 @@
     "frequency": "460.425MHz",
     "slug": "zone12",
     "broadcastifyId": 37365,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37365"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37365",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=12"
   },
   {
     "name": "CPD Zone 13 - District 9",
@@ -112,7 +123,8 @@
     "frequency": "460.450MHz",
     "slug": "zone13",
     "broadcastifyId": 37366,
-    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37366"
+    "broadcastify": "https://api.crimeisdown.com/api/broadcastify-stream/37366",
+    "openmhz": "https://openmhz.com/system/chi_cpd?filter-type=talkgroup&filter-code=13"
   },
   {
     "name": "CPD Citywide 1",
