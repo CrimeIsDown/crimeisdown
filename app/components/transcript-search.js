@@ -135,7 +135,8 @@ export default class TranscriptSearchComponent extends Component {
             ? highlightedSegment[0].tag
             : String(src.src);
       }
-      segment[1] = highlightedSegment[1];
+      // Show newlines properly
+      segment[1] = highlightedSegment[1].replaceAll('\n', '<br>');
     }
 
     if (hit.audio_type == 'digital tdma') {
