@@ -725,7 +725,7 @@ export default class TranscriptSearchComponent extends Component {
           };
         },
         events: {
-          click({ event, item, marker, map }) {
+          click({ item, marker, map }) {
             if (typeof item.raw_metadata === 'string') {
               globalThis.processHit(item);
             }
