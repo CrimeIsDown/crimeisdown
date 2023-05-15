@@ -359,7 +359,7 @@ export default class TranscriptSearchComponent extends Component {
 
     if (this.onTranscriptMapPage && !this.shouldShowMap) {
       alert(
-        'Sorry, you must be at the Captain tier or above on Patreon to access the map of calls.'
+        'Sorry, you must be at the Captain tier or above on Patreon to access the map of calls (currently an experimental feature).'
       );
       window.location = '/transcripts/search' + window.location.search;
       return;

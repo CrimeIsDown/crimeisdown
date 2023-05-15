@@ -102,6 +102,10 @@
 
 .ais-GeoSearch-map {
   height: 75vh;
+  // Google Maps infobox
+  .gm-style-iw.gm-style-iw-c {
+    color: var(--bs-gray-900);
+  }
 }
 
 audio.call-audio {
