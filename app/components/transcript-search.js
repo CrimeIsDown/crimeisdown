@@ -12,6 +12,7 @@ import { unescape } from 'instantsearch.js/es/lib/utils';
 import {
   clearRefinements,
   currentRefinements,
+  geoSearch,
   hitsPerPage,
   pagination,
   refinementList,
@@ -28,6 +29,7 @@ export default class TranscriptSearchComponent extends Component {
   @service session;
 
   @tracked hasAccess = undefined;
+  @tracked shouldShowMap = false;
   @tracked apiKey =
     'REDACTED_PUBLIC_CREDENTIAL';
   @tracked indexName = this.demoIndexName;
@@ -321,6 +323,12 @@ export default class TranscriptSearchComponent extends Component {
       this.indexName =
         this.config.get('MEILISEARCH_INDEX') || this.paidIndexName;
       this.hasAccess = true;
+
+      this.onTranscriptMapPage = window.location.pathname == '/transcripts/map';
+
+      this.shouldShowMap =
+        this.onTranscriptMapPage &&
+        this.session.user.patreon_tier.features.transcript_geosearch;
     } catch (e) {
       if (loggedIn) {
         console.error(e);
@@ -342,11 +350,20 @@ export default class TranscriptSearchComponent extends Component {
         '#hits'
       ).style.background = `url("data:image/svg+xml;base64,${base64Mark}") repeat`;
     }
+    await new Promise((r) => setTimeout(r, 1)); // Wait for run loop to complete
   }
 
   @action
   async setupSearch() {
     await this.login();
+
+    if (this.onTranscriptMapPage && !this.shouldShowMap) {
+      alert(
+        'Sorry, you must be at the Captain tier or above on Patreon to access the map of calls.'
+      );
+      window.location = '/transcripts/search' + window.location.search;
+      return;
+    }
 
     this.defaultSort = `${this.indexName}:start_time:desc`;
     this.defaultRouteState = {
@@ -360,6 +377,16 @@ export default class TranscriptSearchComponent extends Component {
           Math.floor(this.flatpickrOptions.minDefaultDate.getTime() / 1000) +
           ':',
       };
+    }
+
+    if (this.shouldShowMap) {
+      this.defaultRouteState[this.indexName].refinementList = {
+        short_name: ['chi_cpd', 'chi_cfd', 'chi_oemc'],
+      };
+      this.defaultRouteState[this.indexName].geoSearch = {
+        boundingBox: '42,-87.5,41.6,-87.9',
+      };
+      this.defaultRouteState[this.indexName].hitsPerPage = 60;
     }
 
     const searchClient = new instantMeiliSearch(
@@ -429,6 +456,10 @@ export default class TranscriptSearchComponent extends Component {
       this.getPaginationWidget(),
       this.getHitsPerPageWidget(),
     ];
+
+    if (this.shouldShowMap) {
+      mainWidgets.push(this.getGeoSearchWidget());
+    }
 
     this.search.addWidgets(mainWidgets.concat(sidebarWidgets));
 
@@ -654,6 +685,84 @@ export default class TranscriptSearchComponent extends Component {
   getPaginationWidget() {
     return pagination({
       container: '#pagination',
+    });
+  }
+
+  getGeoSearchWidget() {
+    const globalThis = this;
+    return geoSearch({
+      container: '#geo-search',
+      googleReference: window.google,
+      initialPosition: {
+        lat: 41.85,
+        lng: -87.63,
+      },
+      initialZoom: 11,
+      mapOptions: {
+        streetViewControl: true,
+      },
+      enableRefineOnMapMove: false,
+      builtInMarker: {
+        createOptions(item) {
+          const maxTime =
+            (globalThis.maxStartTime
+              ? globalThis.maxStartTime
+              : new Date()
+            ).getTime() / 1000;
+          const minTime =
+            (globalThis.minStartTime
+              ? globalThis.minStartTime
+              : new Date()
+            ).getTime() / 1000;
+          const duration = Math.max(1, maxTime - minTime);
+
+          return {
+            title: item.geo_formatted_address,
+            opacity: Math.max(
+              0.6,
+              Math.min((maxTime - item.start_time) / duration, 1)
+            ),
+          };
+        },
+        events: {
+          click({ event, item, marker, map }) {
+            if (typeof item.raw_metadata === 'string') {
+              globalThis.processHit(item);
+            }
+            if (!item.time_warning) {
+              item.time_warning = '';
+            }
+            const infowindow = new window.google.maps.InfoWindow({
+              content: `
+                <h4 class="fs-5">
+                  <a class="btn btn-sm btn-primary" href="${item.contextUrl}">
+                    Filter to
+                  </a>
+                  ${item.talkgroup_tag}
+                </h4>
+                <h5 class="fs-6">${item.talkgroup_group} - ${item.talkgroup_description}</h5>
+                <p>
+                  <strong>
+                    <a href="${item.permalink}">${item.start_time_string}</a> (${item.relative_time})
+                  </strong>
+                  ${item.time_warning}
+                </p>
+                <audio
+                  id="call-audio-${item.id}"
+                  class="call-audio"
+                  src="${item.raw_audio_url}"
+                  controls
+                ></audio>
+                <p>${item.transcript}</p>
+                `,
+            });
+            infowindow.open({
+              anchor: marker,
+              map,
+            });
+          },
+        },
+      },
     });
   }
 }

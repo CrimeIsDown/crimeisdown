@@ -25,6 +25,9 @@ Router.map(function () {
   this.route('audio-live', {
     path: '/audio/live/:stream',
   });
+  this.route('map-transcripts', {
+    path: '/transcripts/map',
+  });
   this.route('search-transcripts', {
     path: '/transcripts/search',
   });

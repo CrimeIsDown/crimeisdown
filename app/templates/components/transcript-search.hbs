@@ -178,6 +178,10 @@
     </div>
     <div id="current-refinements" class="mt-2"></div>
     <div id="stats" class="mb-1"></div>
+    {{#if (and this.hasAccess this.shouldShowMap)}}
+    <h5>Experimental map of radio calls</h5>
+    <div id="geo-search" class="mb-1"></div>
+    {{/if}}
     <div id="hits" class="ais-Hits">
       <ol class="ais-Hits-list">
         {{#each this.hits key="id" as |hit|}}
