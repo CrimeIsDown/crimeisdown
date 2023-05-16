@@ -738,9 +738,9 @@ export default class TranscriptSearchComponent extends Component {
                   <a class="btn btn-sm btn-primary" href="${item.contextUrl}">
                     Filter to
                   </a>
-                  ${item.talkgroup_tag}
+                  ${item.talkgroup_description}
                 </h4>
-                <h5 class="fs-6">${item.talkgroup_group} - ${item.talkgroup_description}</h5>
+                <h5 class="fs-6">${item.geo_formatted_address}</h5>
                 <p>
                   <strong>
                     <a href="${item.permalink}">${item.start_time_string}</a> (${item.relative_time})
