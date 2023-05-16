@@ -719,8 +719,8 @@ export default class TranscriptSearchComponent extends Component {
           return {
             title: item.geo_formatted_address,
             opacity: Math.max(
-              0.6,
-              Math.min((maxTime - item.start_time) / duration, 1)
+              0.3,
+              Math.min(1 - (maxTime - item.start_time) / duration, 1)
             ),
           };
         },
