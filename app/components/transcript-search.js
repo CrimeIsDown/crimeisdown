@@ -29,7 +29,7 @@ export default class TranscriptSearchComponent extends Component {
   @service session;
 
   @tracked hasAccess = undefined;
-  @tracked shouldShowMap = false;
+  @tracked onTranscriptMapPage = window.location.pathname == '/transcripts/map';
   @tracked apiKey =
     'REDACTED_PUBLIC_CREDENTIAL';
   @tracked indexName = this.demoIndexName;
@@ -319,16 +319,17 @@ export default class TranscriptSearchComponent extends Component {
   async login() {
     const loggedIn = await this.session.authenticated;
     try {
-      this.apiKey = await this.session.getSearchAPIKey();
-      this.indexName =
-        this.config.get('MEILISEARCH_INDEX') || this.paidIndexName;
+      if (
+        !this.onTranscriptMapPage ||
+        (this.onTranscriptMapPage &&
+          this.session.user.patreon_tier.features.transcript_geosearch)
+      ) {
+        this.apiKey = await this.session.getSearchAPIKey();
+        this.indexName =
+          this.config.get('MEILISEARCH_INDEX') || this.paidIndexName;
+      }
       this.hasAccess = true;
 
-      this.onTranscriptMapPage = window.location.pathname == '/transcripts/map';
-
-      this.shouldShowMap =
-        this.onTranscriptMapPage &&
-        this.session.user.patreon_tier.features.transcript_geosearch;
     } catch (e) {
       if (loggedIn) {
         console.error(e);
@@ -357,14 +358,6 @@ export default class TranscriptSearchComponent extends Component {
   async setupSearch() {
     await this.login();
 
-    if (this.onTranscriptMapPage && !this.shouldShowMap) {
-      alert(
-        'Sorry, you must be at the Captain tier or above on Patreon to access the map of calls (currently an experimental feature).'
-      );
-      window.location = '/transcripts/search' + window.location.search;
-      return;
-    }
-
     this.defaultSort = `${this.indexName}:start_time:desc`;
     this.defaultRouteState = {
       [this.indexName]: {
@@ -379,7 +372,7 @@ export default class TranscriptSearchComponent extends Component {
       };
     }
 
-    if (this.shouldShowMap) {
+    if (this.onTranscriptMapPage) {
       this.defaultRouteState[this.indexName].refinementList = {
         short_name: ['chi_cpd', 'chi_cfd', 'chi_oemc'],
       };
@@ -457,7 +450,7 @@ export default class TranscriptSearchComponent extends Component {
       this.getHitsPerPageWidget(),
     ];
 
-    if (this.shouldShowMap) {
+    if (this.onTranscriptMapPage) {
       mainWidgets.push(this.getGeoSearchWidget());
     }
 

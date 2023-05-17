@@ -45,10 +45,18 @@
 {{/if}}
 <div class="search-panel row {{if (eq this.hasAccess undefined) "d-none" ""}}">
   <div class="search-panel__filters col-lg-3">
-    {{#if (eq this.hasAccess false)}}
+    {{#if (eq this.indexName this.demoIndexName)}}
     <div class="alert alert-danger">
       {{#if this.session.isAuthenticated}}
-      <p>You are not at a high enough membership tier. Please upgrade your membership on Patreon to the Sergeant tier or above to access.</p>
+      <p>
+        You are currently using a demo version with old transmissions. To search the latest scanner traffic, please upgrade your membership on Patreon to the
+        {{#if (and this.onTranscriptMapPage (not this.session.user.patreon_tier.features.transcript_geosearch))}}
+        Captain ($20/mo)
+        {{else}}
+        Sergeant ($5/mo)
+        {{/if}}
+        tier or above to access.
+      </p>
       {{else}}
       <p>You are currently using a demo version with old transmissions. To search the latest scanner traffic, become a patron of at least $5/mo and then <a href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url">login</a>.</p>
       <p class="mt-2"><a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img class="img-fluid" src="/img/become-a-patron.png" alt="Become a Patron!"></a></p>
@@ -59,14 +67,12 @@
       <h2 id="filtersHeading" class="d-lg-none">Filters</h2>
       <div class="row mb-4">
         <div id="clear-refinements" class="col"></div>
-        {{#if this.hasAccess}}
         <div id="reset-refinements" class="col">
           <button type="button" class="ais-ClearRefinements-button" {{on "click" this.resetFilters}}><span>Default filters</span></button>
         </div>
         <div id="chicago-refinements" class="col">
           <button type="button" class="ais-ClearRefinements-button" {{on "click" this.setChicagoFilters}}><span>Chicago only</span></button>
         </div>
-        {{/if}}
       </div>
       <div class="accordion accordion-flush" id="filterOptionsAccordion">
         <div class="accordion-item">
@@ -178,8 +184,11 @@
     </div>
     <div id="current-refinements" class="mt-2"></div>
     <div id="stats" class="mb-1"></div>
-    {{#if (and this.hasAccess this.shouldShowMap)}}
+    {{#if this.onTranscriptMapPage}}
     <h5>Experimental map of radio calls</h5>
+    {{#if (and this.hasAccess (not this.session.user.patreon_tier.features.transcript_geosearch))}}
+    <p class="text-danger">Sorry, you must be at the Captain tier or above on Patreon to access the map of calls (currently an experimental feature).</p>
+    {{/if}}
     <div id="geo-search" class="mb-1"></div>
     {{/if}}
     <div id="hits" class="ais-Hits">
