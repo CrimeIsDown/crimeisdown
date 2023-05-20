@@ -7,6 +7,7 @@ import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
 import instantsearch from 'instantsearch.js';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 import connectRange from 'instantsearch.js/es/connectors/range/connectRange';
+import connectGeoSearch from 'instantsearch.js/es/connectors/geo-search/connectGeoSearch';
 import { history } from 'instantsearch.js/es/lib/routers';
 import { unescape } from 'instantsearch.js/es/lib/utils';
 import {
@@ -329,7 +330,6 @@ export default class TranscriptSearchComponent extends Component {
           this.config.get('MEILISEARCH_INDEX') || this.paidIndexName;
       }
       this.hasAccess = true;
-
     } catch (e) {
       if (loggedIn) {
         console.error(e);
@@ -451,7 +451,11 @@ export default class TranscriptSearchComponent extends Component {
     ];
 
     if (this.onTranscriptMapPage) {
-      mainWidgets.push(this.getGeoSearchWidget());
+      if (this.indexName == this.paidIndexName) {
+        mainWidgets.push(this.getGeoSearchWidgetGoogle());
+      } else {
+        mainWidgets.push(this.getGeoSearchWidgetLeaflet());
+      }
     }
 
     this.search.addWidgets(mainWidgets.concat(sidebarWidgets));
@@ -681,7 +685,109 @@ export default class TranscriptSearchComponent extends Component {
     });
   }
 
-  getGeoSearchWidget() {
+  getGeoSearchWidgetLeaflet() {
+    const globalThis = this;
+
+    let map = null;
+    let markers = [];
+
+    const renderGeoSearch = (renderOptions, isFirstRender) => {
+      console.log(renderOptions);
+      const { items, position, widgetParams } = renderOptions;
+
+      if (isFirstRender) {
+        map = L.map(document.querySelector(widgetParams.container));
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution:
+            '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+      }
+
+      markers.forEach((marker) => marker.remove());
+
+      const layerGroup = L.markerClusterGroup({
+        disableClusteringAtZoom: 12,
+      }).addTo(map);
+
+      markers = items.map((item) => {
+        const maxTime =
+          (globalThis.maxStartTime
+            ? globalThis.maxStartTime
+            : new Date()
+          ).getTime() / 1000;
+        const minTime =
+          (globalThis.minStartTime
+            ? globalThis.minStartTime
+            : new Date()
+          ).getTime() / 1000;
+        const duration = Math.max(1, maxTime - minTime);
+
+        const marker = L.marker([item._geoloc.lat, item._geoloc.lng], {
+          title: item.geo_formatted_address,
+          opacity: Math.max(
+            0.7,
+            Math.min(1 - (maxTime - item.start_time) / duration, 1)
+          ),
+        }).addTo(layerGroup);
+
+        if (typeof item.raw_metadata === 'string') {
+          globalThis.processHit(item);
+        }
+        if (!item.time_warning) {
+          item.time_warning = '';
+        }
+        const popup = `
+          <h4 class="fs-5">
+            <a href="${item.contextUrl}">
+              ${item.talkgroup_description}
+            </a>
+          </h4>
+          <h5 class="fs-6">${item.geo_formatted_address}</h5>
+          <p>
+            <strong>
+              <a href="${item.permalink}">${item.start_time_string}</a> (${item.relative_time})
+            </strong>
+            ${item.time_warning}
+          </p>
+          <audio
+            id="call-audio-${item.id}"
+            class="call-audio"
+            src="${item.raw_audio_url}"
+            controls
+          ></audio>
+          <div style="max-height: 200px; overflow: auto">
+            <p>${item.transcript}</p>
+          </div>
+          `;
+
+        marker.bindPopup(popup);
+      });
+
+      if (markers.length) {
+        map.fitBounds(layerGroup.getBounds());
+      } else {
+        map.setView(
+          position || widgetParams.initialPosition,
+          widgetParams.initialZoom
+        );
+      }
+    };
+
+    const customGeoSearch = connectGeoSearch(renderGeoSearch);
+
+    return customGeoSearch({
+      container: '#geo-search',
+      initialPosition: {
+        lat: 41.85,
+        lng: -87.63,
+      },
+      initialZoom: 11,
+      enableRefineOnMapMove: false,
+    });
+  }
+
+  getGeoSearchWidgetGoogle() {
     const globalThis = this;
     return geoSearch({
       container: '#geo-search',
