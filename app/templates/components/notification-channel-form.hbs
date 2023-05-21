@@ -5,7 +5,7 @@
     <select id="serviceInput" name="service" class="form-select" {{on "change" this.setService}} required>
       <option value="">Choose a service</option>
       <option value="tgram" selected={{eq @channel.service "tgram"}}>Telegram</option>
-      <option value="mailgun" selected={{eq @channel.service "mailgun"}}>Email</option>
+      <option value="ses" selected={{eq @channel.service "ses"}}>Email</option>
       {{!-- <option value="sns" selected={{eq @channel.service "sns"}}>SMS</option> --}}
     </select>
   </div>
@@ -15,7 +15,7 @@
       {{#if (or (eq @channel.service "tgram") (eq this.service "tgram"))}}
       Telegram Chat ID
       {{/if}}
-      {{#if (or (eq @channel.service "mailgun") (eq this.service "mailgun"))}}
+      {{#if (or (eq @channel.service "ses") (eq this.service "ses"))}}
       Email Address
       {{/if}}
       {{#if (or (eq @channel.service "sns") (eq this.service "sns"))}}

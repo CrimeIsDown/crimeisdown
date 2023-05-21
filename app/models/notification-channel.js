@@ -8,7 +8,7 @@ export default class NotificationChannelModel extends Model {
     switch (this.service) {
       case 'tgram':
         return 'Telegram';
-      case 'mailgun':
+      case 'ses':
         return 'Email';
       case 'sns':
         return 'SMS';
