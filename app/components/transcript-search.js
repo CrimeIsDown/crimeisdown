@@ -50,7 +50,7 @@ export default class TranscriptSearchComponent extends Component {
 
   constructor() {
     super(...arguments);
-    this.minStartTime = moment().subtract(1, 'day').toDate();
+    this.minStartTime = moment().subtract(12, 'hours').toDate();
     this.maxStartTime = new Date();
     this.flatpickrOptions = {
       enableTime: true,
@@ -387,6 +387,7 @@ export default class TranscriptSearchComponent extends Component {
       this.apiKey,
       {
         finitePagination: true,
+        keepZeroFacets: true,
       }
     );
 
