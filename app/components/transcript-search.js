@@ -177,9 +177,9 @@ export default class TranscriptSearchComponent extends Component {
     let start_time = moment.unix(hit.start_time);
     if (hit.short_name == 'chi_cpd') {
       if (hit.raw_metadata['encrypted'] == 1) {
-        hit.time_warning = ` - received at ${start_time
+        hit.time_warning = ` - delayed until ${start_time
           .toDate()
-          .toLocaleString()}`;
+          .toLocaleTimeString()}`;
         start_time = start_time.subtract(30, 'minutes');
         hit.encrypted = true;
       }

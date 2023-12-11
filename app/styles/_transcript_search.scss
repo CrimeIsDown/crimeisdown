@@ -46,14 +46,20 @@
   padding: 0.5rem;
   background: var(--bs-body-bg-rgb);
   box-shadow: none;
+  line-height: 1rem !important;
   &.selected {
     background: var(--bs-tertiary-bg);
   }
-  p {
-    margin-bottom: 0.5rem;
-  }
-  p:last-of-type {
+  blockquote {
+    border-left: 0.25rem solid var(--bs-primary-border-subtle);
+    padding-left: 0.5rem;
+    font-size: 0.9rem;
     margin-bottom: 0;
+    word-break: break-all;
+  }
+  p {
+    line-height: 1.3rem;
+    margin-bottom: 0.1rem;
   }
   .media-player-container {
     margin: 0.25rem;

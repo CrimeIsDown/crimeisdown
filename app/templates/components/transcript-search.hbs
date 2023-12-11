@@ -197,7 +197,10 @@
         <li id="hit-{{hit.id}}" class="ais-Hits-item{{if (eq hit.id this.selectedHit) " selected" ""}}" {{did-insert this.didInsertHit}}>
           <div class="row">
             <div class="col">
-              <h4 class="fs-5">
+              <h4 class="fs-6">
+                <button type="button" class="btn btn-sm btn-success" {{on "click" (fn this.playAudio hit)}}>
+                  <FaIcon @icon="play" /><span class="visually-hidden">Play Audio</span>
+                </button>
                 {{#if (eq hit.id this.selectedHit)}}
                 <a class="btn btn-sm btn-warning" href="{{hit.contextUrl}}" {{on "click" (fn this.getContext hit)}}>
                   <FaIcon @icon="star" />
@@ -208,37 +211,48 @@
                 </a>
                 {{/if}}
                 {{hit.talkgroup_tag}}
+                <span class="badge text-bg-{{hit.talkgroup_group_tag_color}} ms-1 me-1">
+                  {{hit.talkgroup_group_tag}}
+                </span>
+                {{#if hit.encrypted}}
+                <span class="badge text-bg-warning me-1" data-bs-toggle="tooltip" title="From an official Broadcastify.com stream of an encrypted channel">
+                  Encrypted / Delayed 30mins
+                </span>
+                {{/if}}
+                <span class="fst-italic" style="font-size: 0.9rem;">{{hit.relative_time}}</span>
               </h4>
-              <h5 class="fs-6">{{hit.talkgroup_group}} - {{hit.talkgroup_description}}</h5>
+              <blockquote class="blockquote">
+                {{#each hit.raw_transcript as |segment|}}
+                  <p>
+                    {{#if (get segment "0")}}
+                    {{!-- template-lint-disable no-triple-curlies --}}
+                    <a href="{{get segment "0.filter_link"}}" title="Radio ID {{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>:
+                    {{/if}}
+                    {{!-- template-lint-disable no-triple-curlies --}}
+                    {{{get segment "1"}}}
+                  </p>
+                {{/each}}
+              </blockquote>
+            </div>
+            <div class="col-lg-4">
               <p>
                 <strong>
-                  <a href="{{hit.permalink}}"><FaIcon @icon="link" /> {{hit.start_time_string}}</a> ({{hit.relative_time}})
+                  <a href="{{hit.permalink}}"><FaIcon @icon="link" /> {{hit.start_time_string}}</a>
                 </strong>
                 {{hit.time_warning}}
               </p>
               <p>
-                <button type="button" class="btn btn-sm btn-success" {{on "click" (fn this.playAudio hit)}}>
-                  <FaIcon @icon="play" /><span class="visually-hidden">Play Audio</span>
-                </button>
                 <span class="badge text-bg-light me-1">
                   Duration: {{hit.call_length}}s
                 </span>
-                <span class="badge text-bg-secondary me-1">
+                <a href="https://openmhz.com/system/{{hit.short_name}}?filter-type=talkgroup&filter-code={{hit.talkgroup}}" class="badge text-bg-secondary me-1" target="_blank" rel="noopener noreferrer">
                   TG {{hit.talkgroup}}
-                </span>
-                <span class="badge text-bg-{{hit.talkgroup_group_tag_color}} me-1">
-                  {{hit.talkgroup_group_tag}}
-                </span>
+                </a>
                 <span
                   class="badge text-bg-secondary me-1"
                 >
                   {{hit.audio_type}}
                 </span>
-                {{#if hit.encrypted}}
-                <span class="badge text-bg-danger me-1" data-bs-toggle="tooltip" title="From an official Broadcastify.com stream of an encrypted channel">
-                  Encrypted / Delayed 30mins
-                </span>
-                {{/if}}
                 {{#if (eq this.session.user.id 1)}}
                 <button
                   class="badge text-bg-light btn btn-sm btn-light"
@@ -250,33 +264,21 @@
                 </button>
                 {{/if}}
               </p>
-              {{#if (and hit.showPlayer (not this.useMediaPlayerComponent))}}
-              <audio
-                id="call-audio-{{hit.id}}"
-                class="call-audio"
-                src="{{hit.raw_audio_url}}"
-                controls
-                autoplay
-              ></audio>
-              {{/if}}
-              <p>
-                {{#each hit.raw_transcript as |segment|}}
-                  {{#if (get segment "0")}}
-                  {{!-- template-lint-disable no-triple-curlies --}}
-                  <a href="{{get segment "0.filter_link"}}" title="Radio ID {{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>:
-                  {{/if}}
-                  {{!-- template-lint-disable no-triple-curlies --}}
-                  {{{get segment "1"}}}<br>
-                {{/each}}
-              </p>
-            </div>
-            {{#if (and this.useMediaPlayerComponent hit.showPlayer)}}
-            <div class="col-lg-5">
-              <div id="call-audio-{{hit.id}}" class="media-player-container">
+              <p class="fst-italic">{{hit.talkgroup_group}} / <strong>{{hit.talkgroup_description}}</strong></p>
+              {{#if hit.showPlayer}}
+                {{#if this.useMediaPlayerComponent}}
                 <MediaPlayer @src="{{hit.raw_audio_url}}" @type="audio/mpeg" @idSuffix="-{{hit.id}}" @hideZoom="true" @autoplay="true" />
-              </div>
+                {{else}}
+                <audio
+                  id="call-audio-{{hit.id}}"
+                  class="call-audio"
+                  src="{{hit.raw_audio_url}}"
+                  controls
+                  autoplay
+                ></audio>
+                {{/if}}
+              {{/if}}
             </div>
-            {{/if}}
           </div>
           {{#if (eq this.session.user.id 1)}}
           <div class="modal fade metadata-modal" id="metadata-{{hit.id}}" tabindex="-1" aria-labelledby="metadata-modal-heading-{{hit.id}}" aria-hidden="true">
