@@ -196,50 +196,13 @@
         {{#each this.hits key="id" as |hit|}}
         <li id="hit-{{hit.id}}" class="ais-Hits-item{{if (eq hit.id this.selectedHit) " selected" ""}}" {{did-insert this.didInsertHit}}>
           <div class="row">
-            <div class="col">
-              <h4 class="fs-6">
-                <button type="button" class="btn btn-sm btn-success" {{on "click" (fn this.playAudio hit)}}>
-                  <FaIcon @icon="play" /><span class="visually-hidden">Play Audio</span>
-                </button>
-                {{#if (eq hit.id this.selectedHit)}}
-                <a class="btn btn-sm btn-warning" href="{{hit.contextUrl}}" {{on "click" (fn this.getContext hit)}}>
-                  <FaIcon @icon="star" />
-                </a>
-                {{else}}
-                <a class="btn btn-sm btn-primary" href="{{hit.contextUrl}}" {{on "click" (fn this.getContext hit)}}>
-                  <FaIcon @icon="filter" />
-                </a>
-                {{/if}}
-                {{hit.talkgroup_tag}}
-                <span class="badge text-bg-{{hit.talkgroup_group_tag_color}} ms-1 me-1">
-                  {{hit.talkgroup_group_tag}}
-                </span>
-                {{#if hit.encrypted}}
-                <span class="badge text-bg-warning me-1" data-bs-toggle="tooltip" title="From an official Broadcastify.com stream of an encrypted channel">
-                  Encrypted / Delayed 30mins
-                </span>
-                {{/if}}
-                <span class="fst-italic fs-7">{{hit.relative_time}}</span>
-              </h4>
-              <blockquote class="blockquote">
-                {{#each hit.raw_transcript as |segment|}}
-                  <p>
-                    {{#if (get segment "0")}}
-                    {{!-- template-lint-disable no-triple-curlies --}}
-                    <a href="{{get segment "0.filter_link"}}" title="Radio ID {{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>:
-                    {{/if}}
-                    {{!-- template-lint-disable no-triple-curlies --}}
-                    {{{get segment "1"}}}
-                  </p>
-                {{/each}}
-              </blockquote>
-            </div>
-            <div class="col-lg-4">
-              <p>
+            <div class="col-lg-5 collapse d-md-block order-lg-2" id="hit-{{hit.id}}-metadata-col">
+              <p class="d-none d-md-block">
                 <strong>
                   <a href="{{hit.permalink}}"><FaIcon @icon="link" /> {{hit.start_time_string}}</a>
                 </strong>
                 {{hit.time_warning}}
+                <span class="fst-italic fs-7">({{hit.relative_time}})</span>
               </p>
               <p>
                 <span class="badge text-bg-light me-1">
@@ -253,6 +216,11 @@
                 >
                   {{hit.audio_type}}
                 </span>
+                {{#if hit.encrypted}}
+                <span class="badge text-bg-warning me-1" data-bs-toggle="tooltip" title="From an official Broadcastify.com stream of an encrypted channel">
+                  Encrypted / Delayed 30mins
+                </span>
+                {{/if}}
                 {{#if (eq this.session.user.id 1)}}
                 <button
                   class="badge text-bg-light btn btn-sm btn-light"
@@ -278,6 +246,48 @@
                 ></audio>
                 {{/if}}
               {{/if}}
+            </div>
+            <div class="col">
+              <h4 class="fs-6">
+                <button type="button" class="btn btn-sm btn-success" {{on "click" (fn this.playAudio hit)}}>
+                  <FaIcon @icon="play" /><span class="visually-hidden">Play Audio</span>
+                </button>
+                {{#if (eq hit.id this.selectedHit)}}
+                <a class="btn btn-sm btn-warning" href="{{hit.contextUrl}}" {{on "click" (fn this.getContext hit)}}>
+                  <FaIcon @icon="star" />
+                </a>
+                {{else}}
+                <a class="btn btn-sm btn-primary" href="{{hit.contextUrl}}" {{on "click" (fn this.getContext hit)}}>
+                  <FaIcon @icon="filter" />
+                </a>
+                {{/if}}
+                <button type="button" class="btn btn-sm btn-info d-md-none" data-bs-toggle="collapse" data-bs-target="#hit-{{hit.id}}-metadata-col" aria-expanded="false" aria-controls="hit-{{hit.id}}-metadata-col">
+                  <FaIcon @icon="circle-info" /><span class="visually-hidden">More Details</span>
+                </button>
+                {{hit.talkgroup_tag}}
+                <span class="badge text-bg-{{hit.talkgroup_group_tag_color}} ms-1 me-1">
+                  {{hit.talkgroup_group_tag}}
+                </span>
+              </h4>
+              <p class="text-small d-md-none">
+                <strong>
+                  <a href="{{hit.permalink}}">{{hit.start_time_string}}</a>
+                </strong>
+                {{hit.time_warning}}
+                <span class="fst-italic fs-7">({{hit.relative_time}})</span>
+              </p>
+              <blockquote class="blockquote">
+                {{#each hit.raw_transcript as |segment|}}
+                  <p>
+                    {{#if (get segment "0")}}
+                    {{!-- template-lint-disable no-triple-curlies --}}
+                    <a href="{{get segment "0.filter_link"}}" title="Radio ID {{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>:
+                    {{/if}}
+                    {{!-- template-lint-disable no-triple-curlies --}}
+                    {{{get segment "1"}}}
+                  </p>
+                {{/each}}
+              </blockquote>
             </div>
           </div>
           {{#if (eq this.session.user.id 1)}}
