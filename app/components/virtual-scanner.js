@@ -3,15 +3,16 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import EmberObject, { action } from '@ember/object';
+import { A } from '@ember/array';
 import fetch from 'fetch';
 
 export default class VirtualScanner extends Component {
   dragScale = 50;
 
   @tracked
-  streams = [];
+  streams = A([]);
   @tracked
-  enabledStreams = [];
+  enabledStreams = A([]);
 
   constructor() {
     super(...arguments);
@@ -43,7 +44,7 @@ export default class VirtualScanner extends Component {
           desc: node.querySelector('name').textContent,
           order: 999,
         };
-        this.args.streams.forEach((stream, index) => {
+        for (const [index, stream] of this.args.streams.entries()) {
           if (stream.slug === streamData.name) {
             streamData = {
               name: streamData.name,
@@ -51,9 +52,9 @@ export default class VirtualScanner extends Component {
               order: index,
               openmhz: stream.openmhz,
             };
-            return;
+            break;
           }
-        });
+        }
         this.streams.pushObject(streamData);
       }
     }
