@@ -4,6 +4,7 @@ import { action, set } from '@ember/object';
 import { service } from '@ember/service';
 
 export default class AppHeader extends Component {
+  @service config;
   @service session;
   @tracked playmusic = false;
 

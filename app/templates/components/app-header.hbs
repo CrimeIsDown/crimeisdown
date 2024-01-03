@@ -42,13 +42,13 @@
               {{this.session.user.patreon_tier.name}} {{this.session.user.name}}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarAuthDropdown">
-              <a class="dropdown-item" href="https://api.crimeisdown.com/profile">Profile</a>
-              <a class="dropdown-item" href="https://api.crimeisdown.com/logout" referrerpolicy="unsafe-url">Logout</a>
+              <a class="dropdown-item" href="{{ this.config.ENV.API_BASE_URL }}/profile">Profile</a>
+              <a class="dropdown-item" href="{{ this.config.ENV.API_BASE_URL }}/logout" referrerpolicy="unsafe-url">Logout</a>
             </div>
           </li>
           {{else}}
           <li class="nav-item">
-            <a href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/login-with-patreon.png" alt="Log in with Patreon"></a>
+            <a href="{{ this.config.ENV.API_BASE_URL }}/auth/redirect" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/login-with-patreon.png" alt="Log in with Patreon"></a>
           </li>
           {{/if}}
           <li class="nav-item dropdown" {{did-insert this.initThemeToggle}}>

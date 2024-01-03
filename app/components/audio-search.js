@@ -1,8 +1,11 @@
 import Component from '@glimmer/component';
+import { service } from '@ember/service';
 import { action } from '@ember/object';
 import moment from 'moment-timezone';
 
 export default class AudioSearch extends Component {
+  @service config;
+
   constructor() {
     super(...arguments);
     let options = {
@@ -37,7 +40,7 @@ export default class AudioSearch extends Component {
   @action
   submit(event) {
     event.preventDefault();
-    let downloadUrl = 'https://api.crimeisdown.com/recordings/download-audio';
+    let downloadUrl = this.config.get('API_BASE_URL') + '/recordings/download-audio';
     const inputs = {};
     for (const element of event.target.elements) {
       if (element.name) {

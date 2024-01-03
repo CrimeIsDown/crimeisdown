@@ -58,7 +58,7 @@
         tier or above to access.
       </p>
       {{else}}
-      <p>You are currently using a demo version with old transmissions. To search the latest scanner traffic, become a patron of at least $5/mo and then <a href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url">login</a>.</p>
+      <p>You are currently using a demo version with old transmissions. To search the latest scanner traffic, become a patron of at least $5/mo and then <a href="{{ this.config.ENV.API_BASE_URL }}/auth/redirect" referrerpolicy="unsafe-url">login</a>.</p>
       <p class="mt-2"><a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img class="img-fluid" src="/img/become-a-patron.png" alt="Become a Patron!"></a></p>
       {{/if}}
     </div>
@@ -208,7 +208,7 @@
                 <span class="badge text-bg-light me-1">
                   Duration: {{hit.call_length}}s
                 </span>
-                <a href="https://openmhz.com/system/{{hit.short_name}}?filter-type=talkgroup&filter-code={{hit.talkgroup}}" class="badge text-bg-secondary me-1" target="_blank" rel="noopener noreferrer">
+                <a href="https://openmhz.com/system/{{hit.short_name}}?filter-type=talkgroup&filter-code={{hit.talkgroup}}&time={{hit.start_time_ms}}" class="badge text-bg-secondary me-1" target="_blank" rel="noopener noreferrer">
                   TG {{hit.talkgroup}}
                 </a>
                 <span
