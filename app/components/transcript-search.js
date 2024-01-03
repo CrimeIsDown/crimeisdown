@@ -184,7 +184,7 @@ export default class TranscriptSearchComponent extends Component {
         hit.encrypted = true;
       }
     }
-    hit.start_time_ms = hit.start_time * 1000;
+    hit.start_time_ms = hit.start_time * 1000 + 1; // Add 1 since OpenMHz shows calls older than the specified time, and we want to include the current one
     hit.start_time_string = start_time.toDate().toLocaleString();
     hit.relative_time = start_time.fromNow();
 
