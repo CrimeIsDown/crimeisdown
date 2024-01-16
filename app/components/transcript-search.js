@@ -14,6 +14,7 @@ import {
   clearRefinements,
   currentRefinements,
   geoSearch,
+  hierarchicalMenu,
   hitsPerPage,
   pagination,
   refinementList,
@@ -44,12 +45,21 @@ export default class TranscriptSearchComponent extends Component {
   @tracked maxStartTime;
   @tracked currentSearch;
   demoIndexName = 'calls_demo';
-  paidIndexName = 'calls';
   autoRefresh = undefined;
   scrollTimer;
 
+  systemLabels = {
+    'chi_cpd': 'Chicago Police Department',
+    'chi_cfd': 'Chicago Fire Department (conventional P25)',
+    'chi_oemc': 'Chicago OEMC (trunked P25)',
+    'sc21102': 'STARCOM21',
+    'chisuburbs': 'Chicago Suburbs',
+    'willco_p25': 'Will County (P25)',
+  };
+
   constructor() {
     super(...arguments);
+    this.paidIndexName = 'calls_' + moment.utc().format('YYYY_MM');
     this.minStartTime = moment().subtract(12, 'hours').toDate();
     this.maxStartTime = new Date();
     this.flatpickrOptions = {
@@ -383,7 +393,7 @@ export default class TranscriptSearchComponent extends Component {
       this.defaultRouteState[this.indexName].hitsPerPage = 60;
     }
 
-    const searchClient = new instantMeiliSearch(
+    const im = new instantMeiliSearch(
       this.config.get('MEILISEARCH_URL'),
       this.apiKey,
       {
@@ -393,10 +403,13 @@ export default class TranscriptSearchComponent extends Component {
     );
 
     this.search = instantsearch({
-      searchClient,
+      searchClient: im.searchClient,
       indexName: this.indexName,
       routing: {
         router: this.getSearchRouter(),
+      },
+      future: {
+        preserveSharedStateOnUnmount: true,
       },
     });
 
@@ -430,15 +443,29 @@ export default class TranscriptSearchComponent extends Component {
       this.currentSearch = uiState;
     });
 
+    const systemMenuTransformItems = (items) => {
+      const result = items.map(item => ({
+        ...item,
+        label: this.systemLabels[item.value] ?? item.label,
+        highlighted: this.systemLabels[item.value] ?? item.highlighted,
+      }));
+      return result;
+    };
+
     const sidebarWidgets = [
       this.getClearRefinementsWidget(),
-      this.getRefinementListWidget('#system-menu', 'short_name'),
+      this.getHierarchicalMenuWidget('#tg-h-menu', [
+        'talkgroup_hierarchy.lvl0',
+        'talkgroup_hierarchy.lvl1',
+        'talkgroup_hierarchy.lvl2',
+      ], systemMenuTransformItems),
+      this.getRefinementListWidget('#system-menu', 'short_name', systemMenuTransformItems),
       this.getRefinementListWidget('#dept-menu', 'talkgroup_group'),
       this.getRefinementListWidget('#tg-menu', 'talkgroup_tag'),
       this.getRefinementListWidget('#tg-type-menu', 'talkgroup_group_tag'),
       this.getRefinementListWidget('#units-menu', 'units'),
       this.getRefinementListWidget('#radios-menu', 'radios'),
-      this.getRefinementListWidget('#srclist-menu', 'srcList'),
+      // this.getRefinementListWidget('#srclist-menu', 'srcList'),
       this.getStartTimeRangeWidget(),
     ];
 
@@ -484,7 +511,7 @@ export default class TranscriptSearchComponent extends Component {
 
   getSearchRouter() {
     const windowTitle = (routeState) => {
-      const indexState = routeState.calls || {};
+      const indexState = routeState[this.indexName] || {};
 
       if (!indexState.query) {
         return 'Search Scanner Transcripts | CrimeIsDown.com';
@@ -509,6 +536,7 @@ export default class TranscriptSearchComponent extends Component {
     return history({
       windowTitle,
       parseURL,
+      cleanUrlOnDispose: true
     });
   }
 
@@ -587,6 +615,18 @@ export default class TranscriptSearchComponent extends Component {
             );
           }
         }
+        if (item.attribute == 'short_name') {
+          for (const refinement of item.refinements) {
+            refinement.label = this.systemLabels[refinement.value];
+          }
+        }
+        if (item.attribute == 'talkgroup_hierarchy.lvl0') {
+          item.label = 'Sys/Dept/TG';
+          for (const refinement of item.refinements) {
+            const levels = refinement.label.split(' > ');
+            refinement.label = refinement.label.replace(levels[0], this.systemLabels[levels[0]]);
+          }
+        }
         switch (item.attribute) {
           case 'short_name':
             item.label = 'System';
@@ -641,7 +681,7 @@ export default class TranscriptSearchComponent extends Component {
     return connectHits(render)();
   }
 
-  getRefinementListWidget(container, attribute) {
+  getRefinementListWidget(container, attribute, transformItems = undefined) {
     return refinementList({
       container,
       attribute,
@@ -654,6 +694,17 @@ export default class TranscriptSearchComponent extends Component {
         item: ['form-check'],
         count: ['ms-1'],
       },
+      transformItems
+    });
+  }
+
+  getHierarchicalMenuWidget(container, attributes, transformItems = undefined) {
+    return hierarchicalMenu({
+      container,
+      attributes,
+      showMore: true,
+      showMoreLimit: 60,
+      transformItems
     });
   }
 

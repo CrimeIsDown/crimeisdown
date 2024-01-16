@@ -93,6 +93,18 @@
   }
 }
 
+.ais-HierarchicalMenu-link--selected {
+  font-weight: 600;
+}
+
+.ais-HierarchicalMenu-link::before {
+  transform: rotate(90deg);
+}
+
+.ais-HierarchicalMenu-link--selected::before {
+  transform: rotate(180deg);
+}
+
 .ais-RefinementList-item--selected .ais-RefinementList-checkbox,
 .ais-GeoSearch-input:checked {
   background-image: var(--bs-form-check-bg-image);

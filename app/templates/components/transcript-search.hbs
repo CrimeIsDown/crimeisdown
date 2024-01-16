@@ -76,6 +76,26 @@
       </div>
       <div class="accordion accordion-flush" id="filterOptionsAccordion">
         <div class="accordion-item">
+          <h3 class="accordion-header" id="tg-h-heading">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tg-h-collapse" aria-expanded="false" aria-controls="tg-h-collapse">
+              System / Department / Talkgroup
+            </button>
+          </h3>
+          <div id="tg-h-collapse" class="accordion-collapse collapse show" aria-labelledby="tg-h-heading">
+            <div id="tg-h-menu" class="accordion-body"></div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="system-heading">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#system-collapse" aria-expanded="false" aria-controls="system-collapse">
+              Radio System
+            </button>
+          </h3>
+          <div id="system-collapse" class="accordion-collapse collapse show" aria-labelledby="system-heading">
+            <div id="system-menu" class="accordion-body"></div>
+          </div>
+        </div>
+        <div class="accordion-item">
           <h3 class="accordion-header" id="dept-heading">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dept-collapse" aria-expanded="false" aria-controls="dept-collapse">
               Departments
@@ -107,11 +127,11 @@
         </div>
         <div class="accordion-item">
           <h3 class="accordion-header" id="units-heading">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#units-collapse" aria-expanded="false" aria-controls="units-collapse">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#units-collapse" aria-expanded="false" aria-controls="units-collapse">
               Units
             </button>
           </h3>
-          <div id="units-collapse" class="accordion-collapse collapse show" aria-labelledby="units-heading">
+          <div id="units-collapse" class="accordion-collapse collapse" aria-labelledby="units-heading">
             <div id="units-menu" class="accordion-body"></div>
           </div>
         </div>
@@ -125,7 +145,7 @@
             <div id="radios-menu" class="accordion-body"></div>
           </div>
         </div>
-        <div class="accordion-item">
+        {{!-- <div class="accordion-item">
           <h3 class="accordion-header" id="srclist-heading">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#srclist-collapse" aria-expanded="false" aria-controls="srclist-collapse">
               Sources
@@ -134,7 +154,7 @@
           <div id="srclist-collapse" class="accordion-collapse collapse" aria-labelledby="srclist-heading">
             <div id="srclist-menu" class="accordion-body"></div>
           </div>
-        </div>
+        </div> --}}
         <div class="accordion-item">
           <h3 class="accordion-header" id="calltime-heading">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#time-input-collapse" aria-expanded="false" aria-controls="time-input-collapse">
@@ -158,16 +178,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h3 class="accordion-header" id="system-heading">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#system-collapse" aria-expanded="false" aria-controls="system-collapse">
-              Radio System
-            </button>
-          </h3>
-          <div id="system-collapse" class="accordion-collapse collapse show" aria-labelledby="system-heading">
-            <div id="system-menu" class="accordion-body"></div>
           </div>
         </div>
       </div>
