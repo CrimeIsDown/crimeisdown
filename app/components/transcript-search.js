@@ -702,8 +702,7 @@ export default class TranscriptSearchComponent extends Component {
     return hierarchicalMenu({
       container,
       attributes,
-      showMore: true,
-      showMoreLimit: 60,
+      limit: 60,
       transformItems
     });
   }
