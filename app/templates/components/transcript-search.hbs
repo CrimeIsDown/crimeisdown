@@ -255,6 +255,9 @@
                   autoplay
                 ></audio>
                 {{/if}}
+                <a href="{{hit.raw_audio_url}}" class="btn btn-sm btn-primary mt-2" target="_blank" rel="noopener noreferrer">
+                  <FaIcon @icon="download" /> Download Audio
+                </a>
               {{/if}}
             </div>
             <div class="col">
