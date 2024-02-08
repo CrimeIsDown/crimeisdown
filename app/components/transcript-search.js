@@ -59,7 +59,8 @@ export default class TranscriptSearchComponent extends Component {
 
   constructor() {
     super(...arguments);
-    this.paidIndexName = 'calls_' + moment.utc().format('YYYY_MM');
+    const urlParams = new URLSearchParams(window.location.search);
+    this.paidIndexName = urlParams.get('index') ?? 'calls_' + moment.utc().format('YYYY_MM');
     this.minStartTime = moment().subtract(12, 'hours').toDate();
     this.maxStartTime = new Date();
     this.flatpickrOptions = {
@@ -88,7 +89,36 @@ export default class TranscriptSearchComponent extends Component {
       max === this.flatpickrOptions.maxDefaultDate.getTime()
         ? undefined
         : Math.floor(max / 1000);
+    if (this.hasAccess && !this.config.get('MEILISEARCH_INDEX')) {
+      // The max date should not be greater than the end of the month that min is in
+      const minUtc = moment.unix(min).utc();
+      const maxUtc = moment.unix(max).utc();
+      if (maxUtc.isAfter(minUtc.endOf('month'))) {
+        max = minUtc.endOf('month').unix();
+      }
+    }
     this.updateStartTimeFilter([min, max]);
+    const indexName = 'calls_' + moment.unix(min).utc().format('YYYY_MM');
+
+    if (this.hasAccess && !this.config.get('MEILISEARCH_INDEX') && indexName !== this.indexName) {
+      // Redirect to the new index
+      setTimeout(() => {
+        // Get current URL parts
+        const path = window.location.pathname;
+        const params = new URLSearchParams(window.location.search);
+        const hash = window.location.hash;
+
+        // Update query string values
+        params.set('index', indexName);
+
+        let paramsAsString = params.toString();
+        paramsAsString = paramsAsString.replaceAll(this.indexName, indexName);
+
+        // Update URL
+        window.location.href = `${path}?${paramsAsString}${hash}`;
+      }, 500);
+      // We need a timeout as we have to wait for the new filters to be added to the URL
+    }
   }
 
   @action
