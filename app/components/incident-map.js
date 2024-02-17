@@ -383,10 +383,10 @@ export default class IncidentMap extends Component {
       wards: {
         label: 'Wards',
         layer: null,
-        url: '/data/map_data/wards.geojson',
+        url: '/data/map_data/wards_2023.geojson',
         showByDefault: false,
         propMappings: {
-          ward: 'Ward',
+          ward_id: 'Ward',
         },
         style: {
           fill: true,
