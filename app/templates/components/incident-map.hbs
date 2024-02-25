@@ -163,10 +163,14 @@
         <div id="leaflet-map" {{did-insert this.initMap}}></div>
       </div>
       <div class="tab-pane fade" id="traffic-map" role="tabpanel" aria-labelledby="traffic-tab">
-        <iframe id="waze-map" title="Waze map" src="https://embed.waze.com/iframe?zoom=11&lat=41.85&lon=-87.63&ct=livemap"></iframe>
+        <div data-src={{this.wazeIframeUrl}}>
+          <iframe id="waze-map" title="Waze map"></iframe>
+        </div>
       </div>
       <div class="tab-pane fade" id="crime-map" role="tabpanel" aria-labelledby="crime-tab">
-        <iframe id="clear-map" title="Crime map" src="https://chicagopd.maps.arcgis.com/apps/webappviewer/index.html?id=96ca65e89cd54b8c808b136a66778369"></iframe>
+        <div data-src={{this.crimereportsIframeUrl}}>
+          <iframe id="clear-map" title="Crime map"></iframe>
+        </div>
       </div>
     </div>
   </div>

@@ -32,6 +32,12 @@ export default class IncidentMap extends Component {
   @tracked
   location = {};
 
+  @tracked
+  wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=11&lat=41.85&lon=-87.63&ct=livemap'
+
+  @tracked
+  crimereportsIframeUrl = 'https://chicagopd.maps.arcgis.com/apps/webappviewer/index.html?id=96ca65e89cd54b8c808b136a66778369'
+
   constructor() {
     super(...arguments);
 
@@ -188,6 +194,16 @@ export default class IncidentMap extends Component {
       );
       this.searchAddress();
     }
+
+    const tabs = [document.getElementById('traffic-tab'), document.getElementById('crime-tab')];
+    for (const tabEl of tabs) {
+      tabEl.addEventListener('show.bs.tab', function (event) {
+        const iframe = document.getElementById(event.target.getAttribute('aria-controls')).getElementsByTagName('iframe')[0];
+        if (iframe.src != iframe.parentElement.getAttribute('data-src')) {
+          iframe.src = iframe.parentElement.getAttribute('data-src');
+        }
+      });
+    }
   }
 
   initBaseLayers() {
@@ -268,19 +284,17 @@ export default class IncidentMap extends Component {
       event.location.raw
     );
     const randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
-    const wazeIframeUrl =
+    this.wazeIframeUrl =
       'https://embed.waze.com/iframe?zoom=15&lat=' +
       this.location.meta.latitude +
       '&lon=' +
       this.location.meta.longitude +
       '&pin=1&_=' +
       randomInt;
-    $('#waze-map').attr('src', wazeIframeUrl);
     if (this.location.meta.inChicago) {
-      const crimereportsIframeUrl = this.buildCrimeMapUrl(
+      this.crimereportsIframeUrl = this.buildCrimeMapUrl(
         this.location.meta.formattedAddress
       );
-      $('#clear-map').attr('src', crimereportsIframeUrl);
 
       schedule('afterRender', () => {
         const tooltipTriggerList = [].slice.call(
@@ -413,7 +427,8 @@ export default class IncidentMap extends Component {
       gangs: {
         label: 'Gangs (unofficial)',
         layer: null,
-        url: 'https://www.google.com/maps/d/kml?forcekml=1&mid=1am7PF0tT25EztnOTAgUEL2E382VjVTc7',
+        // https://www.google.com/maps/d/kml?forcekml=1&mid=1am7PF0tT25EztnOTAgUEL2E382VjVTc7
+        url: '/data/map_data/gangs.kml',
         showByDefault: false,
       },
     };

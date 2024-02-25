@@ -31,7 +31,7 @@
     <link rel="preload" href="{{rootURL}}assets/crimeisdown.js" as="script">
 
     <link rel="preload" href="https://crimeisdown.statuspage.io/embed/script.js" as="script">
-    <link rel="preload" href="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL&callback=googleCallback" as="script">
+    <link rel="preload" href="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL&loading=async&libraries=places&callback=googleCallback" as="script">
     <link rel="preload" href="{{rootURL}}assets/stereo-panner-node.js" as="script">
     <link rel="preload" href="{{rootURL}}assets/doorbell.js" as="script">
     <link rel="preload" href="{{rootURL}}assets/hotjar.js" as="script">
@@ -54,7 +54,7 @@
     <script>
       function googleCallback() {}
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL&callback=googleCallback"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=REDACTED_PUBLIC_CREDENTIAL&loading=async&libraries=places&callback=googleCallback"></script>
     <!-- Doorbell.io widget -->
     <script src="{{rootURL}}assets/doorbell.js"></script>
     <!-- Hotjar Tracking Code for https://crimeisdown.com/ -->
