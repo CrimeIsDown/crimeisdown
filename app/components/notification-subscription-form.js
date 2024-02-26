@@ -35,6 +35,35 @@ export default class NotificationSubscriptionFormComponent extends Component {
   }
 
   @action
+  async loadAutocomplete() {
+    if (this.session.user.patreon_tier.features.transcript_geosearch) {
+      const center = { lat: 41.8781, lng: -87.6298 }; // downtown Chicago
+      const defaultBounds = {
+        north: center.lat + 1,
+        south: center.lat - 1,
+        east: center.lng + 1,
+        west: center.lng - 1,
+      };
+      const input = document.getElementById("addressInput");
+      const options = {
+        bounds: defaultBounds,
+        componentRestrictions: { country: "us" },
+        fields: ["address_components", "geometry", "icon", "name"],
+        strictBounds: false,
+      };
+      const autocomplete = new google.maps.places.Autocomplete(input, options);
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (!place.geometry) {
+          return;
+        }
+        document.getElementById('latInput').value = place.geometry.location.lat();
+        document.getElementById('lngInput').value = place.geometry.location.lng();
+      });
+    }
+  }
+
+  @action
   async submit(event) {
     event.preventDefault();
     const formdata = new FormData(event.target);
@@ -46,9 +75,30 @@ export default class NotificationSubscriptionFormComponent extends Component {
       alert('You must select at least one notification channel.');
       return;
     }
+    if (formdata.get('keywords').length == 0 && !formdata.get('address')) {
+      alert('You must enter at least one keyword or address.');
+      return;
+    }
+    if (formdata.get('address') && (!formdata.get('lat') || !formdata.get('lng'))) {
+      alert('You must select a valid address from the autocomplete.');
+      return;
+    }
+    if (formdata.get('address') && !formdata.get('radius') && !formdata.get('travel_time')) {
+      alert('You must enter a radius or travel time for the address.');
+      return;
+    }
     const data = {
       name: formdata.get('name'),
       keywords: formdata.get('keywords').split('\n'),
+      location: {
+        address: formdata.get('address'),
+        geo: {
+          lat: parseFloat(formdata.get('lat')),
+          lng: parseFloat(formdata.get('lng')),
+        },
+        radius: parseFloat(formdata.get('radius')),
+        travel_time: parseFloat(formdata.get('travel_time')),
+      },
       topic: formdata.getAll('topic').join('|'),
       notification_channels: formdata
         .getAll('notification_channels')

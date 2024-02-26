@@ -3,6 +3,7 @@ import Model, { attr } from '@ember-data/model';
 export default class TranscriptSubscriptionModel extends Model {
   @attr name;
   @attr keywords;
+  @attr location;
   @attr topic;
   @attr notification_channels;
 
