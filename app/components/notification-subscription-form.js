@@ -59,6 +59,7 @@ export default class NotificationSubscriptionFormComponent extends Component {
         }
         document.getElementById('latInput').value = place.geometry.location.lat();
         document.getElementById('lngInput').value = place.geometry.location.lng();
+        document.getElementById('mapAddressButton').href = `https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}`;
       });
     }
   }
