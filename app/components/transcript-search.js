@@ -60,7 +60,8 @@ export default class TranscriptSearchComponent extends Component {
   constructor() {
     super(...arguments);
     const urlParams = new URLSearchParams(window.location.search);
-    this.paidIndexName = urlParams.get('index') ?? 'calls_' + moment.utc().format('YYYY_MM');
+    const matches = /calls_[0-9]{4}_[0-9]{2}/g.exec(window.location.search);
+    this.paidIndexName = urlParams.get('index') ?? (matches ? matches[0] : undefined) ?? 'calls_' + moment.utc().format('YYYY_MM');
     this.minStartTime = moment().subtract(12, 'hours').toDate();
     this.maxStartTime = new Date();
     this.flatpickrOptions = {
