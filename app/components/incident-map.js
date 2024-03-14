@@ -33,10 +33,15 @@ export default class IncidentMap extends Component {
   location = {};
 
   @tracked
-  wazeIframeUrl = 'https://embed.waze.com/iframe?zoom=11&lat=41.85&lon=-87.63&ct=livemap'
+  location_approximate = false;
 
   @tracked
-  crimereportsIframeUrl = 'https://chicagopd.maps.arcgis.com/apps/webappviewer/index.html?id=96ca65e89cd54b8c808b136a66778369'
+  wazeIframeUrl =
+    'https://embed.waze.com/iframe?zoom=11&lat=41.85&lon=-87.63&ct=livemap';
+
+  @tracked
+  crimereportsIframeUrl =
+    'https://chicagopd.maps.arcgis.com/apps/webappviewer/index.html?id=96ca65e89cd54b8c808b136a66778369';
 
   constructor() {
     super(...arguments);
@@ -195,10 +200,15 @@ export default class IncidentMap extends Component {
       this.searchAddress();
     }
 
-    const tabs = [document.getElementById('traffic-tab'), document.getElementById('crime-tab')];
+    const tabs = [
+      document.getElementById('traffic-tab'),
+      document.getElementById('crime-tab'),
+    ];
     for (const tabEl of tabs) {
       tabEl.addEventListener('show.bs.tab', function (event) {
-        const iframe = document.getElementById(event.target.getAttribute('aria-controls')).getElementsByTagName('iframe')[0];
+        const iframe = document
+          .getElementById(event.target.getAttribute('aria-controls'))
+          .getElementsByTagName('iframe')[0];
         if (iframe.src != iframe.parentElement.getAttribute('data-src')) {
           iframe.src = iframe.parentElement.getAttribute('data-src');
         }
@@ -282,6 +292,9 @@ export default class IncidentMap extends Component {
     this.location = await this.addressLookup.generateLocationDataForAddress(
       this.layers,
       event.location.raw
+    );
+    this.location_approximate = ['RANGE_INTERPOLATED', 'APPROXIMATE'].includes(
+      event.location.raw.geometry.location_type
     );
     const randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
     this.wazeIframeUrl =

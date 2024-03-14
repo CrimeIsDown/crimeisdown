@@ -25,6 +25,7 @@ module.exports = {
   globals: {
     L: true,
     ga: true,
+    google: true,
     rome: true,
     bootstrap: true,
   },

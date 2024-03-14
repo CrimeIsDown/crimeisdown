@@ -44,11 +44,11 @@ export default class NotificationSubscriptionFormComponent extends Component {
         east: center.lng + 1,
         west: center.lng - 1,
       };
-      const input = document.getElementById("addressInput");
+      const input = document.getElementById('addressInput');
       const options = {
         bounds: defaultBounds,
-        componentRestrictions: { country: "us" },
-        fields: ["address_components", "geometry", "icon", "name"],
+        componentRestrictions: { country: 'us' },
+        fields: ['address_components', 'geometry', 'icon', 'name'],
         strictBounds: false,
       };
       const autocomplete = new google.maps.places.Autocomplete(input, options);
@@ -57,9 +57,13 @@ export default class NotificationSubscriptionFormComponent extends Component {
         if (!place.geometry) {
           return;
         }
-        document.getElementById('latInput').value = place.geometry.location.lat();
-        document.getElementById('lngInput').value = place.geometry.location.lng();
-        document.getElementById('mapAddressButton').href = `https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}`;
+        document.getElementById('latInput').value =
+          place.geometry.location.lat();
+        document.getElementById('lngInput').value =
+          place.geometry.location.lng();
+        document.getElementById(
+          'mapAddressButton'
+        ).href = `https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}`;
       });
     }
   }
@@ -80,11 +84,18 @@ export default class NotificationSubscriptionFormComponent extends Component {
       alert('You must enter at least one keyword or address.');
       return;
     }
-    if (formdata.get('address') && (!formdata.get('lat') || !formdata.get('lng'))) {
+    if (
+      formdata.get('address') &&
+      (!formdata.get('lat') || !formdata.get('lng'))
+    ) {
       alert('You must select a valid address from the autocomplete.');
       return;
     }
-    if (formdata.get('address') && !formdata.get('radius') && !formdata.get('travel_time')) {
+    if (
+      formdata.get('address') &&
+      !formdata.get('radius') &&
+      !formdata.get('travel_time')
+    ) {
       alert('You must enter a radius or travel time for the address.');
       return;
     }

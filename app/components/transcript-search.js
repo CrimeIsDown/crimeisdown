@@ -49,19 +49,22 @@ export default class TranscriptSearchComponent extends Component {
   scrollTimer;
 
   systemLabels = {
-    'chi_cpd': 'Chicago Police Department',
-    'chi_cfd': 'Chicago Fire Department (conventional P25)',
-    'chi_oemc': 'Chicago OEMC (trunked P25)',
-    'sc21102': 'STARCOM21',
-    'chisuburbs': 'Chicago Suburbs',
-    'willco_p25': 'Will County (P25)',
+    chi_cpd: 'Chicago Police Department',
+    chi_cfd: 'Chicago Fire Department (conventional P25)',
+    chi_oemc: 'Chicago OEMC (trunked P25)',
+    sc21102: 'STARCOM21',
+    chisuburbs: 'Chicago Suburbs',
+    willco_p25: 'Will County (P25)',
   };
 
   constructor() {
     super(...arguments);
     const urlParams = new URLSearchParams(window.location.search);
     const matches = /calls_[0-9]{4}_[0-9]{2}/g.exec(window.location.search);
-    this.paidIndexName = urlParams.get('index') ?? (matches ? matches[0] : undefined) ?? 'calls_' + moment.utc().format('YYYY_MM');
+    this.paidIndexName =
+      urlParams.get('index') ??
+      (matches ? matches[0] : undefined) ??
+      'calls_' + moment.utc().format('YYYY_MM');
     this.minStartTime = moment().subtract(12, 'hours').toDate();
     this.maxStartTime = new Date();
     this.flatpickrOptions = {
@@ -101,7 +104,11 @@ export default class TranscriptSearchComponent extends Component {
     this.updateStartTimeFilter([min, max]);
     const indexName = 'calls_' + moment.unix(min).utc().format('YYYY_MM');
 
-    if (this.hasAccess && !this.config.get('MEILISEARCH_INDEX') && indexName !== this.indexName) {
+    if (
+      this.hasAccess &&
+      !this.config.get('MEILISEARCH_INDEX') &&
+      indexName !== this.indexName
+    ) {
       // Redirect to the new index
       setTimeout(() => {
         // Get current URL parts
@@ -475,7 +482,7 @@ export default class TranscriptSearchComponent extends Component {
     });
 
     const systemMenuTransformItems = (items) => {
-      const result = items.map(item => ({
+      const result = items.map((item) => ({
         ...item,
         label: this.systemLabels[item.value] ?? item.label,
         highlighted: this.systemLabels[item.value] ?? item.highlighted,
@@ -485,12 +492,20 @@ export default class TranscriptSearchComponent extends Component {
 
     const sidebarWidgets = [
       this.getClearRefinementsWidget(),
-      this.getHierarchicalMenuWidget('#tg-h-menu', [
-        'talkgroup_hierarchy.lvl0',
-        'talkgroup_hierarchy.lvl1',
-        'talkgroup_hierarchy.lvl2',
-      ], systemMenuTransformItems),
-      this.getRefinementListWidget('#system-menu', 'short_name', systemMenuTransformItems),
+      this.getHierarchicalMenuWidget(
+        '#tg-h-menu',
+        [
+          'talkgroup_hierarchy.lvl0',
+          'talkgroup_hierarchy.lvl1',
+          'talkgroup_hierarchy.lvl2',
+        ],
+        systemMenuTransformItems
+      ),
+      this.getRefinementListWidget(
+        '#system-menu',
+        'short_name',
+        systemMenuTransformItems
+      ),
       this.getRefinementListWidget('#dept-menu', 'talkgroup_group'),
       this.getRefinementListWidget('#tg-menu', 'talkgroup_tag'),
       this.getRefinementListWidget('#tg-type-menu', 'talkgroup_group_tag'),
@@ -567,7 +582,7 @@ export default class TranscriptSearchComponent extends Component {
     return history({
       windowTitle,
       parseURL,
-      cleanUrlOnDispose: true
+      cleanUrlOnDispose: true,
     });
   }
 
@@ -655,7 +670,10 @@ export default class TranscriptSearchComponent extends Component {
           item.label = 'Sys/Dept/TG';
           for (const refinement of item.refinements) {
             const levels = refinement.label.split(' > ');
-            refinement.label = refinement.label.replace(levels[0], this.systemLabels[levels[0]]);
+            refinement.label = refinement.label.replace(
+              levels[0],
+              this.systemLabels[levels[0]]
+            );
           }
         }
         switch (item.attribute) {
@@ -725,7 +743,7 @@ export default class TranscriptSearchComponent extends Component {
         item: ['form-check'],
         count: ['ms-1'],
       },
-      transformItems
+      transformItems,
     });
   }
 
@@ -734,7 +752,7 @@ export default class TranscriptSearchComponent extends Component {
       container,
       attributes,
       limit: 60,
-      transformItems
+      transformItems,
     });
   }
 

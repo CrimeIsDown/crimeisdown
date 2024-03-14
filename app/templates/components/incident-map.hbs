@@ -24,6 +24,11 @@
               <button type="button" class="btn btn-info{{if this.geolocationPending " disabled" ""}}" {{on "click" this.locateMe}} title="Device geolocation works best on mobile"><FaIcon @icon="crosshairs" /> Use my location</button>
             </div>
             {{#if this.location.meta.latitude}}
+            {{#if this.location_approximate}}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              The location entered is not precise, the boundary results given may not be correct. Use a valid street address for better accuracy. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {{/if}}
             <table class="table table-bordered table-condensed">
               <tbody>
               <tr class="info">
