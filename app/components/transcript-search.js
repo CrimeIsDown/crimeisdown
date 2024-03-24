@@ -1,6 +1,7 @@
 import { action, set } from '@ember/object';
 import { service } from '@ember/service';
 import { capitalize } from '@ember/string';
+import { task, timeout } from 'ember-concurrency';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
@@ -35,6 +36,7 @@ export default class TranscriptSearchComponent extends Component {
   @tracked apiKey =
     'REDACTED_PUBLIC_CREDENTIAL';
   @tracked indexName = this.demoIndexName;
+  @tracked latestIndexName;
   @tracked hits = [];
   @tracked selectedHit = null;
   @tracked useMediaPlayerComponent =
@@ -59,10 +61,11 @@ export default class TranscriptSearchComponent extends Component {
 
   constructor() {
     super(...arguments);
-    const urlParams = new URLSearchParams(window.location.search);
     const matches = /calls_[0-9]{4}_[0-9]{2}/g.exec(window.location.search);
+    this.latestIndexName =
+      this.config.get('MEILISEARCH_INDEX') ??
+      'calls_' + moment.utc().format('YYYY_MM');
     this.paidIndexName =
-      urlParams.get('index') ??
       (matches ? matches[0] : undefined) ??
       'calls_' + moment.utc().format('YYYY_MM');
     this.minStartTime = moment().subtract(12, 'hours').toDate();
@@ -78,6 +81,30 @@ export default class TranscriptSearchComponent extends Component {
     if (window.location.hash.startsWith('#hit-')) {
       this.selectedHit = window.location.hash.split('#hit-')[1];
     }
+
+    this.updateLatestIndex.perform();
+  }
+
+  @task *updateLatestIndex() {
+    while (true) {
+      this.latestIndexName =
+        this.config.get('MEILISEARCH_INDEX') ??
+        'calls_' + moment.utc().format('YYYY_MM');
+      yield timeout(1000);
+    }
+  }
+
+  @action setIndexName(indexName) {
+    // Get current URL parts
+    const path = window.location.pathname;
+    const params = new URLSearchParams(window.location.search);
+    const hash = window.location.hash;
+
+    let paramsAsString = params.toString();
+    paramsAsString = paramsAsString.replaceAll(this.indexName, indexName);
+
+    // Update URL
+    window.location.href = `${path}?${paramsAsString}${hash}`;
   }
 
   @action
@@ -111,19 +138,7 @@ export default class TranscriptSearchComponent extends Component {
     ) {
       // Redirect to the new index
       setTimeout(() => {
-        // Get current URL parts
-        const path = window.location.pathname;
-        const params = new URLSearchParams(window.location.search);
-        const hash = window.location.hash;
-
-        // Update query string values
-        params.set('index', indexName);
-
-        let paramsAsString = params.toString();
-        paramsAsString = paramsAsString.replaceAll(this.indexName, indexName);
-
-        // Update URL
-        window.location.href = `${path}?${paramsAsString}${hash}`;
+        this.setIndexName(indexName);
       }, 500);
       // We need a timeout as we have to wait for the new filters to be added to the URL
     }

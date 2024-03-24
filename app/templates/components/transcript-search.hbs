@@ -62,6 +62,12 @@
       <p class="mt-2"><a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img class="img-fluid" src="/img/become-a-patron.png" alt="Become a Patron!"></a></p>
       {{/if}}
     </div>
+    {{else}}
+      {{#unless (eq this.indexName this.latestIndexName)}}
+      <div class="alert alert-warning">
+        <p>You are using an old search index ({{this.indexName}}). To search the latest scanner traffic, please switch to the <a href="javascript:;" {{on "click" (fn this.setIndexName this.latestIndexName)}}>latest index</a>.</p>
+      </div>
+      {{/unless}}
     {{/if}}
     <div id="filters" class="collapse">
       <h2 id="filtersHeading" class="d-lg-none">Filters</h2>
