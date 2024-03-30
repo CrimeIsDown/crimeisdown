@@ -291,6 +291,9 @@
                   {{hit.talkgroup_group_tag}}
                 </span>
               </h4>
+              {{#if this.onTranscriptMapPage}}
+              <p><span class="badge text-bg-light fs-6"><FaIcon @icon="location-dot" /> {{hit.geo_formatted_address}}</span></p>
+              {{/if}}
               <p class="text-small d-md-none">
                 <strong>
                   <a href="{{hit.permalink}}">{{hit.start_time_string}}</a>
