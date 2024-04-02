@@ -68,6 +68,12 @@
                     <p>{{ this.location.police.zone.description }}</p>
                     <p><LinkTo class="btn btn-primary" @route="audio-live" @model={{this.location.police.zone.slug}} title={{concat "Listen to " this.location.police.zone.name}}><FaIcon @icon="volume-up" /> Listen to CPD with Instant Replay</LinkTo></p>
                     <StreamPlayer @stream={{this.location.police.zone}} @autoplay={{false}} />
+
+                    <h5><strong>Search the audio archive</strong></h5>
+                    {{#if (eq this.location.police.district "2")}}
+                    <p class="mb-0"><small><sup>*</sup>The 2nd district switched to Zone 7 on June 30, 2022.</small></p>
+                    {{/if}}
+                    <AudioSearch @feed={{this.location.police.zone.slug}} />
                   {{/if}}
                 </td>
               </tr>

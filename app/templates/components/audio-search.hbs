@@ -2,31 +2,12 @@
   <div class="mb-3">
     <label for="cpdfeed">Radio channel</label>
     <select name="feed" id="cpdfeed" class="form-control" required>
+      {{#unless @feed}}
       <option value="" disabled selected>Select channel</option>
-      <option value="citywide1">Citywide 1</option>
-      <option value="citywide2">Citywide 2</option>
-      <option value="citywide3">Citywide 3</option>
-      <option value="citywide4">Citywide 4</option>
-      <option value="citywide5">Citywide 5</option>
-      <option value="citywide6">Citywide 6</option>
-      <option value="citywide7">Citywide 7</option>
-      <option value="zone1">Zone 1 (016/017)</option>
-      <option value="zone2">Zone 2 (019)</option>
-      <option value="zone3">Zone 3 (012/014)</option>
-      <option value="zone4">Zone 4 (001/018)</option>
-      <option value="zone5">Zone 5 (002) - no longer in use</option>
-      <option value="zone6">Zone 6 (007/008)</option>
-      <option value="zone7">Zone 7 (002/003)</option>
-      <option value="zone8">Zone 8 (004/006)</option>
-      <option value="zone9">Zone 9 (005/022)</option>
-      <option value="zone10">Zone 10 (010/011)</option>
-      <option value="zone11">Zone 11 (020/024)</option>
-      <option value="zone12">Zone 12 (015/025)</option>
-      <option value="zone13">Zone 13 (009)</option>
-      <option value="fire_main">CFD Fire Main (North)</option>
-      <option value="fire_englewood">CFD Fire Englewood (South)</option>
-      <option value="ems_main">CFD EMS Main (North)</option>
-      <option value="ems_englewood">CFD EMS Englewood (South)</option>
+      {{/unless}}
+      {{#each this.feeds as |feed|}}
+        <option value={{feed.value}} selected={{if (eq feed.value @feed) "selected"}}>{{feed.label}}</option>
+      {{/each}}
     </select>
   </div>
   <div class="mb-3">
