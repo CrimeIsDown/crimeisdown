@@ -752,6 +752,7 @@ export default class TranscriptSearchComponent extends Component {
       operator: 'or',
       showMore: true,
       showMoreLimit: 60,
+      searchable: true,
       cssClasses: {
         label: ['form-check-label'],
         checkbox: ['form-check-input'],
