@@ -6,6 +6,8 @@ export default class NotificationChannelModel extends Model {
 
   get serviceName() {
     switch (this.service) {
+      case 'ntfy':
+        return 'ntfy.crimeisdown.com';
       case 'tgram':
         return 'Telegram';
       case 'ses':

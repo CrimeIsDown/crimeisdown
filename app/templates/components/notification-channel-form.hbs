@@ -4,6 +4,7 @@
     <label for="serviceInput" class="form-label">Service name:</label>
     <select id="serviceInput" name="service" class="form-select" {{on "change" this.setService}} required>
       <option value="">Choose a service</option>
+      <option value="ntfy" selected={{eq @channel.service "ntfy"}}>ntfy.crimeisdown.com</option>
       <option value="tgram" selected={{eq @channel.service "tgram"}}>Telegram</option>
       <option value="ses" selected={{eq @channel.service "ses"}}>Email</option>
       {{!-- <option value="sns" selected={{eq @channel.service "sns"}}>SMS</option> --}}
@@ -14,6 +15,9 @@
       Destination:
       {{#if (or (eq @channel.service "tgram") (eq this.service "tgram"))}}
       Telegram Chat ID
+      {{/if}}
+      {{#if (or (eq @channel.service "ntfy") (eq this.service "ntfy"))}}
+      ntfy Topic Name
       {{/if}}
       {{#if (or (eq @channel.service "ses") (eq this.service "ses"))}}
       Email Address
@@ -27,6 +31,11 @@
   {{#if (or (eq @channel.service "tgram") (eq this.service "tgram"))}}
   <div class="alert alert-info" role="alert">
     Get your Telegram chat ID by sending a message to <a href="https://t.me/crimeisdown_bot" target="_blank" rel="noopener noreferrer">@crimeisdown_bot</a>.
+  </div>
+  {{/if}}
+  {{#if (or (eq @channel.service "ntfy") (eq this.service "ntfy"))}}
+  <div class="alert alert-info" role="alert">
+    This topic name can be anything you like, but it must be unique across all users. It cannot contain spaces (use _underscores_ instead). This topic name is what you will enter onto <a href="https://ntfy.crimeisdown.com/" target="_blank" rel="noopener noreferrer">ntfy.crimeisdown.com</a> to subscribe to notifications.
   </div>
   {{/if}}
   <button type="submit" class="btn btn-primary">{{if @channel "Update" "Add"}} Channel</button>

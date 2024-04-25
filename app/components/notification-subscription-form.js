@@ -79,7 +79,14 @@ export default class NotificationSubscriptionFormComponent extends Component {
       alert('You must select at least one notification channel.');
       return;
     }
-    if (formdata.get('keywords').length == 0 && !formdata.get('address')) {
+    let isJustNtfy = true;
+    for (const channel of formdata.getAll('notification_channels')) {
+      if (await this.store.peekRecord('notification-channel', channel).service != 'ntfy') {
+        isJustNtfy = false;
+        break;
+      }
+    }
+    if (formdata.get('keywords').length == 0 && !formdata.get('address') && !isJustNtfy) {
       alert('You must enter at least one keyword or address.');
       return;
     }
@@ -98,23 +105,26 @@ export default class NotificationSubscriptionFormComponent extends Component {
       alert('You must enter a radius or travel time for the address.');
       return;
     }
-    const data = {
+    let data = {
       name: formdata.get('name'),
       keywords: formdata.get('keywords').split('\n'),
-      location: {
-        address: formdata.get('address'),
-        geo: {
-          lat: parseFloat(formdata.get('lat')),
-          lng: parseFloat(formdata.get('lng')),
-        },
-        radius: parseFloat(formdata.get('radius')),
-        travel_time: parseFloat(formdata.get('travel_time')),
-      },
       topic: formdata.getAll('topic').join('|'),
       notification_channels: formdata
         .getAll('notification_channels')
         .map((value) => parseInt(value)),
     };
+    const location = {
+      address: formdata.get('address'),
+      geo: {
+        lat: parseFloat(formdata.get('lat')),
+        lng: parseFloat(formdata.get('lng')),
+      },
+      radius: parseFloat(formdata.get('radius')),
+      travel_time: parseFloat(formdata.get('travel_time')),
+    };
+    if (!isNaN(location.geo.lat) && !isNaN(location.geo.lng)) {
+      data.location = location;
+    }
     if (this.args.subscription) {
       const subscription = this.args.subscription;
       Object.assign(subscription, data);
