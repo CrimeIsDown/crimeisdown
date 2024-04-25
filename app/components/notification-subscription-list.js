@@ -18,7 +18,7 @@ export default class NotificationSubscriptionListComponent extends Component {
       set(
         this,
         'availableTalkgroups',
-        await this.store.peekAll('search-talkgroup')
+        await this.store.peekAll('search-talkgroup'),
       );
     }
 

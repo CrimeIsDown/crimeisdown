@@ -75,7 +75,7 @@ export default class DirectivesList extends Component {
                   event.preventDefault();
                   this.openDirective(
                     $(event.currentTarget).attr('href'),
-                    $(event.currentTarget).text()
+                    $(event.currentTarget).text(),
                   );
                 });
 
@@ -100,25 +100,25 @@ export default class DirectivesList extends Component {
                 history.pushState(
                   '',
                   document.title,
-                  window.location.pathname + window.location.search
+                  window.location.pathname + window.location.search,
                 );
                 // Open the directive
                 let title = $('#directives')
                   .find(
                     'td > a[href="https://directives.crimeisdown.com/diff/' +
                       path +
-                      '"]'
+                      '"]',
                   )
                   .text();
                 this.openDirective(
                   'https://directives.crimeisdown.com/diff/' + path,
-                  title
+                  title,
                 );
               }
             },
           });
         });
-      }
+      },
     );
   }
 
@@ -128,7 +128,7 @@ export default class DirectivesList extends Component {
     let url = new URL(document.getElementById('url').value);
     let date = document.getElementById('date').value;
     window.location.assign(
-      'https://directives.crimeisdown.com' + url.pathname + '?date=' + date
+      'https://directives.crimeisdown.com' + url.pathname + '?date=' + date,
     );
   }
 
@@ -149,7 +149,7 @@ export default class DirectivesList extends Component {
     modal.find('#newVersion').attr('src', url);
 
     const bsModal = new bootstrap.Modal(
-      document.getElementById('directiveViewer')
+      document.getElementById('directiveViewer'),
     );
     bsModal.show();
 

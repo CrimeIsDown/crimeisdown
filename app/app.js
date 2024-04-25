@@ -36,7 +36,7 @@ Sentry.init({
       error &&
       error.message &&
       error.message.match(
-        /The play\(\) request was interrupted by a call to pause\(\)/i
+        /The play\(\) request was interrupted by a call to pause\(\)/i,
       )
     ) {
       return null;

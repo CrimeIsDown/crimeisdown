@@ -97,7 +97,7 @@ export default class AddressLookup extends Service {
       let result = leafletPip.pointInLayer(
         loc,
         layers.communityAreas.layer,
-        true
+        true,
       )[0];
       if (result) {
         meta.communityArea = result.feature.properties['Community Area'];
@@ -114,7 +114,7 @@ export default class AddressLookup extends Service {
       let result = leafletPip.pointInLayer(
         loc,
         layers.neighborhoods.layer,
-        true
+        true,
       )[0];
       if (result) {
         meta.neighborhood = result.feature.properties['Neighborhood'];
@@ -139,7 +139,7 @@ export default class AddressLookup extends Service {
       let result = leafletPip.pointInLayer(
         loc,
         layers.policeDistricts.layer,
-        true
+        true,
       )[0];
       if (result) {
         police.district =
@@ -167,7 +167,7 @@ export default class AddressLookup extends Service {
       let result = leafletPip.pointInLayer(
         loc,
         layers.policeBeats.layer,
-        true
+        true,
       )[0];
       if (result) {
         police.beat = result.feature.properties['Police Beat'];
@@ -185,7 +185,7 @@ export default class AddressLookup extends Service {
 
     this.fireStations.forEach((station) => {
       let distance = loc.distanceTo(
-        L.latLng(station.latitude, station.longitude)
+        L.latLng(station.latitude, station.longitude),
       );
       if (station.engine.length && nearestEngine.distance > distance) {
         nearestEngine = station;
@@ -223,7 +223,7 @@ export default class AddressLookup extends Service {
 
     this.traumaCenters.forEach((hospital) => {
       let distance = loc.distanceTo(
-        L.latLng(hospital.latitude, hospital.longitude)
+        L.latLng(hospital.latitude, hospital.longitude),
       );
       if (hospital.level1Adult && nearestTraumaAdult.distance > distance) {
         nearestTraumaAdult = hospital;
@@ -231,7 +231,7 @@ export default class AddressLookup extends Service {
         set(
           nearestTraumaAdult,
           'distanceMi',
-          Math.round(distance * 0.000621371192 * 100) / 100
+          Math.round(distance * 0.000621371192 * 100) / 100,
         );
       }
       if (hospital.level1Ped && nearestTraumaPed.distance > distance) {
@@ -240,7 +240,7 @@ export default class AddressLookup extends Service {
         set(
           nearestTraumaPed,
           'distanceMi',
-          Math.round(distance * 0.000621371192 * 100) / 100
+          Math.round(distance * 0.000621371192 * 100) / 100,
         );
       }
     });
@@ -274,17 +274,17 @@ export default class AddressLookup extends Service {
       }
       if (station.batt.indexOf(HQ)) {
         searchable.push(
-          'BC' + station.batt.substring(0, station.batt.indexOf(HQ))
+          'BC' + station.batt.substring(0, station.batt.indexOf(HQ)),
         );
       }
       if (station.fireDist.indexOf(HQ)) {
         searchable.push(
-          '2-2-' + station.fireDist.substring(0, station.fireDist.indexOf(HQ))
+          '2-2-' + station.fireDist.substring(0, station.fireDist.indexOf(HQ)),
         );
       }
       if (station.emsDist.indexOf(HQ)) {
         searchable.push(
-          '4-5-' + station.emsDist.substring(0, station.emsDist.indexOf(HQ))
+          '4-5-' + station.emsDist.substring(0, station.emsDist.indexOf(HQ)),
         );
       }
 

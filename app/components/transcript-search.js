@@ -177,12 +177,12 @@ export default class TranscriptSearchComponent extends Component {
     hit.json = JSON.stringify(hitClone, null, 2);
 
     hit._highlightResult.transcript.value = unescape(
-      hit._highlightResult.transcript.value
+      hit._highlightResult.transcript.value,
     ).trim();
 
     try {
       hit.highlighted_transcript = JSON.parse(
-        unescape(hit._highlightResult.raw_transcript.value)
+        unescape(hit._highlightResult.raw_transcript.value),
       );
     } catch (e) {
       console.log(e);
@@ -269,7 +269,7 @@ export default class TranscriptSearchComponent extends Component {
 
     if (this.hits) {
       const existingHit = this.hits.filter(
-        (existingHit) => existingHit.id === hit.id
+        (existingHit) => existingHit.id === hit.id,
       )[0];
       if (existingHit) {
         hit.showPlayer = existingHit.showPlayer || false;
@@ -296,7 +296,7 @@ export default class TranscriptSearchComponent extends Component {
         },
         range: {
           start_time: [hit.start_time - 60 * 20, hit.start_time + 60 * 10].join(
-            ':'
+            ':',
           ),
         },
       },
@@ -400,7 +400,7 @@ export default class TranscriptSearchComponent extends Component {
         alert(
           `Could not load search, please try again or check that you are at the right Patreon tier.\nGot error: ${
             e.message || e
-          }`
+          }`,
         );
       }
       this.hasAccess = false;
@@ -411,9 +411,8 @@ export default class TranscriptSearchComponent extends Component {
 
       const base64Mark = btoa(generateWatermark('DEMO'));
 
-      document.querySelector(
-        '#hits'
-      ).style.background = `url("data:image/svg+xml;base64,${base64Mark}") repeat`;
+      document.querySelector('#hits').style.background =
+        `url("data:image/svg+xml;base64,${base64Mark}") repeat`;
     }
     await new Promise((r) => setTimeout(r, 1)); // Wait for run loop to complete
   }
@@ -452,7 +451,7 @@ export default class TranscriptSearchComponent extends Component {
       {
         finitePagination: true,
         keepZeroFacets: true,
-      }
+      },
     );
 
     this.search = instantsearch({
@@ -469,7 +468,7 @@ export default class TranscriptSearchComponent extends Component {
     this.search.on('render', () => {
       const body = document.querySelector('body.ember-application');
       const container = document.querySelector(
-        'body > div.container, body > div.container-fluid'
+        'body > div.container, body > div.container-fluid',
       );
       if (
         this.search.status === 'loading' ||
@@ -514,12 +513,12 @@ export default class TranscriptSearchComponent extends Component {
           'talkgroup_hierarchy.lvl1',
           'talkgroup_hierarchy.lvl2',
         ],
-        systemMenuTransformItems
+        systemMenuTransformItems,
       ),
       this.getRefinementListWidget(
         '#system-menu',
         'short_name',
-        systemMenuTransformItems
+        systemMenuTransformItems,
       ),
       this.getRefinementListWidget('#dept-menu', 'talkgroup_group'),
       this.getRefinementListWidget('#tg-menu', 'talkgroup_tag'),
@@ -672,7 +671,7 @@ export default class TranscriptSearchComponent extends Component {
                 day: 'numeric',
                 hour: 'numeric',
                 minute: '2-digit',
-              })
+              }),
             );
           }
         }
@@ -687,7 +686,7 @@ export default class TranscriptSearchComponent extends Component {
             const levels = refinement.label.split(' > ');
             refinement.label = refinement.label.replace(
               levels[0],
-              this.systemLabels[levels[0]]
+              this.systemLabels[levels[0]],
             );
           }
         }
@@ -844,7 +843,7 @@ export default class TranscriptSearchComponent extends Component {
           title: item.geo_formatted_address,
           opacity: Math.max(
             0.7,
-            Math.min(1 - (maxTime - item.start_time) / duration, 1)
+            Math.min(1 - (maxTime - item.start_time) / duration, 1),
           ),
         }).addTo(layerGroup);
 
@@ -886,7 +885,7 @@ export default class TranscriptSearchComponent extends Component {
       } else {
         map.setView(
           position || widgetParams.initialPosition,
-          widgetParams.initialZoom
+          widgetParams.initialZoom,
         );
       }
     };
@@ -936,7 +935,7 @@ export default class TranscriptSearchComponent extends Component {
             title: item.geo_formatted_address,
             opacity: Math.max(
               0.3,
-              Math.min(1 - (maxTime - item.start_time) / duration, 1)
+              Math.min(1 - (maxTime - item.start_time) / duration, 1),
             ),
           };
         },

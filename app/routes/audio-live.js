@@ -19,7 +19,7 @@ export default class AudioLiveRoute extends Route {
       const response = await fetch('/data/audio_data/online_streams.json');
       const onlineStreams = await response.json();
       const stream = onlineStreams.filter(
-        (stream) => stream.slug === params.stream
+        (stream) => stream.slug === params.stream,
       )[0];
       if (stream) {
         return stream;

@@ -30,7 +30,7 @@ export default class NotificationSubscriptionFormComponent extends Component {
     set(
       this,
       'availableTalkgroups',
-      await this.store.findAll('search-talkgroup')
+      await this.store.findAll('search-talkgroup'),
     );
   }
 
@@ -61,9 +61,8 @@ export default class NotificationSubscriptionFormComponent extends Component {
           place.geometry.location.lat();
         document.getElementById('lngInput').value =
           place.geometry.location.lng();
-        document.getElementById(
-          'mapAddressButton'
-        ).href = `https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}`;
+        document.getElementById('mapAddressButton').href =
+          `https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}`;
       });
     }
   }
@@ -123,7 +122,7 @@ export default class NotificationSubscriptionFormComponent extends Component {
     } else {
       const subscription = this.store.createRecord(
         'transcript-subscription',
-        data
+        data,
       );
       subscription.save();
       document.getElementById('subscription-form').reset();

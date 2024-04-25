@@ -72,7 +72,7 @@ export default class SearchRadioids extends Component {
           if (match.Level_4.match(/\$1$/)) {
             this.radio.level4 = match.Level_4.replace(
               '$1',
-              input.match(/\d+/)[0]
+              input.match(/\d+/)[0],
             );
           } else {
             this.radio.level4 = match.Level_4;

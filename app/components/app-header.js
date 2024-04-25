@@ -59,7 +59,7 @@ export default class AppHeader extends Component {
     const showActiveTheme = (theme) => {
       const activeThemeIcon = document.querySelector('.theme-icon-active use');
       const btnToActive = document.querySelector(
-        `[data-bs-theme-value="${theme}"]`
+        `[data-bs-theme-value="${theme}"]`,
       );
       const svgOfActiveBtn = btnToActive
         .querySelector('svg use')

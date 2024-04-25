@@ -17,7 +17,7 @@ export default class ApplicationAdapter extends RESTAdapter {
         document.cookie
           .split('; ')
           .find((row) => row.startsWith('XSRF-TOKEN='))
-          ?.split('=')[1]
+          ?.split('=')[1],
       ),
     };
   }

@@ -5,7 +5,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action, set } from '@ember/object';
-import { debounce, schedule } from '@ember/runloop';
+import { debounceTask, scheduleTask } from 'ember-lifeline';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
 
@@ -93,7 +93,7 @@ export default class IncidentMap extends Component {
 
       if (e.accuracy > 1000) {
         alert(
-          'Warning: We were not able to determine a precise location, so your location results may be incorrect. Try a different device for better results.'
+          'Warning: We were not able to determine a precise location, so your location results may be incorrect. Try a different device for better results.',
         );
       }
 
@@ -102,11 +102,11 @@ export default class IncidentMap extends Component {
       const marker = L.marker(e.latlng)
         .addTo(this.map)
         .bindPopup(
-          'You are within ' + radius.toPrecision(5) + ' feet of this point'
+          'You are within ' + radius.toPrecision(5) + ' feet of this point',
         )
         .openPopup();
       const circle = L.circle(e.latlng, radius, { fill: radius < 1000 }).addTo(
-        this.map
+        this.map,
       );
 
       this.setGeoLocationMarkers(marker, circle);
@@ -131,7 +131,7 @@ export default class IncidentMap extends Component {
     this.map.on('locationerror', (e) => {
       alert(
         e.message +
-          ' If you are on iOS, make sure to enable Location Services first.'
+          ' If you are on iOS, make sure to enable Location Services first.',
       );
 
       this.geolocationPending = false;
@@ -195,7 +195,7 @@ export default class IncidentMap extends Component {
           .substring(hash.indexOf('location_query='))
           .split('&')[0]
           .split('=')[1]
-          .replace(/\+/g, ' ')
+          .replace(/\+/g, ' '),
       );
       this.searchAddress();
     }
@@ -224,7 +224,7 @@ export default class IncidentMap extends Component {
           '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         minZoom: 0,
         maxZoom: 20,
-      }
+      },
     );
 
     this.layersControl.addBaseLayer(mapbox, 'MapBox Streets');
@@ -236,7 +236,7 @@ export default class IncidentMap extends Component {
           '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         minZoom: 0,
         maxZoom: 20,
-      }
+      },
     );
     this.layersControl.addBaseLayer(mapboxDark, 'MapBox Streets Dark');
 
@@ -254,7 +254,7 @@ export default class IncidentMap extends Component {
         minZoom: 0,
         maxZoom: 20,
       }),
-      'OpenStreetMap'
+      'OpenStreetMap',
     );
 
     this.layersControl.addBaseLayer(
@@ -263,7 +263,7 @@ export default class IncidentMap extends Component {
         minZoom: 0,
         maxZoom: 20,
       }),
-      'Google Hybrid'
+      'Google Hybrid',
     );
   }
 
@@ -291,10 +291,10 @@ export default class IncidentMap extends Component {
 
     this.location = await this.addressLookup.generateLocationDataForAddress(
       this.layers,
-      event.location.raw
+      event.location.raw,
     );
     this.location_approximate = ['RANGE_INTERPOLATED', 'APPROXIMATE'].includes(
-      event.location.raw.geometry.location_type
+      event.location.raw.geometry.location_type,
     );
     const randomInt = Math.round(Math.random() * 1000); // Without this, the iframe would not reload when we change locations
     this.wazeIframeUrl =
@@ -306,12 +306,12 @@ export default class IncidentMap extends Component {
       randomInt;
     if (this.location.meta.inChicago) {
       this.crimereportsIframeUrl = this.buildCrimeMapUrl(
-        this.location.meta.formattedAddress
+        this.location.meta.formattedAddress,
       );
 
-      schedule('afterRender', () => {
+      scheduleTask(this, 'actions', () => {
         const tooltipTriggerList = [].slice.call(
-          document.querySelectorAll('[data-bs-toggle="tooltip"]')
+          document.querySelectorAll('[data-bs-toggle="tooltip"]'),
         );
         tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl);
@@ -485,7 +485,7 @@ export default class IncidentMap extends Component {
                   className: 'awesome-marker-icon-red awesome-marker',
                   html: '<svg class="svg-inline--fa fa-fire-extinguisher" data-prefix="fas" data-icon="fire-extinguisher" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: #fff;font-size: 1rem;margin-top: 10px;"><path fill="currentColor" d="M500.3 7.3C507.7 13.3 512 22.4 512 32v96c0 9.6-4.3 18.7-11.7 24.7s-17.2 8.5-26.6 6.6l-160-32C301.5 124.9 292 115.7 289 104H224v34.8c37.8 18 64 56.5 64 101.2V384H64V240c0-44.7 26.2-83.2 64-101.2V110c-36.2 11.1-66 36.9-82.3 70.5c-5.8 11.9-20.2 16.9-32.1 11.1S-3.3 171.4 2.5 159.5C26.7 109.8 72.7 72.6 128 60.4V32c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V56h65c3-11.7 12.5-20.9 24.7-23.4l160-32c9.4-1.9 19.1 .6 26.6 6.6zM288 416v32c0 35.3-28.7 64-64 64H128c-35.3 0-64-28.7-64-64V416H288zM176 96c8.8 0 16-7.2 16-16s-7.2-16-16-16s-16 7.2-16 16s7.2 16 16 16z"></path></svg>',
                 }),
-              }
+              },
             );
 
             // Convert address to title case
@@ -539,7 +539,7 @@ export default class IncidentMap extends Component {
         } else if (layerName === 'gangs') {
           const kmlLayer = new L.KML();
           this.map.attributionControl.addAttribution(
-            'Gang map by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank">u/ReggieG45</a>'
+            'Gang map by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank">u/ReggieG45</a>',
           );
           if (layerObj.showByDefault) {
             kmlLayer.addTo(this.map);
@@ -561,7 +561,7 @@ export default class IncidentMap extends Component {
                 if (
                   Object.prototype.hasOwnProperty.call(
                     layerObj.propMappings,
-                    key
+                    key,
                   )
                 ) {
                   props[layerObj.propMappings[key]] = feature.properties[key];
@@ -614,7 +614,7 @@ export default class IncidentMap extends Component {
             const result = leafletPip.pointInLayer(
               e.latlng,
               obj.layer,
-              true
+              true,
             )[0];
             if (result) {
               Object.assign(allProps, result.feature.properties);
@@ -632,9 +632,11 @@ export default class IncidentMap extends Component {
       }
     };
 
+    const debounce = {"onMouseMove": onMouseMove};
+
     this.map.on('mousemove', (e) => {
       if (e.originalEvent.buttons === 0) {
-        debounce(this, onMouseMove, e, 2, true);
+        debounceTask(debounce, 'onMouseMove', e, 2, true);
       }
     });
 
@@ -673,7 +675,7 @@ export default class IncidentMap extends Component {
             },
           },
         },
-      })
+      }),
     );
 
     const drawEventCreated = (event) => {

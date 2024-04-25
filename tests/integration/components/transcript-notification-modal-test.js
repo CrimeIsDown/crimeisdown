@@ -25,5 +25,5 @@ module(
 
       assert.dom(this.element).hasText('template block text');
     });
-  }
+  },
 );

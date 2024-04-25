@@ -78,7 +78,7 @@ export default class AudioSearch extends Component {
     let datetime = moment.tz(
       inputs.datetime,
       'M/D/YYYY h:mm A',
-      'America/Chicago'
+      'America/Chicago',
     );
     if (
       Object.keys(this.encryptedZones).includes(inputs.feed) &&

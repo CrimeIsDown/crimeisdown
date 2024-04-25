@@ -44,7 +44,7 @@ export default class MediaPlayer extends Component {
       this.plugins.wavesurfer.plugins.push(
         window.WaveSurfer.timeline.create({
           container: '#timeline' + this.idSuffix,
-        })
+        }),
       );
     }
 
@@ -84,12 +84,12 @@ export default class MediaPlayer extends Component {
     let wavesurfer = this.player.wavesurfer().surfer;
     let playerWidth = wavesurfer.drawer.getWidth();
     let minPxPerSec = Math.round(
-      (playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration()
+      (playerWidth * wavesurfer.params.pixelRatio) / wavesurfer.getDuration(),
     );
     let defaultMinPxPerSec = 20;
 
     wavesurfer.zoom(
-      minPxPerSec * (Number(e.target.value) / defaultMinPxPerSec)
+      minPxPerSec * (Number(e.target.value) / defaultMinPxPerSec),
     );
   }
 }

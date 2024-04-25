@@ -24,12 +24,12 @@ export default class VirtualScanner extends Component {
     let nodes = [];
     try {
       const response = await fetch(
-        'https://audio.crimeisdown.com/streaming/stat'
+        'https://audio.crimeisdown.com/streaming/stat',
       );
       if (response.status == 200) {
         const parser = new window.DOMParser().parseFromString(
           await response.text(),
-          'text/xml'
+          'text/xml',
         );
         nodes = parser.querySelectorAll('live stream');
       }
@@ -120,7 +120,7 @@ export default class VirtualScanner extends Component {
         } else if (streamData.panner) {
           streamData.panner.pan.setValueAtTime(
             roomPos.x / 2,
-            this.audioContext.currentTime
+            this.audioContext.currentTime,
           );
         }
       }
@@ -144,7 +144,7 @@ export default class VirtualScanner extends Component {
     if (event.target.checked) {
       this.setupResonanceScene();
       this.enabledStreams.pushObject(
-        EmberObject.create(this.streams.findBy('name', event.target.value))
+        EmberObject.create(this.streams.findBy('name', event.target.value)),
       );
     } else {
       this.removeStream(event.target.value);
@@ -166,7 +166,7 @@ export default class VirtualScanner extends Component {
 
     if (!(window.AudioContext || window.webkitAudioContext)) {
       alert(
-        'Sorry, your browser does not support our own audio streaming. Please check out some of the other streaming links on this page, or switch to a browser like Chrome that is supported.'
+        'Sorry, your browser does not support our own audio streaming. Please check out some of the other streaming links on this page, or switch to a browser like Chrome that is supported.',
       );
       return;
     }
@@ -220,17 +220,17 @@ export default class VirtualScanner extends Component {
       this.randomPosition(
         this.sceneDimensions.width,
         this.sceneDimensions.height,
-        this.sceneDimensions.depth
-      )
+        this.sceneDimensions.depth,
+      ),
     );
     streamData.set(
       'draggableElement',
-      this.addDraggable(streamName, streamData.position)
+      this.addDraggable(streamName, streamData.position),
     );
 
     player.media.addEventListener(
       'canplay',
-      this.onCanPlay.bind(this, streamData)
+      this.onCanPlay.bind(this, streamData),
     );
   }
 
@@ -238,7 +238,7 @@ export default class VirtualScanner extends Component {
     const target = event.detail.target;
     target.removeEventListener(
       'canplay',
-      this.onCanPlay.bind(this, streamData)
+      this.onCanPlay.bind(this, streamData),
     );
     // Get the real media element
     let playerElement = target.renderer;
@@ -248,7 +248,7 @@ export default class VirtualScanner extends Component {
 
     if (streamData.audioElementSource) {
       console.error(
-        'Already existing audioElementSource for element ' + playerElement.id
+        'Already existing audioElementSource for element ' + playerElement.id,
       );
       return;
     }
@@ -266,7 +266,7 @@ export default class VirtualScanner extends Component {
     target.addEventListener('volumechange', () => {
       volume.gain.setValueAtTime(
         target.getVolume(),
-        this.audioContext.currentTime
+        this.audioContext.currentTime,
       );
     });
     streamData.analyser.connect(volume);

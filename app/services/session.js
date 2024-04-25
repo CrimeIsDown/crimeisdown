@@ -37,7 +37,7 @@ export default class SessionService extends Service {
     try {
       const response = await fetch(
         this.config.get('API_BASE_URL') + '/api/user',
-        this.fetchOptions
+        this.fetchOptions,
       );
       if (response.status === 200) {
         this.user = await response.json();
@@ -63,7 +63,7 @@ export default class SessionService extends Service {
             Accept: 'text/plain',
           },
           credentials: 'include',
-        }
+        },
       );
       if (response.status != 200) {
         return Promise.reject(response.status);

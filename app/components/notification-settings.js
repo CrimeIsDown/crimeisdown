@@ -42,7 +42,7 @@ export default class NotificationSettingsComponent extends Component {
   async getNotificationsConfig() {
     const response = await fetch(
       this.config.get('API_BASE_URL') + '/api/config/notifications.json',
-      this.session.fetchOptions
+      this.session.fetchOptions,
     );
     this.notificationsConfig = await response.json();
   }
