@@ -436,9 +436,6 @@ export default class TranscriptSearchComponent extends Component {
     }
 
     if (this.onTranscriptMapPage) {
-      this.defaultRouteState[this.indexName].refinementList = {
-        short_name: ['chi_cpd', 'chi_cfd', 'chi_oemc'],
-      };
       this.defaultRouteState[this.indexName].geoSearch = {
         boundingBox: '42,-87.5,41.6,-87.9',
       };
