@@ -1,17 +1,16 @@
-FROM node:8 AS build-env
+FROM node:20 AS build-env
 
-RUN npm install -g yarn
-RUN yarn global add ember-cli
+RUN npm install -g ember-cli
 
 WORKDIR /usr/src/app
 
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
-RUN yarn install
+RUN npm install
 
 COPY . .
 
-RUN ember build
+RUN ember build -e production
 
 FROM nginx:1-alpine
 
