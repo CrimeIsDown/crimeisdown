@@ -30,6 +30,7 @@ export default class TranscriptSearchComponent extends Component {
   @service config;
   @service metrics;
   @service session;
+  @service addressLookup;
 
   @tracked hasAccess = undefined;
   @tracked onTranscriptMapPage = window.location.pathname == '/transcripts/map';
@@ -61,6 +62,7 @@ export default class TranscriptSearchComponent extends Component {
 
   constructor() {
     super(...arguments);
+    this.addressLookup.loadData();
     const matches = /calls_[0-9]{4}_[0-9]{2}/g.exec(window.location.search);
     this.latestIndexName =
       this.config.get('MEILISEARCH_INDEX') ??
@@ -196,10 +198,16 @@ export default class TranscriptSearchComponent extends Component {
       const src = segment[0];
       if (src) {
         src.filter_link = this.getSrcFilterLink(src);
-        src.label =
-          highlightedSegment[0].tag.length > 0
-            ? highlightedSegment[0].tag
-            : String(src.src);
+        if (highlightedSegment[0].tag.length > 0) {
+          src.label = highlightedSegment[0].tag;
+          const fireStationResults = this.addressLookup.findStation(src.label);
+          if (fireStationResults.length) {
+            src.address =
+              fireStationResults[0].addr + ' ' + fireStationResults[0].zip;
+          }
+        } else {
+          src.label = String(src.src);
+        }
       }
       // Show newlines properly
       segment[1] = highlightedSegment[1].replaceAll('\n', '<br>');
@@ -312,7 +320,13 @@ export default class TranscriptSearchComponent extends Component {
   }
 
   @action
-  didInsertHit() {
+  didInsertHit(elem) {
+    const tooltipTriggerList = [].slice.call(
+      elem.querySelectorAll('[data-bs-toggle="tooltip"]'),
+    );
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
     if (this.selectedHit) {
       clearTimeout(this.scrollTimer);
       this.scrollTimer = setTimeout(() => {

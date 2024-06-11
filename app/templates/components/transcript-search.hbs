@@ -306,7 +306,7 @@
                   <p>
                     {{#if (get segment "0")}}
                     {{!-- template-lint-disable no-triple-curlies --}}
-                    <a href="{{get segment "0.filter_link"}}" title="Radio ID {{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>:
+                    <a href="{{get segment "0.filter_link"}}" title="Radio ID {{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>{{#if segment.0.address}} <a href="javascript:;" data-bs-toggle="tooltip" data-bs-title="{{{get segment "0.address"}}}"><FaIcon @icon="map-marker-alt" /></a>{{/if}}:
                     {{/if}}
                     {{!-- template-lint-disable no-triple-curlies --}}
                     {{{get segment "1"}}}
