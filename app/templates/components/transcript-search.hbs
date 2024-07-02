@@ -37,6 +37,10 @@
       <span class="visually-hidden">Settings</span>
       <FaIcon @icon="gear" />
     </button>
+    <button type="button" class="btn btn-primary" {{on "click" this.saveSearch}}>
+      <span class="visually-hidden">Save</span>
+      <FaIcon @icon="save" />
+    </button>
   </div>
 </div>
 
@@ -81,6 +85,32 @@
         </div>
       </div>
       <div class="accordion accordion-flush" id="filterOptionsAccordion">
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="saved-h-heading">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#saved-h-collapse" aria-expanded="false" aria-controls="tg-h-collapse">
+              Saved Searches
+            </button>
+          </h3>
+          <div id="saved-h-collapse" class="accordion-collapse collapse show" aria-labelledby="saved-h-heading">
+            <div id="saved-h-menu" class="accordion-body">
+              {{#unless this.savedSearches}}
+              No saved searches.
+              {{/unless}}
+              {{#each this.savedSearches as |search index|}}
+              <ul class="list-group list-group-horizontal pb-2">
+                <a href="{{search.url}}" class="list-group-item list-group-item-action" style="padding-top: 0.7rem">
+                  {{search.name}}
+                </a>
+                <li class="list-group-item">
+                  <button type="button" class="btn btn-danger btn-sm" aria-label="Delete" {{on "click" (fn this.removeSavedSearch index)}}>
+                    <FaIcon @icon="trash-alt" />
+                  </button>
+                </li>
+              </ul>
+              {{/each}}
+            </div>
+          </div>
+        </div>
         <div class="accordion-item">
           <h3 class="accordion-header" id="tg-h-heading">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tg-h-collapse" aria-expanded="false" aria-controls="tg-h-collapse">

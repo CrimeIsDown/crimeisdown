@@ -1,6 +1,7 @@
 import { action, set } from '@ember/object';
 import { service } from '@ember/service';
 import { capitalize } from '@ember/string';
+import { A } from '@ember/array';
 import { task, timeout } from 'ember-concurrency';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
@@ -47,6 +48,7 @@ export default class TranscriptSearchComponent extends Component {
   @tracked minStartTime;
   @tracked maxStartTime;
   @tracked currentSearch;
+  @tracked savedSearches = A([]);
   demoIndexName = 'calls_demo';
   autoRefresh = undefined;
   scrollTimer;
@@ -82,6 +84,14 @@ export default class TranscriptSearchComponent extends Component {
     };
     if (window.location.hash.startsWith('#hit-')) {
       this.selectedHit = window.location.hash.split('#hit-')[1];
+    }
+    const savedSearches = localStorage.getItem('savedSearches')
+    if (savedSearches) {
+      let savedSearchesArray = JSON.parse(savedSearches);
+      if (!Array.isArray(savedSearchesArray)) {
+        savedSearchesArray = [];
+      }
+      this.savedSearches = A(savedSearchesArray);
     }
 
     this.updateLatestIndex.perform();
@@ -317,6 +327,33 @@ export default class TranscriptSearchComponent extends Component {
     const state = this.buildContextState(hit);
     this.selectedHit = hit.id;
     this.search.setUiState(state);
+  }
+
+  @action saveSearch(event) {
+    let searchName = prompt('Enter a name for this search');
+    if (!searchName) {
+      return;
+    }
+    let state = this.search.getUiState();
+    delete state[this.indexName]['range'];
+    this.savedSearches.pushObject({
+      name: searchName,
+      url: this.search.createURL(state),
+    });
+    try {
+      localStorage.setItem('savedSearches', JSON.stringify(this.savedSearches));
+    } catch (e) {
+      alert('Could not save search, localStorage is disabled.');
+    }
+  }
+
+  @action removeSavedSearch(index, event) {
+    this.savedSearches.removeAt(index);
+    try {
+      localStorage.setItem('savedSearches', JSON.stringify(this.savedSearches));
+    } catch (e) {
+      alert('Could not save search, localStorage is disabled.');
+    }
   }
 
   @action
