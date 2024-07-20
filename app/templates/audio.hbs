@@ -7,12 +7,12 @@
           <p><em><a href="#lookuprecording">Jump to scanner recording download</a></em></p>
         </div>
         <div class="col-md-12 mb-3">
-          <VirtualScanner @streams={{this.model}} />
+          <VirtualScanner @streams={{this.model.streams}} />
         </div>
         <div class="col-md-12">
           <h3>General #ChicagoScanner feed</h3>
-          <p>Scanner feed of ISP Dist. Chicago, Metra PD, CPD Citywides, various CFD incident channels, Marine 16, and aviation UNICOM. Scan list subject to change.<br><br><a href="https://www.youtube.com/channel/UCUS-tAwCyxBrrA3FtSjH2NA/live" target="_blank" rel="noopener noreferrer">View on YouTube</a></p>
-          <iframe id="youtube-player" title="YouTube scanner feed" src="https://www.youtube.com/embed/Td5SccXbbu4?si=ax2OdlS4jPA4abvc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <p>Scanner feed of ISP Dist. Chicago, Metra PD, CPD Citywides, various CFD incident channels, Marine 16, and aviation UNICOM. Scan list subject to change.<br><br><a href="https://www.youtube.com/@EricTendian/live" target="_blank" rel="noopener noreferrer">View on YouTube</a></p>
+          <iframe id="youtube-player" title="YouTube scanner feed" src="{{this.model.youtubeEmbedUrl}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <div class="col-md-12">
           <div class="accordion" id="accordion">
