@@ -9,7 +9,7 @@ export default class AudioRoute extends Route {
     model.streams = await response.json();
 
     try {
-      const ytResponse = await fetch('https://corsproxy.io/?' + encodeURIComponent('https://www.youtube.com/@EricTendian/live'));
+      const ytResponse = await fetch('https://worker.erictendian.workers.dev/youtubelive/');
       const ytResponseData = await ytResponse.text();
 
       const parser = new DOMParser();
