@@ -170,12 +170,20 @@ module.exports = function (defaults) {
   app.import('node_modules/videojs-wavesurfer/dist/videojs.wavesurfer.js');
   app.import('node_modules/videojs-wavesurfer/dist/css/videojs.wavesurfer.css');
 
-  app.import(
-    'node_modules/icecast-metadata-player/build/icecast-metadata-player-1.17.3.main.min.js',
-  );
-  app.import(
-    'node_modules/icecast-metadata-player/build/icecast-metadata-player-1.17.3.mediasource.min.js',
-  );
+  for (const component of [
+    'main',
+    'synaudio',
+    'mediasource',
+    'mpeg',
+    'flac',
+    'opus',
+    'vorbis',
+    'common',
+  ]) {
+    app.import(
+      `node_modules/icecast-metadata-player/build/icecast-metadata-player-1.17.3.${component}.min.js`,
+    );
+  }
 
   const ogvAssets = new Funnel('node_modules/ogv/dist', {
     srcDir: '/',
