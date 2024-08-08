@@ -35,4 +35,5 @@ Router.map(function () {
     path: '/transcripts/notifications',
   });
   this.route('settings');
+  this.route('airshow');
 });

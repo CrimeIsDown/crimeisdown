@@ -9,12 +9,16 @@ export default class AudioRoute extends Route {
     model.streams = await response.json();
 
     try {
-      const ytResponse = await fetch('https://worker.erictendian.workers.dev/youtubelive/');
+      const ytResponse = await fetch(
+        'https://worker.erictendian.workers.dev/youtubelive/',
+      );
       const ytResponseData = await ytResponse.text();
 
       const parser = new DOMParser();
       const doc = parser.parseFromString(ytResponseData, 'text/html');
-      model.youtubeEmbedUrl = doc.querySelector('meta[property="og:video:secure_url"]').attributes.content.value;
+      model.youtubeEmbedUrl = doc.querySelector(
+        'meta[property="og:video:secure_url"]',
+      ).attributes.content.value;
     } catch (e) {
       console.error('Error fetching YouTube data', e);
     }

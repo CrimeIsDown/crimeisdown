@@ -632,7 +632,7 @@ export default class IncidentMap extends Component {
       }
     };
 
-    const debounce = {"onMouseMove": onMouseMove};
+    const debounce = { onMouseMove: onMouseMove };
 
     this.map.on('mousemove', (e) => {
       if (e.originalEvent.buttons === 0) {

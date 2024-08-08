@@ -85,7 +85,7 @@ export default class TranscriptSearchComponent extends Component {
     if (window.location.hash.startsWith('#hit-')) {
       this.selectedHit = window.location.hash.split('#hit-')[1];
     }
-    const savedSearches = localStorage.getItem('savedSearches')
+    const savedSearches = localStorage.getItem('savedSearches');
     if (savedSearches) {
       let savedSearchesArray = JSON.parse(savedSearches);
       if (!Array.isArray(savedSearchesArray)) {
@@ -329,7 +329,7 @@ export default class TranscriptSearchComponent extends Component {
     this.search.setUiState(state);
   }
 
-  @action saveSearch(event) {
+  @action saveSearch() {
     let searchName = prompt('Enter a name for this search');
     if (!searchName) {
       return;
@@ -347,7 +347,7 @@ export default class TranscriptSearchComponent extends Component {
     }
   }
 
-  @action removeSavedSearch(index, event) {
+  @action removeSavedSearch(index) {
     this.savedSearches.removeAt(index);
     try {
       localStorage.setItem('savedSearches', JSON.stringify(this.savedSearches));

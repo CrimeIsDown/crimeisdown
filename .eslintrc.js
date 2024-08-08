@@ -28,6 +28,7 @@ module.exports = {
     google: true,
     rome: true,
     bootstrap: true,
+    IcecastMetadataPlayer: true,
   },
   rules: {
     'ember/no-jquery': 'off',

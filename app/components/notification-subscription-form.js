@@ -81,12 +81,19 @@ export default class NotificationSubscriptionFormComponent extends Component {
     }
     let isJustNtfy = true;
     for (const channel of formdata.getAll('notification_channels')) {
-      if (await this.store.peekRecord('notification-channel', channel).service != 'ntfy') {
+      if (
+        (await this.store.peekRecord('notification-channel', channel)
+          .service) != 'ntfy'
+      ) {
         isJustNtfy = false;
         break;
       }
     }
-    if (formdata.get('keywords').length == 0 && !formdata.get('address') && !isJustNtfy) {
+    if (
+      formdata.get('keywords').length == 0 &&
+      !formdata.get('address') &&
+      !isJustNtfy
+    ) {
       alert('You must enter at least one keyword or address.');
       return;
     }

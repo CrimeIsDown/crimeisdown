@@ -98,7 +98,7 @@
               {{/unless}}
               {{#each this.savedSearches as |search index|}}
               <ul class="list-group list-group-horizontal pb-2">
-                <a href="{{search.url}}" class="list-group-item list-group-item-action" style="padding-top: 0.7rem">
+                <a href="{{search.url}}" class="list-group-item list-group-item-action">
                   {{search.name}}
                 </a>
                 <li class="list-group-item">
@@ -336,7 +336,7 @@
                   <p>
                     {{#if (get segment "0")}}
                     {{!-- template-lint-disable no-triple-curlies --}}
-                    <a href="{{get segment "0.filter_link"}}" title="Radio ID {{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>{{#if segment.0.address}} <a href="javascript:;" data-bs-toggle="tooltip" data-bs-title="{{{get segment "0.address"}}}"><FaIcon @icon="map-marker-alt" /></a>{{/if}}:
+                    <a href="{{get segment "0.filter_link"}}" title="Radio ID {{get segment "0.src"}}" {{on "click" (fn this.filterSrc (get segment "0") hit)}}>{{{get segment "0.label"}}}</a>{{#if (get segment "0.address")}} <a href="javascript:;" data-bs-toggle="tooltip" data-bs-title="{{{get segment "0.address"}}}"><FaIcon @icon="map-marker-alt" /></a>{{/if}}:
                     {{/if}}
                     {{!-- template-lint-disable no-triple-curlies --}}
                     {{{get segment "1"}}}
