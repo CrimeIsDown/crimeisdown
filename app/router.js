@@ -36,4 +36,5 @@ Router.map(function () {
   });
   this.route('settings');
   this.route('airshow');
+  this.route('sandbox');
 });

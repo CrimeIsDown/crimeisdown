@@ -6,6 +6,24 @@ const Funnel = require('broccoli-funnel');
 
 module.exports = function (defaults) {
   const app = new EmberApp(defaults, {
+    autoImport: {
+      webpack: {
+        module: {
+          rules: [
+            {
+              test: /react-frontend\/.*\.jsx/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: [['@babel/preset-react', { runtime: 'automatic' }]],
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
+
     babel: {
       plugins: [
         // ... any other plugins
