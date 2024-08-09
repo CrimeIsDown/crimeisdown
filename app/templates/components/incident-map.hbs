@@ -23,6 +23,11 @@
             <div class="form-group mt-1 mb-3">
               <button type="button" class="btn btn-info{{if this.geolocationPending " disabled" ""}}" {{on "click" this.locateMe}} title="Device geolocation works best on mobile"><FaIcon @icon="crosshairs" /> Use my location</button>
             </div>
+            {{#if this.no_results}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              The location entered could not be found. Please try again with a different address or intersection. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {{/if}}
             {{#if this.location.meta.latitude}}
             {{#if this.location_approximate}}
             <div class="alert alert-warning alert-dismissible fade show" role="alert">

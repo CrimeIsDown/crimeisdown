@@ -36,6 +36,9 @@ export default class IncidentMap extends Component {
   location_approximate = false;
 
   @tracked
+  no_results = false;
+
+  @tracked
   wazeIframeUrl =
     'https://embed.waze.com/iframe?zoom=11&lat=41.85&lon=-87.63&ct=livemap';
 
@@ -64,7 +67,7 @@ export default class IncidentMap extends Component {
   }
 
   @action
-  searchAddress(event = null) {
+  async searchAddress(event = null) {
     if (event) {
       event.preventDefault();
     }
@@ -75,7 +78,17 @@ export default class IncidentMap extends Component {
     }
     $('.leaflet-control-geosearch form input').val(this.address);
     $('#address-search').find('input[name="address"]').val(this.address);
-    this.searchControl.searchElement.handleSubmit({ query: this.address });
+
+    const query = { query: this.address };
+    this.searchControl.resultList.clear();
+    const results = await this.geosearchProvider.search(query);
+
+    if (results && results.length > 0) {
+      this.no_results = false;
+      this.searchControl.showResult(results[0], query);
+    } else {
+      this.no_results = true;
+    }
   }
 
   @action
@@ -275,6 +288,7 @@ export default class IncidentMap extends Component {
   }
 
   async showLocation(event) {
+    this.no_results = false;
     const query = this.address;
     if (query) {
       // We actually searched an address here, so don't show the geolocation marker anymore
