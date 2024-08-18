@@ -98,14 +98,18 @@
               {{/unless}}
               {{#each this.savedSearches as |search|}}
               <ul class="list-group list-group-horizontal pb-2">
-                <a href="{{search.url}}" class="list-group-item list-group-item-action">
+                <a href="{{search.latestUrl}}" class="list-group-item list-group-item-action">
                   {{search.name}}
                 </a>
                 {{#if search.is_global}}
                 <li class="list-group-item">
                   <FaIcon @icon="earth-americas" />
                 </li>
-                {{else}}
+                {{/if}}
+                {{#if (eq search.user_id this.session.user.id)}}
+                <button type="button" class="btn btn-secondary btn-sm list-group-item" aria-label="Update" {{on "click" (fn this.updateSavedSearch search)}}>
+                  <FaIcon @icon="pencil" />
+                </button>
                 <button type="button" class="btn btn-danger btn-sm list-group-item" aria-label="Delete" {{on "click" (fn this.deleteSavedSearch search)}}>
                   <FaIcon @icon="trash-alt" />
                 </button>

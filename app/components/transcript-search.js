@@ -340,19 +340,54 @@ export default class TranscriptSearchComponent extends Component {
     set(this, 'savedSearches', searches);
   }
 
+  getSearchFilters() {
+    const filters = [];
+    const refinementItems = document.querySelectorAll('.ais-CurrentRefinements-item');
+    for (const item of refinementItems) {
+      const label = item.querySelector('.ais-CurrentRefinements-label').innerText;
+      if (label.startsWith('Call Time')) {
+        continue;
+      }
+      const values = [];
+      for (const value of item.querySelectorAll('.ais-CurrentRefinements-category .ais-CurrentRefinements-categoryLabel')) {
+        values.push(value.innerText);
+      }
+      filters.push(`${label} ${values.join(', ')}`);
+    }
+    return filters;
+  }
+
+  createSavedSearchUrl() {
+    let state = this.search.getUiState();
+    delete state[this.indexName]['range'];
+    delete state[this.indexName]['sortBy'];
+    return this.search.createURL(state);
+  }
+
   @action saveSearch() {
-    let searchName = prompt('Enter a name for this search');
+    const searchName = prompt('Enter a name for this search');
     if (!searchName) {
       return;
     }
-    let state = this.search.getUiState();
-    delete state[this.indexName]['range'];
     const data = {
       name: searchName,
-      url: this.search.createURL(state),
+      url: this.createSavedSearchUrl(),
     };
     const search = this.store.createRecord('saved-search', data);
     search.save();
+  }
+
+  @action
+  async updateSavedSearch(search) {
+    const filters = this.getSearchFilters();
+    if (!filters) {
+      alert('No filters to save, make sure to open the saved search and then choose new filters before updating.');
+    }
+    const shouldUpdate = confirm('New filters:\n' + filters.join('\n') + '\n\nAre you sure you want to update this search?');
+    if (shouldUpdate) {
+      search.url = this.createSavedSearchUrl();
+      search.save();
+    }
   }
 
   @action
