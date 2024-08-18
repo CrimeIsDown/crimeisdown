@@ -360,7 +360,7 @@ export default class TranscriptSearchComponent extends Component {
   createSavedSearchUrl() {
     let state = this.search.getUiState();
     delete state[this.indexName]['range'];
-    delete state[this.indexName]['sortBy'];
+    state[this.indexName]['sortBy'] = `${this.indexName}:start_time:desc`;
     return this.search.createURL(state);
   }
 
