@@ -96,16 +96,20 @@
               {{#unless this.savedSearches}}
               No saved searches.
               {{/unless}}
-              {{#each this.savedSearches as |search index|}}
+              {{#each this.savedSearches as |search|}}
               <ul class="list-group list-group-horizontal pb-2">
                 <a href="{{search.url}}" class="list-group-item list-group-item-action">
                   {{search.name}}
                 </a>
+                {{#if search.is_global}}
                 <li class="list-group-item">
-                  <button type="button" class="btn btn-danger btn-sm" aria-label="Delete" {{on "click" (fn this.removeSavedSearch index)}}>
-                    <FaIcon @icon="trash-alt" />
-                  </button>
+                  <FaIcon @icon="earth-americas" />
                 </li>
+                {{else}}
+                <button type="button" class="btn btn-danger btn-sm list-group-item" aria-label="Delete" {{on "click" (fn this.deleteSavedSearch search)}}>
+                  <FaIcon @icon="trash-alt" />
+                </button>
+                {{/if}}
               </ul>
               {{/each}}
             </div>

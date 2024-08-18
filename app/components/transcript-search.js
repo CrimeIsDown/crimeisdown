@@ -32,6 +32,7 @@ export default class TranscriptSearchComponent extends Component {
   @service metrics;
   @service session;
   @service addressLookup;
+  @service store;
 
   @tracked hasAccess = undefined;
   @tracked onTranscriptMapPage = window.location.pathname == '/transcripts/map';
@@ -84,14 +85,6 @@ export default class TranscriptSearchComponent extends Component {
     };
     if (window.location.hash.startsWith('#hit-')) {
       this.selectedHit = window.location.hash.split('#hit-')[1];
-    }
-    const savedSearches = localStorage.getItem('savedSearches');
-    if (savedSearches) {
-      let savedSearchesArray = JSON.parse(savedSearches);
-      if (!Array.isArray(savedSearchesArray)) {
-        savedSearchesArray = [];
-      }
-      this.savedSearches = A(savedSearchesArray);
     }
 
     this.updateLatestIndex.perform();
@@ -329,6 +322,24 @@ export default class TranscriptSearchComponent extends Component {
     this.search.setUiState(state);
   }
 
+  @action
+  async initSavedSearches() {
+    const savedSearches = localStorage.getItem('savedSearches');
+    if (savedSearches) {
+      let savedSearchesArray = JSON.parse(savedSearches);
+      if (Array.isArray(savedSearchesArray)) {
+        for (const savedSearch of savedSearchesArray) {
+          const search = this.store.createRecord('saved-search', savedSearch);
+          await search.save();
+        }
+      }
+      localStorage.removeItem('savedSearches');
+    }
+
+    const searches = await this.store.findAll('saved-search');
+    set(this, 'savedSearches', searches);
+  }
+
   @action saveSearch() {
     let searchName = prompt('Enter a name for this search');
     if (!searchName) {
@@ -336,24 +347,18 @@ export default class TranscriptSearchComponent extends Component {
     }
     let state = this.search.getUiState();
     delete state[this.indexName]['range'];
-    this.savedSearches.pushObject({
+    const data = {
       name: searchName,
       url: this.search.createURL(state),
-    });
-    try {
-      localStorage.setItem('savedSearches', JSON.stringify(this.savedSearches));
-    } catch (e) {
-      alert('Could not save search, localStorage is disabled.');
-    }
+    };
+    const search = this.store.createRecord('saved-search', data);
+    search.save();
   }
 
-  @action removeSavedSearch(index) {
-    this.savedSearches.removeAt(index);
-    try {
-      localStorage.setItem('savedSearches', JSON.stringify(this.savedSearches));
-    } catch (e) {
-      alert('Could not save search, localStorage is disabled.');
-    }
+  @action
+  async deleteSavedSearch(search) {
+    await search.destroyRecord();
+    await this.initSavedSearches();
   }
 
   @action
@@ -471,6 +476,11 @@ export default class TranscriptSearchComponent extends Component {
   @action
   async setupSearch() {
     await this.login();
+    try {
+      await this.initSavedSearches();
+    } catch (e) {
+      console.error(e);
+    }
 
     this.defaultSort = `${this.indexName}:start_time:desc`;
     this.defaultRouteState = {
@@ -541,6 +551,15 @@ export default class TranscriptSearchComponent extends Component {
       delete uiState['range'];
       delete uiState['sortBy'];
       this.currentSearch = uiState;
+    });
+
+    this.search.on('error', ({ error }) => {
+      console.error(error);
+      alert(
+        `Could not load search, please try again or logout and log back in.\nGot error: ${
+          error.message || error
+        }`,
+      );
     });
 
     const systemMenuTransformItems = (items) => {

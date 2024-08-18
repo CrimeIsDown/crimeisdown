@@ -44,8 +44,11 @@
   }
 }
 
-#saved-h-menu .list-group-item {
-  padding-top: 0.75rem !important;
+#saved-h-menu .list-group-item:last-child {
+  background-color: var(--bs-btn-bg);
+  color: var(--bs-btn-color);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .ais-Hits-item, .ais-InfiniteHits-item {
