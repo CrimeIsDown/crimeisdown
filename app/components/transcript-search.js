@@ -87,6 +87,11 @@ export default class TranscriptSearchComponent extends Component {
       this.selectedHit = window.location.hash.split('#hit-')[1];
     }
 
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('key')) {
+      this.config.set('MEILISEARCH_KEY', params.get('key'));
+    }
+
     this.updateLatestIndex.perform();
   }
 
