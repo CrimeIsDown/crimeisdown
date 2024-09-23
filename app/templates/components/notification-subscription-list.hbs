@@ -24,6 +24,12 @@
           <Textarea class="form-control" id="keywordList" rows="3" @value={{subscription.keywordsString}} disabled></Textarea>
         </div>
         {{/if}}
+        {{#if subscription.ignoreKeywordsString}}
+        <div class="mb-3">
+          <p class="fw-bold">Keywords to negate other keyword matches, one per line</p>
+          <Textarea class="form-control" id="ignoreKeywordList" rows="1" @value={{subscription.ignoreKeywordsString}} disabled></Textarea>
+        </div>
+        {{/if}}
         {{#if subscription.location.address}}
         <div class="mb-3">
           <p class="fst-italic">

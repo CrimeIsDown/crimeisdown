@@ -6,7 +6,11 @@
   </div>
   <div class="mb-3">
     <label for="keywordList" class="form-label">Keywords to match, one per line (will be interpreted as exact matches, case insensitive)</label>
-    <textarea class="form-control" id="keywordList" rows="3" name="keywords" value="{{@subscription.keywordsString}}" placeholder="Examples: person shot&#10;still and box&#10;still in box"></textarea>
+    <textarea class="form-control" id="keywordList" rows="3" name="keywords" value="{{@subscription.keywordsString}}" placeholder="Examples: dead body&#10;person shot&#10;still and box&#10;still in box"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="ignoreKeywordList" class="form-label">Keywords to prevent a notification if other keywords were matched above, one per line (will be interpreted as exact matches, case insensitive)</label>
+    <textarea class="form-control" id="ignoreKeywordList" rows="1" name="ignore_keywords" value="{{@subscription.ignoreKeywordsString}}" placeholder="Examples: disregard&#10;dead body cam"></textarea>
   </div>
   {{#if this.session.user.patreon_tier.features.transcript_geosearch}}
   <div class="mb-3" {{did-insert this.loadAutocomplete}}>
