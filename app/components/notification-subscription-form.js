@@ -121,6 +121,12 @@ export default class NotificationSubscriptionFormComponent extends Component {
         .getAll('notification_channels')
         .map((value) => parseInt(value)),
     };
+    if (data.keywords.length == 1 && data.keywords[0] == '') {
+      data.keywords = null;
+    }
+    if (data.ignore_keywords.length == 1 && data.ignore_keywords[0] == '') {
+      data.ignore_keywords = null;
+    }
     const location = {
       address: formdata.get('address'),
       geo: {
