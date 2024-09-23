@@ -115,6 +115,7 @@ export default class NotificationSubscriptionFormComponent extends Component {
     let data = {
       name: formdata.get('name'),
       keywords: formdata.get('keywords').split('\n'),
+      ignore_keywords: formdata.get('ignore_keywords').split('\n'),
       topic: formdata.getAll('topic').join('|'),
       notification_channels: formdata
         .getAll('notification_channels')

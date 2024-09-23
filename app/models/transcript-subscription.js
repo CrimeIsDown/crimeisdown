@@ -22,7 +22,7 @@ export default class TranscriptSubscriptionModel extends Model {
 
   get ignoreKeywordsString() {
     let ignore_keywords = this.ignore_keywords;
-    if (typeof this.keywords === 'string') {
+    if (typeof this.ignore_keywords === 'string') {
       try {
         ignore_keywords = JSON.parse(this.ignore_keywords);
       } catch {
