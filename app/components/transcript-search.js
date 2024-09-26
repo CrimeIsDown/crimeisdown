@@ -347,14 +347,20 @@ export default class TranscriptSearchComponent extends Component {
 
   getSearchFilters() {
     const filters = [];
-    const refinementItems = document.querySelectorAll('.ais-CurrentRefinements-item');
+    const refinementItems = document.querySelectorAll(
+      '.ais-CurrentRefinements-item',
+    );
     for (const item of refinementItems) {
-      const label = item.querySelector('.ais-CurrentRefinements-label').innerText;
+      const label = item.querySelector(
+        '.ais-CurrentRefinements-label',
+      ).innerText;
       if (label.startsWith('Call Time')) {
         continue;
       }
       const values = [];
-      for (const value of item.querySelectorAll('.ais-CurrentRefinements-category .ais-CurrentRefinements-categoryLabel')) {
+      for (const value of item.querySelectorAll(
+        '.ais-CurrentRefinements-category .ais-CurrentRefinements-categoryLabel',
+      )) {
         values.push(value.innerText);
       }
       filters.push(`${label} ${values.join(', ')}`);
@@ -386,9 +392,15 @@ export default class TranscriptSearchComponent extends Component {
   async updateSavedSearch(search) {
     const filters = this.getSearchFilters();
     if (!filters) {
-      alert('No filters to save, make sure to open the saved search and then choose new filters before updating.');
+      alert(
+        'No filters to save, make sure to open the saved search and then choose new filters before updating.',
+      );
     }
-    const shouldUpdate = confirm('New filters:\n' + filters.join('\n') + '\n\nAre you sure you want to update this search?');
+    const shouldUpdate = confirm(
+      'New filters:\n' +
+        filters.join('\n') +
+        '\n\nAre you sure you want to update this search?',
+    );
     if (shouldUpdate) {
       search.url = this.createSavedSearchUrl();
       search.save();

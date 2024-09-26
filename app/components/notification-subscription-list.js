@@ -28,6 +28,9 @@ export default class NotificationSubscriptionListComponent extends Component {
 
   @action
   async deleteSubscription(subscription) {
+    if (!confirm('Are you sure you want to delete this subscription?')) {
+      return;
+    }
     await subscription.destroyRecord();
     await this.initData();
   }
