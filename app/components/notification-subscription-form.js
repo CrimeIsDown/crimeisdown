@@ -114,6 +114,7 @@ export default class NotificationSubscriptionFormComponent extends Component {
     }
     let data = {
       name: formdata.get('name'),
+      enabled: formdata.get('enabled') == 'on',
       keywords: formdata.get('keywords').split('\n'),
       ignore_keywords: formdata.get('ignore_keywords').split('\n'),
       topic: formdata.getAll('topic').join('|'),

@@ -9,7 +9,12 @@
       <div class="card-header">
         <div class="row">
           <div class="col">
-            <h5 class="mt-1 mb-0">{{subscription.name}}</h5>
+            <h5 class="mt-1 mb-0">
+              {{#unless subscription.enabled}}
+              <span class="badge bg-secondary me-2">Disabled</span>
+              {{/unless}}
+              {{subscription.name}}
+            </h5>
           </div>
           <div class="col-3 d-flex justify-content-end">
             <button type="button" class="btn btn-secondary btn-sm me-2" aria-label="Edit" {{on "click" (fn @onEdit subscription)}}><FaIcon @icon="pencil-alt" /></button>
@@ -58,6 +63,9 @@
         <div class="mb-3">
           <p class="fw-bold">Will notify via:</p>
           <NotificationChannelList @channels={{subscription.notification_channels}} />
+          {{#unless subscription.enabled}}
+          <p class="mt-2 fst-italic">Note: Notifications are currently disabled. Please edit and re-enable the subscription to receive them.</p>
+          {{/unless}}
         </div>
       </div>
     </div>

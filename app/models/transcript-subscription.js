@@ -2,6 +2,7 @@ import Model, { attr } from '@ember-data/model';
 
 export default class TranscriptSubscriptionModel extends Model {
   @attr name;
+  @attr enabled;
   @attr keywords;
   @attr ignore_keywords;
   @attr location;
