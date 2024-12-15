@@ -52,8 +52,8 @@ export default class SessionService extends Service {
   }
 
   async getSearchAPIKey() {
-    if (this.config.get('MEILISEARCH_KEY')) {
-      return Promise.resolve(this.config.get('MEILISEARCH_KEY'));
+    if (this.config.get('SEARCH_KEY')) {
+      return Promise.resolve(this.config.get('SEARCH_KEY'));
     }
     if (this.isAuthenticated) {
       const response = await fetch(

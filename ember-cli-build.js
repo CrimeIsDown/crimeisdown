@@ -179,12 +179,8 @@ module.exports = function (defaults) {
   app.import('node_modules/ogv/dist/ogv.js');
   app.import('vendor/videojs-ogvjs.js');
 
-  app.import(
-    'node_modules/videojs-wavesurfer/node_modules/wavesurfer.js/dist/wavesurfer.js',
-  );
-  app.import(
-    'node_modules/videojs-wavesurfer/node_modules/wavesurfer.js/dist/plugin/wavesurfer.timeline.js',
-  );
+  app.import('node_modules/wavesurfer.js/dist/wavesurfer.js');
+  app.import('node_modules/wavesurfer.js/dist/plugin/wavesurfer.timeline.js');
   app.import('node_modules/videojs-wavesurfer/dist/videojs.wavesurfer.js');
   app.import('node_modules/videojs-wavesurfer/dist/css/videojs.wavesurfer.css');
 
@@ -199,7 +195,7 @@ module.exports = function (defaults) {
     'common',
   ]) {
     app.import(
-      `node_modules/icecast-metadata-player/build/icecast-metadata-player-1.17.3.${component}.min.js`,
+      `node_modules/icecast-metadata-player/build/icecast-metadata-player-1.17.8.${component}.min.js`,
     );
   }
 

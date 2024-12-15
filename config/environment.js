@@ -20,9 +20,9 @@ module.exports = function (environment) {
       // when it is created
       API_BASE_URL: 'https://api.crimeisdown.com',
       API_AUTH_TOKEN: null,
-      MEILISEARCH_URL: 'https://search.crimeisdown.com',
-      MEILISEARCH_KEY: null,
-      MEILISEARCH_INDEX: null,
+      SEARCH_URL: 'https://search.crimeisdown.com',
+      SEARCH_KEY: null,
+      SEARCH_INDEX: null,
     },
 
     metricsAdapters: [
