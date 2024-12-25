@@ -20,8 +20,10 @@ module.exports = function (environment) {
       // when it is created
       API_BASE_URL: 'https://api.crimeisdown.com',
       API_AUTH_TOKEN: null,
-      SEARCH_URL: 'https://search.crimeisdown.com',
-      SEARCH_KEY: null,
+      MEILISEARCH_URL: 'https://search.crimeisdown.com',
+      MEILISEARCH_KEY: null,
+      TYPESENSE_URL: 'http://sirens-db:8108',
+      TYPESENSE_KEY: null,
       SEARCH_INDEX: null,
     },
 

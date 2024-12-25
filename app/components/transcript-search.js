@@ -5,6 +5,7 @@ import { A } from '@ember/array';
 import { task, timeout } from 'ember-concurrency';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 import instantsearch from 'instantsearch.js';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
@@ -36,8 +37,11 @@ export default class TranscriptSearchComponent extends Component {
 
   @tracked hasAccess = undefined;
   @tracked onTranscriptMapPage = window.location.pathname == '/transcripts/map';
-  @tracked apiKey =
-    'REDACTED_PUBLIC_CREDENTIAL';
+  @tracked apiKeys = {
+    meilisearchKey:
+      'REDACTED_PUBLIC_CREDENTIAL',
+    typesenseKey: 'REDACTED_PUBLIC_CREDENTIAL',
+  };
   @tracked indexName = this.demoIndexName;
   @tracked latestIndexName;
   @tracked hits = [];
@@ -70,7 +74,7 @@ export default class TranscriptSearchComponent extends Component {
     this.addressLookup.loadData();
     const matches = /calls_[0-9]{4}_[0-9]{2}/g.exec(window.location.search);
     this.latestIndexName =
-      this.config.get('SEARCH_INDEX') ??
+      this.getSearchIndexFromConfig() ??
       'calls_' + moment.utc().format('YYYY_MM');
     this.paidIndexName =
       (matches ? matches[0] : undefined) ??
@@ -91,16 +95,28 @@ export default class TranscriptSearchComponent extends Component {
 
     const params = new URLSearchParams(window.location.search);
     if (params.get('key')) {
-      this.config.set('SEARCH_KEY', params.get('key'));
+      this.config.set('MEILISEARCH_KEY', params.get('key'));
     }
 
     this.updateLatestIndex.perform();
   }
 
+  getSearchIndexFromConfig() {
+    const newName = this.config.get('SEARCH_INDEX');
+    if (!newName) {
+      const oldName = this.config.get('MEILISEARCH_INDEX');
+      if (oldName) {
+        this.config.set('SEARCH_INDEX', oldName);
+        return oldName;
+      }
+    }
+    return newName;
+  }
+
   @task *updateLatestIndex() {
     while (true) {
       this.latestIndexName =
-        this.config.get('SEARCH_INDEX') ??
+        this.getSearchIndexFromConfig() ??
         'calls_' + moment.utc().format('YYYY_MM');
       yield timeout(1000);
     }
@@ -132,7 +148,7 @@ export default class TranscriptSearchComponent extends Component {
       max === this.flatpickrOptions.maxDefaultDate.getTime()
         ? undefined
         : Math.floor(max / 1000);
-    if (this.hasAccess && !this.config.get('SEARCH_INDEX')) {
+    if (this.hasAccess && !this.getSearchIndexFromConfig()) {
       // The max date should not be greater than the end of the month that min is in
       const minUtc = moment.unix(min).utc();
       const maxUtc = moment.unix(max).utc();
@@ -145,7 +161,7 @@ export default class TranscriptSearchComponent extends Component {
 
     if (
       this.hasAccess &&
-      !this.config.get('SEARCH_INDEX') &&
+      !this.getSearchIndexFromConfig() &&
       indexName !== this.indexName
     ) {
       // Redirect to the new index
@@ -499,8 +515,8 @@ export default class TranscriptSearchComponent extends Component {
         (this.onTranscriptMapPage &&
           this.session.user.patreon_tier.features.transcript_geosearch)
       ) {
-        this.apiKey = await this.session.getSearchAPIKey();
-        this.indexName = this.config.get('SEARCH_INDEX') || this.paidIndexName;
+        this.apiKeys = await this.session.getSearchAPIKeys();
+        this.indexName = this.getSearchIndexFromConfig() || this.paidIndexName;
       }
       this.hasAccess = true;
     } catch (e) {
@@ -535,9 +551,50 @@ export default class TranscriptSearchComponent extends Component {
       console.error(e);
     }
 
+    const meilisearchUrl = this.config.get('MEILISEARCH_URL');
+    let im = null;
+    if (meilisearchUrl) {
+      im = new instantMeiliSearch(meilisearchUrl, this.apiKeys.meilisearchKey, {
+        finitePagination: true,
+        keepZeroFacets: true,
+      });
+    }
+
+    let typesenseInstantsearchAdapter = null;
+    if (
+      this.config.get('TYPESENSE_URL') &&
+      !this.config.get('MEILISEARCH_KEY')
+    ) {
+      const typesenseUrl = new URL(this.config.get('TYPESENSE_URL'));
+      typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
+        server: {
+          apiKey: this.apiKeys.typesenseKey, // Be sure to use an API key that only allows search operations
+          nodes: [
+            {
+              host: typesenseUrl.hostname,
+              path: typesenseUrl.pathname === '/' ? '' : typesenseUrl.pathname,
+              port: typesenseUrl.port,
+              protocol: typesenseUrl.protocol.replace(':', ''),
+            },
+          ],
+          cacheSearchResultsForSeconds: 0, // Cache search results from server. Defaults to 2 minutes. Set to 0 to disable caching.
+        },
+        // The following parameters are directly passed to Typesense's search API endpoint.
+        //  So you can pass any parameters supported by the search endpoint below.
+        //  query_by is required.
+        additionalSearchParameters: {
+          query_by: 'transcript_plaintext',
+          highlight_fields: 'raw_transcript',
+        },
+      });
+    }
+
+    const shoudUseTypesense = typesenseInstantsearchAdapter !== null;
+
     this.defaultSort = this._buildSortString(
       this.newestFirstSort,
       this.indexName,
+      shoudUseTypesense,
     );
     this.defaultRouteState = {
       [this.indexName]: {
@@ -559,34 +616,12 @@ export default class TranscriptSearchComponent extends Component {
       this.defaultRouteState[this.indexName].hitsPerPage = 60;
     }
 
-    const searchUrl = new URL(this.config.get('SEARCH_URL'));
-
-    const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
-      server: {
-        apiKey: this.apiKey, // Be sure to use an API key that only allows search operations
-        nodes: [
-          {
-            host: searchUrl.hostname,
-            path: searchUrl.pathname,
-            port: searchUrl.port,
-            protocol: searchUrl.protocol.replace(':', ''),
-          },
-        ],
-        cacheSearchResultsForSeconds: 0, // Cache search results from server. Defaults to 2 minutes. Set to 0 to disable caching.
-      },
-      // The following parameters are directly passed to Typesense's search API endpoint.
-      //  So you can pass any parameters supported by the search endpoint below.
-      //  query_by is required.
-      additionalSearchParameters: {
-        query_by: 'transcript_plaintext',
-      },
-    });
-
     this.search = instantsearch({
-      searchClient: typesenseInstantsearchAdapter.searchClient,
+      searchClient: (shoudUseTypesense ? typesenseInstantsearchAdapter : im)
+        .searchClient,
       indexName: this.indexName,
       routing: {
-        router: this.getSearchRouter(),
+        router: this.getSearchRouter(shoudUseTypesense),
       },
       future: {
         preserveSharedStateOnUnmount: true,
@@ -668,7 +703,7 @@ export default class TranscriptSearchComponent extends Component {
 
     const mainWidgets = [
       this.getSearchBoxWidget(),
-      this.getSortByWidget(),
+      this.getSortByWidget(shoudUseTypesense),
       this.getCurrentRefinementsWidget(),
       this.getStatsWidget(),
       this.getHitsWidget(),
@@ -706,7 +741,7 @@ export default class TranscriptSearchComponent extends Component {
     this.search.setUiState(uiState);
   }
 
-  getSearchRouter() {
+  getSearchRouter(isUsingTypesense) {
     const windowTitle = (routeState) => {
       const indexState = routeState[this.indexName] || {};
 
@@ -723,6 +758,13 @@ export default class TranscriptSearchComponent extends Component {
       if (!Object.keys(routeState).length) {
         return this.defaultRouteState;
       }
+      const indexName = Object.keys(routeState)[0];
+      if (routeState[indexName].sortBy && isUsingTypesense) {
+        routeState[indexName].sortBy = routeState[indexName].sortBy.replace(
+          `${indexName}:`,
+          `${indexName}/sort/`,
+        );
+      }
       if (routeState[this.demoIndexName] && this.hasAccess) {
         delete Object.assign(routeState, {
           [this.indexName]: routeState[this.demoIndexName],
@@ -730,8 +772,31 @@ export default class TranscriptSearchComponent extends Component {
       }
       return routeState;
     };
+    const createURL = ({ qsModule, routeState, location }) => {
+      if (Object.keys(routeState).length) {
+        const indexName = Object.keys(routeState)[0];
+        if (routeState[indexName].sortBy && isUsingTypesense) {
+          routeState[indexName].sortBy = routeState[indexName].sortBy.replace(
+            `${indexName}/sort/`,
+            `${indexName}:`,
+          );
+        }
+      }
+
+      const { protocol, hostname, port = '', pathname, hash } = location;
+      const queryString = qsModule.stringify(routeState);
+      const portWithPrefix = port === '' ? '' : `:${port}`;
+
+      // IE <= 11 has no proper `location.origin` so we cannot rely on it.
+      if (!queryString) {
+        return `${protocol}//${hostname}${portWithPrefix}${pathname}${hash}`;
+      }
+
+      return `${protocol}//${hostname}${portWithPrefix}${pathname}?${queryString}${hash}`;
+    };
     return history({
       windowTitle,
+      createURL,
       parseURL,
       cleanUrlOnDispose: true,
     });
@@ -751,7 +816,7 @@ export default class TranscriptSearchComponent extends Component {
     });
   }
 
-  getSortByWidget() {
+  getSortByWidget(isUsingTypesense) {
     return sortBy({
       container: '#sort-by',
       cssClasses: {
@@ -760,25 +825,39 @@ export default class TranscriptSearchComponent extends Component {
       items: [
         {
           label: 'Newest First',
-          value: this._buildSortString(this.newestFirstSort, this.indexName),
+          value: this._buildSortString(
+            this.newestFirstSort,
+            this.indexName,
+            isUsingTypesense,
+          ),
         },
         {
           label: 'Oldest First',
-          value: this._buildSortString(this.oldestFirstSort, this.indexName),
+          value: this._buildSortString(
+            this.oldestFirstSort,
+            this.indexName,
+            isUsingTypesense,
+          ),
         },
         {
           label: 'Relevance',
-          value: this._buildSortString(undefined, this.indexName),
+          value: this._buildSortString(
+            undefined,
+            this.indexName,
+            isUsingTypesense,
+          ),
         },
       ],
     });
   }
 
-  _buildSortString(sortBy, indexName) {
+  _buildSortString(sortBy, indexName, isUsingTypesense) {
     if (!sortBy) {
       return indexName;
     }
-    return `${indexName}/sort/${sortBy}`;
+    return isUsingTypesense
+      ? `${indexName}/sort/${sortBy}`
+      : `${indexName}:${sortBy}`;
   }
 
   getHitsPerPageWidget() {

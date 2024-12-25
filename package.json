@@ -50,6 +50,7 @@
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "@mapbox/leaflet-pip": "^1.1.0",
+    "@meilisearch/instant-meilisearch": "^0.23.0",
     "@sentry/ember": "^7.112.2",
     "bootstrap": "^5.3.3",
     "bootstrap-table": "^1.22.4",
