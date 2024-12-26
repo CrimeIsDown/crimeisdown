@@ -195,7 +195,8 @@ export default class TranscriptSearchComponent extends Component {
 
   processHit(hit) {
     hit.raw_metadata = JSON.parse(hit.raw_metadata);
-    hit.raw_transcript = JSON.parse(hit.raw_transcript);
+    const raw_transcript = hit.raw_transcript;
+    hit.raw_transcript = JSON.parse(raw_transcript);
     const hitClone = { ...hit };
     delete hitClone['_highlightResult'];
     delete hitClone['_snippetResult'];
@@ -204,14 +205,20 @@ export default class TranscriptSearchComponent extends Component {
 
     hit.json = JSON.stringify(hitClone, null, 2);
 
-    hit._highlightResult.transcript.value = unescape(
-      hit._highlightResult.transcript.value,
-    ).trim();
-
     try {
-      hit.highlighted_transcript = JSON.parse(
-        unescape(hit._highlightResult.raw_transcript.value),
+      let unescapedRawTranscript = unescape(
+        hit._highlightResult.raw_transcript.value,
       );
+      if (hit._rawTypesenseHit) {
+        // Typesense doesn't always return the full raw transcript so we need to get the original and re-insert the highlighted parts
+        unescapedRawTranscript = raw_transcript.replace(
+          unescapedRawTranscript
+            .replaceAll('<mark>', '')
+            .replaceAll('</mark>', ''),
+          unescapedRawTranscript,
+        );
+      }
+      hit.highlighted_transcript = JSON.parse(unescapedRawTranscript);
     } catch (e) {
       console.log(e);
       hit.highlighted_transcript = hit.raw_transcript;
