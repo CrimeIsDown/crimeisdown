@@ -38,9 +38,9 @@ export default class TranscriptSearchComponent extends Component {
   @tracked hasAccess = undefined;
   @tracked onTranscriptMapPage = window.location.pathname == '/transcripts/map';
   @tracked apiKeys = {
-    meilisearchKey:
+    meilisearch:
       'REDACTED_PUBLIC_CREDENTIAL',
-    typesenseKey: 'REDACTED_PUBLIC_CREDENTIAL',
+    typesense: 'REDACTED_PUBLIC_CREDENTIAL',
   };
   @tracked indexName = this.demoIndexName;
   @tracked latestIndexName;
@@ -554,7 +554,7 @@ export default class TranscriptSearchComponent extends Component {
     const meilisearchUrl = this.config.get('MEILISEARCH_URL');
     let im = null;
     if (meilisearchUrl) {
-      im = new instantMeiliSearch(meilisearchUrl, this.apiKeys.meilisearchKey, {
+      im = new instantMeiliSearch(meilisearchUrl, this.apiKeys.meilisearch, {
         finitePagination: true,
         keepZeroFacets: true,
       });
@@ -568,7 +568,7 @@ export default class TranscriptSearchComponent extends Component {
       const typesenseUrl = new URL(this.config.get('TYPESENSE_URL'));
       typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
         server: {
-          apiKey: this.apiKeys.typesenseKey, // Be sure to use an API key that only allows search operations
+          apiKey: this.apiKeys.typesense, // Be sure to use an API key that only allows search operations
           nodes: [
             {
               host: typesenseUrl.hostname,

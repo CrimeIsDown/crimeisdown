@@ -53,8 +53,8 @@ export default class SessionService extends Service {
 
   async getSearchAPIKeys() {
     const keys = {
-      meilisearchKey: this.config.get('MEILISEARCH_KEY'),
-      typesenseKey: this.config.get('TYPESENSE_KEY'),
+      meilisearch: this.config.get('MEILISEARCH_KEY'),
+      typesense: this.config.get('TYPESENSE_KEY'),
     };
     if (keys.meilisearchKey || keys.typesenseKey) {
       return Promise.resolve(keys);
@@ -74,8 +74,8 @@ export default class SessionService extends Service {
       }
       const data = await response.json();
       return Promise.resolve({
-        meilisearchKey: data.meilisearchKey,
-        typesenseKey: data.typesenseKey,
+        meilisearch: data.meilisearch,
+        typesense: data.typesense,
       });
     }
     return Promise.reject('Not logged in!');
