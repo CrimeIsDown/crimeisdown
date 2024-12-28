@@ -51,16 +51,20 @@ export default class SessionService extends Service {
     return this.user;
   }
 
-  async getSearchAPIKey() {
-    if (this.config.get('MEILISEARCH_KEY')) {
-      return Promise.resolve(this.config.get('MEILISEARCH_KEY'));
+  async getSearchAPIKeys() {
+    const keys = {
+      meilisearch: this.config.get('MEILISEARCH_KEY'),
+      typesense: this.config.get('TYPESENSE_KEY'),
+    };
+    if (keys.meilisearchKey || keys.typesenseKey) {
+      return Promise.resolve(keys);
     }
     if (this.isAuthenticated) {
       const response = await fetch(
         this.config.get('API_BASE_URL') + '/api/search-key',
         {
           headers: {
-            Accept: 'text/plain',
+            Accept: 'application/json',
           },
           credentials: 'include',
         },
@@ -68,7 +72,11 @@ export default class SessionService extends Service {
       if (response.status != 200) {
         return Promise.reject(response.status);
       }
-      return await response.text();
+      const data = await response.json();
+      return Promise.resolve({
+        meilisearch: data.meilisearch,
+        typesense: data.typesense,
+      });
     }
     return Promise.reject('Not logged in!');
   }
