@@ -56,7 +56,7 @@ export default class SessionService extends Service {
       meilisearch: this.config.get('MEILISEARCH_KEY'),
       typesense: this.config.get('TYPESENSE_KEY'),
     };
-    if (keys.meilisearchKey || keys.typesenseKey) {
+    if (keys.meilisearch || keys.typesense) {
       return Promise.resolve(keys);
     }
     if (this.isAuthenticated) {
