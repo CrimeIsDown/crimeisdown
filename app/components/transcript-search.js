@@ -596,12 +596,22 @@ export default class TranscriptSearchComponent extends Component {
       });
     }
 
-    const shoudUseTypesense = typesenseInstantsearchAdapter !== null;
+    const indexAge = this.indexName.startsWith('calls_2')
+      ? moment
+          .utc()
+          .diff(
+            moment.utc(this.indexName.split('_').slice(1).join('_'), 'YYYY_MM'),
+            'months',
+          )
+      : 0;
+    // Use Meilisearch for indexes older than 6 months
+    const shouldUseTypesense =
+      typesenseInstantsearchAdapter !== null && indexAge < 6;
 
     this.defaultSort = this._buildSortString(
       this.newestFirstSort,
       this.indexName,
-      shoudUseTypesense,
+      shouldUseTypesense,
     );
     this.defaultRouteState = {
       [this.indexName]: {
@@ -624,11 +634,11 @@ export default class TranscriptSearchComponent extends Component {
     }
 
     this.search = instantsearch({
-      searchClient: (shoudUseTypesense ? typesenseInstantsearchAdapter : im)
+      searchClient: (shouldUseTypesense ? typesenseInstantsearchAdapter : im)
         .searchClient,
       indexName: this.indexName,
       routing: {
-        router: this.getSearchRouter(shoudUseTypesense),
+        router: this.getSearchRouter(shouldUseTypesense),
       },
       future: {
         preserveSharedStateOnUnmount: true,
@@ -710,7 +720,7 @@ export default class TranscriptSearchComponent extends Component {
 
     const mainWidgets = [
       this.getSearchBoxWidget(),
-      this.getSortByWidget(shoudUseTypesense),
+      this.getSortByWidget(shouldUseTypesense),
       this.getCurrentRefinementsWidget(),
       this.getStatsWidget(),
       this.getHitsWidget(),
@@ -1034,6 +1044,7 @@ export default class TranscriptSearchComponent extends Component {
   getPaginationWidget() {
     return pagination({
       container: '#pagination',
+      totalPages: 50,
     });
   }
 
