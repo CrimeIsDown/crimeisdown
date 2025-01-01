@@ -592,6 +592,7 @@ export default class TranscriptSearchComponent extends Component {
         additionalSearchParameters: {
           query_by: 'transcript_plaintext',
           highlight_fields: 'raw_transcript',
+          exclude_fields: 'embedding',
         },
       });
     }
