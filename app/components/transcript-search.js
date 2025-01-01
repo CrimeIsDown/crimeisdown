@@ -584,7 +584,8 @@ export default class TranscriptSearchComponent extends Component {
               protocol: typesenseUrl.protocol.replace(':', ''),
             },
           ],
-          cacheSearchResultsForSeconds: 60, // Cache search results from server. Defaults to 2 minutes. Set to 0 to disable caching.
+          cacheSearchResultsForSeconds: 60, // Cache search requests for 60 seconds
+          useServerSideSearchCache: true, // Enable the server-side search cache
         },
         // The following parameters are directly passed to Typesense's search API endpoint.
         //  So you can pass any parameters supported by the search endpoint below.
