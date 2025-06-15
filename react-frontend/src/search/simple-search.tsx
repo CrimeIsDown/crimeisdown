@@ -40,6 +40,7 @@ export function SimpleSearchComponent(props: SimpleSearchComponentProps) {
           }
           placeholder={placeholder}
           value={searchTerm}
+          autoComplete='off'
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button type="submit" className="btn btn-primary">Search</button>
