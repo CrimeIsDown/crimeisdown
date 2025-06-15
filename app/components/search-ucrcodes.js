@@ -29,6 +29,7 @@ export default class SearchUcrcodes extends Component {
 
   @action
   lookupUCR() {
+    let input = this.ucrCode;
     this.metrics.trackEvent({
       category: 'Tools',
       action: 'Searches UCR list',
