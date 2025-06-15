@@ -11,11 +11,12 @@ module.exports = function (defaults) {
         module: {
           rules: [
             {
-              test: /react-frontend\/.*\.jsx/,
+              test: /react-frontend\/.*\.tsx/,
               use: {
                 loader: 'babel-loader',
                 options: {
-                  presets: [['@babel/preset-react', { runtime: 'automatic' }]],
+                  presets: [['@babel/preset-react', { runtime: 'automatic' }],
+                  '@babel/preset-typescript'],
                 },
               },
             },
