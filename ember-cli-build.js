@@ -15,8 +15,10 @@ module.exports = function (defaults) {
               use: {
                 loader: 'babel-loader',
                 options: {
-                  presets: [['@babel/preset-react', { runtime: 'automatic' }],
-                  '@babel/preset-typescript'],
+                  presets: [
+                    ['@babel/preset-react', { runtime: 'automatic' }],
+                    '@babel/preset-typescript',
+                  ],
                 },
               },
             },

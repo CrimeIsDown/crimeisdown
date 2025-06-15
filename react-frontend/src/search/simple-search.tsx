@@ -33,7 +33,7 @@ export function SimpleSearchComponent(props: SimpleSearchComponentProps) {
       <div className="input-group">
         <input
           type="search"
-          className="form-control"
+          className={`form-control${error ? ' error' : ''}`}
           id={id}
           aria-describedby={
             [ariaDescribedBy, error && 'error'].filter(Boolean).join(' ')
@@ -45,7 +45,7 @@ export function SimpleSearchComponent(props: SimpleSearchComponentProps) {
         <button type="submit" className="btn btn-primary">Search</button>
       </div>
 
-      {error && <p id="error" className="text-bg-danger fw-bold mt-1 p-1">{error}</p>}
+      {error && <p id="error" className="text-bg-danger fw-bold mt-2 p-1">{error}</p>}
     </form>
   );
 }

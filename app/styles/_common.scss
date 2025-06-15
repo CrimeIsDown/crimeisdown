@@ -1,4 +1,7 @@
 // From the Bootstrap docs
+$danger: #dc3545;
+$btn-primary: #0d6efd;
+
 .bi {
   width: 1em;
   height: 1em;
@@ -98,5 +101,9 @@ ul.nav.nav-tabs {
 }
 
 input[type="search"]:focus {
-  box-shadow: 0 0 0 0.25rem #0a58ca;
+  box-shadow: 0 0 .3125rem .2125rem $btn-primary;
+}
+
+input[type="search"].error {
+  box-shadow: 0 0 .3125rem .2125rem $danger;
 }
