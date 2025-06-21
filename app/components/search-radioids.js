@@ -4,11 +4,14 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import fetch from 'fetch';
 import $ from 'jquery';
+import { SimpleSearchComponent } from 'react-frontend/src/search/simple-search.tsx';
 
 export default class SearchRadioids extends Component {
   @service metrics;
   @tracked radioIds = [];
   @tracked radio = {};
+
+  simpleSearchComponent = SimpleSearchComponent;
 
   constructor() {
     super(...arguments);
@@ -26,19 +29,14 @@ export default class SearchRadioids extends Component {
   }
 
   @action
-  lookupRadioId(event) {
-    event.preventDefault();
-    if (!this.radioId) {
-      alert('Please enter a radio ID before searching.');
-      return;
-    }
-    let input = this.radioId.toUpperCase();
-    set(this, 'radioId', input);
+  lookupRadioId(radioId) {
+    let input = radioId.toUpperCase();
     this.metrics.trackEvent({
       category: 'Tools',
       action: 'Searches radio ID list',
       label: input,
     });
+
     let matches = [];
     this.radioIds.forEach((row) => {
       if (input.match('^' + row.ID_Number + '$')) {

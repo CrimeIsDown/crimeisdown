@@ -1,11 +1,13 @@
 <div id="ucr-search">
-  <form {{on "submit" this.lookupUCR}}>
-    <label for="ucr">UCR (Uniform Crime Reporting) Code to lookup</label>
-    <div class="input-group">
-      <Input class="form-control" name="ucr" placeholder="041A" @type="text" @value={{this.ucrCode}} aria-label="UCR (Uniform Crime Reporting) Code to lookup" />
-      <button class="btn btn-primary" type="submit">Define</button>
-    </div>
-  </form>
+  <div 
+    {{react this.simpleSearchComponent 
+      id="ucr-id" 
+      labelText="UCR (Uniform Crime Reporting) Code"
+      exampleText="Example: 041A"
+      ariaDescribedBy="ucr-id-desc" 
+      onSearch=this.lookupUCR
+    }} 
+  />
   <div class="results">
     <table class="table table-bordered table-condensed">
       <tbody>

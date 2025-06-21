@@ -3,11 +3,14 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import fetch from 'fetch';
+import { SimpleSearchComponent } from 'react-frontend/src/search/simple-search.tsx';
 
 export default class SearchUcrcodes extends Component {
   @service metrics;
   @tracked ucrCodes = [];
   @tracked ucr = {};
+
+  simpleSearchComponent = SimpleSearchComponent;
 
   constructor() {
     super(...arguments);
@@ -25,13 +28,8 @@ export default class SearchUcrcodes extends Component {
   }
 
   @action
-  lookupUCR(event) {
-    event.preventDefault();
-    let input = this.ucrCode;
-    if (!input) {
-      alert('Please enter a UCR code before searching.');
-      return;
-    }
+  lookupUCR(ucrCode) {
+    let input = ucrCode;
     this.metrics.trackEvent({
       category: 'Tools',
       action: 'Searches UCR list',

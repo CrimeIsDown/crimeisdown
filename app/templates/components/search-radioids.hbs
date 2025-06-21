@@ -1,11 +1,13 @@
 <div id="radio-search">
-  <form {{on "submit" this.lookupRadioId}}>
-    <label for="radioid">Radio ID to search</label>
-    <div class="input-group">
-      <Input class="form-control" name="radioid" placeholder="1234, 599, 2-1-8, 100X" @type="text" @value={{this.radioId}} aria-label="Radio ID to search" />
-      <button class="btn btn-primary" type="submit">Search</button>
-    </div>
-  </form>
+  <div 
+    {{react this.simpleSearchComponent 
+      id="radio-id" 
+      labelText="Radio ID"
+      exampleText="Example: 1234, 599, 2-1-8, 100X"
+      ariaDescribedBy="radio-id-desc" 
+      onSearch=this.lookupRadioId
+    }} 
+  />
   <div class="results">
     <table class="table table-bordered table-condensed">
       <tbody>
