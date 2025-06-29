@@ -22,7 +22,7 @@ module.exports = function (environment) {
       API_AUTH_TOKEN: null,
       MEILISEARCH_URL: 'https://search.crimeisdown.com',
       MEILISEARCH_KEY: null,
-      TYPESENSE_URL: 'https://search2.crimeisdown.com',
+      TYPESENSE_URL: null,
       TYPESENSE_KEY: null,
       SEARCH_INDEX: null,
     },

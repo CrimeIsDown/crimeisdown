@@ -598,17 +598,7 @@ export default class TranscriptSearchComponent extends Component {
       });
     }
 
-    const indexAge = this.indexName.startsWith('calls_2')
-      ? moment
-          .utc()
-          .diff(
-            moment.utc(this.indexName.split('_').slice(1).join('_'), 'YYYY_MM'),
-            'months',
-          )
-      : 0;
-    // Use Meilisearch for indexes older than 6 months
-    const shouldUseTypesense =
-      typesenseInstantsearchAdapter !== null && indexAge < 6;
+    const shouldUseTypesense = typesenseInstantsearchAdapter !== null;
 
     this.defaultSort = this._buildSortString(
       this.newestFirstSort,
