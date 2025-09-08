@@ -13,15 +13,10 @@
     </button>
     {{#if this.hasAccess}}
     {{#if this.session.user.patreon_tier.features.transcript_notifications}}
-    <button type="button" class="btn btn-info text-bg-info" data-bs-toggle="modal" data-bs-target="#transcriptNotifications" aria-controls="transcriptNotifications">
+    <LinkTo @route="notifications" target="_blank" rel="noopener noreferrer" class="btn btn-info text-bg-info">
       <span class="visually-hidden">Notify Me</span>
       <FaIcon @icon="bell" />
-    </button>
-    <TranscriptNotificationModal />
-    {{!-- <LinkTo @route="notifications" class="btn btn-info text-white">
-      <span class="visually-hidden">Notify Me</span>
-      <FaIcon @icon="bell" />
-    </LinkTo> --}}
+    </LinkTo>
     {{/if}}
     <div id="refresh-buttons" class="btn-group" role="group" aria-label="Refresh buttons">
       <button type="button" class="btn btn-primary" {{on "click" this.refresh}}>

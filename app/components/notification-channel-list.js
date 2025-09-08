@@ -11,16 +11,7 @@ export default class NotificationChannelListComponent extends Component {
 
   constructor() {
     super(...arguments);
-    this.loadChannels();
-  }
-
-  async loadChannels() {
-    // Use findAll with backgroundReload: false to prevent duplicate requests
-    // Ember Data will automatically deduplicate identical requests
-    this.channels = await this.store.findAll('notification-channel', {
-      backgroundReload: false,
-      reload: false,
-    });
+    this.channels = this.store.peekAll('notification-channel');
   }
 
   @action
@@ -31,7 +22,6 @@ export default class NotificationChannelListComponent extends Component {
       return;
     }
     await channel.destroyRecord();
-    // Update the local array without making a new API call
-    set(this, 'channels', this.store.peekAll('notification-channel'));
+    set(this, 'channels', await this.store.findAll('notification-channel'));
   }
 }

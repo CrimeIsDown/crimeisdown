@@ -22,21 +22,12 @@ export default class NotificationSubscriptionFormComponent extends Component {
 
   @action
   async getChannels() {
-    // Use findAll with backgroundReload: false to prevent duplicate requests
-    // Ember Data will automatically deduplicate identical requests
-    set(this, 'channels', await this.store.findAll('notification-channel', {
-      backgroundReload: false,
-      reload: false,
-    }));
+    set(this, 'channels', this.store.peekAll('notification-channel'));
   }
 
   @action
   async getTalkgroups() {
-    set(
-      this,
-      'availableTalkgroups',
-      await this.store.findAll('search-talkgroup'),
-    );
+    set(this, 'availableTalkgroups', this.store.peekAll('search-talkgroup'));
   }
 
   @action

@@ -22,8 +22,7 @@ export default class NotificationSubscriptionListComponent extends Component {
       );
     }
 
-    const subscriptions = await this.store.findAll('transcript-subscription');
-    set(this, 'subscriptions', subscriptions);
+    set(this, 'subscriptions', this.store.peekAll('transcript-subscription'));
   }
 
   @action
