@@ -22,13 +22,12 @@ export default class NotificationSubscriptionFormComponent extends Component {
 
   @action
   async getChannels() {
-    // Check if channels are already loaded in the store
-    const existingChannels = this.store.peekAll('notification-channel');
-    if (existingChannels.length > 0) {
-      set(this, 'channels', existingChannels);
-    } else {
-      set(this, 'channels', await this.store.findAll('notification-channel'));
-    }
+    // Use findAll with backgroundReload: false to prevent duplicate requests
+    // Ember Data will automatically deduplicate identical requests
+    set(this, 'channels', await this.store.findAll('notification-channel', {
+      backgroundReload: false,
+      reload: false,
+    }));
   }
 
   @action

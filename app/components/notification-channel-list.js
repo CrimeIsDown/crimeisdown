@@ -11,15 +11,16 @@ export default class NotificationChannelListComponent extends Component {
 
   constructor() {
     super(...arguments);
-    // Check if channels are already loaded in the store
-    const existingChannels = this.store.peekAll('notification-channel');
-    if (existingChannels.length > 0) {
-      this.channels = existingChannels;
-    } else {
-      this.store.findAll('notification-channel').then((channels) => {
-        this.channels = channels;
-      });
-    }
+    this.loadChannels();
+  }
+
+  async loadChannels() {
+    // Use findAll with backgroundReload: false to prevent duplicate requests
+    // Ember Data will automatically deduplicate identical requests
+    this.channels = await this.store.findAll('notification-channel', {
+      backgroundReload: false,
+      reload: false,
+    });
   }
 
   @action
@@ -30,7 +31,7 @@ export default class NotificationChannelListComponent extends Component {
       return;
     }
     await channel.destroyRecord();
-    // Use peekAll to get the updated channels from the store without making a new API call
+    // Update the local array without making a new API call
     set(this, 'channels', this.store.peekAll('notification-channel'));
   }
 }
