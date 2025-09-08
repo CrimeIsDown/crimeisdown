@@ -22,7 +22,13 @@ export default class NotificationSubscriptionFormComponent extends Component {
 
   @action
   async getChannels() {
-    set(this, 'channels', await this.store.findAll('notification-channel'));
+    // Check if channels are already loaded in the store
+    const existingChannels = this.store.peekAll('notification-channel');
+    if (existingChannels.length > 0) {
+      set(this, 'channels', existingChannels);
+    } else {
+      set(this, 'channels', await this.store.findAll('notification-channel'));
+    }
   }
 
   @action

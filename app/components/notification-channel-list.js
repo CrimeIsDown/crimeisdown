@@ -11,9 +11,15 @@ export default class NotificationChannelListComponent extends Component {
 
   constructor() {
     super(...arguments);
-    this.store.findAll('notification-channel').then((channels) => {
-      this.channels = channels;
-    });
+    // Check if channels are already loaded in the store
+    const existingChannels = this.store.peekAll('notification-channel');
+    if (existingChannels.length > 0) {
+      this.channels = existingChannels;
+    } else {
+      this.store.findAll('notification-channel').then((channels) => {
+        this.channels = channels;
+      });
+    }
   }
 
   @action
@@ -24,6 +30,7 @@ export default class NotificationChannelListComponent extends Component {
       return;
     }
     await channel.destroyRecord();
-    set(this, 'channels', await this.store.findAll('notification-channel'));
+    // Use peekAll to get the updated channels from the store without making a new API call
+    set(this, 'channels', this.store.peekAll('notification-channel'));
   }
 }
