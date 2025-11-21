@@ -45,7 +45,12 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+Deployments are handled by Cloudflare Pages via `.github/workflows/cloudflare-pages.yml`:
+
+* Pushes to `main` or `master` run `npm run build` and upload the `dist/` directory to the Cloudflare Pages project named `crimeisdown`.
+* Pull requests from the main repository generate preview deployments so changes can be verified before merge.
+* Define the `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` repository secrets with credentials that have Cloudflare Pages access.
+* The `_headers` and `_redirects` files in `public/` control global headers and SPA-style routing during the Ember build.
 
 ## Further Reading / Useful Links
 
