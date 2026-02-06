@@ -24,8 +24,7 @@
         <div class="col-md-6">
           <h3 id="lookuprecording">Look up scanner recording</h3>
           <AudioSearch />
-        </div>
-        <div class="col-md-6">
+          <hr>
           <p>
             {{#if this.session.isAuthenticated}}
             You are logged in! You have {{#if (eq this.session.user.patreon_tier.features.archive_downloads 1000)}}unlimited downloads{{else}}a download limit of {{this.session.user.patreon_tier.features.archive_downloads}}{{/if}}.
@@ -68,9 +67,12 @@
             </tbody>
           </table>
         </div>
+        <div class="col-md-6">
+          <AudioRangeExport />
+        </div>
       </div>
       <div class="row">
-        <div class="col-md-12" id="online-streams-list">
+        <div class="col-md-12 mt-2" id="online-streams-list">
           <h2>Online Streams</h2>
           <h4>From CrimeIsDown.com</h4>
           <p>These streams allow individual audio clips to be played, so you can rewind easily without need to download a full archive. They are more like a virtual police scanner.</p>

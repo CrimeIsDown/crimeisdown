@@ -198,7 +198,7 @@ module.exports = function (defaults) {
     'common',
   ]) {
     app.import(
-      `node_modules/icecast-metadata-player/build/icecast-metadata-player-1.17.8.${component}.min.js`,
+      `node_modules/icecast-metadata-player/build/icecast-metadata-player-1.17.13.${component}.min.js`,
     );
   }
 

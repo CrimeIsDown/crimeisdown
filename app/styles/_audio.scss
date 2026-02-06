@@ -90,6 +90,33 @@ input.flatpickr-mobile {
   padding: 0;
 }
 
+.audio-range-export {
+  .audio-range-export__form {
+    .input-group-text {
+      min-width: 42px;
+      justify-content: center;
+    }
+  }
+
+  .audio-range-export__status {
+    border-color: var(--bs-border-color);
+    background-color: var(--bs-body-bg);
+  }
+
+  .audio-range-export__message {
+    white-space: pre-line;
+  }
+
+  .audio-range-export__missing {
+    max-height: 160px;
+    overflow-y: auto;
+    border: 1px solid var(--bs-border-color);
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--bs-light-bg-subtle);
+  }
+}
+
 /* Needed to avoid browser scrolling down too far */
 #lookuprecording:target::before {
   content: "";
