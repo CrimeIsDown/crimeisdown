@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - master
+      - v3
       - develop
   pull_request: {}
 
