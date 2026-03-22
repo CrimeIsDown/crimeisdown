@@ -4,7 +4,7 @@
   "description": "CrimeIsDown.com website",
   "repository": {
     "type": "git",
-    "url": "https://github.com/CrimeIsDown/crimeisdown-v3"
+    "url": "https://github.com/CrimeIsDown/crimeisdown"
   },
   "license": "MIT",
   "author": "Eric Tendian <eric@crimeisdown.com>",
@@ -27,7 +27,7 @@
     "test:ember": "ember test"
   },
   "bugs": {
-    "url": "https://github.com/CrimeIsDown/crimeisdown-v3/issues"
+    "url": "https://github.com/CrimeIsDown/crimeisdown/issues"
   },
   "engines": {
     "node": ">= 18"
