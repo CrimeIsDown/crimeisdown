@@ -18,13 +18,15 @@ jobs:
     name: "Lint"
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      NODE_VERSION: 20
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
       - name: Install Dependencies
         run: npm ci
@@ -35,13 +37,15 @@ jobs:
   # test:
   #   name: "Test"
   #   runs-on: ubuntu-latest
+  #   env:
+  #     NODE_VERSION: 20
 
   #   steps:
-  #     - uses: actions/checkout@v3
+  #     - uses: actions/checkout@v4
   #     - name: Install Node
-  #       uses: actions/setup-node@v3
+  #       uses: actions/setup-node@v4
   #       with:
-  #         node-version: 18
+  #         node-version: ${{ env.NODE_VERSION }}
   #         cache: npm
   #     - name: Install Dependencies
   #       run: npm ci
