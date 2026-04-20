@@ -8,6 +8,8 @@ import { archivePricing } from "@/lib/audio/archive";
 import { archiveFeeds, audioStreams } from "@/lib/audio/data";
 import { loadRadioIds, loadUcrCodes } from "@/lib/reference/data";
 
+export const prerender = true;
+
 const radioIds = loadRadioIds();
 const ucrCodes = loadUcrCodes();
 const liveStreams = audioStreams.filter((stream) => stream.slug !== "cpd_zone_scan");

@@ -125,6 +125,7 @@ export function MapLookupApp({
   const markerRef = useRef<CircleMarker | null>(null);
   const circleRef = useRef<Circle | null>(null);
   const leafletRef = useRef<typeof import("leaflet") | null>(null);
+  const hasBootstrappedLookup = useRef(false);
 
   const wazeUrl = useMemo(() => {
     if (!result) {
@@ -277,6 +278,37 @@ export function MapLookupApp({
 
     window.history.replaceState({}, "", nextUrl);
   }, [result]);
+
+  useEffect(() => {
+    if (hasBootstrappedLookup.current || initialResult || initialError) {
+      return;
+    }
+
+    hasBootstrappedLookup.current = true;
+
+    const currentUrl = new URL(window.location.href);
+    const initialSearch = currentUrl.searchParams.get("q")?.trim();
+    const latParam = currentUrl.searchParams.get("lat");
+    const lngParam = currentUrl.searchParams.get("lng");
+    const lat = latParam === null ? Number.NaN : Number(latParam);
+    const lng = lngParam === null ? Number.NaN : Number(lngParam);
+
+    if (initialSearch) {
+      setQuery(initialSearch);
+
+      const requestUrl = new URL("/api/location-context", window.location.origin);
+      requestUrl.searchParams.set("q", initialSearch);
+      void runLookup(requestUrl);
+      return;
+    }
+
+    if (Number.isFinite(lat) && Number.isFinite(lng)) {
+      const requestUrl = new URL("/api/location-context", window.location.origin);
+      requestUrl.searchParams.set("lat", String(lat));
+      requestUrl.searchParams.set("lng", String(lng));
+      void runLookup(requestUrl);
+    }
+  }, [initialError, initialResult]);
 
   async function runLookup(nextUrl: URL) {
     setLoading(true);
