@@ -1,0 +1,29 @@
+---
+type Props = {
+  title: string;
+  eyebrow?: string;
+  description?: string;
+  href?: string;
+  external?: boolean;
+};
+
+const { title, eyebrow, description, href, external = false } = Astro.props;
+---
+
+<article class="surface-card rounded-[1.65rem] p-6 transition-transform hover:-translate-y-1">
+  <div class="space-y-3">
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h3 class="text-xl font-semibold text-foreground">{title}</h3>
+    {description && <p class="text-sm leading-7 text-muted-foreground">{description}</p>}
+    {href && (
+      <a
+        href={href}
+        class="inline-flex items-center gap-2 font-semibold text-primary no-underline hover:underline"
+        target={external ? "_blank" : undefined}
+        rel={external ? "noreferrer" : undefined}
+      >
+        Open
+      </a>
+    )}
+  </div>
+</article>

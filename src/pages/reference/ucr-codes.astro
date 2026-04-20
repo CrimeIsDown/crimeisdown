@@ -1,0 +1,38 @@
+---
+import UcrCodeLookup from "@/components/reference/UcrCodeLookup";
+import PageHero from "@/components/layout/PageHero.astro";
+import SectionCard from "@/components/layout/SectionCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { buttonVariants } from "@/lib/button-styles";
+import { loadUcrCodes } from "@/lib/reference/data";
+
+const ucrCodes = loadUcrCodes();
+---
+
+<BaseLayout
+  title="UCR Code Lookup"
+  description="Direct-link version of the Chicago UCR code lookup tool."
+>
+  <PageHero
+    eyebrow="Reference"
+    title="UCR Code Lookup"
+    description="Use the standalone lookup when you only need the offense code details. The full guide page remains the combined reference workflow."
+    actions={[
+      { href: "/guide", label: "Back to /guide" },
+      { href: "/reference", label: "Reference hub", variant: "ghost" },
+    ]}
+  />
+
+  <SectionCard
+    title="Search a UCR code"
+    description="Enter a complete code to resolve the primary and secondary offense descriptions used in CPD reporting."
+  >
+    <UcrCodeLookup client:load rows={ucrCodes} />
+    <div class="mt-5 flex flex-wrap gap-3">
+      <a href="/guide" class:list={["no-underline", buttonVariants()]}>Back to /guide</a>
+      <a href="/reference" class:list={["no-underline", buttonVariants({ variant: "outline" })]}>
+        Reference hub
+      </a>
+    </div>
+  </SectionCard>
+</BaseLayout>

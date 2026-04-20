@@ -1,0 +1,44 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { inferArchivePlayback } from "@/lib/audio/archive";
+
+export const prerender = false;
+
+const filename = Astro.params.filename ?? "archive";
+const inputUrl = Astro.url.searchParams.get("url") ?? "";
+const type = Astro.url.searchParams.get("type") ?? "";
+const playback = inferArchivePlayback(inputUrl || null, type || undefined);
+const resolvedFilename = playback?.filename ?? filename;
+---
+
+<BaseLayout title="Play Audio Archive" description="Open a direct archive file URL and play it in the browser.">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <form method="GET">
+          <div class="form-group">
+            <label for="url">Audio file URL</label>
+            <input type="text" name="url" id="url" class="form-control" value={inputUrl} aria-label="Audio file URL" />
+          </div>
+          <div class="form-group mt-2">
+            <label for="type">Media type</label>
+            <input type="text" name="type" id="type" class="form-control" value={type} aria-label="Media type" />
+          </div>
+          <button type="submit" class="btn btn-primary mt-2">Play</button>
+        </form>
+      </div>
+      <div class="col-sm-12 mt-3">
+        {playback ? (
+          <>
+            <h4><a href={playback.url} target="_blank" rel="noopener noreferrer">{resolvedFilename}</a></h4>
+            <audio class="w-100" controls preload="metadata" src={playback.url}>
+              <p>Your browser does not support embedded audio playback.</p>
+            </audio>
+          </>
+        ) : (
+          <p>Provide a valid <code>?url=</code> parameter to load archive playback here.</p>
+        )}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

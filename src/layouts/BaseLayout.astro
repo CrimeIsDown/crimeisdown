@@ -1,0 +1,121 @@
+---
+import "@/styles/global.css";
+import "@/styles/legacy.css";
+import Footer from "@/components/layout/Footer.astro";
+import Header from "@/components/layout/Header.astro";
+import { buildCanonical, buildTitle } from "@/lib/seo";
+import { site } from "@/lib/site";
+import { themeStorageKey } from "@/lib/theme";
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  noIndex?: boolean;
+  mainClass?: string;
+};
+
+const {
+  title,
+  description = site.description,
+  canonicalPath = Astro.url.pathname,
+  noIndex = false,
+  mainClass = "site-main",
+} = Astro.props;
+
+const canonical = buildCanonical(canonicalPath);
+const fullTitle = buildTitle(title);
+const bootstrapStylesheet =
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css";
+const bootstrapScript =
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js";
+const themeScript = `
+(() => {
+  const storageKey = ${JSON.stringify(themeStorageKey)};
+  const root = document.documentElement;
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const getStoredTheme = () => {
+    try {
+      return localStorage.getItem(storageKey) || "auto";
+    } catch {
+      return "auto";
+    }
+  };
+  const applyTheme = (theme) => {
+    const resolvedTheme = theme === "auto"
+      ? media.matches ? "dark" : "light"
+      : theme;
+    root.dataset.theme = theme;
+    root.setAttribute("data-bs-theme", resolvedTheme);
+    root.classList.toggle("dark", resolvedTheme === "dark");
+  };
+  const syncButtons = (theme) => {
+    document.querySelectorAll("[data-theme-value]").forEach((button) => {
+      const isActive = button.getAttribute("data-theme-value") === theme;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+  };
+  const storedTheme = getStoredTheme();
+  applyTheme(storedTheme);
+  media.addEventListener?.("change", () => {
+    if (getStoredTheme() === "auto") {
+      applyTheme("auto");
+    }
+  });
+  document.addEventListener("DOMContentLoaded", () => {
+    syncButtons(getStoredTheme());
+    document.querySelectorAll("[data-theme-value]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const theme = button.getAttribute("data-theme-value") || "auto";
+        try {
+          localStorage.setItem(storageKey, theme);
+        } catch {}
+        applyTheme(theme);
+        syncButtons(theme);
+      });
+    });
+    if (getStoredTheme() === "auto") {
+      applyTheme("auto");
+      syncButtons("auto");
+    }
+  });
+})();
+`;
+---
+
+<!doctype html>
+<html lang="en" data-theme="auto" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="light dark" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="search" type="application/opensearchdescription+xml" href="https://crimeisdown.com/osd.xml" title="Address search" />
+    <link rel="stylesheet" href={bootstrapStylesheet} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@CrimeIsDown" />
+    <meta name="twitter:title" content={site.title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:creator" content="@EricTendian" />
+    <script is:inline set:html={themeScript}></script>
+    {noIndex && <meta name="robots" content="noindex, follow" />}
+  </head>
+  <body class="site-shell">
+    <Header />
+    <main class={mainClass}>
+      <slot />
+    </main>
+    <Footer />
+    <script is:inline src={bootstrapScript} defer></script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { audioStreams } from "@/lib/audio/data";
+
+export const prerender = false;
+
+const streamSlug = Astro.params.stream ?? "";
+const autoplay = Astro.url.searchParams.get("autoplay") === "true";
+const stream = audioStreams.find((candidate) => candidate.slug === streamSlug);
+
+if (!stream) {
+  return Astro.redirect(`/audio${Astro.url.search}`, 308);
+}
+---
+
+<BaseLayout title={`${stream.name ?? stream.slug} Live Audio`} description={stream.description || `Listen to ${stream.name}.`}>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        {stream.name ? (
+          <>
+            <h1>{stream.name}</h1>
+            <p>{stream.description} <strong><a href="/audio">Visit our Scanner Audio page for more streams, and to download archives of this channel.</a></strong></p>
+          </>
+        ) : (
+          <h1>{stream.slug}</h1>
+        )}
+        {stream.broadcastify ? (
+          <div class="alert alert-warning" role="alert">
+            This feed is hosted by Broadcastify.com, as it is of an encrypted radio channel. Radio traffic is delayed 30-35 minutes. CrimeIsDown.com has no control over these streams and is not affiliated with Broadcastify.
+            {" "}
+            {stream.broadcastifyId ? (
+              <a href={`https://www.broadcastify.com/listen/feed/${stream.broadcastifyId}`} target="_blank" rel="noopener noreferrer">
+                <img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /> Listen on Broadcastify.com
+              </a>
+            ) : null}
+          </div>
+        ) : null}
+
+        {stream.slug === "cpd_zone_scan" ? (
+          <iframe
+            id="youtube-player"
+            title="YouTube scanner feed"
+            src={`https://www.youtube.com/embed/live_stream?channel=UCUS-tAwCyxBrrA3FtSjH2NA${autoplay ? "&autoplay=1" : ""}`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        ) : stream.broadcastify ? (
+          <audio class="w-100" controls preload="none" src={stream.broadcastify} autoplay={autoplay}>
+            <p>Your browser does not support embedded audio playback.</p>
+          </audio>
+        ) : null}
+
+        {stream.openmhz ? (
+          <>
+            <h2 class="h4 mt-3">Transmission-based stream/archive</h2>
+            <p>Use the Archive button in the menu below to jump to a certain time. <a href={stream.openmhz}><i>Player hosted by OpenMHz.com</i></a></p>
+            <iframe id="openmhz-iframe" title="OpenMHz stream" src={stream.openmhz}></iframe>
+          </>
+        ) : null}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

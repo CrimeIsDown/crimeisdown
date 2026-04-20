@@ -1,0 +1,40 @@
+---
+import { MapLookupApp } from "@/components/area/MapLookupApp";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { lookupLocationContext } from "@/lib/location/engine";
+import { loadRadioIds, loadUcrCodes } from "@/lib/reference/data";
+
+const q = Astro.url.searchParams.get("q")?.trim() || undefined;
+let initialResult = null;
+let initialError = null;
+const radioIds = loadRadioIds();
+const ucrCodes = loadUcrCodes();
+
+if (q) {
+  try {
+    initialResult = await lookupLocationContext({
+      origin: Astro.url.toString(),
+      q,
+    });
+  } catch (error) {
+    initialError =
+      error instanceof Error ? error.message : "Unable to look up that location.";
+  }
+}
+---
+
+<BaseLayout
+  title="Incident Map"
+  description="Look up a Chicago address to see neighborhoods, districts, wards, and recommended scanner channels."
+>
+  <div class="container-fluid">
+    <MapLookupApp
+      client:load
+      initialQuery={q}
+      initialResult={initialResult}
+      initialError={initialError}
+      radioIds={radioIds}
+      ucrCodes={ucrCodes}
+    />
+  </div>
+</BaseLayout>

@@ -1,0 +1,20 @@
+---
+type Props = {
+  title?: string;
+  description?: string;
+  class?: string;
+  id?: string;
+};
+
+const { title, description, class: className, ...rest } = Astro.props;
+---
+
+<section {...rest} class:list={["surface-card rounded-[1.75rem] p-6 sm:p-8", className]}>
+  {(title || description) && (
+    <div class="mb-5 space-y-2">
+      {title && <h2 class="text-2xl font-semibold text-foreground">{title}</h2>}
+      {description && <p class="max-w-3xl text-sm leading-7 text-muted-foreground">{description}</p>}
+    </div>
+  )}
+  <slot />
+</section>

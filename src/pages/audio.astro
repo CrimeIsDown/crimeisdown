@@ -1,0 +1,166 @@
+---
+import ArchiveDownloadForm from "@/components/audio/ArchiveDownloadForm";
+import ScannerNotepad from "@/components/audio/ScannerNotepad";
+import RadioIdLookup from "@/components/reference/RadioIdLookup";
+import UcrCodeLookup from "@/components/reference/UcrCodeLookup";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { archivePricing } from "@/lib/audio/archive";
+import { archiveFeeds, audioStreams } from "@/lib/audio/data";
+import { loadRadioIds, loadUcrCodes } from "@/lib/reference/data";
+
+const radioIds = loadRadioIds();
+const ucrCodes = loadUcrCodes();
+const liveStreams = audioStreams.filter((stream) => stream.slug !== "cpd_zone_scan");
+---
+
+<BaseLayout title="Scanner Audio" description="Listen to live scanner audio and download Chicago archive recordings.">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="d-lg-none">
+          <p><em><a href="#lookuprecording">Jump to scanner recording download</a></em></p>
+        </div>
+        <div class="mb-3">
+          <h3>Live streaming from CrimeIsDown</h3>
+          <div class="alert alert-info" role="alert">
+            <p><img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /> streams are provided by Broadcastify.com, for encrypted radio channels (marked with [ENC]). Radio traffic is delayed 30-35 minutes. CrimeIsDown.com has no control over these streams and is not affiliated with Broadcastify.</p>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <fieldset id="streamlist">
+                  <legend>Available streams</legend>
+                  <div class="stream-options mb-3">
+                    {liveStreams.map((stream) => (
+                      <div class="form-check">
+                        <input class="form-check-input" id={`checkbox-${stream.slug}`} type="checkbox" disabled />
+                        <label class="form-check-label" for={`checkbox-${stream.slug}`}>{stream.shortname ?? stream.name}</label>
+                        <a href={`/audio/live/${stream.slug}`} target="_blank" title={`Listen to only ${stream.shortname ?? stream.name}`}> open</a>
+                        {stream.broadcastify ? (
+                          <a href={stream.broadcastify} target="_blank" rel="noopener noreferrer">
+                            <img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" />
+                          </a>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h4>Spatial Scanner Audio</h4>
+              <p>Open a dedicated stream page from the list to listen live or use OpenMHz instant replay where available.</p>
+              <p>The original multi-stream scanner layout is preserved structurally here while stream playback is routed through the rebuilt Astro pages.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>General #ChicagoScanner feed</h3>
+          <p>Scanner feed of ISP Dist. Chicago, Metra PD, CPD Citywides, various CFD incident channels, Marine 16, and aviation UNICOM. Scan list subject to change.<br /><br /><a href="https://www.youtube.com/@EricTendian/live" target="_blank" rel="noopener noreferrer">View on YouTube</a></p>
+          <iframe id="youtube-player" title="YouTube scanner feed" src="https://crimeisdown.com/youtubelive" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="mt-3">
+          <div class="accordion" id="accordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingRIDSearch">
+                <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseRIDSearch" aria-expanded="false" aria-controls="collapseRIDSearch" type="button">
+                  Radio ID Search
+                </button>
+              </h2>
+              <div id="collapseRIDSearch" class="accordion-collapse collapse" aria-labelledby="headingRIDSearch">
+                <div id="search-radioids" class="accordion-body">
+                  <RadioIdLookup client:load rows={radioIds} />
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingUCRSearch">
+                <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseUCRSearch" aria-expanded="false" aria-controls="collapseUCRSearch" type="button">
+                  UCR Code Search
+                </button>
+              </h2>
+              <div id="collapseUCRSearch" class="accordion-collapse collapse" aria-labelledby="headingUCRSearch">
+                <div id="search-ucrcodes" class="accordion-body">
+                  <UcrCodeLookup client:load rows={ucrCodes} />
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingNotepad">
+                <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseNotepad" aria-expanded="false" aria-controls="collapseNotepad" type="button">
+                  Notepad
+                </button>
+              </h2>
+              <div id="collapseNotepad" class="accordion-collapse collapse" aria-labelledby="headingNotepad">
+                <div id="notepad" class="accordion-body">
+                  <ScannerNotepad client:load />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 id="lookuprecording">Look up scanner recording</h3>
+            <ArchiveDownloadForm client:load feeds={archiveFeeds} />
+            <hr />
+            <p><a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/become-a-patron.png" alt="Become a Patron!" /></a></p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Cost</th>
+                  <th>Downloads / day</th>
+                </tr>
+              </thead>
+              <tbody>
+                {archivePricing.map((row) => (
+                  <tr>
+                    <td>
+                      {row.href ? <a href={row.href} target="_blank" rel="noopener noreferrer">{row.label}</a> : row.label}
+                    </td>
+                    <td>{row.downloadsPerDay}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <h4>Range export (Commander+)</h4>
+            <p class="text-muted">Combine up to 24 continuous hours into one MP3 file.</p>
+            <p>Range export remains part of the archive workflow and is available from the main recording tools once account access is restored.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mt-2" id="online-streams-list">
+            <h2>Online Streams</h2>
+            <h4>From CrimeIsDown.com</h4>
+            <p>These streams allow individual audio clips to be played, so you can rewind easily without need to download a full archive. They are more like a virtual police scanner.</p>
+            <ul>
+              <li><p><a href="https://openmhz.com/system/sc21102" target="_blank" rel="noopener noreferrer">STARCOM21</a></p></li>
+              <li><p><a href="https://openmhz.com/system/chi_oemc" target="_blank" rel="noopener noreferrer">Chicago OEMC 800MHz</a> (includes CFD)</p></li>
+              <li><p><a href="https://openmhz.com/system/chi_cfd" target="_blank" rel="noopener noreferrer">Chicago Fire Department</a> (old system, not in use usually)</p></li>
+              <li><p><a href="https://openmhz.com/system/chi_cpd" target="_blank" rel="noopener noreferrer">Chicago Police Department</a> (including delayed encrypted feeds)</p></li>
+              <li><p><a href="https://openmhz.com/system/chisuburbs" target="_blank" rel="noopener noreferrer">Chicago Suburbs</a></p></li>
+              <li><p><a href="https://www.broadcastify.com/calls/" target="_blank" rel="noopener noreferrer">Broadcastify Calls</a></p></li>
+            </ul>
+            <h4>Broadcastify feed lists by county</h4>
+            <ul>
+              <li><p><a href="https://www.broadcastify.com/listen/ctid/606" target="_blank" rel="noopener noreferrer">Cook County (includes Chicago)</a></p></li>
+              <li><p><a href="https://www.broadcastify.com/listen/ctid/639" target="_blank" rel="noopener noreferrer">Lake County (north suburbs)</a></p></li>
+              <li><p><a href="https://www.broadcastify.com/listen/ctid/612" target="_blank" rel="noopener noreferrer">DuPage County (west suburbs)</a></p></li>
+              <li><p><a href="https://www.broadcastify.com/listen/ctid/635" target="_blank" rel="noopener noreferrer">Kane County (far west/northwest suburbs)</a></p></li>
+              <li><p><a href="https://www.broadcastify.com/listen/ctid/689" target="_blank" rel="noopener noreferrer">Will County (south/southwest suburbs)</a></p></li>
+            </ul>
+            <h4>Other Sources</h4>
+            <ul>
+              <li><p><a href="https://www.liveatc.net/search/?icao=kord" target="_blank" rel="noopener noreferrer">LiveATC O'Hare Airport</a></p></li>
+              <li><p><a href="https://www.liveatc.net/search/?icao=kmdw" target="_blank" rel="noopener noreferrer">LiveATC Midway Airport</a></p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

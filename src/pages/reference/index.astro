@@ -1,0 +1,53 @@
+---
+import PageHero from "@/components/layout/PageHero.astro";
+import SectionCard from "@/components/layout/SectionCard.astro";
+import MarketingCard from "@/components/marketing/MarketingCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Reference"
+  description="Deep links for the radio ID lookup, UCR code lookup, and the main scanner guide."
+>
+  <PageHero
+    eyebrow="Reference"
+    title="Quick public reference tools for Chicago scanner traffic."
+    description="The main guide workflow lives on /guide. These direct-link pages stay available when you only need a lookup tool or the long-form guide by itself."
+    actions={[{ href: "/guide", label: "Open Scanner Guide" }]}
+  />
+
+  <div class="grid gap-6 lg:grid-cols-3">
+    <MarketingCard
+      eyebrow="Combined workflow"
+      title="Scanner Guide"
+      description="The guide page pairs both lookups with the full long-form scanner guide."
+      href="/guide"
+    />
+    <MarketingCard
+      eyebrow="Standalone tool"
+      title="Radio ID Lookup"
+      description="Search CPD and related radio identifiers without loading the full guide page."
+      href="/reference/radio-ids"
+    />
+    <MarketingCard
+      eyebrow="Standalone tool"
+      title="UCR Code Lookup"
+      description="Look up offense descriptions directly from the public UCR code dataset."
+      href="/reference/ucr-codes"
+    />
+  </div>
+
+  <SectionCard
+    title="Why these links stay public"
+    description="The public site still works best when a user can jump directly to the piece of context they need without navigating a larger product surface."
+  >
+    <div class="rich-copy space-y-4 text-sm">
+      <p>
+        If the question is “what does this radio ID mean?” or “what offense is that UCR code?”, the reference pages should answer it immediately.
+      </p>
+      <p>
+        The combined guide page remains the best starting point if you want both lookup tools and the longer scanner reference in one place.
+      </p>
+    </div>
+  </SectionCard>
+</BaseLayout>

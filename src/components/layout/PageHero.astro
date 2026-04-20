@@ -1,0 +1,45 @@
+---
+import { buttonVariants } from "@/lib/button-styles";
+
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  actions?: { href: string; label: string; variant?: "primary" | "secondary" | "ghost"; external?: boolean }[];
+};
+
+const { eyebrow, title, description, actions = [] } = Astro.props;
+---
+
+<section class="surface-card accent-card rounded-[2rem] px-6 py-10 sm:px-8 lg:px-10">
+  <div class="max-w-3xl space-y-4">
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h1 class="text-4xl font-semibold leading-tight text-foreground sm:text-5xl">
+      {title}
+    </h1>
+    <p class="max-w-2xl text-lg leading-8 text-muted-foreground">
+      {description}
+    </p>
+    {actions.length > 0 && (
+      <div class="flex flex-wrap gap-3 pt-2">
+        {actions.map((action) => (
+          <a
+            href={action.href}
+            class:list={[
+              "no-underline",
+              action.variant === "secondary"
+                ? buttonVariants({ variant: "secondary" })
+                : action.variant === "ghost"
+                  ? buttonVariants({ variant: "outline" })
+                  : buttonVariants({ variant: "default" }),
+            ]}
+            target={action.external ? "_blank" : undefined}
+            rel={action.external ? "noreferrer" : undefined}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

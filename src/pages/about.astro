@@ -1,0 +1,91 @@
+---
+import PageHero from "@/components/layout/PageHero.astro";
+import SectionCard from "@/components/layout/SectionCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionIntro from "@/components/marketing/SectionIntro.astro";
+import SplitPanel from "@/components/marketing/SplitPanel.astro";
+---
+
+<BaseLayout
+  title="About"
+  description="About CrimeIsDown, what stays free, and what moved to Sirens."
+>
+  <PageHero
+    eyebrow="About CrimeIsDown"
+    title="The public front door for Chicago scanner context."
+    description="CrimeIsDown stays focused on free public utility: location context, listening, and reference. Sirens now handles the premium investigative workflow."
+  />
+  <SectionIntro
+    eyebrow="Mission"
+    title="The site exists to answer a practical question."
+    description="Someone hears sirens and wants context. CrimeIsDown tries to answer that with the smallest useful public surface: look up the place, listen live, and understand the local scanner terms. Everything beyond that belongs on Sirens."
+  />
+
+  <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+    <SectionCard title="Why the name matters">
+      <div class="rich-copy space-y-4 text-sm">
+        <p>
+          CrimeIsDown comes from the long-running Chicago scanner conversation around whether official crime narratives match what people hear in the field.
+        </p>
+        <p>
+          The point of the site has never been to tell anyone what to think. It is to make the radio, the geography, and the source material easy to inspect for yourself.
+        </p>
+        <p>
+          That is why the public site is now narrower. It starts with the location question and stays out of the way until the user needs to go deeper.
+        </p>
+      </div>
+    </SectionCard>
+
+    <SectionCard title="What changed">
+      <div class="grid gap-3 text-sm">
+        <div class="rounded-2xl border border-[var(--border)] bg-white/55 p-4">
+          Free: area lookup, live listening, audio archives, reference tools.
+        </div>
+        <div class="rounded-2xl border border-[var(--border)] bg-white/55 p-4">
+          Moved: transcript search, alerts, premium account flows, assistant features.
+        </div>
+        <div class="rounded-2xl border border-[var(--border)] bg-white/55 p-4">
+          Retained: the public site still points people to the source data and supporting material.
+        </div>
+      </div>
+    </SectionCard>
+  </div>
+
+  <SplitPanel
+    left={{
+      title: "What stays on CrimeIsDown",
+      description:
+        "The public site remains the fast answer path for Chicago residents and scanner listeners.",
+      bullets: [
+        "Location-first lookup",
+        "Live scanner listening",
+        "Reference and guide content",
+      ],
+      href: "/map",
+    }}
+    right={{
+      title: "What lives in Sirens",
+      description:
+        "Sirens is the separate premium product for transcript search and deeper investigative workflows.",
+      bullets: [
+        "Transcript search",
+        "Saved alerts",
+        "Assistant and incident workflows",
+      ],
+      href: "https://sirens.app",
+      external: true,
+      tone: "accent",
+    }}
+  />
+
+  <SectionCard title="Source credits">
+    <div class="rich-copy space-y-4 text-sm">
+      <p>
+        Map and neighborhood context comes from the City of Chicago data portal and other public reference datasets.
+      </p>
+      <p>
+        Audio, radio IDs, and scanner references draw from community-maintained public sources and published feeds. Those links stay on the public site so the source trail is visible.
+      </p>
+    </div>
+  </SectionCard>
+</BaseLayout>
