@@ -14,7 +14,7 @@
     "test:e2e": "playwright test"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.5",
