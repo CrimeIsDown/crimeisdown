@@ -4,7 +4,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { archivePricing } from "@/lib/audio/archive";
 import { archiveFeeds } from "@/lib/audio/data";
 
-const initialFeed = Astro.url.searchParams.get("feed") ?? undefined;
+export const prerender = true;
 ---
 
 <BaseLayout title="Audio Archives" description="Look up scanner recordings and play direct archive links.">
@@ -12,7 +12,7 @@ const initialFeed = Astro.url.searchParams.get("feed") ?? undefined;
     <div class="row">
       <div class="col-sm-12 col-lg-6">
         <h3>Look up scanner recording</h3>
-        <ArchiveDownloadForm client:load feeds={archiveFeeds} initialFeed={initialFeed} />
+        <ArchiveDownloadForm client:load feeds={archiveFeeds} />
       </div>
       <div class="col-sm-12 col-lg-6">
         <h3>Download limits</h3>

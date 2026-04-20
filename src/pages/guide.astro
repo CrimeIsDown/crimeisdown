@@ -4,6 +4,8 @@ import UcrCodeLookup from "@/components/reference/UcrCodeLookup";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { loadRadioIds, loadUcrCodes } from "@/lib/reference/data";
 
+export const prerender = true;
+
 const radioIds = loadRadioIds();
 const ucrCodes = loadUcrCodes();
 ---

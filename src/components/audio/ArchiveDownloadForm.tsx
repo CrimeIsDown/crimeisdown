@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   AUDIO_ARCHIVE_ENDPOINT,
@@ -20,6 +20,17 @@ export default function ArchiveDownloadForm({ feeds, initialFeed }: Props) {
   );
   const [datetime, setDatetime] = useState(initialDatetime);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (feed) {
+      return;
+    }
+
+    const feedParam = new URL(window.location.href).searchParams.get("feed");
+    if (feedParam && feeds.some((candidate) => candidate.value === feedParam)) {
+      setFeed(feedParam);
+    }
+  }, [feed, feeds]);
 
   function onSubmit(event: { preventDefault(): void }) {
     event.preventDefault();

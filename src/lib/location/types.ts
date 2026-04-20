@@ -98,9 +98,12 @@ export type LocationContextResult = {
   ems?: EmsContext;
 };
 
+export type AssetTextFetcher = (path: string) => Promise<string>;
+
 export type LookupRequest = {
   origin: string;
   q?: string;
   lat?: number;
   lng?: number;
+  assetText?: AssetTextFetcher;
 };

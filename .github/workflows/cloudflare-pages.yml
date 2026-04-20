@@ -24,7 +24,7 @@ jobs:
       name: ${{ github.ref == 'refs/heads/v4' && 'production' || 'preview' }}
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     env:
-      NODE_VERSION: 20
+      NODE_VERSION: 24
       BUILD_DIR: dist
     steps:
       - uses: actions/checkout@v4
@@ -38,11 +38,10 @@ jobs:
       - name: Build production assets
         run: npm run build
       - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: crimeisdown
-          directory: ${{ env.BUILD_DIR }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref_name }}
+          wranglerVersion: "4"
+          command: pages deploy ${{ env.BUILD_DIR }} --project-name=crimeisdown --branch=${{ github.head_ref || github.ref_name }}

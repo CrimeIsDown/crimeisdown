@@ -4,8 +4,13 @@ import fireStations from "../../../public/data/city_data/fire_stations.json";
 import traumaCenters from "../../../public/data/city_data/trauma_centers.json";
 import streams from "../../../public/data/audio_data/online_streams.json";
 
-import type { FireStation, StreamInfo, TraumaCenter } from "@/lib/location/types";
-import { mapOverlayCollections } from "@/lib/location/overlays";
+import type {
+  AssetTextFetcher,
+  FireStation,
+  StreamInfo,
+  TraumaCenter,
+} from "@/lib/location/types";
+import { loadMapOverlayCollections } from "@/lib/location/overlays";
 
 type LookupDatasets = {
   communityAreas: FeatureCollection<Polygon | MultiPolygon>;
@@ -19,7 +24,9 @@ type LookupDatasets = {
   streams: StreamInfo[];
 };
 
-export function loadLookupDatasets() {
+export async function loadLookupDatasets(assetText: AssetTextFetcher) {
+  const mapOverlayCollections = await loadMapOverlayCollections(assetText);
+
   return {
     communityAreas: mapOverlayCollections.communityAreas,
     neighborhoods: mapOverlayCollections.neighborhoods,

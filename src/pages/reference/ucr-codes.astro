@@ -6,6 +6,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { buttonVariants } from "@/lib/button-styles";
 import { loadUcrCodes } from "@/lib/reference/data";
 
+export const prerender = true;
+
 const ucrCodes = loadUcrCodes();
 ---
 

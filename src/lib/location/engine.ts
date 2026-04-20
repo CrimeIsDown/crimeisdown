@@ -5,6 +5,7 @@ import type { FeatureCollection, MultiPolygon, Polygon } from "geojson";
 import { CHICAGO_VIEWBOX, POLICE_AREAS, POLICE_ZONES } from "@/lib/location/constants";
 import { loadLookupDatasets } from "@/lib/location/data";
 import type {
+  AssetTextFetcher,
   Coordinate,
   FireStation,
   LocationContextResult,
@@ -220,13 +221,27 @@ async function reverseGeocode(origin: string, coordinate: Coordinate) {
   return payload.display_name || `Coordinates ${coordinate.lat.toFixed(5)}, ${coordinate.lng.toFixed(5)}`;
 }
 
+function createHttpAssetTextFetcher(origin: string): AssetTextFetcher {
+  return async (path) => {
+    const response = await fetch(new URL(path, origin));
+    if (!response.ok) {
+      throw new Error(`Failed to load ${path}: ${response.status}`);
+    }
+
+    return response.text();
+  };
+}
+
 export async function lookupLocationContext({
   origin,
   q,
   lat,
   lng,
+  assetText,
 }: LookupRequest): Promise<LocationContextResult> {
-  const datasets = loadLookupDatasets();
+  const datasets = await loadLookupDatasets(
+    assetText ?? createHttpAssetTextFetcher(origin),
+  );
 
   let resolved: GeocodeResult;
 
