@@ -4,7 +4,7 @@ This repository now contains the Astro rewrite of the public `crimeisdown.com` s
 
 ## Requirements
 
-- Node.js 20+
+- Node.js 24+
 - npm
 
 ## Install
