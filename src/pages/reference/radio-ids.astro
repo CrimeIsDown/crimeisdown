@@ -1,0 +1,38 @@
+---
+import RadioIdLookup from "@/components/reference/RadioIdLookup";
+import PageHero from "@/components/layout/PageHero.astro";
+import SectionCard from "@/components/layout/SectionCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { buttonVariants } from "@/lib/button-styles";
+import { loadRadioIds } from "@/lib/reference/data";
+
+const radioIds = loadRadioIds();
+---
+
+<BaseLayout
+  title="Radio ID Lookup"
+  description="Direct-link version of the Chicago radio ID lookup tool."
+>
+  <PageHero
+    eyebrow="Reference"
+    title="Radio ID Lookup"
+    description="Use the standalone lookup when you only need the radio ID breakdown. The full guide page stays available if you want the broader scanner context alongside it."
+    actions={[
+      { href: "/guide", label: "Back to /guide" },
+      { href: "/reference", label: "Reference hub", variant: "ghost" },
+    ]}
+  />
+
+  <SectionCard
+    title="Search a radio ID"
+    description="Enter a complete radio ID to resolve the agency, bureau, division, section, and assignment details."
+  >
+    <RadioIdLookup client:load rows={radioIds} />
+    <div class="mt-5 flex flex-wrap gap-3">
+      <a href="/guide" class:list={["no-underline", buttonVariants()]}>Back to /guide</a>
+      <a href="/reference" class:list={["no-underline", buttonVariants({ variant: "outline" })]}>
+        Reference hub
+      </a>
+    </div>
+  </SectionCard>
+</BaseLayout>

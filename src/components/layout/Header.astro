@@ -1,0 +1,77 @@
+---
+import { authCta, isNavItemActive, primaryNav, site } from "@/lib/site";
+
+const pathname = Astro.url.pathname;
+---
+
+<header>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a href="/" class="navbar-brand">
+        <img src="/img/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-middle" />
+        {site.name}
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav me-auto">
+          {primaryNav.map((item) => (
+            <li class="nav-item">
+              <a
+                href={item.href}
+                class:list={["nav-link", isNavItemActive(pathname, item) && "active"]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a
+              href={authCta.href}
+              referrerpolicy="unsafe-url"
+              class="ptrn-button"
+              target={authCta.external ? "_blank" : undefined}
+              rel={authCta.external ? "noreferrer" : undefined}
+            >
+              <img src="/img/login-with-patreon.png" alt="Log in with Patreon" />
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <button
+              class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
+              id="bd-theme"
+              type="button"
+              aria-expanded="false"
+              data-bs-toggle="dropdown"
+              data-bs-display="static"
+            >
+              Theme
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme">
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" data-theme-value="light">
+                  Light
+                </button>
+              </li>
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" data-theme-value="dark">
+                  Dark
+                </button>
+              </li>
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center active" data-theme-value="auto">
+                  Auto
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

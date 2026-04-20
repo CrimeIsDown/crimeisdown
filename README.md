@@ -1,61 +1,43 @@
-# crimeisdown
+# CrimeIsDown Frontend
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This repository now contains the Astro rewrite of the public `crimeisdown.com` site. The active app lives in `src/` and uses Astro, React islands, Tailwind v4, and shadcn/ui components.
 
-## Prerequisites
+## Requirements
 
-You will need the following things properly installed on your computer.
+- Node.js 20+
+- npm
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://cli.emberjs.com/release/)
-* [Google Chrome](https://google.com/chrome/)
+## Install
 
-## Installation
+```bash
+npm install
+```
 
-* `git clone <repository-url>` this repository
-* `cd crimeisdown`
-* `npm install`
+## Local development
 
-## Running / Development
+Use the normal Astro dev server:
 
-* `npm run start`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+```bash
+npm run dev
+```
 
-### Code Generators
+If you run into slow dev startup in this mixed-history repo, the local config avoids the Cloudflare adapter during development:
 
-Make use of the many generators for code, try `ember help generate` for more details
+```bash
+npx astro dev --config astro.config.local.mjs
+```
 
-### Running Tests
+## Checks
 
-* `npm run test`
-* `npm run test:ember -- --server`
+```bash
+npm run lint
+npm run test
+```
 
-### Linting
+## Production build
 
-* `npm run lint`
-* `npm run lint:fix`
+```bash
+npm run build
+```
 
-### Building
-
-* `npm exec ember build` (development)
-* `npm run build` (production)
-
-### Deploying
-
-Deployments are handled by Cloudflare Pages via `.github/workflows/cloudflare-pages.yml`:
-
-* Pushes to `main` or `master` run `npm run build` and upload the `dist/` directory to the Cloudflare Pages project named `crimeisdown`.
-* Pull requests from the main repository generate preview deployments so changes can be verified before merge.
-* Define the `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` repository secrets with credentials that have Cloudflare Pages access.
-* The `_headers` and `_redirects` files in `public/` control global headers and SPA-style routing during the Ember build.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://cli.emberjs.com/release/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+The production deploy target is Cloudflare Pages/Workers, with configuration in [wrangler.jsonc](./wrangler.jsonc) and CI workflows under `.github/workflows/`.

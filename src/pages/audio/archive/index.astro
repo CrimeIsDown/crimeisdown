@@ -1,0 +1,40 @@
+---
+import ArchiveDownloadForm from "@/components/audio/ArchiveDownloadForm";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { archivePricing } from "@/lib/audio/archive";
+import { archiveFeeds } from "@/lib/audio/data";
+
+const initialFeed = Astro.url.searchParams.get("feed") ?? undefined;
+---
+
+<BaseLayout title="Audio Archives" description="Look up scanner recordings and play direct archive links.">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-lg-6">
+        <h3>Look up scanner recording</h3>
+        <ArchiveDownloadForm client:load feeds={archiveFeeds} initialFeed={initialFeed} />
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <h3>Download limits</h3>
+        <p><a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/become-a-patron.png" alt="Become a Patron!" /></a></p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Cost</th>
+              <th>Downloads / day</th>
+            </tr>
+          </thead>
+          <tbody>
+            {archivePricing.map((row) => (
+              <tr>
+                <td>{row.href ? <a href={row.href} target="_blank" rel="noopener noreferrer">{row.label}</a> : row.label}</td>
+                <td>{row.downloadsPerDay}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p><a class="btn btn-primary" href="/audio/archive/example?url=https://example.com/archive.mp3">Play direct archive URL</a></p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

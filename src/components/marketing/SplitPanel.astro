@@ -1,0 +1,54 @@
+---
+import { buttonVariants } from "@/lib/button-styles";
+
+type Side = {
+  title: string;
+  description: string;
+  href?: string;
+  external?: boolean;
+  bullets: string[];
+  tone?: "default" | "accent";
+};
+
+type Props = {
+  left: Side;
+  right: Side;
+};
+
+const { left, right } = Astro.props;
+
+const panels = [
+  { label: "CrimeIsDown", side: left },
+  { label: "Sirens", side: right },
+] as const;
+---
+
+<div class="grid gap-6 lg:grid-cols-2">
+  {panels.map(({ label, side }) => (
+    <section class:list={["surface-card rounded-[1.65rem] p-6 sm:p-8", side.tone === "accent" && "accent-card"]}>
+      <span class="eyebrow">{label}</span>
+      <h3 class="mt-3 text-2xl font-semibold text-foreground">{side.title}</h3>
+      <p class="mt-3 text-sm leading-7 text-muted-foreground">{side.description}</p>
+      <ul class="mt-5 space-y-2 text-sm leading-7 text-muted-foreground">
+        {side.bullets.map((bullet) => (
+          <li class="flex gap-2">
+            <span class="mt-2 h-2 w-2 rounded-full bg-primary/70"></span>
+            <span>{bullet}</span>
+          </li>
+        ))}
+      </ul>
+      {side.href && (
+        <div class="mt-6">
+          <a
+            href={side.href}
+            class:list={[buttonVariants({ variant: "default" }), "no-underline"]}
+            target={side.external ? "_blank" : undefined}
+            rel={side.external ? "noreferrer" : undefined}
+          >
+            Open {label}
+          </a>
+        </div>
+      )}
+    </section>
+  ))}
+</div>

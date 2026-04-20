@@ -1,0 +1,52 @@
+---
+import { buttonVariants } from "@/lib/button-styles";
+import { inferArchivePlayback } from "@/lib/audio/archive";
+
+const {
+  showPlaceholder = true,
+  heading = "Archive playback",
+} = Astro.props as {
+  showPlaceholder?: boolean;
+  heading?: string;
+};
+
+const playback = inferArchivePlayback(
+  Astro.url.searchParams.get("url"),
+  Astro.url.searchParams.get("type"),
+);
+---
+
+{playback ? (
+  <section class="surface-card rounded-[1.75rem] p-6 sm:p-8">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div class="space-y-2">
+        <span class="eyebrow">{heading}</span>
+        <h2 class="text-2xl font-semibold text-foreground">{playback.filename}</h2>
+      </div>
+      <a
+        class:list={["no-underline", buttonVariants({ variant: "outline" })]}
+        href={playback.url}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Open original file
+      </a>
+    </div>
+    <audio class="mt-5 w-full" controls preload="metadata" src={playback.url}>
+      <p>Your browser does not support embedded audio playback.</p>
+    </audio>
+    <p class="mt-3 text-sm text-muted-foreground">
+      Source type: {playback.type}
+    </p>
+  </section>
+) : null}
+
+{!playback && showPlaceholder ? (
+  <section class="surface-card rounded-[1.75rem] border border-dashed border-border/80 bg-muted/35 p-6 sm:p-8">
+    <span class="eyebrow">{heading}</span>
+    <h2 class="text-2xl font-semibold text-foreground">Open a direct archive link</h2>
+    <p class="mt-3 text-sm text-muted-foreground">
+      Paste a legacy archive URL with `?url=` on this page and the recording will load here.
+    </p>
+  </section>
+) : null}
