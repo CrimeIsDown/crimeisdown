@@ -102,9 +102,6 @@ test("legacy routes resolve cleanly", async ({ page, request }) => {
   await expect(page.getByRole("heading", { name: "Chicago Air and Water Show radio" })).toBeVisible();
   await expect(page.locator("#icecast-audio")).toBeVisible();
 
-  await page.goto("/sirens");
-  await expect(page.getByRole("heading", { name: "Why do I hear sirens?" })).toBeVisible();
-  await expect(page.getByLabel("Where?")).toBeVisible();
 
   const transcriptResponse = await request.get("/transcripts/search", {
     maxRedirects: 0,

@@ -1,0 +1,9 @@
+.git
+**/node_modules
+**/.venv
+**/__pycache__
+**/.env
+**/.env.*
+**/dist
+**/htmlcov
+output

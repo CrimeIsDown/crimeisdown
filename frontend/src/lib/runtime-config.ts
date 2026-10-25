@@ -1,10 +1,9 @@
 export const runtimeConfigDefaults = {
   API_BASE_URL: import.meta.env.PUBLIC_API_BASE_URL || "https://api.crimeisdown.com",
   API_AUTH_TOKEN: "",
-  MEILISEARCH_URL: "https://search.crimeisdown.com",
+  MEILISEARCH_URL: import.meta.env.PUBLIC_MEILISEARCH_URL || "https://search.crimeisdown.com",
   MEILISEARCH_KEY: "",
-  // Public search-only demo credential already shipped by the Ember frontend.
-  MEILISEARCH_DEMO_KEY: "REDACTED_PUBLIC_CREDENTIAL",
+  MEILISEARCH_DEMO_KEY: import.meta.env.PUBLIC_MEILISEARCH_DEMO_KEY || "",
   SEARCH_INDEX: "",
   TYPESENSE_KEY: "",
 } as const;

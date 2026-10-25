@@ -14,7 +14,6 @@ export type ActionLink = {
 export const site = {
   name: "CrimeIsDown.com",
   domain: "https://crimeisdown.com",
-  sirensDomain: "https://sirens.app",
   title: "CrimeIsDown.com",
   description:
     "Taking the confusion out of monitoring Chicago crime with data-driven tools.",

@@ -91,14 +91,18 @@ const themeScript = `
   });
 })();
 `;
+const doorbellKey = import.meta.env.PUBLIC_DOORBELL_API_KEY || "";
+const doorbellId = import.meta.env.PUBLIC_DOORBELL_APP_ID || "";
+const hotjarId = import.meta.env.PUBLIC_HOTJAR_SITE_ID || "";
 const globalScript = `
 try {
   window.googleCallback = window.googleCallback || function () {};
   window.doorbellOptions = {
-    appKey: "REDACTED_PUBLIC_CREDENTIAL",
+    appKey: ${JSON.stringify(doorbellKey)},
     hideButton: true,
   };
   (function (w, d, t) {
+    if (!${JSON.stringify(doorbellKey)} || !${JSON.stringify(doorbellId)}) return;
     var hasLoaded = false;
     function l() {
       if (hasLoaded) return;
@@ -108,7 +112,7 @@ try {
       g.id = "doorbellScript";
       g.type = "text/javascript";
       g.async = true;
-      g.src = "https://embed.doorbell.io/button/0?t=" + new Date().getTime();
+      g.src = "https://embed.doorbell.io/button/" + encodeURIComponent(${JSON.stringify(doorbellId)}) + "?t=" + new Date().getTime();
       (d.getElementsByTagName("head")[0] || d.getElementsByTagName("body")[0]).appendChild(g);
     }
     if (w.addEventListener) w.addEventListener("load", l, false);
@@ -117,8 +121,9 @@ try {
     if (d.readyState === "complete") l();
   })(window, document, "script");
   (function (h, o, t, j, a, r) {
+    if (!${JSON.stringify(hotjarId)}) return;
     h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments); };
-    h._hjSettings = { hjid: 0, hjsv: 5 };
+    h._hjSettings = { hjid: Number(${JSON.stringify(hotjarId)}), hjsv: 5 };
     a = o.getElementsByTagName("head")[0];
     r = o.createElement("script");
     r.async = 1;

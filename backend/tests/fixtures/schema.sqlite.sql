@@ -1,0 +1,23 @@
+-- Synthetic empty application schema for local tests; no production records.
+BEGIN TRANSACTION;
+CREATE TABLE "audio_range_exports" ("id" varchar not null, "user_id" integer not null, "feed" varchar not null, "broadcastify" tinyint(1) not null default '0', "start_at" datetime not null, "end_at" datetime not null, "requested_hours" integer not null, "processed_hours" integer not null default '0', "charged_hours" integer not null, "status" varchar not null default 'queued', "missing_hours" text, "output_path" varchar, "error_message" text, "completed_at" datetime, "expires_at" datetime, "created_at" datetime, "updated_at" datetime, foreign key("user_id") references "users"("id") on delete cascade, primary key ("id"));
+CREATE TABLE "failed_jobs" ("id" integer primary key autoincrement not null, "uuid" varchar not null, "connection" text not null, "queue" text not null, "payload" text not null, "exception" text not null, "failed_at" datetime not null default CURRENT_TIMESTAMP);
+CREATE TABLE "notification_channels" ("id" integer primary key autoincrement not null, "user_id" integer not null, "service" varchar not null, "path" varchar not null, "created_at" datetime, "updated_at" datetime, foreign key("user_id") references "users"("id"));
+CREATE TABLE "password_resets" ("email" varchar not null, "token" varchar not null, "created_at" datetime, primary key ("email"));
+CREATE TABLE "personal_access_tokens" ("id" integer primary key autoincrement not null, "tokenable_type" varchar not null, "tokenable_id" integer not null, "name" varchar not null, "token" varchar not null, "abilities" text, "last_used_at" datetime, "expires_at" datetime, "created_at" datetime, "updated_at" datetime);
+CREATE TABLE "saved_searches" ("id" integer primary key autoincrement not null, "user_id" integer not null, "name" varchar not null, "url" text not null, "is_global" tinyint(1) not null default '0', "created_at" datetime, "updated_at" datetime, foreign key("user_id") references "users"("id"));
+DELETE FROM "sqlite_sequence";
+INSERT INTO "sqlite_sequence" VALUES('users',0);
+INSERT INTO "sqlite_sequence" VALUES('transcript_subscriptions',0);
+CREATE TABLE "tr_sub_destinations" ("id" integer primary key autoincrement not null, "transcript_subscription_id" integer not null, "notification_channel_id" integer not null, "created_at" datetime, "updated_at" datetime, foreign key("transcript_subscription_id") references "transcript_subscriptions"("id"), foreign key("notification_channel_id") references "notification_channels"("id"));
+CREATE TABLE "transcript_subscriptions" ("id" integer primary key autoincrement not null, "user_id" integer not null, "name" varchar not null, "topic" text not null, "keywords" text, "created_at" datetime, "updated_at" datetime, "location" text, "ignore_keywords" text, "enabled" tinyint(1) not null default '1', foreign key("user_id") references users("id") on delete no action on update no action);
+CREATE TABLE "users" ("id" integer primary key autoincrement not null, "name" varchar not null, "email" varchar not null, "email_verified_at" datetime, "password" varchar, "remember_token" varchar, "created_at" datetime, "updated_at" datetime, "patreon_id" varchar, "patreon_token" varchar, "patreon_refresh_token" varchar, "patreon_tier_id_override" varchar);
+CREATE UNIQUE INDEX "failed_jobs_uuid_unique" on "failed_jobs" ("uuid");
+CREATE INDEX "personal_access_tokens_tokenable_type_tokenable_id_index" on "personal_access_tokens" ("tokenable_type", "tokenable_id");
+CREATE UNIQUE INDEX "personal_access_tokens_token_unique" on "personal_access_tokens" ("token");
+CREATE UNIQUE INDEX "users_email_unique" on "users" ("email");
+CREATE UNIQUE INDEX "tr_sub_destinations_unique" on "tr_sub_destinations" ("transcript_subscription_id", "notification_channel_id");
+CREATE INDEX "audio_range_exports_user_id_created_at_index" on "audio_range_exports" ("user_id", "created_at");
+CREATE INDEX "audio_range_exports_status_created_at_index" on "audio_range_exports" ("status", "created_at");
+CREATE INDEX "audio_range_exports_expires_at_index" on "audio_range_exports" ("expires_at");
+COMMIT;

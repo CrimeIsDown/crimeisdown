@@ -58,7 +58,7 @@ CID_RUNTIME=node npm run build
 
 The Node build emits a standalone server. Run it with
 `HOST=127.0.0.1 PORT=4321 node dist/server/entry.mjs` or use the generic container
-recipe in `deploy/Dockerfile.node` after building `dist`.
+recipe in `Dockerfile` after building `dist`.
 
 The default build uses the Cloudflare adapter and the generic `wrangler.jsonc`
 configuration. Deployment-specific infrastructure and release procedures are

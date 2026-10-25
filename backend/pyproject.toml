@@ -1,0 +1,92 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = ""
+requires-python = ">=3.14,<4.0"
+dependencies = [
+    "fastapi[standard]>=0.141.1,<1.0.0",
+    "python-multipart<1.0.0,>=0.0.27",
+    "email-validator<3.0.0.0,>=2.1.0.post1",
+    "pydantic>=2.13.5",
+    "emails>=1.1.2,<2.0",
+    "jinja2<4.0.0,>=3.1.4",
+    "alembic>=1.19.1,<2.0.0",
+    "httpx<1.0.0,>=0.25.1",
+    "psycopg[binary]>=3.3.6,<4.0.0",
+    "sqlmodel>=0.0.46,<1.0.0",
+    "pydantic-settings<3.0.0,>=2.2.1",
+    "sentry-sdk[fastapi]>=2.70.0,<3.0.0",
+    "pyjwt>=2.15.0,<3.0.0",
+    "pwdlib[argon2,bcrypt]>=0.3.1",
+    "pymysql>=1.1.1",
+    "redis>=5",
+    "cryptography>=44",
+    "google-cloud-storage>=3",
+    "celery[redis]>=5.5",
+    "authlib>=1.6",
+    "python-dateutil>=2.9",
+]
+
+[dependency-groups]
+dev = [
+    "pytest<10.0.0,>=7.4.3",
+    "mypy<3.0.0,>=1.8.0",
+    "ty>=0.0.25",
+    "ruff<1.0.0,>=0.16.0",
+    "coverage<8.0.0,>=7.4.3",
+    "types-python-dateutil>=2.9.0.20261021",
+    "types-authlib>=1.8.0.20260911",
+    "celery-types>=0.26.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.mypy]
+strict = true
+exclude = ["venv", ".venv", "alembic"]
+
+[tool.ruff]
+target-version = "py314"
+exclude = ["alembic"]
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "ARG001", # unused arguments in functions
+    "T201",   # print statements are not allowed
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "W191",  # indentation contains tabs
+    "B904",  # Allow raising exceptions without from e, for HTTPException
+]
+
+[tool.ruff.lint.pyupgrade]
+# Preserve types, even if a file imports `from __future__ import annotations`.
+keep-runtime-typing = true
+
+[tool.coverage.run]
+source = ["app"]
+dynamic_context = "test_function"
+
+[tool.coverage.report]
+show_missing = true
+sort = "-Cover"
+
+[tool.coverage.html]
+show_contexts = true
+
+[tool.ty.terminal]
+error-on-warning = true
+
+[tool.fastapi]
+entrypoint = "app.main:app"

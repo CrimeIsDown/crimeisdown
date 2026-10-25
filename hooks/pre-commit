@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+python3 scripts/check-publication.py
+exec gitleaks git --staged --redact=100 --no-banner

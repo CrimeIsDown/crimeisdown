@@ -1,0 +1,8 @@
+title = "CrimeIsDown publication checks"
+[extend]
+useDefault = true
+
+[[rules]]
+id = "google-key-literal-supplement"
+description = "Google-shaped credential literals, including legacy variants"
+regex = '''AIza[0-9A-Za-z_-]{30,}'''
