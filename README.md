@@ -36,7 +36,7 @@ audio corpus or deployment configuration is included.
 npm test
 npm run test:backend
 npm run build
-python3 scripts/check-publication.py
+python3 scripts/check-publication.py --history
 # Install Gitleaks, then scan every locally available Git ref.
 gitleaks git --log-opts=--all --redact=100
 ```

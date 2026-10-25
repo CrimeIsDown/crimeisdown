@@ -10,8 +10,8 @@ Before committing, install Gitleaks and enable the local hooks:
 git config core.hooksPath hooks
 ```
 
-CI scans all fetched history with Gitleaks and checks the tracked tree for common
-operational disclosures. Do not bypass a failed scan. Classify and resolve the
+CI scans all fetched history with Gitleaks and checks both the tracked tree and
+historical blobs/messages for common operational disclosures. Do not bypass a failed scan. Classify and resolve the
 finding, rotate actual exposed credentials where needed, and rescan. Provider
 restrictions remain necessary for public browser keys.
 
