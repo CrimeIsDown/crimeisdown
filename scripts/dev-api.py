@@ -21,6 +21,7 @@ def main():
     from app.crimeisdown.database import Database
     from app.crimeisdown.settings import Settings
     from app.crimeisdown.state import MemoryState
+    from app.crimeisdown.storage import LocalStorage
 
     with tempfile.TemporaryDirectory(prefix="cid-monorepo-demo-") as directory:
         path = Path(directory) / "demo.sqlite"
@@ -42,6 +43,9 @@ def main():
             cache_files=None,
             google_cloud_key_file=None,
             archive_local_root=None,
+            notification_configuration=ROOT
+            / "backend/tests/fixtures/notifications.json",
+            smtp_host="",
             patreon_client_id="",
             patreon_client_secret="",
             cors_origins="http://localhost:4321,http://127.0.0.1:4321,http://localhost:5173",
@@ -59,7 +63,13 @@ def main():
         with httpx.Client(transport=httpx.MockTransport(offline)) as client:
             database = Database(settings.connection_url())
             app = create_app(
-                settings, database=database, state=MemoryState(), http=client
+                settings,
+                database=database,
+                state=MemoryState(),
+                http=client,
+                storage=LocalStorage(Path(directory) / "audio", settings),
+                mailer=lambda *_args: None,
+                enqueue=lambda _export_id: None,
             )
             try:
                 uvicorn.run(app, host="127.0.0.1", port=8000)
