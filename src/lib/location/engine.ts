@@ -2,7 +2,7 @@ import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
 import type { FeatureCollection, MultiPolygon, Polygon } from "geojson";
 
-import { CHICAGO_VIEWBOX, POLICE_AREAS, POLICE_ZONES } from "@/lib/location/constants";
+import { POLICE_AREAS, POLICE_ZONES } from "@/lib/location/constants";
 import { loadLookupDatasets } from "@/lib/location/data";
 import type {
   AssetTextFetcher,
@@ -18,12 +18,7 @@ type GeocodeResult = {
   formattedAddress: string;
   lat: number;
   lng: number;
-};
-
-type NominatimSearchResult = {
-  display_name: string;
-  lat: string;
-  lon: string;
+  approximate?: boolean;
 };
 
 function titleCase(value?: string | null) {
@@ -165,60 +160,44 @@ function findArea(district?: string) {
   return undefined;
 }
 
-async function geocodeAddress(origin: string, query: string): Promise<GeocodeResult> {
-  const url = new URL("https://nominatim.openstreetmap.org/search");
-  url.searchParams.set("q", query);
-  url.searchParams.set("format", "jsonv2");
-  url.searchParams.set("limit", "1");
-  url.searchParams.set("countrycodes", "us");
-  url.searchParams.set("viewbox", CHICAGO_VIEWBOX);
-  url.searchParams.set("bounded", "1");
-
-  const response = await fetch(url, {
-    headers: {
-      accept: "application/json",
-      "user-agent": `${origin}/crimeisdown-v4`,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Geocoding request failed with ${response.status}`);
+async function geocodeLocation(query: string | Coordinate, key?: string): Promise<GeocodeResult> {
+  if (!key) throw new Error("Location search is temporarily unavailable. Please try again.");
+  const url = new URL("https://maps.googleapis.com/maps/api/geocode/json");
+  url.searchParams.set("key", key);
+  if (typeof query === "string") {
+    url.searchParams.set("address", query);
+    url.searchParams.set("bounds", "41.6,-87.9|42,-87.5");
+  } else {
+    url.searchParams.set("latlng", `${query.lat},${query.lng}`);
   }
-
-  const results = (await response.json()) as NominatimSearchResult[];
-  const match = results[0];
-
-  if (!match) {
-    throw new Error("No matching location found.");
-  }
-
+  const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
+  if (!response.ok) throw new Error("Location search is temporarily unavailable. Please try again.");
+  const payload = await response.json() as {
+    status: string;
+    results?: { formatted_address: string; geometry: { location: Coordinate; location_type?: string } }[];
+  };
+  if (payload.status === "ZERO_RESULTS") throw new Error("The location entered could not be found. Please try again with a different address or intersection.");
+  if (payload.status !== "OK" || !payload.results?.length) throw new Error("Location search is temporarily unavailable. Please try again.");
+  const match = payload.results[0];
   return {
-    formattedAddress: match.display_name,
-    lat: Number(match.lat),
-    lng: Number(match.lon),
+    formattedAddress: match.formatted_address,
+    // Reverse geocoding must not move a device's coordinates to the nearest building.
+    ...(typeof query === "string" ? match.geometry.location : query),
+    approximate: ["RANGE_INTERPOLATED", "APPROXIMATE"].includes(match.geometry.location_type || ""),
   };
 }
 
-async function reverseGeocode(origin: string, coordinate: Coordinate) {
-  const url = new URL("https://nominatim.openstreetmap.org/reverse");
-  url.searchParams.set("lat", String(coordinate.lat));
-  url.searchParams.set("lon", String(coordinate.lng));
-  url.searchParams.set("format", "jsonv2");
-  url.searchParams.set("zoom", "18");
-
-  const response = await fetch(url, {
-    headers: {
-      accept: "application/json",
-      "user-agent": `${origin}/crimeisdown-v4`,
-    },
+export function findStation(query: string, stations: FireStation[]) {
+  const normalized = query.trim().toUpperCase();
+  return stations.find((station) => {
+    const aliases = [station.engine, station.truck, station.ambo, station.special]
+      .flatMap((value) => value.split(/,\s*/));
+    if (station.squad) aliases.push(station.squad.split("/")[0]);
+    for (const [value, prefix] of [[station.batt, "BC"], [station.fireDist, "2-2-"], [station.emsDist, "4-5-"]]) {
+      if (value.endsWith(" (HQ)")) aliases.push(prefix + value.replace(" (HQ)", ""));
+    }
+    return aliases.some((alias) => alias && alias.toUpperCase() === normalized);
   });
-
-  if (!response.ok) {
-    return `Coordinates ${coordinate.lat.toFixed(5)}, ${coordinate.lng.toFixed(5)}`;
-  }
-
-  const payload = (await response.json()) as { display_name?: string };
-  return payload.display_name || `Coordinates ${coordinate.lat.toFixed(5)}, ${coordinate.lng.toFixed(5)}`;
 }
 
 function createHttpAssetTextFetcher(origin: string): AssetTextFetcher {
@@ -238,6 +217,7 @@ export async function lookupLocationContext({
   lat,
   lng,
   assetText,
+  googleGeocodingKey,
 }: LookupRequest): Promise<LocationContextResult> {
   const datasets = await loadLookupDatasets(
     assetText ?? createHttpAssetTextFetcher(origin),
@@ -245,16 +225,14 @@ export async function lookupLocationContext({
 
   let resolved: GeocodeResult;
 
-  if (q) {
-    resolved = await geocodeAddress(origin, q);
-  } else if (lat !== undefined && lng !== undefined) {
-    resolved = {
-      formattedAddress: await reverseGeocode(origin, { lat, lng }),
-      lat,
-      lng,
-    };
+  if (q?.trim()) {
+    const station = findStation(q, datasets.fireStations);
+    if (station) q = `${station.addr} ${station.zip}`;
+    resolved = await geocodeLocation(q, googleGeocodingKey);
+  } else if (lat !== undefined && lng !== undefined && Number.isFinite(lat) && Number.isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180) {
+    resolved = await geocodeLocation({ lat, lng }, googleGeocodingKey);
   } else {
-    throw new Error("A query or coordinates are required.");
+    throw new Error("A query or valid coordinates are required.");
   }
 
   const coordinate = { lat: resolved.lat, lng: resolved.lng };
@@ -266,7 +244,7 @@ export async function lookupLocationContext({
 
   const wardId = ward ? String(ward.properties?.ward ?? "") : undefined;
   const district = normalizeDistrict(districtFeature?.properties?.dist_num);
-  const beat = beatFeature ? String(beatFeature.properties?.beat ?? "") : undefined;
+  const beat = beatFeature ? String(beatFeature.properties?.beat_num ?? "") : undefined;
   const alderman = wardId
     ? datasets.aldermen.find((entry) => String(entry.ward) === wardId)
     : undefined;
@@ -294,7 +272,8 @@ export async function lookupLocationContext({
       lng,
     },
     meta: {
-      formattedAddress: resolved.formattedAddress,
+      formattedAddress: resolved.formattedAddress + (inChicago ? "" : " (Not in Chicago, no additional location info available)"),
+      approximate: resolved.approximate,
       latitude: coordinate.lat,
       longitude: coordinate.lng,
       inChicago,

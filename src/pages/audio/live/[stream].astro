@@ -1,4 +1,5 @@
 ---
+import LiveStreamPlayer from "@/components/audio/LiveStreamPlayer";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { audioStreams } from "@/lib/audio/data";
 
@@ -46,11 +47,8 @@ if (!stream) {
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
           ></iframe>
-        ) : stream.broadcastify ? (
-          <audio class="w-100" controls preload="none" src={stream.broadcastify} autoplay={autoplay}>
-            <p>Your browser does not support embedded audio playback.</p>
-          </audio>
-        ) : null}
+        ) : <LiveStreamPlayer client:only="react" slug={stream.slug} broadcastify={stream.broadcastify} autoplay={autoplay} />}
+
 
         {stream.openmhz ? (
           <>

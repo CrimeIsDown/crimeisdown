@@ -1,6 +1,8 @@
 ---
 import "@/styles/global.css";
 import "@/styles/legacy.css";
+import "@/styles/parity.css";
+import Icons from "@/components/layout/Icons.astro";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import { buildCanonical, buildTitle } from "@/lib/seo";
@@ -26,9 +28,13 @@ const {
 const canonical = buildCanonical(canonicalPath);
 const fullTitle = buildTitle(title);
 const bootstrapStylesheet =
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css";
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css";
 const bootstrapScript =
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js";
+  "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js";
+const googleMapsKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
+const googlePlacesScript = googleMapsKey
+  ? `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(googleMapsKey)}&loading=async&libraries=places&callback=googleCallback`
+  : undefined;
 const themeScript = `
 (() => {
   const storageKey = ${JSON.stringify(themeStorageKey)};
@@ -36,7 +42,7 @@ const themeScript = `
   const media = window.matchMedia("(prefers-color-scheme: dark)");
   const getStoredTheme = () => {
     try {
-      return localStorage.getItem(storageKey) || "auto";
+      return localStorage.getItem("theme") || localStorage.getItem(storageKey) || "auto";
     } catch {
       return "auto";
     }
@@ -50,6 +56,8 @@ const themeScript = `
     root.classList.toggle("dark", resolvedTheme === "dark");
   };
   const syncButtons = (theme) => {
+    const icon = document.querySelector(".theme-icon-active use");
+    icon?.setAttribute("href", "#" + ({light:"sun-fill",dark:"moon-stars-fill",auto:"circle-half"}[theme] || "circle-half"));
     document.querySelectorAll("[data-theme-value]").forEach((button) => {
       const isActive = button.getAttribute("data-theme-value") === theme;
       button.classList.toggle("active", isActive);
@@ -70,6 +78,7 @@ const themeScript = `
         const theme = button.getAttribute("data-theme-value") || "auto";
         try {
           localStorage.setItem(storageKey, theme);
+          localStorage.setItem("theme", theme);
         } catch {}
         applyTheme(theme);
         syncButtons(theme);
@@ -81,6 +90,45 @@ const themeScript = `
     }
   });
 })();
+`;
+const globalScript = `
+try {
+  window.googleCallback = window.googleCallback || function () {};
+  window.doorbellOptions = {
+    appKey: "REDACTED_PUBLIC_CREDENTIAL",
+    hideButton: true,
+  };
+  (function (w, d, t) {
+    var hasLoaded = false;
+    function l() {
+      if (hasLoaded) return;
+      hasLoaded = true;
+      window.doorbellOptions.windowLoaded = true;
+      var g = d.createElement(t);
+      g.id = "doorbellScript";
+      g.type = "text/javascript";
+      g.async = true;
+      g.src = "https://embed.doorbell.io/button/0?t=" + new Date().getTime();
+      (d.getElementsByTagName("head")[0] || d.getElementsByTagName("body")[0]).appendChild(g);
+    }
+    if (w.addEventListener) w.addEventListener("load", l, false);
+    else if (w.attachEvent) w.attachEvent("onload", l);
+    else l();
+    if (d.readyState === "complete") l();
+  })(window, document, "script");
+  (function (h, o, t, j, a, r) {
+    h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments); };
+    h._hjSettings = { hjid: 0, hjsv: 5 };
+    a = o.getElementsByTagName("head")[0];
+    r = o.createElement("script");
+    r.async = 1;
+    r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+    a.appendChild(r);
+  })(window, document, "//static.hotjar.com/c/hotjar-", ".js?sv=");
+  if (window.StereoPannerNode && typeof window.StereoPannerNode.polyfill === "function") {
+    window.StereoPannerNode.polyfill();
+  }
+} catch {}
 `;
 ---
 
@@ -96,6 +144,9 @@ const themeScript = `
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.ico" />
     <link rel="search" type="application/opensearchdescription+xml" href="https://crimeisdown.com/osd.xml" title="Address search" />
+    <link rel="preconnect" href="//maps.googleapis.com" />
+    <link rel="preload" href="https://crimeisdown.statuspage.io/embed/script.js" as="script" />
+    {googlePlacesScript && <link rel="preload" href={googlePlacesScript} as="script" />}
     <link rel="stylesheet" href={bootstrapStylesheet} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -108,14 +159,18 @@ const themeScript = `
     <meta name="twitter:description" content={description} />
     <meta name="twitter:creator" content="@EricTendian" />
     <script is:inline set:html={themeScript}></script>
-    {noIndex && <meta name="robots" content="noindex, follow" />}
+    {(noIndex || import.meta.env.PUBLIC_PREVIEW === "true") && <meta name="robots" content="noindex, nofollow" />}
   </head>
   <body class="site-shell">
+    <Icons />
     <Header />
     <main class={mainClass}>
       <slot />
     </main>
     <Footer />
     <script is:inline src={bootstrapScript} defer></script>
+    <script is:inline src="https://crimeisdown.statuspage.io/embed/script.js" defer></script>
+    <script is:inline set:html={globalScript}></script>
+    {googlePlacesScript && <script is:inline src={googlePlacesScript} async></script>}
   </body>
 </html>

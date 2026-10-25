@@ -13,11 +13,12 @@ type MapOverlayCollections = {
   wards: FeatureCollection<Polygon | MultiPolygon>;
 };
 
-let mapOverlayCollectionsPromise: Promise<MapOverlayCollections> | undefined;
+let mapOverlayCollections: MapOverlayCollections | undefined;
 
-export function loadMapOverlayCollections(assetText: AssetTextFetcher) {
-  if (!mapOverlayCollectionsPromise) {
-    mapOverlayCollectionsPromise = (async () => {
+export async function loadMapOverlayCollections(assetText: AssetTextFetcher) {
+  if (!mapOverlayCollections) {
+    // Cache only completed data. Pending asset I/O belongs to its Worker request.
+    const loaded = await (async () => {
       const [
         communityAreasRaw,
         neighborhoodsRaw,
@@ -39,11 +40,9 @@ export function loadMapOverlayCollections(assetText: AssetTextFetcher) {
         policeBeats: parseFeatureCollection(policeBeatsRaw),
         wards: parseFeatureCollection(wardsRaw),
       };
-    })().catch((error) => {
-      mapOverlayCollectionsPromise = undefined;
-      throw error;
-    });
+    })();
+    mapOverlayCollections = loaded;
   }
 
-  return mapOverlayCollectionsPromise;
+  return mapOverlayCollections;
 }

@@ -36,22 +36,13 @@ export const primaryNav: NavItem[] = [
   {
     href: "/transcripts/search",
     label: "Transcript Search",
-    description: "Search radio transcripts to find what happened faster.",
+    description: "Search scanner transcripts with your Patreon membership.",
   },
-  {
-    href: "/transcripts/map",
-    label: "Transcript Map",
-    description: "Open the transcript map workflow from the public shell.",
-  },
+  { href: "/transcripts/map", label: "Transcript Map" },
   {
     href: "/guide",
     label: "Scanner Guide",
     description: "Decode radio IDs, UCR codes, and scanner terminology.",
-  },
-  {
-    href: "/directives",
-    label: "Police Directive Changes",
-    description: "Track directive change references from the public site.",
   },
 ];
 

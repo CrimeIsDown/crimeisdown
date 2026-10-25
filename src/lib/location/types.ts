@@ -17,6 +17,8 @@ export type MetaContext = {
   latitude: number;
   longitude: number;
   inChicago: boolean;
+  approximate?: boolean;
+  accuracy?: number;
   neighborhood?: string;
   communityArea?: string;
   ward?: string;
@@ -106,4 +108,5 @@ export type LookupRequest = {
   lat?: number;
   lng?: number;
   assetText?: AssetTextFetcher;
+  googleGeocodingKey?: string;
 };

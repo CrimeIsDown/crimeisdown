@@ -1,0 +1,182 @@
+@import "./instantsearch-satellite.css";
+@import "leaflet/dist/leaflet.css";
+@import "leaflet.markercluster/dist/MarkerCluster.css";
+@import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+.pac-container {
+  z-index: 10000;
+}
+
+.input-group .form-control.form-range {
+  height: 2.5rem;
+  padding: 1rem;
+}
+
+.ais-SearchBox-form {
+  background: none;
+}
+
+.ais-SearchBox-input.form-control {
+  padding-left: 2.5rem;
+  box-shadow: none;
+}
+.ais-SearchBox-input.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.ais-SortBy-select.form-select,
+.ais-HitsPerPage-select.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+#option-buttons {
+  height: 2.5rem;
+  margin-top: 0.5rem;
+}
+#option-buttons > * {
+  margin-right: 0.5rem;
+}
+#option-buttons #refresh-buttons svg.spin {
+  animation: 2s linear infinite spinner-border;
+}
+#option-buttons #refresh-buttons button.spin svg {
+  animation: 0.75s linear 1 spinner-border;
+}
+
+#saved-h-menu .btn.list-group-item {
+  background-color: var(--bs-btn-bg);
+  color: var(--bs-btn-color);
+  border-radius: 0;
+}
+#saved-h-menu .btn.list-group-item:last-child {
+  border-top-right-radius: var(--bs-list-group-border-radius);
+  border-bottom-right-radius: var(--bs-list-group-border-radius);
+}
+
+.ais-Hits-item, .ais-InfiniteHits-item {
+  display: block;
+  margin: 0 -0.5rem;
+  padding: 0.5rem;
+  background: var(--bs-body-bg-rgb);
+  box-shadow: none;
+  line-height: 1rem !important;
+}
+.ais-Hits-item.selected, .ais-InfiniteHits-item.selected {
+  background: var(--bs-tertiary-bg);
+}
+.ais-Hits-item blockquote, .ais-InfiniteHits-item blockquote {
+  border-left: 0.1rem solid var(--bs-primary-border-subtle);
+  padding-left: 0.3rem;
+  font-size: 1rem;
+  margin-bottom: 0;
+  overflow-wrap: anywhere;
+}
+.ais-Hits-item p, .ais-InfiniteHits-item p {
+  line-height: 1.3rem;
+  margin-bottom: 0.1rem;
+}
+.ais-Hits-item .media-player-container, .ais-InfiniteHits-item .media-player-container {
+  margin: 0.25rem;
+}
+
+.ais-Highlight-highlighted, .ais-Snippet-highlighted {
+  font-style: inherit;
+}
+
+#filters .ais-ClearRefinements-button {
+  min-height: 3rem;
+}
+
+.ais-CurrentRefinements--noRefinement > .ais-CurrentRefinements-list {
+  display: none;
+}
+
+.ais-CurrentRefinements:not(.ais-CurrentRefinements--noRefinement) {
+  margin-bottom: 1rem;
+}
+
+.ais-CurrentRefinements-item {
+  background-color: var(--bs-white);
+  color: var(--bs-black);
+}
+.ais-CurrentRefinements-item .ais-CurrentRefinements-delete {
+  color: var(--bs-gray-500);
+  margin-top: 0.125rem;
+}
+
+.ais-HierarchicalMenu-link--selected {
+  font-weight: 600;
+}
+
+.ais-HierarchicalMenu-link::before {
+  transform: rotate(90deg);
+}
+
+.ais-HierarchicalMenu-link--selected::before {
+  transform: rotate(180deg);
+}
+
+.ais-RefinementList-item--selected .ais-RefinementList-checkbox,
+.ais-GeoSearch-input:checked {
+  background-image: var(--bs-form-check-bg-image);
+  background-size: contain;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  box-shadow: initial;
+  color: initial;
+}
+
+.ais-Pagination-list {
+  flex-wrap: wrap;
+}
+
+.ais-GeoSearch-map {
+  height: 75vh;
+}
+.ais-GeoSearch-map .gm-style-iw.gm-style-iw-c {
+  color: var(--bs-gray-900);
+}
+
+audio.call-audio {
+  height: 100px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.metadata-modal pre {
+  height: 80vh;
+}
+
+fieldset .talkgroup-list {
+  height: 50vh;
+  overflow: auto;
+}
+
+@media (min-width: 992px) {
+  #filters.collapse {
+    display: block;
+  }
+}
+@media (min-width: 768px) {
+  #option-buttons {
+    margin-top: 0;
+  }
+}
+
+[data-search-time] label { display: block; }
+[data-transcript-search] [hidden] { display: none !important; }
+[data-transcript-search] .transcript-playback[hidden] { display: none; }
+[data-transcript-search] .ais-Hits-list { padding-left: 0; }
+[data-transcript-search] .transcript-result { scroll-margin-top: 90px; }
+[data-transcript-search] .transcript-waveform { width: 100%; height: 80px; }
+[data-transcript-search] #option-buttons label { margin: 0; }
+#filters > .row > .col { min-width: 0; }
+#filters .ais-ClearRefinements-button { width: 100%; min-width: 0; white-space: normal; padding-left: 8px; padding-right: 8px; }
+
+.transcript-result.selected { background: var(--bs-tertiary-bg); }
+#option-buttons { flex-wrap: wrap; height: auto; row-gap: .25rem; }
+#option-buttons .btn { white-space: nowrap; }
+#option-buttons label:has(input:checked) { color: var(--bs-white); background: var(--bs-primary); }
+[data-transcript-search][data-demo="true"] #transcript-hits { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Ctext transform='translate(20,100) rotate(-30)' fill='rgba(45,45,45,0.08)' font-size='32' font-family='Arial,Helvetica,sans-serif'%3EDEMO%3C/text%3E%3C/svg%3E") repeat; }

@@ -1,18 +1,20 @@
 ---
+import ArchiveMembership from "@/components/audio/ArchiveMembership";
+import AudioRangeExport from "@/components/audio/AudioRangeExport";
+import VirtualScanner from "@/components/audio/VirtualScanner";
 import ArchiveDownloadForm from "@/components/audio/ArchiveDownloadForm";
 import ScannerNotepad from "@/components/audio/ScannerNotepad";
 import RadioIdLookup from "@/components/reference/RadioIdLookup";
 import UcrCodeLookup from "@/components/reference/UcrCodeLookup";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { archivePricing } from "@/lib/audio/archive";
-import { archiveFeeds, audioStreams } from "@/lib/audio/data";
+import { archiveFeeds } from "@/lib/audio/data";
 import { loadRadioIds, loadUcrCodes } from "@/lib/reference/data";
 
 export const prerender = true;
 
 const radioIds = loadRadioIds();
 const ucrCodes = loadUcrCodes();
-const liveStreams = audioStreams.filter((stream) => stream.slug !== "cpd_zone_scan");
 ---
 
 <BaseLayout title="Scanner Audio" description="Listen to live scanner audio and download Chicago archive recordings.">
@@ -23,38 +25,7 @@ const liveStreams = audioStreams.filter((stream) => stream.slug !== "cpd_zone_sc
           <p><em><a href="#lookuprecording">Jump to scanner recording download</a></em></p>
         </div>
         <div class="mb-3">
-          <h3>Live streaming from CrimeIsDown</h3>
-          <div class="alert alert-info" role="alert">
-            <p><img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" /> streams are provided by Broadcastify.com, for encrypted radio channels (marked with [ENC]). Radio traffic is delayed 30-35 minutes. CrimeIsDown.com has no control over these streams and is not affiliated with Broadcastify.</p>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <fieldset id="streamlist">
-                  <legend>Available streams</legend>
-                  <div class="stream-options mb-3">
-                    {liveStreams.map((stream) => (
-                      <div class="form-check">
-                        <input class="form-check-input" id={`checkbox-${stream.slug}`} type="checkbox" disabled />
-                        <label class="form-check-label" for={`checkbox-${stream.slug}`}>{stream.shortname ?? stream.name}</label>
-                        <a href={`/audio/live/${stream.slug}`} target="_blank" title={`Listen to only ${stream.shortname ?? stream.name}`}> open</a>
-                        {stream.broadcastify ? (
-                          <a href={stream.broadcastify} target="_blank" rel="noopener noreferrer">
-                            <img class="bcfy-favicon" src="https://s.broadcastify.com/icons/favicon-96x96.png" title="Audio provided by Broadcastify.com" alt="Broadcastify.com" />
-                          </a>
-                        ) : null}
-                      </div>
-                    ))}
-                  </div>
-                </fieldset>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <h4>Spatial Scanner Audio</h4>
-              <p>Open a dedicated stream page from the list to listen live or use OpenMHz instant replay where available.</p>
-              <p>The original multi-stream scanner layout is preserved structurally here while stream playback is routed through the rebuilt Astro pages.</p>
-            </div>
-          </div>
+          <VirtualScanner client:only="react" />
         </div>
         <div>
           <h3>General #ChicagoScanner feed</h3>
@@ -108,7 +79,7 @@ const liveStreams = audioStreams.filter((stream) => stream.slug !== "cpd_zone_sc
             <h3 id="lookuprecording">Look up scanner recording</h3>
             <ArchiveDownloadForm client:load feeds={archiveFeeds} />
             <hr />
-            <p><a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img src="/img/become-a-patron.png" alt="Become a Patron!" /></a></p>
+            <ArchiveMembership client:only="react" />
             <table class="table">
               <thead>
                 <tr>
@@ -129,9 +100,7 @@ const liveStreams = audioStreams.filter((stream) => stream.slug !== "cpd_zone_sc
             </table>
           </div>
           <div class="col-md-6">
-            <h4>Range export (Commander+)</h4>
-            <p class="text-muted">Combine up to 24 continuous hours into one MP3 file.</p>
-            <p>Range export remains part of the archive workflow and is available from the main recording tools once account access is restored.</p>
+            <AudioRangeExport client:only="react" />
           </div>
         </div>
         <div class="row">

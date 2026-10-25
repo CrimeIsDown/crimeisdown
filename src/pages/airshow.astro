@@ -1,12 +1,13 @@
 ---
+import IcecastPlayer from "@/components/audio/IcecastPlayer";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 export const prerender = true;
 ---
 
-<BaseLayout title="Airshow" description="Compatibility page for the retired airshow route." noIndex>
+<BaseLayout title="Airshow" description="Listen to the Chicago Air and Water Show radio stream.">
   <div class="container">
     <h2>Chicago Air and Water Show radio</h2>
-    <p>This route is retained for compatibility only. Use the main <a href="/audio">Scanner Audio</a> page for currently supported listening tools.</p>
+    <IcecastPlayer client:only="react" stream="https://icecast.crimeisdown.com/airshow" />
   </div>
 </BaseLayout>

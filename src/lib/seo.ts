@@ -6,5 +6,5 @@ export function buildCanonical(pathname: string) {
 }
 
 export function buildTitle(title?: string) {
-  return title ? `${title} | ${site.title}` : site.title;
+  return title && title !== site.title ? `${title} | ${site.title}` : site.title;
 }

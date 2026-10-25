@@ -1,0 +1,19 @@
+---
+const { src, type = "audio/mpeg" } = Astro.props;
+---
+<div data-waveform-player data-src={src} data-type={type}>
+  <audio class="video-js vjs-default-skin vjs-fluid" controls></audio>
+  <div data-waveform-timeline></div>
+  <div class="input-group mb-3"><span class="input-group-text">−</span><input class="form-control" type="range" min="0" max="100" value="0" aria-label="Zoom control" /><span class="input-group-text">+</span></div>
+</div>
+<script>
+import { mountWaveformPlayer } from "@/lib/media-player";
+document.querySelectorAll<HTMLElement>("[data-waveform-player]").forEach(async root => {
+  const audio = root.querySelector<HTMLAudioElement>("audio")!;
+  try {
+    const player = await mountWaveformPlayer(audio, root.dataset.src!, root.dataset.type!, false, root.querySelector<HTMLElement>("[data-waveform-timeline]")!);
+    root.querySelector("input")!.addEventListener("input", event => player.wavesurfer().surfer.zoom(Number((event.target as HTMLInputElement).value)));
+    window.addEventListener("pagehide", () => player.dispose(), { once: true });
+  } catch { audio.src = root.dataset.src!; audio.controls = true; }
+});
+</script>

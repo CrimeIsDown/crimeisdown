@@ -1,0 +1,30 @@
+/* Bootstrap controls the visibility of its collapse components. Tailwind's utility
+   with the same name must not hide the expanded desktop filters or metadata. */
+.collapse { visibility: visible; }
+html, body { font-family: var(--bs-body-font-family); }
+[data-bs-theme="dark"] { --bs-body-color: #d6dade; --bs-body-color-rgb: 214, 218, 222; }
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  body { padding-top: 4.4rem; }
+  body > main > .container, body > main > .container-fluid { padding-top: 2rem; }
+}
+.cid-icon { height: 1em; width: 1em; display: inline-block; vertical-align: -0.125em; fill: currentColor; }
+.draggable-parent { width: 200px; height: 200px; position: relative; border: 1px solid var(--bs-border-color); }
+.draggable-parent .scanner-listener { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.draggable-parent .draggable { position: absolute; cursor: move; background: transparent; border: 0; padding: 0; font-size: .8rem; }
+body.site-shell { display: block; min-height: initial; }
+.stream .title { font-size: 1.25rem; margin-bottom: 0; }
+.stream-options label { cursor: pointer; margin-bottom: .2rem; }
+.draggable-parent { width: 230px; height: 216px; margin-bottom: 1em; border: 2px solid var(--bs-secondary); background: var(--bs-gray-100); color: black; }
+.stream-player { height: 40px; width: 200px !important; }
+@media (min-width: 768px) { .stream-options { max-height: 300px; overflow: auto; } }
+/* React updates input.type during rerenders; retain Flatpickr's alternate-input layout. */
+.input-group.date > input.flatpickr-input { display: none; }
+
+.navbar-brand { flex-shrink: 0; }
+.pell-button { padding: 0; }
+.pell-actionbar { color: #212529; }
+.bcfy-favicon { display: inline-block; vertical-align: middle; }
+.legacy-geosearch-control form:not([hidden]) { display: flex; width: 260px; position: absolute; left: 34px; top: -2px; }
+.legacy-geosearch-control form[hidden] { display: none; }
+.legacy-geosearch-control .form-control { min-width: 0; }
+.awesome-marker .svg-inline--fa { display: inline-block; width: 1em; height: 1em; vertical-align: -.125em; }

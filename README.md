@@ -1,43 +1,68 @@
-# CrimeIsDown Frontend
+# CrimeIsDown frontend
 
-This repository now contains the Astro rewrite of the public `crimeisdown.com` site. The active app lives in `src/` and uses Astro, React islands, Tailwind v4, and shadcn/ui components.
+The public CrimeIsDown.com website uses Astro, React, Bootstrap, and Tailwind.
+This repository contains the frontend, public map assets, and frontend tests.
 
-## Requirements
+## Development
 
-- Node.js 24+
-- npm
+Use Node.js 24 or newer and npm:
 
-## Install
-
-```bash
-npm install
-```
-
-## Local development
-
-Use the normal Astro dev server:
-
-```bash
+```sh
+npm ci
 npm run dev
 ```
 
-If you run into slow dev startup in this mixed-history repo, the local config avoids the Cloudflare adapter during development:
+The alternative local configuration is available with
+`npx astro dev --config astro.config.local.mjs`.
 
-```bash
-npx astro dev --config astro.config.local.mjs
-```
+## Configuration
 
-## Checks
+- `PUBLIC_API_BASE_URL`: browser-accessible API origin; defaults to
+  `https://api.crimeisdown.com`.
+- `PUBLIC_MAPBOX_ACCESS_TOKEN`: optional Mapbox public browser token (`pk.`).
+  Without it, the map uses OpenStreetMap and omits the Mapbox basemaps.
+- `PUBLIC_PREVIEW=true`: enables the frontend preview notice.
+- `PUBLIC_GOOGLE_MAPS_API_KEY`: browser key for Maps JavaScript and Places.
+  Restrict it to approved website referrers and the required APIs.
+- `GOOGLE_GEOCODING_API_KEY`: server-only key required for address lookup.
+  Restrict it to the server egress IP and Geocoding API. Never use a `PUBLIC_`
+  variable for this key.
 
-```bash
+Set local values in an ignored `.env` file. Variables prefixed with `PUBLIC_`
+are embedded in browser code; never put private credentials in them.
+
+The settings page supports browser-local API and search configuration overrides.
+Member search credentials are requested from the API after login. The bundled
+search-only demo credential supports the publicly accessible transcript demo.
+
+## API integration
+
+Account state and Patreon login are provided by the configured API. Browser
+requests include cookies; the API must allow the frontend origin and credentialed
+CORS. Writes initialize `/sanctum/csrf-cookie` and send the readable `XSRF-TOKEN`
+cookie in the `X-XSRF-TOKEN` header. Local development against an API requires
+compatible cookie settings or a local API instance.
+
+The frontend consumes user, saved-search, subscription, channel, and audio-export
+resources. It does not store account or subscription records locally. Patreon
+login returns to the current frontend URL through the API's `/auth/redirect`
+endpoint. Tests should use synthetic accounts and mocked responses.
+
+## Checks and builds
+
+```sh
+npm test
 npm run lint
-npm run test
+CID_RUNTIME=node npm run build
 ```
 
-## Production build
+The Node build emits a standalone server. Run it with
+`HOST=127.0.0.1 PORT=4321 node dist/server/entry.mjs` or use the generic container
+recipe in `deploy/Dockerfile.node` after building `dist`.
 
-```bash
-npm run build
-```
+The default build uses the Cloudflare adapter and the generic `wrangler.jsonc`
+configuration. Deployment-specific infrastructure and release procedures are
+maintained separately from this public repository.
 
-The production deploy target is Cloudflare Pages/Workers, with configuration in [wrangler.jsonc](./wrangler.jsonc) and CI workflows under `.github/workflows/`.
+Browser tests are in `tests/e2e`; run them with `npm run test:e2e` after installing
+Playwright Chromium. Unit and browser tests do not require production accounts.

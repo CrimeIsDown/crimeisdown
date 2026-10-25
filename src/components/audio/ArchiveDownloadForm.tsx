@@ -1,7 +1,8 @@
+import { loadRuntimeConfig } from "@/lib/runtime-config";
+import CalendarInput from "./CalendarInput";
 import { useEffect, useState } from "react";
 
 import {
-  AUDIO_ARCHIVE_ENDPOINT,
   buildArchiveDownloadParams,
 } from "@/lib/audio/archive";
 import type { ArchiveFeed } from "@/lib/audio/data";
@@ -13,11 +14,7 @@ type Props = {
 
 export default function ArchiveDownloadForm({ feeds, initialFeed }: Props) {
   const initialDatetime = getChicagoDatetimeInput();
-  const [feed, setFeed] = useState(
-    initialFeed && feeds.some((candidate) => candidate.value === initialFeed)
-      ? initialFeed
-      : "",
-  );
+  const [feed, setFeed] = useState(() => getInitialFeed(feeds, initialFeed));
   const [datetime, setDatetime] = useState(initialDatetime);
   const [error, setError] = useState("");
 
@@ -49,7 +46,7 @@ export default function ArchiveDownloadForm({ feeds, initialFeed }: Props) {
     try {
       const params = buildArchiveDownloadParams(feed, datetime);
       window.open(
-        `${AUDIO_ARCHIVE_ENDPOINT}?${params.toString()}`,
+        `${loadRuntimeConfig().API_BASE_URL}/recordings/download-audio?${params.toString()}`,
         "_blank",
         "noopener,noreferrer",
       );
@@ -83,12 +80,11 @@ export default function ArchiveDownloadForm({ feeds, initialFeed }: Props) {
 
       <div className="mb-3">
         <label htmlFor="archive-datetime">Time of recording (in US Central time)</label>
-        <input
+        <CalendarInput
           id="archive-datetime"
           className="form-control"
-          type="datetime-local"
           value={datetime}
-          onChange={(event) => setDatetime(event.target.value)}
+          onValueChange={setDatetime}
         />
       </div>
 
@@ -99,8 +95,23 @@ export default function ArchiveDownloadForm({ feeds, initialFeed }: Props) {
   );
 }
 
+function getInitialFeed(feeds: ArchiveFeed[], initialFeed: string | undefined) {
+  if (initialFeed && feeds.some((candidate) => candidate.value === initialFeed)) {
+    return initialFeed;
+  }
+
+  if (typeof window === "undefined") {
+    return "";
+  }
+
+  const feedParam = new URL(window.location.href).searchParams.get("feed");
+  return feedParam && feeds.some((candidate) => candidate.value === feedParam)
+    ? feedParam
+    : "";
+}
+
 function getChicagoDatetimeInput() {
-  const now = new Date();
+  const now = new Date(Date.now() - 60 * 60 * 1000);
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Chicago",
     year: "numeric",
@@ -108,7 +119,7 @@ function getChicagoDatetimeInput() {
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
-    hour12: false,
+    hourCycle: "h23",
   }).formatToParts(now);
   const map = Object.fromEntries(
     parts
@@ -120,7 +131,7 @@ function getChicagoDatetimeInput() {
   const month = map.month;
   const day = map.day;
   const hour = Number(map.hour) || 0;
-  const minute = map.minute ?? "00";
+  const minute = "00";
 
   return `${year}-${month}-${day}T${String(hour).padStart(2, "0")}:${minute}`;
 }

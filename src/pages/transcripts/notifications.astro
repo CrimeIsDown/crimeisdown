@@ -1,3 +1,6 @@
 ---
-return Astro.redirect(`https://sirens.app/alerts${Astro.url.search}`, 308);
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import NotificationSettings from "@/components/notifications/NotificationSettings";
 ---
+<BaseLayout title="Notifications"><div class="container"><h1 class="fs-2">Notification Settings</h1><NotificationSettings client:only="react" /></div></BaseLayout>
+<style is:global>fieldset .talkgroup-list { height: 50vh; overflow: auto; }</style>

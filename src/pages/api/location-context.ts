@@ -1,25 +1,17 @@
 import type { APIRoute } from "astro";
+import { env } from "cloudflare:workers";
 
 import { lookupLocationContext } from "@/lib/location/engine";
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ locals, request, url }) => {
+export const GET: APIRoute = async ({ request, url }) => {
   const q = url.searchParams.get("q")?.trim() || undefined;
   const latParam = url.searchParams.get("lat");
   const lngParam = url.searchParams.get("lng");
   const lat = latParam !== null ? Number(latParam) : undefined;
   const lng = lngParam !== null ? Number(lngParam) : undefined;
-  const runtime = locals as {
-    runtime?: {
-      env?: {
-        ASSETS?: {
-          fetch: (request: Request | string) => Promise<Response>;
-        };
-      };
-    };
-  };
-  const assets = runtime.runtime?.env?.ASSETS;
+  const assets = (env as unknown as { ASSETS?: { fetch(request: Request | string): Promise<Response> } }).ASSETS;
   const assetText = assets
     ? async (path: string) => {
         const response = await assets.fetch(new URL(path, request.url).toString());
@@ -38,6 +30,7 @@ export const GET: APIRoute = async ({ locals, request, url }) => {
       lat,
       lng,
       assetText,
+      googleGeocodingKey: typeof env.GOOGLE_GEOCODING_API_KEY === "string" ? env.GOOGLE_GEOCODING_API_KEY : undefined,
     });
 
     return new Response(JSON.stringify(payload), {

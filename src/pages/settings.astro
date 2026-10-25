@@ -1,3 +1,25 @@
 ---
-return Astro.redirect(`https://sirens.app/account${Astro.url.search}`, 308);
+import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
+<BaseLayout title="Settings" noIndex>
+  <div class="container"><div class="row"><div class="col-md-6 offset-md-3">
+    <h1 class="fs-3">Settings</h1><p>Various settings for the developer</p>
+    <form data-runtime-settings><div data-settings-fields></div><button class="btn btn-primary" type="submit">Submit</button><p role="status" data-settings-status></p></form>
+  </div></div></div>
+  <script>
+    import { loadRuntimeConfig, setRuntimeConfigValue, type RuntimeConfigKey } from "@/lib/runtime-config";
+    const config = loadRuntimeConfig();
+    const fields = document.querySelector("[data-settings-fields]")!;
+    for (const [key, value] of Object.entries(config)) {
+      const group = document.createElement("div"); group.className = "form-floating mb-3";
+      const input = document.createElement("input"); input.type = "text"; input.className = "form-control"; input.id = key; input.name = key; input.value = value; input.placeholder = "Value for " + key;
+      const label = document.createElement("label"); label.htmlFor = key; label.textContent = key;
+      group.append(input, label); fields.append(group);
+    }
+    document.querySelector("[data-runtime-settings]")!.addEventListener("submit", event => {
+      event.preventDefault();
+      for (const [key, value] of new FormData(event.currentTarget as HTMLFormElement)) setRuntimeConfigValue(key as RuntimeConfigKey, String(value));
+      document.querySelector("[data-settings-status]")!.textContent = "Settings saved.";
+    });
+  </script>
+</BaseLayout>

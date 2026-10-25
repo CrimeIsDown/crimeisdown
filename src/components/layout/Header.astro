@@ -1,14 +1,89 @@
 ---
 import { authCta, isNavItemActive, primaryNav, site } from "@/lib/site";
+import { runtimeConfigDefaults } from "@/lib/runtime-config";
 
 const pathname = Astro.url.pathname;
+const headerSessionScript = `
+(() => {
+  const defaults = ${JSON.stringify(runtimeConfigDefaults)};
+  const config = { ...defaults };
+  try {
+    Object.keys(config).forEach((key) => {
+      const value = localStorage.getItem(key);
+      if (value) config[key] = value;
+    });
+  } catch {}
+
+  const authHost = document.querySelector("[data-auth-host]");
+  if (!authHost) return;
+
+  const login = authHost.querySelector("[data-patreon-login]");
+  if (login) {
+    const updateLoginUrl = () => {
+      const url = new URL(config.API_BASE_URL + "/auth/redirect");
+      url.searchParams.set("return_to", window.location.href);
+      login.href = url.href;
+    };
+    updateLoginUrl();
+    login.addEventListener("click", updateLoginUrl);
+  }
+
+  const headers = { Accept: "application/json" };
+  if (config.API_AUTH_TOKEN) {
+    headers.Authorization = "Bearer " + config.API_AUTH_TOKEN;
+  }
+
+  fetch(config.API_BASE_URL + "/api/user", {
+    headers,
+    credentials: "include",
+  })
+    .then((response) => response.status === 200 ? response.json() : null)
+    .then((user) => {
+      if (!user) return;
+      const profileUrl = config.API_BASE_URL + "/profile";
+      const logout = new URL(config.API_BASE_URL + "/logout");
+      logout.searchParams.set("return_to", window.location.href);
+      const logoutUrl = logout.href;
+      const tier = user.patreon_tier?.name ? user.patreon_tier.name + " " : "";
+      const name = user.name || user.email || "Account";
+      const item = document.createElement("li");
+      item.className = "nav-item dropdown";
+      const toggle = document.createElement("button");
+      toggle.className = "nav-link dropdown-toggle";
+      toggle.id = "navbarAuthDropdown";
+      toggle.type = "button";
+      toggle.setAttribute("data-bs-toggle", "dropdown");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.textContent = tier + name + " ";
+      const menu = document.createElement("div");
+      menu.className = "dropdown-menu";
+      menu.setAttribute("aria-labelledby", "navbarAuthDropdown");
+      for (const [label, href] of [["Profile", profileUrl], ["Logout", logoutUrl]]) {
+        const link = document.createElement("a");
+        link.className = "dropdown-item";
+        link.href = href;
+        link.textContent = label;
+        link.referrerPolicy = "unsafe-url";
+        if (label === "Logout") link.addEventListener("click", () => {
+          const url = new URL(config.API_BASE_URL + "/logout");
+          url.searchParams.set("return_to", window.location.href);
+          link.href = url.href;
+        });
+        menu.append(link);
+      }
+      item.append(toggle, menu);
+      authHost.replaceWith(item);
+    })
+    .catch(() => {});
+})();
+`;
 ---
 
 <header>
   <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="dark">
     <div class="container-fluid">
       <a href="/" class="navbar-brand">
-        <img src="/img/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-middle" />
+        <img src="/img/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-middle" />{" "}
         {site.name}
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,13 +105,12 @@ const pathname = Astro.url.pathname;
         </ul>
 
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
+          <li class="nav-item" data-auth-host>
             <a
               href={authCta.href}
+              data-patreon-login
               referrerpolicy="unsafe-url"
               class="ptrn-button"
-              target={authCta.external ? "_blank" : undefined}
-              rel={authCta.external ? "noreferrer" : undefined}
             >
               <img src="/img/login-with-patreon.png" alt="Log in with Patreon" />
             </a>
@@ -45,26 +119,31 @@ const pathname = Astro.url.pathname;
             <button
               class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme"
+              aria-label="Toggle theme"
               type="button"
               aria-expanded="false"
               data-bs-toggle="dropdown"
               data-bs-display="static"
             >
-              Theme
+              <svg class="bi my-1 theme-icon-active" aria-hidden="true"><use href="#circle-half"></use></svg>
+              <span class="d-lg-none ms-2">Toggle theme</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme">
               <li>
                 <button type="button" class="dropdown-item d-flex align-items-center" data-theme-value="light">
+                  <svg class="bi me-2 opacity-50" aria-hidden="true"><use href="#sun-fill"></use></svg>
                   Light
                 </button>
               </li>
               <li>
                 <button type="button" class="dropdown-item d-flex align-items-center" data-theme-value="dark">
+                  <svg class="bi me-2 opacity-50" aria-hidden="true"><use href="#moon-stars-fill"></use></svg>
                   Dark
                 </button>
               </li>
               <li>
                 <button type="button" class="dropdown-item d-flex align-items-center active" data-theme-value="auto">
+                  <svg class="bi me-2 opacity-50" aria-hidden="true"><use href="#circle-half"></use></svg>
                   Auto
                 </button>
               </li>
@@ -74,4 +153,5 @@ const pathname = Astro.url.pathname;
       </div>
     </div>
   </nav>
+  <script is:inline set:html={headerSessionScript}></script>
 </header>

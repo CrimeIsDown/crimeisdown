@@ -1,0 +1,50 @@
+---
+const { map = false } = Astro.props;
+---
+<div data-transcript-search data-transcript-map={map ? "true" : "false"}>
+<h1 class="visually-hidden">Call Transcript Search</h1>
+<p data-search-loading>Logging in...</p>
+<div data-search-controls hidden>
+  <div class="row mb-2">
+    <div class="col-lg-3 d-none d-lg-block"><h2 class="fs-4">Filters</h2></div>
+    <div id="transcript-query" class="col-lg mb-2 mb-lg-0"></div><div id="transcript-sort" class="col-lg-auto col"></div><div id="transcript-page-size" class="col-lg-auto col"></div>
+    <div id="option-buttons" class="col-md-auto d-flex justify-content-end">
+      <button class="btn btn-primary d-lg-none" data-bs-toggle="collapse" data-bs-target="#filters" aria-controls="filters" aria-label="Filters"><svg class="cid-icon" aria-hidden="true"><use href="#cid-Filter"></use></svg></button>
+      <a href="/transcripts/notifications" class="btn btn-info text-bg-info" data-search-notifications hidden aria-label="Notify Me" title="Notify Me"><svg class="cid-icon" aria-hidden="true"><use href="#cid-Bell"></use></svg></a>
+      <div class="btn-group" role="group" aria-label="Refresh buttons"><button class="btn btn-primary" data-search-refresh aria-label="Refresh" title="Refresh"><svg class="cid-icon" aria-hidden="true"><use href="#cid-Redo"></use></svg></button><label class="btn btn-outline-primary"><input class="visually-hidden" type="checkbox" data-search-auto-refresh />Auto-Refresh</label></div>
+      <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#search-settings" aria-controls="search-settings" aria-label="Settings" title="Settings"><svg class="cid-icon" aria-hidden="true"><use href="#cid-Gear"></use></svg></button>
+      <button class="btn btn-primary" data-save-search-button aria-label="Save" title="Save"><svg class="cid-icon" aria-hidden="true"><use href="#cid-Save"></use></svg></button>
+    </div>
+  </div>
+  <div class="search-panel row"><aside class="search-panel__filters col-lg-3">
+    <div class="alert alert-danger" data-search-notice hidden><p><span data-search-status></span><a data-search-login href="https://api.crimeisdown.com/auth/redirect" referrerpolicy="unsafe-url">login</a><span data-search-login-suffix>.</span></p><p class="mt-2" data-search-become><a href="https://www.patreon.com/bePatron?u=4805116" referrerpolicy="unsafe-url" class="ptrn-button"><img class="img-fluid" src="/img/become-a-patron.png" alt="Become a Patron!" /></a></p></div>
+    <div id="filters" class="collapse"><h2 class="d-lg-none">Filters</h2>
+      <div class="row mb-4"><div id="transcript-clear" class="col"></div><div class="col"><button class="ais-ClearRefinements-button" data-search-default><span>Default filters</span></button></div><div class="col"><button class="ais-ClearRefinements-button" data-search-chicago><span>Chicago only</span></button></div></div>
+      <div class="accordion accordion-flush" id="filterOptionsAccordion">
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#saved-h-collapse" aria-expanded="true" aria-controls="saved-h-collapse">Saved Searches</button></h3><div id="saved-h-collapse" class="accordion-collapse collapse show"><div id="saved-h-menu" class="accordion-body" data-saved-searches>No saved searches.</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#filter-hierarchy" aria-expanded="true" aria-controls="filter-hierarchy">System / Department / Talkgroup</button></h3><div id="filter-hierarchy" class="accordion-collapse collapse show"><div id="transcript-hierarchy" class="accordion-body"></div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#filter-system" aria-expanded="true" aria-controls="filter-system">Radio System</button></h3><div id="filter-system" class="accordion-collapse collapse show"><div id="transcript-system" class="accordion-body"></div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#filter-department" aria-expanded="true" aria-controls="filter-department">Departments</button></h3><div id="filter-department" class="accordion-collapse collapse show"><div id="transcript-department" class="accordion-body"></div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#filter-talkgroup" aria-expanded="true" aria-controls="filter-talkgroup">Talkgroups</button></h3><div id="filter-talkgroup" class="accordion-collapse collapse show"><div id="transcript-talkgroup" class="accordion-body"></div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#filter-type" aria-expanded="true" aria-controls="filter-type">Talkgroup Type</button></h3><div id="filter-type" class="accordion-collapse collapse show"><div id="transcript-type" class="accordion-body"></div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#filter-units" aria-expanded="false" aria-controls="filter-units">Units</button></h3><div id="filter-units" class="accordion-collapse collapse"><div id="transcript-units" class="accordion-body"></div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#filter-radios" aria-expanded="false" aria-controls="filter-radios">Radio IDs</button></h3><div id="filter-radios" class="accordion-collapse collapse"><div id="transcript-radios" class="accordion-body"></div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#time-input-collapse" aria-expanded="true" aria-controls="time-input-collapse">Call Time</button></h3><div id="time-input-collapse" class="accordion-collapse collapse show"><div class="accordion-body">
+          <form data-search-time>
+            {[ ["from", "From Time"], ["to", "To Time"] ].map(([name, label]) => <div class="col"><label for={`transcript-time-${name}`}>{label}</label><div class="input-group date"><input id={`transcript-time-${name}`} class="form-control" type="text" name={name} /><span class="input-group-text" data-calendar-open={name} role="button" tabindex="0" aria-label={`Open ${label} calendar`}><svg class="cid-icon" viewBox="0 0 448 512" aria-hidden="true"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v32H448V128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM448 192H0V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192z" /></svg></span></div></div>)}
+            <button class="visually-hidden" tabindex="-1">Apply time range</button></form>
+          <div class="alert alert-warning mt-3">You can only search one month at a time due to system limitations. Please limit your search to a month or less. Archives go back to January 2023.</div>
+        </div></div></div>
+      </div>
+    </div>
+  </aside><section class="search-panel__results col" aria-label="Transcript results">
+    <div id="search-settings" class="collapse mb-1"><label class="mb-2">Archive month<input class="form-control" type="month" min="2023-01" data-search-month /></label><div class="form-check form-switch mt-2 mb-1"><input class="form-check-input" type="checkbox" role="switch" id="waveform-toggle" /><label class="form-check-label" for="waveform-toggle">Show waveform when playing audio</label></div></div>
+    <div id="transcript-current" class="mt-2"></div><div id="transcript-stats" class="mb-1" role="status"></div>
+    {map && <><h5>Experimental map of radio calls</h5><p class="text-danger" data-map-membership hidden>Sorry, you must be at the Captain tier or above on Patreon to access the map of calls (currently an experimental feature).</p><div id="geo-search" class="ais-GeoSearch-map mb-1"></div></>}
+    <div id="transcript-hits"></div><div id="transcript-pagination" class="mt-3"></div>
+  </section></div>
+</div></div>
+<script>
+import { mountTranscriptSearch } from "@/lib/transcript-search";
+void mountTranscriptSearch();
+</script>

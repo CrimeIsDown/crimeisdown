@@ -1,0 +1,42 @@
+---
+type Props = {
+  alertKey: string;
+  type?: string;
+};
+
+const { alertKey, type = "primary" } = Astro.props;
+const storageKey = `alert-${alertKey}`;
+---
+
+<div
+  class={`alert alert-${type} alert-dismissible fade show`}
+  role="alert"
+  data-dismissible-alert={storageKey}
+>
+  <slot />
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-dismissible-alert]").forEach((alert) => {
+    const key = alert.dataset.dismissibleAlert;
+    if (!key) return;
+
+    try {
+      if (localStorage.getItem(key)) {
+        alert.remove();
+        return;
+      }
+    } catch {
+      return;
+    }
+
+    alert.querySelector(".btn-close")?.addEventListener("click", () => {
+      try {
+        localStorage.setItem(key, "true");
+      } catch {
+        // localStorage may be unavailable.
+      }
+    });
+  });
+</script>

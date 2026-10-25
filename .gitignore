@@ -11,6 +11,7 @@
 /.playwright-cli/
 /.wrangler/
 /output/
+/test-results/
 
 # environment and logs
 /.env*

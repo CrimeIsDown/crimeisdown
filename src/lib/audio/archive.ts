@@ -57,6 +57,11 @@ export function inferArchivePlayback(
   type?: string | null,
 ): ArchivePlayback | null {
   if (!url) return null;
+  try {
+    if (!["http:", "https:"].includes(new URL(url).protocol)) return null;
+  } catch {
+    return null;
+  }
 
   const filename = safeFilenameFromUrl(url);
   return {
@@ -66,10 +71,13 @@ export function inferArchivePlayback(
   };
 }
 
-export function buildArchiveDownloadParams(feed: string, datetimeLocal: string) {
+export function buildArchiveDownloadParams(
+  feed: string,
+  datetimeLocal: string,
+) {
   const params = new URLSearchParams();
   params.set("feed", feed);
-  params.set("datetime", formatArchiveDatetime(datetimeLocal));
+  params.set("datetime", new Date(chicagoTimestamp(datetimeLocal)).toISOString());
 
   if (shouldUseBroadcastify(feed, datetimeLocal)) {
     params.set("broadcastify", "1");
@@ -187,4 +195,67 @@ function guessMediaType(filename: string) {
     default:
       return "audio/mpeg";
   }
+}
+
+/** Interpret the form's wall clock in Chicago, regardless of the viewer's timezone. */
+export function chicagoTimestamp(value: string): number {
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value))
+    throw new Error("Use a valid date and time.");
+  const target = Date.parse(value + ":00Z");
+  if (
+    !Number.isFinite(target) ||
+    new Date(target).toISOString().slice(0, 16) !== value
+  )
+    throw new Error("Use a valid date and time.");
+  let estimate = target;
+  const formatter = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Chicago",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  });
+  for (let i = 0; i < 4; i++) {
+    const parts = Object.fromEntries(
+      formatter.formatToParts(estimate).map((p) => [p.type, p.value]),
+    );
+    const represented = Date.parse(
+      `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:00Z`,
+    );
+    if (represented === target) return estimate;
+    estimate += target - represented;
+  }
+  throw new Error(
+    "This time does not exist in Chicago because of daylight saving time.",
+  );
+}
+
+export function buildRangeExportPayload(
+  feed: string,
+  start: string,
+  end: string,
+) {
+  if (!feed || !start || !end)
+    throw new Error("Feed, start time, and end time are required.");
+  const duration = chicagoTimestamp(end) - chicagoTimestamp(start);
+  if (duration <= 0) throw new Error("End time must be after start time.");
+  if (!start.endsWith(":00") || !end.endsWith(":00"))
+    throw new Error(
+      "Start and end times must be hour-aligned (mm:ss = 00:00).",
+    );
+  if (duration > 24 * 3600 * 1000)
+    throw new Error("Time range must be 24 hours or less.");
+  const cutoff = encryptedCutoverByFeed[feed]?.replace(" ", "T").slice(0, 16);
+  if (cutoff && start < cutoff && end > cutoff)
+    throw new Error(
+      "This range crosses the encrypted cutover time. Please split it into two separate exports.",
+    );
+  return {
+    feed,
+    start_datetime: start.replace("T", " ") + ":00",
+    end_datetime: end.replace("T", " ") + ":00",
+    broadcastify: shouldUseBroadcastify(feed, start),
+  };
 }

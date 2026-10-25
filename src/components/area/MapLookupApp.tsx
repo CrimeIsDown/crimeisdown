@@ -1,10 +1,19 @@
 import "leaflet/dist/leaflet.css";
+import "leaflet-draw/dist/leaflet.draw.css";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+import "leaflet.awesome-markers/dist/leaflet.awesome-markers.css";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
+import { point } from "@turf/helpers";
+import type { Feature, Polygon, MultiPolygon } from "geojson";
 import type {
   Circle,
   CircleMarker,
   Control,
+  DivIcon,
+  FeatureGroup,
   GeoJSON,
   LatLngExpression,
   LayerGroup,
@@ -17,6 +26,9 @@ import type {
   TraumaCenter,
 } from "@/lib/location/types";
 import ScannerNotepad from "@/components/audio/ScannerNotepad";
+import LiveStreamPlayer from "@/components/audio/LiveStreamPlayer";
+import ArchiveDownloadForm from "@/components/audio/ArchiveDownloadForm";
+import { archiveFeeds } from "@/lib/audio/data";
 import RadioIdLookup from "@/components/reference/RadioIdLookup";
 import UcrCodeLookup from "@/components/reference/UcrCodeLookup";
 import type { RadioIdRow, UcrCodeRow } from "@/lib/reference/data";
@@ -29,7 +41,7 @@ type Props = {
   ucrCodes: UcrCodeRow[];
 };
 
-type TabKey = "map" | "traffic" | "crime";
+type TabKey = "map" | "traffic" | "crime" | "incidents";
 
 type GeoJsonOverlaySpec = {
   type: "geojson";
@@ -48,7 +60,15 @@ type MarkerOverlaySpec = {
   activeByDefault?: boolean;
 };
 
-type OverlaySpec = GeoJsonOverlaySpec | MarkerOverlaySpec;
+type KmlOverlaySpec = {
+  type: "kml";
+  name: string;
+  url: string;
+  activeByDefault?: boolean;
+  attribution?: string;
+};
+
+type OverlaySpec = GeoJsonOverlaySpec | MarkerOverlaySpec | KmlOverlaySpec;
 
 const overlays: OverlaySpec[] = [
   {
@@ -101,6 +121,21 @@ const overlays: OverlaySpec[] = [
     weight: 2,
     popupFields: [["ward_id", "Ward"]],
   },
+  {
+    type: "geojson",
+    name: "Municipalities",
+    url: "/data/map_data/municipalities.geojson",
+    color: "#3a0",
+    weight: 2,
+    popupFields: [["AGENCY_DESC", "Jurisdiction"]],
+  },
+  {
+    type: "kml",
+    name: "Gangs (unofficial)",
+    url: "/data/map_data/gangs.kml",
+    attribution:
+      'Gang map by <a href="https://np.reddit.com/r/Chiraqology/wiki/index/gangmaps" target="_blank" rel="noreferrer">u/ReggieG45</a>',
+  },
 ] as const;
 
 const defaultCenter: LatLngExpression = [41.85, -87.63];
@@ -120,11 +155,20 @@ export function MapLookupApp({
   const [loading, setLoading] = useState(false);
   const [locating, setLocating] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("map");
+  const [loadedTabs, setLoadedTabs] = useState<Set<TabKey>>(() => new Set(["map"]));
+  function selectTab(tab: TabKey) {
+    setActiveTab(tab);
+    setLoadedTabs((tabs) => new Set([...tabs, tab]));
+  }
+  const [mapReady, setMapReady] = useState(false);
+  const lookupRequest = useRef<AbortController | null>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const markerRef = useRef<CircleMarker | null>(null);
   const circleRef = useRef<Circle | null>(null);
   const leafletRef = useRef<typeof import("leaflet") | null>(null);
+  const editableLayerRef = useRef<FeatureGroup | null>(null);
+  const infoControlRef = useRef<Control & { update?: (props?: Record<string, string | number>) => void } | null>(null);
   const hasBootstrappedLookup = useRef(false);
 
   const wazeUrl = useMemo(() => {
@@ -152,6 +196,18 @@ export function MapLookupApp({
       }
 
       const L = await import("leaflet");
+      L.Icon.Default.imagePath = "";
+      L.Icon.Default.mergeOptions({
+        iconUrl: "/img/marker-icon.png",
+        iconRetinaUrl: "/img/marker-icon-2x.png",
+        shadowUrl: "/img/marker-shadow.png",
+      });
+      window.L = L;
+      await Promise.all([
+        import("leaflet-draw"),
+        import("leaflet.markercluster"),
+        import("leaflet-plugins/layer/vector/KML.js"),
+      ]);
       if (disposed || !mapContainerRef.current) {
         return;
       }
@@ -163,42 +219,157 @@ export function MapLookupApp({
       });
 
       mapRef.current = map;
+      setMapReady(true);
 
-      const streets = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; OpenStreetMap contributors",
-        maxZoom: 19,
-      }).addTo(map);
-
-      const dark = L.tileLayer(
-        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-        {
-          attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-          maxZoom: 20,
-        },
-      );
+      infoControlRef.current = createInfoControl(L).addTo(map);
 
       const layerControl = L.control.layers(
-        {
-          OpenStreetMap: streets,
-          "Dark map": dark,
-        },
         undefined,
-        { collapsed: false },
+        undefined,
+        { collapsed: !window.matchMedia("(min-width: 768px)").matches },
       ).addTo(map) as Control.Layers;
 
-      await Promise.all(
-        overlays.map(async (overlay) => {
-          const layer = await buildOverlayLayer(L, overlay);
-          if (!layer) {
-            return;
-          }
+      const mapboxToken = import.meta.env.PUBLIC_MAPBOX_ACCESS_TOKEN;
+      const mapbox = mapboxToken ? L.tileLayer(
+        `https://api.mapbox.com/styles/v1/erictendian/ciqn6pmjh0005bini99og1s6q/tiles/256/{z}/{x}/{y}?access_token=${encodeURIComponent(mapboxToken)}`,
+        {
+          attribution:
+            '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          minZoom: 0,
+          maxZoom: 20,
+        },
+      ) : null;
+      const mapboxDark = mapboxToken ? L.tileLayer(
+        `https://api.mapbox.com/styles/v1/erictendian/cj9ne99zz3e112rp4pxcpua1z/tiles/256/{z}/{x}/{y}?access_token=${encodeURIComponent(mapboxToken)}`,
+        {
+          attribution:
+            '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          minZoom: 0,
+          maxZoom: 20,
+        },
+      ) : null;
+      const openStreetMap = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        maxNativeZoom: 19,
+        minZoom: 0,
+        maxZoom: 20,
+      });
+      const googleHybrid = L.tileLayer("https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}", {
+        attribution: "&copy; Google",
+        maxZoom: 20,
+        subdomains: ["0", "1", "2", "3"],
+      });
 
-          layerControl.addOverlay(layer, overlay.name);
-          if (overlay.activeByDefault) {
-            layer.addTo(map);
-          }
-        }),
-      );
+      if (mapbox) layerControl.addBaseLayer(mapbox, "MapBox Streets");
+      if (mapboxDark) layerControl.addBaseLayer(mapboxDark, "MapBox Streets Dark");
+      layerControl.addBaseLayer(openStreetMap, "OpenStreetMap");
+      layerControl.addBaseLayer(googleHybrid, "Google Hybrid");
+
+      const preferredBaseLayer = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? mapboxDark
+        : mapbox;
+      (preferredBaseLayer ?? openStreetMap).addTo(map);
+
+      addStreetViewControl(L, map);
+      addAddressControl(L, map, (value) => {
+        setQuery(value);
+        const url = new URL("/api/location-context", window.location.origin);
+        url.searchParams.set("q", value);
+        void runLookup(url);
+      });
+
+      editableLayerRef.current = L.featureGroup().addTo(map);
+      layerControl.addOverlay(editableLayerRef.current, "User Features");
+      const leafletWithDraw = L as unknown as typeof L & {
+        Control: typeof L.Control & {
+          Draw: new (options: Record<string, unknown>) => Control;
+        };
+        Draw: {
+          Event: {
+            CREATED: string;
+          };
+        };
+      };
+      const drawControl = new leafletWithDraw.Control.Draw({
+        edit: {
+          featureGroup: editableLayerRef.current,
+          poly: {
+            allowIntersection: false,
+          },
+        },
+        draw: {
+          polyline: {
+            shapeOptions: {
+              color: "#00ff00",
+              weight: 10,
+            },
+          },
+          polygon: {
+            showArea: true,
+            allowIntersection: false,
+            drawError: {
+              color: "#da2600",
+              message: "<strong>Error:<strong> Polygon cannot intersect with itself",
+            },
+            shapeOptions: {
+              color: "#00ff00",
+            },
+          },
+        },
+      });
+      map.addControl(drawControl);
+      map.on(leafletWithDraw.Draw.Event.CREATED, (event: { layer: LayerGroup }) => {
+        editableLayerRef.current?.addLayer(event.layer);
+      });
+
+      const boundaries: { layer: GeoJSON; spec: GeoJsonOverlaySpec }[] = [];
+      const showBoundaryInfo = (event: { latlng: { lat: number; lng: number }; type: string; originalEvent?: MouseEvent }) => {
+        if (event.originalEvent?.buttons || drawing) return;
+        const props: Record<string, string | number> = {};
+        const candidate = point([event.latlng.lng, event.latlng.lat]);
+        for (const { layer, spec } of boundaries) {
+          let matched = false;
+          layer.eachLayer((entry) => {
+            if (matched) return;
+            const feature = (entry as unknown as { feature?: Feature<Polygon | MultiPolygon> }).feature;
+            if (feature && booleanPointInPolygon(candidate, feature)) {
+              matched = true;
+              for (const [key, label] of spec.popupFields) {
+                const value = feature.properties?.[key];
+                if (value !== undefined && value !== null) props[label] = value;
+              }
+            }
+          });
+        }
+        infoControlRef.current?.update?.(props);
+        if (event.type === "click" && Object.keys(props).length) {
+          const contents = document.createElement("div");
+          contents.innerHTML = infoControlRef.current?.getContainer()?.innerHTML || "";
+          L.popup().setLatLng(event.latlng).setContent(contents).openOn(map);
+        }
+      };
+      let drawing = false;
+      map.on("draw:drawstart draw:editstart draw:deletestart", () => { drawing = true; });
+      map.on("draw:drawstop draw:editstop draw:deletestop", () => { drawing = false; });
+      map.on("mousemove", showBoundaryInfo);
+      map.on("click", showBoundaryInfo);
+      for (const overlay of overlays) {
+        const layer = await buildOverlayLayer(
+          L,
+          map,
+          overlay,
+        );
+        if (!layer) {
+          continue;
+        }
+
+        layerControl.addOverlay(layer, overlay.name);
+        if (overlay.type === "geojson") boundaries.push({ layer: layer as GeoJSON, spec: overlay });
+        if (overlay.activeByDefault) {
+          layer.addTo(map);
+        }
+      }
     }
 
     void initializeMap().catch((mapError) => {
@@ -207,11 +378,14 @@ export function MapLookupApp({
 
     return () => {
       disposed = true;
+      lookupRequest.current?.abort();
       mapRef.current?.remove();
       mapRef.current = null;
       markerRef.current = null;
       circleRef.current = null;
+      editableLayerRef.current = null;
       leafletRef.current = null;
+      infoControlRef.current = null;
     };
   }, []);
 
@@ -229,15 +403,15 @@ export function MapLookupApp({
 
   useEffect(() => {
     const L = leafletRef.current;
-    if (!mapRef.current || !result || !L) {
+    if (!mapRef.current || !L) {
       return;
     }
 
     const map = mapRef.current;
-    const coordinate = L.latLng(result.meta.latitude, result.meta.longitude);
-
     markerRef.current?.remove();
     circleRef.current?.remove();
+    if (!result) return;
+    const coordinate = L.latLng(result.meta.latitude, result.meta.longitude);
 
     markerRef.current = L.circleMarker(coordinate, {
       radius: 8,
@@ -247,15 +421,15 @@ export function MapLookupApp({
       weight: 2,
     })
       .addTo(map)
-      .bindPopup(result.meta.formattedAddress);
+      .bindPopup(result.meta.accuracy !== undefined ? `You are within ${(result.meta.accuracy * 3.28084).toPrecision(5)} feet of this point` : result.meta.formattedAddress);
 
-    if (!result.meta.inChicago) {
+    if (!result.meta.inChicago || result.meta.accuracy !== undefined) {
       markerRef.current.openPopup();
     }
 
-    if (result.query.lat !== undefined && result.query.lng !== undefined) {
+    if (result.meta.accuracy !== undefined) {
       circleRef.current = L.circle(coordinate, {
-        radius: 200,
+        radius: result.meta.accuracy,
         color: "#0d6efd",
         fillOpacity: 0.08,
       }).addTo(map);
@@ -270,6 +444,9 @@ export function MapLookupApp({
 
     if (result.query.q) {
       nextUrl.searchParams.set("q", result.query.q);
+      nextUrl.hash = "location_query=" + encodeURIComponent(result.query.q);
+    } else {
+      nextUrl.hash = "";
     }
     if (result.query.lat !== undefined && result.query.lng !== undefined) {
       nextUrl.searchParams.set("lat", String(result.query.lat));
@@ -277,7 +454,7 @@ export function MapLookupApp({
     }
 
     window.history.replaceState({}, "", nextUrl);
-  }, [result]);
+  }, [result, mapReady]);
 
   useEffect(() => {
     if (hasBootstrappedLookup.current || initialResult || initialError) {
@@ -287,7 +464,7 @@ export function MapLookupApp({
     hasBootstrappedLookup.current = true;
 
     const currentUrl = new URL(window.location.href);
-    const initialSearch = currentUrl.searchParams.get("q")?.trim();
+    const initialSearch = (currentUrl.searchParams.get("q") || new URLSearchParams(currentUrl.hash.slice(1)).get("location_query"))?.trim();
     const latParam = currentUrl.searchParams.get("lat");
     const lngParam = currentUrl.searchParams.get("lng");
     const lat = latParam === null ? Number.NaN : Number(latParam);
@@ -310,12 +487,15 @@ export function MapLookupApp({
     }
   }, [initialError, initialResult]);
 
-  async function runLookup(nextUrl: URL) {
+  async function runLookup(nextUrl: URL, accuracy?: number) {
+    lookupRequest.current?.abort();
+    const controller = new AbortController();
+    lookupRequest.current = controller;
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch(nextUrl);
+      const response = await fetch(nextUrl, { signal: AbortSignal.any([controller.signal, AbortSignal.timeout(15000)]) });
       const payload = (await response.json()) as
         | LocationContextResult
         | { error: string };
@@ -324,17 +504,23 @@ export function MapLookupApp({
         throw new Error("error" in payload ? payload.error : "Lookup failed.");
       }
 
+      if (accuracy !== undefined) {
+        payload.meta.formattedAddress = "N/A - From device location";
+        payload.meta.accuracy = accuracy;
+      }
+      if (payload.query.q) setQuery(payload.query.q);
       setResult(payload);
       setActiveTab("map");
     } catch (lookupError) {
+      if (controller.signal.aborted) return;
       setResult(null);
       setError(
         lookupError instanceof Error
-          ? lookupError.message
+          ? lookupError.name === "TimeoutError" ? "Location search timed out. Please try again." : lookupError.message
           : "Lookup failed.",
       );
     } finally {
-      setLoading(false);
+      if (!controller.signal.aborted) setLoading(false);
     }
   }
 
@@ -366,7 +552,7 @@ export function MapLookupApp({
         requestUrl.searchParams.set("lat", String(position.coords.latitude));
         requestUrl.searchParams.set("lng", String(position.coords.longitude));
         setQuery("");
-        await runLookup(requestUrl);
+        await runLookup(requestUrl, position.coords.accuracy);
         setLocating(false);
       },
       (geoError) => {
@@ -421,8 +607,11 @@ export function MapLookupApp({
                 {error ? (
                   <div className="alert alert-danger alert-dismissible fade show" role="alert">
                     {error}
+                    <button type="button" className="btn-close" aria-label="Close" onClick={() => setError(null)} />
                   </div>
                 ) : null}
+                {result?.meta.approximate ? <div className="alert alert-warning" role="alert">The location entered is not precise, the boundary results given may not be correct. Use a valid street address for better accuracy.</div> : null}
+                {result?.meta.accuracy !== undefined && result.meta.accuracy > 1000 ? <div className="alert alert-warning" role="alert">Warning: We were not able to determine a precise location, so your location results may be incorrect. Try a different device for better results.</div> : null}
                 {result && !result.meta.inChicago ? (
                   <div className="alert alert-warning alert-dismissible fade show" role="alert">
                     This location is outside Chicago, so the boundary results given may not be correct.
@@ -431,7 +620,7 @@ export function MapLookupApp({
                 {result ? (
                   <table className="table table-bordered table-condensed">
                     <tbody>
-                      <tr className="table-info">
+                      <tr className="info">
                         <th colSpan={2}>Location Info</th>
                       </tr>
                       <tr>
@@ -439,8 +628,8 @@ export function MapLookupApp({
                         <td>{result.meta.formattedAddress}</td>
                       </tr>
                       <tr>
-                        <td>Latitude: {result.meta.latitude.toFixed(5)}</td>
-                        <td>Longitude: {result.meta.longitude.toFixed(5)}</td>
+                        <td>Latitude: {result.meta.latitude.toFixed(6)}</td>
+                        <td>Longitude: {result.meta.longitude.toFixed(6)}</td>
                       </tr>
                       <tr>
                         <td>Neighborhood</td>
@@ -470,7 +659,7 @@ export function MapLookupApp({
                       </tr>
                       {result.police ? (
                         <>
-                          <tr className="table-info">
+                          <tr className="info">
                             <th colSpan={2}>Chicago Police Department</th>
                           </tr>
                           <tr>
@@ -488,13 +677,12 @@ export function MapLookupApp({
                                       Listen to CPD with Instant Replay
                                     </a>
                                   </p>
+                                  <LiveStreamPlayer key={`stream-${result.police.zone.slug}`} slug={result.police.zone.slug} broadcastify={result.police.zone.broadcastify} />
                                   <h5><strong>Search the audio archive</strong></h5>
                                   {result.police.district === "2" ? (
                                     <p className="mb-0"><small><sup>*</sup>The 2nd district switched to Zone 7 on June 30, 2022.</small></p>
                                   ) : null}
-                                  <p className="mt-2">
-                                    <a className="btn btn-outline-primary" href={`/audio/archive?feed=${result.police.zone.slug}`}>Look up scanner recording</a>
-                                  </p>
+                                  <ArchiveDownloadForm key={`archive-${result.police.zone.slug}`} feeds={archiveFeeds} initialFeed={result.police.zone.slug} />
                                 </>
                               ) : null}
                             </td>
@@ -503,7 +691,7 @@ export function MapLookupApp({
                       ) : null}
                       {result.fire ? (
                         <>
-                          <tr className="table-info">
+                          <tr className="info">
                             <th colSpan={2}>Chicago Fire Department</th>
                           </tr>
                           <tr>
@@ -541,7 +729,7 @@ export function MapLookupApp({
                       ) : null}
                       {result.ems ? (
                         <>
-                          <tr className="table-info">
+                          <tr className="info">
                             <th colSpan={2}>Closest Medical Services</th>
                           </tr>
                           <tr>
@@ -597,24 +785,35 @@ export function MapLookupApp({
         </div>
       </div>
       <div className="col map-container">
-        <ul className="nav nav-tabs legacy-map-tabs" id="cadTabs" role="tablist">
+        <ul className="nav nav-tabs legacy-map-tabs" id="cadTabs" role="tablist" onKeyDown={(event) => {
+          if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+          const tabs = [...event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+          const current = tabs.indexOf(event.target as HTMLButtonElement);
+          if (current < 0) return;
+          event.preventDefault();
+          const next = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : (current + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+          tabs[next].focus();
+          tabs[next].click();
+        }}>
           <li className="nav-item">
-            <button type="button" className={`nav-link${activeTab === "map" ? " active" : ""}`} onClick={() => setActiveTab("map")} aria-controls="main-map">
+            <button type="button" role="tab" id="map-tab" aria-selected={activeTab === "map"} tabIndex={activeTab === "map" ? 0 : -1} className={`nav-link${activeTab === "map" ? " active" : ""}`} onClick={() => selectTab("map")} aria-controls="main-map">
               <span className="d-none d-md-inline">Address Search</span> Map
             </button>
           </li>
           <li className="nav-item">
-            <button type="button" className={`nav-link${activeTab === "traffic" ? " active" : ""}`} onClick={() => setActiveTab("traffic")} aria-controls="traffic-map">
+            <button type="button" role="tab" id="traffic-tab" aria-selected={activeTab === "traffic"} tabIndex={activeTab === "traffic" ? 0 : -1} className={`nav-link${activeTab === "traffic" ? " active" : ""}`} onClick={() => selectTab("traffic")} aria-controls="traffic-map">
               Traffic<span className="d-none d-md-inline"> Map</span>
             </button>
           </li>
           <li className="nav-item">
-            <button type="button" className={`nav-link${activeTab === "crime" ? " active" : ""}`} onClick={() => setActiveTab("crime")} aria-controls="crime-map">
+            <button type="button" role="tab" id="crime-tab" aria-selected={activeTab === "crime"} tabIndex={activeTab === "crime" ? 0 : -1} className={`nav-link${activeTab === "crime" ? " active" : ""}`} onClick={() => selectTab("crime")} aria-controls="crime-map">
               Crime<span className="d-none d-md-inline"> Map</span>
             </button>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/transcripts/map">Incidents<span className="d-none d-md-inline"> Map</span></a>
+            <a className="nav-link" href="/transcripts/map">
+              Incidents<span className="d-none d-md-inline"> Map</span>
+            </a>
           </li>
         </ul>
 
@@ -623,10 +822,10 @@ export function MapLookupApp({
             <div id="leaflet-map" ref={mapContainerRef} style={{ display: activeTab === "map" ? "block" : "none" }}></div>
           </div>
           <div className={`tab-pane fade${activeTab === "traffic" ? " show active" : ""}`} id="traffic-map" role="tabpanel" aria-labelledby="traffic-tab">
-            <iframe id="waze-map" title="Waze map" src={wazeUrl}></iframe>
+            <iframe id="waze-map" title="Waze map" src={loadedTabs.has("traffic") ? wazeUrl : undefined}></iframe>
           </div>
           <div className={`tab-pane fade${activeTab === "crime" ? " show active" : ""}`} id="crime-map" role="tabpanel" aria-labelledby="crime-tab">
-            <iframe id="clear-map" title="Crime map" src={crimeMapUrl}></iframe>
+            <iframe id="clear-map" title="Crime map" src={loadedTabs.has("crime") ? crimeMapUrl : undefined}></iframe>
           </div>
         </div>
       </div>
@@ -636,6 +835,7 @@ export function MapLookupApp({
 
 async function buildOverlayLayer(
   L: typeof import("leaflet"),
+  map: LeafletMap,
   overlay: OverlaySpec,
 ): Promise<GeoJSON | LayerGroup | null> {
   const response = await fetch(overlay.url);
@@ -645,7 +845,13 @@ async function buildOverlayLayer(
 
   if (overlay.type === "markers") {
     const rows = (await response.json()) as FireStation[];
-    const layer = L.layerGroup();
+    const markerClusterGroup = (L as typeof L & {
+      markerClusterGroup?: (options?: Record<string, unknown>) => LayerGroup;
+    }).markerClusterGroup;
+    const layer = markerClusterGroup
+      ? markerClusterGroup({ showCoverageOnHover: false })
+      : L.layerGroup();
+    const fireIcon = makeFireIcon(L);
 
     rows.forEach((station) => {
       const title =
@@ -653,18 +859,37 @@ async function buildOverlayLayer(
         [station.engine, station.truck, station.ambo, station.squad]
           .filter(Boolean)
           .join("-");
-      const marker = L.circleMarker([station.latitude, station.longitude], {
-        radius: 5,
-        color: "#dc3545",
-        fillColor: "#dc3545",
-        fillOpacity: 0.75,
-        weight: 1,
+      const marker = L.marker([station.latitude, station.longitude], {
+        title,
+        icon: fireIcon,
       });
 
       marker.bindPopup(buildStationPopup(title, station));
       layer.addLayer(marker);
     });
 
+    return layer;
+  }
+
+  if (overlay.type === "kml") {
+    const kmlCtor = (L as typeof L & {
+      KML?: (new () => LayerGroup) & { parseKML(document: Document): LayerGroup[] };
+    }).KML;
+
+    if (!kmlCtor) {
+      return null;
+    }
+
+    if (overlay.attribution) {
+      map.attributionControl.addAttribution(overlay.attribution);
+    }
+
+    const kmlText = await response.text();
+    const kml = new DOMParser().parseFromString(kmlText, "text/xml");
+    const layer = new kmlCtor();
+    // This plugin's addKML expects a URL, unlike the Ember plugin. Parse the
+    // already fetched XML directly instead of requesting "[object XMLDocument]".
+    for (const child of kmlCtor.parseKML(kml)) layer.addLayer(child);
     return layer;
   }
 
@@ -676,23 +901,114 @@ async function buildOverlayLayer(
       opacity: 0.85,
       fillOpacity: 0.03,
     },
-    onEachFeature: (feature, layer) => {
-      const fields = overlay.popupFields
-        .map(([key, label]) => {
-          const value = feature.properties?.[key];
-          if (value === undefined || value === null || value === "") {
-            return null;
-          }
 
-          return `<strong>${label}:</strong> ${value}`;
-        })
-        .filter(Boolean);
-
-      if (fields.length) {
-        layer.bindPopup(fields.join("<br />"));
-      }
-    },
   }) as GeoJSON;
+}
+
+function createInfoControl(L: typeof import("leaflet")) {
+  const info = new L.Control({ position: "topright" }) as Control & {
+    _div?: HTMLDivElement;
+    update?: (props?: Record<string, string | number>) => void;
+  };
+
+  info.onAdd = function () {
+    this._div = L.DomUtil.create("div", "info");
+    this.update?.();
+    return this._div;
+  };
+
+  info.update = function (props) {
+    const rows = props && Object.keys(props).length
+      ? Object.entries(props)
+          .map(([key, value]) => `<p><em>${key}</em>: ${value}</p>`)
+          .join("")
+      : "<p>Hover/tap a layer</p>";
+
+    if (this._div) {
+      this._div.innerHTML = `<h4>Layer Info</h4>${rows}`;
+    }
+  };
+
+  return info;
+}
+
+function addStreetViewControl(
+  L: typeof import("leaflet"),
+  map: LeafletMap,
+) {
+  const control = new L.Control({ position: "topleft" });
+
+  control.onAdd = function () {
+    const container = L.DomUtil.create("div", "leaflet-bar leaflet-control legacy-map-link-control");
+    const streetViewLink = L.DomUtil.create("a", "", container);
+    streetViewLink.href = googleStreetViewUrl(map);
+    map.on("moveend", () => { streetViewLink.href = googleStreetViewUrl(map); });
+    streetViewLink.target = "_blank";
+    streetViewLink.rel = "noopener noreferrer";
+    streetViewLink.textContent = "Street View";
+    streetViewLink.title = "Open Google Street View near the map center";
+
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.on(streetViewLink, "click", () => {
+      streetViewLink.href = googleStreetViewUrl(map);
+    });
+
+    return container;
+  };
+
+  control.addTo(map);
+}
+
+function googleStreetViewUrl(map: LeafletMap) {
+  const center = map.getCenter();
+  return `https://www.google.com/maps?layer=c&cbll=${center.lat},${center.lng}`;
+}
+
+function addAddressControl(L: typeof import("leaflet"), map: LeafletMap, search: (query: string) => void) {
+  const control = new L.Control({ position: "topleft" });
+  control.onAdd = () => {
+    const container = L.DomUtil.create("div", "leaflet-bar leaflet-control legacy-geosearch-control");
+    const toggle = L.DomUtil.create("a", "", container);
+    toggle.href = "#";
+    toggle.title = "Enter address";
+    toggle.setAttribute("aria-label", "Enter address");
+    toggle.textContent = "⌕";
+    const form = L.DomUtil.create("form", "input-group", container);
+    form.hidden = true;
+    const input = L.DomUtil.create("input", "form-control", form);
+    input.type = "search";
+    input.placeholder = "Enter address";
+    input.setAttribute("aria-label", "Search map address");
+    const submit = L.DomUtil.create("button", "btn btn-primary", form);
+    submit.type = "submit";
+    submit.textContent = "Search";
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.disableScrollPropagation(container);
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      form.hidden = !form.hidden;
+      toggle.setAttribute("aria-expanded", String(!form.hidden));
+      if (!form.hidden) input.focus();
+    });
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (input.value.trim()) search(input.value.trim());
+    });
+    return container;
+  };
+  control.addTo(map);
+}
+
+function makeFireIcon(L: typeof import("leaflet")): DivIcon {
+  return L.divIcon({
+    iconSize: [35, 45],
+    iconAnchor: [17, 42],
+    popupAnchor: [1, -32],
+    shadowAnchor: [10, 12],
+    shadowSize: [36, 16],
+    className: "awesome-marker-icon-red awesome-marker",
+    html: '<svg class="svg-inline--fa fa-fire-extinguisher" data-prefix="fas" data-icon="fire-extinguisher" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="color: #fff;font-size: 1rem;margin-top: 10px;"><path fill="currentColor" d="M500.3 7.3C507.7 13.3 512 22.4 512 32v96c0 9.6-4.3 18.7-11.7 24.7s-17.2 8.5-26.6 6.6l-160-32C301.5 124.9 292 115.7 289 104H224v34.8c37.8 18 64 56.5 64 101.2V384H64V240c0-44.7 26.2-83.2 64-101.2V110c-36.2 11.1-66 36.9-82.3 70.5c-5.8 11.9-20.2 16.9-32.1 11.1S-3.3 171.4 2.5 159.5C26.7 109.8 72.7 72.6 128 60.4V32c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V56h65c3-11.7 12.5-20.9 24.7-23.4l160-32c9.4-1.9 19.1 .6 26.6 6.6zM288 416v32c0 35.3-28.7 64-64 64H128c-35.3 0-64-28.7-64-64V416H288zM176 96c8.8 0 16-7.2 16-16s-7.2-16-16-16s-16 7.2-16 16s7.2 16 16 16z"></path></svg>',
+  });
 }
 
 function buildStationPopup(title: string, station: FireStation) {
@@ -703,6 +1019,7 @@ function buildStationPopup(title: string, station: FireStation) {
     ${station.truck ? `<br /><strong>Truck/Tower:</strong> ${station.truck}` : ""}
     ${station.ambo ? `<br /><strong>Ambulance:</strong> ${station.ambo}` : ""}
     ${station.squad ? `<br /><strong>Squad:</strong> ${station.squad}` : ""}
+    ${station.special ? `<br /><strong>Special (search radio IDs):</strong> ${station.special}` : ""}
     ${station.batt ? `<br /><strong>Battalion:</strong> ${station.batt}` : ""}
     ${station.fireDist ? `<br /><strong>District:</strong> ${station.fireDist}` : ""}
     ${station.emsDist ? `<br /><strong>EMS District:</strong> ${station.emsDist}` : ""}
@@ -718,7 +1035,7 @@ function formatStation(
     return "N/A";
   }
 
-  return `${station[key]} (${key === "ambo" ? "Ambo." : key === "truck" ? "Truck" : titleCase(key)})`;
+  return <span tabIndex={0} title={titleCase(station.addr)}>{station[key]} ({key === "ambo" ? "Ambo." : key === "truck" ? "Truck" : titleCase(key)})</span>;
 }
 
 function formatTrauma(center: TraumaCenter | undefined) {

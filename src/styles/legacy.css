@@ -166,6 +166,22 @@ iframe#youtube-player {
   margin-bottom: 0.5rem;
 }
 
+.map-container .info.leaflet-control {
+  background: rgba(var(--bs-dark-rgb), 0.7);
+  padding: 0.5em 1em;
+  text-align: right;
+}
+
+.map-container .info.leaflet-control h4,
+.map-container .info.leaflet-control p {
+  color: var(--bs-light);
+  margin: 0.25em 0;
+}
+
+.map-container .info.leaflet-control p {
+  font-size: 1rem;
+}
+
 .map-container .leaflet-popup-content h4 {
   font-size: 1rem;
 }
