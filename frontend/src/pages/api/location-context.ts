@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { env } from "cloudflare:workers";
+import { env } from "@/lib/server-runtime";
 
 import { lookupLocationContext } from "@/lib/location/engine";
 

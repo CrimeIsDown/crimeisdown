@@ -21,7 +21,7 @@ npm --prefix frontend ci
 # Terminal 1: temporary SQLite and memory state; no real provider credentials.
 CID_DEMO=1 uv run --package app python scripts/dev-api.py
 # Terminal 2: website against the local API.
-CID_RUNTIME=node PUBLIC_API_BASE_URL=http://localhost:8000 npm run dev
+PUBLIC_API_BASE_URL=http://localhost:8000 npm run dev
 ```
 
 The development API uses an empty application schema and blocks outbound provider
@@ -35,7 +35,7 @@ audio corpus or deployment configuration is included.
 ```sh
 npm test
 npm run test:backend
-CID_RUNTIME=node npm run build
+npm run build
 python3 scripts/check-publication.py
 # Install Gitleaks, then scan every locally available Git ref.
 gitleaks git --log-opts=--all --redact=100

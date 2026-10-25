@@ -38,7 +38,6 @@ jobs:
       - run: npm test
       - run: npm run build
         env:
-          CID_RUNTIME: node
           PUBLIC_API_BASE_URL: http://localhost:8000
   backend:
     runs-on: ubuntu-24.04

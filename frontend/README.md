@@ -12,8 +12,7 @@ npm ci
 npm run dev
 ```
 
-The alternative local configuration is available with
-`npx astro dev --config astro.config.local.mjs`.
+The development server and production build both use the Node adapter.
 
 ## Configuration
 
@@ -53,16 +52,12 @@ endpoint. Tests should use synthetic accounts and mocked responses.
 ```sh
 npm test
 npm run lint
-CID_RUNTIME=node npm run build
+npm run build
 ```
 
 The Node build emits a standalone server. Run it with
 `HOST=127.0.0.1 PORT=4321 node dist/server/entry.mjs` or use the generic container
 recipe in `Dockerfile` after building `dist`.
 
-The default build uses the Cloudflare adapter and the generic `wrangler.jsonc`
-configuration. Deployment-specific infrastructure and release procedures are
-maintained separately from this public repository.
-
-Browser tests are in `tests/e2e`; run them with `npm run test:e2e` after installing
-Playwright Chromium. Unit and browser tests do not require production accounts.
+Deployment-specific infrastructure and release procedures are maintained
+separately from this public repository.
