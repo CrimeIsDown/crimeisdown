@@ -338,7 +338,7 @@ export async function mountTranscriptSearch() {
               hit,
               index,
               search.createURL.bind(search),
-              account?.id === 1,
+              Boolean(account?.is_admin),
               onMap,
               search.getUiState(),
             );

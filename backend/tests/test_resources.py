@@ -126,3 +126,7 @@ def test_membership_and_admin_bindings_are_configurable(pair):
     user = client.get("/api/user", headers=bearer()).json()
     assert user["is_admin"] is True
     assert user["patreon_tier"]["name"] == "Example staff"
+    assert (
+        client.get("/api/config/notifications.json", headers=bearer()).status_code
+        == 200
+    )

@@ -357,7 +357,7 @@ def create_app(
     @app.get("/api/config/notifications.json")
     def configuration(request: Request) -> Any:
         user = require_user(request)
-        if str(user.get("patreon_tier_id_override")) != "demo-admin":
+        if str(user.get("patreon_tier_id_override")) != settings.admin_tier_id:
             raise HTTPException(403, "Forbidden")
         return services.notification_config(request.state.db)
 
