@@ -1,0 +1,11 @@
+{
+  "repository": "OWNER/REPOSITORY",
+  "application_directory": "/srv/example/app",
+  "state_directory": "/srv/example/deploy",
+  "compose_project": "app",
+  "image_prefix": "example/release",
+  "health_checks": [
+    "http://127.0.0.1:8000/api/healthz",
+    "http://127.0.0.1:4321/"
+  ]
+}
