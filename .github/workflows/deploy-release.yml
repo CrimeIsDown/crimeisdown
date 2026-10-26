@@ -1,0 +1,111 @@
+name: Deploy release
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Deploy a published release or restore the previous deployment
+        type: choice
+        options: [deploy, rollback]
+        default: deploy
+      tag:
+        description: Published release tag (ignored for rollback)
+        type: string
+        default: v4.0
+permissions:
+  contents: read
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    outputs:
+      operation: ${{ steps.target.outputs.operation }}
+      tag: ${{ steps.target.outputs.tag }}
+      sha: ${{ steps.target.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Resolve a published release on main
+        id: target
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          OPERATION: ${{ inputs.operation || 'deploy' }}
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$OPERATION" == rollback ]]; then
+            echo 'operation=rollback' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          [[ "$OPERATION" == deploy ]]
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]
+          gh api "repos/$GH_REPO/releases/tags/$RELEASE_TAG" > "$RUNNER_TEMP/release.json"
+          jq -e '.draft == false and .prerelease == false and .published_at != null' "$RUNNER_TEMP/release.json" > /dev/null
+          SHA=$(git rev-parse "refs/tags/$RELEASE_TAG^{commit}")
+          git merge-base --is-ancestor "$SHA" origin/main
+          {
+            echo 'operation=deploy'
+            echo "tag=$RELEASE_TAG"
+            echo "sha=$SHA"
+          } >> "$GITHUB_OUTPUT"
+          {
+            echo "### Deploy $RELEASE_TAG"
+            echo "Commit: $SHA"
+          } >> "$GITHUB_STEP_SUMMARY"
+  validate:
+    needs: resolve
+    if: needs.resolve.outputs.operation == 'deploy'
+    uses: ./.github/workflows/validate.yml
+    with:
+      ref: ${{ needs.resolve.outputs.sha }}
+  deploy:
+    needs: [resolve, validate]
+    if: >-
+      ${{ !cancelled() && needs.resolve.result == 'success' &&
+          (needs.validate.result == 'success' || needs.resolve.outputs.operation == 'rollback') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    environment:
+      name: production
+    concurrency:
+      group: production-release
+      cancel-in-progress: false
+    steps:
+      - name: Deploy approved release or roll back
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST_KEY: ${{ secrets.DEPLOY_HOST_KEY }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          OPERATION: ${{ needs.resolve.outputs.operation }}
+          RELEASE_TAG: ${{ needs.resolve.outputs.tag }}
+          RELEASE_SHA: ${{ needs.resolve.outputs.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          KEY="$RUNNER_TEMP/deploy-key"
+          HOSTS="$RUNNER_TEMP/deploy-hosts"
+          trap 'rm -f "$KEY" "$HOSTS"' EXIT
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$KEY"
+          printf '%s\n' "$DEPLOY_HOST_KEY" > "$HOSTS"
+          [[ "$DEPLOY_PORT" =~ ^[0-9]+$ ]]
+          REQUEST=rollback
+          if [[ "$OPERATION" == deploy ]]; then
+            [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]
+            [[ "$RELEASE_SHA" =~ ^[a-f0-9]{40}$ ]]
+            REQUEST="deploy $RELEASE_TAG $RELEASE_SHA"
+          else
+            [[ "$OPERATION" == rollback ]]
+          fi
+          ssh -T -p "$DEPLOY_PORT" -i "$KEY" \
+            -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$HOSTS" -o ServerAliveInterval=30 \
+            "$DEPLOY_USER@$DEPLOY_HOST" "$REQUEST"
+          echo "Approved $OPERATION completed." >> "$GITHUB_STEP_SUMMARY"

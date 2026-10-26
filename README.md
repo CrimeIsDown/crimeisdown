@@ -46,7 +46,7 @@ commit. Original-implementation comparisons are maintained separately. The
 optional Meilisearch integration test needs a disposable local search service.
 
 Read [configuration](docs/CONFIGURATION.md), [architecture](docs/ARCHITECTURE.md)
-and [security](SECURITY.md). The backend retains compatible account records,
+[deployment](docs/DEPLOYMENT.md) and [security](SECURITY.md). The backend retains compatible account records,
 sessions and API contracts; deployment-specific mappings are configured separately.
 The earlier frontend history is preserved with credential literals removed.
 

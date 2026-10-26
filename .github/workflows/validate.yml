@@ -1,9 +1,14 @@
 name: Validate CrimeIsDown
 on:
   push:
-    branches: [main, v4]
+    branches: [main]
   pull_request:
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        required: true
 permissions:
   contents: read
 jobs:
@@ -15,6 +20,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+          ref: ${{ inputs.ref || github.sha }}
       - name: Install pinned Gitleaks
         run: |
           curl --fail --silent --show-error --location https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz -o /tmp/gitleaks.tar.gz
@@ -32,6 +38,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+          ref: ${{ inputs.ref || github.sha }}
       - uses: actions/setup-node@v5
         with:
           node-version: 24
@@ -49,6 +56,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+          ref: ${{ inputs.ref || github.sha }}
       - uses: actions/setup-python@v6
         with:
           python-version-file: .python-version
