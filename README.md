@@ -52,4 +52,5 @@ The earlier frontend history is preserved with credential literals removed.
 
 This project incorporates work derived from the
 [FastAPI full-stack template](https://github.com/fastapi/full-stack-fastapi-template).
-See LICENSE for attribution.
+See [third-party notices](THIRD_PARTY_NOTICES.md) for the template attribution.
+No project-wide license is granted for CrimeIsDown original code.

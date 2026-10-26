@@ -1,3 +1,11 @@
+# Third-party notices
+
+This repository does not grant a project-wide license to CrimeIsDown
+original code. The notice below applies to code derived from the
+[FastAPI full-stack template](https://github.com/fastapi/full-stack-fastapi-template).
+
+## FastAPI full-stack template
+
 MIT License
 
 Copyright (c) 2019 Sebastián Ramírez
