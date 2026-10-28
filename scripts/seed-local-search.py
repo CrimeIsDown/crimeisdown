@@ -76,7 +76,7 @@ def main():
         call(4,"chi_cfd",1022,"CFD Fire S","Chicago Fire Department","Duplicate conventional CFD patch: excluded from homepage searches."),
         call(5,"chi_cpd",2,"Chi PD Zone 2","Chicago Police Department (CPD)","Zone 2 dispatch: northern control record, excluded from Zone 8 searches."),
         call(6,"chi_oemc",1021,"CFD Fire Main","Chicago Fire Department","Fire Main dispatch: northern control record, excluded from Englewood searches."),
-        call(7,"chi_oemc",1024,"CFD EMS Englewood","Chicago Fire Department","EMS South dispatch: training message for the South Side search test."),
+        call(7,"chi_oemc",1024,"CFD EMS Englwd","Chicago Fire Department","EMS South dispatch: training message for the South Side search test."),
         call(8,"chi_oemc",1023,"CFD EMS Main","Chicago Fire Department","EMS North dispatch: northern control record, excluded from Englewood searches."),
     ]
     wait(request("/indexes/calls_demo/documents",documents,"POST"))

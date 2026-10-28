@@ -21,11 +21,11 @@ describe("homepage location transcript demo", () => {
     const url = new URL(result.href, "https://example.test");
     expect(url.pathname).toBe("/transcripts/search");
     expect(result.label).toBe("CPD Zone 8 and CFD Fire/EMS South");
-    expect(url.searchParams.get("calls_demo[refinementList][talkgroup][0]")).toBe("8");
-    expect(url.searchParams.get("calls_demo[refinementList][talkgroup][1]")).toBe("1022");
-    expect(url.searchParams.get("calls_demo[refinementList][talkgroup][2]")).toBe("1024");
+    expect(url.searchParams.get("calls_demo[refinementList][talkgroup_tag][0]")).toBe("Chi PD Zone 8");
+    expect(url.searchParams.get("calls_demo[refinementList][talkgroup_tag][1]")).toBe("CFD Fire Englewd");
+    expect(url.searchParams.get("calls_demo[refinementList][talkgroup_tag][2]")).toBe("CFD EMS Englwd");
     expect([...url.searchParams.values()]).not.toContain("chi_cfd");
-    expect([...url.searchParams.keys()].some(key => key.includes("talkgroup_tag"))).toBe(false);
+    expect([...url.searchParams.keys()].some(key => key.includes("[talkgroup]"))).toBe(false);
     expect([...url.searchParams.keys()].every(key => key.startsWith("calls_demo["))).toBe(true);
     expect(result.href).not.toContain("geoSearch");
   });
@@ -45,7 +45,7 @@ describe("homepage location transcript demo", () => {
       fire: { channel: "Main" },
     } as LocationContextResult);
     const values = [...new URL(result.href, "https://example.test").searchParams.values()];
-    expect(values).toEqual(["calls_demo:start_time:desc", "chi_cpd", "chi_oemc", "2", "1021", "1023"]);
+    expect(values).toEqual(["calls_demo:start_time:desc", "chi_cpd", "chi_oemc", "Chi PD Zone 2", "CFD Fire Main", "CFD EMS Main"]);
     expect(result.label).toBe("CPD Zone 2 and CFD Fire/EMS North");
   });
 });

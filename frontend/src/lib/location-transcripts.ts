@@ -1,5 +1,4 @@
 import type { LocationContextResult } from "./location/types";
-import { audioStreams } from "./audio/data";
 
 /** Search original CPD/OEMC channels; the conventional CFD system duplicates OEMC. */
 export function locationTranscriptSearch(location: LocationContextResult, index = "calls_demo") {
@@ -12,19 +11,18 @@ export function locationTranscriptSearch(location: LocationContextResult, index 
   if (!zone || !/^(?:[1-9]|1[0-3])$/.test(zone) || !["Main", "Englewood"].includes(fire || "")) {
     throw new Error("We couldn’t identify both radio channels for that address. Try a more specific Chicago street address.");
   }
-  const policeFeed = audioStreams.find(stream => stream.slug === `zone${zone}`);
-  const policeTalkgroup = policeFeed?.openmhz
-    ? new URL(policeFeed.openmhz).searchParams.get("filter-code") : null;
-  if (!policeTalkgroup || !/^\d+$/.test(policeTalkgroup)) {
-    throw new Error("We couldn’t identify the police talkgroup for that address. Please try again.");
-  }
-  const talkgroups = [policeTalkgroup, ...(fire === "Englewood" ? ["1022", "1024"] : ["1021", "1023"])];
+  const tags = [
+    `Chi PD Zone ${zone}`,
+    ...(fire === "Englewood"
+      ? ["CFD Fire Englewd", "CFD EMS Englwd"]
+      : ["CFD Fire Main", "CFD EMS Main"]),
+  ];
   const params = new URLSearchParams({
     [`${index}[sortBy]`]: `${index}:start_time:desc`,
   });
   for (const [attribute, values] of Object.entries({
     short_name: ["chi_cpd", "chi_oemc"],
-    talkgroup: talkgroups,
+    talkgroup_tag: tags,
   })) {
     values.forEach((value, position) => {
       params.set(`${index}[refinementList][${attribute}][${position}]`, value);

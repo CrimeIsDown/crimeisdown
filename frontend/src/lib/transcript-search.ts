@@ -3,7 +3,7 @@ import fireStations from "../../public/data/city_data/fire_stations.json";
 import instantsearch, { type UiState } from "instantsearch.js";
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import { history } from "instantsearch.js/es/lib/routers";
-import { connectRange, connectGeoSearch, connectRefinementList } from "instantsearch.js/es/connectors";
+import { connectRange, connectGeoSearch } from "instantsearch.js/es/connectors";
 import {
   clearRefinements,
   currentRefinements,
@@ -231,8 +231,6 @@ export async function mountTranscriptSearch() {
       future: { preserveSharedStateOnUnmount: true },
     });
     search.addWidgets([
-      // Keep numeric channel links routable and removable through the existing filter chips.
-      connectRefinementList(() => {})({ attribute: "talkgroup", operator: "or" }),
       searchBox({
         container: "#transcript-query",
         placeholder: "",
@@ -269,7 +267,6 @@ export async function mountTranscriptSearch() {
                   short_name: "System",
                   talkgroup_group: "Department",
                   talkgroup_tag: "Talkgroup",
-                  talkgroup: "Talkgroup ID",
                 } as Record<string, string>
               )[item.attribute] || item.label,
             refinements: item.refinements.map((refinement) => ({

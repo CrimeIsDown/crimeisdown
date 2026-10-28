@@ -60,8 +60,9 @@ server Geocoding key must be available at runtime. City-boundary validation uses
 the map datasets; locations outside Chicago are rejected.
 
 Successful lookups open `/transcripts/search` with `calls_demo` refinements for
-the police zone and OEMC fire/EMS talkgroups: 1021/1023 for north and 1022/1024
-for south. Searches include `chi_cpd` and `chi_oemc`; `chi_cfd` is excluded because
+the police zone and OEMC fire/EMS channel tags: `CFD Fire Main` / `CFD EMS Main`
+for north and `CFD Fire Englewd` / `CFD EMS Englwd` for south. Searches include
+`chi_cpd` and `chi_oemc`; `chi_cfd` is excluded because
 it patches OEMC and duplicates its traffic. Explicit demo links always use the
 public demo search key, including for signed-in members. The
 preview is channel-based, not a search for incidents at the exact address.
