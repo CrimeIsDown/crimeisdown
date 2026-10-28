@@ -1,0 +1,10 @@
+.scanner-feed-row { display: flex; align-items: center; gap: .4rem; min-height: 2.5rem; padding: .25rem 0; border-top: 1px solid var(--bs-border-color); }
+.scanner-feed-name { flex: 1; min-width: 0; font-size: .875rem; line-height: 1.45; text-decoration: none; }
+.scanner-feed-name:hover { text-decoration: underline; }
+.scanner-external-icon { font-size: .65rem; margin-left: .3rem; opacity: .6; }
+.scanner-feed-row .form-check-input { margin: 0; flex-shrink: 0; }
+.scanner-feed-row label { margin: 0; }
+.scanner-archive-link { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; flex-shrink: 0; color: var(--bs-secondary-color); border-radius: .25rem; }
+.scanner-archive-link svg { width: 1.1rem; height: 1.1rem; }
+.scanner-archive-link:hover { color: var(--bs-primary); background: var(--bs-primary-bg-subtle); }
+.scanner-archive-link:focus-visible, .scanner-feed-name:focus-visible { outline: 2px solid var(--bs-primary); outline-offset: 2px; }

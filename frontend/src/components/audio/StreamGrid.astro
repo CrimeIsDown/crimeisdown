@@ -28,9 +28,11 @@ const { groups } = Astro.props as { groups: AudioStreamGroup[] };
               <div class="flex flex-wrap gap-2">
                 <a
                   class:list={["no-underline", buttonVariants({ variant: "secondary" })]}
-                  href={`/audio/live/${stream.slug}`}
+                  href={stream.broadcastifyId ? `https://www.broadcastify.com/listen/feed/${stream.broadcastifyId}` : `/audio/live/${stream.slug}`}
+                  target={stream.broadcastifyId ? "_blank" : undefined}
+                  rel={stream.broadcastifyId ? "noreferrer" : undefined}
                 >
-                  Open player
+                  {stream.broadcastifyId ? "Listen on Broadcastify.com" : "Open player"}
                 </a>
                 {stream.openmhz ? (
                   <a
@@ -42,16 +44,7 @@ const { groups } = Astro.props as { groups: AudioStreamGroup[] };
                     OpenMHz
                   </a>
                 ) : null}
-                {stream.broadcastify ? (
-                  <a
-                    class:list={["no-underline", buttonVariants({ variant: "outline" })]}
-                    href={stream.broadcastify}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Broadcastify
-                  </a>
-                ) : null}
+
               </div>
             </div>
           </article>

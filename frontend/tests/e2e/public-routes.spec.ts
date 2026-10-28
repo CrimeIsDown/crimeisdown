@@ -3,11 +3,16 @@ import { expect, test } from "@playwright/test";
 test("homepage keeps all Ember tools", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("heading", { name: "Welcome to CrimeIsDown.com!" })).toBeVisible();
-  await expect(page.getByRole("main").getByRole("link", { name: "Chicago Map", exact: true })).toBeVisible();
-  await expect(page.getByRole("main").getByRole("link", { name: "Scanner Audio", exact: true })).toBeVisible();
-  await expect(page.getByRole("main").getByRole("link", { name: "Scanner Guide", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Scanner Transcripts", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Make sense of Chicago’s scanner traffic." })).toBeVisible();
+  const tools = page.getByRole("navigation", { name: "Scanner tools" });
+  for (const [name, href] of [
+    ["Chicago Map", "/map"],
+    ["Scanner Audio", "/audio"],
+    ["Scanner Transcripts", "/transcripts/search"],
+    ["Scanner Guide", "/guide"],
+  ]) {
+    await expect(tools.getByRole("link", { name: new RegExp(name) })).toHaveAttribute("href", href);
+  }
 });
 
 test("shared navigation includes supported routes", async ({ page }) => {

@@ -9,7 +9,7 @@ export type StreamInfo = {
   frequency?: string;
   slug: string;
   openmhz?: string | null;
-  broadcastify?: string | null;
+  broadcastifyId?: number | null;
 };
 
 export type MetaContext = {
@@ -109,4 +109,5 @@ export type LookupRequest = {
   lng?: number;
   assetText?: AssetTextFetcher;
   googleGeocodingKey?: string;
+  geocodingProvider?: "google" | "photon";
 };

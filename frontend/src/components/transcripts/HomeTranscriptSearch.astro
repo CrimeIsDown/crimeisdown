@@ -1,0 +1,25 @@
+<section class="home-location-search" aria-labelledby="home-location-heading">
+  <h2 id="home-location-heading" data-home-search-heading>Start with your part of Chicago</h2>
+  <form data-home-location-search>
+    <label for="home-location">Chicago street address</label>
+    <div class="home-location-controls">
+      <div class="home-location-input">
+      <input id="home-location" class="form-control" type="text" name="address" maxlength="200" autocomplete="street-address" placeholder="Enter a Chicago address" required aria-describedby="home-location-help home-location-status" />
+      <div class="home-location-dropdown" data-location-dropdown hidden>
+        <ul id="home-location-suggestions" role="listbox" aria-label="Address suggestions"></ul>
+        <small>Search data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a></small>
+      </div>
+      </div>
+      <div class="home-location-actions">
+        <button class="btn btn-primary" type="submit"><span data-home-search-label>See sample transcripts</span> <span aria-hidden="true">&rarr;</span></button>
+        <a class="btn home-sirens-action" data-sirens-link href={import.meta.env.PUBLIC_SIRENS_URL || "https://sirens.app/"} target="_blank" rel="noopener noreferrer" title="Open Sirens AI chat with your address">Locate the sirens <span aria-hidden="true">&nearr;</span></a>
+      </div>
+    </div>
+    <p id="home-location-help"><span data-home-search-help>We’ll find the police and fire channels covering your address and open sample transcripts. Free to try, no account needed.</span> <span class="home-location-limits" data-home-search-limits>Historical recordings · Chicago addresses only.</span></p>
+    <p id="home-location-status" role="status" aria-live="polite" hidden></p>
+  </form>
+</section>
+<script>
+  import { mountHomeTranscriptSearch } from "@/lib/home-transcript-search";
+  mountHomeTranscriptSearch();
+</script>

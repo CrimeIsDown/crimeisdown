@@ -29,14 +29,14 @@ export default function VirtualScanner() {
         const available: Stream[] = audioStreams
           .filter(
             (s) =>
+              s.broadcastifyId ||
               live.includes(s.slug) ||
-              s.broadcastify ||
               s.name.startsWith("CFD") ||
               s.name.startsWith("CPD Citywide"),
           )
           .map((s) => ({
             ...s,
-            disabled: !live.includes(s.slug) && !s.broadcastify,
+            disabled: Boolean(s.broadcastifyId) || !live.includes(s.slug),
           }));
         for (const name of live)
           if (!available.some((s) => s.slug === name))
@@ -86,22 +86,43 @@ export default function VirtualScanner() {
             src="https://s.broadcastify.com/icons/favicon-96x96.png"
             alt="Broadcastify.com"
           />{" "}
-          streams are provided by Broadcastify.com, for encrypted radio channels
-          (marked with [ENC]). Radio traffic is delayed 30-35 minutes.
-          CrimeIsDown.com has no control over these streams and is not
+          Listen to encrypted radio channels using the Broadcastify.com links
+          below. Radio traffic is delayed 30-35 minutes. CrimeIsDown.com is not
           affiliated with Broadcastify.
         </p>
       </div>
       <div className="row">
         <div className="col-md-6">
           <fieldset id="streamlist">
-            <legend>Check the streams to play</legend>
-            <div className="stream-options mb-3">
+            <legend>Scanner feeds</legend>
+            <div className="stream-options scanner-feed-list mb-3">
               {loading ? (
                 <p>Loading...</p>
               ) : streams.length ? (
-                streams.map((s) => (
-                  <div className="form-check" key={s.slug}>
+                streams.map((s) => s.broadcastifyId ? (
+                  <div className="scanner-feed-row" key={s.slug}>
+                    <a
+                      className="scanner-feed-name"
+                      href={`https://www.broadcastify.com/listen/feed/${s.broadcastifyId}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {(s.shortname ?? s.name).replace(" [ENC]", "")}
+                      <svg className="cid-icon scanner-external-icon" aria-hidden="true"><use href="#cid-Link" /></svg>
+                    </a>{" "}
+                    <a
+                      className="scanner-archive-link"
+                      href={`/audio/live/${s.slug}`}
+                      aria-label={`Archive for ${s.shortname ?? s.name}`}
+                      title={`View archive for ${s.shortname ?? s.name}`}
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 3h18v4H3zM5 7v14h14V7M10 11h4" />
+                      </svg>
+                    </a>
+                  </div>
+                ) : (
+                  <div className="scanner-feed-row" key={s.slug}>
                     <input
                       className="form-check-input"
                       type="checkbox"
@@ -112,34 +133,22 @@ export default function VirtualScanner() {
                       onChange={(e) => toggle(s.slug, e.target.checked)}
                     />
                     <label
-                      className="form-check-label"
+                      className="form-check-label scanner-feed-name"
                       htmlFor={`checkbox-${s.slug}`}
                     >
                       {s.shortname ?? s.name}
                     </label>{" "}
                     <a
                       href={`/audio/live/${s.slug}`}
-                      target="_blank"
-                      title={`Listen to only ${s.shortname ?? s.name}`}
-                      rel="noreferrer"
+                      className="scanner-archive-link"
+                      aria-label={`Archive for ${s.shortname ?? s.name}`}
+                      title={`View archive for ${s.shortname ?? s.name}`}
                     >
-                      <svg className="cid-icon" aria-hidden="true">
-                        <use href="#cid-Link" />
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 3h18v4H3zM5 7v14h14V7M10 11h4" />
                       </svg>
                     </a>
-                    {s.broadcastify && (
-                      <a
-                        href={`https://www.broadcastify.com/listen/feed/${s.broadcastifyId}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <img
-                          className="bcfy-favicon"
-                          src="https://s.broadcastify.com/icons/favicon-96x96.png"
-                          alt="Broadcastify.com"
-                        />
-                      </a>
-                    )}
+
                   </div>
                 ))
               ) : (
@@ -230,7 +239,6 @@ export default function VirtualScanner() {
                   </p>
                   <LiveStreamPlayer
                     slug={slug}
-                    broadcastify={s.broadcastify}
                     autoplay
                     context={context.current}
                     onLevel={(level) => {

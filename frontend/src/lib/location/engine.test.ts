@@ -22,6 +22,17 @@ describe("Ember map lookup compatibility", () => {
     expect(result.ems?.nearestTraumaAdult?.name).toBe("University of Chicago Medical Center");
   });
 
+  it("can use the local Photon provider with the same Chicago channel datasets", async () => {
+    vi.stubGlobal("fetch", vi.fn(async () => Response.json({features:[{
+      geometry:{type:"Point",coordinates:[-87.62412,41.83055]},
+      properties:{name:"Police Headquarters",housenumber:"3510",street:"South Michigan Avenue",city:"Chicago"},
+    }]})));
+    const result = await lookupLocationContext({...request,q:"3510 South Michigan Avenue local integration",googleGeocodingKey:undefined,geocodingProvider:"photon"});
+    expect(result.meta.inChicago).toBe(true);
+    expect(result.police?.zone?.num).toBe("7");
+    expect(result.fire?.channel).toBe("Englewood");
+  });
+
   it("turns apparatus aliases into the same station address used by Ember", async () => {
     const fetcher = vi.fn(async (_input: RequestInfo | URL) => Response.json({ status: "OK", results: [headquarters] }));
     vi.stubGlobal("fetch", fetcher);

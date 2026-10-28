@@ -180,3 +180,10 @@ fieldset .talkgroup-list {
 #option-buttons .btn { white-space: nowrap; }
 #option-buttons label:has(input:checked) { color: var(--bs-white); background: var(--bs-primary); }
 [data-transcript-search][data-demo="true"] #transcript-hits { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Ctext transform='translate(20,100) rotate(-30)' fill='rgba(45,45,45,0.08)' font-size='32' font-family='Arial,Helvetica,sans-serif'%3EDEMO%3C/text%3E%3C/svg%3E") repeat; }
+
+@media (max-width: 767px) {
+  .ais-CurrentRefinements-list { display: flex; flex-wrap: wrap; gap: .5rem; max-width: 100%; }
+  .ais-CurrentRefinements-item { flex-wrap: wrap; gap: .25rem .5rem; max-width: 100%; margin: 0; }
+  .ais-CurrentRefinements-category { max-width: 100%; }
+  .ais-CurrentRefinements-categoryLabel { overflow-wrap: anywhere; }
+}

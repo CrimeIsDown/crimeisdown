@@ -123,22 +123,23 @@ export async function mountTranscriptSearch() {
       credentials: "include",
       headers: { ...headers, ...options.headers },
     });
-  let key = config.MEILISEARCH_KEY;
+  const explicitDemo = transcriptIndex(window.location.search, "") === "calls_demo";
+  let key = explicitDemo ? config.MEILISEARCH_DEMO_KEY : config.MEILISEARCH_KEY;
   let paid = false;
   try {
-    const user = await request("/api/user");
-    const account = user.ok ? await user.json() : null;
+    const user = explicitDemo ? null : await request("/api/user");
+    const account = user?.ok ? await user.json() : null;
     const features = account?.patreon_tier?.features || {};
     root.querySelector<HTMLElement>("[data-search-notifications]")!.hidden =
       !features.transcript_notifications;
-    if (!key && account) {
+    if (!explicitDemo && !key && account) {
       const response = await request("/api/search-key");
       if (response.ok) {
         key = (await response.json()).meilisearch;
         paid = true;
       } else if (response.status !== 403)
         throw new Error("Could not load your search key. Please try again.");
-    } else if (key) paid = true;
+    } else if (key && !explicitDemo) paid = true;
     const mapAccess = !onMap || features.transcript_geosearch;
     if (!mapAccess) {
       paid = false;
@@ -148,11 +149,13 @@ export async function mountTranscriptSearch() {
     if (!paid) {
       key = config.MEILISEARCH_DEMO_KEY;
       notice.hidden = false;
-      status.textContent = account
+      status.textContent = explicitDemo
+        ? "Try searching these channels using historical sample recordings. Unlock current scanner transcripts with a qualifying Patreon membership."
+        : account
         ? `You are currently using a demo version with old transmissions. To search the latest scanner traffic, please upgrade your membership on Patreon to the ${onMap ? "Captain ($20/mo)" : "Sergeant ($5/mo)"} tier or above to access.`
         : "You are currently using a demo version with old transmissions. To search the latest scanner traffic, become a patron of at least $5/mo and then ";
     }
-    if (!key) return;
+    if (!key) throw new Error("Sample transcript search is temporarily unavailable. Please try again later.");
     login.hidden = Boolean(account);
     root.querySelector<HTMLElement>("[data-search-login-suffix]")!.hidden = Boolean(account);
     root.querySelector<HTMLElement>("[data-search-become]")!.hidden = Boolean(account);
@@ -166,11 +169,7 @@ export async function mountTranscriptSearch() {
       window.location.search,
       currentIndex,
     );
-    const index = paid
-      ? requestedIndex === "calls_demo"
-        ? currentIndex
-        : requestedIndex
-      : "calls_demo";
+    const index = paid ? requestedIndex : "calls_demo";
     if (requestedIndex !== index && window.location.search) {
       window.history.replaceState(
         window.history.state,
@@ -181,6 +180,12 @@ export async function mountTranscriptSearch() {
           index,
         ).href,
       );
+    }
+    const demoOffer = root.querySelector<HTMLElement>("[data-search-demo-offer]")!;
+    demoOffer.hidden = !explicitDemo;
+    if (explicitDemo) {
+      notice.hidden = true;
+      root.querySelector<HTMLElement>("[data-save-search-button]")!.hidden = true;
     }
     const search = instantsearch({
       indexName: index,

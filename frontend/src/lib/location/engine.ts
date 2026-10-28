@@ -2,6 +2,7 @@ import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point } from "@turf/helpers";
 import type { FeatureCollection, MultiPolygon, Polygon } from "geojson";
 
+import { geocodeWithPhoton } from "./photon";
 import { POLICE_AREAS, POLICE_ZONES } from "@/lib/location/constants";
 import { loadLookupDatasets } from "@/lib/location/data";
 import type {
@@ -160,7 +161,8 @@ function findArea(district?: string) {
   return undefined;
 }
 
-async function geocodeLocation(query: string | Coordinate, key?: string): Promise<GeocodeResult> {
+async function geocodeLocation(query: string | Coordinate, key?: string, provider: "google" | "photon" = "google"): Promise<GeocodeResult> {
+  if (provider === "photon") return geocodeWithPhoton(query);
   if (!key) throw new Error("Location search is temporarily unavailable. Please try again.");
   const url = new URL("https://maps.googleapis.com/maps/api/geocode/json");
   url.searchParams.set("key", key);
@@ -218,6 +220,7 @@ export async function lookupLocationContext({
   lng,
   assetText,
   googleGeocodingKey,
+  geocodingProvider,
 }: LookupRequest): Promise<LocationContextResult> {
   const datasets = await loadLookupDatasets(
     assetText ?? createHttpAssetTextFetcher(origin),
@@ -228,9 +231,9 @@ export async function lookupLocationContext({
   if (q?.trim()) {
     const station = findStation(q, datasets.fireStations);
     if (station) q = `${station.addr} ${station.zip}`;
-    resolved = await geocodeLocation(q, googleGeocodingKey);
+    resolved = await geocodeLocation(q, googleGeocodingKey, geocodingProvider);
   } else if (lat !== undefined && lng !== undefined && Number.isFinite(lat) && Number.isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180) {
-    resolved = await geocodeLocation({ lat, lng }, googleGeocodingKey);
+    resolved = await geocodeLocation({ lat, lng }, googleGeocodingKey, geocodingProvider);
   } else {
     throw new Error("A query or valid coordinates are required.");
   }

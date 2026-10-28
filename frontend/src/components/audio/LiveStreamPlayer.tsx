@@ -15,7 +15,6 @@ type Player = {
 };
 type Props = {
   slug: string;
-  broadcastify?: string | null;
   autoplay?: boolean;
   onPanner?: (panner: PannerNode | null) => void;
   context?: AudioContext;
@@ -23,7 +22,6 @@ type Props = {
 };
 export default function LiveStreamPlayer({
   slug,
-  broadcastify,
   autoplay = false,
   context,
   onPanner,
@@ -51,7 +49,7 @@ export default function LiveStreamPlayer({
       const nativeHls = Boolean(
         audio.canPlayType("application/vnd.apple.mpegurl"),
       );
-      if (!broadcastify && !nativeHls)
+      if (!nativeHls)
         (window as unknown as { dashjs: unknown }).dashjs = await import(
           "dashjs"
         );
@@ -69,7 +67,7 @@ export default function LiveStreamPlayer({
         pauseOtherPlayers: false,
         features: ["playpause", "current", "volume"],
         iconSprite: "/img/mejs-controls.svg",
-        renderers: broadcastify || nativeHls ? ["html5"] : ["native_dash"],
+        renderers: nativeHls ? ["html5"] : ["native_dash"],
         success(media: Media) {
           const connect = () => {
             if (!context || source || disposed) return;
@@ -110,15 +108,12 @@ export default function LiveStreamPlayer({
       });
       player.setSrc({
         src:
-          broadcastify ||
-          (nativeHls
+          nativeHls
             ? `https://audio.crimeisdown.com/streaming/hls/${encodeURIComponent(slug)}/index.m3u8`
-            : `https://audio.crimeisdown.com/streaming/dash/${encodeURIComponent(slug)}/`),
-        type: broadcastify
-          ? "audio/mpeg"
-          : nativeHls
-            ? "application/vnd.apple.mpegurl"
-            : "application/dash+xml",
+            : `https://audio.crimeisdown.com/streaming/dash/${encodeURIComponent(slug)}/`,
+        type: nativeHls
+          ? "application/vnd.apple.mpegurl"
+          : "application/dash+xml",
       });
       if (autoplay) {
         player.load();
@@ -141,7 +136,7 @@ export default function LiveStreamPlayer({
       audio.load();
       container.replaceChildren();
     };
-  }, [slug, broadcastify, autoplay, context]);
+  }, [slug, autoplay, context]);
   return (
     <>
       <div ref={host} />

@@ -1,5 +1,6 @@
-"""Loopback-only, isolated API startup demonstration; never a production entrypoint."""
+"""Isolated local API demonstration, listening on loopback unless explicitly shared."""
 
+import argparse
 import os
 import sqlite3
 import sys
@@ -11,6 +12,12 @@ sys.path.insert(0, str(ROOT / "backend"))
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument("--app-url", help="Browser-visible API URL when sharing over a LAN")
+    parser.add_argument("--frontend-origin", action="append", default=[], help="Additional frontend origin allowed to call this demo API")
+    args = parser.parse_args()
     if os.environ.get("CID_DEMO") != "1":
         raise SystemExit(
             "Explicitly set CID_DEMO=1 to start the isolated local demonstration."
@@ -34,7 +41,7 @@ def main():
             database_url="sqlite:///" + str(path),
             app_key="base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
             app_name="CrimeIsDown local demo",
-            app_url="http://localhost:8000",
+            app_url=args.app_url or f"http://localhost:{args.port}",
             session_secure_cookie=False,
             session_domain=None,
             legacy_session_redis_url=None,
@@ -48,7 +55,7 @@ def main():
             smtp_host="",
             patreon_client_id="",
             patreon_client_secret="",
-            cors_origins="http://localhost:4321,http://127.0.0.1:4321,http://localhost:5173",
+            cors_origins=",".join(["http://localhost:4321", "http://127.0.0.1:4321", "http://localhost:5173", *args.frontend_origin]),
         )
 
         # The demonstration cannot forward requests to live providers.
@@ -72,7 +79,7 @@ def main():
                 enqueue=lambda _export_id: None,
             )
             try:
-                uvicorn.run(app, host="127.0.0.1", port=8000)
+                uvicorn.run(app, host=args.host, port=args.port)
             finally:
                 database.engine.dispose()
 

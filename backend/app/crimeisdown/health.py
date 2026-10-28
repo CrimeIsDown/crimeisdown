@@ -4,21 +4,13 @@ from typing import Any
 
 import httpx
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import PlainTextResponse, RedirectResponse
+from fastapi.responses import PlainTextResponse
 
 
 def register_health(app: FastAPI, services: Any) -> Any:
     @app.get("/api/healthz")
     def healthz() -> dict[str, str]:
         return {"status": "ok"}
-
-    @app.get("/api/broadcastify-stream/{feed_id}")
-    def broadcastify(feed_id: str) -> Any:
-        return RedirectResponse(
-            services.broadcastify(feed_id),
-            status_code=302,
-            headers={"Access-Control-Allow-Origin": "*"},
-        )
 
     @app.get("/api/search-health")
     def search_health(request: Request) -> Any:

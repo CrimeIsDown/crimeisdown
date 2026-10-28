@@ -39,6 +39,12 @@ const { map = false } = Astro.props;
     </div>
   </aside><section class="search-panel__results col" aria-label="Transcript results">
     <div id="search-settings" class="collapse mb-1"><label class="mb-2">Archive month<input class="form-control" type="month" min="2023-01" data-search-month /></label><div class="form-check form-switch mt-2 mb-1"><input class="form-check-input" type="checkbox" role="switch" id="waveform-toggle" /><label class="form-check-label" for="waveform-toggle">Show waveform when playing audio</label></div></div>
+    <div class="alert alert-info" data-search-demo-offer hidden>
+      <h2 class="h5">Find the call without replaying the whole feed.</h2>
+      <p>Try a keyword, street name, or phrase to see how transcript search works. This free preview uses historical recordings from your selected channels.</p>
+      <a class="btn btn-primary" href="https://www.patreon.com/EricTendian" target="_blank" rel="noopener noreferrer">Search current traffic with Patreon</a>
+      <p class="small mt-2 mb-0">Choose a Patreon tier with transcript-search access. AI transcripts can contain errors.</p>
+    </div>
     <div id="transcript-current" class="mt-2"></div><div id="transcript-stats" class="mb-1" role="status"></div>
     {map && <><h5>Experimental map of radio calls</h5><p class="text-danger" data-map-membership hidden>Sorry, you must be at the Captain tier or above on Patreon to access the map of calls (currently an experimental feature).</p><div id="geo-search" class="ais-GeoSearch-map mb-1"></div></>}
     <div id="transcript-hits"></div><div id="transcript-pagination" class="mt-3"></div>

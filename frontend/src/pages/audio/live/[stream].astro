@@ -26,9 +26,9 @@ if (!stream) {
         ) : (
           <h1>{stream.slug}</h1>
         )}
-        {stream.broadcastify ? (
+        {stream.broadcastifyId ? (
           <div class="alert alert-warning" role="alert">
-            This feed is hosted by Broadcastify.com, as it is of an encrypted radio channel. Radio traffic is delayed 30-35 minutes. CrimeIsDown.com has no control over these streams and is not affiliated with Broadcastify.
+            Listen to this encrypted radio channel on Broadcastify.com. Radio traffic is delayed 30-35 minutes. CrimeIsDown.com is not affiliated with Broadcastify.
             {" "}
             {stream.broadcastifyId ? (
               <a href={`https://www.broadcastify.com/listen/feed/${stream.broadcastifyId}`} target="_blank" rel="noopener noreferrer">
@@ -38,7 +38,7 @@ if (!stream) {
           </div>
         ) : null}
 
-        {stream.slug === "cpd_zone_scan" ? (
+        {stream.broadcastifyId ? null : stream.slug === "cpd_zone_scan" ? (
           <iframe
             id="youtube-player"
             title="YouTube scanner feed"
@@ -47,7 +47,7 @@ if (!stream) {
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
           ></iframe>
-        ) : <LiveStreamPlayer client:only="react" slug={stream.slug} broadcastify={stream.broadcastify} autoplay={autoplay} />}
+        ) : <LiveStreamPlayer client:only="react" slug={stream.slug} autoplay={autoplay} />}
 
 
         {stream.openmhz ? (

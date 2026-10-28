@@ -30,6 +30,7 @@ export const GET: APIRoute = async ({ request, url }) => {
       lat,
       lng,
       assetText,
+      geocodingProvider: env.GEOCODING_PROVIDER === "photon" ? "photon" : "google",
       googleGeocodingKey: typeof env.GOOGLE_GEOCODING_API_KEY === "string" ? env.GOOGLE_GEOCODING_API_KEY : undefined,
     });
 

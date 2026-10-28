@@ -1,10 +1,8 @@
 import hashlib
 import json
-import re
 import uuid
 from datetime import UTC, datetime, timedelta
 from typing import Any
-from urllib.parse import urlparse
 
 import httpx
 from fastapi import HTTPException
@@ -364,31 +362,3 @@ class Services:
             else:
                 entry["channels"].extend(channels)
         return config
-
-    def broadcastify(self, feed_id: Any) -> Any:
-        if not str(feed_id).isdigit():
-            raise HTTPException(404, "Not Found")
-        key = "broadcastify-hls-" + str(feed_id)
-        cached = self.state.get(key)
-        if cached:
-            return cached
-        response = self.http.get(
-            "https://www.broadcastify.com/listen/feed/" + str(feed_id),
-            headers={"User-Agent": "CrimeIsDown/1.0"},
-        )
-        response.raise_for_status()
-        match = re.search(r'hlsUrl:\s*"((?:\\.|[^"\\])+)"', response.text)
-        try:
-            value = json.loads('"' + match[1] + '"') if match else ""
-            parsed = urlparse(value)
-            valid = (
-                parsed.scheme == "https"
-                and (parsed.hostname or "").endswith(".broadcastify.com")
-                and parsed.path.endswith(".m3u8")
-            )
-        except ValueError, AttributeError:
-            valid = False
-        if not valid:
-            raise HTTPException(404, "Could not find Broadcastify stream URL")
-        self.state.set(key, value, 3600)
-        return value

@@ -24,6 +24,13 @@ CID_DEMO=1 uv run --package app python scripts/dev-api.py
 PUBLIC_API_BASE_URL=http://localhost:8000 npm run dev
 ```
 
+To share the local preview with another machine, start the demo API with
+`--host 0.0.0.0 --app-url http://YOUR_LAN_IP:8000 --frontend-origin http://YOUR_LAN_IP:4321`.
+Set `PUBLIC_API_BASE_URL=http://YOUR_LAN_IP:8000` in the ignored
+`frontend/.env.local`, then rebuild/restart the frontend. The startup script still
+uses loopback by default. Account endpoints require authentication; a signed-out
+local account check returns 401, just as it does on the deployed API.
+
 The development API uses an empty application schema and blocks outbound provider
 calls. It demonstrates startup and logged-out behavior; authenticated scenarios
 are covered by synthetic fixtures and mocked providers in the tests. Public map

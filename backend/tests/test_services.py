@@ -127,7 +127,7 @@ def test_patreon_refresh_preserves_account_and_entitlements(pair):
     assert "patreon_token" not in result
 
 
-def test_talkgroups_and_health_and_broadcastify(pair):
+def test_talkgroups_and_health(pair):
     _, app, client, *_ = pair
 
     def upstream(req):
@@ -151,10 +151,6 @@ def test_talkgroups_and_health_and_broadcastify(pair):
                     ]
                 },
             )
-        if req.url.host == "www.broadcastify.com":
-            return httpx.Response(
-                200, text='hlsUrl: "https://audio.broadcastify.com/feed/1.m3u8"'
-            )
         if req.url.host == "api.openmhz.com":
             return httpx.Response(
                 200,
@@ -175,23 +171,12 @@ def test_talkgroups_and_health_and_broadcastify(pair):
     result = client.get("/api/searchTalkgroups", headers=bearer()).json()
     assert result[0]["talkgroups"][0]["talkgroups"][0]["value"] == "1@chi_cpd"
     assert client.get("/api/search-health?engine=meilisearch").text == "42"
-    assert (
-        client.get("/api/broadcastify-stream/1").headers["location"]
-        == "https://audio.broadcastify.com/feed/1.m3u8"
-    )
     assert client.get("/api/openmhz-health/chi_cpd").status_code == 404
     assert client.get("/api/livestream-health").text == "Livestream online"
 
 
-def test_stream_rejects_untrusted_redirects_and_oauth_rejects_state(pair):
-    _, app, client, *_ = pair
-    transport(
-        app,
-        lambda req: httpx.Response(
-            200, text='hlsUrl: "https://broadcastify.com.attacker.example/feed.m3u8"'
-        ),
-    )
-    assert client.get("/api/broadcastify-stream/2").status_code == 404
+def test_oauth_rejects_forged_state(pair):
+    _, _, client, *_ = pair
     assert client.get("/auth/callback?state=forged&code=anything").status_code == 400
 
 

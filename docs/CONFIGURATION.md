@@ -50,3 +50,62 @@ Build the API from the repository root with `docker build -f backend/Dockerfile 
 For the website, build `frontend/dist` first, then use `frontend/Dockerfile` with
 `frontend` as its build context. Production inventory and deployment runbooks
 are maintained outside this repository.
+
+### Homepage transcript preview
+
+The homepage address form uses the browser Places autocomplete key above and
+`/api/location-context`, the same server-side lookup as the Chicago Map. The
+server Geocoding key must be available at runtime. City-boundary validation uses
+the map datasets; locations outside Chicago are rejected.
+
+Successful lookups open `/transcripts/search` with `calls_demo` refinements for
+the police zone and fire dispatch channel. Explicit demo links always use the
+public demo search key, including for signed-in members. Historical CFD channel
+names are included so recordings from older systems remain searchable. The
+preview is channel-based, not a search for incidents at the exact address.
+
+### Key-free local geocoding
+
+`npm run dev` uses Photon/OpenStreetMap for geocoding and homepage address
+suggestions by default, without Google keys. For a local production-build preview,
+run `GEOCODING_PROVIDER=photon npm --prefix frontend run preview -- --host 0.0.0.0`.
+Production builds default to Google; set `GEOCODING_PROVIDER=google` explicitly to
+use Google during development. The browser obtains the active provider from
+`/api/location-suggestions`, so no separate public provider setting is required.
+
+Photon requests are debounced and cached for local use. Its public demo server
+has no availability guarantee; see https://github.com/komoot/photon#demo-server.
+Address coverage differs from Google. Numbered-address lookups reject unmatched
+house numbers rather than assigning channels from a street midpoint. CrimeIsDown
+still uses its own Chicago boundary and channel datasets after geocoding. Demo
+transcript results continue to require `PUBLIC_MEILISEARCH_DEMO_KEY`.
+
+### Testing transcript conversion without Patreon
+
+The isolated API supports normal email/password registration at
+`http://YOUR_LAN_IP:8000/register`; it does not require a Patreon account. Users
+created there belong only to the temporary demo database and disappear when the
+local API stops.
+
+For repeatable search tests, `CID_DEMO=1 python3 scripts/seed-local-search.py`
+seeds a separate local Meilisearch with six clearly labeled synthetic calls. The
+loader only writes to a loopback URL and reads a local Meilisearch master key from
+`/tmp/cid-homepage-search.env` (override with `--env-file`). It writes only the
+search-only demo key and public search origin to the ignored `frontend/.env.local`.
+Use `--public-url http://YOUR_LAN_IP:7700` when testing from other machines, then
+rebuild the frontend. The demo key is scoped to `calls_demo` and cannot change
+settings or query monthly indexes. Synthetic calls have no audio attached.
+
+### Member searches and Sirens handoff
+
+Homepage account checks use `/api/user`. Visitors and users without transcript
+search access open `calls_demo`; eligible members open the current UTC monthly
+index with the same police-zone/fire-channel filters. Membership is still checked
+by the backend when the search page requests a private search key.
+
+The “Locate the sirens” link passes an editable question in a URL fragment. The
+Sirens client must support `#prompt=...`; it preserves that draft through sign-in
+and does not submit automatically. Production defaults to `https://sirens.app/`.
+Set `PUBLIC_SIRENS_URL` in the ignored frontend environment to test a separate
+local Sirens server. Deploy the Sirens receiver change before using prefilled
+questions on the public site.

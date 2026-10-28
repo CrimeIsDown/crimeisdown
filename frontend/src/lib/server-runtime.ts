@@ -1,5 +1,6 @@
 /** Server-only equivalent of the asset binding when hosted with @astrojs/node. */
 export const env = {
+  GEOCODING_PROVIDER: process.env.GEOCODING_PROVIDER || (import.meta.env.DEV ? "photon" : "google"),
   GOOGLE_GEOCODING_API_KEY: process.env.GOOGLE_GEOCODING_API_KEY,
   ASSETS: {
     fetch(input: Request | string): Promise<Response> {

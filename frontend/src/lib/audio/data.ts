@@ -7,7 +7,6 @@ export type AudioStream = {
   frequency: string;
   slug: string;
   openmhz?: string | null;
-  broadcastify?: string | null;
   broadcastifyId?: number | null;
 };
 

@@ -672,12 +672,22 @@ export function MapLookupApp({
                                 <>
                                   <strong>{result.police.zone.name}</strong>{result.police.zone.frequency ? ` (${result.police.zone.frequency})` : ""}<br />
                                   <p>{result.police.zone.description}</p>
-                                  <p>
-                                    <a className="btn btn-primary" href={`/audio/live/${result.police.zone.slug}`} title={`Listen to ${result.police.zone.name}`}>
-                                      Listen to CPD with Instant Replay
-                                    </a>
-                                  </p>
-                                  <LiveStreamPlayer key={`stream-${result.police.zone.slug}`} slug={result.police.zone.slug} broadcastify={result.police.zone.broadcastify} />
+                                  {result.police.zone.broadcastifyId ? (
+                                    <p>
+                                      <a className="btn btn-primary" href={`https://www.broadcastify.com/listen/feed/${result.police.zone.broadcastifyId}`} target="_blank" rel="noreferrer">
+                                        Listen on Broadcastify.com
+                                      </a>
+                                    </p>
+                                  ) : (
+                                    <>
+                                      <p>
+                                        <a className="btn btn-primary" href={`/audio/live/${result.police.zone.slug}`} title={`Listen to ${result.police.zone.name}`}>
+                                          Listen to CPD with Instant Replay
+                                        </a>
+                                      </p>
+                                      <LiveStreamPlayer key={`stream-${result.police.zone.slug}`} slug={result.police.zone.slug} />
+                                    </>
+                                  )}
                                   <h5><strong>Search the audio archive</strong></h5>
                                   {result.police.district === "2" ? (
                                     <p className="mb-0"><small><sup>*</sup>The 2nd district switched to Zone 7 on June 30, 2022.</small></p>
