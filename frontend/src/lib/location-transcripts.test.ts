@@ -20,10 +20,12 @@ describe("homepage location transcript demo", () => {
     const result = locationTranscriptSearch(location);
     const url = new URL(result.href, "https://example.test");
     expect(url.pathname).toBe("/transcripts/search");
-    expect(result.label).toBe("CPD Zone 8 and CFD Fire Englewood");
-    expect(url.searchParams.get("calls_demo[refinementList][talkgroup_tag][0]")).toBe("Chi PD Zone 8");
-    expect(url.searchParams.get("calls_demo[refinementList][talkgroup_tag][1]")).toBe("CFD Fire Englewd");
-    expect(url.searchParams.get("calls_demo[refinementList][talkgroup_tag][3]")).toBe("CFD Fire S");
+    expect(result.label).toBe("CPD Zone 8 and CFD Fire/EMS South");
+    expect(url.searchParams.get("calls_demo[refinementList][talkgroup][0]")).toBe("8");
+    expect(url.searchParams.get("calls_demo[refinementList][talkgroup][1]")).toBe("1022");
+    expect(url.searchParams.get("calls_demo[refinementList][talkgroup][2]")).toBe("1024");
+    expect([...url.searchParams.values()]).not.toContain("chi_cfd");
+    expect([...url.searchParams.keys()].some(key => key.includes("talkgroup_tag"))).toBe(false);
     expect([...url.searchParams.keys()].every(key => key.startsWith("calls_demo["))).toBe(true);
     expect(result.href).not.toContain("geoSearch");
   });
@@ -36,16 +38,14 @@ describe("homepage location transcript demo", () => {
     expect(() => locationTranscriptSearch({ meta: { inChicago: true }, police: {} } as LocationContextResult)).toThrow("both radio channels");
   });
 
-  it("selects northern fire aliases without including southern channels", () => {
+  it("selects north OEMC fire and EMS talkgroups without the conventional CFD patch", () => {
     const result = locationTranscriptSearch({
       meta: { inChicago: true },
       police: { zone: { num: "2" } },
       fire: { channel: "Main" },
     } as LocationContextResult);
     const values = [...new URL(result.href, "https://example.test").searchParams.values()];
-    expect(values).toContain("Chi PD Zone 2");
-    expect(values).toContain("CFD Fire Main");
-    expect(values).toContain("CFD Fire N");
-    expect(values).not.toContain("CFD Fire S");
+    expect(values).toEqual(["calls_demo:start_time:desc", "chi_cpd", "chi_oemc", "2", "1021", "1023"]);
+    expect(result.label).toBe("CPD Zone 2 and CFD Fire/EMS North");
   });
 });

@@ -17,7 +17,8 @@ describe("membership-aware homepage search", () => {
     const result=locationTranscriptSearch({meta:{inChicago:true},police:{zone:{num:"8"}},fire:{channel:"Englewood"}} as LocationContextResult,mode.index);
     const params=new URL(result.href,"https://example.test").searchParams;
     expect([...params.keys()].every(key=>key.startsWith("calls_2026_11["))).toBe(true);
-    expect(params.get("calls_2026_11[refinementList][talkgroup_tag][0]")).toBe("Chi PD Zone 8");
+    expect(params.get("calls_2026_11[refinementList][talkgroup][0]")).toBe("8");
+    expect(params.get("calls_2026_11[refinementList][talkgroup][2]")).toBe("1024");
   });
   it("builds an encoded draft fragment without transmitting the address in query parameters", () => {
     const url=new URL(sirensPrefillUrl("83rd & Stony Island, Chicago"));

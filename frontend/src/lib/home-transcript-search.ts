@@ -102,7 +102,7 @@ export function mountHomeTranscriptSearch() {
     form.setAttribute("aria-busy", "true");
     status.hidden = false;
     status.className = "";
-    status.textContent = "Finding your police zone and fire channel…";
+    status.textContent = "Finding your police zone and fire/EMS channels…";
     try {
       const url = new URL("/api/location-context", window.location.origin);
       if (selected) {

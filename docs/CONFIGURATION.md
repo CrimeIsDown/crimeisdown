@@ -60,9 +60,10 @@ server Geocoding key must be available at runtime. City-boundary validation uses
 the map datasets; locations outside Chicago are rejected.
 
 Successful lookups open `/transcripts/search` with `calls_demo` refinements for
-the police zone and fire dispatch channel. Explicit demo links always use the
-public demo search key, including for signed-in members. Historical CFD channel
-names are included so recordings from older systems remain searchable. The
+the police zone and OEMC fire/EMS talkgroups: 1021/1023 for north and 1022/1024
+for south. Searches include `chi_cpd` and `chi_oemc`; `chi_cfd` is excluded because
+it patches OEMC and duplicates its traffic. Explicit demo links always use the
+public demo search key, including for signed-in members. The
 preview is channel-based, not a search for incidents at the exact address.
 
 Configure the demo key in the private production `frontend-build.env` before
@@ -95,7 +96,7 @@ created there belong only to the temporary demo database and disappear when the
 local API stops.
 
 For repeatable search tests, `CID_DEMO=1 python3 scripts/seed-local-search.py`
-seeds a separate local Meilisearch with six clearly labeled synthetic calls. The
+seeds a separate local Meilisearch with eight clearly labeled synthetic calls. The
 loader only writes to a loopback URL and reads a local Meilisearch master key from
 `/tmp/cid-homepage-search.env` (override with `--env-file`). It writes only the
 search-only demo key and public search origin to the ignored `frontend/.env.local`.

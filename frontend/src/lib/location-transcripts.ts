@@ -1,6 +1,7 @@
 import type { LocationContextResult } from "./location/types";
+import { audioStreams } from "./audio/data";
 
-/** Use the same channel assignments as the map, including historical CFD names. */
+/** Search original CPD/OEMC channels; the conventional CFD system duplicates OEMC. */
 export function locationTranscriptSearch(location: LocationContextResult, index = "calls_demo") {
   if (index !== "calls_demo" && !/^calls_\d{4}_\d{2}$/.test(index)) throw new Error("Invalid transcript index");
   if (!location.meta.inChicago) {
@@ -11,18 +12,19 @@ export function locationTranscriptSearch(location: LocationContextResult, index 
   if (!zone || !/^(?:[1-9]|1[0-3])$/.test(zone) || !["Main", "Englewood"].includes(fire || "")) {
     throw new Error("We couldn’t identify both radio channels for that address. Try a more specific Chicago street address.");
   }
-  const tags = [
-    `Chi PD Zone ${zone}`,
-    ...(fire === "Englewood"
-      ? ["CFD Fire Englewd", "CFD Fire Engwd", "CFD Fire S"]
-      : ["CFD Fire Main", "CFD Fire N"]),
-  ];
+  const policeFeed = audioStreams.find(stream => stream.slug === `zone${zone}`);
+  const policeTalkgroup = policeFeed?.openmhz
+    ? new URL(policeFeed.openmhz).searchParams.get("filter-code") : null;
+  if (!policeTalkgroup || !/^\d+$/.test(policeTalkgroup)) {
+    throw new Error("We couldn’t identify the police talkgroup for that address. Please try again.");
+  }
+  const talkgroups = [policeTalkgroup, ...(fire === "Englewood" ? ["1022", "1024"] : ["1021", "1023"])];
   const params = new URLSearchParams({
     [`${index}[sortBy]`]: `${index}:start_time:desc`,
   });
   for (const [attribute, values] of Object.entries({
-    short_name: ["chi_cpd", "chi_oemc", "chi_cfd"],
-    talkgroup_tag: tags,
+    short_name: ["chi_cpd", "chi_oemc"],
+    talkgroup: talkgroups,
   })) {
     values.forEach((value, position) => {
       params.set(`${index}[refinementList][${attribute}][${position}]`, value);
@@ -30,6 +32,6 @@ export function locationTranscriptSearch(location: LocationContextResult, index 
   }
   return {
     href: `/transcripts/search?${params}`,
-    label: `CPD Zone ${zone} and CFD Fire ${fire}`,
+    label: `CPD Zone ${zone} and CFD Fire/EMS ${fire === "Englewood" ? "South" : "North"}`,
   };
 }

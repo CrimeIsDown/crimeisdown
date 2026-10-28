@@ -9,10 +9,10 @@ export function homeSearchContext(account: HomeSearchAccount, now = new Date()) 
     heading: paid ? "Search your local radio channels" : "Start with your part of Chicago",
     button: paid ? "Search transcripts" : "See sample transcripts",
     help: paid
-      ? "We’ll find the police zone and fire channel covering your address, then open their current transcripts."
+      ? "We’ll find the police zone and fire/EMS channels covering your address, then open their current transcripts."
       : account
-        ? "Explore sample transcripts from the police and fire channels covering your address. A Patreon tier with transcript search adds access to current traffic."
-        : "We’ll find the police and fire channels covering your address and open sample transcripts. Free to try, no account needed.",
+        ? "Explore sample transcripts from the police, fire, and EMS channels covering your address. A Patreon tier with transcript search adds access to current traffic."
+        : "We’ll find the police, fire, and EMS channels covering your address and open sample transcripts. Free to try, no account needed.",
     limits: paid ? "Chicago addresses only. CPD zone traffic is delayed 30–35 minutes." : "Historical recordings · Chicago addresses only.",
   };
 }
