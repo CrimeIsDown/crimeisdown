@@ -10,6 +10,11 @@ enter its tag. Tags use `vMAJOR.MINOR` or `vMAJOR.MINOR.PATCH`. Draft and
 prerelease releases are not eligible. The server rechecks the tag and commit
 before building, so moving a tag cannot silently change an approved deployment.
 
+Deploying the currently active commit only rechecks health; it does not rebuild
+images or take a new configuration snapshot. Changes to frontend build settings
+therefore require a release at a new commit. Update the private settings before
+publishing that release, and verify the affected public feature after deployment.
+
 ## Private deployment boundary
 
 GitHub holds only environment-scoped SSH connection credentials: `DEPLOY_HOST`,

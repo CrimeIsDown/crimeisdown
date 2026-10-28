@@ -33,7 +33,8 @@ Set these during the Astro build:
 - `PUBLIC_GOOGLE_MAPS_API_KEY`: restricted browser Maps/Places key.
 - `PUBLIC_MAPBOX_ACCESS_TOKEN`: restricted public Mapbox token.
 - `PUBLIC_MEILISEARCH_URL` and `PUBLIC_MEILISEARCH_DEMO_KEY`: search origin and
-  an optional search-only credential restricted to the public demo index.
+  a search-only credential restricted to `calls_demo`, required for the public
+  homepage transcript preview.
 - `PUBLIC_DOORBELL_APP_ID` and `PUBLIC_DOORBELL_API_KEY`: optional feedback widget.
 - `PUBLIC_HOTJAR_SITE_ID`: optional analytics site identifier.
 
@@ -63,6 +64,12 @@ the police zone and fire dispatch channel. Explicit demo links always use the
 public demo search key, including for signed-in members. Historical CFD channel
 names are included so recordings from older systems remain searchable. The
 preview is channel-based, not a search for incidents at the exact address.
+
+Configure the demo key in the private production `frontend-build.env` before
+building a release. Use the existing demo index through the public search router;
+monthly archive hosts may not contain `calls_demo`. Confirm the credential can
+search that index and is denied access to monthly indexes and index settings.
+Never embed an administrator key or use local synthetic data in production.
 
 ### Key-free local geocoding
 
