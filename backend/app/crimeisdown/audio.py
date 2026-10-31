@@ -52,6 +52,26 @@ def buckets(start: Any, end: Any) -> Any:
         cursor += timedelta(hours=1)
 
 
+def recording_sources(storage: Any, prefix: str) -> list[str]:
+    """Archive hours also contain metadata sidecars, which are not audio."""
+    sources = []
+    for source in storage.listing("recordings", prefix):
+        path = Path(source)
+        if path.suffix.lower() == ".xz":
+            path = path.with_suffix("")
+        if path.suffix.lower() in {
+            ".mp3",
+            ".wav",
+            ".m4a",
+            ".aac",
+            ".ogg",
+            ".flac",
+            ".opus",
+        }:
+            sources.append(source)
+    return sources
+
+
 def convert(source: Any, target: Any, *, concat: Any = False) -> Any:
     args = ["ffmpeg", "-hide_banner", "-loglevel", "warning", "-y"]
     if concat:
@@ -146,8 +166,8 @@ def build_export(db: Any, services: Any, storage: Any, export_id: Any) -> Any:
                 root = Path(directory)
                 files = []
                 for hour in buckets(start, end):
-                    sources = storage.listing(
-                        "recordings",
+                    sources = recording_sources(
+                        storage,
                         source_prefix(record["feed"], hour, record["broadcastify"]),
                     )
                     if not sources:
@@ -281,7 +301,7 @@ def register_audio(app: FastAPI, db: Any, services: Any) -> Any:
             prefix = ("broadcastify/" if broadcastify else "") + hour.strftime(
                 "%Y/%m/%d/%H/"
             )
-        files = storage.listing("recordings", prefix)
+        files = recording_sources(storage, prefix)
         if not files:
             raise HTTPException(404, "Could not find recording")
         return {"count": len(files), "files": files}
@@ -329,8 +349,8 @@ def register_audio(app: FastAPI, db: Any, services: Any) -> Any:
         if cached:
             destination = cached[0]
         else:
-            sources = storage.listing(
-                "recordings", source_prefix(feed, hour, broadcastify)
+            sources = recording_sources(
+                storage, source_prefix(feed, hour, broadcastify)
             )
             if not sources:
                 return HTMLResponse(

@@ -1,6 +1,8 @@
 import subprocess
 from datetime import datetime, timedelta
 
+import pytest
+
 from app.crimeisdown.audio import LOCAL, buckets, build_export, cleanup, source_prefix
 
 from .conftest import NOW, bearer
@@ -247,3 +249,91 @@ def test_xz_recordings_are_decompressed_and_converted(pair, tmp_path):
     )
     output = download_mp3(app.state.storage, "sample.wav.xz", tmp_path)
     assert output.suffix == ".mp3" and output.stat().st_size > 1024
+
+
+def broadcastify_hour(storage, hour, tmp_path, suffix=".mp3"):
+    import lzma
+
+    from app.crimeisdown.audio import convert
+
+    prefix = f"broadcastify/2026/10/31/{hour:02d}/zone7_20261031_{hour:02d}0000"
+    fixture_audio(storage, prefix + ".wav", tmp_path)
+    wav = storage.path("recordings", prefix + ".wav")
+    mp3 = tmp_path / "recording.mp3"
+    convert(wav, mp3)
+    if suffix.endswith(".xz"):
+        compressed = tmp_path / ("recording" + suffix)
+        compressed.write_bytes(
+            lzma.compress((wav if suffix == ".wav.xz" else mp3).read_bytes())
+        )
+        storage.upload("recordings", prefix + suffix, compressed)
+    else:
+        storage.upload("recordings", prefix + suffix, mp3)
+    wav.unlink()
+    metadata = storage.path("recordings", prefix + ".json")
+    metadata.write_text('{"feed": "zone7", "segments": []}')
+    metadata.with_suffix(".json.xz").write_bytes(lzma.compress(metadata.read_bytes()))
+    return prefix
+
+
+@pytest.mark.parametrize("hour", [0, 1])
+@pytest.mark.parametrize("suffix", [".mp3", ".mp3.xz", ".wav.xz"])
+def test_broadcastify_download_ignores_metadata(pair, tmp_path, hour, suffix):
+    app, client = audio_runtime(pair, tmp_path)
+    prefix = broadcastify_hour(app.state.storage, hour + 5, tmp_path, suffix)
+    params = {
+        "feed": "zone7",
+        "datetime": f"2026-10-31T{hour:02d}:00:00-05:00",
+        "broadcastify": "1",
+    }
+    response = client.get("/recordings/download-audio", params=params)
+    assert response.status_code == 302
+    assert client.get(response.headers["location"]).status_code == 200
+    assert client.get("/recordings/health", params=params).json() == {
+        "count": 1,
+        "files": [prefix + suffix],
+    }
+
+
+@pytest.mark.parametrize("metadata_only", [False, True])
+def test_broadcastify_export_ignores_metadata(pair, tmp_path, metadata_only):
+    app, client = audio_runtime(pair, tmp_path)
+    for hour in [5, 6]:
+        prefix = broadcastify_hour(app.state.storage, hour, tmp_path)
+        if metadata_only:
+            app.state.storage.delete("recordings", prefix + ".mp3")
+    response = client.post(
+        "/api/audio-range-exports",
+        headers=bearer(2),
+        json={
+            "feed": "zone7",
+            "start_datetime": "2026-10-31 00:00:00",
+            "end_datetime": "2026-10-31 02:00:00",
+            "broadcastify": True,
+        },
+    )
+    assert response.status_code == 202
+    export_id = response.json()["id"]
+    build_export(app.state.db, app.state.services, app.state.storage, export_id)
+    result = client.get(
+        "/api/audio-range-exports/" + export_id, headers=bearer(2)
+    ).json()
+    assert result["processed_hours"] == 2
+    if metadata_only:
+        assert result["status"] == "failed"
+        assert result["error"] == "No recordings found in requested range."
+        assert len(result["missing_hours"]) == 2
+        params = {
+            "feed": "zone7",
+            "datetime": "2026-10-31T00:00:00-05:00",
+            "broadcastify": "1",
+        }
+        assert (
+            client.get("/recordings/download-audio", params=params).status_code == 404
+        )
+        assert client.get("/recordings/health", params=params).status_code == 404
+    else:
+        assert result["status"] == "succeeded"
+        assert result["missing_hours"] == []
+        download = client.get(result["download_url"])
+        assert download.status_code == 200 and len(download.content) > 1024
