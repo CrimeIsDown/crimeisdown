@@ -17,8 +17,9 @@ body.site-shell { display: block; min-height: initial; }
 .draggable-parent { width: 230px; height: 216px; margin-bottom: 1em; border: 2px solid var(--bs-secondary); background: var(--bs-gray-100); color: black; }
 .stream-player { height: 40px; width: 200px !important; }
 @media (min-width: 768px) { .stream-options { max-height: 300px; overflow: auto; } }
-/* React updates input.type during rerenders; retain Flatpickr's alternate-input layout. */
-.input-group.date > input.flatpickr-input { display: none; }
+/* React updates input.type during rerenders; hide only Flatpickr's backing input,
+   leaving its native mobile date/time control visible. */
+.input-group.date > input.flatpickr-input:not(.flatpickr-mobile) { display: none; }
 
 .navbar-brand { flex-shrink: 0; }
 .pell-button { padding: 0; }
