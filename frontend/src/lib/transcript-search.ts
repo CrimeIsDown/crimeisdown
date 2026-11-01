@@ -85,7 +85,9 @@ export function switchTranscriptIndex(
       params.append(
         next + key.slice(previous.length),
         key.endsWith("[sortBy]")
-          ? value.replace(previous + ":", next + ":")
+          ? value === previous
+            ? next
+            : value.replace(previous + ":", next + ":")
           : value,
       );
     } else params.append(key, value);
@@ -257,6 +259,7 @@ export async function mountTranscriptSearch() {
         items: [
           { label: "Newest First", value: index + ":start_time:desc" },
           { label: "Oldest First", value: index + ":start_time:asc" },
+          { label: "Relevance", value: index },
         ],
       }),
       hitsPerPage({

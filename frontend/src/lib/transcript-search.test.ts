@@ -84,6 +84,17 @@ describe("Ember-compatible transcript state", () => {
     expect(result.searchParams.has("calls_2025_10[page]")).toBe(false);
     expect(result.hash).toBe("#hit-1");
   });
+  it("keeps relevance sorting on the selected archive month", () => {
+    const result = switchTranscriptIndex(
+      new URL(
+        "https://crimeisdown.com/transcripts/search?calls_2026_10[query]=dispatch&calls_2026_10[sortBy]=calls_2026_10",
+      ),
+      "calls_2026_10",
+      "calls_2025_10",
+    );
+    expect(result.searchParams.get("calls_2025_10[sortBy]")).toBe("calls_2025_10");
+    expect(result.searchParams.get("calls_2025_10[query]")).toBe("dispatch");
+  });
   it("reads the original serialized transcript segments without requiring a migration", () => {
     expect(
       transcriptText({
