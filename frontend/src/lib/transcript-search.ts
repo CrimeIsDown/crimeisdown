@@ -98,6 +98,19 @@ export function switchTranscriptIndex(
   return result;
 }
 
+export function createTranscriptQueryHook() {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  return (query: string, refine: (query: string) => void) => {
+    clearTimeout(timer);
+    if (!query) {
+      refine(query);
+      return;
+    }
+    // Match the original search: wait for a pause instead of rendering every keystroke.
+    timer = setTimeout(() => refine(query), 500);
+  };
+}
+
 export async function mountTranscriptSearch() {
   const root = document.querySelector<HTMLElement>("[data-transcript-search]");
   if (!root) return;
@@ -235,6 +248,7 @@ export async function mountTranscriptSearch() {
         container: "#transcript-query",
         placeholder: "",
         showReset: true,
+        queryHook: createTranscriptQueryHook(),
         cssClasses: { input: "form-control" },
       }),
       sortBy({
@@ -578,7 +592,15 @@ export async function mountTranscriptSearch() {
         ".transcript-playback",
       )!;
       player.hidden = false;
-      const audio = player.querySelector<HTMLAudioElement>("audio")!;
+      let audio = player.querySelector<HTMLAudioElement>("audio");
+      if (!audio) {
+        audio = document.createElement("audio");
+        audio.className = "call-audio";
+        audio.controls = true;
+        audio.preload = "none";
+        audio.src = player.querySelector<HTMLAnchorElement>("a")!.href;
+        player.prepend(audio);
+      }
       await audio.play().catch(() => {});
       if (
         root.querySelector<HTMLInputElement>("#waveform-toggle")!.checked &&
@@ -901,7 +923,7 @@ export function renderHit(
     "digital tdma",
     "digital",
   );
-  return `<article id="hit-${id}" class="transcript-result"><div class="row"><div class="col-lg-5 collapse d-md-block order-lg-2" id="hit-${id}-metadata-col"><p class="d-none d-md-block">${time}</p><p><span class="badge text-bg-light me-1">Duration: ${escape(hit.call_length)}s</span><a href="https://openmhz.com/system/${escape(encodeURIComponent(String(hit.short_name)))}?filter-type=talkgroup&filter-code=${escape(encodeURIComponent(String(hit.talkgroup)))}&time=${start * 1000 + 1}" class="badge text-bg-secondary me-1" target="_blank" rel="noopener noreferrer">TG ${escape(hit.talkgroup)}</a><span class="badge text-bg-secondary me-1">${escape(audioType.charAt(0).toUpperCase() + audioType.slice(1))}</span>${delayed ? '<span class="badge text-bg-warning me-1" title="From an official Broadcastify.com stream of an encrypted channel">Encrypted / Delayed 30mins</span>' : ""}${admin ? `<button class="badge text-bg-light btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#metadata-${id}">Raw Data</button>` : ""}</p><p class="fst-italic">${escape(hit.talkgroup_group)} / <strong>${escape(hit.talkgroup_description)}</strong></p>${audio ? `<div class="transcript-playback" hidden><audio class="call-audio" controls preload="none" src="${audio}"></audio><a href="${audio}" class="btn btn-sm btn-primary mt-2" target="_blank" rel="noopener noreferrer">${icon("Download")} Download Audio</a></div>` : ""}</div><div class="col"><h4 class="fs-6"><button type="button" class="btn btn-sm btn-success" data-play-audio aria-label="Play Audio" ${audio ? "" : "disabled"}>${icon("Play")}</button> <a href="${escape(context)}" class="btn btn-sm btn-primary" aria-label="Show call context" title="Show call context">${icon("Filter")}</a> <button type="button" class="btn btn-sm btn-info d-md-none" data-bs-toggle="collapse" data-bs-target="#hit-${id}-metadata-col" aria-controls="hit-${id}-metadata-col" aria-expanded="false" aria-label="More Details">${icon("CircleInfo")}</button> ${escape(hit.talkgroup_tag)} <span class="badge text-bg-${color} ms-1 me-1">${escape(group)}</span></h4>${map ? `<p><span class="badge text-bg-light fs-6">📍 ${escape(hit.geo_formatted_address)}</span></p>` : ""}<p class="text-small d-md-none">${time}</p><blockquote class="blockquote">${transcript}</blockquote></div></div>${admin ? `<div class="modal fade metadata-modal" id="metadata-${id}" tabindex="-1" aria-label="Raw Result Data"><div class="modal-dialog modal-xl"><div class="modal-content"><div class="modal-header"><h5>Raw Result Data</h5><button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><pre>${escape(JSON.stringify(hit, null, 2))}</pre></div></div></div></div>` : ""}</article>`;
+  return `<article id="hit-${id}" class="transcript-result"><div class="row"><div class="col-lg-5 collapse d-md-block order-lg-2" id="hit-${id}-metadata-col"><p class="d-none d-md-block">${time}</p><p><span class="badge text-bg-light me-1">Duration: ${escape(hit.call_length)}s</span><a href="https://openmhz.com/system/${escape(encodeURIComponent(String(hit.short_name)))}?filter-type=talkgroup&filter-code=${escape(encodeURIComponent(String(hit.talkgroup)))}&time=${start * 1000 + 1}" class="badge text-bg-secondary me-1" target="_blank" rel="noopener noreferrer">TG ${escape(hit.talkgroup)}</a><span class="badge text-bg-secondary me-1">${escape(audioType.charAt(0).toUpperCase() + audioType.slice(1))}</span>${delayed ? '<span class="badge text-bg-warning me-1" title="From an official Broadcastify.com stream of an encrypted channel">Encrypted / Delayed 30mins</span>' : ""}${admin ? `<button class="badge text-bg-light btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#metadata-${id}">Raw Data</button>` : ""}</p><p class="fst-italic">${escape(hit.talkgroup_group)} / <strong>${escape(hit.talkgroup_description)}</strong></p>${audio ? `<div class="transcript-playback" hidden><a href="${audio}" class="btn btn-sm btn-primary mt-2" target="_blank" rel="noopener noreferrer">${icon("Download")} Download Audio</a></div>` : ""}</div><div class="col"><h4 class="fs-6"><button type="button" class="btn btn-sm btn-success" data-play-audio aria-label="Play Audio" ${audio ? "" : "disabled"}>${icon("Play")}</button> <a href="${escape(context)}" class="btn btn-sm btn-primary" aria-label="Show call context" title="Show call context">${icon("Filter")}</a> <button type="button" class="btn btn-sm btn-info d-md-none" data-bs-toggle="collapse" data-bs-target="#hit-${id}-metadata-col" aria-controls="hit-${id}-metadata-col" aria-expanded="false" aria-label="More Details">${icon("CircleInfo")}</button> ${escape(hit.talkgroup_tag)} <span class="badge text-bg-${color} ms-1 me-1">${escape(group)}</span></h4>${map ? `<p><span class="badge text-bg-light fs-6">📍 ${escape(hit.geo_formatted_address)}</span></p>` : ""}<p class="text-small d-md-none">${time}</p><blockquote class="blockquote">${transcript}</blockquote></div></div>${admin ? `<div class="modal fade metadata-modal" id="metadata-${id}" tabindex="-1" aria-label="Raw Result Data"><div class="modal-dialog modal-xl"><div class="modal-content"><div class="modal-header"><h5>Raw Result Data</h5><button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><pre>${escape(JSON.stringify(hit, null, 2))}</pre></div></div></div></div>` : ""}</article>`;
 }
 
 async function waitForGoogle(): Promise<

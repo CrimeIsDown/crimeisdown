@@ -1,11 +1,43 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   switchTranscriptIndex,
   transcriptIndex,
   transcriptText,
   renderHit,
   transcriptMonth,
+  createTranscriptQueryHook,
 } from "./transcript-search";
+
+describe("transcript query scheduling", () => {
+  afterEach(() => vi.useRealTimers());
+
+  it("searches only the final query after typing pauses for 500ms", () => {
+    vi.useFakeTimers();
+    const refine = vi.fn();
+    const queryHook = createTranscriptQueryHook();
+    for (const query of ["d", "di", "dis", "dispatch"]) {
+      queryHook(query, refine);
+      vi.advanceTimersByTime(80);
+    }
+    expect(refine).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(419);
+    expect(refine).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1);
+    expect(refine).toHaveBeenCalledExactlyOnceWith("dispatch");
+  });
+
+  it("clears immediately and cancels a pending typed query", () => {
+    vi.useFakeTimers();
+    const refine = vi.fn();
+    const queryHook = createTranscriptQueryHook();
+    queryHook("dispatch", refine);
+    vi.advanceTimersByTime(100);
+    queryHook("", refine);
+    expect(refine).toHaveBeenCalledExactlyOnceWith("");
+    vi.runAllTimers();
+    expect(refine).toHaveBeenCalledExactlyOnceWith("");
+  });
+});
 
 describe("Ember-compatible transcript state", () => {
   it("chooses monthly indexes in UTC when Chicago is still in the previous month", () => {
@@ -68,6 +100,21 @@ describe("Ember-compatible transcript state", () => {
 });
 
 describe("legacy call rendering", () => {
+  it("renders the audio download without creating a player before playback", () => {
+    const result = renderHit(
+      {
+        id: "lazy-audio",
+        start_time: 1000,
+        raw_audio_url: "https://example.test/call.mp3",
+      },
+      "calls_2026_11",
+      () => "https://crimeisdown.com/transcripts/search",
+    );
+    expect(result).toContain('href="https://example.test/call.mp3"');
+    expect(result).toContain("data-play-audio");
+    expect(result).not.toContain("<audio");
+  });
+
   it("keeps transcript and metadata markup inert while preserving safe search highlights", () => {
     const result = renderHit(
       {
