@@ -161,17 +161,36 @@ def register_accounts(app: FastAPI, db: Any, services: Any, sessions: Any) -> An
             request.state.session["_cid_notice"] = message
         return RedirectResponse(location, status_code=302)
 
+    def account_return(request: Any) -> str:
+        return safe_return_url(request.query_params.get("return_to"), s)
+
+    def return_field(destination: str) -> str:
+        return (
+            '<input type="hidden" name="return_to" value="'
+            + escape(destination, quote=True)
+            + '">'
+        )
+
+    def account_link(path: str, destination: str) -> str:
+        return escape(path + "?" + urlencode({"return_to": destination}), quote=True)
+
     @app.get("/login")
     def login_form(request: Request) -> Any:
+        destination = account_return(request)
         if request.state.user:
-            return RedirectResponse("/dashboard", status_code=302)
+            return RedirectResponse(destination, status_code=302)
         return page(
             request,
             "Log in",
             '<form method="post"><!--csrf-->'
+            + return_field(destination)
             + input_field("email", "Email", "email")
             + input_field("password", "Password", "password")
-            + '<label class="remember"><input type="checkbox" name="remember" value="1">Remember me</label><div class="actions"><a href="/forgot-password">Forgot your password?</a><button>Log in</button></div><a class="patreon" href="/auth/redirect"><img src="/account-assets/login-with-patreon.png" alt="Log in with Patreon" width="272" height="42"></a></form>',
+            + '<label class="remember"><input type="checkbox" name="remember" value="1">Remember me</label><div class="actions"><a href="/forgot-password">Forgot your password?</a><button>Log in</button></div><p>New here? <a href="'
+            + account_link("/register", destination)
+            + '">Create an account</a></p><a class="patreon" href="'
+            + account_link("/auth/redirect", destination)
+            + '"><img src="/account-assets/login-with-patreon.png" alt="Log in with Patreon" width="272" height="42"></a></form>',
         )
 
     @app.post("/login")
@@ -197,7 +216,7 @@ def register_accounts(app: FastAPI, db: Any, services: Any, sessions: Any) -> An
             invalid("email", "These credentials do not match our records.")
         services.state.delete(throttle)
         login_user(request, user)
-        response = done(request, "/dashboard")
+        response = done(request, safe_return_url(data.get("return_to"), s))
         if data.get("remember") in (True, 1, "1", "on"):
             token = user.get("remember_token") or secrets.token_hex(30)
             db.change(
@@ -261,15 +280,21 @@ def register_accounts(app: FastAPI, db: Any, services: Any, sessions: Any) -> An
 
     @app.get("/register")
     def registration_form(request: Request) -> Any:
+        destination = account_return(request)
+        if request.state.user:
+            return RedirectResponse(destination, status_code=302)
         return page(
             request,
             "Register",
             '<form method="post"><!--csrf-->'
+            + return_field(destination)
             + input_field("name", "Name")
             + input_field("email", "Email", "email")
             + input_field("password", "Password", "password")
             + input_field("password_confirmation", "Confirm password", "password")
-            + "<button>Register</button></form>",
+            + '<button>Register</button><p>Already have an account? <a href="'
+            + account_link("/login", destination)
+            + '">Log in</a></p></form>',
         )
 
     @app.post("/register")
@@ -300,7 +325,7 @@ def register_accounts(app: FastAPI, db: Any, services: Any, sessions: Any) -> An
         except IntegrityError:
             invalid("email", "The email has already been taken.")
         login_user(request, user)
-        return done(request, "/dashboard")
+        return done(request, safe_return_url(data.get("return_to"), s))
 
     @app.get("/dashboard")
     def dashboard(request: Request) -> Any:
