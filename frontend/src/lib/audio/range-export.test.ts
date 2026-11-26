@@ -4,12 +4,23 @@ import {
   chicagoTimestamp,
   inferArchivePlayback,
   buildArchiveDownloadParams,
+  hasRepeatedChicagoHour,
 } from "./archive";
 
 describe("preserved archive range semantics", () => {
   it("sends hourly downloads as the same UTC instants as Ember", () => {
     expect(buildArchiveDownloadParams("zone7", "2026-10-22T02:00").get("datetime")).toBe("2026-10-22T07:00:00.000Z");
     expect(buildArchiveDownloadParams("zone7", "2026-01-10T12:00").get("datetime")).toBe("2026-01-10T18:00:00.000Z");
+  });
+  it("sends distinct UTC instants for each occurrence of a repeated hour", () => {
+    const first = buildArchiveDownloadParams("zone11", "2026-11-01T01:00");
+    const second = buildArchiveDownloadParams("zone11", "2026-11-01T01:00", "second");
+    expect(first.get("datetime")).toBe("2026-11-01T06:00:00.000Z");
+    expect(second.get("datetime")).toBe("2026-11-01T07:00:00.000Z");
+    expect(second.get("broadcastify")).toBe("1");
+    expect(hasRepeatedChicagoHour("2026-11-01T01:30")).toBe(true);
+    expect(hasRepeatedChicagoHour("2026-11-01T02:00")).toBe(false);
+    expect(hasRepeatedChicagoHour("2026-03-08T02:00")).toBe(false);
   });
   it("interprets winter and summer forms in Chicago, independent of the browser timezone", () => {
     expect(new Date(chicagoTimestamp("2026-01-10T12:00")).toISOString()).toBe(

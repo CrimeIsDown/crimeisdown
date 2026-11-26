@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 import {
   buildArchiveDownloadParams,
+  hasRepeatedChicagoHour,
+  shouldUseBroadcastify,
 } from "@/lib/audio/archive";
 import type { ArchiveFeed } from "@/lib/audio/data";
 
@@ -16,7 +18,10 @@ export default function ArchiveDownloadForm({ feeds, initialFeed }: Props) {
   const initialDatetime = getChicagoDatetimeInput();
   const [feed, setFeed] = useState(() => getInitialFeed(feeds, initialFeed));
   const [datetime, setDatetime] = useState(initialDatetime);
+  const [occurrence, setOccurrence] = useState<"first" | "second">("first");
   const [error, setError] = useState("");
+  const showOccurrence =
+    shouldUseBroadcastify(feed, datetime) && hasRepeatedChicagoHour(datetime);
 
   useEffect(() => {
     if (feed) {
@@ -44,7 +49,11 @@ export default function ArchiveDownloadForm({ feeds, initialFeed }: Props) {
     }
 
     try {
-      const params = buildArchiveDownloadParams(feed, datetime);
+      const params = buildArchiveDownloadParams(
+        feed,
+        datetime,
+        showOccurrence ? occurrence : "first",
+      );
       window.open(
         `${loadRuntimeConfig().API_BASE_URL}/recordings/download-audio?${params.toString()}`,
         "_blank",
@@ -65,7 +74,10 @@ export default function ArchiveDownloadForm({ feeds, initialFeed }: Props) {
           id="archive-feed"
           className="form-control"
           value={feed}
-          onChange={(event) => setFeed(event.target.value)}
+          onChange={(event) => {
+            setFeed(event.target.value);
+            setOccurrence("first");
+          }}
         >
           <option value="" disabled>
             Select channel
@@ -84,9 +96,29 @@ export default function ArchiveDownloadForm({ feeds, initialFeed }: Props) {
           id="archive-datetime"
           className="form-control"
           value={datetime}
-          onValueChange={setDatetime}
+          onValueChange={(value) => {
+            setDatetime(value);
+            setOccurrence("first");
+          }}
         />
       </div>
+
+      {showOccurrence && (
+        <div className="mb-3">
+          <label htmlFor="archive-occurrence">Which 1 a.m. hour?</label>
+          <select
+            id="archive-occurrence"
+            className="form-control"
+            value={occurrence}
+            onChange={(event) =>
+              setOccurrence(event.target.value === "second" ? "second" : "first")
+            }
+          >
+            <option value="first">First 1 a.m. (CDT)</option>
+            <option value="second">Second 1 a.m. (CST)</option>
+          </select>
+        </div>
+      )}
 
       {error ? <p className="text-bg-danger fw-bold mt-2 p-1">{error}</p> : null}
 

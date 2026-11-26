@@ -74,12 +74,24 @@ export function inferArchivePlayback(
 export function buildArchiveDownloadParams(
   feed: string,
   datetimeLocal: string,
+  occurrence: "first" | "second" = "first",
 ) {
+  const broadcastify = shouldUseBroadcastify(feed, datetimeLocal);
+  const firstTimestamp = chicagoTimestamp(datetimeLocal);
+  const timestamp =
+    occurrence === "first"
+      ? firstTimestamp
+      : broadcastify
+        ? secondChicagoTimestamp(firstTimestamp)
+        : null;
+  if (timestamp === null) {
+    throw new Error("A second occurrence is unavailable for this recording.");
+  }
   const params = new URLSearchParams();
   params.set("feed", feed);
-  params.set("datetime", new Date(chicagoTimestamp(datetimeLocal)).toISOString());
+  params.set("datetime", new Date(timestamp).toISOString());
 
-  if (shouldUseBroadcastify(feed, datetimeLocal)) {
+  if (broadcastify) {
     params.set("broadcastify", "1");
   }
 
@@ -197,6 +209,29 @@ function guessMediaType(filename: string) {
   }
 }
 
+const chicagoTime = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "America/Chicago",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+});
+
+function secondChicagoTimestamp(first: number): number | null {
+  const later = first + 60 * 60 * 1000;
+  return chicagoTime.format(first) === chicagoTime.format(later) ? later : null;
+}
+
+export function hasRepeatedChicagoHour(value: string): boolean {
+  try {
+    return secondChicagoTimestamp(chicagoTimestamp(value)) !== null;
+  } catch {
+    return false;
+  }
+}
+
 /** Interpret the form's wall clock in Chicago, regardless of the viewer's timezone. */
 export function chicagoTimestamp(value: string): number {
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value))
@@ -208,18 +243,9 @@ export function chicagoTimestamp(value: string): number {
   )
     throw new Error("Use a valid date and time.");
   let estimate = target;
-  const formatter = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "America/Chicago",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23",
-  });
   for (let i = 0; i < 4; i++) {
     const parts = Object.fromEntries(
-      formatter.formatToParts(estimate).map((p) => [p.type, p.value]),
+      chicagoTime.formatToParts(estimate).map((p) => [p.type, p.value]),
     );
     const represented = Date.parse(
       `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:00Z`,

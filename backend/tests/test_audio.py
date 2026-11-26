@@ -28,7 +28,7 @@ def audio_runtime(pair, tmp_path):
     return app, TestClient(app, follow_redirects=False)
 
 
-def fixture_audio(storage, name, tmp_path):
+def fixture_audio(storage, name, tmp_path, frequency=440):
     source = tmp_path / "tone.wav"
     subprocess.run(
         [
@@ -40,7 +40,7 @@ def fixture_audio(storage, name, tmp_path):
             "-f",
             "lavfi",
             "-i",
-            "sine=frequency=440:duration=1",
+            f"sine=frequency={frequency}:duration=1",
             str(source),
         ],
         check=True,
@@ -151,6 +151,40 @@ def test_download_cache_hits_and_failures_do_not_consume_limit(pair, tmp_path):
         ).json()["count"]
         == 1
     )
+
+
+@pytest.mark.parametrize("utc_hours", [(6, 7), (7, 6)])
+def test_broadcastify_download_caches_each_fall_back_hour(pair, tmp_path, utc_hours):
+    app, client = audio_runtime(pair, tmp_path)
+    for hour, frequency in [(6, 440), (7, 880)]:
+        fixture_audio(
+            app.state.storage,
+            f"broadcastify/2026/11/01/{hour:02d}/zone11_20261101_{hour:02d}0000.wav",
+            tmp_path,
+            frequency,
+        )
+
+    def download(hour):
+        return client.get(
+            "/recordings/download-audio",
+            params={
+                "feed": "zone11",
+                "datetime": f"2026-11-01T{hour:02d}:00:00Z",
+                "broadcastify": "1",
+            },
+        )
+
+    first, second = [download(hour) for hour in utc_hours]
+    assert first.status_code == second.status_code == 302
+    assert first.headers["x-cache"] == second.headers["x-cache"] == "MISS"
+    assert (
+        client.get(first.headers["location"]).content
+        != client.get(second.headers["location"]).content
+    )
+    for hour, original in zip(utc_hours, (first, second), strict=True):
+        cached = download(hour)
+        assert cached.headers["x-cache"] == "HIT"
+        assert cached.headers["location"] == original.headers["location"]
 
 
 def test_failed_export_keeps_charged_hours_and_error(pair, tmp_path):
