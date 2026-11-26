@@ -343,15 +343,19 @@ def register_audio(app: FastAPI, db: Any, services: Any) -> Any:
                 status_code=429,
                 headers={**headers, "Retry-After": "86400"},
             )
-        basename = feed + "_" + hour.astimezone(LOCAL).strftime("%Y%m%d_%H")
-        cached = [f for f in storage.listing("cache", basename) if f.endswith(".mp3")]
+        prefix = source_prefix(feed, hour, broadcastify)
+        # Broadcastify stores both fall-back hours separately in UTC.
+        cache_prefix = (
+            prefix if broadcastify else feed + "_" + hour.strftime("%Y%m%d_%H")
+        )
+        cached = [
+            f for f in storage.listing("cache", cache_prefix) if f.endswith(".mp3")
+        ]
         hit = bool(cached)
         if cached:
             destination = cached[0]
         else:
-            sources = recording_sources(
-                storage, source_prefix(feed, hour, broadcastify)
-            )
+            sources = recording_sources(storage, prefix)
             if not sources:
                 return HTMLResponse(
                     "<p>Error: No recording found at that time. If this is a very recent recording, it may not have been uploaded yet (it can take up to an hour to upload). Otherwise, please try a different hour.</p>",
@@ -359,7 +363,7 @@ def register_audio(app: FastAPI, db: Any, services: Any) -> Any:
                 )
             source = sources[0]
             suffix = Path(source).name.split(".")[0][-4:]
-            destination = basename + suffix + ".mp3"
+            destination = cache_prefix + suffix + ("Z" if broadcastify else "") + ".mp3"
             with tempfile.TemporaryDirectory(prefix="cid-download-") as directory:
                 output = download_mp3(storage, source, Path(directory))
                 storage.upload("cache", destination, output)
