@@ -361,6 +361,16 @@ def register_accounts(app: FastAPI, db: Any, services: Any, sessions: Any) -> An
             + input_field("password", "Password", "password")
             + '<div class="actions"><button class="cancel" type="button" onclick="document.getElementById(&quot;delete-account&quot;).close()">Cancel</button><button class="danger">Delete account</button></div></form></dialog>'
         )
+        if (
+            not user.get("patreon_id")
+            and s.patreon_client_id
+            and s.patreon_redirect_uri
+        ):
+            content = (
+                "<h2>Patreon membership</h2><p>Link your Patreon identity to use its membership benefits with this account.</p>"
+                '<p><a href="/auth/redirect?return_to=%2Fprofile">Link Patreon account</a></p>'
+                + content
+            )
         return page(request, "Profile", content)
 
     @app.api_route("/profile", methods=["PATCH", "POST"])
@@ -641,6 +651,9 @@ def register_accounts(app: FastAPI, db: Any, services: Any, sessions: Any) -> An
             raise HTTPException(503, "Patreon login is not configured.")
         state = secrets.token_urlsafe(32)
         request.state.session["state"] = state
+        request.state.session["patreon_link_user_id"] = (
+            request.state.user["id"] if request.state.user else None
+        )
         referer = request.query_params.get("return_to") or request.headers.get(
             "referer", ""
         )
@@ -670,6 +683,12 @@ def register_accounts(app: FastAPI, db: Any, services: Any, sessions: Any) -> An
             or not request.query_params.get("code")
         ):
             raise HTTPException(400, "Invalid OAuth state.")
+        linking_user_id = request.state.session.pop("patreon_link_user_id", None)
+        current_user = request.state.user
+        if linking_user_id != (current_user["id"] if current_user else None):
+            raise HTTPException(
+                400, "Your account changed during Patreon login. Please try again."
+            )
         # OAuth token exchange uses the maintained Authlib implementation.
         factory = getattr(services, "oauth_client_factory", OAuth2Client)
         with factory(
@@ -692,12 +711,28 @@ def register_accounts(app: FastAPI, db: Any, services: Any, sessions: Any) -> An
         person = identity.json()["data"]
         attrs = person["attributes"]
         user = db.get(request.state.db, "users", person["id"], "patreon_id")
+        if current_user:
+            if user and user["id"] != current_user["id"]:
+                raise HTTPException(
+                    409, "This Patreon identity is already linked to another account."
+                )
+            if current_user.get("patreon_id") not in (None, "", person["id"]):
+                raise HTTPException(
+                    409,
+                    "This account is already linked to a different Patreon identity.",
+                )
+            user = current_user
         changes = {
             "name": attrs["full_name"],
             "email": attrs["email"],
             "patreon_token": tokens["access_token"],
             "patreon_refresh_token": tokens.get("refresh_token"),
         }
+        if current_user:
+            # Explicit linking preserves the local account's profile and credentials.
+            changes.pop("name")
+            changes.pop("email")
+            changes["patreon_id"] = person["id"]
         try:
             user = (
                 db.change(
