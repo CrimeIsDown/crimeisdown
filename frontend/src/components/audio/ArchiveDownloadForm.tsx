@@ -132,14 +132,9 @@ function getInitialFeed(feeds: ArchiveFeed[], initialFeed: string | undefined) {
     return initialFeed;
   }
 
-  if (typeof window === "undefined") {
-    return "";
-  }
-
-  const feedParam = new URL(window.location.href).searchParams.get("feed");
-  return feedParam && feeds.some((candidate) => candidate.value === feedParam)
-    ? feedParam
-    : "";
+  // Start with the same value as the server-rendered select. The effect applies
+  // URL parameters after hydration so React updates the selected option.
+  return "";
 }
 
 function getChicagoDatetimeInput() {
