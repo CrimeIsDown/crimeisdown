@@ -7,6 +7,11 @@ export default function VirtualScanner() {
   const [streams, setStreams] = useState<Stream[]>([]),
     [enabled, setEnabled] = useState<string[]>([]),
     [loading, setLoading] = useState(true);
+  const [zonePlayers, setZonePlayers] = useState(
+    () => new Map<number, Window>(),
+  );
+  const [popupBlocked, setPopupBlocked] = useState(false);
+  const hasZonePlayers = zonePlayers.size > 0;
   const context = useRef<AudioContext | undefined>(undefined);
   const panners = useRef(new Map<string, PannerNode>());
   const room = useRef<HTMLDivElement>(null);
@@ -36,7 +41,7 @@ export default function VirtualScanner() {
           )
           .map((s) => ({
             ...s,
-            disabled: Boolean(s.broadcastifyId) || !live.includes(s.slug),
+            disabled: !s.broadcastifyId && !live.includes(s.slug),
           }));
         for (const name of live)
           if (!available.some((s) => s.slug === name))
@@ -54,6 +59,37 @@ export default function VirtualScanner() {
       void context.current?.close();
     };
   }, []);
+
+  useEffect(() => {
+    if (!hasZonePlayers) return;
+    const timer = window.setInterval(() => {
+      setZonePlayers((previous) => {
+        const openPlayers = [...previous].filter(([, player]) => !player.closed);
+        return openPlayers.length === previous.size
+          ? previous
+          : new Map(openPlayers);
+      });
+    }, 750);
+    return () => window.clearInterval(timer);
+  }, [hasZonePlayers]);
+
+  function openZone(feedId: number) {
+    const player = window.open(
+      "about:blank",
+      "_blank",
+      "popup,width=460,height=560",
+    );
+    setPopupBlocked(!player);
+    if (!player) return;
+
+    // Keep a handle to detect closure, and detach the opener before navigation.
+    player.opener = null;
+    player.location.replace(
+      `https://www.broadcastify.com/listen/feed/popout.php?feedId=${feedId}`,
+    );
+    setZonePlayers((previous) => new Map(previous).set(feedId, player));
+  }
+
   function toggle(slug: string, checked: boolean) {
     if (checked) {
       context.current ||= new AudioContext();
@@ -86,10 +122,16 @@ export default function VirtualScanner() {
             src="https://s.broadcastify.com/icons/favicon-96x96.png"
             alt="Broadcastify.com"
           />{" "}
-          Listen to encrypted radio channels using the Broadcastify.com links
-          below. Radio traffic is delayed 30-35 minutes. CrimeIsDown.com is not
-          affiliated with Broadcastify.
+          Select a CPD zone to open its Broadcastify player. Close the pop-out
+          to stop listening to that zone. Zone audio is delayed 30–35 minutes.
+          CrimeIsDown.com is not affiliated with Broadcastify.
         </p>
+        {popupBlocked ? (
+          <p role="status">
+            Your browser blocked the pop-out. Use the link next to the zone to
+            open Broadcastify in a new tab.
+          </p>
+        ) : null}
       </div>
       <div className="row">
         <div className="col-md-6">
@@ -99,58 +141,60 @@ export default function VirtualScanner() {
               {loading ? (
                 <p>Loading...</p>
               ) : streams.length ? (
-                streams.map((s) => s.broadcastifyId ? (
-                  <div className="scanner-feed-row" key={s.slug}>
-                    <a
-                      className="scanner-feed-name"
-                      href={`https://www.broadcastify.com/listen/feed/${s.broadcastifyId}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {(s.shortname ?? s.name).replace(" [ENC]", "")}
-                      <svg className="cid-icon scanner-external-icon" aria-hidden="true"><use href="#cid-Link" /></svg>
-                    </a>{" "}
-                    <a
-                      className="scanner-archive-link"
-                      href={`/audio/live/${s.slug}`}
-                      aria-label={`Archive for ${s.shortname ?? s.name}`}
-                      title={`View archive for ${s.shortname ?? s.name}`}
-                    >
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 3h18v4H3zM5 7v14h14V7M10 11h4" />
-                      </svg>
-                    </a>
-                  </div>
-                ) : (
-                  <div className="scanner-feed-row" key={s.slug}>
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id={`checkbox-${s.slug}`}
-                      value={s.slug}
-                      disabled={s.disabled}
-                      checked={enabled.includes(s.slug)}
-                      onChange={(e) => toggle(s.slug, e.target.checked)}
-                    />
-                    <label
-                      className="form-check-label scanner-feed-name"
-                      htmlFor={`checkbox-${s.slug}`}
-                    >
-                      {s.shortname ?? s.name}
-                    </label>{" "}
-                    <a
-                      href={`/audio/live/${s.slug}`}
-                      className="scanner-archive-link"
-                      aria-label={`Archive for ${s.shortname ?? s.name}`}
-                      title={`View archive for ${s.shortname ?? s.name}`}
-                    >
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 3h18v4H3zM5 7v14h14V7M10 11h4" />
-                      </svg>
-                    </a>
-
-                  </div>
-                ))
+                streams.map((stream) => {
+                  const { slug, broadcastifyId } = stream;
+                  const name = stream.shortname ?? stream.name;
+                  const label = broadcastifyId ? name.replace(" [ENC]", "") : name;
+                  const zoneOpen = Boolean(
+                    broadcastifyId && zonePlayers.has(broadcastifyId),
+                  );
+                  return (
+                    <div className="scanner-feed-row" key={slug}>
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id={`checkbox-${slug}`}
+                        value={slug}
+                        disabled={stream.disabled || zoneOpen}
+                        checked={zoneOpen || enabled.includes(slug)}
+                        onChange={(event) => {
+                          if (broadcastifyId) openZone(broadcastifyId);
+                          else toggle(slug, event.target.checked);
+                        }}
+                      />
+                      <label
+                        className="form-check-label scanner-feed-name"
+                        htmlFor={`checkbox-${slug}`}
+                      >
+                        {label}
+                      </label>
+                      {broadcastifyId ? (
+                        <a
+                          className="scanner-feed-action"
+                          href={`https://www.broadcastify.com/listen/feed/${broadcastifyId}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Open ${label} on Broadcastify in a new tab`}
+                          title="Open on Broadcastify in a new tab"
+                        >
+                          <svg className="cid-icon" aria-hidden="true">
+                            <use href="#cid-Link" />
+                          </svg>
+                        </a>
+                      ) : null}
+                      <a
+                        href={`/audio/live/${slug}`}
+                        className="scanner-feed-action"
+                        aria-label={`Archive for ${name}`}
+                        title={`View archive for ${name}`}
+                      >
+                        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M3 3h18v4H3zM5 7v14h14V7M10 11h4" />
+                        </svg>
+                      </a>
+                    </div>
+                  );
+                })
               ) : (
                 <p className="text-danger">
                   Sorry, all streams are currently offline due to technical

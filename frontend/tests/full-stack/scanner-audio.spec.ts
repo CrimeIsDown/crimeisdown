@@ -30,6 +30,79 @@ async function expectMp3(response: APIResponse) {
   ).toBeTruthy();
 }
 
+test("zone pop-outs open independently while CW2 stays on the scanner", async ({
+  page,
+  context,
+}) => {
+  await page.route("https://audio.crimeisdown.com/streaming/stat", (route) =>
+    route.fulfill({
+      contentType: "text/xml",
+      body: "<rtmp><live><stream><name>citywide2</name><active/></stream></live></rtmp>",
+    }),
+  );
+  await context.route(
+    "https://www.broadcastify.com/listen/feed/popout.php?feedId=*",
+    (route) =>
+      route.fulfill({
+        contentType: "text/html",
+        body: "<title>Zone player</title>",
+      }),
+  );
+
+  await page.goto("/audio");
+  const cw2 = page.getByRole("checkbox", { name: "CPD Citywide 2" });
+  await cw2.check();
+  const cw2Player = page.getByRole("application", { name: "Audio Player" });
+  await expect(cw2Player).toBeVisible();
+  await cw2Player.evaluate((element) => {
+    element.setAttribute("data-original-player", "");
+  });
+
+  const zone1 = page.getByRole("checkbox", { name: /CPD Zone 1 \(/ });
+  const zone2 = page.getByRole("checkbox", { name: /CPD Zone 2 \(/ });
+  const zone1Popup = page.waitForEvent("popup");
+  await zone1.check({ timeout: 5000 });
+  const firstPlayer = await zone1Popup;
+  await firstPlayer.waitForURL(
+    "https://www.broadcastify.com/listen/feed/popout.php?feedId=37354",
+  );
+  expect(await firstPlayer.evaluate(() => window.opener === null)).toBe(true);
+  const zone2Popup = page.waitForEvent("popup");
+  await zone2.check();
+  const secondPlayer = await zone2Popup;
+  await secondPlayer.waitForURL(
+    "https://www.broadcastify.com/listen/feed/popout.php?feedId=37355",
+  );
+  await expect(zone1).toBeChecked();
+  await expect(cw2Player).toHaveAttribute("data-original-player", "");
+
+  await expect(zone1).toBeDisabled();
+  await firstPlayer.close();
+  await expect(zone1).not.toBeChecked();
+  await expect(zone1).toBeEnabled();
+  await expect(zone2).toBeChecked();
+  await secondPlayer.close();
+  await expect(zone2).not.toBeChecked();
+  await expect(cw2).toBeChecked();
+  await expect(cw2Player).toHaveAttribute("data-original-player", "");
+});
+
+test("a blocked zone pop-out leaves an ordinary Broadcastify link", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    window.open = () => null;
+  });
+  await page.goto("/audio");
+  const zone = page.getByRole("checkbox", { name: /CPD Zone 1 \(/ });
+  await zone.click({ timeout: 5000 });
+  await expect(zone).not.toBeChecked();
+  await expect(page.getByText(/browser blocked the pop-out/i)).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /CPD Zone 1 .*Broadcastify in a new tab/ }),
+  ).toHaveAttribute("href", "https://www.broadcastify.com/listen/feed/37354");
+});
+
 for (const hour of [0, 1]) {
   test(`Zone 7 ${hour}:00 download skips JSON metadata and serves MP3`, async ({
     page,
