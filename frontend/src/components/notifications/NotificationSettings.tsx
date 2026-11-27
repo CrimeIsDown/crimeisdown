@@ -12,8 +12,8 @@ type Subscription = {
   id: number;
   name: string;
   enabled: boolean;
-  keywords: string[] | string | null;
-  ignore_keywords: string[] | string | null;
+  keywords: string[] | Record<string, string> | string | null;
+  ignore_keywords: string[] | Record<string, string> | string | null;
   topic: string;
   notification_channels: number[];
   location: LocationRule | null;
@@ -39,7 +39,8 @@ function lines(value: Subscription["keywords"]): string {
       return value;
     }
   }
-  return Array.isArray(value) ? value.join("\n") : "";
+  // Laravel's filtered arrays can retain numeric keys and serialize as objects.
+  return value && typeof value === "object" ? Object.values(value).join("\n") : "";
 }
 function strings(value: FormDataEntryValue | null) {
   const result = String(value || "").split("\n");
