@@ -5,6 +5,8 @@
     "dev": "npm --prefix frontend run dev",
     "build": "npm --prefix frontend run build",
     "test": "npm --prefix frontend test",
+    "test:e2e": "npm --prefix frontend run test:e2e --",
+    "test:e2e:audio": "npm --prefix frontend run test:e2e:audio --",
     "lint": "npm --prefix frontend run lint",
     "test:backend": "uv run --package app pytest backend/tests -q"
   }

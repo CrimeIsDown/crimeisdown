@@ -52,6 +52,33 @@ The public test suite requires no PHP, private repository or historical backend
 commit. Original-implementation comparisons are maintained separately. The
 optional Meilisearch integration test needs a disposable local search service.
 
+The full-stack browser suite uses Chromium desktop, iPhone emulation, and Android
+emulation against the production frontend build and an isolated local API. It
+covers homepage location searches, map lookups, reference tools, transcript
+queries/playback/saved searches, notification settings, navigation, account access,
+and scanner audio downloads/exports. A temporary SQLite database, synthetic
+Commander account, and MP3/JSON archive fixtures exercise real account and archive
+processing. Geocoder and search-provider responses are fixed; Chicago boundary
+datasets, UI state, API resources, CSRF, and FFmpeg processing run normally.
+Bootstrap's pinned npm assets replace the CDN in tests. No production credentials,
+Redis, Celery, or external provider calls are needed. The browser timezone is
+Tokyo to verify that recording times still use Chicago.
+
+```sh
+npm --prefix frontend exec -- playwright install chromium
+npm run test:e2e
+# Run only the scanner audio coverage:
+npm run test:e2e:audio
+```
+
+Alternatively, use an installed Chrome browser with
+`PLAYWRIGHT_CHANNEL=chrome npm run test:e2e`.
+
+The suite starts its own servers on loopback ports 4331 and 8765 and cleans up
+the temporary archive/database on exit. Those ports must be free. It also runs
+in CI; failing tests retain screenshots and Playwright traces in
+`frontend/test-results/`.
+
 Read [configuration](docs/CONFIGURATION.md), [architecture](docs/ARCHITECTURE.md)
 [deployment](docs/DEPLOYMENT.md) and [security](SECURITY.md). The backend retains compatible account records,
 sessions and API contracts; deployment-specific mappings are configured separately.
